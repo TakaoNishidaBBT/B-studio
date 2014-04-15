@@ -1,0 +1,92 @@
+a.bframe_calendar {
+	text-decoration: none;
+}
+
+a.bframe_calendar:visited {
+	text-decoration: none;
+}
+a.bframe_calendar:active {
+	text-decoration: none;
+}
+a.bframe_calendar:hover {
+	text-decoration: none;
+}
+div.wrapper {
+	height: 100%;
+	text-align: center;
+	overflow: hidden;
+	background-color: #fff;
+	border: 1px solid #eee;
+}
+
+table.calendar {
+	text-align: center;
+	margin: 0 auto;
+}
+table.calendar caption {
+	font-size: 14px;
+	margin: 0;
+	padding: 6px 0;
+	font-weight: bold;
+}
+table.calendar caption span {
+	display: inline-block;
+	line-height: 23px;
+	vertical-align: top;
+	width: 90px;
+}
+table.calendar caption a:link,
+table.calendar caption a:visited,
+table.calendar caption a:active {
+	text-decoration: none;
+	line-height: 23px;
+	height:23px;
+	display: inline-block;
+	overflow: hidden;
+}
+table.calendar caption a:hover {
+	text-decoration: none;
+}
+table.calendar caption a:hover img {
+	margin-top: -23px;
+}
+table.calendar th {
+	margin: 0;
+	padding: 0;
+	text-align: center;
+	font-size: 13px;
+	width: 20px;
+	height: 20px;
+}
+table.calendar td.day {
+	margin: 0;
+	padding: 0;
+	font-size: 14px;
+	width: 20px;
+	height: 20px;
+	background: url(../images/common/popup_menu_back.png) repeat-x;
+}
+table.calendar th.sun {
+	color: #c00;
+}
+table.calendar th.sat {
+	color: #00c;
+}
+table.calendar td.sun {
+	color: #c00;
+}
+table.calendar td.sat {
+	color: #00c;
+}
+table.calendar td.holiday {
+	color: #c00;
+	background-color: #ffc0c0;
+}
+table.calendar td.day:hover {
+	font-weight: bold;
+	background-position: 0 -30px;
+	color: #fff;
+}
+table.calendar caption span.data {
+	display: none;
+}

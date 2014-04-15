@@ -1,0 +1,182 @@
+﻿@charset "utf-8";
+
+body {
+	background-color: #fff;
+}
+h1 {
+	margin: 0;
+	padding-left: 10px;
+	background: #bbb;
+	height: 32px;
+	line-height: 32px;
+	font-size: 15px;
+	color: #fff;
+	background: url(../images/common/title_back.jpg) repeat-x;
+	border-bottom: 1px solid #404040;
+	text-align: center;
+}
+
+/********************
+ * LOGIN FORM
+ *
+ ********************/
+div.login {
+	width: 60%;
+	min-width: 400px;
+	height: 190px;
+	margin: 40px auto;
+	padding: 0;
+	color: #fff;
+	font-family: "メイリオ","Meryo","ＭＳ Ｐゴシック","MS PGothic","Hiragino Kaku Gothic Pro","ヒラギノ角ゴ Pro W3","Lucida Grande","Lucida Sans Unicode",Helvetica,Arial,Verdana,sans-serif;
+}
+div.account {
+	padding: 0 0 20px 0;
+}
+div.login table {
+	margin: 0 auto;
+}
+div.login table th {
+	margin: 0;
+	padding: 0 6px 0 20px;
+	height: 30px;
+	color: #333;
+	font-weight: normal;
+}
+div.login table th.user {
+	background: url(../images/common/user.png) 0 12px no-repeat;
+}
+div.login table th.key {
+	background: url(../images/common/key.png) 0 12px no-repeat;
+}
+div.login table td {
+	display: table-cell;
+	vertical-align: middle;
+	height: 30px;
+	margin: 0;
+	padding: 5px;
+	color: #fff;
+}
+div.login table td input {
+	width: 180px;
+	height: 28px;
+	color: #fff;
+	background-color: #fafafa;
+	color: #333;
+	border-top: 1px solid #888;
+	border-left: 1px solid #888;
+	border-right: 1px solid #ddd;
+	border-bottom: 1px solid #ddd;
+}
+
+/******************************
+ * icon
+ *
+ ******************************/
+div.icon {
+	margin: 0 auto;
+	text-align: center;
+	line-height: 34px;
+	border-radius: 50%;
+	width: 27px;
+	height: 27px;
+	background-color: #ddd;
+	z-index: 2;
+}
+
+/******************************
+ * button
+ *
+ ******************************/
+ul.submit, ul.transition {
+	margin: -14px 0 0 0;
+	padding: 32px 0 0 0;
+	list-style: none;
+	border-top: 1px solid #ddd;
+}
+ul.submit li, ul.transition li {
+	margin: 0 auto;
+	padding: 0;
+	border-top: 1px solid #444444;
+	border-left: 1px solid #444444;
+	border-right: 1px solid #777777;
+	border-bottom: 1px solid #777777;
+	width: 240px;
+}
+ul.submit li input, ul.transition li input {
+	margin: 0;
+	padding-bottom: 1px;
+	height: 40px;
+	width: 240px;
+	background-color: #3a3a3a;
+	border-top: 1px solid #888888;
+	border-left: 1px solid #888888;
+	border-right: 1px solid #222222;
+	border-bottom: 1px solid #222222;
+	color: #fff;
+	font-family: "Lucida Grande","Lucida Sans Unicode",Helvetica,Arial,Verdana,sans-serif;
+	text-shadow: -1px -1px #111;
+	cursor: pointer;
+}
+ul.submit li input:hover, ul.transition li input:hover {
+	margin-right: 10px;
+	background-color: #666666;
+	border-top: 1px solid #999999;
+	border-left: 1px solid #999999;
+	border-right: 1px solid #333333;
+	border-bottom: 1px solid #333333;
+	color: #fff;
+	text-shadow: 1px 1px #222;
+}
+
+/********************
+ * LOGIN ERROR
+ *
+ ********************/
+div.message {
+	width: 60%;
+	height: 190px;
+	margin: 40px auto;
+	padding: 0;
+	text-align: center;
+}
+div.message dl.error {
+	margin: 0 auto;
+	padding-top: 12px;
+	text-align: center;
+	height: 94px;
+}
+div.message dl.error dt {
+	margin-bottom: 10px;
+	padding: 0 0 3px 30px;
+	font-size: 16px;
+	font-weight: bold;
+	color: #c00;
+}
+div.message dl.error dt img {
+	margin: 0 6px 0 0;
+	vertical-align: -20%;
+}
+div.message dl.error dd {
+	margin: 0;
+}
+/* supprt browser */
+div.support {
+	font-family: "メイリオ", "Meiryo", "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "Osaka", verdana, lucida, arial, helvetica, sans-serif;
+	text-align: center;
+}
+div.support p {
+	padding: 40px 0 20px 0;
+	font-size: 16px;
+}
+div.support table.browsers {
+	width: 200px;
+	margin: 0 auto;
+}
+div.support td.icon {
+	width: 100px;
+	padding: 8px 0
+}
+div.support td.name {
+	text-align: left;
+	font-size: 20px;
+}

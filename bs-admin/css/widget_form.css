@@ -1,0 +1,217 @@
+@charset "UTF-8";
+
+html, body {
+	background-color: #444444;
+}
+div#contents_container {
+	margin-top: 0;
+	overflow: hidden;
+}
+div#contents_container_footer {
+	height: 15px;
+	background-image: -moz-linear-gradient(center bottom, #555555 0%, #6e6e6e 100%);
+	margin: 0;
+}
+div#contents {
+	overflow: hidden;
+	background-color: #3a3a3a;
+}
+
+/******************************
+ * main_container
+ *
+ ******************************/
+div.main_container {
+	margin: 0 8px 0 0;
+	padding: 0;
+	background-color: #555555;
+	overflow: hidden;
+}
+
+/******************************
+ * tab control
+ *
+ ******************************/
+ul.tabcontrol {
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+	background-color: #444444;
+	border-top: 1px solid #505050;
+	border-bottom: 1px solid #3a3a3a;
+	overflow: visible;
+	height: 28px;
+	min-width: 800px;
+}
+ul.tabcontrol li {
+	float: left;
+	height: 28px;
+	width: 100px;
+	margin: -1px 0 0 0;
+	padding: 0;
+	border-top: 1px solid #666666;
+	border-right: 1px solid #333333;
+	border-bottom: 1px solid #3a3a3a;
+	background-color: #444444;
+	overflow: hidden;
+}
+ul.tabcontrol li.selected {
+	background-color: #555555;
+	border-top: 1px solid #777777;
+	border-right: 1px solid #3a3a3a;
+	border-bottom: 1px solid #555555;
+}
+ul.tabcontrol li:hover:not(:last-child) {
+	background-color: #555555;
+	border-top: 1px solid #777777;
+	border-right: 1px solid #3a3a3a;
+}
+ul.tabcontrol li a:visited,
+ul.tabcontrol li a {
+	padding-left: 10px;
+	text-shadow: -1px -1px #111;
+	display: block;
+	text-align: left;
+	line-height: 28px;
+	color: #aaa;
+	text-decoration: none;
+}
+ul.tabcontrol li a:hover {
+	text-shadow: 1px 1px #333333;
+	background-color: #555555;
+	color: #fff;
+	text-decoration: none;
+}
+ul.tabcontrol li.selected a {
+	color: #fff;
+	text-shadow: -1px -1px #333;
+}
+ul.tabcontrol li.regist {
+	border: none;
+	height: 26px;
+	margin-left: 50px;
+	padding-top: 3px;
+	width: 300px;
+	text-align: left;
+	border-top: 1px solid #505050;
+	overflow: hidden;
+}
+
+/******************************
+ * button
+ *
+ ******************************/
+div.input_container {
+	border-top: 1px solid #222222;
+	border-left: 1px solid #222222;
+	border-right: 1px solid #606060;
+	border-bottom: 1px solid #606060;
+	width: 140px;
+	float: left;
+}
+input.regist-button {
+	margin: 0;
+	padding-bottom: 1px;
+	height: 20px;
+	width: 140px;
+	background-color: #666666;
+	border-top: 1px solid #888888;
+	border-left: 1px solid #888888;
+	border-right: 1px solid #333333;
+	border-bottom: 1px solid #333333;
+	color: #eee;
+	text-shadow: -1px -1px #333;
+	cursor: pointer;
+}
+input.regist-button:hover, input.regist-buttonHover {
+	background-color: #888888;
+	border-top: 1px solid #aaa;
+	border-left: 1px solid #aaa;
+	border-right: 1px solid #444444;
+	border-bottom: 1px solid #444444;
+	color: #fff;
+	text-shadow: 1px 1px #333;
+}
+
+/******************************
+ * message
+ *
+ ******************************/
+div.message_container {
+	float: left;
+	margin-left: 10px;
+}
+span#message {
+	display: table-cell;
+	vertical-align: middle;
+	height: 24px;
+	color: #fff;
+}
+
+/******************************
+ * regist
+ *
+ ******************************/
+div.regist {
+	background-color: #555555;
+	margin-right: 8px;
+	padding: 8px 8px;
+	color: #fff;
+	border-top: #666666 1px solid;
+	border-bottom: #3a3a3a 3px solid;
+	overflow: hidden;
+	clear: both;
+}
+
+/******************************
+ * EDITOR
+ *
+ ******************************/
+div.editor_container {
+	clear: both;
+	margin: 0;
+	background-color: #555555;
+	border-top: 1px solid #555555;
+	padding: 6px 8px 8px 8px;
+}
+div#preview {
+	background-color: #ffffff;
+	border-top: 1px solid #3a3a3a;
+	border-bottom: 1px solid #777777;
+}
+div.text_editor {
+	margin: 0;
+	padding: 0;
+	background-color: #000;
+	width: 100%;
+	overflow:hidden;
+	border-top: 1px #3a3a3a solid;
+	border-bottom: 1px #777777 solid;
+	position: relative;
+}
+div.text_editor textarea {
+	border: none;
+	margin: 0;
+	padding: 0px;
+	width: 100%;
+	height: 300px;
+}
+div#config {
+	margin: 0;
+	padding-bottom: 5px;
+	text-align: center;
+	background-color: #555555;
+	overflow: auto;
+}
+div#config textarea {
+	font-size: 12px;
+}
+div#config textarea.external_css,
+div#config textarea.external_js {
+	height: 80px;
+}
+div.visual_editor {
+	background-color: #444444;
+	border-top: 1px solid #3a3a3a;
+	border-bottom: 1px solid #777777;
+}

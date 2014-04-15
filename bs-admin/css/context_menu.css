@@ -1,0 +1,49 @@
+﻿@charset "utf-8";
+
+/******************************
+ * popup menu
+ *
+ ******************************/
+table.context_menu {
+	width: 100%;
+	margin: 0;
+	padding: 3px 4px;
+	background-color: #fff;
+	color: #333;
+	border-collapse: separate;
+	border-spacing: 0;
+	border: 1px solid #f8f8f8;
+}
+table.context_menu td {
+	padding: 2px 6px;
+	line-height: 22px;
+	height: 26px;
+	border-top: 1px solid #fff;
+	border-bottom: 1px solid #fff;
+	font-weight: normal;
+	background: url(../images/common/popup_menu_back.png) repeat-x;
+	color: #333;
+	vertical-align: middle;
+}
+table.context_menu td.selected {
+	background-position: 0 -30px;
+	border-top: 1px solid #38bbfc;
+	border-bottom: 1px solid #107ec7;
+	color: #fff
+}
+table.context_menu td.disabled {
+	color: #ccc;
+}
+table.context_menu td.disabled img {
+	display: none;
+}
+table.context_menu td img {
+	margin: 0 2px 0 0;
+	vertical-align: middle;
+	vertical-align: -30%;
+}
+table.context_menu td span {
+	margin: 0;
+	padding: 0 6px;
+	vertical-align: middle;
+}

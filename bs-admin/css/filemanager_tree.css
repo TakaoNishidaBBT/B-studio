@@ -1,0 +1,272 @@
+@charset "UTF-8";
+
+/******************************
+ * bframe_tree
+ *
+ ******************************/
+div#tree_container {
+	margin: 0;
+}
+div#tree_container_header {
+	height: 18px;
+	background-color: #444444;
+}
+div#tree_box {
+	border-top: 1px solid #ddd;
+	border-left: 1px solid #ddd;
+	overflow: auto;
+}
+div.bframe_tree {
+	cursor:default;
+	padding: 8px 0;
+	background-color: #fff;
+	color: #000;
+}
+div.bframe_tree ul {
+	margin: 0 0 0 20px;
+	padding: 0;
+	white-space: nowrap;
+}
+div.bframe_tree ul.root {
+	margin: 0;
+	padding: 0;
+}
+div.bframe_tree li.tree-list {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+div.bframe_tree li.tree-list div.tree {
+	margin: 0;
+	padding-top: 2px;
+	height: 20px;
+	border-top: 1px solid #fff;
+}
+div.bframe_tree li.tree-list div.selected {
+	border-top: 1px dotted #f00;
+}
+div.bframe_tree li.tree-list img {
+	vertical-align: -30%;
+	margin-right: 2px;
+}
+div.bframe_tree li.tree-list span.node-name {
+	padding: 2px 4px 1px 4px;
+	font-size: 12px;
+}
+div.bframe_tree a:link {
+	text-decoration: none;
+}
+div.bframe_tree a:visited {
+	color: #03c;
+	text-decoration: none;
+}
+div.bframe_tree a:active {
+	color: #f00;
+	text-decoration: none;
+}
+div.bframe_tree a:hover {
+	color: #000;
+	text-decoration: none;
+}
+
+/******************************
+ * pain thumb
+ *
+ ******************************/
+div.thumbs li.tree-list div.tree {
+	margin: 0;
+	border-left: 1px solid #444444;
+	width: 120px;
+}
+div.thumbs li.tree-list div.selected {
+	border-left: 1px dotted #f00;
+}
+div.thumbs li.tree-list input {
+	padding: 0;
+	font-size: 12px;
+	background-color: #ece9d8;
+	background-color: #fff;
+	border: 1px solid #ece9d8;
+	border: 1px solid #444;
+	ime-mode: disabled;
+	text-align: center;
+	height: 20px;
+	width: 90%;
+}
+div.thumbs li.tree-list span.node-name {
+	display: block;
+	margin: 2px auto;
+	padding: 4px 4px 2px 4px;
+	font-size: 12px;
+}
+div.thumbs li.tree-list span.edit {
+/*	display: block;*/
+	margin: 2px auto;
+	padding: 0;
+	height: 24px;
+	background-color: #fff;
+}
+div.bframe_pain a:link {
+	text-decoration: none;
+}
+div.bframe_pain a:visited {
+	color: #03c;
+	text-decoration: none;
+}
+div.bframe_pain a:active {
+	color: #f00;
+	text-decoration: none;
+}
+div.bframe_pain a:hover {
+	color: #000;
+	text-decoration: none;
+}
+div.thumbs li.tree-list {
+	margin: 4px auto;
+	padding: 0;
+	width: 120px;
+	height: 150px;
+	list-style: none;
+	float: left;
+}
+div.thumbs div {
+	text-align: center;
+}
+div.clone_node_pain span.img-border, div.thumbs span.img-border {
+	display: table-cell;
+	margin: 0 auto;
+	width: 110px;
+	height: 110px;
+	border:1px #555555 solid;
+	vertical-align: middle;
+}
+div.thumbs img {
+	margin: 0;
+}
+div.thumbs input {
+	height: 12px;
+	_height: 18px;
+	padding: 1px 0;
+	font-size: 12px;
+}
+div.clone_node_pain span.node-name, div.thumbs span.node-name {
+	display: block;
+	margin: 0 auto;
+	padding: 2px 4px 1px 4px;
+	font-size: 12px;
+	color: #fff;
+	word-wrap: break-word;
+	width: 85%;
+}
+span.current {
+	background-color: #22a8f6 !important;
+	color: #fff !important;
+	z-index: 100;
+	position: relative;
+}
+span.selected {
+	background-color: #ece9d8 !important;
+	color: #333 !important;
+	z-index: 100;
+	position: relative;
+}
+div.thumbs img.control {
+	display: none;
+}
+
+/******************************
+ * pain detail
+ *
+ ******************************/
+div.detail table {
+	margin: 0 20px 20px 20px;
+}
+div.detail table div.tree {
+	margin: 0;
+	padding: 5px 4px 1px 4px;
+	border-top: 1px solid #444444;
+	width: 100%;
+}
+div.detail table div.selected {
+	border-top: 1px dotted #f00;
+}
+div.detail table th {
+	text-align: left;
+	font-weight: normal;
+	height: 30px;
+}
+div.detail table th span {
+	display: block;
+	line-height: 22px;
+	padding-left: 8px;
+	margin: 0 18px 6px 0;
+	border-bottom: 1px solid #fff;
+	color: #fff;
+}
+div.detail table th.file-name {
+	min-width: 240px;
+}
+div.detail table th.update-time {
+	min-width: 125px;
+}
+div.detail table th.update-time span {
+	padding-left: 8px;
+}
+div.detail table th.file-size {
+	min-width: 100px;
+}
+div.detail table th.file-size span {
+	padding-left: 4px;
+}
+div.detail table th.image-size {
+	min-width: 100px;
+}
+div.detail table th.image-size span {
+	padding-left: 4px;
+}
+div.detail table td {
+	height: 20px;
+	white-space: nowrap;
+	color: #fff;
+	padding-left: 4px;
+}
+div.detail table td span.update-datetime {
+	padding-left: 4px;
+}
+div.detail table td.file-size {
+	text-align: right;
+}
+div.detail table td span.file-size {
+	padding-right: 25px;
+}
+div.detail table td span.image-size {
+	padding-left: 8px;
+}
+div.detail table td img {
+	vertical-align: -30%;
+	margin-right: 2px;
+}
+div.detail table td span.node-name {
+	display: inline;
+	padding: 2px 4px 1px 4px;
+	font-size: 12px;
+}
+div.detail table td span.selected {
+	background-color: #aaaaaa;
+	color: #fff;
+}
+div.detail a:link {
+	text-decoration: none;
+}
+div.detail a:visited {
+	color: #fff;
+	text-decoration: none;
+}
+div.detail a:active {
+	color: #fff;
+	text-decoration: none;
+}
+div.detail a:hover {
+	color: #fff;
+	text-decoration: none;
+}

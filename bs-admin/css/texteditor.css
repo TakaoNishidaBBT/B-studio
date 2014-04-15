@@ -1,0 +1,131 @@
+@charset "UTF-8";
+
+/******************************
+ * bframe_editarea
+ *
+ ******************************/
+div.container {
+	margin: 0;
+	overflow: auto;
+	width: 100%;
+}
+ul.control {
+	margin: 0;
+	padding: 0 0 2px 0;
+	height: 30px;
+	background-color: #3a3a3a;
+	border-top: 1px solid #5a5a5a;
+	border-bottom: 1px solid #222;
+	text-decoration: none;
+	-moz-user-select: none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+}
+ul.control li {
+	float: left;
+	width: 40px;
+	padding: 0;
+	border-right: 1px solid #2a2a2a;
+	border-top: 1px solid #444444;
+	border-bottom: 1px solid #2a2a2a;
+	list-style-type: none;
+}
+ul.control li:first-child {
+	border-left: 1px solid #3a3a3a;
+}
+ul.control li:not(:first-child) {
+	border-left: 1px solid #666666;
+}
+ul.control li:hover {
+	float: left;
+	width: 40px;
+	border-top: 1px solid #666666;
+	border-left: 1px solid #666666;
+	border-right: 1px solid #333333;
+	border-bottom: 1px solid #333333;
+	background-color: #555555;
+	list-style-type: none;
+}
+ul.control li a {
+	display: block;
+	text-align: center;
+	padding: 7px 0;
+	list-style-type: none;
+	color: #fff;
+	cursor: pointer;
+}
+ul.control li img {
+	vertical-align: middle;
+}
+div.line_number {
+	float: left;
+	background-color: #000;
+	background: url(../images/common/editor_back.png) repeat 0 7px;
+	border-right: 2px #556B2F solid;
+	color: #0f0;
+	color: #fff;
+	width: 30px;
+	padding: 8px 4px 4px 4px;
+	text-align: right;
+	-moz-user-select: none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+}
+div.container div.editor {
+	background-color: #000;
+	background: url(../images/common/editor_back.png) repeat 0 7px;
+	color: #fff;
+	padding: 4px 0 6px 40px;
+}
+div.container pre {
+	font-family: "ＭＳ ゴシック", "MS Gothic", monospace;
+	color: #fff;
+	padding: 3px 5px;
+	outline: none;
+	-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;
+}
+div.container pre p {
+	margin: 0;
+}
+span.comments, span.comments span {
+	color: #40ff40;
+}
+span.comments-sl {
+	color: #40ff40;
+}
+span.functions {
+	color: #ff8800;
+}
+span.xml-tag {
+	color: #b6883c;
+}
+span.xml-attribute {
+	color: #b6883c;
+}
+span.php-keyword {
+	color: #aaccff;
+}
+span.css-keyword {
+	color: #b6883c;
+}
+span.string-sq {
+	color: #bdb76b;
+}
+span.string-dq {
+	color: #f00;
+}
+span.string {
+	color: #bdb76b;
+}
+span.attribute {
+	color: #ff952b;
+}
+span.cdata {
+	color: #8080ff;
+}
+span.variable {
+	color: #b6883c;
+}
+span.php-tag {
+	color: #ff0;
+}

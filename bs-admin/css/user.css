@@ -1,0 +1,30 @@
+@charset "UTF-8";
+
+/******************************
+ * h2
+ *
+ ******************************/
+h2.user {
+	margin: 0;
+	padding-left: 10px;
+	font-size: 15px;
+	background: url(../images/common/title_back_user.png) repeat-x;
+	color: #fff;
+	border-top: 1px solid #90b080;
+	border-bottom: 1px solid #608050;
+	line-height: 34px;
+}
+h2.user span {
+	font-size: 11px;
+	font-weight: normal;
+	margin-left: 10px;
+	line-height: 24px;
+}
+
+div.list-header {
+	background: url(../images/common/list_header_back.png) repeat-x;
+	border-top: 1px solid #fff;
+	border-bottom: 1px solid #ccc;
+	margin: 0;
+	height: 52px;
+}
