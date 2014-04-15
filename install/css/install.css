@@ -1,0 +1,235 @@
+@charset 'UTF-8';
+
+body {
+	background-color: #fff;
+	padding-top: 13px;
+	color: #555;
+	font-family: "メイリオ", "Meiryo", "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "Osaka", "ＭＳ Ｐゴシック", "MS PGothic", "IPA UIGothic", "IPA mona UIGothic", "VL PGothic", "Sazanami Gothic", "DynaLab-dfghsgothic w5-jisx0208.1990-0", "DynaLab-dfggothic w5-iso8859-1", "Trebuchet MS", "Bitstream Vera Sans", verdana, lucida, arial, helvetica, sans-serif;
+	font-size: small;
+}
+@media screen {
+	body {
+		margin-left: 10%;
+		margin-right: 10%;
+	}
+}
+
+@media print {
+	pre, .note, td, th {
+		border: 1px dashed gray;
+	}
+}
+
+img {
+	border: none;
+}
+
+a:link, a:visited {
+	color: #1D3565; 
+	font-weight: bold;
+	text-decoration: none;
+}
+a: hover {
+	text-decoration: underline;
+}
+
+.heading {
+	text-align: center;
+	font-size: xx-large;
+	font-weight: bold;
+	color: gray;
+	letter-spacing:3px;
+	margin: 15px 0 20px;
+}
+
+.heading i {
+	position: absolute;
+	top: 15px;
+	right: 5px;
+	font-size: small;
+	font-style: normal;
+	font-weight: normal;
+}
+
+
+p {
+	text-indent: 10px;
+	margin-left:20px;
+}
+
+h1 {
+	color: #555;
+}
+
+h2 {
+	border-bottom: 1px dotted gray;
+	font-size: 145%;
+	color: #555;
+	font-weight:normal;
+	letter-spacing:2px;
+}
+
+h3 {
+	margin-left: 12px;
+	border-bottom:1px dotted #666;
+	font-size:100%;
+	color:#555;
+	letter-spacing:1px;
+}
+
+pre, .note, .faq .answer {
+	font-family: "メイリオ", "Meiryo", "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "Osaka", "ＭＳ Ｐゴシック", "MS PGothic", "IPA UIGothic", "IPA mona UIGothic", "VL PGothic", "Sazanami Gothic", "DynaLab-dfghsgothic w5-jisx0208.1990-0", "DynaLab-dfggothic w5-iso8859-1", "Trebuchet MS", "Bitstream Vera Sans", verdana, lucida, arial, helvetica, sans-serif;
+	font-size: small;
+	background-color: #eee;
+	padding: 10px;
+	font-size: small;
+}
+
+.screenshot {
+	text-align: center;
+	background-color: #eee;
+	padding: 10px;
+}
+
+.faq .question {
+	font-weight: bold;
+	margin-bottom: 0px;
+}
+
+.faq .answer {
+
+}
+
+.faq {
+	margin-bottom: 20px;
+}
+
+/******************************
+ * table FORM
+ *
+ ******************************/
+table.form {
+	width: 100%;
+	border-left: none;
+	border-top: none;
+	border-right: none;
+	border-bottom: none;
+	border-collapse: separate;
+	border-spacing: 0;
+}
+table.form th {
+	width: 21%;
+	padding: 12px 15px 8px 15px;
+	border-top: 1px solid #aaa;
+	border-left: 1px solid #888;
+	border-bottom: 1px solid #666;
+	border-right: 1px solid #777;
+	background: #888;
+	color: #fff;
+	font-weight: normal;
+	text-align: left;
+}
+table.form tr:first-child th {
+	border-top: 1px solid #aaa;
+}
+table.form tr:first-child td {
+	border-top: 1px solid #aaa;
+}
+
+table.form th.error{
+	background: #fee;
+}
+table.form td {
+	padding: 5px;
+	border: 1px solid #bbb;
+	border-top: 1px solid #fff;
+	border-left: 1px solid #fff;
+	border-bottom: 1px solid #ddd;
+	border-right: 1px solid #ddd;
+	font-weight: normal;
+}
+
+input.textbox {
+	border-top: 1px solid #999;
+	border-left: 1px solid #999;
+	border-right: 1px solid #ddd;
+	border-bottom: 1px solid #ddd;
+	height: 22px;
+	padding: 0 5px;
+	vertical-align: middle;
+}
+
+/* ERROR */
+p.error-message-top {
+	clear: both;
+	color: #f00;
+	font-size: 14px;
+	font-weight: bold;
+	text-align: center;
+}
+span.error-message {
+	clear: both;
+	color: #f00;
+	margin: 0px 0px 0px 3px;
+}
+
+p.error-message {
+	clear: both;
+	color: #f00;
+	margin: 0px 0px 0px 3px;
+}
+
+ul {
+	line-height:1.5em;
+	margin:0 0 0.5em 40px;
+	padding:0;
+	list-style: none;
+}
+
+div.confirm {
+	text-align: center;
+	margin: 0 0 40px 0;
+}
+
+ul.control {
+	margin: 30px 0;
+	text-align: center;
+}
+span.status_ng {
+	color: #ff4500;
+}
+span.caution {
+	color: #ff4500;
+}
+
+/* 日本語入力モード */
+.ime-off {
+	ime-mode: disabled;
+}
+.ime-on {
+	ime-mode: active;
+}
+
+input.button {
+	padding: 5px 40px;
+	line-height: 17px;
+	border-top: 1px solid #fff;
+	border-right: 1px solid #888;
+	border-bottom: 1px solid #888;
+	border-left: 1px solid #fff;
+	border-radius: 2px;
+	background-color: #fff;
+	background: url(../images/button_back.png) repeat-x;
+	overflow: visible;
+	vertical-align: middle;
+}
+input.button:hover, input.buttonHover {
+	border-right: 1px solid #999;
+	border-bottom: 1px solid #999;
+	cursor: pointer;
+	background: url(../images/button_back_on.png) repeat-x;
+}
+.htaccess {
+	width: 99%;
+	height: 200px;
+}

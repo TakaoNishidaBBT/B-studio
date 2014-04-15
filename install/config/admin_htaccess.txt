@@ -1,0 +1,7 @@
+RewriteEngine off
+
+AuthType Basic
+AuthName "Limited Room"
+AuthUserFile %AUTH_USER_FILE%
+AuthGroupFile /dev/null
+#require valid-user
