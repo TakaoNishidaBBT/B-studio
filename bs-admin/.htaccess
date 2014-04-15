@@ -1,7 +1,0 @@
-RewriteEngine off
-
-AuthType Basic
-AuthName "Limited Room"
-AuthUserFile C:/public_html/bstudio/bs-admin/.htpassword
-AuthGroupFile /dev/null
-#require valid-user
