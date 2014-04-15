@@ -55,7 +55,10 @@
 		confirmPermission($perm_message);
 	}
 	if(!function_exists('gd_info')) {
-		$error_message = 'GDライブラリを有効にしてください';
+		$error_message = 'GDライブラリを有効にしてください。';
+	}
+	if(!class_exists('ZipArchive')) {
+		$error_message = 'ZipArchiveクラスが必要です。';
 	}
 
 	// HTTPヘッダー出力
