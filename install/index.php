@@ -131,18 +131,18 @@
 		if($status) {
 			// DB接続テスト
 			if(class_exists('mysqli')) {
-				$db = new mysqli($_POST['db_srv'], $_POST['db_usr'], $_POST['db_pwd'], $_POST['db_nme']);
+				$db = @mysqli_connect($_POST['db_srv'], $_POST['db_usr'], $_POST['db_pwd'], $_POST['db_nme']);
 			}
 			else {
 				$db = @mysql_connect($_POST['db_srv'], $_POST['db_usr'], $_POST['db_pwd']);
-				if($db) {
-					$status = @mysql_select_db($_POST['db_nme'], $db);
-					if(!$status) {
-						$obj = $db_install_form->getElementByName('db_nme');
-						$obj->status = false;
-						$status = $db_install_form->validate();
-						$error_message = 'DBへ接続はできましたがスキーマの選択に失敗しました。';
-					}
+			}
+			if($db) {
+				$status = @mysql_select_db($_POST['db_nme'], $db);
+				if(!$status) {
+					$obj = $db_install_form->getElementByName('db_nme');
+					$obj->status = false;
+					$status = $db_install_form->validate();
+					$error_message = 'DBへ接続はできましたがスキーマの選択に失敗しました。';
 				}
 			}
 			if(!$db || $db->connect_error) {
@@ -156,7 +156,10 @@
 				$obj = $db_install_form->getElementByName('db_nme');
 				$obj->status = false;
 				$status = $db_install_form->validate();
-				$error_message = 'DBへの接続に失敗しました。<br />(' . $db->connect_error . ')';
+				$error_message = 'DBへの接続に失敗しました。';
+				if($db->connect_error) {
+					$error_message.= '<br />(' . $db->connect_error . ')';
+				}
 			}
 		}
 		else {
