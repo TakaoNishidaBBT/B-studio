@@ -1,0 +1,54 @@
+@charset "UTF-8";
+
+/******************************
+ * H2
+ *
+ ******************************/
+h2.settings {
+	margin: 0;
+	padding-left: 10px;
+	font-size: 15px;
+	background: url(../images/common/title_back_settings.png) repeat-x;
+	color: #fff;
+	border-top: 1px solid #acad7a;
+	border-bottom: 1px solid #626330;
+	line-height: 34px;
+}
+h2.settings span {
+	font-size: 11px;
+	font-weight: normal;
+	margin-left: 10px;
+	line-height: 24px;
+}
+
+/******************************
+ * button
+ *
+ ******************************/
+input#backToList {
+	width: 140px;
+}
+
+input.regist-button {
+	padding: 2px 4px;
+	border-top: 1px solid #80a090;
+	border-right: 1px solid #206030;
+	border-bottom: 1px solid #206030;
+	border-left: 1px solid #80a090;
+	background-color: #406050;
+	color: #fff;
+	width: auto;
+	overflow: visible;
+}
+input.regist-button:hover, input.regist-buttonHover {
+	padding: 2px 4px;
+	border-top: 1px solid #80a090;
+	border-right: 1px solid #306040;
+	border-bottom: 1px solid #306040;
+	border-left: 1px solid #80a090;
+	background-color: #0e9b27;
+	cursor: pointer;
+	color: #fff;
+	width: auto;
+	overflow: visible;
+}

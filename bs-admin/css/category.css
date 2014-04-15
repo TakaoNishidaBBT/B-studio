@@ -1,0 +1,91 @@
+@charset "UTF-8";
+
+/******************************
+ * bframe_tree
+ *
+ ******************************/
+div#tree_container {
+	margin: 0;
+}
+div#select_category_container {
+	margin: 0;
+}
+div.select_category {
+	border: 1px solid #ccc;
+}
+div#tree_container_header {
+	height: 18px;
+	background-color: #444444;
+}
+div#tree_box {
+	border-top: 1px solid #ddd;
+	border-left: 1px solid #ddd;
+	overflow: auto;
+}
+div#select_category_container div#tree_box {
+	border: 1px solid #ddd;
+}
+div.bframe_tree {
+	cursor:default;
+	padding: 8px 0;
+	background-color: #fff;
+	overflow: auto;
+}
+div.bframe_tree ul {
+	margin: 0 0 0 20px;
+	padding: 0;
+	white-space: nowrap;
+}
+div.bframe_tree ul.root {
+	margin: 0;
+	padding: 0;
+}
+div.bframe_tree li.tree-list {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+div.bframe_tree li.tree-list div.tree {
+	margin: 0;
+	padding-top: 2px;
+	height: 20px;
+	border-top: 1px solid #fff;
+}
+div.bframe_tree li.tree-list div.selected {
+	border-top: 1px dotted #f00;
+}
+div.bframe_tree li.tree-list img {
+	vertical-align: -30%;
+	margin-right: 2px;
+}
+div.bframe_tree li.tree-list span.node-name {
+	padding: 2px 5px;
+	font-size: 12px;
+}
+div.bframe_tree li.tree-list span.node-name input {
+	margin: 0;
+	padding: 1px 0;
+}
+div.bframe_tree a:link {
+	text-decoration: none;
+}
+div.bframe_tree a:visited {
+	color: #000;
+	text-decoration: none;
+}
+div.bframe_tree a:active {
+	color: #000;
+	text-decoration: none;
+}
+div.bframe_tree a:hover {
+	color: #000;
+	text-decoration: none;
+}
+span.current {
+	background-color: #22a8f6 !important;
+	color: #fff !important;
+}
+span.selected {
+	background-color: #ece9d8 !important;
+	color: #333 !important;
+}

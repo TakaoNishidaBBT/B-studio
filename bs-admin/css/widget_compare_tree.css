@@ -1,0 +1,230 @@
+@charset "UTF-8";
+
+/******************************
+ * bframe_compare_tree
+ *
+ ******************************/
+div#tree_container {
+	margin: 0;
+}
+div#tree_container_header {
+	height: 18px;
+	background-color: #444444;
+}
+div#left_tree_box,
+div#right_tree_box {
+	border-top: 1px solid #ddd;
+	border-left: 1px solid #ddd;
+	overflow: auto;
+}
+div.bframe_compare_tree {
+	cursor:default;
+	padding: 8px 0;
+	background-color: #fff;
+	color: #000;
+}
+div.bframe_compare_tree ul {
+	margin: 0 0 0 20px;
+	padding: 0;
+	white-space: nowrap;
+}
+div.bframe_compare_tree ul.root {
+	margin: 0;
+	padding: 0;
+}
+div.bframe_compare_tree li.tree-list {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+div.bframe_compare_tree li.tree-list div.tree {
+	margin: 0;
+	padding-top: 2px;
+	height: 20px;
+	border-top: 1px solid #fff;
+}
+div.bframe_compare_tree li.tree-list div.selected {
+	border-top: 1px dotted #f00;
+}
+div.bframe_compare_tree li.tree-list img {
+	vertical-align: -30%;
+	margin: 0;
+}
+div.bframe_compare_tree li.tree-list span.node-name {
+	padding: 2px 5px;
+	font-size: 12px;
+}
+div.bframe_compare_tree li.tree-list span.node-status {
+	padding: 0;
+	font-size: 12px;
+	margin-right: 2px;
+	border: 2px solid #fff;
+}
+div.bframe_compare_tree a:link {
+	text-decoration: none;
+}
+div.bframe_compare_tree a:visited {
+	color: #03c;
+	text-decoration: none;
+}
+div.bframe_compare_tree a:active {
+	color: #f00;
+	text-decoration: none;
+}
+div.bframe_compare_tree a:hover {
+	color: #000;
+	text-decoration: none;
+}
+div#compare_tree_container_left,
+div#compare_tree_container_right {
+	margin: 0;
+	float: left;
+	width: 50%;
+}
+/******************************
+ * pain thumb
+ *
+ ******************************/
+div.thumbs li.tree-list div.tree {
+	margin: 0;
+	border-left: 1px solid #444444;
+	width: 120px;
+}
+div.thumbs li.tree-list div.selected {
+	border-left: 1px dotted #f00;
+}
+div.thumbs li.tree-list input {
+	height: 12px;
+	_height: 18px;
+	padding: 1px 0;
+	font-size: 12px;
+}
+div.thumbs li.tree-list span.node-name {
+	padding: 2px 4px 1px 4px;
+	font-size: 12px;
+}
+div.bframe_pain a:link {
+	text-decoration: none;
+}
+div.bframe_pain a:visited {
+	color: #fff;
+	text-decoration: none;
+}
+div.bframe_pain a:active {
+	color: #fff;
+	text-decoration: none;
+}
+div.bframe_pain a:hover {
+	color: #fff;
+	text-decoration: none;
+}
+div.thumbs li.tree-list {
+	margin: 4px auto;
+	padding: 0;
+	width: 120px;
+	height: 150px;
+	list-style: none;
+	float: left;
+}
+div.thumbs div {
+	text-align: center;
+}
+div.thumbs img {
+	margin: 0;
+}
+div.thumbs input {
+	height: 12px;
+	_height: 18px;
+	padding: 1px 0;
+	font-size: 12px;
+}
+span.current {
+	background-color: #22a8f6 !important;
+	color: #fff !important;
+}
+span.selected {
+	background-color: #ece9d8 !important;
+	color: #333 !important;
+}
+span.add {
+	border: 2px solid #4763ff !important;
+	background-color: #4763ff;
+}
+span.del {
+	border: 2px solid #ff6347 !important;
+	background-color: #ff6347;
+}
+span.diff {
+	border: 2px solid #ccdd2d !important;
+	background-color: #ccdd2d;
+}
+span.diff-child {
+	border: 2px solid #ccdd2d !important;
+	background-color: #ccdd2d;
+}
+div.thumbs img.control {
+	display: none;
+}
+
+/******************************
+ * pain detail
+ *
+ ******************************/
+div.detail table {
+	margin: 0 20px 20px 20px;
+}
+div.detail table div.tree {
+	margin: 0;
+	padding: 5px 4px 1px 4px;
+	border-top: 1px solid #444444;
+	width: 100%;
+}
+div.detail table div.selected {
+	border-top: 1px dotted #f00;
+}
+div.detail table th {
+	border-bottom: 1px solid #ffffff;
+	text-align: left;
+	font-weight: normal;
+	color: #fff;
+	height: 30px;
+}
+div.detail table th.name {
+	min-width: 250px;
+}
+div.detail table th.create-datetime {
+	width: 100px;
+}
+div.detail table td {
+	height: 20px;
+	white-space: nowrap;
+	color: #fff;
+}
+div.detail table td img {
+	vertical-align: -30%;
+	margin-right: 2px;
+}
+div.detail table td span.node-name {
+	display: inline;
+	padding: 2px 4px 1px 4px;
+	font-size: 12px;
+}
+div.detail table td span.selected {
+	background-color: #aaaaaa;
+	color: #fff;
+}
+div.detail a:link {
+	text-decoration: none;
+}
+div.detail a:visited {
+	color: #fff;
+	text-decoration: none;
+}
+div.detail a:active {
+	color: #fff;
+	text-decoration: none;
+}
+div.detail a:hover {
+	color: #fff;
+	text-decoration: none;
+}
