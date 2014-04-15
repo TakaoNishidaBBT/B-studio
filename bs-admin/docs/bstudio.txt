@@ -1,0 +1,193 @@
+■ACEエディター
+
+【ソース修正点】
+
+1.横スクロールバーの表示バグ修正
+	softwrapをFree（行っている）にもかかわらずinvisibleオブジェクトの表示があった場合は
+	maxlineの文字数に1を加算しているため常に横スクロールバーが表示される。
+
+	※印本来はsoftwrapの値を参照するべきだが、本システムでは常にsoftwrapをfreeとしているため
+	単純にコメントアウト
+
+	行番号：13034
+
+    this.$getLongestLine = function() {
+        var charCount = this.session.getScreenWidth();
+        if (this.$textLayer.showInvisibles)
+//            charCount += 1;
+
+        return Math.max(this.$size.scrollerWidth - 2 * this.$padding, Math.round(charCount * this.characterWidth));
+    };
+
+
+
+2.phpの文法解釈のバグ
+	<?php widget('0000000006'); // test ?>
+	上記の場合　?> もコメントと解釈され、phpの閉じタグがない、と判定されてしまう。
+
+	修正ファイル：worker-php.js
+
+	行番号：2576
+
+            {
+                value: PHP.Constants.T_COMMENT,
+//              re: /^\/\/.*(\s)?/ fixed (T.Nishida 2013/04/22)
+                re: /^\/\/((?!\?>).)*(\s)?/
+            },
+
+
+
+3.F3キーをfindnext2コマンドとして登録
+{
+    name: "findnext2",
+    bindKey: bindKey("F3", "Command-G"),
+    exec: function(editor) { editor.findNext(); },
+    readOnly: true
+}
+shit+F3キーをfindprevious2コマンドとして登録
+{
+    name: "findprevious2",
+    bindKey: bindKey("Shift-F3", "Command-Shift-G"),
+    exec: function(editor) { editor.findPrevious(); },
+    readOnly: true
+}
+
+4.mode-php.jsを修正
+
+5.theme-twilight.jsを修正
+
+6.aceエディターはporotype.jsとコンフリクトするためjqueryに変更（フォームのシリアライズ処理）
+
+7.全角文字判定のバグ
+line：6729
+
+    function isFullWidth(c) {
+               c >= 0x2010 && c <= 0x2E80 ||	// 2329 -> 2010  232A -> 2E80 T.Nishida
+
+
+line：14218
+    this.$renderToken = function(stringBuilder, screenColumn, token, value) {
+        var self = this;
+        var replaceReg = /\t|&|<|( +)|([\x00-\x1f\x80-\xa0\u1680\u180E\u2000-\u200f\u2028\u2029\u202F\u205F\u3000\uFEFF])|[\u1100-\u115F\u11A3-\u11A7\u11FA-\u11FF\u2010-\u2E80\u2E80-\u2E99\u2E9B-\u2EF3\u2F00-\u2FD5\u2FF0-\u2FFB\u3000-\u303E\u3041-\u3096\u3099-\u30FF\u3105-\u312D\u3131-\u318E\u3190-\u31BA\u31C0-\u31E3\u31F0-\u321E\u3220-\u3247\u3250-\u32FE\u3300-\u4DBF\u4E00-\uA48C\uA490-\uA4C6\uA960-\uA97C\uAC00-\uD7A3\uD7B0-\uD7C6\uD7CB-\uD7FB\uF900-\uFAFF\uFE10-\uFE19\uFE30-\uFE52\uFE54-\uFE66\uFE68-\uFE6B\uFF01-\uFF60\uFFE0-\uFFE6]/g;
+        var replaceFunc = function(c, a, b, tabIdx, idx4) {
+
+
+■CKEditor
+
+1.イメージプロパティダイアログボックスを使用して画像を設定する際、widthとheightを設定しないように修正
+　指定したい場合は指定可能なため（初期値として自動挿入しないため）
+
+	【修正ファイル】
+	bc-admin/js/ckeditor/plugins/image/dialogs/image.js
+
+
+			var onImgLoadEvent = function() {
+					// Image is ready.
+					var original = this.originalElement;
+					original.setCustomData( 'isReady', 'true' );
+					original.removeListener( 'load', onImgLoadEvent );
+					original.removeListener( 'error', onImgLoadErrorEvent );
+					original.removeListener( 'abort', onImgLoadErrorEvent );
+
+					// Hide loader
+					CKEDITOR.document.getById( imagePreviewLoaderId ).setStyle( 'display', 'none' );
+
+					// New image -> new domensions
+				//	if ( !this.dontResetSize )
+→				//		resetSize( this );	// このfunctionを実行しないように変更
+
+					if ( this.firstLoad )
+						CKEDITOR.tools.setTimeout( function() {
+						switchLockRatio( this, 'check' );
+					}, 0, this );
+
+					this.firstLoad = false;
+					this.dontResetSize = false;
+				};
+
+2.テーブルセルの下方向に分割バグの修正
+　テーブルセルを下方向に分割する際、対象セルが一番右側だった場合、
+　分割により挿入されるTDがその行の先頭となっていしまい、表が崩れる。
+
+　修正個所：plugin/tabletools/plugin.js(572行目）
+
+	function verticalSplitCell( selection, isDetect ) {
+
+			// The destination row is empty, append at will.
+			if ( !candidateCell )
+			// update by T.Nishida 2014/01/27
+			//	newCellTr.append( newCell, true );
+				newCellTr.append( newCell, false );　→trueをfalseに変更
+
+3.HTML5 対応
+	a,spanタグ配下にインラインタグしか許可しない設定を解除
+
+　修正個所：core/dtd.js(100行目以降）
+//		a: Y( P, { a: 1, button: 1 } ), // Treat as normal inline element (not a transparent one).
+		↓
+		a: F,
+
+//		h1: P,
+//		h2: P,
+//		h3: P,
+//		h4: P,
+//		h5: P,
+//		h6: P,
+		h1: F,
+		h2: F,
+		h3: F,
+		h4: F,
+		h5: F,
+		h6: F,
+
+//		span: P,
+		span: F,
+
+
+■CKEditorのビルド
+	1.ソースをダウンロードし、その配下にdevディレクトリを作成
+	2.buildディレクトリをコピー
+	3.コマンドラインでbuild
+
+	a) build.shを開いて下の方のコマンドを環境に合わせてディレクトリなどを変更しコマンドラインから実行する。
+		例）実行環境：C:\public_html\ckeditor\dev\builder
+
+		java -jar ckbuilder/$CKBUILDER_VERSION/ckbuilder.jar --build ../../ release --version="4.2 DEV" --build-config build-config.js --overwrite "$@"
+
+			↓
+
+		java -jar ckbuilder.jar --build ../../ release --version="4.2 DEV" --build-config build-config.js --overwrite "$@"
+
+
+	4.releaseディレクトリに実行形式が出来上がる
+
+■Mergely
+
+1.非表示のエディタでのoffsetの計算でバグ
+
+	function _calculate_offsetsを修正
+
+//			if (!top_offset) return;//try again
+			if (top_offset < 0) return;//try again
+
+2.初期表示の幅が画面にFITしない。リサイズすれば直る。
+
+	jQuery.extend(Mgly.mergely.prototype, {
+
+	name: 'mergely',
+	//http://jupiterjs.com/news/writing-the-perfect-jquery-plugin
+	init: function(el, options) {
+
+			：
+			：
+//				var w = jQuery(el).parent().width() + scrollbar;
+				var w = jQuery(el).parent().width();
+
+3.見栄えの調整
+
+	function _draw_diff
+
+//		ctx_lhs.fillRect(1.5, lfrom, 4.5, lto);
+//		ctx_rhs.fillRect(1.5, rfrom, 4.5, rto);
+		ctx_lhs.fillRect(0, lfrom, 8, lto);
+		ctx_rhs.fillRect(0, rfrom, 8, rto);
