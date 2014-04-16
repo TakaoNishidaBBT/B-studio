@@ -19,8 +19,8 @@
 
 			$this->site_settings_table = new B_Table($this->db, 'settings');
 			$this->site_settings = $this->site_settings_table->select();
-			$this->title = B_TITLE_PREFIX . htmlspecialchars($this->site_settings['admin_site_title'], ENT_QUOTES, B_CHARSET);
-			$this->site_title = $this->site_settings['admin_site_title'];
+			$this->site_title = htmlspecialchars($this->site_settings['admin_site_title'], ENT_QUOTES, B_CHARSET);
+			$this->title = B_TITLE_PREFIX . $this->site_title;
 
 			// ブラウザチェック
 			if(!$this->checkBrowser()) {
