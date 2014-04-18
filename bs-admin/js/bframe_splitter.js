@@ -60,6 +60,7 @@
 		drag_overlay.style.left = 0;
 		drag_overlay.style.opacity = 0;
 		drag_overlay.style.backgroundColor = '#f00';
+		drag_overlay.style.cursor = 'e-resize';
 
 		document.body.appendChild(drag_overlay);
 
