@@ -193,7 +193,7 @@ $config_form_config = array(
 				array(
 					'name'					=> 'title',
 					'class'					=> 'B_InputText',
-					'special_html'			=> 'class="title ime-on" maxlength="100" ',
+					'special_html'			=> 'class="title" maxlength="100" ',
 					'no_trim'				=> true,
 				),
 			),
@@ -281,7 +281,7 @@ $config_form_config = array(
 				array(
 					'name'					=> 'keyword',
 					'class'					=> 'B_TextArea',
-					'special_html'			=> 'class="keyword ime-on"',
+					'special_html'			=> 'class="keyword"',
 				),
 			),
 		),
@@ -300,7 +300,7 @@ $config_form_config = array(
 				array(
 					'name'					=> 'description',
 					'class'					=> 'B_TextArea',
-					'special_html'			=> 'class="description ime-on"',
+					'special_html'			=> 'class="description"',
 				),
 			),
 		),
