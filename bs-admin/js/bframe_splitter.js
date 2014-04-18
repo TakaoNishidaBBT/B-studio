@@ -51,8 +51,21 @@
 		var size = {width: target.offsetWidth, height: target.offsetHeight};
 		bframe.resize_handler.registCallBackFunction(_adjustWindow);
 
+		var drag_overlay = document.createElement('div');
+
+		drag_overlay.className = 'drag_overlay';
+		drag_overlay.style.display = 'none';
+		drag_overlay.style.position = 'absolute';
+		drag_overlay.style.top = 0;
+		drag_overlay.style.left = 0;
+		drag_overlay.style.opacity = 0;
+		drag_overlay.style.backgroundColor = '#f00';
+
+		document.body.appendChild(drag_overlay);
+
 		bframe.addEventListner(self, 'mousedown', start);
-		bframe.addEventListner(window, 'beforeunload' ,cleanUp);
+		bframe.addEventListner(drag_overlay, 'mousemove', resize);
+		bframe.addEventListner(drag_overlay, 'mouseup', stop);
 
 		setEventHandler();
 
@@ -79,8 +92,16 @@
 			splitbar.cleanUp();
 		}
 
+
 		function start(event) {
 			setEventHandlerAllFrames();
+
+			var w = top.window.innerWidth || top.document.documentElement.clientWidth || top.document.body.clientWidth;
+			var h = top.window.innerHeight || top.document.documentElement.clientHeight || top.document.body.clientHeight;
+			drag_overlay.style.width = w + 'px';
+			drag_overlay.style.height = h + 'px';
+			drag_overlay.style.display = 'block';
+
 			var mp = bframe.getMousePosition(event);
 			var ep = bframe.getElementPosition(self);
 			pain.setElementPosition(ep);
@@ -117,6 +138,7 @@
 			pain.position(ep);
 			splitbar.hide();
 			self.style.visibility = 'visible';
+			drag_overlay.style.display = 'none';
 
 			resize_status = false;
 		}
