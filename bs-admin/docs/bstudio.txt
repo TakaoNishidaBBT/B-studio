@@ -6,14 +6,14 @@
 	softwrapをFree（行っている）にもかかわらずinvisibleオブジェクトの表示があった場合は
 	maxlineの文字数に1を加算しているため常に横スクロールバーが表示される。
 
-	※印本来はsoftwrapの値を参照するべきだが、本システムでは常にsoftwrapをfreeとしているため
+	※本来はsoftwrapの値を参照するべきだが、本システムでは常にsoftwrapをfreeとしているため
 	単純にコメントアウト
 
 	行番号：13034
 
     this.$getLongestLine = function() {
         var charCount = this.session.getScreenWidth();
-        if (this.$textLayer.showInvisibles)
+//        if (this.$textLayer.showInvisibles)
 //            charCount += 1;
 
         return Math.max(this.$size.scrollerWidth - 2 * this.$padding, Math.round(charCount * this.characterWidth));
