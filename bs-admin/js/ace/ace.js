@@ -12825,7 +12825,7 @@ var VirtualRenderer = function(container, theme) {
 
     this.$getLongestLine = function() {
         var charCount = this.session.getScreenWidth();
-        if (this.$textLayer.showInvisibles)
+//        if (this.$textLayer.showInvisibles)
 //            charCount += 1; fixed (T.Nishida 2013/08/17)
 
         return Math.max(this.$size.scrollerWidth - 2 * this.$padding, Math.round(charCount * this.characterWidth));
