@@ -171,7 +171,7 @@
 			overlay.style.display = 'none';
 			modal_window.style.display = 'none';
 			modal_window.style.opacity = 0;
-			containerBody.src = '';
+			containerBody.src = 'about:blank';
 			window_status = false;
 
 			executeCallBack(param);
