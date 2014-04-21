@@ -184,8 +184,9 @@
 			ace_editor.redo();
 		}
 
-		function openWidget() {
+		function openWidget(event) {
 			activateModalWindow(widget, 350, 400, insert);
+			bframe.stopPropagation(event);
 		}
 
 		function insert(code) {
