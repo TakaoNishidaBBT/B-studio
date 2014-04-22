@@ -6,7 +6,6 @@
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
 $form_config = array(
-	array('class' => 'B_Hidden', 'name' => 'terminal_id', 'value' => TERMINAL_ID),
 	array('class' => 'B_Hidden', 'name' => 'baseHref', 'value' => B_SITE_BASE),
 	array('class' => 'B_Hidden', 'name' => 'node_id'),
 	array('class' => 'B_Hidden', 'name' => 'contents_id'),

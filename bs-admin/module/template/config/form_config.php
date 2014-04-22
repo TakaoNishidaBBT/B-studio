@@ -7,7 +7,7 @@
 */
 $form_config = array(
 	array('class' => 'B_Hidden', 'name' => 'node_id'),
-	array('class' => 'B_Hidden', 'name' => 'template_id'),
+	array('class' => 'B_Hidden', 'name' => 'contents_id'),
 	array('class' => 'B_Hidden', 'name' => 'update_datetime'),
 	array(
 		'start_html'	=> '<div class="editor_container bframe_adjustwindow" param="margin:8">',
