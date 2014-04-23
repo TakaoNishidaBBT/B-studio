@@ -81,7 +81,7 @@
 			$contents = file_get_contents('./config/admin_htaccess.txt');
 			$contents = str_replace('%AUTH_USER_FILE%', DOC_ROOT . ROOT_DIR . 'bs-admin/.htpassword', $contents);
 			file_put_contents('../bs-admin/.htaccess', $contents);
-			file_put_contents('../bs-admin-files/.htaccess', $password);
+			file_put_contents('../bs-admin-files/.htaccess', $contents);
 
 			// setup bs-admin password
 			$password = $param['basic_auth_id'] . ':' . htpasswd($param['basic_auth_pwd']);
