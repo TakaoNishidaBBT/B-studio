@@ -4,3 +4,4 @@
 /bs-admin/cache
 /bs-admin/log
 /bs-admin/db/db_connect.php
+/bs-admin/user/users.php
