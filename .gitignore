@@ -1,9 +1,10 @@
 /bs-admin-files
+/bs-admin-files/.htaccess
 /files
 /bs-admin/archive
 /bs-admin/cache
 /bs-admin/log
 /bs-admin/db/db_connect.php
-/.htaccess
+.htaccess
 /bs-admin/.htaccess
 /bs-admin/.htpassword

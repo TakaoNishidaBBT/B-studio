@@ -10,6 +10,6 @@
 			'user_name'	=> 'サイト管理者',
 			'user_id'	=> 'admin',
 			'pwd'		=> '21232f297a57a5a743894a0e4a801fc3',
-			'user_auth'	=> 'admin',
+			'user_auth'	=> 'super_admin',
 		)
 	);

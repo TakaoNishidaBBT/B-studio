@@ -57,7 +57,7 @@
 			$this->user_name = htmlspecialchars($this->user_name, ENT_QUOTES, B_CHARSET);
 
 			switch($this->user_auth) {
-			case 'admin':
+			case 'super_admin':
 				$this->initial_page = DISPATCH_URL . '&amp;module=contents&amp;page=index&amp;method=init';
 				break;
 
