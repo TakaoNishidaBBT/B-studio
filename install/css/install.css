@@ -207,7 +207,8 @@ span.caution {
 	ime-mode: disabled;
 }
 .ime-on {
-	ime-mode: active;
+/* commnet out for IE11 */
+/*	ime-mode: active;*/
 }
 
 input.button {
