@@ -10,6 +10,6 @@
 			'user_name'	=> '%USER_NAME%',
 			'user_id'	=> '%USER_ID%',
 			'pwd'		=> '%PASSWORD%',
-			'user_auth'	=> 'admin',
+			'user_auth'	=> 'super_admin',
 		)
 	);
