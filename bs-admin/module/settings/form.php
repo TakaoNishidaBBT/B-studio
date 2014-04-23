@@ -114,6 +114,8 @@
 			if(is_array($admin_file_data)) {
 				foreach($admin_file_data as $key => $value) {
 					if($value) {
+						$info = $this->util->pathinfo($key);
+						if(substr($info['basename'], 0, 1) == '.') continue;
 						$zip->addFile($value, B_ADMIN_FILES . $key);
 					}
 					else {
@@ -127,6 +129,8 @@
 			if(is_array($file_data)) {
 				foreach($file_data as $key => $value) {
 					if($value) {
+						$info = $this->util->pathinfo($key);
+						if(substr($info['basename'], 0, 1) == '.') continue;
 						$zip->addFile($value, B_UPLOAD_FILES . $key);
 					}
 					else {
