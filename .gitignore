@@ -5,6 +5,4 @@
 /bs-admin/cache
 /bs-admin/log
 /bs-admin/db/db_connect.php
-.htaccess
-/bs-admin/.htaccess
-/bs-admin/.htpassword
+
