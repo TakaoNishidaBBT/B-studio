@@ -85,6 +85,8 @@
 
 	function confirmPermission(&$message) {
 		$status = checkPermission(DOC_ROOT . ROOT_DIR . '.htaccess', $message);
+		$status = checkPermission(DOC_ROOT . ROOT_DIR . 'bs-admin/.htaccess', $message);
+		$status = checkPermission(DOC_ROOT . ROOT_DIR . 'bs-admin/.htpassword', $message);
 		$status&= checkPermission(DOC_ROOT . ROOT_DIR . 'bs-admin/archive', $message);
 		$status&= checkPermission(DOC_ROOT . ROOT_DIR . 'bs-admin/cache', $message);
 		$status&= checkPermission(DOC_ROOT . ROOT_DIR . 'bs-admin/config/core_config.php', $message);
