@@ -8,6 +8,7 @@
 	define('B_CHARSET', 'UTF-8');
 	mb_internal_encoding(B_CHARSET);
 	ini_set('display_errors', 'On');
+	error_reporting(E_ALL ^ E_NOTICE);
 
 	require_once('config/form_config.php');
 	require_once('../bs-admin/class/B_Element.php');

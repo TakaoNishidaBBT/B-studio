@@ -5,6 +5,7 @@
  *
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
+	error_reporting(E_ALL ^ E_NOTICE);
 	ini_set('display_errors','Off');
 	set_error_handler('exception_error_handler');
 
