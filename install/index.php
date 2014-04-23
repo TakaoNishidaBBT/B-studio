@@ -92,9 +92,9 @@
 		$status&= checkPermission(DOC_ROOT . ROOT_DIR . 'bs-admin/download', $message);
 		$status&= checkPermission(DOC_ROOT . ROOT_DIR . 'bs-admin/log', $message);
 		$status&= checkPermission(DOC_ROOT . ROOT_DIR . 'bs-admin/user/users.php', $message);
+		$status&= checkPermission(DOC_ROOT . ROOT_DIR . 'bs-admin-files', $message);
 		$status&= checkPermission(DOC_ROOT . ROOT_DIR . 'bs-admin-files/files', $message);
 		$status&= checkPermission(DOC_ROOT . ROOT_DIR . 'bs-admin-files/thumbs', $message);
-		$status&= checkPermission(DOC_ROOT . ROOT_DIR . 'bs-admin-files/work', $message);
 		$status&= checkPermission(DOC_ROOT . ROOT_DIR . 'files', $message);
 		return $status;
 	}
