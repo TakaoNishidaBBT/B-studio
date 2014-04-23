@@ -1016,7 +1016,7 @@
 	// 
 	// -------------------------------------------------------------------------
 	class B_Text extends B_Element {
-		function getElementsHtml() {
+		function getElementsHtml($mode=null) {
 			if($this->shorten_text) {
 				$this->value = $this->shortenText($this->value, $this->shorten_text);
 			}
@@ -1043,7 +1043,7 @@
 	class B_TextArea extends B_Element {
 		function getElementsHtml($mode=null) {
 			if($mode == 'confirm') {
-				return B_TextField::getElementsHtml();
+				return B_TextField::getElementsHtml($mode);
 			}
 			else {
 				return 
@@ -1063,7 +1063,7 @@
 	// 
 	// -------------------------------------------------------------------------
 	class B_TextField extends B_Element {
-		function getElementsHtml() {
+		function getElementsHtml($mode=null) {
 			if($this->specialchars == 'none') {
 				$value = $this->value;
 			}
@@ -1136,7 +1136,7 @@
 	// 
 	// -------------------------------------------------------------------------
 	class B_InputImage extends B_Element {
-		function getElementsHtml() {
+		function getElementsHtml($mode=null) {
 			if($this->label) {
 				$html = '<label>' . $this->label . '</label>';
 			}
@@ -1199,7 +1199,7 @@
 	// 
 	// -------------------------------------------------------------------------
 	class B_Button extends B_Element {
-		function getElementsHtml($mode) {
+		function getElementsHtml($mode=null) {
 			if($mode == 'confirm') {
 				return;
 			}
@@ -1224,7 +1224,7 @@
 	// 
 	// -------------------------------------------------------------------------
 	class B_Password extends B_Element {
-		function getElementsHtml($mode) {
+		function getElementsHtml($mode=null) {
 			if($mode == 'confirm') {
 				if($this->value) {
 					return $this->confirm_message;
@@ -1252,7 +1252,7 @@
 	// 
 	// -------------------------------------------------------------------------
 	class B_Submit extends B_Element {
-		function getElementsHtml() {
+		function getElementsHtml($mode=null) {
 			return 
 				'<input ' .
 				$this->special_html . ' ' .
@@ -1269,7 +1269,7 @@
 	// 
 	// -------------------------------------------------------------------------
 	class B_Reset extends B_Element {
-		function getElementsHtml() {
+		function getElementsHtml($mode=null) {
 			return 
 				'<input ' .
 				$this->special_html . ' ' .
@@ -1286,7 +1286,7 @@
 	// 
 	// -------------------------------------------------------------------------
 	class B_Hidden extends B_Element {
-		function getElementsHtml() {
+		function getElementsHtml($mode=null) {
 			if(is_array($this->value)) {
 				foreach($this->value as $value2) {
 					$html.=
@@ -1333,7 +1333,7 @@
 	class B_SelectBox extends B_Element {
 		function getElementsHtml($mode=null) {
 			if($mode == 'confirm') {
-				return B_SelectedText::getElementsHtml();
+				return B_SelectedText::getElementsHtml($mode);
 			}
 
 			$html = 
@@ -1374,7 +1374,7 @@
 	// 
 	// -------------------------------------------------------------------------
 	class B_SelectedText extends B_Element {
-		function getElementsHtml() {
+		function getElementsHtml($mode=null) {
 			if(isset($this->data_set_value)) {
 				if(is_array($this->value)) {
 					foreach($this->value as $value) {
@@ -1532,7 +1532,7 @@
 			$this->createInstance();
 		}
 
-		function getElementsHtml() {
+		function getElementsHtml($mode=null) {
 			return;
 		}
 
@@ -1728,7 +1728,7 @@
 			$this->createInstance();
 		}
 
-		function getElementsHtml() {
+		function getElementsHtml($mode=null) {
 			return;
 		}
 
@@ -1851,7 +1851,7 @@
 	// 
 	// -------------------------------------------------------------------------
 	class B_Label extends B_Element {
-		function getElementsHtml() {
+		function getElementsHtml($mode=null) {
 			return '<label for="' . $this->parent->_getHtmlid() . '">' . $this->value . '</label>';
 		}
 	}
@@ -1861,7 +1861,7 @@
 	// 
 	// -------------------------------------------------------------------------
 	class B_Link extends B_Element {
-		function getElementsHtml() {
+		function getElementsHtml($mode=null) {
 			if($this->specialchars == 'none') {
 				return $this->value;
 			}
@@ -1870,7 +1870,7 @@
 			}
 		}
 
-		function getStartHtml() {
+		function getStartHtml($mode=null) {
 			if($this->link && $this->link == 'none') {
 				return $this->start_html;
 			}
@@ -1894,7 +1894,7 @@
 			return $this->start_html . $this->element_start_html . $this->special_html . $this->event . '>';;
 		}
 
-		function getEndHtml() {
+		function getEndHtml($mode=null) {
 			if($this->element_start_html) {
 				$this->element_end_html = '</a>';
 			}
@@ -2007,7 +2007,7 @@
 	// 
 	// -------------------------------------------------------------------------
 	class B_PlaceHolder extends B_Element {
-		function getElementsHtml() {
+		function getElementsHtml($mode=null) {
 			return;
 		}
 
@@ -2021,7 +2021,7 @@
 	// 
 	// -------------------------------------------------------------------------
 	class B_Data extends B_Element {
-		function getElementsHtml() {
+		function getElementsHtml($mode=null) {
 			return;
 		}
 	}
@@ -2031,7 +2031,7 @@
 	// 
 	// -------------------------------------------------------------------------
 	class B_DateTime extends B_Element {
-		function getElementsHtml() {
+		function getElementsHtml($mode=null) {
 			if($this->value) {
 				return $this->myDate($this->format, $this->value);
 			}
@@ -2065,7 +2065,7 @@
 	// 
 	// -------------------------------------------------------------------------
 	class B_Row extends B_Element {
-		function getElementsHtml() {
+		function getElementsHtml($mode=null) {
 			return;
 		}
 	}
@@ -2097,7 +2097,7 @@
 				'>';
 		}
 
-		function getStartHtml() {
+		function getStartHtml($mode=null) {
 			return
 				'<' . $this->tag . ' ' .
 				$this->special_html .
@@ -2106,11 +2106,11 @@
 				'>';
 		}
 
-		function getEndHtml() {
+		function getEndHtml($mode=null) {
 			return '</' . $this->tag . '>';
 		}
 
-		function getElementsHtml() {
+		function getElementsHtml($mode=null) {
 			return;
 		}
 	}
@@ -2137,7 +2137,7 @@
 
 		}
 
-		function getStartHtml() {
+		function getStartHtml($mode=null) {
 			if($this->special_html) {
 				$special_html = ' ' . $this->special_html;
 			}
@@ -2150,11 +2150,11 @@
 			return '<' . $this->tag . $special_html . $name . $id . '>';
 		}
 
-		function getEndHtml() {
+		function getEndHtml($mode=null) {
 			return '</' . $this->tag . '>';
 		}
 
-		function getElementsHtml() {
+		function getElementsHtml($mode=null) {
 			return;
 		}
 	}
@@ -2164,7 +2164,7 @@
 	// 
 	// -------------------------------------------------------------------------
 	class B_Iframe extends B_Element {
-		function getStartHtml() {
+		function getStartHtml($mode=null) {
 			if($this->name) {
 				$name = ' name="' . $this->name . '"';
 				$id = ' id="' . $this->_gethtmlid() . '"';
@@ -2177,11 +2177,11 @@
 				'>';
 		}
 
-		function getEndHtml() {
+		function getEndHtml($mode=null) {
 			return '</iframe>';
 		}
 
-		function getElementsHtml() {
+		function getElementsHtml($mode=null) {
 			return;
 		}
 	}
@@ -2191,7 +2191,7 @@
 	// 
 	// -------------------------------------------------------------------------
 	class B_Image extends B_Element {
-		function getElementsHtml() {
+		function getElementsHtml($mode=null) {
 			if($this->path) {
 				$src = B_Util::getPath($this->path, $this->value);
 			}

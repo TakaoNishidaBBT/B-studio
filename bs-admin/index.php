@@ -5,4 +5,5 @@
  *
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
+	error_reporting(E_ALL & ~E_NOTICE);
 	require_once('./controller/controller.php');
