@@ -185,6 +185,7 @@
 	require_once(B_DOC_ROOT . B_ADMIN_ROOT . 'global/' . $g_data_set . '.php');
 
 	// PHPエラーログ表示設定
+	error_reporting(E_ALL & ~E_NOTICE & ~E_STRICT);
 	ini_set('display_errors','Off');
 	ini_set('log_errors','On');
 	ini_set('error_log', B_DOC_ROOT . B_ADMIN_ROOT . 'log/system.log');
