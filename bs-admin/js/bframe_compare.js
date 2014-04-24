@@ -34,7 +34,7 @@
 				width: 'auto',
 				height: 'auto',
 				vpcolor: 'rgba(0, 0, 256, 0.4)',
-				fgcolor: {a:'#0000cc',c:'#889900',d:'#cc0000'},
+				fgcolor: {a:'#0000cc',c:'#ffffff',d:'#cc0000'},
 				resize_timeout: '100',
 				cmsettings: {
 					readOnly: true, 

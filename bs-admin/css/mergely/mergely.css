@@ -31,7 +31,7 @@
 .mergely.d.lhs.start { border-top: 1px solid #aa0000; }
 
 .mergely.c.lhs,
-.mergely.c.rhs { background-color: #889900; }
+.mergely.c.rhs { background-color: #3b3b3b; }
 .mergely.c.lhs.start,
 .mergely.c.rhs.start { border-top: 1px solid #383838; }
 .mergely.c.lhs.end,
