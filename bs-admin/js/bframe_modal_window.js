@@ -38,7 +38,7 @@
 
 		overlay.className = 'overlay';
 		overlay.style.display = 'none';
-		overlay.style.position = 'absolute';
+		overlay.style.position = 'fixed';
 		overlay.style.top = 0;
 		overlay.style.left = 0;
 
@@ -49,7 +49,7 @@
 
 		modal_window.className = 'modal_window';
 		modal_window.style.display = 'none';
-		modal_window.style.position = 'absolute';
+		modal_window.style.position = 'fixed';
 		modal_window.style.opacity = 0;
 		document.body.appendChild(modal_window);
 
@@ -236,7 +236,7 @@
 
 			drag_overlay.className = 'drag_overlay';
 			drag_overlay.style.display = 'none';
-			drag_overlay.style.position = 'absolute';
+			drag_overlay.style.position = 'fixed';
 			drag_overlay.style.top = 0;
 			drag_overlay.style.left = 0;
 			drag_overlay.style.opacity = 0;
@@ -273,7 +273,6 @@
 				else {
 					event.preventDefault();
 				}
-
 			}
 
 			function dragging(event) {
@@ -319,8 +318,8 @@
 			function setWindowPosition(event) {
 				var m = bframe.getMousePosition(event);
 
-				modal_window.style.left = parseInt(m.screenX - m.scrollLeft - offset_x) + 'px';
-				modal_window.style.top = parseInt(m.screenY - m.scrollTop - offset_y) + 'px';
+				modal_window.style.left = parseInt(m.screenX - offset_x) + 'px';
+				modal_window.style.top = parseInt(m.screenY - offset_y) + 'px';
 			}
 		}
 	}
