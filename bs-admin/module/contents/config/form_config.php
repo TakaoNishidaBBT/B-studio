@@ -192,7 +192,7 @@ $config_form_config = array(
 				array(
 					'name'					=> 'title',
 					'class'					=> 'B_InputText',
-					'special_html'			=> 'class="title" maxlength="100" ',
+					'special_html'			=> 'class="title bframe_textarea"',
 					'no_trim'				=> true,
 				),
 			),
@@ -215,7 +215,7 @@ $config_form_config = array(
 				array(
 					'name'					=> 'bread_crumb_name',
 					'class'					=> 'B_InputText',
-					'special_html'			=> 'class="bread_crumb ime-on" maxlength="100" ',
+					'special_html'			=> 'class="bread_crumb bframe_textarea"" ',
 					'no_trim'				=> true,
 				),
 			),
@@ -280,7 +280,7 @@ $config_form_config = array(
 				array(
 					'name'					=> 'keyword',
 					'class'					=> 'B_TextArea',
-					'special_html'			=> 'class="keyword"',
+					'special_html'			=> 'class="keyword bframe_textarea"',
 				),
 			),
 		),
@@ -299,7 +299,7 @@ $config_form_config = array(
 				array(
 					'name'					=> 'description',
 					'class'					=> 'B_TextArea',
-					'special_html'			=> 'class="description"',
+					'special_html'			=> 'class="description bframe_textarea"',
 				),
 			),
 		),
@@ -318,7 +318,7 @@ $config_form_config = array(
 				array(
 					'name'					=> 'external_css',
 					'class'					=> 'B_TextArea',
-					'special_html'			=> 'class="external_css ime-off"',
+					'special_html'			=> 'class="external_css bframe_textarea"',
 				),
 			),
 		),
@@ -337,7 +337,7 @@ $config_form_config = array(
 				array(
 					'name'					=> 'external_js',
 					'class'					=> 'B_TextArea',
-					'special_html'			=> 'class="external_js ime-off"',
+					'special_html'			=> 'class="external_js bframe_textarea"',
 				),
 			),
 		),
@@ -356,7 +356,7 @@ $config_form_config = array(
 				array(
 					'class'					=> 'B_TextArea',
 					'name'					=> 'header_element',
-					'special_html'			=> 'class="header_element"',
+					'special_html'			=> 'class="header_element bframe_textarea"',
 				),
 			),
 		),

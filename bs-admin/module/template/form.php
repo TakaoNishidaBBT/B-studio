@@ -222,6 +222,7 @@
 			$this->html_header->appendProperty('script', '<script src="js/bframe_edit_check.js" type="text/javascript"></script>');
 			$this->html_header->appendProperty('script', '<script src="js/bframe_effect.js" type="text/javascript"></script>');
 			$this->html_header->appendProperty('script', '<script src="js/bframe_texteditor.js" type="text/javascript"></script>');
+			$this->html_header->appendProperty('script', '<script src="js/bframe_shortcut.js" type="text/javascript"></script>');
 			$this->html_header->appendProperty('script', '<script src="js/ace/ace.js" type="text/javascript"></script>');
 			$this->html_header->appendProperty('script', '<script src="js/ace/ext-split.js" type="text/javascript"></script>');
 			$this->html_header->appendProperty('script', '<script src="js/ace/theme-twilight.js" type="text/javascript"></script>');
