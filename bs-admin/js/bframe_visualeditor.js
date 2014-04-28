@@ -67,6 +67,10 @@
 				var h = target.style.height;
 			}
 
+			// Bold and Italic tags change to default because icons are "B" and "I"
+			CKEDITOR.config.coreStyles_bold = {element : 'b'};
+			CKEDITOR.config.coreStyles_italic = {element : 'i'};
+
 			// protect php
 			CKEDITOR.config.protectedSource.push( /<\?[\s\S]*?\?>/g );
 

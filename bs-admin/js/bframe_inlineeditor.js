@@ -53,6 +53,10 @@
 			CKEDITOR.config.language = 'ja';
 			CKEDITOR.config.autoParagraph = false;
 
+			// Bold and Italic tags change to default because icons are "B" and "I"
+			CKEDITOR.config.coreStyles_bold = {element : 'b'};
+			CKEDITOR.config.coreStyles_italic = {element : 'i'};
+
 			// for HTML5 tags(cancel Automatic ACF Mode)
 			CKEDITOR.config.allowedContent = true;
 

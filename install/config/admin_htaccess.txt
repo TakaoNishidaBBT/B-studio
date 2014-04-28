@@ -5,3 +5,6 @@ AuthName "Limited Room"
 AuthUserFile %AUTH_USER_FILE%
 AuthGroupFile /dev/null
 require valid-user
+
+php_value upload_max_filesize 200M
+php_value post_max_size 201M
