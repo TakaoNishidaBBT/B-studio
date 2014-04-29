@@ -13,17 +13,14 @@ body {
 		margin-right: 10%;
 	}
 }
-
 @media print {
 	pre, .note, td, th {
 		border: 1px dashed gray;
 	}
 }
-
 img {
 	border: none;
 }
-
 a:link, a:visited {
 	color: #1D3565; 
 	font-weight: bold;
@@ -32,7 +29,6 @@ a:link, a:visited {
 a: hover {
 	text-decoration: underline;
 }
-
 .heading {
 	text-align: center;
 	font-size: xx-large;
@@ -41,7 +37,6 @@ a: hover {
 	letter-spacing:3px;
 	margin: 15px 0 20px;
 }
-
 .heading i {
 	position: absolute;
 	top: 15px;
@@ -50,25 +45,21 @@ a: hover {
 	font-style: normal;
 	font-weight: normal;
 }
-
-
 p {
 	text-indent: 10px;
 	margin-left:20px;
 }
-
 h1 {
 	color: #555;
 }
-
 h2 {
 	border-bottom: 1px dotted gray;
 	font-size: 145%;
 	color: #555;
 	font-weight:normal;
 	letter-spacing:2px;
+	margin-top: 30px;
 }
-
 h3 {
 	margin-left: 12px;
 	border-bottom:1px dotted #666;
@@ -76,7 +67,7 @@ h3 {
 	color:#555;
 	letter-spacing:1px;
 }
-
+/*
 pre, .note, .faq .answer {
 	font-family: "メイリオ", "Meiryo", "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "Osaka", "ＭＳ Ｐゴシック", "MS PGothic", "IPA UIGothic", "IPA mona UIGothic", "VL PGothic", "Sazanami Gothic", "DynaLab-dfghsgothic w5-jisx0208.1990-0", "DynaLab-dfggothic w5-iso8859-1", "Trebuchet MS", "Bitstream Vera Sans", verdana, lucida, arial, helvetica, sans-serif;
 	font-size: small;
@@ -84,26 +75,12 @@ pre, .note, .faq .answer {
 	padding: 10px;
 	font-size: small;
 }
-
 .screenshot {
 	text-align: center;
 	background-color: #eee;
 	padding: 10px;
 }
-
-.faq .question {
-	font-weight: bold;
-	margin-bottom: 0px;
-}
-
-.faq .answer {
-
-}
-
-.faq {
-	margin-bottom: 20px;
-}
-
+*/
 /******************************
  * table FORM
  *
@@ -157,6 +134,9 @@ input.textbox {
 	height: 22px;
 	padding: 0 5px;
 	vertical-align: middle;
+}
+input.prefix {
+	width: 80px;
 }
 
 /* ERROR */

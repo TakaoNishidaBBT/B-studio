@@ -183,7 +183,7 @@ $db_install_form_config = array(
 				array(
 					'name'					=> 'db_prefix',
 					'class'					=> 'B_InputText',
-					'special_html'			=> 'class="textbox ime-off" size="20" maxlength="100" ',
+					'special_html'			=> 'class="textbox prefix ime-off" maxlength="100" ',
 					'value'					=> 'bs_',
 					'validate'				=>
 					array(
