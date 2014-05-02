@@ -10,18 +10,8 @@
 	// 
 	// -------------------------------------------------------------------------
 	class B_Util {
-		function getRandomPassword($length){
+		function getRandomText($length){
 			$base = 'abcdefghijkmnprstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ2345678';
-			$pwd = '';
-			for($i=0 ; $i<$length ; $i++){
-				$pwd.= $base{mt_rand(0, strlen($base)-1)};
-			}
-			return $pwd;
-		}
-
-		function getRandomID($length){
-			$base = 'abcdefghijkmnprstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ2345678';
-			$pwd = '';
 			for($i=0 ; $i<$length ; $i++){
 				$pwd.= $base{mt_rand(0, strlen($base)-1)};
 			}
@@ -29,7 +19,7 @@
 		}
 
 		function removeComma($value) {
-			return str_replace(',', '',$value);
+			return str_replace(',', '', $value);
 		}
 
 		function addMonth($year, $month, $add) {
@@ -93,7 +83,6 @@
 		}
 
 		function json_encode($data) {
-			$json = '';
 			foreach($data as $key => $value) {
 				if($json) $json .= ',';
 				if(!is_numeric($key)) {
@@ -173,18 +162,17 @@
 			}
 			if(substr($file_name, 0, 1) == '/') {
 				$file_name = substr($file_name, 1);
-			}	
+			}
 
 			return $dir . '/' . $file_name;
 		}
 
-		function encodeNumericentity($str) {
-			$ret = '';
+		function encodeNumericEntity($str) {
 			$convmap = array(0, 0x2FFFF, 0, 0xFFFF);
 
 			for($i=0 ; $i<mb_strlen($str) ; $i++) {
 				if(rand(0, 5)) {
-					$ret.= mb_encode_numericentity(mb_substr($str, $i, 1), $convmap);
+					$ret.= mb_encode_numericentity(mb_substr($str, $i, 1), $convmap, mb_internal_encoding());
 				}
 				else {
 					$ret.= mb_substr($str, $i, 1);

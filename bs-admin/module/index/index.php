@@ -43,7 +43,7 @@
 			if(!defined('TERMINAL_ID')) {
 				// TERMINAL_ID設定
 				$util = new B_Util();
-				define('TERMINAL_ID', $util->getRandomID(12));
+				define('TERMINAL_ID', $util->getRandomText(12));
 				$_SESSION['terminal_id'] = TERMINAL_ID;
 
 				// TERMINAL_ID毎のセッション領域を作成

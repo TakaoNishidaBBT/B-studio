@@ -461,9 +461,6 @@
 				$this->html_header->appendProperty('css', '<style>' . $this->contents['css'] . '</style>');
 			}
 
-			$this->html_header->appendProperty('script'
-				, '<script src="' . B_SITE_ROOT_SSL . 'bs-admin/js/bframe.js" type="text/javascript"></script>');
-
 			// ページタイトル設定
 			$this->setTitle(htmlspecialchars($this->contents['title'], ENT_QUOTES, B_CHARSET));
 

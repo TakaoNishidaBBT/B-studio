@@ -46,6 +46,7 @@ $tree_config = array(
 					'jpeg'		=> 'download',
 					'gif'		=> 'download',
 					'png'		=> 'download',
+					'bmp'		=> 'download',
 					'ico'		=> 'download',
 					'swf'		=> 'download',
 					'flv'		=> 'download',

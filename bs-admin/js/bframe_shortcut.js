@@ -21,6 +21,8 @@
 	// 
 	// -------------------------------------------------------------------------
 	bframe.shortcut = function(target) {
+		var self = target;
+
 		// regist button
 		var regist_button = document.getElementById('regist');
 
@@ -38,6 +40,8 @@
 			switch(keycode) {
 			case 83:	// Delete
 				if(e.ctrlKey) {
+					var obj = bframe.getEventSrcElement(event);
+					bframe.fireEvent(obj, 'focus');
 					bframe.fireEvent(regist_button, 'click');
 					event.preventDefault();
 				}

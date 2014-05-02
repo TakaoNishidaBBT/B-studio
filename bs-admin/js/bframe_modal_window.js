@@ -126,11 +126,17 @@
 			if(params) {
 				if(w = bframe.getParam('width', params)) {
 					window_width_default = w;
+					var set_windo_size = true;
 				}
 				if(h = bframe.getParam('height', params)) {
 					window_height_default = h;
+					var set_windo_size = true;
 				}
 			}
+			if(!set_windo_size) {
+				containerBody.onload = onloadModalWindow;
+			}
+
 			window_width = window_width_default;
 			window_height = window_height_default;
 
@@ -160,6 +166,20 @@
 			window_status = 'activate';
 		};
 
+		function onloadModalWindow() {
+			if(!containerBody.contentDocument) return;
+			var w = containerBody.contentDocument.body.clientWidth;
+			var h = containerBody.contentDocument.body.clientHeight;
+			
+			setWindowSize(w, h);
+		}
+		
+		function setWindowSize(width, height) {
+			window_width_default = width;
+			window_height_default = height;
+			resizeOverlay();
+		}
+
 		function deactivate(param) {
 			for(var i=children.length; i > 0; i--) {
 				var child = children[i-1];
@@ -188,7 +208,7 @@
 			window_height = Math.round(h * 0.8) - margin < window_height_default ? Math.round(h * 0.8) - margin : window_height_default;
 			modal_window.style.left = ((w - window_width) / 2) + 'px';
 			modal_window.style.top = ((h - window_height - margin) / 2) + 'px';
-
+console.log(window_width, window_height);
 			containerBody.style.width = window_width + 'px';
 			containerBody.style.height = window_height + 'px';
 		}
