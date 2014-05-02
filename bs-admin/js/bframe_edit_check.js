@@ -49,7 +49,9 @@
 		};
 
 		function setEditFlag() {
-			edit_flag=true;
+			if(!editing_obj || (editing_obj && editing_obj.value != start_value)) {
+				edit_flag=true;
+			}
 		};
 
 		this.setEditFlag = setEditFlag;

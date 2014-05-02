@@ -187,6 +187,8 @@
 		this.executeCallBack = AjaxSubmitExecuteCallBack;
 
 		ajaxResponse = function() {
+			var obj;
+
 			if(httpObj.readyState == 4 && httpObj.status == 200 && bframe.response_wait){
 				response = eval('('+httpObj.responseText+')');
 				if(response.status && response.mode && response.mode == 'confirm') {
@@ -196,14 +198,16 @@
 					}
 				}
 				if(response.message && response.message_obj) {
-					var obj = document.getElementById(response.message_obj);
-					obj.innerHTML = response.message;
-					bframe.effect.fadeOut(obj, 100, 0, 6000);
+					if(obj = document.getElementById(response.message_obj)) {
+						obj.innerHTML = response.message;
+						bframe.effect.fadeOut(obj, 100, 0, 6000);
+					}
 				}
 				if(response.values) {
 					for(var obj_id in response.values) {
-						var obj = document.getElementById(obj_id);
-						obj.value = response.values[obj_id];
+						if(obj = document.getElementById(obj_id)) {
+							obj.value = response.values[obj_id];
+						}
 					}
 				}
 				bframe.response_wait = false;

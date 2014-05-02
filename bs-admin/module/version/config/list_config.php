@@ -185,7 +185,7 @@ array(
 				'value'			=> '比較',
 				'fixedparam'	=>
 				array(
-					'terminal_id'	=> $this->util->getRandomID(12),
+					'terminal_id'	=> $this->util->getRandomText(12),
 					'module'		=> 'compare', 
 					'page'			=> 'index', 
 					'method'		=> 'init',
