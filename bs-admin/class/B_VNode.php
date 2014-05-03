@@ -139,6 +139,10 @@
 					$this->node_status = 'diff';
 					return true;
 				}
+				if($this->contents_id != $left[$this->node_id]['contents_id']) {
+					$this->node_status = 'diff';
+					return true;
+				}
 				if($this->parent && $this->parent->node_id != $left[$this->node_id]['parent_node']) {
 					$this->node_status = 'diff';
 					return true;
@@ -147,6 +151,10 @@
 			else {
 				if(!$left[$this->node_id]) return false;
 				if($this->node_name != $right[$this->node_id]['node_name']) {
+					$this->node_status = 'diff';
+					return true;
+				}
+				if($this->contents_id != $right[$this->node_id]['contents_id']) {
 					$this->node_status = 'diff';
 					return true;
 				}

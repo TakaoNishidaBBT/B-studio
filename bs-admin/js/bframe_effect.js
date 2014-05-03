@@ -11,6 +11,7 @@
 	bframe._effect = function() {
 		var self;
 		var opacity;
+		var delay_timer;
 		var timer;
 		var speed;
 		var start;
@@ -23,13 +24,8 @@
 			end = e;
 			millisec = m;
 
-			if(timer) {
-				clearInterval(timer);
-				timer = false;
-			}
-
 			if(delay) {
-	            timer = setTimeout(fadeInStart, delay);
+				delay_timer = setTimeout(fadeInStart, delay);
 			}
 			else {
 				fadeInStart();
@@ -37,43 +33,40 @@
 		}
 
 		function fadeInStart() {
-		    if(start < end) {
+			if(start < end) {
 				opacity = start;
 				interval = millisec / (end - start);
-	            timer = setInterval(_fadeIn, parseInt(interval));
-		    }
+				for(var i=start ; i<end ; i++) {
+					timer = setTimeout(_fadeIn, i*interval);
+				}
+			}
 		}
 
 		function _fadeIn() {
-			if(opacity >= 100) {
-				clearInterval(timer);
-				timer = false;
-			}
-			self.style.opacity = (opacity / 100);
-			opacity++;
+			self.style.opacity = (++opacity / 100);
 		}
 
-		this.fadeOut = function(target, start, end, millisec) {
-			if(timer) {
-				clearInterval(timer);
-				timer = false;
-			}
-
+		this.fadeOut = function(target, s, e, m) {
 			self = target;
-		    if(start > end) {
+			start = s;
+			end = e;
+			millisec = m;
+			
+			fadeOutStart();
+		}
+
+		function fadeOutStart() {
+			if(start > end) {
 				opacity = start;
 				interval = millisec / (start - end);
-	            timer = setInterval(_fadeOut, interval);
-		    }
+				for(var i=start ; i<end ; i++) {
+					timer = setTimeout(_fadeOut, i*interval);
+				}
+			}
 		}
 
 		function _fadeOut() {
-			if(opacity < 0) {
-				clearInterval(timer);
-				timer = false;
-			}
-			self.style.opacity = (opacity / 100); 
-			opacity--;
+			self.style.opacity = (--opacity / 100);
 		}
 	}
 
