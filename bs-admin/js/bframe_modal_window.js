@@ -28,9 +28,8 @@
 		var close = document.createElement('span');
 		var window_width_default = 250;
 		var window_height_default = 250;
-		var window_width = 250;
-		var window_height = 250;
 		var window_status;
+		var set_window_size = false;
 		var children = Array();
 		var opener;
 		var baseIndex = 5000;
@@ -79,6 +78,7 @@
 		containerBody.style.position = 'relative';
 		containerBody.frameBorder = 0;
 		containerBody.deactivate = deactivate;
+		containerBody.onload = onloadModalWindow;
 		container.appendChild(containerBody);
 
 		bframe.addEventListner(overlay, 'click', deactivate);
@@ -111,7 +111,7 @@
 				if(!child) {
 					var id = window_id*10 + children.length+1;
 					child = new bframe.modal_window(id);
-					child.setBaseIndex(baseIndex + 1000);
+					child.setBaseIndex(baseIndex + 1000 + i*10);
 				}
 				child.setOverlayOpacity(0);
 				child.activate(target, window);
@@ -122,23 +122,19 @@
 			if(t = target.getAttribute('title')) {
 				title.innerHTML = t;
 			}
+
+			set_window_size = false;
 			var params = target.getAttribute('params');
 			if(params) {
 				if(w = bframe.getParam('width', params)) {
 					window_width_default = w;
-					var set_windo_size = true;
+					set_window_size = true;
 				}
 				if(h = bframe.getParam('height', params)) {
 					window_height_default = h;
-					var set_windo_size = true;
+					set_window_size = true;
 				}
 			}
-			if(!set_windo_size) {
-				containerBody.onload = onloadModalWindow;
-			}
-
-			window_width = window_width_default;
-			window_height = window_height_default;
 
 			resizeOverlay();
 
@@ -161,23 +157,34 @@
 			overlay.style.display = 'block';
 			modal_window.style.display = 'block';
 			modal_window.style.opacity = 0;
-			bframe.effect.fadeIn(modal_window, 300, 0, 100, 100);
+
+			if(set_window_size) {
+				bframe.effect.fadeIn(modal_window, 300, 0, 100, 400);
+			}
 
 			window_status = 'activate';
 		};
 
 		function onloadModalWindow() {
-			if(!containerBody.contentDocument) return;
-			var w = containerBody.contentDocument.body.clientWidth;
-			var h = containerBody.contentDocument.body.clientHeight;
-			
-			setWindowSize(w, h);
+			if(set_window_size) return;
+
+			try {
+				var w = containerBody.contentDocument.body.clientWidth;
+				var h = containerBody.contentDocument.body.clientHeight;
+				setWindowSize(w, h);
+			}
+			catch(e) {
+				bframe.effect.fadeIn(modal_window, 0, 0, 100, 400);
+			}
 		}
 		
 		function setWindowSize(width, height) {
+			if(!width || !height) return;
+			
 			window_width_default = width;
 			window_height_default = height;
 			resizeOverlay();
+			bframe.effect.fadeIn(modal_window, 0, 0, 100, 400);
 		}
 
 		function deactivate(param) {
@@ -198,19 +205,18 @@
 		}
 
 		function resizeOverlay() {
-			var w = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-			var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
-			overlay.style.width = w + 'px';
-			overlay.style.height = h + 'px';
+			var ow = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+			var oh = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+			overlay.style.width = ow + 'px';
+			overlay.style.height = oh + 'px';
 			var margin = 65;
 
-			window_width = Math.round(w * 0.6) < window_width_default ? Math.round(w * 0.6) : window_width_default;
-			window_height = Math.round(h * 0.8) - margin < window_height_default ? Math.round(h * 0.8) - margin : window_height_default;
-			modal_window.style.left = ((w - window_width) / 2) + 'px';
-			modal_window.style.top = ((h - window_height - margin) / 2) + 'px';
-console.log(window_width, window_height);
-			containerBody.style.width = window_width + 'px';
-			containerBody.style.height = window_height + 'px';
+			w = Math.round(ow * 0.6) < window_width_default ? Math.round(ow * 0.6) : window_width_default;
+			h = Math.round(oh * 0.8) - margin < window_height_default ? Math.round(oh * 0.8) - margin : window_height_default;
+			modal_window.style.left = ((ow - w) / 2) + 'px';
+			modal_window.style.top = ((oh - h - margin) / 2) + 'px';
+			containerBody.style.width = w + 'px';
+			containerBody.style.height = h + 'px';
 		}
 
 		this.setBaseIndex = function(value) {

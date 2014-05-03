@@ -127,7 +127,7 @@
 				$ret = $node->setContentsId($contents_id, $this->user_id);
 				if($ret) {
 					$this->db->commit();
-					$this->createCacheFile(B_FILE_INFO_W, B_FILE_INFO_SEMAPHORE_W, B_WORKING_RESOURCE_NODE_VIEW);
+					$this->removeCacheFile();
 				}
 				if(!$ret) {
 					$this->db->rollback();
