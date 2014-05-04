@@ -12,7 +12,7 @@
 			$auth = new B_AdminAuth;
 			$auth->getUserInfo($this->user_id, $this->user_name, $this->user_auth);
 
-			// HTMLヘッダー
+			// HTML header
 			require_once(B_DOC_ROOT . B_ADMIN_ROOT . 'module/common/config/html_header_config.php');
 			$this->createHtmlHeader($html_header_config);
 
@@ -20,7 +20,7 @@
 			$rs = $this->db->query($sql);
 			$this->version = $this->db->fetch_assoc($rs);
 
-			// バージョン情報
+			// version info
 			$this->version_info = '　公開バージョン：' . $this->version['current_version'] . '　';
 			$this->version_info.= '　作業中バージョン：' . $this->version['working_version'];
 
@@ -32,7 +32,7 @@
 			if(file_exists(B_FILE_INFO_W)) {
 				unlink(B_FILE_INFO_W);
 			}
-			// 同一バージョン
+			// if current and working versions are same
 			if($this->version['current_version'] == $this->version['working_version'] && file_exists(B_FILE_INFO_C)) {
 				unlink(B_FILE_INFO_C);
 			}
@@ -64,6 +64,9 @@
 
 			// set time limit to 2 minutes
 			set_time_limit(120);
+
+			// continue whether a client disconnect or not
+			ignore_user_abort(true);
 
 			// remove all Thumbnail Cache Files
 			$this->removeThumbnailCacheFile();

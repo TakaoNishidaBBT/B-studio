@@ -15,14 +15,13 @@
 	// 
 	// -------------------------------------------------------------------------
 	bframe.uploader = function() {
-		var ret = bframe.getPageInfo();
-		var terminal_id = ret.terminal_id;
-		var module = ret.source_module;
-		var page = ret.source_page;
+		var page_info = bframe.getPageInfo();
+		var terminal_id = page_info.terminal_id;
+		var module = page_info.source_module;
+		var page = page_info.source_page;
 
 		var upload_file = document.getElementById('uploadFile');
 		var select_button = document.getElementById('selectButton');
-//		var cancel_button = document.getElementById('cancelButton');
 		var upload_status = document.getElementById('divStatus');
 		var progressFieldId = 'fsUploadProgress';
 		var httpObj;
@@ -36,7 +35,6 @@
 
 		select_button.onclick = selectFiles;
 		upload_file.onchange = uploadFiles;
-//		cancel_button.onclick = cancelUpload;
 
 		queueComplete(0);
 
@@ -64,7 +62,7 @@
 				upload_queue[i] = {'file' : files[i], 'progress' : progress, 'mode' : 'confirm'};
 			}
 
-			upload(0);
+			confirm(0);
 			true;
 		}
 
@@ -72,6 +70,59 @@
 			var node = document.getElementById(id);
 			while(node.childNodes) {
 				node.removeChild(node.firstChild);
+			}
+		}
+
+		function confirm(index) {
+			var info = upload_queue[index];
+			if(!info) return;
+
+			httpObj = new XMLHttpRequest();
+
+			if(httpObj.upload){
+				httpObj.onreadystatechange = confirmResult;
+				progress = upload_queue[index].progress;
+				progress.setStatus('Uploading...');
+				progress.toggleCancel(true, this);
+			}
+
+			var form_data = new FormData();
+
+			form_data.append('terminal_id', terminal_id);
+			form_data.append('module', module);
+			form_data.append('page', page);
+			form_data.append('method', 'upload');
+			form_data.append('mode', mode);
+			form_data.append('filename', upload_queue[index].file['name']);
+			form_data.append('mode', upload_queue[index].mode);
+
+			httpObj.open('POST','index.php');
+			httpObj.send(form_data);
+		}
+
+		function confirmResult() {
+			if(httpObj.readyState == 4 && httpObj.status == 200){
+				var response = eval('('+httpObj.responseText+')');
+
+				if(response.status) {
+					if(response.mode == 'confirm'){
+						showConfirmDialog(response.message, overwrite, overwriteAll, cancel, cancelAll);
+					}
+					else {
+						overwrite();
+					}
+				}
+				else {
+					progress.setError();
+					progress.setStatus(response.message);
+					if(mode == 'confirm') {
+						confirm(++index);
+					}
+					else {
+						index++;
+						overwrite();
+					}
+				}
 			}
 		}
 
@@ -103,12 +154,7 @@
 			form_data.append('mode', mode);
 
 			form_data.append('Filedata', upload_queue[index].file);
-			if(mode == 'confirm') {
-				form_data.append('mode', upload_queue[index].mode);
-			}
-			else {
-				form_data.append('mode', mode);
-			}
+			form_data.append('mode', upload_queue[index].mode);
 
 			httpObj.open('POST','index.php');
 			httpObj.send(form_data);
@@ -118,12 +164,13 @@
 			if(httpObj.readyState == 4 && httpObj.status == 200){
 				var response = eval('('+httpObj.responseText+')');
 
-				if(mode == 'confirm' && response.mode == 'confirm'){
-					showConfirmDialog(response.message, overwrite, overwriteAll, cancel, cancelAll);
+				result(response);
+				if(mode == 'confirm') {
+					confirm(++index);
 				}
 				else {
-					result(response);
-					upload(++index);
+					index++;
+					overwrite();
 				}
 			}
 		}
@@ -147,6 +194,7 @@
 
 		function overwriteAll() {
 			mode = 'regist';
+			upload_queue[index].mode = 'regist';
 			upload(index);
 		}
 

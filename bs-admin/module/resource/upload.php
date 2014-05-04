@@ -9,90 +9,54 @@
 		function __construct() {
 			parent::__construct(__FILE__);
 
+			$this->dir = B_RESOURCE_DIR;
 			$this->current_folder = $this->global_session['resource']['current_node'];
 		}
 
 		function upload() {
+			if($_REQUEST['mode'] == 'confirm'){
+				$this->confirm();
+			}
+			else {
+				$this->_upload();
+			}
+		}
+
+		function confirm() {
 			$status = true;
 
-			if(!$this->current_folder) {
-				$status = false;
-				$this->error_message = 'フォルダが選択されていません';
-			}
+			try {
+				if(!$this->current_folder) {
+					throw new Exception('フォルダが選択されていません');
+				}
 
-			if($status) {
-				$this->dir = B_RESOURCE_DIR;
+				// get file info
+				$file = $this->util->pathinfo($_POST['filename']);
 
-				// アップロードファイル名取得
-				$file = $this->util->pathinfo($_FILES['Filedata']['name']);
-
-				// 拡張子は小文字に統一（windowsにダウンロードした時のため）
+				// unify extension to lowercase for windows system
 				$file['extension'] = strtolower($file['extension']);
 
 				if(strlen($file['basename']) != mb_strlen($file['basename'])) {
-					$this->error_message = '日本語ファイル名は使用できません。';
-					$status = false;
+					throw new Exception('日本語ファイル名は使用できません。');
 				}
 				if(preg_match('/[\\\\:\/\*\?<>\|\s]/', $file['basename'])) {
-					$this->error_message = 'ファイル名／フォルダ名に次の文字は使えません \ / : * ? " < > | スペース';;
-					$status = false;
+					throw new Exception('ファイル名／フォルダ名に次の文字は使えません \ / : * ? " < > | スペース');
+				}
+
+				$ret = $this->file_exists($file['basename']);
+				if($ret) {
+					$mode = 'confirm';
+					$message = $file['basename'] . 'は既に存在します。<br />上書きしてもよろしいですか？';
 				}
 			}
-
-			if($status) {
-				if(!is_dir($this->dir)) {
-					if(mkdir($this->dir)) {
-						chmod($this->dir, 0777);
-					}
-					else {
-						$status = false;
-						$this->error_message = "ディレクトリの作成に失敗しました";
-					}
-				}
-			}
-			if($status) {
-				if($_REQUEST['mode'] == 'confirm'){
-					$ret = $this->file_exists($file['basename']);
-					if($ret) {
-						$this->error_message = $file['basename'] . 'は既に存在します。<br />上書きしてもよろしいですか？';
-						$mode = 'confirm';
-						$status = false;
-					}
-				}
-			}
-			if($status) {
-				if(strtolower($file['extension']) == 'zip' && class_exists('ZipArchive')) {
-
-					// ブラウザを閉じても処理を継続
-					ignore_user_abort(true);
-
-					// set time limit to 10 minutes
-					set_time_limit(600);
-
-					$zip_file = B_RESOURCE_WORK_DIR . $file['basename'];
-					if($status = $this->_move_uploaded_file($_FILES['Filedata']['tmp_name'], $zip_file)) {
-						$zip = new ZipArchive();
-						$zip->open($zip_file);
-						$zip->extractTo(B_RESOURCE_EXTRACT_DIR);
-						$zip->close();
-						unlink($zip_file);
-
-						$node = new B_FileNode(B_RESOURCE_EXTRACT_DIR, '/', null, null, 'all');
-						$node->walk($this, regist_archive);
-
-						$node->remove();
-
-						$this->removeCacheFile();
-					}
-				}
-				else {
-					$this->regist($file);
-				}
+			catch(Exception $e) {
+				$status = false;
+				$message = $e->getMessage();
 			}
 
 			$response['status'] = $status;
 			$response['mode'] = $mode;
-			$response['message'] = $this->error_message;
+			$response['message'] = $message;
 
 			header('Content-Type: application/x-javascript charset=utf-8');
 			echo $this->util->json_encode($response);
@@ -118,6 +82,61 @@
 			else {
 				return false;
 			}
+		}
+
+		function _upload() {
+			$status = true;
+
+			try {
+				// get file info
+				$file = $this->util->pathinfo($_FILES['Filedata']['name']);
+
+				if(!is_dir($this->dir)) {
+					if(mkdir($this->dir)) {
+						chmod($this->dir, 0777);
+					}
+					else {
+						throw new Exception('ディレクトリの作成に失敗しました');
+					}
+				}
+
+				if(strtolower($file['extension']) == 'zip' && class_exists('ZipArchive')) {
+
+					// set time limit to 10 minutes
+					set_time_limit(600);
+
+					// continue whether a client disconnect or not
+					ignore_user_abort(true);
+
+					$zip_file = B_RESOURCE_WORK_DIR . $file['basename'];
+					if($status = $this->_move_uploaded_file($_FILES['Filedata']['tmp_name'], $zip_file)) {
+						$zip = new ZipArchive();
+						$zip->open($zip_file);
+						$zip->extractTo(B_RESOURCE_EXTRACT_DIR);
+						$zip->close();
+						unlink($zip_file);
+
+						$node = new B_FileNode(B_RESOURCE_EXTRACT_DIR, '/', null, null, 'all');
+						$node->walk($this, regist_archive);
+						$node->remove();
+						$this->removeCacheFile();
+					}
+				}
+				else {
+					$this->regist($file);
+				}
+			}
+			catch(Exception $e) {
+				$status = false;
+				$message = $e->getMessage();
+			}
+
+			$response['status'] = $status;
+			$response['message'] = $message;
+
+			header('Content-Type: application/x-javascript charset=utf-8');
+			echo $this->util->json_encode($response);
+			exit;
 		}
 
 		function regist_archive($node) {
@@ -214,6 +233,7 @@
 					break;
 				}
 				$this->log->write('ERROR:' . $this->error_message);
+				throw new Exception($this->error_message);
 
 				return false;
 			}
@@ -410,14 +430,14 @@
 		}
 
 		function view() {
-			// HTTPヘッダー出力
+			// send HTTP header
 			$this->sendHttpHeader();
 
 			$this->html_header->appendProperty('css', '<link href="css/upload.css" type="text/css" rel="stylesheet" media="all" />');
 			$this->html_header->appendProperty('script', '<script src="js/bframe_dialog.js" type="text/javascript"></script>');
 			$this->html_header->appendProperty('script', '<script src="js/bframe_uploader.js" type="text/javascript"></script>');
 
-			// HTMLヘッダー出力
+			// HTML header
 			$this->showHtmlHeader();
 
 			require_once('./view/view_upload.php');

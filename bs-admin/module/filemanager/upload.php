@@ -15,42 +15,67 @@
 		}
 
 		function upload() {
+			if($this->request['mode'] == 'confirm'){
+				$this->confirm();
+			}
+			else {
+				$this->_upload();
+			}
+		}
+
+		function confirm() {
 			$status = true;
 
-			// アップロードファイル名取得
-			$file = $this->util->pathinfo($_FILES['Filedata']['name']);
-			if($status) {
+			try {
+	 			// アップロードファイル名取得
+				$file = $this->util->pathinfo($_POST['filename']);
+
 				if(strlen($file['basename']) != mb_strlen($file['basename'])) {
-					$this->error_message = '日本語ファイル名は使用できません。';
-					$status = false;
+					throw new Exception('日本語ファイル名は使用できません。');
 				}
 				if(preg_match('/[\\\\:\/\*\?<>\|\s]/', $file['basename'])) {
-					$this->error_message = 'ファイル名／フォルダ名に次の文字は使えません \ / : * ? " < > | スペース';;
-					$status = false;
+					throw new Exception('ファイル名／フォルダ名に次の文字は使えません \ / : * ? " < > | スペース');
 				}
-			}
-
-			if($status) {
 				if($this->global_session[$this->session['relation']]['current_node'] != 'root') {
 					$path = $this->global_session[$this->session['relation']]['current_node'] . '/';
 					if(substr($path, 0, 1) == '/') {
 						$path = substr($path, 1);
 					}
 				}
-			}
-
-			if($status) {
-				if($_REQUEST['mode'] == 'confirm'){
-					$ret = file_exists(B_UPLOAD_DIR . $path . $file['basename']);
-					if($ret) {
-						$this->error_message = $file['basename'] . 'は既に存在します。<br />上書きしてもよろしいですか？';
-						$mode = 'confirm';
-						$status = false;
-					}
+				if(file_exists(B_UPLOAD_DIR . $path . $file['basename'])) {
+					$message = $file['basename'] . 'は既に存在します。<br />上書きしてもよろしいですか？';
+					$mode = 'confirm';
 				}
 			}
+			catch(Exception $e) {
+				$status = false;
+				$message = $e->getMessage();
+			}
 
-			if($status) {
+			$response['status'] = $status;
+			$response['mode'] = $mode;
+			$response['message'] = $message;
+
+			header('Content-Type: application/x-javascript charset=utf-8');
+			echo $this->util->json_encode($response);
+			exit;
+		}
+
+		function _upload() {
+			$status = true;
+
+			try {
+				// set path
+				if($this->global_session[$this->session['relation']]['current_node'] != 'root') {
+					$path = $this->global_session[$this->session['relation']]['current_node'] . '/';
+					if(substr($path, 0, 1) == '/') {
+						$path = substr($path, 1);
+					}
+				}
+
+				// アップロードファイル名取得
+				$file = $this->util->pathinfo($_FILES['Filedata']['name']);
+
 				if(strtolower($file['extension']) == 'zip' && class_exists('ZipArchive')) {
 					$zip_file = B_RESOURCE_WORK_DIR . $file['basename'];
 					$status = move_uploaded_file($_FILES['Filedata']['tmp_name'], $zip_file);
@@ -115,12 +140,16 @@
 					}
 
 					$this->log->write($this->error_message);
+					throw new Exception($this->error_message);
 				}
+			}
+			catch(Exception $e) {
+				$status = false;
+				$message = $e->getMessage();
 			}
 
 			$response['status'] = $status;
-			$response['mode'] = $mode;
-			$response['message'] = $this->error_message;
+			$response['message'] = $message;
 
 			header('Content-Type: application/x-javascript charset=utf-8');
 			echo $this->util->json_encode($response);

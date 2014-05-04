@@ -182,10 +182,12 @@
 
 				$this->node_id = $new_name;
 				$this->path = $new_name;
+				$this->thumbnail_image_path = $this->getThumbnailImgPath();
 			}
 			else {
 				$this->path = B_Util::getPath($this->parent->path, $this->file_name);
 				$this->node_id = B_Util::getPath($this->parent->path, $this->file_name);
+				$this->thumbnail_image_path = $this->getThumbnailImgPath();
 			}
 
 			$this->fullpath = B_Util::getPath($this->dir, $this->path);
@@ -298,82 +300,81 @@
 
 		function _createthumbnail(&$data, &$index) {
 			if(!file_exists($this->fullpath)) return;
-			$max_size = B_THUMB_MAX_SIZE;
-			$file_info = pathinfo($this->path);
-			$thumbnail_image_path = $this->getThumbnailImgPath();
 
 			if($this->thumb && file_exists(B_UPLOAD_THUMBDIR . $this->thumb)) {
-				$data[$thumbnail_image_path] = $this->thumb;
+				$data[$this->thumbnail_image_path] = $this->thumb;
+				return;
 			}
-			else {
-				$index++;
-				$thumbnail_file_path = B_UPLOAD_THUMBDIR . str_pad($index, 10, '0', STR_PAD_LEFT) . '.' . $file_info['extension'];
 
-				switch(strtolower($file_info['extension'])) {
-				case 'jpg':
-				case 'jpeg':
-					if(!function_exists('imagecreatefromjpeg')) return;
-					$image = @imagecreatefromjpeg($this->fullpath);
-					break;
+			$index++;
+			$file_info = pathinfo($this->path);
+			$max_size = B_THUMB_MAX_SIZE;
+			$thumbnail_file_path = B_UPLOAD_THUMBDIR . str_pad($index, 10, '0', STR_PAD_LEFT) . '.' . $file_info['extension'];
 
-				case 'gif':
-					if(!function_exists('imagecreatefromgif')) return;
-					$image = @imagecreatefromgif($this->fullpath);
-					break;
+			switch(strtolower($file_info['extension'])) {
+			case 'jpg':
+			case 'jpeg':
+				if(!function_exists('imagecreatefromjpeg')) return;
+				$image = @imagecreatefromjpeg($this->fullpath);
+				break;
 
-				case 'png':
-					if(!function_exists('imagecreatefrompng')) return;
-					$image = @imagecreatefrompng($this->fullpath);
-					break;
+			case 'gif':
+				if(!function_exists('imagecreatefromgif')) return;
+				$image = @imagecreatefromgif($this->fullpath);
+				break;
 
-				default:
-					return;
+			case 'png':
+				if(!function_exists('imagecreatefrompng')) return;
+				$image = @imagecreatefrompng($this->fullpath);
+				break;
+
+			default:
+				return;
+			}
+
+			$image_size = getimagesize($this->fullpath);
+			$width = $image_size[0];
+			$height = $image_size[1];
+
+			if($width > $max_size) {
+				if($width > $height) {
+					$height = round($height * $max_size / $width);
+					$width = $max_size;
 				}
-
-				$image_size = getimagesize($this->fullpath);
-				$width = $image_size[0];
-				$height = $image_size[1];
-
-				if($width > $max_size) {
-					if($width > $height) {
-						$height = round($height * $max_size / $width);
-						$width = $max_size;
-					}
-					else {
-						$width = round($width * $max_size / $height);
-						$height = $max_size;
-					}
-				}
-				else if($height > $max_size) {
+				else {
 					$width = round($width * $max_size / $height);
 					$height = $max_size;
 				}
-				if(!$width) $width=1;
-				if(!$height) $height=1;
-
-				$new_image = ImageCreateTrueColor($width, $height);
-				ImageCopyResampled($new_image, $image, 0, 0, 0, 0, $width, $height, $image_size[0], $image_size[1]);
-
-				switch(strtolower($file_info['extension'])) {
-				case 'jpg':
-				case 'jpeg':
-					ImageJPEG($new_image, $thumbnail_file_path, 100);
-					break;
-
-				case 'gif':
-					ImageGIF($new_image, $thumbnail_file_path);
-					break;
-
-				case 'png':
-					ImagePNG($new_image, $thumbnail_file_path);
-					break;
-
-				default:
-					return;
-				}
-				chmod($thumbnail_file_path, 0777);
-				$data[$thumbnail_image_path] = str_pad($index, 10, '0', STR_PAD_LEFT) . '.' . $file_info['extension'];
 			}
+			else if($height > $max_size) {
+				$width = round($width * $max_size / $height);
+				$height = $max_size;
+			}
+			if(!$width) $width=1;
+			if(!$height) $height=1;
+
+			$new_image = ImageCreateTrueColor($width, $height);
+			ImageCopyResampled($new_image, $image, 0, 0, 0, 0, $width, $height, $image_size[0], $image_size[1]);
+
+			switch(strtolower($file_info['extension'])) {
+			case 'jpg':
+			case 'jpeg':
+				ImageJPEG($new_image, $thumbnail_file_path, 100);
+				break;
+
+			case 'gif':
+				ImageGIF($new_image, $thumbnail_file_path);
+				break;
+
+			case 'png':
+				ImagePNG($new_image, $thumbnail_file_path);
+				break;
+
+			default:
+				return;
+			}
+			chmod($thumbnail_file_path, 0777);
+			$data[$this->thumbnail_image_path] = str_pad($index, 10, '0', STR_PAD_LEFT) . '.' . $file_info['extension'];
 
 			return;
 		}
