@@ -367,7 +367,7 @@
 		}
 
 		function response($node_id, $category) {
-			// if thumb-nail cache file exists
+			// if thumb-nail cache file not exists
 			if(!file_exists(B_FILE_INFO_THUMB)) {
 				$this->createThumbnailCacheFile();
 			}

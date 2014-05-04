@@ -45,7 +45,6 @@
 			$this->status = $this->form->validate();
 
 			if($this->status) {
-				// 表示モードを確認モードに設定
 				$this->display_mode = 'confirm';
 				$this->form->getValue($param);
 				$this->session['request'] = $param;
@@ -106,7 +105,7 @@
 				exit;
 			}
 
-			// ブラウザを閉じても処理を継続
+			// continue whether a client disconnect or not
 			ignore_user_abort(true);
 
 			$node = new B_FileNode(B_ADMIN_FILES_DIR, 'root', null, null, 'all');
