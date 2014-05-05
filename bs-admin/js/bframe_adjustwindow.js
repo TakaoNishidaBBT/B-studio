@@ -48,7 +48,7 @@
 		var margin = 0;
 
 		if(param) {
-			m = bframe.getParam('margin', param);
+			var m = bframe.getParam('margin', param);
 			if(m) margin = m;
 		}
 
@@ -83,10 +83,13 @@
 		var pos = bframe.getElementPosition(self);
 		var param = target.getAttribute('param');
 		var margin = 0;
+		var param_height = 100;
 
 		if(param) {
-			m = bframe.getParam('margin', param);
+			var m = bframe.getParam('margin', param);
 			if(m) margin = m;
+			var ph = bframe.getParam('height', param);
+			if(ph) param_height = ph.replace(/%/, '');
 		}
 
 		bframe.resize_handler.registCallBackFunction(adjustParent);
@@ -111,11 +114,15 @@
 				h = h.replace('px', '');
 			}
 
+			var height = h - margin;
+			if(param_height) {
+				height = height * param_height / 100;
+			}
 			if(self.tagName.toLowerCase() == 'iframe') {
-				self.height = h - margin + 'px';
+				self.height = height + 'px';
 			}
 			else {
-				self.style.height = h - margin + 'px';
+				self.style.height = height + 'px';
 			}
 		}
 	}

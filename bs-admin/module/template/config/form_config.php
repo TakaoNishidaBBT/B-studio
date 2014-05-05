@@ -10,13 +10,13 @@ $form_config = array(
 	array('class' => 'B_Hidden', 'name' => 'contents_id'),
 	array('class' => 'B_Hidden', 'name' => 'update_datetime'),
 	array(
-		'start_html'	=> '<div class="editor_container bframe_adjustwindow" param="margin:8">',
+		'start_html'	=> '<div class="editor_container bframe_adjustwindow" param="margin:16">',
 		'end_html'		=> '</div>',
 		array(
-			'start_html'	=> '<div id="html" class="bframe_adjustwindow" param="margin:8">',
+			'start_html'	=> '<div id="html" class="bframe_adjustwindow" param="margin:5">',
 			'end_html'		=> '</div>',
 			array(
-				'start_html'	=> '<div class="text_editor start_html" style="height:300px;">',
+				'start_html'	=> '<div class="bframe_adjustparent text_editor start_html" param="margin:30,height:50%">',
 				'end_html'		=> '</div>',
 				array(
 					'name'				=> 'start_html',
@@ -40,7 +40,7 @@ $form_config = array(
 				),
 			),
 			array(
-				'start_html'	=> '<div class="text_editor end_html" style="height:300px; margin-top:10px">',
+				'start_html'	=> '<div class="bframe_adjustparent text_editor end_html" param="margin:30,height:50%" style="margin-top:8px">',
 				'end_html'		=> '</div>',
 				array(
 					'name'				=> 'end_html',
@@ -65,7 +65,7 @@ $form_config = array(
 			),
 		),
 		array(
-			'start_html'	=> '<div id="css" class="text_editor bframe_adjustparent" param="margin:30" style="display:none">',
+			'start_html'	=> '<div id="css" class="text_editor bframe_adjustparent" param="margin:22" style="display:none">',
 			'end_html'		=> '</div>',
 			array(
 				'id'				=> 'css_editor',
@@ -76,7 +76,7 @@ $form_config = array(
 			),
 		),
 		array(
-			'start_html'	=> '<div id="php" class="text_editor bframe_adjustparent" param="margin:30" style="display:none">',
+			'start_html'	=> '<div id="php" class="text_editor bframe_adjustparent" param="margin:22" style="display:none">',
 			'end_html'		=> '</div>',
 			array(
 				'id'				=> 'php_editor',
@@ -94,7 +94,7 @@ $form_config = array(
 			),
 		),
 		array(
-			'start_html'	=> '<div id="preview" class="bframe_adjustparent" param="margin:22" style="display:none">',
+			'start_html'	=> '<div id="preview" class="bframe_adjustparent" param="margin:14" style="display:none">',
 			'end_html'		=> '</div>',
 			array(
 				'start_html'	=> '<iframe id="preview_frame" name="preview_frame" class="bframe_adjustparent" frameborder="0" align="top" scrolling="auto" noresize="noresize" width="100%">',
