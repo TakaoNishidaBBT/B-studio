@@ -5,7 +5,7 @@
  *
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
-	error_reporting(E_ALL & ~E_NOTICE);
+	error_reporting(E_ALL & ~E_NOTICE & ~E_STRICT);
 	$file = pathinfo($_REQUEST['url']);
 
 	require_once('./bs-admin/config/core_config.php');
