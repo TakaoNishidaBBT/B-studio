@@ -40,12 +40,11 @@
 			,['Outdent','Indent']
 			,['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock']
 			,['Link','Unlink','Anchor']
-			,['Image','Flash','Table','HorizontalRule']
+			,['Image','Flash','Table']
 			,'/'
-			,['Styles','Format','Font','FontSize']
+			,['Styles','Format','FontSize']
 			,['TextColor','BGColor']
-			,['ShowBlocks','PageBreak']
-			,['Print']
+			,['ShowBlocks']
 			,['Find','Replace']
 			,['Source','Preview','Maximize','Templates']
 			];
