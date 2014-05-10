@@ -51,7 +51,7 @@
 			start = s;
 			end = e;
 			millisec = m;
-			
+
 			fadeOutStart();
 		}
 
@@ -59,7 +59,7 @@
 			if(start > end) {
 				opacity = start;
 				interval = millisec / (start - end);
-				for(var i=start ; i<end ; i++) {
+				for(var i=start ; i>end ; i--) {
 					timer = setTimeout(_fadeOut, i*interval);
 				}
 			}
