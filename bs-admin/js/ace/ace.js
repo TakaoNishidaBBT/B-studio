@@ -3762,6 +3762,7 @@ var TextInput = function(parentNode, host) {
     event.addListener(text, "select", onSelect);
 
     event.addListener(text, "input", onInput);
+    event.addListener(text, "blur", onInput);
 
     event.addListener(text, "cut", onCut);
     event.addListener(text, "copy", onCopy);
@@ -3784,6 +3785,10 @@ var TextInput = function(parentNode, host) {
             }
         });
     }
+
+	var compare_timer;
+	var last_value;
+
     var onCompositionStart = function(e) {
         if (inComposition) return;
         inComposition = {};
@@ -3796,7 +3801,15 @@ var TextInput = function(parentNode, host) {
             host.selection.clearSelection();
         }
         host.session.markUndoGroup();
+		compare_timer = setInterval(compare, 50);
     };
+
+	var compare = function() {
+		if(text.value != last_value) {
+			last_value = text.value;
+			onCompositionUpdate();
+	    }
+	}
 
     var onCompositionUpdate = function() {
         if (!inComposition) return;
@@ -3817,6 +3830,8 @@ var TextInput = function(parentNode, host) {
     var onCompositionEnd = function(e) {
         var c = inComposition;
         inComposition = false;
+		clearInterval(compare_timer);
+
         var timer = setTimeout(function() {
             var str = text.value.replace(/\x01/g, "");
             if (inComposition)
@@ -3831,7 +3846,7 @@ var TextInput = function(parentNode, host) {
         inputHandler = function compositionInputHandler(str) {
             clearTimeout(timer);
             str = str.replace(/\x01/g, "");
-            if (str == c.lastValue)
+            if (str == c.lastValue || !c.lastValue)
                 return "";
             if (c.lastValue)
                 host.undo();
@@ -3842,6 +3857,10 @@ var TextInput = function(parentNode, host) {
         if (e.type == "compositionend" && c.range) {
             host.selection.setRange(c.range);
         }
+		if(!useragent.isWebKit) {
+			text.blur();
+			text.focus();
+		}
     };
     
     
