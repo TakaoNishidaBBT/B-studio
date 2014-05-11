@@ -95,6 +95,7 @@
 					if($ret) {
 						$this->db->commit();
 						$this->status = true;
+						$this->session['open_nodes'][$this->request['destination_node_id']] = true;
 					}
 					else {
 						$this->db->rollback();
