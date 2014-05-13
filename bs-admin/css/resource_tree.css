@@ -230,8 +230,9 @@ div.detail table td.file-size {
 div.detail table td span.file-size {
 	padding-right: 25px;
 }
-div.detail table td span.image-size {
-	padding-left: 8px;
+div.detail table td.image-size {
+	text-align: center;
+	padding-right: 18px;
 }
 div.detail table td img {
 	vertical-align: -30%;

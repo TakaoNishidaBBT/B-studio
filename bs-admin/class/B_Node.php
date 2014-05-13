@@ -35,13 +35,10 @@
 			}
 
 			if($row) {
-				$this->node_type = $row['node_type'];
-				$this->node_class = $row['node_class'];
-				$this->node_name = $row['node_name'];
-				$this->disp_seq = $row['disp_seq'];
-				$this->contents_id = $row['contents_id'];
-				$this->update_datetime = $row['update_datetime'];
-				$this->create_datetime = $row['create_datetime'];
+				$this->property = $row;
+				foreach($this->property as $key => $value) {
+					$this->$key = $value;
+				}
 			}
 			else {
 				$this->node_type = $node_id;
@@ -141,14 +138,20 @@
 		}
 
 		function _getNodeList($node_id, $category, $dir, $path) {
-			$list['node_id'] = $this->node_id;
-			$list['node_type'] = $this->node_type;
-			$list['node_class'] = $this->node_class;
-			$list['node_name'] = mb_convert_encoding($this->node_name, 'UTF-8', 'auto');
-			$list['contents_id'] = $this->contents_id;
+			if($this->property) {
+				foreach($this->property as $key => $value) {
+					$list[$key] = $this->$key;
+				}
+			}
+			else {
+				$list['node_id'] = $this->node_id;
+				$list['node_type'] = $this->node_type;
+				$list['node_class'] = $this->node_class;
+				$list['node_name'] = $this->node_name;
+			}
+
 			$list['node_count'] = $this->node_count;
 			$list['folder_count'] = $this->folder_count;
-			$list['update_datetime'] = $this->update_datetime;
 			$list['create_datetime'] = date('Y/m/d H:i', $this->create_datetime);
 			if($dir) {
 				$list['file_size'] = B_Util::human_filesize($this->getFileSize($dir), 1);
