@@ -2255,6 +2255,7 @@
 
 			// image-size
 			td = document.createElement('td');
+			td.className = 'image-size';
 			tr.appendChild(td);
 
 			span = document.createElement('span');
