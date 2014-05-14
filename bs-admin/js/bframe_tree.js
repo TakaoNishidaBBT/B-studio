@@ -1722,6 +1722,9 @@
 				if(bframe.searchParentById(destination_node, 'utrash')) return false;
 				if(selected_node.exists(destination_node_id)) return false;
 				if(selected_node.isChild(destination_node_id)) return false;
+				if(destination_node_id.substr(0, 1) == 'p') {
+					if(selected_node.id() == current_node.id() || selected_node.isChild(current_node.id())) return false;
+				}
 
 				return true;
 			}
