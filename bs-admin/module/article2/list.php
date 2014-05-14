@@ -125,7 +125,7 @@
 		}
 
 		function setHeader() {
-			$obj =& $this->header->getElementByName('default_row_per_page');
+			$obj = $this->header->getElementByName('default_row_per_page');
 			$obj->value = $this->default_row_per_page;
 
 			// ヘッダー情報設定
