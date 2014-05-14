@@ -169,7 +169,7 @@
 			$row = $this->db->fetch_assoc($rs);
 
 			if(!$row) {
-				if($node['node_type'] == 'page') {
+				if($node && $node['node_type'] == 'page') {
 					$param_array = explode('?', $node_name);
 					$_REQUEST['id'] = $param_array[0];
 					return $node;

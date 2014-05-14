@@ -343,8 +343,10 @@
 				$this->header->setFilterValue($this->filter_value);
 			}
 			if($this->sort_key) {
-				$obj =& $this->header->getElementByFieldName('sort_key', $this->sort_key);
-				$obj->special_html = $obj->cond_html;
+				$obj = $this->header->getElementByFieldName('sort_key', $this->sort_key);
+				if($obj) {
+					$obj->special_html = $obj->cond_html;
+				}
 			}
 			return $this->header->getHtml($mode);
 		}
