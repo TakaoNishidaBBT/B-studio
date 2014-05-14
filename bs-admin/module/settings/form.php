@@ -165,6 +165,9 @@
 		}
 
 		function backupDB() {
+			// continue whether a client disconnect or not
+			ignore_user_abort(true);
+
 			$dump_file_name = B_SITE_NAME . '_' . date("YmdHis") . '.sql';
 			$file_path = B_DOWNLOAD_DIR . $dump_file_name;
 			if(!$this->db->backupTables($file_path)) {
