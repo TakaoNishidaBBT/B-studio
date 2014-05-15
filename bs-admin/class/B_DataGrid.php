@@ -20,7 +20,6 @@
 			$this->auth_filter = $auth_filter;
 			$this->config_filter = $config_filter;
 			$this->row_instance = new B_Element($this->config['row'], $this->auth_filter, $this->config_filter);
-			$this->terminal_id = TERMINAL_ID;
 			if($config['header']) {
 				$this->header_conf = $config['header'];
 			}
@@ -106,13 +105,7 @@
 					$this->row[] = $row;
 				}
 				if($this->pager) {
-					// get record count
-					if($this->count_sql) {
-						$count_sql = $this->count_sql;
-					}
-					else {
-						$count_sql = "select count(*) cnt from (" . $sql . ") a";
-					}
+					$count_sql = 'select found_rows() cnt';
 					$rs = $this->db->query($count_sql);
 					$row = $this->db->fetch_assoc($rs);
 					$this->record_cnt = $row['cnt'];
@@ -150,6 +143,7 @@
 						$this->sql_group_by .
 						$this->sql_order_by;
 				}
+				$sql = preg_replace('/select/i', 'select sql_calc_found_rows', $sql, 1);
 			}
 			else {
 				$sql = 
