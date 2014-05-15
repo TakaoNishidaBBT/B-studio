@@ -24,7 +24,7 @@
 		var self = this;
 		var target_id = bframe.getID(target);
 
-		var	response_wait = false;
+		var response_wait = false;
 		var httpObj;
 
 		var ret = bframe.getPageInfo();
