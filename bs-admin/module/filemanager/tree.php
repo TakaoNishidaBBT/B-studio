@@ -21,6 +21,8 @@
 		}
 
 		function getNodeList() {
+			$this->session['selected_node'] = '';
+
 			if($this->request['node_id']) {
 				$this->session['current_node'] = $this->request['node_id'];
 				$this->session['open_nodes'][$this->request['node_id']] = true;
