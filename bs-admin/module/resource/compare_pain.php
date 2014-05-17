@@ -195,22 +195,22 @@
 			if($this->session['disp_mode'] == 'detail') {
 				$this->left = new B_DataGrid($this->db, $compare_pain_detail_config);
 				$param['pos'] = 'left';
-				$this->left->setTrCallBack($this, '_detail_callback', $param);
+				$this->left->setCallBack($this, '_detail_callback', $param);
 
 				$this->right = new B_DataGrid($this->db, $compare_pain_detail_config);
 				$param['pos'] = 'right';
-				$this->right->setTrCallBack($this, '_detail_callback', $param);
+				$this->right->setCallBack($this, '_detail_callback', $param);
 
 				$this->view_file = './view/view_compare_pain_detail.php';
 			}
 			else {
 				$this->left = new B_DataGrid($this->db, $compare_pain_config);
 				$param['pos'] = 'left';
-				$this->left->setTrCallBack($this, '_thumb_callback', $param);
+				$this->left->setCallBack($this, '_thumb_callback', $param);
 
 				$this->right = new B_DataGrid($this->db, $compare_pain_config);
 				$param['pos'] = 'right';
-				$this->right->setTrCallBack($this, '_thumb_callback', $param);
+				$this->right->setCallBack($this, '_thumb_callback', $param);
 
 				$this->view_file = './view/view_compare_pain.php';
 			}

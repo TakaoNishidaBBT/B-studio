@@ -14,7 +14,6 @@
 			$this->db = $db;
 			$this->page_no = 1;
 			$this->callback_index = 0;
-			$this->tr_callback_index = 0;
 			$this->excel_callback_index = 0;
 			$this->config = $config;
 			$this->auth_filter = $auth_filter;
@@ -160,28 +159,21 @@
 			$this->caption = $caption;
 		}
 
-		function setCallBack($column, $obj, $method) {
-			$this->callback[$this->callback_index]['column'] = $column;
+		function setCallBack($obj, $method, $param=NULL) {
 			$this->callback[$this->callback_index]['obj'] = $obj;
 			$this->callback[$this->callback_index]['method'] = $method;
+			if($param) {
+				$this->_setCallBackParam($param);
+			}
 			$this->callback_index++;
 		}
 
-		function setTrCallBack($obj, $method, $param=NULL) {
-			$this->tr_callback[$this->tr_callback_index]['obj'] = $obj;
-			$this->tr_callback[$this->tr_callback_index]['method'] = $method;
-			if($param) {
-				$this->_setTrCallBackParam($param);
-			}
-			$this->tr_callback_index++;
-		}
-
-		function _setTrCallBackParam($param) {
+		function _setCallBackParam($param) {
 			if(is_array($param)) {
-				$this->tr_callback[$this->tr_callback_index]['param'] = $param;
+				$this->callback[$this->callback_index]['param'] = $param;
 			}
 			else {
-				echo 'ERROR param must be array :setTrCallBackParam';
+				echo 'ERROR param must be array :setCallBackParam';
 			}
 		}
 
@@ -278,27 +270,32 @@
 			$i=0;
 
 			// tr call back
-			for($i=0 ; $i < $this->tr_callback_index ; $i++) {
+			for($i=0 ; $i < $this->callback_index ; $i++) {
 				for($j=0 ; $j < count($this->row) ; $j++) {
 					$param = array('row' => &$this->row[$j], 'cnt' => $j);
 
-					if($this->tr_callback[$i]['param']) {
-						if(is_array($this->tr_callback[$i]['param'])) {
-							foreach($this->tr_callback[$i]['param'] as $key => $value) {
+					if($this->callback[$i]['param']) {
+						if(is_array($this->callback[$i]['param'])) {
+							foreach($this->callback[$i]['param'] as $key => $value) {
 								$param[$key] = $value;
 							}
 						}
 					}
 
-					$obj = $this->tr_callback[$i]['obj'];
-					$method = $this->tr_callback[$i]['method'];
+					$obj = $this->callback[$i]['obj'];
+					$method = $this->callback[$i]['method'];
 					if($obj) {
 						if(method_exists($obj, $method)) {
 							$obj->$method($param);
 						}
 					}
 					else {
-						call_user_func($method, $param);
+						if(is_callable($method)) {
+							$method($param);
+						}
+						else {
+							call_user_func($method, $param);
+						}
 					}
 				}
 			}

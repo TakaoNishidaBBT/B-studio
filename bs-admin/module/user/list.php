@@ -20,7 +20,7 @@
 			$this->dg = new B_DataGrid($this->db, $list_config);
 
 			// コールバック設定
-			$this->dg->setTrCallBack($this, '_list_callback');
+			$this->dg->setCallBack($this, '_list_callback');
 		}
 
 		function func_default() {
