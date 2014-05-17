@@ -23,7 +23,7 @@
 			$this->version_control_result = new B_Element($version_control_result_config, $this->user_auth);
 
 			// コールバック設定
-			$this->dg->setTrCallBack($this, '_list_callback');
+			$this->dg->setCallBack($this, '_list_callback');
 		}
 
 		function func_default() {

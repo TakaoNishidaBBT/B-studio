@@ -62,7 +62,7 @@
 				'month'			=> $this->month,
 			);
 			// コールバック設定
-			$this->cal->setTrCallBack($this,'_holiday_callback', array('param' => $this->callback_param));
+			$this->cal->setCallBack($this,'_holiday_callback', array('param' => $this->callback_param));
 
 			$this->cal->bind($this->data);
 			$this->cal->setCaption($this->caption->getHtml());
