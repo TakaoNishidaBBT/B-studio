@@ -90,6 +90,8 @@ $tree_config = array(
 				'module'	=> $this->module,
 				'file'		=> 'editor',
 				'method'	=> 'open',
+				'width'		=> '1000',
+				'height'	=> '600',
 			),
 			'disp_change'	=>
 			array(
