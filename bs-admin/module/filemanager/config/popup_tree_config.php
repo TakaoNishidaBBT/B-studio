@@ -69,6 +69,8 @@ $tree_config = array(
 				'module'	=> 'fileeditor',
 				'file'		=> 'index',
 				'method'	=> 'open',
+				'width'		=> '1000',
+				'height'	=> '600',
 			),
 			'disp_change'	=>
 			array(

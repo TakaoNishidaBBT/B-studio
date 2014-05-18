@@ -1026,7 +1026,9 @@
 						'&terminal_id='+terminal_id+
 						'&node_id='+encodeURIComponent(node_id.substr(1));
 
-			var settings='width=1000,height=600,scrollbars=yes,resizable=yes,menubar=no,location=no,toolbar=no,directories=no,status=no,dependent=no';
+			var settings='width='+property.editor.width+',height='+property.editor.height+
+				',scrollbars=yes,resizable=yes,menubar=no,location=no,toolbar=no,directories=no,status=no,dependent=no';
+
 			var editor = window.open(url+param, node_id, settings);
 			editor.focus();
 		}
