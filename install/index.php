@@ -5,6 +5,10 @@
  *
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
+	if(!function_exists('mb_internal_encoding')) {
+		echo 'mbstringモジュールを有効にしてください。';
+		exit;
+	}
 	define('B_CHARSET', 'UTF-8');
 	mb_internal_encoding(B_CHARSET);
 	ini_set('display_errors', 'On');
@@ -54,6 +58,9 @@
 	else {
 		setHtaccess($root_htaccess);
 		confirmPermission($perm_message);
+	}
+	if(!class_exists('mysqli') && !function_exists('mysql_connect')) {
+		$error_message = 'MySQLライブラリを有効にしてください。';
 	}
 	if(!function_exists('gd_info')) {
 		$error_message = 'GDライブラリを有効にしてください。';
