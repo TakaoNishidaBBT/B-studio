@@ -274,6 +274,7 @@
 			var range = ace_editor.getSelectionRange();
 			ace_editor.clearSelection();
 		    ace_editor.getSession().replace(range, target.value);
+			ace_editor.renderer.alignCursor(0);
 		}
 
 		function updateTarget() {
