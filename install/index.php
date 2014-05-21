@@ -59,6 +59,9 @@
 		setHtaccess($root_htaccess);
 		confirmPermission($perm_message);
 	}
+	if(!session_save_path()) {
+		$error_message = 'session.save_pathを設定してください。';
+	}
 	if(!class_exists('mysqli') && !function_exists('mysql_connect')) {
 		$error_message = 'MySQLライブラリを有効にしてください。';
 	}
