@@ -158,6 +158,7 @@
 			header('Cache-control: public');
 			header('Pragma: public');
 
+			ob_end_clean();
 			readfile($file_path);
 			unlink($file_path);
 			unlink($dump_file_path);
@@ -185,6 +186,7 @@
 			header('Cache-control: public');
 			header('Pragma: public');
 
+			ob_end_clean();
 			readfile($file_path);
 			unlink($file_path);
 			exit;

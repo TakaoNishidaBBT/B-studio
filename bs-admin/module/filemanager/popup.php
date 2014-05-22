@@ -329,6 +329,7 @@
 					header("Cache-Control: public");
 					header('Content-type: application/x-zip-dummy-content-type');
 					header('Content-Disposition: attachment; filename=' . $file_name);
+					ob_end_clean();
 					readfile($file_path);
 
 					// 削除
@@ -359,6 +360,7 @@
 						break;
 					}
 					header('Content-Disposition: attachment; filename=' . $node->file_name);
+					ob_end_clean();
 					readfile($node->fullpath);
 				}
 			}
