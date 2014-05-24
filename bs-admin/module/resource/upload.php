@@ -14,15 +14,17 @@
 		}
 
 		function upload() {
-			if($_REQUEST['mode'] == 'confirm'){
-				$this->confirm();
-			}
-			else {
+			switch($this->request['mode']) {
+			case 'confirm':
+			case 'overwrite':
+				$this->confirm($this->request['mode']);
+				break;
+			default:
 				$this->_upload();
 			}
 		}
 
-		function confirm() {
+		function confirm($mode) {
 			$status = true;
 
 			try {
@@ -30,6 +32,19 @@
 					throw new Exception('フォルダが選択されていません');
 				}
 
+	 			// file size check
+				$filesize = $_POST['filesize'];
+				$post_max_size = $this->util->decode_human_filesize(ini_get('post_max_size'));
+				$upload_max_filesize = $this->util->decode_human_filesize(ini_get('upload_max_filesize'));
+				if($filesize > $post_max_size || $filesize > $upload_max_filesize) {
+					if($post_max_size < $upload_max_filesize) {
+						$limit = ini_get('post_max_size');
+					}
+					else {
+						$limit = ini_get('upload_max_filesize');
+					}
+					throw new Exception('ファイルサイズが大きすぎます。アップロードできるのは' . $limit . 'までです');
+				}
 				// get file info
 				$file = $this->util->pathinfo($_POST['filename']);
 
@@ -43,10 +58,13 @@
 					throw new Exception('ファイル名／フォルダ名に次の文字は使えません \ / : * ? " < > | スペース');
 				}
 
-				$ret = $this->file_exists($file['basename']);
-				if($ret) {
-					$mode = 'confirm';
-					$message = $file['basename'] . 'は既に存在します。<br />上書きしてもよろしいですか？';
+	 			// confirm overwrite
+				if($mode == 'confirm'){
+					$ret = $this->file_exists($file['basename']);
+					if($ret) {
+						$response_mode = 'confirm';
+						$message = $file['basename'] . 'は既に存在します。<br />上書きしてもよろしいですか？';
+					}
 				}
 			}
 			catch(Exception $e) {
@@ -55,7 +73,7 @@
 			}
 
 			$response['status'] = $status;
-			$response['mode'] = $mode;
+			$response['mode'] = $response_mode;
 			$response['message'] = $message;
 
 			header('Content-Type: application/x-javascript charset=utf-8');

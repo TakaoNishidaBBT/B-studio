@@ -59,7 +59,7 @@
 				var progress = new FileProgress(files[i], progressFieldId);
 				progress.setStatus('Pending...');
 				progress.toggleCancel(true, this);
-				upload_queue[i] = {'file' : files[i], 'progress' : progress, 'mode' : 'confirm'};
+				upload_queue[i] = {'file' : files[i], 'progress' : progress};
 			}
 
 			confirm(0);
@@ -94,7 +94,7 @@
 			form_data.append('method', 'upload');
 			form_data.append('mode', mode);
 			form_data.append('filename', upload_queue[index].file['name']);
-			form_data.append('mode', upload_queue[index].mode);
+			form_data.append('filesize', upload_queue[index].file['size']);
 
 			httpObj.open('POST','index.php');
 			httpObj.send(form_data);
@@ -115,13 +115,7 @@
 				else {
 					progress.setError();
 					progress.setStatus(response.message);
-					if(mode == 'confirm') {
-						confirm(++index);
-					}
-					else {
-						index++;
-						overwrite();
-					}
+					confirm(++index);
 				}
 			}
 		}
@@ -151,10 +145,8 @@
 			form_data.append('module', module);
 			form_data.append('page', page);
 			form_data.append('method', 'upload');
-			form_data.append('mode', mode);
-
+			form_data.append('mode', 'regist');
 			form_data.append('Filedata', upload_queue[index].file);
-			form_data.append('mode', upload_queue[index].mode);
 
 			httpObj.open('POST','index.php');
 			httpObj.send(form_data);
@@ -165,13 +157,7 @@
 				var response = eval('('+httpObj.responseText+')');
 
 				result(response);
-				if(mode == 'confirm') {
-					confirm(++index);
-				}
-				else {
-					index++;
-					overwrite();
-				}
+				confirm(++index);
 			}
 		}
 
@@ -188,20 +174,18 @@
 		}
 
 		function overwrite() {
-			upload_queue[index].mode = 'regist';
 			upload(index);
 		}
 
 		function overwriteAll() {
-			mode = 'regist';
-			upload_queue[index].mode = 'regist';
+			mode = 'overwrite';
 			upload(index);
 		}
 
 		function cancel() {
 			progress.setCancelled();
 			progress.setStatus('Cancelled.');
-			upload(++index);
+			confirm(++index);
 		}
 
 		function cancelAll() {

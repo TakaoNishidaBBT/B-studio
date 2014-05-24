@@ -88,9 +88,6 @@
 	//ダンプファイル
 	define('B_DUMP_FILE', 'dump/');
 
-	// ファイルアップロードMAXサイズ
-	define('B_UPLOAD_MAX_SIZE', 21000000);
-
 	define('B_THUMB_PREFIX', 'thumb_');
 	define('B_THUMB_MAX_SIZE', '100');
 
