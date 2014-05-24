@@ -1518,102 +1518,71 @@
 					var pageY = event.pageY - scrollTop;
 				}
 
+				destination_node_id = '';
+				destination_node = '';
+
 				if(property.sortable == 'true') {
 					if(property.relation && property.relation.pain && bframe.searchParentById(node, property.relation.pain.id) &&
 						pain_disp_change_select.options[pain_disp_change_select.selectedIndex].value != 'detail') {
 						// destination is in pain and display mode is icon style
 						if(node.node_class == 'leaf') {
-							if(pageX < position.left) {
-								destination_node_id = '';
-								destination_node = '';
-							}
-							else if(pageX < position.left + div.offsetWidth/2) {
-								destination_node_id = node.id;
-								destination_node = node;
-								drag_type = 'sort';
-							}
-							else if(pageX <= position.left + div.offsetWidth) {
-								if(sibling = getNextSibling(node)) {
-									destination_node_id = sibling.id;
-									destination_node = sibling;
+							if(position.left < pageX) {
+								if(pageX < position.left + div.offsetWidth/2) {
+									destination_node_id = node.id;
+									destination_node = node;
 									drag_type = 'sort';
 								}
-								else {
-									destination_node_id = '';
-									destination_node = '';
+								else if(pageX <= position.left + div.offsetWidth) {
+									if(sibling = getNextSibling(node)) {
+										destination_node_id = sibling.id;
+										destination_node = sibling;
+										drag_type = 'sort';
+									}
 								}
-							}
-							else {
-								destination_node_id = '';
-								destination_node = '';
 							}
 						}
 						else {
-							if(pageX < position.left) {
-								destination_node_id = '';
-								destination_node = '';
-							}
-							else if(pageX < position.left + div.offsetWidth/3) {
-								destination_node_id = node.id;
-								destination_node = node;
-								drag_type = 'sort';
-							}
-							else if(pageX < position.left + div.offsetWidth*2/3) {
-								destination_node_id = node.id;
-								destination_node = node;
-								drag_type = 'move';
-							}
-							else if(pageX <= position.left + div.offsetWidth) {
-								if(sibling = getNextSibling(node)) {
-									destination_node_id = sibling.id;
-									destination_node = sibling;
+							if(position.left < pageX) {
+								if(pageX < position.left + div.offsetWidth/3) {
+									destination_node_id = node.id;
+									destination_node = node;
 									drag_type = 'sort';
 								}
-								else {
-									destination_node_id = '';
-									destination_node = '';
+								else if(pageX < position.left + div.offsetWidth*2/3) {
+									destination_node_id = node.id;
+									destination_node = node;
+									drag_type = 'move';
 								}
-							}
-							else {
-								destination_node_id = '';
-								destination_node = '';
+								else if(pageX <= position.left + div.offsetWidth) {
+									if(sibling = getNextSibling(node)) {
+										destination_node_id = sibling.id;
+										destination_node = sibling;
+										drag_type = 'sort';
+									}
+								}
 							}
 						}
 					}
 					else {
 						// destination is in tree or detail list in pain
 						if(node.node_class == 'leaf') {
-							if(pageY < position.top) {
-								destination_node_id = '';
-								destination_node = '';
-							}
-							else if(pageY < position.top + div.offsetHeight/2) {
-								destination_node_id = node.id;
-								destination_node = node;
-								drag_type = 'sort';
-							}
-							else if(pageY <= position.top + div.offsetHeight) {
-								if(sibling = getNextSibling(node)) {
-									destination_node_id = sibling.id;
-									destination_node = sibling;
+							if(position.top < pageY) {
+								if(pageY < position.top + div.offsetHeight/2) {
+									destination_node_id = node.id;
+									destination_node = node;
 									drag_type = 'sort';
 								}
-								else {
-									destination_node_id = '';
-									destination_node = '';
+								else if(pageY <= position.top + div.offsetHeight) {
+									if(sibling = getNextSibling(node)) {
+										destination_node_id = sibling.id;
+										destination_node = sibling;
+										drag_type = 'sort';
+									}
 								}
 							}
-							else {
-								destination_node_id = '';
-								destination_node = '';
-							}
 						}
-						else {
-							if(pageY < position.top) {
-								destination_node_id = '';
-								destination_node = '';
-							}
-							else if(pageY < position.top + div.offsetHeight/3 && node.id != 'troot') {
+						else if(position.top < pageY) {
+							if(pageY < position.top + div.offsetHeight/3 && node.id != 'troot') {
 								destination_node_id = node.id;
 								destination_node = node;
 								drag_type = 'sort';
@@ -1629,14 +1598,6 @@
 									destination_node = sibling;
 									drag_type = 'sort';
 								}
-								else {
-									destination_node_id = '';
-									destination_node = '';
-								}
-							}
-							else {
-								destination_node_id = '';
-								destination_node = '';
 							}
 						}
 					}
@@ -1645,38 +1606,18 @@
 					// sort is disabled
 					if(property.relation && property.relation.pain && bframe.searchParentById(node, property.relation.pain.id)) {
 						// destination is in pain
-						if(node.node_class != 'leaf') {
-							if(pageX < position.left) {
-								destination_node_id = '';
-								destination_node = '';
-							}
-							else if(pageX < position.left + div.offsetWidth) {
-								destination_node_id = node.id;
-								destination_node = node;
-								drag_type = 'move';
-							}
-							else {
-								destination_node_id = '';
-								destination_node = '';
-							}
+						if(node.node_class != 'leaf' && position.left < pageX && pageX < position.left + div.offsetWidth) {
+							destination_node_id = node.id;
+							destination_node = node;
+							drag_type = 'move';
 						}
 					}
 					else {
 						// destination is in tree
-						if(node.node_class != 'leaf') {
-							if(pageY < position.top) {
-								destination_node_id = '';
-								destination_node = '';
-							}
-							else if(pageY < position.top + div.offsetHeight) {
-								destination_node_id = node.id;
-								destination_node = node;
-								drag_type = 'move';
-							}
-							else {
-								destination_node_id = '';
-								destination_node = '';
-							}
+						if(node.node_class != 'leaf' && position.top < pageY && pageY < position.top + div.offsetHeight) {
+							destination_node_id = node.id;
+							destination_node = node;
+							drag_type = 'move';
 						}
 					}
 				}
