@@ -188,4 +188,24 @@
 			$sz = 'BKMGTP';
 			return sprintf("%.2f", $bytes / pow(1024, $factor)) . @$sz[$factor] . 'B';
 		}
+
+		function decode_human_filesize($filesize) {
+			$factor = strtoupper(substr(trim($filesize), -1));
+			$size = substr(trim($filesize), 0, -1);
+			if(!is_numeric($size)) return;
+
+			switch($factor) {
+			case 'K':
+				return round($size * 1024);
+
+			case 'M':
+				return round($size * pow(1024, 2));
+
+			case 'G':
+				return round($size * pow(1024, 3));
+
+			default:
+				return $filesize;
+			}
+		}
 	}

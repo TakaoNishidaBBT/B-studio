@@ -88,12 +88,11 @@
 	//ダンプファイル
 	define('B_DUMP_FILE', 'dump/');
 
-	// ファイルアップロードMAXサイズ
-	define('B_UPLOAD_MAX_SIZE', 21000000);
-
+	// サムネイル
 	define('B_THUMB_PREFIX', 'thumb_');
 	define('B_THUMB_MAX_SIZE', '100');
 
+	// ゴミ箱
 	define('B_TRASH_PATH', 'trash/');
 
 	// ファイル情報

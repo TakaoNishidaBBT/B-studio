@@ -15,21 +15,36 @@
 		}
 
 		function upload() {
-			if($this->request['mode'] == 'confirm'){
-				$this->confirm();
-			}
-			else {
+			switch($this->request['mode']) {
+			case 'confirm':
+			case 'overwrite':
+				$this->confirm($this->request['mode']);
+				break;
+			default:
 				$this->_upload();
 			}
 		}
 
-		function confirm() {
+		function confirm($mode) {
 			$status = true;
 
 			try {
-	 			// アップロードファイル名取得
-				$file = $this->util->pathinfo($_POST['filename']);
+	 			// file size check
+				$filesize = $_POST['filesize'];
+				$post_max_size = $this->util->decode_human_filesize(ini_get('post_max_size'));
+				$upload_max_filesize = $this->util->decode_human_filesize(ini_get('upload_max_filesize'));
+				if($filesize > $post_max_size || $filesize > $upload_max_filesize) {
+					if($post_max_size < $upload_max_filesize) {
+						$limit = ini_get('post_max_size');
+					}
+					else {
+						$limit = ini_get('upload_max_filesize');
+					}
+					throw new Exception('ファイルサイズが大きすぎます。アップロードできるのは' . $limit . 'までです');
+				}
 
+	 			// check file name
+				$file = $this->util->pathinfo($_POST['filename']);
 				if(strlen($file['basename']) != mb_strlen($file['basename'])) {
 					throw new Exception('日本語ファイル名は使用できません。');
 				}
@@ -42,9 +57,13 @@
 						$path = substr($path, 1);
 					}
 				}
-				if(file_exists(B_UPLOAD_DIR . $path . $file['basename'])) {
-					$message = $file['basename'] . 'は既に存在します。<br />上書きしてもよろしいですか？';
-					$mode = 'confirm';
+
+	 			// confirm overwrite
+				if($mode == 'confirm'){
+					if(file_exists(B_UPLOAD_DIR . $path . $file['basename'])) {
+						$message = $file['basename'] . 'は既に存在します。<br />上書きしてもよろしいですか？';
+						$response_mode = 'confirm';
+					}
 				}
 			}
 			catch(Exception $e) {
@@ -53,7 +72,7 @@
 			}
 
 			$response['status'] = $status;
-			$response['mode'] = $mode;
+			$response['mode'] = $response_mode;
 			$response['message'] = $message;
 
 			header('Content-Type: application/x-javascript charset=utf-8');
@@ -73,7 +92,7 @@
 					}
 				}
 
-				// アップロードファイル名取得
+				// get file info
 				$file = $this->util->pathinfo($_FILES['Filedata']['name']);
 
 				if(strtolower($file['extension']) == 'zip' && class_exists('ZipArchive')) {
