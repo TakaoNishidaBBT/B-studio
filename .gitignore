@@ -6,6 +6,8 @@
 
 # git update-index --assume-unchanged .htaccess
 # git update-index --assume-unchanged bs-admin-files/.htaccess
+# git update-index --assume-unchanged bs-admin-files/files/.gitkeep
+# git update-index --assume-unchanged bs-admin-files/thumbs/.gitkeep
 # git update-index --assume-unchanged bs-admin/.htaccess
 # git update-index --assume-unchanged bs-admin/.htpassword
 # git update-index --assume-unchanged bs-admin/db/db_connect.php
