@@ -4,7 +4,6 @@
 /bs-admin/cache
 /bs-admin/log
 
-# git update-index --assume-unchanged .gitignore
 # git update-index --assume-unchanged .htaccess
 # git update-index --assume-unchanged bs-admin-files/.htaccess
 # git update-index --assume-unchanged bs-admin-files/files/.gitkeep
