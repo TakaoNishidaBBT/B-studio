@@ -35,7 +35,7 @@
 		function fadeInStart() {
 			if(start < end) {
 				opacity = start;
-				interval = millisec / (end - start);
+				var interval = millisec / (end - start);
 				for(var i=start ; i<end ; i++) {
 					timer = setTimeout(_fadeIn, i*interval);
 				}
@@ -58,7 +58,7 @@
 		function fadeOutStart() {
 			if(start > end) {
 				opacity = start;
-				interval = millisec / (start - end);
+				var interval = millisec / (start - end);
 				for(var i=start ; i>end ; i--) {
 					timer = setTimeout(_fadeOut, i*interval);
 				}

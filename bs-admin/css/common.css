@@ -220,7 +220,6 @@ input.button {
 	border-right: 1px solid #888;
 	border-bottom: 1px solid #888;
 	border-left: 1px solid #fff;
-	border-radius: 2px;
 	background-color: #fff;
 	background: url(../images/common/button_back.png) repeat-x;
 	overflow: visible;
@@ -262,7 +261,6 @@ input.search-button {
 	border-right: 1px solid #007b27;
 	border-bottom: 1px solid #006b27;
 	border-left: 1px solid #2e9047;
-	border-radius: 2px;
 	background: url(../images/common/search_button_back.png) repeat-x;
 	color: #fff;
 	width: 80px;
@@ -283,7 +281,6 @@ input.insert-button {
 	border-right: 1px solid #002255;
 	border-bottom: 1px solid #001144;
 	border-left: 1px solid #205380;
-	border-radius: 2px;
 	background: url(../images/common/insert_button_back.png) repeat-x;
 	color: #fff;
 	width: 100px;
