@@ -84,6 +84,12 @@
 				header('Content-Type: image/' . strtolower($file['extension']));
 				break;
 
+			case 'html':
+				$contents = file_get_contents(B_RESOURCE_DIR . $info[$url]);
+				$encoding = mb_detect_encoding($contents, ${$g_data_set}['encoding']);
+				header("Content-Type: text/html; charset=$encoding");
+				break;
+
 			default:
 				header('Content-Type: application/' . strtolower($file['extension']));
 				break;
