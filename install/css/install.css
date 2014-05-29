@@ -2,21 +2,12 @@
 
 body {
 	background-color: #fff;
+	margin-left: 10%;
+	margin-right: 10%;
 	padding-top: 13px;
-	color: #555;
+	color: #222;
 	font-family: "メイリオ", "Meiryo", "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "Osaka", "ＭＳ Ｐゴシック", "MS PGothic", "IPA UIGothic", "IPA mona UIGothic", "VL PGothic", "Sazanami Gothic", "DynaLab-dfghsgothic w5-jisx0208.1990-0", "DynaLab-dfggothic w5-iso8859-1", "Trebuchet MS", "Bitstream Vera Sans", verdana, lucida, arial, helvetica, sans-serif;
 	font-size: small;
-}
-@media screen {
-	body {
-		margin-left: 10%;
-		margin-right: 10%;
-	}
-}
-@media print {
-	pre, .note, td, th {
-		border: 1px dashed gray;
-	}
 }
 img {
 	border: none;
@@ -47,7 +38,7 @@ a: hover {
 }
 p {
 	text-indent: 10px;
-	margin-left:20px;
+	margin: 20px;
 }
 h1 {
 	color: #555;
@@ -55,7 +46,7 @@ h1 {
 h2 {
 	border-bottom: 1px dotted gray;
 	font-size: 145%;
-	color: #555;
+	color: #333;
 	font-weight:normal;
 	letter-spacing:2px;
 	margin-top: 30px;
@@ -67,22 +58,8 @@ h3 {
 	color:#555;
 	letter-spacing:1px;
 }
-/*
-pre, .note, .faq .answer {
-	font-family: "メイリオ", "Meiryo", "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "Osaka", "ＭＳ Ｐゴシック", "MS PGothic", "IPA UIGothic", "IPA mona UIGothic", "VL PGothic", "Sazanami Gothic", "DynaLab-dfghsgothic w5-jisx0208.1990-0", "DynaLab-dfggothic w5-iso8859-1", "Trebuchet MS", "Bitstream Vera Sans", verdana, lucida, arial, helvetica, sans-serif;
-	font-size: small;
-	background-color: #eee;
-	padding: 10px;
-	font-size: small;
-}
-.screenshot {
-	text-align: center;
-	background-color: #eee;
-	padding: 10px;
-}
-*/
 /******************************
- * table FORM
+ * form
  *
  ******************************/
 table.form {
@@ -98,9 +75,9 @@ table.form th {
 	width: 21%;
 	padding: 12px 15px 8px 15px;
 	border-top: 1px solid #aaa;
-	border-left: 1px solid #888;
-	border-bottom: 1px solid #666;
-	border-right: 1px solid #777;
+	border-left: none;
+	border-bottom: 1px solid #808080;
+	border-right: none;
 	background: #888;
 	color: #fff;
 	font-weight: normal;
@@ -110,7 +87,7 @@ table.form tr:first-child th {
 	border-top: 1px solid #aaa;
 }
 table.form tr:first-child td {
-	border-top: 1px solid #aaa;
+	border-top: 1px solid #ccc;
 }
 
 table.form th.error{
@@ -120,7 +97,7 @@ table.form td {
 	padding: 5px;
 	border: 1px solid #bbb;
 	border-top: 1px solid #fff;
-	border-left: 1px solid #fff;
+	border-left: none;
 	border-bottom: 1px solid #ddd;
 	border-right: 1px solid #ddd;
 	font-weight: normal;
@@ -132,7 +109,7 @@ input.textbox {
 	border-right: 1px solid #ddd;
 	border-bottom: 1px solid #ddd;
 	height: 22px;
-	padding: 0 5px;
+	padding: 2px 5px;
 	vertical-align: middle;
 }
 input.prefix {
@@ -182,7 +159,7 @@ span.caution {
 	color: #ff4500;
 }
 
-/* 日本語入力モード */
+/* ime */
 .ime-off {
 	ime-mode: disabled;
 }
