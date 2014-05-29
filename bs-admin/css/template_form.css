@@ -18,7 +18,7 @@ div#contents {
 }
 
 /******************************
- * main_container
+ * main container
  *
  ******************************/
 div.main_container {
@@ -29,7 +29,7 @@ div.main_container {
 }
 
 /******************************
- * tabcontrol
+ * tab control
  *
  ******************************/
 ul.tabcontrol {
@@ -165,7 +165,7 @@ div.regist {
 }
 
 /******************************
- * EDITOR
+ * editor
  *
  ******************************/
 div.editor_container {
@@ -220,7 +220,7 @@ div.visual_editor {
 }
 
 /******************************
- * table FORM
+ * form
  *
  ******************************/
 table.form {
@@ -237,8 +237,8 @@ table.form th {
 	background-color: #444444;
 	color: #fff;
 	border-top: 1px solid #555555;
-	border-left: 1px solid #555555;
-	border-bottom: 1px solid #333333;
+	border-left: none;
+	border-bottom: 1px solid #404040;
 	border-right: 1px solid #444444;
 	font-weight: normal;
 	text-align: left;
@@ -269,8 +269,8 @@ table.form td {
 	padding: 5px;
 	border-top: 1px solid #555555;
 	border-left: 1px solid #555555;
-	border-bottom: 1px solid #333333;
-	border-right: 1px solid #333333;
+	border-bottom: 1px solid #404040;
+	border-right: none;
 	background-color: #444444;
 	font-weight: normal;
 	text-align: left;
@@ -281,8 +281,8 @@ table.form td input {
 	color: #ccc;
 	border-top: 1px solid #444444;
 	border-left: 1px solid #444444;
-	border-right: 1px solid #888888;
-	border-bottom: 1px solid #888888;
+	border-right: 1px solid #666666;
+	border-bottom: 1px solid #666666;
 }
 table.form td textarea {
 	height: 60px;
@@ -291,7 +291,7 @@ table.form td textarea {
 }
 table.form td input {
 	height: 22px;
-	padding: 0 5px;
+	padding: 2px 5px;
 	width: 80%;
 }
 table.form td input.template {
