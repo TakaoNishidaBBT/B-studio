@@ -260,7 +260,10 @@ $config_form_config = array(
 						'page'				=> 'select_tree',
 					),
 					array(
-						'value'			=> '<img alt="テンプレート" src="images/common/wrench.png" width="16" height="16" />',
+						'value'			=> '<img alt="テンプレート" src="images/common/popupwindow_icon.png" width="22" height="22" />',
+					),
+					array(
+						'value'			=> '<img alt="テンプレート" src="images/common/clear_icon.png" width="25" height="25" />',
 					),
 				),
 			),
