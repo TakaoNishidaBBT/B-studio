@@ -26,8 +26,6 @@ $tree_config = array(
 			'window'		=> $this->window,
 			'target'		=> $this->target,
 			'target_id'		=> $this->target_id,
-			'width'			=> $this->width,
-			'height'		=> $this->height,
 			'method'		=>
 			array(
 				'getNodeList'	=> 'getNodeList',
@@ -63,14 +61,6 @@ $tree_config = array(
 			'key'			=>
 			array(
 				'delete'	=> true,
-			),
-			'editor'		=>
-			array(
-				'module'	=> 'fileeditor',
-				'file'		=> 'index',
-				'method'	=> 'open',
-				'width'		=> '1000',
-				'height'	=> '600',
 			),
 			'disp_change'	=>
 			array(

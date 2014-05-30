@@ -293,7 +293,7 @@
 
 		function truncateFiles() {
 			$sql = "select contents_id, count(*) cnt, max(del_flag) del_flag, node_name
-					from " . B_DB_PREFIX . "resource_node
+					from " . B_DB_PREFIX . B_RESOURCE_NODE_TABLE . "
 					where node_type = 'file'
 					group by contents_id
 					having cnt = 1 and del_flag = '1'";

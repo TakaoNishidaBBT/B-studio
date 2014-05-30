@@ -26,8 +26,6 @@ $tree_config = array(
 			'window'		=> $this->window,
 			'target'		=> $this->target,
 			'target_id'		=> $this->target_id,
-			'width'			=> $this->width,
-			'height'		=> $this->height,
 			'method'		=>
 			array(
 				'getNodeList'	=> 'getNodeList',
