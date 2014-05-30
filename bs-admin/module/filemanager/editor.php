@@ -39,19 +39,19 @@
 				}
 
 				$obj = $this->editor->getElementByName('file_path');
-				$obj->value = $file_path;
+				if($obj) $obj->value = $file_path;
 
 				$obj = $this->editor->getElementByName('extension');
-				$obj->value = $info['extension'];
+				if($obj) $obj->value = $info['extension'];
 
 				$obj = $this->tab_control->getElementByName('encoding');
-				$obj->value = $encoding;
+				if($obj) $obj->value = $encoding;
 
 				$obj = $this->editor->getElementByName('update_datetime');
-				$obj->value = $update_datetime;
+				if($obj) $obj->value = $update_datetime;
 
 				$obj = $this->tab_control->getElementByName('text_editor_index');
-				$obj->value = $file_path;
+				if($obj) $obj->value = $file_path;
 
 				$this->setTitle($info['basename']);
 			}
