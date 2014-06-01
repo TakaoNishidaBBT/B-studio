@@ -14,12 +14,12 @@ $form_config = array(
 		'start_html'	=> '<div class="editor_container bframe_adjustwindow" param="margin:8" >',
 		'end_html'		=> '</div>',
 		array(
-			'start_html'	=> '<div id="html" class="text_editor bframe_adjustparent" param="margin:22">',
+			'start_html'	=> '<div id="html" class="text_editor bframe_adjustparent" param="margin:20">',
 			'end_html'		=> '</div>',
 			array(
 				'name'				=> 'html1',
 				'class'				=> 'B_TextArea',
-				'special_html'		=> 'class="textarea bframe_adjustparent bframe_texteditor" param="margin:34" style="width:100%"',
+				'special_html'		=> 'class="textarea bframe_adjustparent bframe_texteditor" param="margin:32" style="width:100%"',
 				'no_trim'			=> true,
 			),
 			array(
@@ -46,36 +46,36 @@ $form_config = array(
 			),
 		),
 		array(
-			'start_html'	=> '<div id="css" class="text_editor bframe_adjustparent" param="margin:22" style="display:none">',
+			'start_html'	=> '<div id="css" class="text_editor bframe_adjustparent" param="margin:20" style="display:none">',
 			'end_html'		=> '</div>',
 			array(
 				'id'				=> 'css_editor',
 				'name'				=> 'css',
 				'class'				=> 'B_TextArea',
-				'special_html'		=> 'class="textarea bframe_adjustparent bframe_texteditor" param="margin:34" syntax="css" style="width:100%"',
+				'special_html'		=> 'class="textarea bframe_adjustparent bframe_texteditor" param="margin:32" syntax="css" style="width:100%"',
 				'no_trim'			=> true,
 			),
 		),
 		array(
-			'start_html'	=> '<div id="php" class="text_editor bframe_adjustparent" param="margin:22" style="display:none">',
+			'start_html'	=> '<div id="php" class="text_editor bframe_adjustparent" param="margin:20" style="display:none">',
 			'end_html'		=> '</div>',
 			array(
 				'id'				=> 'php_editor',
 				'name'				=> 'php',
 				'class'				=> 'B_TextArea',
-				'special_html'		=> 'class="textarea bframe_adjustparent bframe_texteditor" param="margin:34" syntax="php" style="width:100%"',
+				'special_html'		=> 'class="textarea bframe_adjustparent bframe_texteditor" param="margin:32" syntax="php" style="width:100%"',
 				'no_trim'			=> true,
 			),
 		),
 		array(
-			'start_html'	=> '<div id="config" class="bframe_adjustparent" param="margin:26" style="display:none">',
+			'start_html'	=> '<div id="config" class="bframe_adjustparent" param="margin:25" style="display:none">',
 			'end_html'		=> '</div>',
 			array(
 				'name'				=> 'config_form',
 			),
 		),
 		array(
-			'start_html'	=> '<div id="preview" class="bframe_adjustparent" param="margin:22" style="display:none">',
+			'start_html'	=> '<div id="preview" class="bframe_adjustparent" param="margin:20" style="display:none">',
 			'end_html'		=> '</div>',
 			array(
 				'start_html'	=> '<iframe id="preview_frame" name="preview_frame" class="bframe_adjustparent" frameborder="0" align="top" scrolling="auto" noresize="noresize" width="100%">',
@@ -228,13 +228,6 @@ $config_form_config = array(
 				'start_html'		=> '<th>',
 				'end_html'			=> '</th>',
 				'value'				=> 'テンプレート　　',
-				array(
-					'class'				=> 'B_Link',
-					'link'				=> '#',
-					'special_html'		=> 'title="クリア" class="button" onclick="clearText(\'template_name\', \'template_id\'); return false;" style="padding:4px 10px;display:inline;"',
-					'specialchars'		=> 'none',
-					'value'				=> 'クリア',
-				),
 			),
 			array(
 				'start_html'		=> '<td>',
@@ -252,19 +245,22 @@ $config_form_config = array(
 					'name'				=> 'open_template',
 					'class'				=> 'B_Link',
 					'link'				=> 'index.php',
-					'special_html'		=> 'title="テンプレート設定" onclick="top.bframe.modalWindow.activate(this, window, \'template_id\'); return false;" params="width:350,height:400"',
+					'special_html'		=> 'title="テンプレート設定" class="settings-button" onclick="top.bframe.modalWindow.activate(this, window, \'template_id\'); return false;" params="width:350,height:400"',
 					'fixedparam'		=>
 					array(
 						'terminal_id'		=> TERMINAL_ID,
 						'module'			=> 'template', 
 						'page'				=> 'select_tree',
 					),
-					array(
-						'value'			=> '<img alt="テンプレート" src="images/common/popupwindow_icon.png" width="22" height="22" />',
-					),
-					array(
-						'value'			=> '<img alt="テンプレート" src="images/common/clear_icon.png" width="25" height="25" />',
-					),
+					'specialchars'		=> 'none',
+					'value'				=> '<img alt="テンプレート" src="images/common/widget.png" />',
+				),
+				array(
+					'class'				=> 'B_Link',
+					'link'				=> '#',
+					'special_html'		=> 'title="クリア" class="clear-button" onclick="clearText(\'template_name\', \'template_id\'); return false;" ',
+					'specialchars'		=> 'none',
+					'value'				=> '<img alt="クリア" src="images/common/clear.png" />',
 				),
 			),
 		),

@@ -163,7 +163,7 @@
 
 				var position = bframe.getElementPosition(target);
 				position.left += context_menu_frame_offset.left;
-				position.top += context_menu_frame_offset.top;
+				position.top += context_menu_frame_offset.top+1;
 				context_menu.positionAbsolute(position);
 
 				context_menu.show();

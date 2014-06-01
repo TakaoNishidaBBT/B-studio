@@ -115,7 +115,7 @@
 			container.appendChild(editor);
 			editor.style.height = target.style.height;
 			editor.style.position = 'absolute';
-			editor.style.top = '34px';
+			editor.style.top = '32px';
 			editor.style.left = '0';
 			editor.style.bottom = '0';
 			editor.style.right = '0';
