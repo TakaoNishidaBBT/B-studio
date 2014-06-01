@@ -14,14 +14,16 @@ $menu_config = array(
 		array(
 			'start_html'    => '<li class="title">',
 			'end_html'	    => '</li>',
-			'value'			=> '<img src="images/common/title.png" alt="B-studio" />',
+/*			'value'			=> '<img src="images/common/title.png" alt="B-studio" />',*/
+			'value'			=> 'B-studio',
 		),
 		array(
 			'auth_filter'	=> 'super_admin/admin',
 			'start_html'    => '<li>',
 			'end_html'	    => '</li>',
 			'class'			=> 'B_Link',
-			'value'			=> 'コンテンツ',
+			'value'			=> '<img src="images/common/contents.png" alt="contents"/>コンテンツ',
+			'specialchars'	=> 'none',
 			'link'			=> DISPATCH_URL . '&amp;module=contents&amp;page=index&amp;method=init',
 			'target'		=> 'main',
 		),
@@ -30,7 +32,8 @@ $menu_config = array(
 			'start_html'    => '<li>',
 			'end_html'	    => '</li>',
 			'class'			=> 'B_Link',
-			'value'			=> 'テンプレート',
+			'value'			=> '<img src="images/common/template.png" alt="テンプレート"/>テンプレート',
+			'specialchars'	=> 'none',
 			'link'			=> DISPATCH_URL . '&amp;module=template&amp;page=index&amp;method=init',
 			'target'		=> 'main',
 		),
@@ -42,7 +45,8 @@ $menu_config = array(
 				'class'			=> 'B_Link',
 				'special_html'	=> 'class="bframe_menu"',
 				'id'			=> 'resource',
-				'value'			=> 'リソース',
+				'value'			=> '<img src="images/common/resource.png" alt="リソース"/>リソース',
+				'specialchars'	=> 'none',
 				'script'		=>
 				array(
 					'bframe_menu'			=>
@@ -75,7 +79,8 @@ $menu_config = array(
 				'class'			=> 'B_Link',
 				'special_html'	=> 'class="bframe_menu"',
 				'id'			=> 'post_menu',
-				'value'			=> '投稿',
+				'value'			=> '<img src="images/common/article.png" alt="投稿"/>投稿',
+				'specialchars'	=> 'none',
 				'script'		=>
 				array(
 					'bframe_menu'			=>
@@ -118,7 +123,8 @@ $menu_config = array(
 				'class'			=> 'B_Link',
 				'special_html'	=> 'class="bframe_menu"',
 				'id'			=> 'setting_menu',
-				'value'			=> '各種設定',
+				'value'			=> '<img src="images/common/settings.png" alt="各種設定"/>各種設定',
+				'specialchars'	=> 'none',
 				'script'		=>
 				array(
 					'bframe_menu'			=>
@@ -230,10 +236,6 @@ $menu_config = array(
 					'value'			=> '+',
 				),
 			),
-		),
-		array(
-			'start_html'    => '<li class="terminator">',
-			'end_html'	    => '</li>',
 		),
 	),
 );

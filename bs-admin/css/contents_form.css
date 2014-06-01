@@ -41,8 +41,8 @@ ul.tabcontrol {
 	padding: 0;
 	list-style-type: none;
 	background-color: #444444;
-	border-top: 1px solid #505050;
-	border-bottom: 1px solid #3a3a3a;
+	border-top: 1px solid #444444;
+	border-bottom: 1px solid #444444;
 	overflow: visible;
 	height: 28px;
 	min-width: 1000px;
@@ -53,27 +53,27 @@ ul.tabcontrol li {
 	width: 100px;
 	margin: -1px 0 0 0;
 	padding: 0;
-	border-top: 1px solid #666666;
+	border-top: 1px solid #444444;
 	border-right: 1px solid #333333;
-	border-bottom: 1px solid #3a3a3a;
+	border-bottom: 1px solid #444444;
 	background-color: #444444;
 	overflow: hidden;
 }
 ul.tabcontrol li.selected {
 	background-color: #555555;
-	border-top: 1px solid #777777;
+	border-top: 1px solid #555555;
 	border-right: 1px solid #3a3a3a;
 	border-bottom: 1px solid #555555;
 }
 ul.tabcontrol li:hover:not(:last-child) {
 	background-color: #555555;
-	border-top: 1px solid #777777;
+	border-top: 1px solid #555555;
 	border-right: 1px solid #3a3a3a;
 }
 ul.tabcontrol li a:visited,
 ul.tabcontrol li a {
 	padding-left: 10px;
-	text-shadow: -1px -1px #111;
+	text-shadow: -1px -1px #333;
 	display: block;
 	text-align: left;
 	line-height: 28px;
@@ -94,10 +94,10 @@ ul.tabcontrol li.regist {
 	border: none;
 	height: 26px;
 	margin-left: 50px;
-	padding-top: 3px;
+	padding-top: 2px;
 	width: 300px;
 	text-align: left;
-	border-top: 1px solid #505050;
+	border-top: 1px solid #444444;
 	overflow: hidden;
 }
 
@@ -106,36 +106,32 @@ ul.tabcontrol li.regist {
  *
  ******************************/
 div.input_container {
-	border-top: 1px solid #222222;
-	border-left: 1px solid #222222;
-	border-right: 1px solid #606060;
-	border-bottom: 1px solid #606060;
 	width: 140px;
 	float: left;
 }
 input.regist-button {
 	margin: 0;
 	padding-bottom: 1px;
-	height: 20px;
+	height: 24px;
 	width: 140px;
 	background-color: #666666;
-	border-top: 1px solid #888888;
-	border-left: 1px solid #888888;
-	border-right: 1px solid #333333;
-	border-bottom: 1px solid #333333;
-	color: #eee;
-	text-shadow: -1px -1px #333;
+	border-top: 1px solid #666666;
+	border-left: 1px solid #666666;
+	border-right: 1px solid #666666;
+	border-bottom: 1px solid #666666;
+	color: #fff;
+	text-shadow: -1px -1px #555555;
 
 	cursor: pointer;
 }
 input.regist-button:hover {
-	background-color: #888888;
-	border-top: 1px solid #aaa;
-	border-left: 1px solid #aaa;
-	border-right: 1px solid #444444;
-	border-bottom: 1px solid #444444;
+	background-color: #777777;
+	border-top: 1px solid #777777;
+	border-left: 1px solid #777777;
+	border-right: 1px solid #777777;
+	border-bottom: 1px solid #777777;
 	color: #fff;
-	text-shadow: 1px 1px #333;
+	text-shadow: 1px 1px #555555;
 }
 
 /******************************
@@ -158,12 +154,9 @@ span#message {
  *
  ******************************/
 div.regist {
-	background-color: #555555;
 	margin-right: 8px;
 	padding: 8px 8px;
 	color: #fff;
-	border-top: #666666 1px solid;
-	border-bottom: #3a3a3a 3px solid;
 	overflow: hidden;
 	clear: both;
 }
@@ -189,7 +182,6 @@ div.text_editor {
 	padding: 0;
 	width: 100%;
 	overflow:hidden;
-	border-top: 1px #3a3a3a solid;
 	border-bottom: 1px #777777 solid;
 	position: relative;
 }
@@ -299,10 +291,6 @@ table.form td input {
 table.form td input.template {
 	width: 30%;
 }
-table.form td img {
-	vertical-align: -35%;
-	margin-left: 8px;
-}
 table.form a:link.button,
 table.form a:visited.button,
 table.form a:active.button,
@@ -331,4 +319,18 @@ table.form th.diff {
 	border-top: 1px solid #99aa00;
 	border-bottom: 1px solid #445500;
 	border-right: 1px solid #445500;
+}
+table.form .settings-button,
+table.form .clear-button {
+	display: inline-block;
+	text-align: center;
+	line-height: 0;
+	padding: 5px;
+	vertical-align: -4px;
+	border: 1px solid #555555;
+}
+table.form .settings-button:hover,
+table.form .clear-button:hover {
+	background-color: #555555;
+	border: 1px solid #666666;
 }

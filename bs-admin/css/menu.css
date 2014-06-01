@@ -7,11 +7,10 @@
 div#HEADER {
 	margin: 0;
 	background: #bbb;
-	height: 32px;
+	height: 34px;
 	line-height: 32px;
 	color: #fff;
-	background: url(../images/common/title_back.jpg) repeat-x;
-	border-bottom: 1px solid #404040;
+	background-color: #444444;
 	min-width: 700px;
 }
 h1 {
@@ -66,7 +65,7 @@ dl.login-user dd  strong {
 div.pull_down_menu {
 	overflow: hidden;
 	height: 36px;
-	background: url(../images/common/navi_back.jpg) repeat-x #525252;
+	background-color: #4c4c4c;
 }
 div.pull_down_menu ul {
 	margin: 0;
@@ -76,16 +75,17 @@ div.pull_down_menu ul {
 }
 div.pull_down_menu ul li {
 	float: left;
-	height: 35px;
+	height: 36px;
 	margin: 0;
-	width: 105px;
+	width: 120px;
 	text-align: center;
-	border-left: 1px solid #707070;
-	border-right: 1px solid #333;
-	background: url(../images/common/navi_back.jpg) repeat-x;
 }
-div.pull_down_menu ul li:not(:last-child):hover {
-	background-position: 0 -36px;
+div.pull_down_menu ul li img {
+	vertical-align: -4px;
+	margin-right: 4px;
+}
+div.pull_down_menu ul li:not(:first-child):hover {
+	background-color: #0689de;
 }
 div.pull_down_menu a,
 div.pull_down_menu a:visited {
@@ -99,15 +99,17 @@ div.pull_down_menu a:visited {
 div.pull_down_menu ul li.title {
 	color: #5e5e5e;
 	text-shadow: -1px -1px #333;
-
-	line-height: 36px;
-	border-left: none;
+	width: 90px;
+	line-height: 39px;
 	font-weight: bold;
 	font-family: Arial,Meiryo,Helvetica,Verdana;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	cursor: default;
 }
-div.pull_down_menu ul li.title:hover {
-	background: url(../images/common/navi_back.jpg) repeat-x;
-}
+
 div.pull_down_menu ul li.terminator {
 	border-right: none;
 }
