@@ -9,9 +9,8 @@ h2 {
 	font-size: 15px;
 	color: #fff;
 	background-color: #555555;
-	border-top: 1px solid #666666;
-	border-bottom: 1px solid #333;
-	line-height: 30px;
+	border-top: 1px solid #5e5e5e;
+	line-height: 33px;
 }
 h2 span.accent {
 	display: block;
@@ -35,7 +34,6 @@ div.header {
 	clear: both;
 	margin: 0;
 	background-color: #3a3a3a;
-	border-top: 1px solid #404040;
 	height: 10px;
 }
 div.footer {

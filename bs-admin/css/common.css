@@ -418,7 +418,7 @@ input.set-button:hover {
 	color: #fff;
 }
 /******************************
- * CONTROL
+ * control
  *
  ******************************/
 div#CONTROL {
@@ -438,7 +438,7 @@ div#CONTROL ul.control li {
 }
 
 /******************************
- * MAIN
+ * main
  *
  ******************************/
 div#MAIN {
@@ -460,7 +460,7 @@ div#DETAIL {
 }
 
 /******************************
- * LIST-MAIN
+ * list main
  *
  ******************************/
 div#LIST_MAIN {
@@ -475,7 +475,7 @@ p.select_status {
 }
 
 /********************
- * LIST HEADER
+ * list header
  *
  ********************/
 ul.search {
@@ -491,17 +491,13 @@ ul.search li {
 }
 
 /******************************
- * LIST TABLE
+ * table list
  *
  ******************************/
 table.list {
 	margin: 0 5px 10px 0;
 	border-collapse: separate;
 	border-spacing: 0;
-	border-top: none;
-	border-left: 1px solid #fafafa;
-	border-right: none;
-	border-bottom: none;
 }
 table.list th {
 	padding: 6px 10px;
@@ -510,15 +506,12 @@ table.list th {
 	color: #eee;
 	text-align: center;
 	white-space: nowrap;
-    background: url(../images/common/th_back.png) top left repeat-x #333;
+    background-color: #3c3c3c;
 	border-left: 1px solid #606060;
-	border-right: 1px solid #333;
 }
 table.list td {
 	padding: 4px 10px;
-	border-top: 1px solid #fff;
-	border-left: 1px solid #fff;
-	border-right: 1px solid #ddd;
+	border-left: 1px solid #ddd;
 	border-bottom: 1px solid #ddd;
 	text-align: left;
 	color: #444;
@@ -529,7 +522,13 @@ table.list th:first-child {
 	border-left: 1px solid #4e4e4e;
 }
 table.list td:first-child {
-	border-left: 1px solid #fafafa;
+	border-left: 1px solid #ddd;
+}
+table.list th:last-child {
+	border-right: 1px solid #3c3c3c;
+}
+table.list td:last-child {
+	border-right: 1px solid #ddd;
 }
 table.list td.center {
 	text-align: center;
@@ -600,7 +599,7 @@ table.list th.no-display{
 }
 
 /******************************
- * table FORM
+ * table form
  *
  ******************************/
 table.form {

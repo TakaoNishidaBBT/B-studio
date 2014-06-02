@@ -10,10 +10,10 @@ $form_config = array(
 	array('class' => 'B_Hidden', 'name' => 'contents_id'),
 	array('class' => 'B_Hidden', 'name' => 'update_datetime'),
 	array(
-		'start_html'	=> '<div class="editor_container bframe_adjustwindow" param="margin:16">',
+		'start_html'	=> '<div class="editor_container bframe_adjustwindow" param="margin:15">',
 		'end_html'		=> '</div>',
 		array(
-			'start_html'	=> '<div id="html" class="bframe_adjustwindow" param="margin:5">',
+			'start_html'	=> '<div id="html" class="bframe_adjustwindow" param="margin:4">',
 			'end_html'		=> '</div>',
 			array(
 				'start_html'	=> '<div class="bframe_adjustparent text_editor start_html" param="margin:30,height:50%">',
@@ -21,7 +21,7 @@ $form_config = array(
 				array(
 					'name'				=> 'start_html',
 					'class'				=> 'B_TextArea',
-					'special_html'		=> 'class="bframe_texteditor" param="margin:34"',
+					'special_html'		=> 'class="bframe_texteditor" param="margin:32"',
 					'no_trim'			=> true,
 				),
 				array(
@@ -40,12 +40,12 @@ $form_config = array(
 				),
 			),
 			array(
-				'start_html'	=> '<div class="bframe_adjustparent text_editor end_html" param="margin:30,height:50%" style="margin-top:8px">',
+				'start_html'	=> '<div class="bframe_adjustparent text_editor end_html" param="margin:25,height:50%" style="margin-top:7px">',
 				'end_html'		=> '</div>',
 				array(
 					'name'				=> 'end_html',
 					'class'				=> 'B_TextArea',
-					'special_html'		=> 'class="bframe_texteditor" param="margin:34"',
+					'special_html'		=> 'class="bframe_texteditor" param="margin:32"',
 					'no_trim'			=> true,
 				),
 				array(
@@ -71,7 +71,7 @@ $form_config = array(
 				'id'				=> 'css_editor',
 				'name'				=> 'css',
 				'class'				=> 'B_TextArea',
-				'special_html'		=> 'class="textarea bframe_adjustparent bframe_texteditor" param="margin:26" syntax="css" style="width:100%"',
+				'special_html'		=> 'class="textarea bframe_adjustparent bframe_texteditor" param="margin:24" syntax="css" style="width:100%"',
 				'no_trim'			=> true,
 			),
 		),
@@ -82,7 +82,7 @@ $form_config = array(
 				'id'				=> 'php_editor',
 				'name'				=> 'php',
 				'class'				=> 'B_TextArea',
-				'special_html'		=> 'class="textarea bframe_adjustparent bframe_texteditor" param="margin:26" syntax="php" style="width:100%"',
+				'special_html'		=> 'class="textarea bframe_adjustparent bframe_texteditor" param="margin:24" syntax="php" style="width:100%"',
 				'no_trim'			=> true,
 			),
 		),
@@ -94,7 +94,7 @@ $form_config = array(
 			),
 		),
 		array(
-			'start_html'	=> '<div id="preview" class="bframe_adjustparent" param="margin:14" style="display:none">',
+			'start_html'	=> '<div id="preview" class="bframe_adjustparent" param="margin:15" style="display:none">',
 			'end_html'		=> '</div>',
 			array(
 				'start_html'	=> '<iframe id="preview_frame" name="preview_frame" class="bframe_adjustparent" frameborder="0" align="top" scrolling="auto" noresize="noresize" width="100%">',
@@ -230,9 +230,9 @@ $tab_control_config = array(
 			'end_html'		=> '</div>',
 			array(
 				'name'			=> 'regist',
-				'class'			=> 'B_Button',
-				'special_html'	=> 'class="regist-button" onClick="bframe.ajaxSubmit.submit(\'F1\', \'' . $this->module . '\', \'form\', \'regist\', \'confirm\', true)"',
-				'value'			=> '　登録　',
+				'start_html'	=> '<span id="regist" class="regist-button" onClick="bframe.ajaxSubmit.submit(\'F1\', \'' . $this->module . '\', \'form\', \'regist\', \'confirm\', true)">',
+				'end_html'		=> '</span>',
+				'value'			=> '<img src="images/common/save.png" alt="保存" />保存',
 			),
 		),
 		array(

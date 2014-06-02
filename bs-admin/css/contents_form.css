@@ -54,7 +54,7 @@ ul.tabcontrol li {
 	margin: -1px 0 0 0;
 	padding: 0;
 	border-top: 1px solid #444444;
-	border-right: 1px solid #333333;
+	border-right: 1px solid #444444;
 	border-bottom: 1px solid #444444;
 	background-color: #444444;
 	overflow: hidden;
@@ -62,13 +62,13 @@ ul.tabcontrol li {
 ul.tabcontrol li.selected {
 	background-color: #555555;
 	border-top: 1px solid #555555;
-	border-right: 1px solid #3a3a3a;
+	border-right: 1px solid #444444;
 	border-bottom: 1px solid #555555;
 }
 ul.tabcontrol li:hover:not(:last-child) {
 	background-color: #555555;
 	border-top: 1px solid #555555;
-	border-right: 1px solid #3a3a3a;
+	border-right: 1px solid #444444;
 }
 ul.tabcontrol li a:visited,
 ul.tabcontrol li a {
@@ -94,7 +94,7 @@ ul.tabcontrol li.regist {
 	border: none;
 	height: 26px;
 	margin-left: 50px;
-	padding-top: 2px;
+	padding-top: 1px;
 	width: 300px;
 	text-align: left;
 	border-top: 1px solid #444444;
@@ -109,10 +109,11 @@ div.input_container {
 	width: 140px;
 	float: left;
 }
-input.regist-button {
+span.regist-button {
+	display: inline-block;
+	text-align: center;
 	margin: 0;
-	padding-bottom: 1px;
-	height: 24px;
+	padding: 4px 0;
 	width: 140px;
 	background-color: #666666;
 	border-top: 1px solid #666666;
@@ -124,7 +125,7 @@ input.regist-button {
 
 	cursor: pointer;
 }
-input.regist-button:hover {
+span.regist-button:hover {
 	background-color: #777777;
 	border-top: 1px solid #777777;
 	border-left: 1px solid #777777;
@@ -132,6 +133,10 @@ input.regist-button:hover {
 	border-bottom: 1px solid #777777;
 	color: #fff;
 	text-shadow: 1px 1px #555555;
+}
+span.regist-button img {
+	vertical-align: -3px;
+	margin-right: 8px;
 }
 
 /******************************
@@ -145,7 +150,7 @@ div.message_container {
 span#message {
 	display: table-cell;
 	vertical-align: middle;
-	height: 24px;
+	height: 26px;
 	color: #fff;
 }
 
@@ -169,13 +174,10 @@ div.editor_container {
 	clear: both;
 	margin: 0;
 	background-color: #555555;
-	border-top: 1px solid #555555;
-	padding: 6px 8px 8px 8px;
+	padding: 7px 8px 8px 8px;
 }
 div#preview {
 	background-color: #ffffff;
-	border-top: 1px solid #3a3a3a;
-	border-bottom: 1px solid #777777;
 }
 div.text_editor {
 	margin: 0;
