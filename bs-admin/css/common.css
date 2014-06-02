@@ -10,7 +10,7 @@ html, body {
 	display: block;
 }
 /******************************
- * BASIC
+ * basics
  *
  ******************************/
 body {
@@ -28,7 +28,7 @@ h2 {
 	min-width: 700px;
 }
 /******************************
- * IFRAME
+ * iframe
  *
  ******************************/
 iframe.main {
@@ -112,7 +112,7 @@ label {
 	cursor: pointer;
 }
 /******************************
- * LINK
+ * link
  *
  ******************************/
 a {
@@ -185,7 +185,7 @@ p.link {
 }
 
 /******************************
- * MESSAGE
+ * message
  *
  ******************************/
 p.select-status {
@@ -210,7 +210,7 @@ span.error-message {
 }
 
 /******************************
- * BUTTON ELEMENTS
+ * button elements
  *
  ******************************/
 input.button {
@@ -422,10 +422,9 @@ input.set-button:hover {
  *
  ******************************/
 div#CONTROL {
-	background: url(../images/common/list_header_back.png);
-	border-top: 1px solid #fff;
-	border-bottom: 1px solid #ccc;
+	background-color: #ececec;
 	margin-bottom: 0;
+	overflow: hidden;
 }
 div#CONTROL ul.control {
 	margin: 6px 0 6px 20px;
