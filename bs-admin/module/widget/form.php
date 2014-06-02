@@ -127,12 +127,12 @@
 			if($ret) {
 				$this->db->commit();
 				$this->status = true;
-				$this->message = "登録しました";
+				$this->message = "保存しました";
 			}
 			else {
 				$this->db->rollback();
 				$this->status = false;
-				$this->message = "登録に失敗しました";
+				$this->message = "保存に失敗しました";
 			}
 		}
 
@@ -155,12 +155,12 @@
 			if($ret) {
 				$this->db->commit();
 				$this->status = true;
-				$this->message = "登録しました";
+				$this->message = "保存しました";
 			}
 			else {
 				$this->db->rollback();
 				$this->status = false;
-				$this->message = "登録に失敗しました";
+				$this->message = "保存に失敗しました";
 			}
 		}
 
@@ -198,12 +198,12 @@
 			if($ret) {
 				$this->db->commit();
 				$this->status = true;
-				$this->message = "登録しました";
+				$this->message = "保存しました";
 			}
 			else {
 				$this->db->rollback();
 				$this->status = false;
-				$this->message = "登録に失敗しました";
+				$this->message = "保存に失敗しました";
 			}
 		}
 
