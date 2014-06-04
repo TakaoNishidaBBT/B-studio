@@ -14,7 +14,6 @@ $menu_config = array(
 		array(
 			'start_html'    => '<li class="title">',
 			'end_html'	    => '</li>',
-/*			'value'			=> '<img src="images/common/title.png" alt="B-studio" />',*/
 			'value'			=> 'B-studio',
 		),
 		array(
