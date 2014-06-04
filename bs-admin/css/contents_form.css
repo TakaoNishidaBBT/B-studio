@@ -319,8 +319,9 @@ table.form a:hover.button {
 table.form th.diff {
 	background-color: #889900;
 	border-top: 1px solid #99aa00;
-	border-bottom: 1px solid #445500;
-	border-right: 1px solid #445500;
+	border-bottom: 1px solid #889900;
+	border-right: 1px solid #889900;
+	text-shadow: -1px -1px #777;
 }
 table.form .settings-button,
 table.form .clear-button {
