@@ -9,10 +9,14 @@
 		echo 'mbstringモジュールを有効にしてください。';
 		exit;
 	}
+	error_reporting(E_ALL & ~E_NOTICE & ~E_STRICT);
 	define('B_CHARSET', 'UTF-8');
 	mb_internal_encoding(B_CHARSET);
 	ini_set('display_errors', 'On');
-	error_reporting(E_ALL & ~E_NOTICE & ~E_STRICT);
+	set_error_handler('exception_error_handler');
+
+	// check timezone
+	date("Ymd");
 
 	require_once('config/form_config.php');
 	require_once('../bs-admin/class/B_Element.php');
@@ -195,4 +199,13 @@
 		$admin_user_form->setValue($_SESSION['param']);
 		$root_htaccess->setValue($_SESSION['param']);
 		confirmPermission($perm_message);
+	}
+
+	function exception_error_handler($errno, $errstr, $errfile, $errline ) {
+	    if (!(error_reporting() & $errno)) {
+	        // error_reporting 設定に含まれていないエラーコードです
+	        return;
+	    }
+
+	    throw new ErrorException($errstr, 0, $errno, $errfile, $errline);
 	}
