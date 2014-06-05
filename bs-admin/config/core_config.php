@@ -42,7 +42,7 @@
 
 	// サイトルート
 	define('B_SITE_ROOT', 'http://' . B_HTTP_HOST . B_CURRENT_ROOT);
-	define('B_SITE_ROOT_SSL', 'http://' . B_HTTP_HOST . B_CURRENT_ROOT);
+	define('B_SITE_ROOT_SSL', 'https://' . B_HTTP_HOST . B_CURRENT_ROOT);
 
 	if(empty($_SERVER['HTTPS']) === true || $_SERVER['HTTPS'] !== 'on') {
 		define('B_SITE_BASE', B_SITE_ROOT);

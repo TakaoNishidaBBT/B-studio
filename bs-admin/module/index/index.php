@@ -75,7 +75,7 @@
 				$auth = new B_AdminAuth;
 				$ret = $auth->login($this->db, $_POST['user_id'], $_POST['password']);
 				if($ret) {
-					$path = B_SITE_ROOT_SSL . 'bs-admin/';
+					$path = B_SITE_BASE . 'bs-admin/';
 					header("Location:$path");
 					exit;
 				}
