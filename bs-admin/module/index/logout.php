@@ -8,6 +8,6 @@
 	$ses = new B_Session;
 	$ses->end();
 
-	$path = B_SITE_ROOT_SSL . "bs-admin/";
+	$path = B_SITE_BASE . "bs-admin/";
 	header("Location:$path");
 	exit;
