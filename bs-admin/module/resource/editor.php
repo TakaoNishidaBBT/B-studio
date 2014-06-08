@@ -61,7 +61,7 @@
 				$obj->value = $update_datetime;
 
 				$obj = $this->tab_control->getElementByName('text_editor_index');
-				$obj->value = B_SITE_ROOT . $this->getFilePath($this->request['node_id']);
+				$obj->value = B_SITE_BASE . $this->getFilePath($this->request['node_id']);
 
 				$this->setTitle($row['node_name']);
 			}

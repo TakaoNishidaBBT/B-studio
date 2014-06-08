@@ -6,7 +6,7 @@
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
 $form_config = array(
-	array('class' => 'B_Hidden', 'name' => 'baseHref', 'value' => B_SITE_ROOT_SSL),
+	array('class' => 'B_Hidden', 'name' => 'baseHref', 'value' => B_SITE_BASE),
 	array('class' => 'B_Hidden', 'name' => 'visual_editor_body_class', 'value' => 'contents'),
 	array('class' => 'B_Hidden', 'name' => 'visual_editor_styles', 'value' => 'default:' . B_CURRENT_ROOT . 'visualeditor/article1/styles/styles.js'),
 	array('class' => 'B_Hidden', 'name' => 'visual_editor_css',	'value' => B_CURRENT_ROOT . 'visualeditor/article1/css/default.css'),
@@ -64,7 +64,7 @@ $form_config = array(
 					'filter'			=> 'select',
 					'id'				=> 'schedule_calendar1',
 					'class'				=> 'B_Link',
-					'special_html'		=> 'class="bframe_calendar" title="カレンダー"',
+					'special_html'		=> 'class="bframe_calendar settings-button" title="カレンダー"',
 					'script'			=>
 					array(
 						'bframe_calendar'	=>
@@ -105,14 +105,6 @@ $form_config = array(
 				'start_html'	=> '<th>',
 				'end_html'		=> '</th>',
 				'value'			=> 'カテゴリ　　',
-				array(
-					'filter'			=> 'select',
-					'class'				=> 'B_Link',
-					'link'				=> '#',
-					'special_html'		=> 'title="クリア" class="button" onclick="clearText(\'category_id\', \'category_name\'); return false;" style="padding:4px 10px;display:inline;"',
-					'specialchars'		=> 'none',
-					'value'				=> 'クリア',
-				),
 			),
 			array(
 				'start_html'		=> '<td>',
@@ -131,7 +123,7 @@ $form_config = array(
 					'name'				=> 'open_category',
 					'class'				=> 'B_Link',
 					'link'				=> 'index.php',
-					'special_html'		=> 'title="カテゴリ設定" onclick="top.bframe.modalWindow.activate(this, window, \'category_id\'); return false;" params="width:350,height:400"',
+					'special_html'		=> 'title="カテゴリ設定" class="settings-button" onclick="top.bframe.modalWindow.activate(this, window, \'category_id\'); return false;" params="width:350,height:400"',
 					'fixedparam'		=>
 					array(
 						'terminal_id'		=> TERMINAL_ID,
@@ -139,9 +131,18 @@ $form_config = array(
 						'page'				=> 'tree',
 					),
 					array(
-						'value'			=> '<img alt="カテゴリ" src="images/common/list_view.png" width="16" height="16" />',
+						'value'			=> '<img alt="カテゴリ" src="images/common/gear.png" />',
 					),
 				),
+				array(
+					'filter'			=> 'select',
+					'class'				=> 'B_Link',
+					'link'				=> '#',
+					'special_html'		=> 'title="クリア" class="clear-button" onclick="clearText(\'category_id\', \'category_name\'); return false;"',
+					'specialchars'		=> 'none',
+					'value'				=> '<img alt="クリア" src="images/common/clear.png" />',
+				),
+
 			),
 	    ),
 
@@ -236,14 +237,6 @@ $form_config = array(
 				'start_html'			=> '<th>',
 				'end_html'				=> '</th>',
 				'value'					=> 'タイトル画像　　',
-				array(
-					'filter'			=> 'select',
-					'class'				=> 'B_Link',
-					'link'				=> '#',
-					'special_html'		=> 'title="クリア" class="button" onclick="clearIMG(\'title_img\', \'title_img_file\'); return false;" style="padding:4px 10px;display:inline;"',
-					'specialchars'		=> 'none',
-					'value'				=> 'クリア',
-				),
 			),
 			array(
 				'start_html'    => '<td>',
@@ -255,15 +248,19 @@ $form_config = array(
 						'start_html'    => '<tr>',
 						'end_html'	    => '</tr>',
 						array(
+							'name'			=> 'title_img',
+							'start_html'	=> '<td id="title_img">',
+							'end_html'		=> '</td>',
+						),
+						array(
 							'filter'		=> 'select',
-							'start_html'    => '<td style="width:70px">',
+							'start_html'    => '<td>',
 							'end_html'	    => '</td>',
 							array(
 								'name'			=> 'open_filelist',
 								'class'			=> 'B_Link',
-								'value'			=> '画像選択',
 								'link'			=> 'index.php',
-								'special_html'	=> 'title="画像選択" class="button" onclick="activateModalWindow(this, 850, 500); return false;" style="line-height:24px"',
+								'special_html'	=> 'title="画像選択" class="settings-button" onclick="activateModalWindow(this, 850, 500); return false;"',
 								'fixedparam'	=>
 								array(
 									'terminal_id'	=> TERMINAL_ID,
@@ -276,18 +273,23 @@ $form_config = array(
 									'width'			=> '110',
 									'height'		=> '80',
 								),
+								'specialchars'	=> 'none',
+								'value'			=> '<img alt="画像選択" src="images/common/gear.png" />',
 							),
-						),
-						array(
-							'name'			=> 'title_img',
-							'start_html'    => '<td id="title_img">',
-							'end_html'	    => '</td>',
+							array(
+								'filter'			=> 'select',
+								'class'				=> 'B_Link',
+								'link'				=> '#',
+								'special_html'		=> 'title="クリア" class="clear-button" onclick="clearIMG(\'title_img\', \'title_img_file\'); return false;"',
+								'specialchars'		=> 'none',
+								'value'				=> '<img alt="クリア" src="images/common/clear.png" />',
+							),
 						),
 						array(
 							'name'			=> 'title_img_file',
 							'class'			=> 'B_Hidden',
-							'start_html'    => '<td>',
-							'end_html'	    => '</td>',
+							'start_html'	=> '<td>',
+							'end_html'		=> '</td>',
 						),
 					),
 				),
@@ -461,19 +463,23 @@ $input_control_config = array(
 	'end_html'		=> '</ul>',
 	array(
 		'name'			=> 'back',
-		'class'			=> 'B_Button',
 		'start_html'	=> '<li>',
 		'end_html'		=> '</li>',
-		'special_html'	=> 'class="button" onClick="bframe.submit(\'F1\', \'' . $this->module . '\', \'list\', \'back\', \'\')"',
-		'value'			=> '戻　る',
+		array(
+			'start_html'	=> '<span class="left-button" onclick="bframe.submit(\'F1\', \'' . $this->module . '\', \'list\', \'back\', \'\')">',
+			'end_html'		=> '</span>',
+			'value'			=> '戻る',
+		),
 	),
 	array(
 		'name'			=> 'confirm',
-		'class'			=> 'B_Button',
 		'start_html'	=> '<li>',
 		'end_html'		=> '</li>',
-		'special_html'	=> 'class="button" onClick="bframe.submit(\'F1\', \'' . $this->module . '\', \'form\', \'confirm\', \'\', true)"',
-		'value'			=> '確　認',
+		array(
+			'start_html'	=> '<span class="right-button" onclick="bframe.submit(\'F1\', \'' . $this->module . '\', \'form\', \'confirm\', \'\', true)">',
+			'end_html'		=> '</span>',
+			'value'			=> '確認',
+		),
 	),
 );
 
@@ -483,19 +489,23 @@ $confirm_control_config = array(
 	'end_html'		=> '</ul>',
 	array(
 		'name'			=> 'back',
-		'class'			=> 'B_Button',
 		'start_html'	=> '<li>',
 		'end_html'		=> '</li>',
-		'special_html'	=> 'class="button" onClick="bframe.submit(\'F1\', \'' . $this->module . '\', \'form\', \'back\', \'\');" ',
-		'value'			=> '戻　る',
+		array(
+			'start_html'	=> '<span class="left-button" onclick="bframe.submit(\'F1\', \'' . $this->module . '\', \'form\', \'back\', \'\')">',
+			'end_html'		=> '</span>',
+			'value'			=> '戻る',
+		),
 	),
 	array(
 		'name'			=> 'regist',
-		'class'			=> 'B_Button',
 		'start_html'	=> '<li>',
 		'end_html'		=> '</li>',
-		'special_html'	=> 'class="button" onClick="bframe.submit(\'F1\', \'' . $this->module . '\', \'form\', \'regist\', \'\');" ',
-		'value'			=> '登　録',
+		array(
+			'start_html'	=> '<span class="right-button" onclick="bframe.submit(\'F1\', \'' . $this->module . '\', \'form\', \'regist\', \'\')">',
+			'end_html'		=> '</span>',
+			'value'			=> '登録',
+		),
 	),
 );
 
@@ -505,19 +515,23 @@ $delete_control_config = array(
 	'end_html'		=> '</ul>',
 	array(
 		'name'			=> 'back',
-		'class'			=> 'B_Button',
 		'start_html'	=> '<li>',
 		'end_html'		=> '</li>',
-		'special_html'	=> 'class="button" onClick="bframe.submit(\'F1\', \'' . $this->module . '\', \'list\', \'back\', \'\');" ',
-		'value'			=> '戻　る',
+		array(
+			'start_html'	=> '<span class="left-button" onclick="bframe.submit(\'F1\', \'' . $this->module . '\', \'list\', \'back\', \'\')">',
+			'end_html'		=> '</span>',
+			'value'			=> '戻る',
+		),
 	),
 	array(
 		'name'			=> 'regist',
-		'class'			=> 'B_Button',
 		'start_html'	=> '<li>',
 		'end_html'		=> '</li>',
-		'special_html'	=> 'class="button" onClick="bframe.confirmSubmit(\'削除します。\n\nよろしいですか？\', \'F1\', \'' . $this->module . '\', \'form\', \'delete\', \'\');" ',
-		'value'			=> '削　除',
+		array(
+			'start_html'	=> '<span class="right-button" onclick="bframe.confirmSubmit(\'削除します。\n\nよろしいですか？\', \'F1\', \'' . $this->module . '\', \'form\', \'delete\', \'\');">',
+			'end_html'		=> '</span>',
+			'value'			=> '削除',
+		),
 	),
 );
 
@@ -527,10 +541,12 @@ $result_control_config = array(
 	'end_html'		=> '</ul>',
 	array(
 		'name'			=> 'backToList',
-		'class'			=> 'B_Button',
 		'start_html'	=> '<li>',
 		'end_html'		=> '</li>',
-		'special_html'	=> 'class="button" onClick="bframe.submit(\'F1\', \'' . $this->module . '\', \'list\', \'back\', \'\')" ',
-		'value'			=> '一覧に戻る',
+		array(
+			'start_html'	=> '<span class="left-button" style="width:150px" onclick="bframe.submit(\'F1\', \'' . $this->module . '\', \'list\', \'back\', \'\')">',
+			'end_html'		=> '</span>',
+			'value'			=> '一覧に戻る',
+		),
 	),
 );

@@ -219,7 +219,7 @@ $tab_control_config = array(
 		'end_html'			=> '</li>',
 		'link'				=> 'preview',
 		'value'				=> 'プレビュー',
-		'special_html'		=> 'class="bframe_tab" onclick="bframe.preview.submit(\'F1\', \'' . B_SITE_ROOT_SSL . 'index.php' . '\', \'template_preview\', \'preview_frame\'); return false;"',
+		'special_html'		=> 'class="bframe_tab" onclick="bframe.preview.submit(\'F1\', \'' . B_SITE_BASE . 'index.php' . '\', \'template_preview\', \'preview_frame\'); return false;"',
 	),
 	array(
 		'name'				=> 'regist_button',
