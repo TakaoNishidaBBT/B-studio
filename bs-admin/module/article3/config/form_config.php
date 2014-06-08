@@ -6,7 +6,7 @@
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
 $form_config = array(
-	array('class' => 'B_Hidden', 'name' => 'baseHref', 'value' => B_SITE_ROOT_SSL),
+	array('class' => 'B_Hidden', 'name' => 'baseHref', 'value' => B_SITE_BASE),
 	array('class' => 'B_Hidden', 'name' => 'visual_editor_body_class', 'value' => 'contents'),
 	array('class' => 'B_Hidden', 'name' => 'visual_editor_styles', 'value' => 'default:' . B_CURRENT_ROOT . 'visualeditor/article3/styles/styles.js'),
 	array('class' => 'B_Hidden', 'name' => 'visual_editor_css',	'value' => B_CURRENT_ROOT . 'visualeditor/article3/css/default.css'),

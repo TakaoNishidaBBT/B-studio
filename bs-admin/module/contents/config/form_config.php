@@ -104,7 +104,7 @@ $tab_control_config = array(
 		'start_html'		=> '<li>',
 		'end_html'			=> '</li>',
 		'link'				=> 'visual',
-		'special_html'		=> 'class="bframe_tab" onclick="bframe.inline.submit(\'F1\', \'' . B_SITE_ROOT_SSL . 'index.php' . '\', \'inline\', \'inline_frame\'); return false;"',
+		'special_html'		=> 'class="bframe_tab" onclick="bframe.inline.submit(\'F1\', \'' . B_SITE_BASE . 'index.php' . '\', \'inline\', \'inline_frame\'); return false;"',
 		'value'				=> 'ビジュアル',
 	),
 	array(
@@ -141,7 +141,7 @@ $tab_control_config = array(
 		'end_html'			=> '</li>',
 		'link'				=> 'preview',
 		'value'				=> 'プレビュー',
-		'special_html'		=> 'class="bframe_tab" onclick="bframe.preview.submit(\'F1\', \'' . B_SITE_ROOT_SSL . 'index.php' . '\', \'preview\', \'preview_frame\'); return false;"',
+		'special_html'		=> 'class="bframe_tab" onclick="bframe.preview.submit(\'F1\', \'' . B_SITE_BASE . 'index.php' . '\', \'preview\', \'preview_frame\'); return false;"',
 	),
 	array(
 		'name'				=> 'regist_button',
@@ -253,7 +253,7 @@ $config_form_config = array(
 						'page'				=> 'select_tree',
 					),
 					'specialchars'		=> 'none',
-					'value'				=> '<img alt="テンプレート" src="images/common/widget.png" />',
+					'value'				=> '<img alt="テンプレート" src="images/common/gear_white.png" />',
 				),
 				array(
 					'class'				=> 'B_Link',

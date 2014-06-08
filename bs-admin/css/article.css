@@ -37,7 +37,20 @@ input.regist-button:hover {
 	cursor: pointer;
 	color: #fff;
 }
-
+.settings-button,
+.clear-button {
+	display: inline-block;
+	text-align: center;
+	line-height: 0;
+	padding: 5px;
+	vertical-align: -5px;
+	border: 1px solid #dddddd;
+}
+.settings-button:hover,
+.clear-button:hover {
+	background-color: #eeeeee;
+	border: 1px solid #dddddd;
+}
 /******************************
  * message
  *

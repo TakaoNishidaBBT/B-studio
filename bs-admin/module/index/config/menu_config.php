@@ -21,7 +21,7 @@ $menu_config = array(
 			'start_html'    => '<li>',
 			'end_html'	    => '</li>',
 			'class'			=> 'B_Link',
-			'value'			=> '<img src="images/common/contents.png" alt="contents"/>コンテンツ',
+			'value'			=> '<img src="images/menu/contents.png" alt="contents"/>コンテンツ',
 			'specialchars'	=> 'none',
 			'link'			=> DISPATCH_URL . '&amp;module=contents&amp;page=index&amp;method=init',
 			'target'		=> 'main',
@@ -31,7 +31,7 @@ $menu_config = array(
 			'start_html'    => '<li>',
 			'end_html'	    => '</li>',
 			'class'			=> 'B_Link',
-			'value'			=> '<img src="images/common/template.png" alt="テンプレート"/>テンプレート',
+			'value'			=> '<img src="images/menu/template.png" alt="テンプレート"/>テンプレート',
 			'specialchars'	=> 'none',
 			'link'			=> DISPATCH_URL . '&amp;module=template&amp;page=index&amp;method=init',
 			'target'		=> 'main',
@@ -44,7 +44,7 @@ $menu_config = array(
 				'class'			=> 'B_Link',
 				'special_html'	=> 'class="bframe_menu"',
 				'id'			=> 'resource',
-				'value'			=> '<img src="images/common/resource.png" alt="リソース"/>リソース',
+				'value'			=> '<img src="images/menu/resource.png" alt="リソース"/>リソース',
 				'specialchars'	=> 'none',
 				'script'		=>
 				array(
@@ -78,7 +78,7 @@ $menu_config = array(
 				'class'			=> 'B_Link',
 				'special_html'	=> 'class="bframe_menu"',
 				'id'			=> 'post_menu',
-				'value'			=> '<img src="images/common/article.png" alt="投稿"/>投稿',
+				'value'			=> '<img src="images/menu/article.png" alt="投稿"/>投稿',
 				'specialchars'	=> 'none',
 				'script'		=>
 				array(
@@ -122,7 +122,7 @@ $menu_config = array(
 				'class'			=> 'B_Link',
 				'special_html'	=> 'class="bframe_menu"',
 				'id'			=> 'setting_menu',
-				'value'			=> '<img src="images/common/settings.png" alt="各種設定"/>各種設定',
+				'value'			=> '<img src="images/menu/settings.png" alt="各種設定"/>各種設定',
 				'specialchars'	=> 'none',
 				'script'		=>
 				array(

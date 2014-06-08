@@ -56,21 +56,21 @@
 			control.className = 'control';
 			parent.appendChild(control);
 
-			li = createControlButton('images/common/undo.png', 'undo (ctrl-z)', undo);
+			li = createControlButton('images/editor/undo.png', 'undo (ctrl-z)', undo);
 			control.appendChild(li);
-			li = createControlButton('images/common/redo.png', 'redo (ctrl-y)', redo);
+			li = createControlButton('images/editor/redo.png', 'redo (ctrl-y)', redo);
 			control.appendChild(li);
-			li = createControlButton('images/common/splith.png', 'split horizontal', splith);
+			li = createControlButton('images/editor/splith.png', 'split horizontal', splith);
 			control.appendChild(li);
-			li = createControlButton('images/common/splitv.png', 'split vertical', splitv);
+			li = createControlButton('images/editor/splitv.png', 'split vertical', splitv);
 			control.appendChild(li);
-			li = createControlButton('images/common/indent_guide.png', 'show indent guide', indentGuide);
+			li = createControlButton('images/editor/indent_guide.png', 'show indent guide', indentGuide);
 			control.appendChild(li);
-			li = createControlButton('images/common/invisible_object.png', 'show invisibles', invisible);
+			li = createControlButton('images/editor/invisible_object.png', 'show invisibles', invisible);
 			control.appendChild(li);
 			widget = bframe.searchNodeById(parent, 'open_widgetmanager');
 			if(widget) {
-				li = createControlButton('images/common/widget.png', 'widget', openWidget);
+				li = createControlButton('images/editor/gear.png', 'widget', openWidget);
 				control.appendChild(li);
 			}
 		}
