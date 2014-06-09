@@ -260,7 +260,7 @@ $config_form_config = array(
 					'link'				=> '#',
 					'special_html'		=> 'title="クリア" class="clear-button" onclick="clearText(\'template_name\', \'template_id\'); return false;" ',
 					'specialchars'		=> 'none',
-					'value'				=> '<img alt="クリア" src="images/common/clear_white.png" />',
+					'value'				=> '<img alt="クリア" src="images/common/clear_gray.png" />',
 				),
 			),
 		),

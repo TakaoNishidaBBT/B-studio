@@ -565,11 +565,16 @@ table.list td a.edit-button:hover {
 	background: url(../images/common/edit-white.png) no-repeat center center #0689de;
 }
 table.list td a.delete-button {
-	background: url(../images/common/delete.png) no-repeat center center;
+	background: url(../images/common/clear.png) no-repeat center center;
 	text-indent:-9999px;
 }
 table.list td a.delete-button:hover {
-	background: url(../images/common/delete-white.png) no-repeat center center #0689de;
+	background: url(../images/common/clear-white.png) no-repeat center center #0689de;
+}
+table.list td a.delete-button-disable {
+	background: url(../images/common/clear_gray.png) no-repeat center center;
+	text-indent:-9999px;
+	cursor: default;
 }
 table.list td a img {
 	vertical-align: -2px;
