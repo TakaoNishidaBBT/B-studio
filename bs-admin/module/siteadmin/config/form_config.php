@@ -193,13 +193,11 @@ $input_control_config = array(
 	'end_html'		=> '</ul>',
 	array(
 		'name'			=> 'confirm',
+		'class'			=> 'B_Submit',
 		'start_html'	=> '<li>',
 		'end_html'		=> '</li>',
-		array(
-			'start_html'	=> '<span class="right-button" onclick="bframe.submit(\'F1\', \'' . $this->module . '\', \'form\', \'confirm\', \'\', true)">',
-			'end_html'		=> '</span>',
-			'value'			=> '確認',
-		),
+		'special_html'	=> 'class="button" onClick="bframe.submit(\'F1\', \'' . $this->module . '\', \'form\', \'confirm\', \'\', true)"',
+		'value'			=> '確　認',
 	),
 );
 
@@ -209,23 +207,19 @@ $confirm_control_config = array(
 	'end_html'		=> '</ul>',
 	array(
 		'name'			=> 'back',
+		'class'			=> 'B_Button',
 		'start_html'	=> '<li>',
 		'end_html'		=> '</li>',
-		array(
-			'start_html'	=> '<span class="left-button" onclick="bframe.submit(\'F1\', \'' . $this->module . '\', \'form\', \'back\', \'\')">',
-			'end_html'		=> '</span>',
-			'value'			=> '戻る',
-		),
+		'special_html'	=> 'class="button" onClick="bframe.submit(\'F1\', \'' . $this->module . '\', \'form\', \'back\', \'\');" ',
+		'value'			=> '戻　る',
 	),
 	array(
 		'name'			=> 'regist',
+		'class'			=> 'B_Button',
 		'start_html'	=> '<li>',
 		'end_html'		=> '</li>',
-		array(
-			'start_html'	=> '<span class="right-button" onclick="bframe.submit(\'F1\', \'' . $this->module . '\', \'form\', \'regist\', \'\')">',
-			'end_html'		=> '</span>',
-			'value'			=> '登録',
-		),
+		'special_html'	=> 'class="button" onClick="bframe.submit(\'F1\', \'' . $this->module . '\', \'form\', \'regist\', \'\');" ',
+		'value'			=> '登　録',
 	),
 );
 
@@ -235,12 +229,10 @@ $result_control_config = array(
 	'end_html'		=> '</ul>',
 	array(
 		'name'			=> 'backToList',
+		'class'			=> 'B_Button',
 		'start_html'	=> '<li>',
 		'end_html'		=> '</li>',
-		array(
-			'start_html'	=> '<span class="left-button" style="width:170px" onclick="bframe.submit(\'F1\', \'' . $this->module . '\', \'form\', \'\', \'\')">',
-			'end_html'		=> '</span>',
-			'value'			=> '設定画面に戻る',
-		),
+		'special_html'	=> 'class="button" onClick="bframe.submit(\'F1\', \'' . $this->module . '\', \'form\', \'\', \'\')" ',
+		'value'			=> '設定画面に戻る',
 	),
 );
