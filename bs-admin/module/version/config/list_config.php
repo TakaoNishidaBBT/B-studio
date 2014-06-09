@@ -38,37 +38,37 @@ array(
 		'class'			=> 'B_Row',
 		array(
 			'name'			=> 'reserved_version',
-			'start_html'	=> '<th>',
+			'start_html'	=> '<th class="center" style="width:35px" >',
 			'end_html'		=> '</th>',
 			'value'			=> '公開',
 		),
 		array(
 			'name'			=> 'working_version',
-			'start_html'	=> '<th>',
+			'start_html'	=> '<th class="center" style="width:35px" >',
 			'end_html'		=> '</th>',
 			'value'			=> '作業中',
 		),
 		array(
 			'name'			=> 'version_id',
-			'start_html'	=> '<th>',
+			'start_html'	=> '<th class="center">',
 			'end_html'		=> '</th>',
 			'value'			=> 'ID',
 		),
 		array(
 			'name'			=> 'publication_date',
-			'start_html'	=> '<th>',
+			'start_html'	=> '<th class="center">',
 			'end_html'		=> '</th>',
 			'value'			=> '公開日時',
 		),
 		array(
 			'name'			=> 'version',
-			'start_html'	=> '<th>',
+			'start_html'	=> '<th class="center">',
 			'end_html'		=> '</th>',
 			'value'			=> 'バージョン',
 		),
 		array(
 			'name'			=> 'publication_status',
-			'start_html'	=> '<th>',
+			'start_html'	=> '<th class="center" style="width:50px">',
 			'end_html'		=> '</th>',
 			'class'			=> 'B_Link',
 			'link'			=> '',
@@ -78,22 +78,22 @@ array(
 		),
 		array(
 			'name'			=> 'memo',
-			'start_html'	=> '<th>',
+			'start_html'	=> '<th class="center">',
 			'end_html'		=> '</th>',
 			'value'			=> 'メモ',
 		),
 		array(
-			'start_html'	=> '<th nowrap>',
+			'start_html'	=> '<th class="center" style="width:40px" nowrap>',
 			'end_html'		=> '</th>',
 			'value'			=> '編集',
 		),
 		array(
-			'start_html'	=> '<th nowrap>',
+			'start_html'	=> '<th class="center" style="width:40px" nowrap>',
 			'end_html'		=> '</th>',
 			'value'			=> '比較',
 		),
 		array(
-			'start_html'	=> '<th nowrap>',
+			'start_html'	=> '<th class="center" style="width:40px" nowrap>',
 			'end_html'		=> '</th>',
 			'value'			=> '削除',
 		),
@@ -157,7 +157,7 @@ array(
 				'name'			=> 'edit',
 				'class'			=> 'B_Link',
 				'link'			=> 'index.php',
-				'special_html'	=> 'class="button"',
+				'special_html'	=> 'class="edit-button"',
 				'value'			=> '編集',
 				'fixedparam'	=>
 				array(
@@ -213,7 +213,7 @@ array(
 				'id'			=> 'del_enable',
 				'class'			=> 'B_Link',
 				'link'			=> 'index.php',
-				'special_html'	=> 'class="button"',
+				'special_html'	=> 'class="delete-button"',
 				'value'			=> '削除',
 				'fixedparam'	=>
 				array(
@@ -232,7 +232,7 @@ array(
 				'name'			=> 'del',
 				'id'			=> 'del_disable',
 				'class'			=> 'B_Link',
-				'special_html'	=> 'class="disable-button" onclick="return false;"',
+				'special_html'	=> 'class="delete-button-disable" onclick="return false;"',
 				'value'			=> '削除',
 				'display'		=> 'none',
 			),
