@@ -1,18 +1,13 @@
 @charset "UTF-8";
 
-/******************************
- * H2
- *
- ******************************/
 h2.settings {
 	margin: 0;
 	padding-left: 10px;
 	font-size: 15px;
-	background: url(../images/common/title_back_settings.png) repeat-x;
+	background-color: #8d8e5b;
 	color: #fff;
-	border-top: 1px solid #acad7a;
-	border-bottom: 1px solid #626330;
-	line-height: 34px;
+	color: #fff;
+	line-height: 33px;
 }
 h2.settings span {
 	font-size: 11px;

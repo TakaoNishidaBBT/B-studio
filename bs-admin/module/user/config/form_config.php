@@ -250,40 +250,24 @@ $input_control_config = array(
 	'start_html'	=> '<ul class="control">',
 	'end_html'		=> '</ul>',
 	array(
-		'class'			=> 'B_Button',
+		'name'			=> 'back',
 		'start_html'	=> '<li>',
 		'end_html'		=> '</li>',
-		'special_html'	=> 'class="button" onClick="bframe.submit(\'F1\', \'' . $this->module . '\', \'list\', \'back\', \'\')"',
-		'value'			=> '戻　る',
+		array(
+			'start_html'	=> '<span class="left-button" onclick="bframe.submit(\'F1\', \'' . $this->module . '\', \'list\', \'back\', \'\')">',
+			'end_html'		=> '</span>',
+			'value'			=> '戻る',
+		),
 	),
 	array(
-		'auth_filter'	=> 'super_admin/admin',
-		'class'			=> 'B_Submit',
+		'name'			=> 'confirm',
 		'start_html'	=> '<li>',
 		'end_html'		=> '</li>',
-		'special_html'	=> 'class="button" onClick="bframe.submit(\'F1\', \'' . $this->module . '\', \'form\', \'confirm\', \'\', true)"',
-		'value'			=> '確　認',
-	),
-);
-
-// control
-$delete_control_config = array(
-	'start_html'	=> '<ul class="control">',
-	'end_html'		=> '</ul>',
-	array(
-		'class'			=> 'B_Button',
-		'start_html'	=> '<li>',
-		'end_html'		=> '</li>',
-		'special_html'	=> 'class="button" onClick="bframe.submit(\'F1\', \'' . $this->module . '\', \'list\', \'back\', \'\')"',
-		'value'			=> '戻　る',
-	),
-	array(
-		'auth_filter'	=> 'super_admin/admin',
-		'class'			=> 'B_Submit',
-		'start_html'	=> '<li>',
-		'end_html'		=> '</li>',
-		'special_html'	=> 'class="button" onClick="return bframe.confirmSubmit(\'このレコードを物理削除します。\n\nよろしいですか？\', \'F1\', \'' . $this->module . '\', \'form\', \'regist\', \'delete\')"',
-		'value'			=> '削　除',
+		array(
+			'start_html'	=> '<span class="right-button" onclick="bframe.submit(\'F1\', \'' . $this->module . '\', \'form\', \'confirm\', \'\', true)">',
+			'end_html'		=> '</span>',
+			'value'			=> '確認',
+		),
 	),
 );
 
@@ -292,32 +276,66 @@ $confirm_control_config = array(
 	'start_html'	=> '<ul class="control">',
 	'end_html'		=> '</ul>',
 	array(
-		'class'			=> 'B_Button',
+		'name'			=> 'back',
 		'start_html'	=> '<li>',
 		'end_html'		=> '</li>',
-		'special_html'	=> 'class="button" onClick="bframe.submit(\'F1\', \'' . $this->module . '\', \'form\', \'back\', \'\');" ',
-		'value'			=> '戻　る',
+		array(
+			'start_html'	=> '<span class="left-button" onclick="bframe.submit(\'F1\', \'' . $this->module . '\', \'form\', \'back\', \'\')">',
+			'end_html'		=> '</span>',
+			'value'			=> '戻る',
+		),
 	),
 	array(
-		'class'			=> 'B_Button',
+		'name'			=> 'regist',
 		'start_html'	=> '<li>',
 		'end_html'		=> '</li>',
-		'special_html'	=> 'class="button" onClick="bframe.submit(\'F1\', \'' . $this->module . '\', \'form\', \'regist\', \'\');" ',
-		'value'			=> '登　録',
+		array(
+			'start_html'	=> '<span class="right-button" onclick="bframe.submit(\'F1\', \'' . $this->module . '\', \'form\', \'regist\', \'\')">',
+			'end_html'		=> '</span>',
+			'value'			=> '登録',
+		),
 	),
 );
 
+// control
+$delete_control_config = array(
+	'start_html'	=> '<ul class="control">',
+	'end_html'		=> '</ul>',
+	array(
+		'name'			=> 'back',
+		'start_html'	=> '<li>',
+		'end_html'		=> '</li>',
+		array(
+			'start_html'	=> '<span class="left-button" onclick="bframe.submit(\'F1\', \'' . $this->module . '\', \'list\', \'back\', \'\')">',
+			'end_html'		=> '</span>',
+			'value'			=> '戻る',
+		),
+	),
+	array(
+		'name'			=> 'regist',
+		'start_html'	=> '<li>',
+		'end_html'		=> '</li>',
+		array(
+			'start_html'	=> '<span class="right-button" onclick="return bframe.confirmSubmit(\'このレコードを削除します。\n\nよろしいですか？\', \'F1\', \'' . $this->module . '\', \'form\', \'regist\', \'delete\')">',
+			'end_html'		=> '</span>',
+			'value'			=> '削除',
+		),
+	),
+);
 
 //control
 $result_control_config = array(
 	'start_html'	=> '<ul class="control">',
 	'end_html'		=> '</ul>',
 	array(
-		'class'			=> 'B_Button',
+		'name'			=> 'backToList',
 		'start_html'	=> '<li>',
 		'end_html'		=> '</li>',
-		'special_html'	=> 'class="button" onClick="bframe.submit(\'F1\', \'' . $this->module . '\', \'list\', \'back\', \'\')" ',
-		'value'			=> '一覧に戻る',
+		array(
+			'start_html'	=> '<span class="left-button" style="width:150px" onclick="bframe.submit(\'F1\', \'' . $this->module . '\', \'list\', \'back\', \'\')">',
+			'end_html'		=> '</span>',
+			'value'			=> '一覧に戻る',
+		),
 	),
 );
 

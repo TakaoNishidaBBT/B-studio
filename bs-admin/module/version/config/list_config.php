@@ -181,7 +181,7 @@ array(
 				'id'			=> 'compare_enable',
 				'class'			=> 'B_Link',
 				'link'			=> 'index.php',
-				'special_html'	=> 'class="button" onclick="window.open(this.href); return false;"',
+				'special_html'	=> 'class="compare-button" onclick="window.open(this.href); return false;"',
 				'value'			=> '比較',
 				'fixedparam'	=>
 				array(
@@ -199,7 +199,7 @@ array(
 				'name'			=> 'compare',
 				'id'			=> 'compare_disable',
 				'class'			=> 'B_Link',
-				'special_html'	=> 'class="disable-button" onclick="return false;"',
+				'special_html'	=> 'class="compare-button-disable" onclick="return false;"',
 				'value'			=> '比較',
 				'display'		=> 'none',
 			),

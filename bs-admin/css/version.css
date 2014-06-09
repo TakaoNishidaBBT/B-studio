@@ -4,11 +4,10 @@ h2.version {
 	margin: 0;
 	padding-left: 10px;
 	font-size: 15px;
-	background: url(../images/common/title_back_version.png) repeat-x;
+	background-color: #5c6c7c;
 	color: #fff;
-	border-top: 1px solid #7a8a9a;
-	border-bottom: 1px solid #405060;
-	line-height: 34px;
+	color: #fff;
+	line-height: 33px;
 }
 h2.version span {
 	font-size: 11px;
@@ -18,9 +17,7 @@ h2.version span {
 }
 
 div.list-header {
-	background: url(../images/common/list_header_back.png) repeat-x;
-	border-top: 1px solid #fff;
-	border-bottom: 1px solid #ccc;
+	background-color: #ececec;
 	margin: 0;
 	height: 52px;
 }
