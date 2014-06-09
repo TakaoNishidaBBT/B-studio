@@ -1,18 +1,13 @@
 @charset "UTF-8";
 
-/******************************
- * h2
- *
- ******************************/
 h2.user {
 	margin: 0;
 	padding-left: 10px;
 	font-size: 15px;
-	background: url(../images/common/title_back_user.png) repeat-x;
+	background-color: #779767;
 	color: #fff;
-	border-top: 1px solid #90b080;
-	border-bottom: 1px solid #608050;
-	line-height: 34px;
+	color: #fff;
+	line-height: 33px;
 }
 h2.user span {
 	font-size: 11px;
@@ -22,9 +17,7 @@ h2.user span {
 }
 
 div.list-header {
-	background: url(../images/common/list_header_back.png) repeat-x;
-	border-top: 1px solid #fff;
-	border-bottom: 1px solid #ccc;
+	background-color: #ececec;
 	margin: 0;
 	height: 52px;
 }

@@ -26,7 +26,7 @@ array(
 		'class'			=> 'B_Row',
 		array(
 			'name'			=> 'user_id',
-			'start_html'	=> '<th>',
+			'start_html'	=> '<th class="sortable" style="width:80px">',
 			'end_html'		=> '</th>',
 			'value'			=> 'ユーザID',
 			'class'			=> 'B_Link',
@@ -37,18 +37,18 @@ array(
 		),
 		array(
 			'name'			=> 'name',
-			'start_html'	=> '<th>',
+			'start_html'	=> '<th class="sortable" style="width:80px">',
 			'end_html'		=> '</th>',
 			'value'			=> '氏名',
 			'class'			=> 'B_Link',
 			'link'			=> DISPATCH_URL,
 			'cond_html'		=> 'class="current-key"',
-			'sort_key'		=> 'name_kana',
-			'param'			=> '&amp;module=' . $this->module . '&amp;page=list&amp;method=sort&amp;sort_key=name_kana',
+			'sort_key'		=> 'name',
+			'param'			=> '&amp;module=' . $this->module . '&amp;page=list&amp;method=sort&amp;sort_key=name',
 		),
 		array(
 			'name'			=> 'user_auth',
-			'start_html'	=> '<th>',
+			'start_html'	=> '<th class="sortable" style="width:60px">',
 			'end_html'		=> '</th>',
 			'value'			=> '権限',
 			'class'			=> 'B_Link',
@@ -59,7 +59,7 @@ array(
 		),
 		array(
 			'name'			=> 'user_status',
-			'start_html'	=> '<th>',
+			'start_html'	=> '<th class="sortable" style="width:60px">',
 			'end_html'		=> '</th>',
 			'value'			=> '状態',
 			'class'			=> 'B_Link',
@@ -69,12 +69,12 @@ array(
 			'param'			=> '&amp;module=' . $this->module . '&amp;page=list&amp;method=sort&amp;sort_key=user_status',
 		),
 		array(
-			'start_html'	=> '<th nowrap>',
+			'start_html'	=> '<th class="center" style="width:40px" nowrap>',
 			'end_html'		=> '</th>',
 			'value'			=> '詳細',
 		),
 		array(
-			'start_html'	=> '<th nowrap>',
+			'start_html'	=> '<th class="center" style="width:40px" nowrap>',
 			'end_html'		=> '</th>',
 			'value'			=> '削除',
 		),
@@ -120,7 +120,7 @@ array(
 				'name'			=> 'detail',
 				'class'			=> 'B_Link',
 				'link'			=> 'index.php',
-				'special_html'	=> 'class="button"',
+				'special_html'	=> 'class="edit-button"',
 				'value'			=> '詳細',
 				'fixedparam'	=>
 				array(
@@ -144,7 +144,7 @@ array(
 				'name'			=> 'delete',
 				'class'			=> 'B_Link',
 				'link'			=> 'index.php',
-				'special_html'	=> 'class="button"',
+				'special_html'	=> 'class="delete-button"',
 				'value'			=> '削除',
 				'fixedparam'	=>
 				array(
