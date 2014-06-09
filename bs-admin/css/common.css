@@ -51,8 +51,7 @@ input.textbox {
 	border-left: 1px solid #999;
 	border-right: 1px solid #ddd;
 	border-bottom: 1px solid #ddd;
-	height: 22px;
-	padding: 2px 5px;
+	padding: 7px 5px;
 	vertical-align: middle;
 }
 textarea.textarea {
