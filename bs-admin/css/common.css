@@ -697,10 +697,10 @@ table.form {
 table.form th {
 	width: 18%;
 	padding: 10px 15px;
-	border-top: 1px solid #f2f8ff;
+	border-top: 1px solid #d8e0ef;
 	border-left: 1px solid #d8e0ef;
-	border-bottom: 1px solid #cbd3e2;
-	border-right: 1px solid #cbd3e2;
+	border-bottom: 1px solid #f4f4f4;
+	border-right: 1px solid #d8e0ef;
 	background: #d8e0ef;
 	font-weight: normal;
 	text-align: left;
@@ -708,6 +708,9 @@ table.form th {
 }
 table.form tr:first-child th {
 	border-top: 1px solid #d8e0ef;
+}
+table.form tr:last-child th {
+	border-bottom: 1px solid #d8e0ef;
 }
 table.form tr:first-child td {
 	border-top: 1px solid #d8e0ef;
