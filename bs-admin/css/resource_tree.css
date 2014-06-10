@@ -87,7 +87,6 @@ div.bframe_tree a:hover {
  ******************************/
 div.thumbs li.tree-list div.tree {
 	margin: 0;
-	padding: 4px 0 8px 0;
 	border-left: 1px solid transparent;
 	width: 120px;
 }

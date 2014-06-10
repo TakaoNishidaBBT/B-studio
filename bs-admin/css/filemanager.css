@@ -72,12 +72,14 @@ div#filemanager_pain {
 }
 div#bframe_pain {
 	overflow: auto;
+	overflow-x: hidden;
 	margin: 0;
+	padding: 30px 0 0 30px;
 	height: 100%;
 }
 div#bframe_pain ul {
 	margin: 0;
-	padding: 10px 2px 10px 30px;
+	padding: 0;
 }
 
 /******************************
