@@ -135,7 +135,7 @@ $result_control_config = array(
 		'start_html'	=> '<li>',
 		'end_html'		=> '</li>',
 		array(
-			'start_html'	=> '<span class="left-button" style="width:150px" onclick="bframe.submit(\'F1\', \'' . $this->module . '\', \'form\', \'\', \'\')">',
+			'start_html'	=> '<span class="left-button" style="width:180px" onclick="bframe.submit(\'F1\', \'' . $this->module . '\', \'form\', \'\', \'\')">',
 			'end_html'		=> '</span>',
 			'value'			=> '設定画面に戻る',
 		),
