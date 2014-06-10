@@ -17,7 +17,7 @@
 			</li>
 		</ul>
 		<div class="pain_container">
-			<div id="bframe_pain" class="bframe_pain bframe_adjustparent" param="margin:56"></div>
+			<div id="bframe_pain" class="bframe_pain bframe_adjustparent" param="margin:64"></div>
 		</div>
 	</div>
 	<div class="footer"></div>
