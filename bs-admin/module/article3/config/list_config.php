@@ -22,7 +22,7 @@ array(
 		array(
 			'name'			=> 'article_id',
 			'class'			=> 'B_Link',
-			'start_html'	=> '<th>',
+			'start_html'	=> '<th class="sortable">',
 			'end_html'		=> '</th>',
 			'value'			=> 'ID',
 			'link'			=> DISPATCH_URL,
@@ -33,7 +33,7 @@ array(
 		array(
 			'name'			=> 'article_date',
 			'class'			=> 'B_Link',
-			'start_html'	=> '<th>',
+			'start_html'	=> '<th class="sortable">',
 			'end_html'		=> '</th>',
 			'value'			=> '日付',
 			'link'			=> DISPATCH_URL,
@@ -44,7 +44,7 @@ array(
 		array(
 			'name'			=> 'category',
 			'class'			=> 'B_Link',
-			'start_html'	=> '<th style="width:100px">',
+			'start_html'	=> '<th class="sortable" style="width:100px">',
 			'end_html'		=> '</th>',
 			'value'			=> 'カテゴリ',
 			'link'			=> DISPATCH_URL,
@@ -55,7 +55,7 @@ array(
 		array(
 			'name'			=> 'tag',
 			'class'			=> 'B_Link',
-			'start_html'	=> '<th style="width:100px">',
+			'start_html'	=> '<th class="sortable" style="width:100px">',
 			'end_html'		=> '</th>',
 			'value'			=> 'タグ',
 			'link'			=> DISPATCH_URL,
@@ -66,7 +66,7 @@ array(
 		array(
 			'name'			=> 'title',
 			'class'			=> 'B_Link',
-			'start_html'	=> '<th style="width:260px">',
+			'start_html'	=> '<th class="sortable" style="width:260px">',
 			'end_html'		=> '</th>',
 			'value'			=> 'タイトル',
 			'link'			=> DISPATCH_URL,
@@ -77,21 +77,22 @@ array(
 		array(
 			'name'			=> 'publication',
 			'class'			=> 'B_Link',
-			'start_html'	=> '<th style="width:40px">',
+			'start_html'	=> '<th class="sortable" style="width:55px">',
 			'end_html'		=> '</th>',
-			'value'			=> '公開',
+			'value'			=> '状態',
+			'title'			=> '公開／プレビュー／非公開',
 			'link'			=> DISPATCH_URL,
 			'cond_html'		=> 'class="current-key"',
 			'sort_key'		=> 'publication',
 			'param'			=> '&amp;module=' . $this->module . '&amp;page=list&amp;method=sort&amp;sort_key=publication',
 		),
 		array(
-			'start_html'	=> '<th nowrap>',
+			'start_html'	=> '<th class="center" style="width:40px" nowrap>',
 			'end_html'		=> '</th>',
 			'value'			=> '編集',
 		),
 		array(
-			'start_html'	=> '<th nowrap>',
+			'start_html'	=> '<th class="center" style="width:40px" nowrap>',
 			'end_html'		=> '</th>',
 			'value'			=> '削除',
 		),
@@ -149,7 +150,7 @@ array(
 				'class'			=> 'B_Link',
 				'link'			=> 'index.php',
 				'value'			=> '編集',
-				'special_html'	=> 'class="button"',
+				'special_html'	=> 'class="edit-button"',
 				'fixedparam'	=>
 				array(
 					'terminal_id'	=> TERMINAL_ID,
@@ -171,7 +172,7 @@ array(
 				'name'			=> 'del',
 				'class'			=> 'B_Link',
 				'link'			=> 'index.php',
-				'special_html'	=> 'class="button"',
+				'special_html'	=> 'class="delete-button"',
 				'value'			=> '削除',
 				'fixedparam'	=>
 				array(

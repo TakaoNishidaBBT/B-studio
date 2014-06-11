@@ -455,25 +455,30 @@ $result_config = array(
 		),
 	),
 );
+
 //control
 $input_control_config = array(
 	'start_html'	=> '<ul class="control">',
 	'end_html'		=> '</ul>',
 	array(
 		'name'			=> 'back',
-		'class'			=> 'B_Button',
 		'start_html'	=> '<li>',
 		'end_html'		=> '</li>',
-		'special_html'	=> 'class="button" onClick="bframe.submit(\'F1\', \'' . $this->module . '\', \'list\', \'back\', \'\')"',
-		'value'			=> '戻　る',
+		array(
+			'start_html'	=> '<span class="left-button" onclick="bframe.submit(\'F1\', \'' . $this->module . '\', \'list\', \'back\', \'\')">',
+			'end_html'		=> '</span>',
+			'value'			=> '戻る',
+		),
 	),
 	array(
 		'name'			=> 'confirm',
-		'class'			=> 'B_Button',
 		'start_html'	=> '<li>',
 		'end_html'		=> '</li>',
-		'special_html'	=> 'class="button" onClick="bframe.submit(\'F1\', \'' . $this->module . '\', \'form\', \'confirm\', \'\', true)"',
-		'value'			=> '確　認',
+		array(
+			'start_html'	=> '<span class="right-button" onclick="bframe.submit(\'F1\', \'' . $this->module . '\', \'form\', \'confirm\', \'\', true)">',
+			'end_html'		=> '</span>',
+			'value'			=> '確認',
+		),
 	),
 );
 
@@ -483,19 +488,23 @@ $confirm_control_config = array(
 	'end_html'		=> '</ul>',
 	array(
 		'name'			=> 'back',
-		'class'			=> 'B_Button',
 		'start_html'	=> '<li>',
 		'end_html'		=> '</li>',
-		'special_html'	=> 'class="button" onClick="bframe.submit(\'F1\', \'' . $this->module . '\', \'form\', \'back\', \'\');" ',
-		'value'			=> '戻　る',
+		array(
+			'start_html'	=> '<span class="left-button" onclick="bframe.submit(\'F1\', \'' . $this->module . '\', \'form\', \'back\', \'\')">',
+			'end_html'		=> '</span>',
+			'value'			=> '戻る',
+		),
 	),
 	array(
 		'name'			=> 'regist',
-		'class'			=> 'B_Button',
 		'start_html'	=> '<li>',
 		'end_html'		=> '</li>',
-		'special_html'	=> 'class="button" onClick="bframe.submit(\'F1\', \'' . $this->module . '\', \'form\', \'regist\', \'\');" ',
-		'value'			=> '登　録',
+		array(
+			'start_html'	=> '<span class="right-button" onclick="bframe.submit(\'F1\', \'' . $this->module . '\', \'form\', \'regist\', \'\')">',
+			'end_html'		=> '</span>',
+			'value'			=> '登録',
+		),
 	),
 );
 
@@ -505,19 +514,23 @@ $delete_control_config = array(
 	'end_html'		=> '</ul>',
 	array(
 		'name'			=> 'back',
-		'class'			=> 'B_Button',
 		'start_html'	=> '<li>',
 		'end_html'		=> '</li>',
-		'special_html'	=> 'class="button" onClick="bframe.submit(\'F1\', \'' . $this->module . '\', \'list\', \'back\', \'\');" ',
-		'value'			=> '戻　る',
+		array(
+			'start_html'	=> '<span class="left-button" onclick="bframe.submit(\'F1\', \'' . $this->module . '\', \'list\', \'back\', \'\')">',
+			'end_html'		=> '</span>',
+			'value'			=> '戻る',
+		),
 	),
 	array(
 		'name'			=> 'regist',
-		'class'			=> 'B_Button',
 		'start_html'	=> '<li>',
 		'end_html'		=> '</li>',
-		'special_html'	=> 'class="button" onClick="bframe.confirmSubmit(\'削除します。\n\nよろしいですか？\', \'F1\', \'' . $this->module . '\', \'form\', \'delete\', \'\');" ',
-		'value'			=> '削　除',
+		array(
+			'start_html'	=> '<span class="right-button" onclick="bframe.confirmSubmit(\'削除します。\n\nよろしいですか？\', \'F1\', \'' . $this->module . '\', \'form\', \'delete\', \'\');">',
+			'end_html'		=> '</span>',
+			'value'			=> '削除',
+		),
 	),
 );
 
@@ -527,10 +540,12 @@ $result_control_config = array(
 	'end_html'		=> '</ul>',
 	array(
 		'name'			=> 'backToList',
-		'class'			=> 'B_Button',
 		'start_html'	=> '<li>',
 		'end_html'		=> '</li>',
-		'special_html'	=> 'class="button" onClick="bframe.submit(\'F1\', \'' . $this->module . '\', \'list\', \'back\', \'\')" ',
-		'value'			=> '一覧に戻る',
+		array(
+			'start_html'	=> '<span class="left-button" style="width:150px" onclick="bframe.submit(\'F1\', \'' . $this->module . '\', \'list\', \'back\', \'\')">',
+			'end_html'		=> '</span>',
+			'value'			=> '一覧に戻る',
+		),
 	),
 );

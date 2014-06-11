@@ -457,6 +457,7 @@ $result_config = array(
 		),
 	),
 );
+
 //control
 $input_control_config = array(
 	'start_html'	=> '<ul class="control">',
