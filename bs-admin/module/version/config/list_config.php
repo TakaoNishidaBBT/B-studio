@@ -249,7 +249,7 @@ $version_control_config = array(
 	array(
 		'class'			=> 'B_Button',
 		'name'			=> 'confirm',
-		'special_html'	=> 'class="regist-button" onclick="bframe.submit(\'F1\', \'' . $this->module . '\', \'list\', \'confirm\', \'\', true)"',
+		'special_html'	=> 'class="version-button" onclick="bframe.submit(\'F1\', \'' . $this->module . '\', \'list\', \'confirm\', \'\', true)"',
 		'value'			=> 'バージョン変更',
 	),
 );
@@ -265,16 +265,16 @@ $version_control_confirm_config = array(
 			'end_html'	    => '</li>',
 			'class'			=> 'B_Button',
 			'name'			=> 'back',
-			'special_html'	=> 'class="button" onclick="bframe.submit(\'F1\', \'' . $this->module . '\', \'list\', \'back\', \'\', true)"',
-			'value'			=> '　戻る　',
+			'special_html'	=> 'class="cancel-button" onclick="bframe.submit(\'F1\', \'' . $this->module . '\', \'list\', \'back\', \'\', true)"',
+			'value'			=> '戻る',
 		),
 		array(
 			'start_html'    => '<li>',
 			'end_html'	    => '</li>',
 			'class'			=> 'B_Button',
 			'name'			=> 'attendance',
-			'special_html'	=> 'class="button" onclick="bframe.submit(\'F1\', \'' . $this->module . '\', \'list\', \'regist\', \'\', true)"',
-			'value'			=> ' 設定 ',
+			'special_html'	=> 'class="regist-button" onclick="bframe.submit(\'F1\', \'' . $this->module . '\', \'list\', \'regist\', \'\', true)"',
+			'value'			=> '設定',
 		),
 	),
 );
