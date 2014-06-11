@@ -27,8 +27,9 @@ div.list-header {
  *
  ******************************/
 #VERSION_CONTROL {
-	margin: 30px 0 0 10px;
+	margin: 30px 0 0 0;
 	padding: 0;
+	text-align: center;
 }
 ul.version_control {
 	margin: 0;
@@ -40,44 +41,62 @@ ul.version_control li {
 	margin: 0;
 	padding: 0;
 }
-
-/******************************
- * contents
- *
- ******************************/
 div.contents {
-	margin: 20px;
+	margin: 40px auto 60px;
+	width: 400px;
 }
-div.contents p {
-	margin: 7px 0;
+div.info {
+	padding-left:90px;
+	line-height: 24px;
 }
 
 /******************************
  * button
  *
  ******************************/
-input.regist-button {
+input.version-button {
 	padding: 10px 0;
 	line-height: 17px;
-	border-top: 1px solid #205380;
-	border-right: 1px solid #002255;
-	border-bottom: 1px solid #001144;
-	border-left: 1px solid #205380;
-
-	border-radius: 2px;
-	background: url(../images/common/version_change_back.png) repeat-x;
+	background-color: #205380;
 	color: #fff;
 	width: 180px;
 	overflow: visible;
 	vertical-align: 10%;
+	cursor: pointer;
+	border: none;
+}
+input.version-button:hover {
+	background-color: #306390;
+}
+
+input.regist-button {
+	padding: 10px 0;
+	line-height: 17px;
+	background: url(../images/common/right-arrow-white.png) 95% center no-repeat #205380;
+	color: #fff;
+	width: 150px;
+	overflow: visible;
+	vertical-align: 10%;
+	cursor: pointer;
+	border: none;
 }
 input.regist-button:hover {
-	border-top: 1px solid #1144dc;
-	border-left: 1px solid #1144dc;
-	border-right: 1px solid #003366;
-	border-bottom: 1px solid #003366;
-	background-position: 0 -37px;
+	background-color: #306390;
+}
+
+input.cancel-button {
+	padding: 10px 0;
+	line-height: 17px;
+	background: url(../images/common/left-arrow-white.png) 5% center no-repeat #205380;
+	color: #fff;
+	width: 150px;
+	overflow: visible;
+	vertical-align: 10%;
 	cursor: pointer;
+	border: none;
+}
+input.cancel-button:hover {
+	background-color: #306390;
 }
 
 /******************************
