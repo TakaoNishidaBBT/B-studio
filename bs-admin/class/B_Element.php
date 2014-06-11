@@ -525,7 +525,7 @@
 				case 'status':
 					if(!$this->status) {
 						$err_obj = $this->searchElementByName('error_message');
-						$err_obj->value = $config['error_message'];
+						if($err_obj) $err_obj->value = $config['error_message'];
 						return false;
 					}
 					break;
@@ -538,11 +538,13 @@
 					if(method_exists($obj, $method)) {
 						if(!$obj->$method($param)) {
 							$err_obj = $this->searchElementByName('error_message');
-							if($config['error_message']) {
-								$err_obj->value = $config['error_message'];
-							}
-							if($param['error_message']) {
-								$err_obj->value = $param['error_message'];
+							if($err_obj) {
+								if($config['error_message']) {
+									$err_obj->value = $config['error_message'];
+								}
+								if($param['error_message']) {
+									$err_obj->value = $param['error_message'];
+								}
 							}
 							return false;
 						}
@@ -553,7 +555,7 @@
 					if($config['option'] == 'numeric') {
 						if(!(int)$this->value) {
 							$err_obj = $this->searchElementByName('error_message');
-							$err_obj->value = $config['error_message'];
+							if($err_obj) $err_obj->value = $config['error_message'];
 							return false;
 						}
 					}
@@ -561,7 +563,7 @@
 					   $this->class != 'B_Radio' && $this->value == '' ||
 					   $this->class == 'B_SelectBox' && $this->data_set_value[$this->value] == '') {
 						$err_obj = $this->searchElementByName('error_message');
-						$err_obj->value = $config['error_message'];
+						if($err_obj) $err_obj->value = $config['error_message'];
 						return false;
 					}
 					break;
@@ -579,7 +581,7 @@
 						if(isset($pair_obj)) {
 							if($this->value != $pair_obj->value) {
 								$err_obj = $this->searchElementByName('error_message');
-								$err_obj->value = $config['error_message'];
+								if($err_obj) $err_obj->value = $config['error_message'];
 								return false;
 							}
 						}
@@ -590,7 +592,7 @@
 					$this->value = mb_convert_kana($this->value, "CKV");
 					if(!$this->checkKana($this->value)) {
 						$err_obj = $this->searchElementByName('error_message');
-						$err_obj->value = $config['error_message'];
+						if($err_obj) $err_obj->value = $config['error_message'];
 						return false;
 					}
 					break;
@@ -599,7 +601,7 @@
 					$this->value = mb_convert_kana($this->value, "cHV");
 					if(!$this->checkKana($this->value)) {
 						$err_obj = $this->searchElementByName('error_message');
-						$err_obj->value = $config['error_message'];
+						if($err_obj) $err_obj->value = $config['error_message'];
 						return false;
 					}
 					break;
@@ -607,7 +609,7 @@
 				case 'alpha':
 					if(!$this->checkAlpha($this->value)) {
 						$err_obj = $this->searchElementByName('error_message');
-						$err_obj->value = $config['error_message'];
+						if($err_obj) $err_obj->value = $config['error_message'];
 						return false;
 					}
 					break;
@@ -615,7 +617,7 @@
 				case 'numeric':
 					if(trim($this->value) && !is_numeric($this->value)) {
 						$err_obj = $this->searchElementByName('error_message');
-						$err_obj->value = $config['error_message'];
+						if($err_obj) $err_obj->value = $config['error_message'];
 						return false;
 					}
 					break;
@@ -623,7 +625,7 @@
 				case 'alphanum':
 					if(!$this->checkAlphaNum($this->value)) {
 						$err_obj = $this->searchElementByName('error_message');
-						$err_obj->value = $config['error_message'];
+						if($err_obj) $err_obj->value = $config['error_message'];
 						return false;
 					}
 					break;
@@ -633,7 +635,7 @@
 						($config['min'] && $this->value < $config['min']) ||
 						($config['max'] && $this->value > $config['max'])) {
 						$err_obj = $this->searchElementByName('error_message');
-						$err_obj->value = $config['error_message'];
+						if($err_obj) $err_obj->value = $config['error_message'];
 						return false;
 					}
 					break;
@@ -642,7 +644,7 @@
 					$len = mb_strlen($this->value);
 					if($len < $config['min'] || $len > $config['max']) {
 						$err_obj = $this->searchElementByName('error_message');
-						$err_obj->value = $config['error_message'];
+						if($err_obj) $err_obj->value = $config['error_message'];
 						return false;
 					}
 					break;
@@ -658,7 +660,7 @@
 						foreach($value_list as $value) {
 							if(!$this->checkPattern($value, $config['pattern'])) {
 								$err_obj = $this->searchElementByName('error_message');
-								$err_obj->value = $config['error_message'];
+								if($err_obj) $err_obj->value = $config['error_message'];
 								return false;
 							}
 						}
@@ -676,7 +678,7 @@
 						foreach($value_list as $value) {
 							if($this->checkPattern($value, $config['pattern'])) {
 								$err_obj = $this->searchElementByName('error_message');
-								$err_obj->value = $config['error_message'];
+								if($err_obj) $err_obj->value = $config['error_message'];
 								return false;
 							}
 						}
@@ -694,7 +696,7 @@
 					foreach($value_list as $value) {
 						if(!$this->checkEmailMX($value)) {
 							$err_obj = $this->searchElementByName('error_message');
-							$err_obj->value = $config['error_message'];
+							if($err_obj) $err_obj->value = $config['error_message'];
 							return false;
 						}
 					}
@@ -703,7 +705,7 @@
 				case 'combination_require':
 					if(!$this->checkCombinationRequire($config['target'])) {
 						$err_obj = $this->searchElementByName('error_message');
-						$err_obj->value = $config['error_message'];
+						if($err_obj) $err_obj->value = $config['error_message'];
 						return false;
 					}
 					break;
@@ -711,7 +713,7 @@
 				case 'compareValue':
 					if($this->value != $this->compareValue) {
 						$err_obj = $this->searchElementByName('error_message');
-						$err_obj->value = $config['error_message'];
+						if($err_obj) $err_obj->value = $config['error_message'];
 						return false;
 					}
 					break;
@@ -741,7 +743,7 @@
 						}
 						$reason_message = $this->data_set_value[$reason];
 						$err_obj = $this->searchElementByName('error_message');
-						$err_obj->value = $config['error_message'] . $reason_message;
+						if($err_obj) $err_obj->value = $config['error_message'] . $reason_message;
 						return false;
 					}
 					break;
@@ -758,7 +760,7 @@
 						}
 					}
 					$err_obj = $this->searchElementByName('error_message');
-					$err_obj->value = $config['error_message'];
+					if($err_obj) $err_obj->value = $config['error_message'];
 					return false;
 					break;
 
@@ -774,7 +776,7 @@
 						}
 					}
 					$err_obj = $this->searchElementByName('error_message');
-					$err_obj->value = $config['error_message'];
+					if($err_obj) $err_obj->value = $config['error_message'];
 					return false;
 					break;
 
@@ -782,7 +784,7 @@
 					// up to top
 					if(!$this->checkExist($this->value)) {
 						$err_obj = $this->searchElementByName('error_message');
-						$err_obj->value = $config['error_message'];
+						if($err_obj) $err_obj->value = $config['error_message'];
 						return false;
 					}
 					break;
@@ -791,7 +793,7 @@
 					// up to top
 					if(!$this->checkNotExist($this->value)) {
 						$err_obj = $this->searchElementByName('error_message');
-						$err_obj->value = $config['error_message'];
+						if($err_obj) $err_obj->value = $config['error_message'];
 						return false;
 					}
 					break;
