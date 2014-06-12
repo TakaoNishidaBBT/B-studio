@@ -56,8 +56,9 @@ div.info {
  * button
  *
  ******************************/
-input.version-button {
-	padding: 10px 0;
+span.version-button {
+	display: inline-block;
+	padding: 10px 2px;
 	line-height: 17px;
 	background-color: #205380;
 	color: #fff;
@@ -67,10 +68,13 @@ input.version-button {
 	cursor: pointer;
 	border: none;
 }
-input.version-button:hover {
+span.version-button:hover {
 	background-color: #306390;
 }
-
+span.version-button img {
+	vertical-align: -8px;
+	margin-right: 8px;
+}
 input.regist-button {
 	padding: 10px 0;
 	line-height: 17px;
