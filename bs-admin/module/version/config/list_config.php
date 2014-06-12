@@ -247,10 +247,10 @@ $version_control_config = array(
 	'start_html'	=> '<div id="VERSION_CONTROL">',
 	'end_html'	    => '</div>',
 	array(
-		'class'			=> 'B_Button',
 		'name'			=> 'confirm',
-		'special_html'	=> 'class="version-button" onclick="bframe.submit(\'F1\', \'' . $this->module . '\', \'list\', \'confirm\', \'\', true)"',
-		'value'			=> 'バージョン変更',
+		'start_html'    => '<span class="version-button" onclick="bframe.submit(\'F1\', \'' . $this->module . '\', \'list\', \'confirm\', \'\', true)">',
+		'end_html'	    => '</span>',
+		'value'			=> '<img src="images/common/version.png" alt="バージョン変更" />バージョン変更',
 	),
 );
 
