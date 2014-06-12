@@ -265,7 +265,7 @@ $version_control_confirm_config = array(
 			'end_html'	    => '</li>',
 			'class'			=> 'B_Button',
 			'name'			=> 'back',
-			'special_html'	=> 'class="cancel-button" onclick="bframe.submit(\'F1\', \'' . $this->module . '\', \'list\', \'back\', \'\', true)"',
+			'special_html'	=> 'class="back-button" onclick="bframe.submit(\'F1\', \'' . $this->module . '\', \'list\', \'back\', \'\', true)"',
 			'value'			=> '戻る',
 		),
 		array(
@@ -280,12 +280,18 @@ $version_control_confirm_config = array(
 );
 //control
 $version_control_result_config = array(
-	'start_html'	=> '<p class="back">',
-	'end_html'		=> '</p>',
+	'start_html'	=> '<div id="VERSION_CONTROL">',
+	'end_html'	    => '</div>',
 	array(
-		'class'			=> 'B_Button',
-		'name'			=> 'backToList',
-		'special_html'	=> 'class="button" onClick="bframe.submit(\'F1\', \'' . $this->module . '\', \'list\', \'back\', \'\')" ',
-		'value'			=> '一覧に戻る',
+		'start_html'    => '<ul class="version_control">',
+		'end_html'	    => '</ul>',
+		array(
+			'start_html'    => '<li>',
+			'end_html'	    => '</li>',
+			'class'			=> 'B_Button',
+			'name'			=> 'backToList',
+			'special_html'	=> 'class="back-button" onclick="bframe.submit(\'F1\', \'' . $this->module . '\', \'list\', \'back\', \'\')" ',
+			'value'			=> '一覧に戻る',
+		),
 	),
 );
