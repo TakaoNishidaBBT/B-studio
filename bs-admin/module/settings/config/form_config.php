@@ -40,12 +40,14 @@ $form_config = array(
 				'value'				=> 'DBバックアップ',
 			),
 			array(
-				'class'				=> 'B_Button',
-				'name'				=> 'backup',
 				'start_html'		=> '<td>',
 				'end_html'			=> '</td>',
-				'special_html'		=> 'class="regist-button" onClick="bframe.submit(\'F1\', \'' . $this->module . '\', \'form\', \'backupDB\', \'\', true)"',
-				'value'				=> '　ダウンロード　',
+				array(
+					'name'				=> 'backup',
+					'start_html'		=> '<span class="download-button" onClick="bframe.submit(\'F1\', \'' . $this->module . '\', \'form\', \'backupDB\', \'\', true)" >',
+					'end_html'			=> '</span>',
+					'value'				=> '<img src="images/common/download.png" alt="ダウンロード" />ダウンロード',
+				),
 			),
 	    ),
 
@@ -61,12 +63,14 @@ $form_config = array(
 				'value'				=> 'FULLバックアップ',
 			),
 			array(
-				'class'				=> 'B_Button',
-				'name'				=> 'backup',
 				'start_html'		=> '<td>',
 				'end_html'			=> '</td>',
-				'special_html'		=> 'class="regist-button" onClick="bframe.submit(\'F1\', \'' . $this->module . '\', \'form\', \'backupAll\', \'\', true)"',
-				'value'				=> '　ダウンロード　',
+				array(
+					'name'				=> 'backup',
+					'start_html'		=> '<span class="download-button" onClick="bframe.submit(\'F1\', \'' . $this->module . '\', \'form\', \'backupAll\', \'\', true)" >',
+					'end_html'			=> '</span>',
+					'value'				=> '<img src="images/common/download.png" alt="ダウンロード" />ダウンロード',
+				),
 			),
 	    ),
 	),

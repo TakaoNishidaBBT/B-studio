@@ -62,7 +62,7 @@ span.version-button {
 	line-height: 17px;
 	background-color: #205380;
 	color: #fff;
-	width: 180px;
+	width: 200px;
 	overflow: visible;
 	vertical-align: 10%;
 	cursor: pointer;
@@ -101,7 +101,7 @@ input.back-button {
 	cursor: pointer;
 	border: none;
 }
-input.cancel-button:hover {
+input.back-button:hover {
 	background-color: #306390;
 }
 
