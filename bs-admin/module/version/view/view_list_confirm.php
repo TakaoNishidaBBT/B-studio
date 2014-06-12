@@ -14,7 +14,6 @@
 				<p>に設定します。</p>
 			</div>
 			<?php echo $this->version_control_confirm->getHtml(); ?>
-
 		</form>
 	</div>
 </body>
