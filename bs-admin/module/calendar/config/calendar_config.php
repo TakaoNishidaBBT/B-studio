@@ -12,7 +12,7 @@ array(
 		array(
 			'name'			=> 'prev_month',
 			'class'			=> 'B_Link',
-			'value'			=> '<img src="./images/common/prev.png" alt="＜" width="23" height="46" />',
+			'value'			=> '<img src="./images/pagenation/prev.png" alt="＜" width="23" height="46" />',
 			'specialchars'	=> 'none',
 		),
 		array(
@@ -37,7 +37,7 @@ array(
 		array(
 			'class'			=> 'B_Link',
 			'name'			=> 'next_month',
-			'value'			=> '<img src="./images/common/next.png" alt="＞" width="23" height="46" />',
+			'value'			=> '<img src="./images/pagenation/next.png" alt="＞" width="23" height="46" />',
 			'specialchars'	=> 'none',
 		),
 	),

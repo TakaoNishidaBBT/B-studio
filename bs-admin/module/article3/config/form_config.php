@@ -84,7 +84,7 @@ $form_config = array(
 					),
 					'element'	=>
 					array(
-						'value'		=> '<img alt="カレンダー" src="images/common/calendar.png" width="16" height="16" />',
+						'value'		=> '<img alt="カレンダー" src="images/common/calendar.png" />',
 					),
 				),
 				array(
