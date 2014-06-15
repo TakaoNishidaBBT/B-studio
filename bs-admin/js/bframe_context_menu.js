@@ -49,7 +49,7 @@
 
 		var frame;
 		var document;
-		var arrow_img = 'images/common/arrow_right.png';
+		var arrow_img = 'images/common/arrow-right.png';
 
 		this.setDocument = function(w) {
 			frame = w;
