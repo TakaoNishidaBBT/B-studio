@@ -9,12 +9,12 @@
 	<div id="HEADER"><h1><?php echo $this->site_title ?></h1></div>
 	<div class="message">
 		<dl class="error">
-			<dt><img src="images/common/warning.png" alt="エラー" />エラー</dt>
+			<dt><img src="images/login/warning.png" alt="エラー" />エラー</dt>
 			<dd><p class="error-message"><strong>ログインIDとパスワードを正しく入力してください</strong></p></dd>
 		</dl>
 
 		<div class="icon">
-			<img src="images/common/lock_icon.png" alt="login" width="27" height="27" />
+			<img src="images/login/lock.png" alt="login" width="27" height="27" />
 		</div>
 
 		<ul class="transition">

@@ -38,10 +38,6 @@
 					$row = $this->main_table->selectByPk($this->request);
 					$this->form->setValue($row);
 				}
-				else {
-					$obj = &$this->form->getElementByName('version_id_container');
-					$obj->display = 'none';
-				}
 				break;
 			}
 		}
@@ -56,13 +52,7 @@
 				$this->display_mode = "confirm";
 				$this->form->getValue($param);
 				$this->session['request'] = $param;
-
 				$this->control = new B_Element($this->confirm_control_config);
-
-				if($this->session['mode'] == 'insert') {
-					$obj = &$this->form->getElementByName('version_id_container');
-					$obj->display = 'none';
-				}
 			}
 			else {
 				$this->control = new B_Element($this->input_control_config);
@@ -199,10 +189,6 @@
 		function back() {
 			$this->form->setValue($this->session['request']);
 			$this->control = new B_Element($this->input_control_config);
-			if($this->session['mode'] == 'insert') {
-				$obj = &$this->form->getElementByName('version_id_container');
-				$obj->display = 'none';
-			}
 		}
 
 		function view() {

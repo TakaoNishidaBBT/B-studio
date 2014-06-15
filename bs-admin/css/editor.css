@@ -38,8 +38,8 @@ ul.tabcontrol {
 	padding: 0;
 	list-style-type: none;
 	background-color: #444444;
-	border-top: 1px solid #505050;
-	border-bottom: 1px solid #3a3a3a;
+	border-top: 1px solid #444444;
+	border-bottom: 1px solid #444444;
 	overflow: visible;
 	height: 28px;
 	min-width: 1000px;
@@ -100,12 +100,12 @@ ul.tabcontrol li.encoding {
 }
 ul.tabcontrol li.regist {
 	border: none;
-	height: 25px;
-	margin-left: 10px;
-	padding-top: 3px;
+	height: 26px;
+	margin-left: 50px;
+	padding-top: 1px;
 	width: 300px;
 	text-align: left;
-	border-top: 1px solid #505050;
+	border-top: 1px solid #444444;
 	overflow: hidden;
 }
 
@@ -114,36 +114,37 @@ ul.tabcontrol li.regist {
  *
  ******************************/
 div.input_container {
-	border-top: 1px solid #222222;
-	border-left: 1px solid #222222;
-	border-right: 1px solid #606060;
-	border-bottom: 1px solid #606060;
 	width: 140px;
 	float: left;
 }
-input.regist-button {
+span.regist-button {
+	display: inline-block;
+	text-align: center;
 	margin: 0;
-	padding-bottom: 1px;
-	height: 20px;
+	padding: 4px 0;
 	width: 140px;
 	background-color: #666666;
-	border-top: 1px solid #888888;
-	border-left: 1px solid #888888;
-	border-right: 1px solid #333333;
-	border-bottom: 1px solid #333333;
-	color: #eee;
-	text-shadow: -1px -1px #333;
+	border-top: 1px solid #666666;
+	border-left: 1px solid #666666;
+	border-right: 1px solid #666666;
+	border-bottom: 1px solid #666666;
+	color: #fff;
+	text-shadow: -1px -1px #555555;
 
 	cursor: pointer;
 }
-input.regist-button:hover {
-	background-color: #888888;
-	border-top: 1px solid #aaa;
-	border-left: 1px solid #aaa;
-	border-right: 1px solid #444444;
-	border-bottom: 1px solid #444444;
+span.regist-button:hover {
+	background-color: #777777;
+	border-top: 1px solid #777777;
+	border-left: 1px solid #777777;
+	border-right: 1px solid #777777;
+	border-bottom: 1px solid #777777;
 	color: #fff;
-	text-shadow: 1px 1px #333;
+	text-shadow: 1px 1px #555555;
+}
+span.regist-button img {
+	vertical-align: -3px;
+	margin-right: 8px;
 }
 
 /******************************
@@ -153,6 +154,7 @@ input.regist-button:hover {
 div.message_container {
 	float: left;
 	margin-left: 10px;
+	padding-top: 2px;
 }
 span#message {
 	display: table-cell;
@@ -214,7 +216,6 @@ div.text_editor {
 	padding: 0;
 	width: 100%;
 	overflow:hidden;
-	border-top: 1px #3a3a3a solid;
 	border-bottom: 1px #777777 solid;
 	position: relative;
 }

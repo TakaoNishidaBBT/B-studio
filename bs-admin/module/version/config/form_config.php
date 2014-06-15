@@ -69,8 +69,8 @@ $form_config = array(
 				array(
 					'name'					=> 'error_message',
 					'class'					=> 'B_ErrMsg',
-					'start_html'			=> '<p class="error-message">',
-					'end_html'				=> '</p>',
+					'start_html'			=> '<span class="error-message">',
+					'end_html'				=> '</span>',
 				),
 			),
 		),
@@ -104,8 +104,8 @@ $form_config = array(
 				array(
 					'name'					=> 'error_message',
 					'class'					=> 'B_ErrMsg',
-					'start_html'			=> '<p class="error-message">',
-					'end_html'				=> '</p>',
+					'start_html'			=> '<span class="error-message">',
+					'end_html'				=> '</span>',
 				),
 			),
 		),

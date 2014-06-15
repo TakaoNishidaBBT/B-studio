@@ -864,7 +864,7 @@
 				$html.= '<a href="' . $this->pager['link'] . $param . '&page_no=' . $total_page_cnt . '">';
 				$html.= $disp_image['last_image']['value'];
 				$html.= '</a>';
-				$html.= $disp_image['last_image']['start_html'];
+				$html.= $disp_image['last_image']['end_html'];
 			}
 			else {
 				$html.= $disp_image['next_image']['start_html'];

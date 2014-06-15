@@ -148,7 +148,7 @@
 						group by user_id";
 
 				$sql = str_replace("%DB_PREFIX%", B_DB_PREFIX, $sql);
-				$sql = str_replace("%KEYWORD%", "%" . $this->util->quoteslahesforlike($this->keyword) . "%", $sql);
+				$sql = str_replace("%KEYWORD%", "%" . $this->db->quoteslahesforlike($this->keyword) . "%", $sql);
 
 				$rs = $this->db->query($sql);
 				for($i=0 ; $row = $this->db->fetch_assoc($rs) ; $i++) {

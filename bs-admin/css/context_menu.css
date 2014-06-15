@@ -27,8 +27,8 @@ table.context_menu td {
 }
 table.context_menu td.selected {
 	background-position: 0 -30px;
-	border-top: 1px solid #38bbfc;
-	border-bottom: 1px solid #107ec7;
+	border-top: 1px solid #28abfb;
+	border-bottom: 1px solid #208ed8;
 	color: #fff
 }
 table.context_menu td.disabled {

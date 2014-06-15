@@ -105,14 +105,6 @@ $form_config = array(
 				'start_html'	=> '<th>',
 				'end_html'		=> '</th>',
 				'value'			=> 'カテゴリ　　',
-				array(
-					'filter'			=> 'select',
-					'class'				=> 'B_Link',
-					'link'				=> '#',
-					'special_html'		=> 'title="クリア" class="button" onclick="clearText(\'category_id\', \'category_name\'); return false;" style="padding:4px 10px;display:inline;"',
-					'specialchars'		=> 'none',
-					'value'				=> 'クリア',
-				),
 			),
 			array(
 				'start_html'		=> '<td>',
@@ -131,7 +123,7 @@ $form_config = array(
 					'name'				=> 'open_category',
 					'class'				=> 'B_Link',
 					'link'				=> 'index.php',
-					'special_html'		=> 'title="カテゴリ設定" onclick="top.bframe.modalWindow.activate(this, window, \'category_id\'); return false;" params="width:350,height:400"',
+					'special_html'		=> 'title="カテゴリ設定" class="settings-button" onclick="top.bframe.modalWindow.activate(this, window, \'category_id\'); return false;" params="width:350,height:400"',
 					'fixedparam'		=>
 					array(
 						'terminal_id'		=> TERMINAL_ID,
@@ -139,9 +131,18 @@ $form_config = array(
 						'page'				=> 'tree',
 					),
 					array(
-						'value'			=> '<img alt="カテゴリ" src="images/common/list_view.png" width="16" height="16" />',
+						'value'			=> '<img alt="カテゴリ" src="images/common/gear.png" />',
 					),
 				),
+				array(
+					'filter'			=> 'select',
+					'class'				=> 'B_Link',
+					'link'				=> '#',
+					'special_html'		=> 'title="クリア" class="clear-button" onclick="clearText(\'category_id\', \'category_name\'); return false;"',
+					'specialchars'		=> 'none',
+					'value'				=> '<img alt="クリア" src="images/common/clear.png" />',
+				),
+
 			),
 	    ),
 
@@ -236,14 +237,6 @@ $form_config = array(
 				'start_html'			=> '<th>',
 				'end_html'				=> '</th>',
 				'value'					=> 'タイトル画像　　',
-				array(
-					'filter'			=> 'select',
-					'class'				=> 'B_Link',
-					'link'				=> '#',
-					'special_html'		=> 'title="クリア" class="button" onclick="clearIMG(\'title_img\', \'title_img_file\'); return false;" style="padding:4px 10px;display:inline;"',
-					'specialchars'		=> 'none',
-					'value'				=> 'クリア',
-				),
 			),
 			array(
 				'start_html'    => '<td>',
@@ -255,15 +248,19 @@ $form_config = array(
 						'start_html'    => '<tr>',
 						'end_html'	    => '</tr>',
 						array(
+							'name'			=> 'title_img',
+							'start_html'	=> '<td id="title_img">',
+							'end_html'		=> '</td>',
+						),
+						array(
 							'filter'		=> 'select',
-							'start_html'    => '<td style="width:70px">',
+							'start_html'    => '<td>',
 							'end_html'	    => '</td>',
 							array(
 								'name'			=> 'open_filelist',
 								'class'			=> 'B_Link',
-								'value'			=> '画像選択',
 								'link'			=> 'index.php',
-								'special_html'	=> 'title="画像選択" class="button" onclick="activateModalWindow(this, 850, 500); return false;" style="line-height:24px"',
+								'special_html'	=> 'title="画像選択" class="settings-button" onclick="activateModalWindow(this, 850, 500); return false;"',
 								'fixedparam'	=>
 								array(
 									'terminal_id'	=> TERMINAL_ID,
@@ -276,18 +273,23 @@ $form_config = array(
 									'width'			=> '110',
 									'height'		=> '80',
 								),
+								'specialchars'	=> 'none',
+								'value'			=> '<img alt="画像選択" src="images/common/gear.png" />',
 							),
-						),
-						array(
-							'name'			=> 'title_img',
-							'start_html'    => '<td id="title_img">',
-							'end_html'	    => '</td>',
+							array(
+								'filter'			=> 'select',
+								'class'				=> 'B_Link',
+								'link'				=> '#',
+								'special_html'		=> 'title="クリア" class="clear-button" onclick="clearIMG(\'title_img\', \'title_img_file\'); return false;"',
+								'specialchars'		=> 'none',
+								'value'				=> '<img alt="クリア" src="images/common/clear.png" />',
+							),
 						),
 						array(
 							'name'			=> 'title_img_file',
 							'class'			=> 'B_Hidden',
-							'start_html'    => '<td>',
-							'end_html'	    => '</td>',
+							'start_html'	=> '<td>',
+							'end_html'		=> '</td>',
 						),
 					),
 				),
