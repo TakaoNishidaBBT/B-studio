@@ -40,7 +40,7 @@ $tree_config = array(
 				'plus'			=> array('src' => './images/folders/plus.gif', 'new' => ''),
 				'minus'			=> array('src' => './images/folders/minus.gif', 'new' => ''),
 				'blank'			=> array('src' => './images/folders/blank.gif', 'new' => ''),
-				'root'			=> array('src' => './images/folders/category_root.png', 'new' => ''),
+				'root'			=> array('src' => './images/folders/category-root.png', 'new' => ''),
 				'trash'			=> array('src' => './images/folders/trash.png', 'new' => ''),
 				'forbidden'		=> array('src' => './images/folders/forbidden.png'),
 				'line'			=> array('src' => './images/folders/line.gif', 'new' => ''),
