@@ -148,11 +148,11 @@ $tree_config = array(
 				'pain'		=>
 				array(
 					'folder'	=> array('src' => './images/folders/folder-big.png'),
-					'js'		=> array('src' => './images/folders/file-icon_big.png'),
-					'swf'		=> array('src' => './images/folders/file-icon_big.png'),
-					'pdf'		=> array('src' => './images/folders/file-icon_big.png'),
-					'css'		=> array('src' => './images/folders/file-icon_big.png'),
-					'misc'		=> array('src' => './images/folders/file-icon_big.png'),
+					'js'		=> array('src' => './images/folders/file-icon-big.png'),
+					'swf'		=> array('src' => './images/folders/file-icon-big.png'),
+					'pdf'		=> array('src' => './images/folders/file-icon-big.png'),
+					'css'		=> array('src' => './images/folders/file-icon-big.png'),
+					'misc'		=> array('src' => './images/folders/file-icon-big.png'),
 				),
 				'detail'	=>
 				array(
