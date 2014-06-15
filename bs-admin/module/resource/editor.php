@@ -163,7 +163,7 @@
 					touch(B_FILE_INFO_C);
 				}
 
-				$message = "登録しました";
+				$message = "保存しました";
 			}
 		}
 

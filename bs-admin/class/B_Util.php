@@ -43,14 +43,6 @@
 			return date('t', mktime(0, 0, 0, (int)$month, 1, (int)$year));
 		}
 
-		function quoteslahesforlike($str) {
-			$ret = mysql_real_escape_string($str);
-			$ret = str_replace("%", "\%", $ret);
-			$ret = str_replace("_", "\_", $ret);
-
-			return $ret;
-		}
-
 		function print_r_xml($tag, $arr) {
 			if(is_numeric($tag)) {
 				$tag = 'array';

@@ -244,6 +244,9 @@ table.form th {
 table.form tr:first-child th {
 	border-top: 1px solid #555555;
 }
+table.form tr:last-child th {
+	border-bottom: 1px solid #404040;
+}
 table.form tr:first-child td {
 	border-top: 1px solid #555555;
 }

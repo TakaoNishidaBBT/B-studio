@@ -194,7 +194,7 @@
 		function setSqlWhere() {
 			// 検索条件設定
 			if($this->keyword) {
-				$keyword = $this->util->quoteslahesforlike($this->keyword);
+				$keyword = $this->db->quoteslahesforlike($this->keyword);
 
 				$sql = "select version_id from %DB_PREFIX%version
 						where version like '%KEYWORD%' or memo like '%KEYWORD%'";

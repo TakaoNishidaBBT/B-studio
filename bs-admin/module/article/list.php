@@ -115,13 +115,13 @@
 			// 表示件数
 			$this->default_row_per_page = 10;
 
-			$this->_setProperty('keyword', "");
-			$this->_setProperty('category_id', "");
+			$this->_setProperty('keyword', '');
+			$this->_setProperty('category_id', '');
 
 			$this->_setProperty('page_no', 1);
 			$this->_setProperty('row_per_page', $this->default_row_per_page);
-			$this->_setProperty('sort_key', "article_date");
-			$this->_setProperty('order', " desc");
+			$this->_setProperty('sort_key', 'article_date');
+			$this->_setProperty('order', ' desc');
 		}
 
 		function setHeader() {
@@ -140,7 +140,7 @@
 
 			// ソート
 			if($this->sort_key) {
-				$sql_order_by = ' order by '.$this->sort_key;
+				$sql_order_by = ' order by ' . $this->sort_key;
 				$sql_order_by.= $this->order;
 				$this->dg->setSortKey($this->sort_key);
 				$this->dg->setSqlOrderBy($sql_order_by);
@@ -155,14 +155,14 @@
 		function setSqlWhere() {
 			// 検索条件設定
 			if($this->keyword) {
-				$keyword = $this->util->quoteslahesforlike($this->keyword);
+				$keyword = $this->db->quoteslahesforlike($this->keyword);
 
 				$sql = "select article_id from %DB_PREFIX%article
 						where title like '%KEYWORD%' or tag like '%KEYWORD%' or description like '%KEYWORD%'
 						group by article_id";
 
 				$sql = str_replace('%DB_PREFIX%', B_DB_PREFIX, $sql);
-				$sql = str_replace('%KEYWORD%', "%" . $this->util->quoteslahesforlike($this->keyword) . "%", $sql);
+				$sql = str_replace('%KEYWORD%', "%" . $this->db->quoteslahesforlike($this->keyword) . "%", $sql);
 
 				$rs = $this->db->query($sql);
 				for($i=0 ; $row = $this->db->fetch_assoc($rs) ; $i++) {

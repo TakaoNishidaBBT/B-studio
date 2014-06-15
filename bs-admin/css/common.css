@@ -236,11 +236,11 @@ span.right-button {
 	padding: 10px 0 9px 0;
 	width: 100px;
 	cursor: pointer;
-	background: url(../images/common/right-arrow.png) no-repeat 82% 50%;
+	background: url(../images/common/right-arrow.png) no-repeat 78% 50%;
 }
 span.right-button:hover {
 	color: #fff;
-	background: url(../images/common/right-arrow-white.png) no-repeat 82% 50% #0689de;
+	background: url(../images/common/right-arrow-white.png) no-repeat 78% 50% #0689de;
 }
 span.left-button {
 	display: inline-block;
@@ -248,12 +248,12 @@ span.left-button {
 	padding: 10px 0 9px 0;
 	width: 100px;
 	cursor: pointer;
-	background: url(../images/common/left-arrow.png) no-repeat 18% 50%;
+	background: url(../images/common/left-arrow.png) no-repeat 22% 50%;
 }
 span.left-button:hover {
 	color: #fff;
 	background-color: #0689de;
-	background: url(../images/common/left-arrow-white.png) no-repeat 18% 50% #0689de;
+	background: url(../images/common/left-arrow-white.png) no-repeat 22% 50% #0689de;
 }
 input.disable-button {
 	padding: 1px 0 0 0;
@@ -685,7 +685,7 @@ table.list th.no-display{
  *
  ******************************/
 table.form {
-	width: 90%;
+	width: 100%;
 	margin-bottom: 20px;
 	border-left: none;
 	border-top: none;
@@ -695,12 +695,12 @@ table.form {
 	border-spacing: 0;
 }
 table.form th {
-	width: 18%;
+	width: 15%;
 	padding: 10px 15px;
 	border-top: 1px solid #d8e0ef;
 	border-left: 1px solid #d8e0ef;
 	border-bottom: 1px solid #f4f4f4;
-	border-right: 1px solid #ffffff;
+	border-right: none;
 	background: #d8e0ef;
 	font-weight: normal;
 	text-align: left;
@@ -727,9 +727,9 @@ table.form tr:first-child th.error {
 }
 table.form td {
 	padding: 5px;
-	border: 1px solid #bbb;
-	border-top: 1px solid #fff;
-	border-left: 1px solid #fff;
+	border: 1px solid #bbbbbb;
+	border-top: 1px solid #ffffff;
+	border-left: none;
 	border-bottom: 1px solid #d8e0ef;
 	border-right: 1px solid #d8e0ef;
 	font-weight: normal;
@@ -743,7 +743,7 @@ table.form td textarea.textarea {
  *
  ******************************/
 ul.page-locator {
-	margin: 0 0 2px 4px;
+	margin: 0 0 4px 4px;
 	padding: 0;
 	overflow: hidden;
 }
@@ -759,18 +759,18 @@ ul.page-locator li a {
 	text-decoration: none;
 	line-height: 23px;
 	display: block;
-	color: #0030a0;
+	color: #bbbbbb;
+	cursor: pointer;
+	font-weight: bold;
 }
 ul.page-locator li a:hover img {
 	margin-top: -23px;
-	cursor: pointer;
 }
 ul.page-locator li.page {
 	line-height: 23px;
-	padding-top: 1px;
 	width: 23px;
 	text-align: center;
-	background: url(../images/common/page_back.png); no-repeat top left;
+	background: url(../images/pagination/page_back.png); no-repeat top left;
 }
 ul.page-locator li.current {
 	font-weight: bold;
@@ -782,6 +782,7 @@ ul.page-locator li.other:hover {
 ul.page-locator li.other:hover a,
 ul.page-locator li.other a:hover {
 	color: #fff;
+	font-weight: bold;
 }
 ul.page-locator li.title {
 	width: 46px;

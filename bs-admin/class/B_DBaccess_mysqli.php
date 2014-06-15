@@ -120,6 +120,14 @@
 			return $this->db->escape_string($string);
 		}
 
+		function quoteslahesforlike($string) {
+			$ret = $this->db->escape_string($string);
+			$ret = str_replace("%", "\%", $ret);
+			$ret = str_replace("_", "\_", $ret);
+
+			return $ret;
+		}
+
 		function dump($file_name) {
 			if(!$this->is_connect) return false;
 

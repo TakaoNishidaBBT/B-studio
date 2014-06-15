@@ -58,7 +58,6 @@
 			$this->form->setValue($this->post);
 
 			if(!$this->form->validate()) {
-				$this->action_message = '入力内容にエラーがあります';
 				$this->control = new B_Element($this->input_control_config, $this->user_auth);
 				return;
 			}
@@ -79,7 +78,7 @@
 		}
 
 		function _validate_callback($param) {
-			// 発送先IDの二重登録確認
+			// IDの二重登録確認
 			$sql = "select count(*) cnt from " . B_DB_PREFIX . $this->table_name . " where user_id='" . $param['value'] . "'";
 			$rs = $this->db->query($sql);
 			$row = $this->db->fetch_assoc($rs);

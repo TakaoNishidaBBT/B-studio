@@ -42,10 +42,10 @@ div.login table th {
 	font-weight: normal;
 }
 div.login table th.user {
-	background: url(../images/common/user.png) 0 12px no-repeat;
+	background: url(../images/login/user.png) 0 12px no-repeat;
 }
 div.login table th.key {
-	background: url(../images/common/key.png) 0 12px no-repeat;
+	background: url(../images/login/key.png) 0 12px no-repeat;
 }
 div.login table td {
 	display: table-cell;
@@ -94,35 +94,22 @@ ul.submit, ul.transition {
 ul.submit li, ul.transition li {
 	margin: 0 auto;
 	padding: 0;
-	border-top: 1px solid #444444;
-	border-left: 1px solid #444444;
-	border-right: 1px solid #777777;
-	border-bottom: 1px solid #777777;
 	width: 240px;
 }
 ul.submit li input, ul.transition li input {
 	margin: 0;
 	padding-bottom: 1px;
-	height: 40px;
-	width: 240px;
+	height: 42px;
+	width: 250px;
+	border: none;
 	background-color: #3a3a3a;
-	border-top: 1px solid #888888;
-	border-left: 1px solid #888888;
-	border-right: 1px solid #222222;
-	border-bottom: 1px solid #222222;
 	color: #fff;
 	font-family: "Lucida Grande","Lucida Sans Unicode",Helvetica,Arial,Verdana,sans-serif;
 	text-shadow: -1px -1px #111;
 	cursor: pointer;
 }
 ul.submit li input:hover, ul.transition li input:hover {
-	margin-right: 10px;
 	background-color: #666666;
-	border-top: 1px solid #999999;
-	border-left: 1px solid #999999;
-	border-right: 1px solid #333333;
-	border-bottom: 1px solid #333333;
-	color: #fff;
 	text-shadow: 1px 1px #222;
 }
 
@@ -145,7 +132,7 @@ div.message dl.error {
 }
 div.message dl.error dt {
 	margin-bottom: 10px;
-	padding: 0 0 3px 30px;
+	padding: 0 0 3px 0;
 	font-size: 16px;
 	font-weight: bold;
 	color: #c00;
