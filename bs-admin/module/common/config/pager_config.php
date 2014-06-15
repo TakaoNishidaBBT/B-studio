@@ -30,13 +30,13 @@ array(
 		array(
 			'start_html'	=> '<li>',
 			'end_html'		=> '</li>',
-			'value'			=> '<img src="images/pagination/top.png" alt="top" />',
+			'value'			=> '<img src="images/pagenation/top.png" alt="top" />',
 		),
 		'prev_image'	=>
 		array(
 			'start_html'	=> '<li>',
 			'end_html'		=> '</li>',
-			'value'			=> '<img src="images/pagination/prev.png" alt="prev" />',
+			'value'			=> '<img src="images/pagenation/prev.png" alt="prev" />',
 		),
 		'current_page'	=>
 		array(
@@ -52,13 +52,13 @@ array(
 		array(
 			'start_html'	=> '<li>',
 			'end_html'		=> '</li>',
-			'value'			=> '<img src="images/pagination/next.png" alt="next" />',
+			'value'			=> '<img src="images/pagenation/next.png" alt="next" />',
 		),
 		'last_image'	=>
 		array(
 			'start_html'	=> '<li>',
 			'end_html'		=> '</li>',
-			'value'			=> '<img src="images/pagination/last.png" alt="next" />',
+			'value'			=> '<img src="images/pagenation/last.png" alt="next" />',
 		),
 		'information'	=>
 		array(
