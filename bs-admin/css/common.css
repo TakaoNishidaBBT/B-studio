@@ -233,27 +233,27 @@ input.button:hover {
 span.right-button {
 	display: inline-block;
 	text-align: center;
-	padding: 10px 0 9px 0;
+	line-height: 33px;
 	width: 100px;
 	cursor: pointer;
-	background: url(../images/common/right-arrow.png) no-repeat 78% 50%;
+	background: url(../images/common/right-arrow.png) no-repeat 71px 50%;
 }
 span.right-button:hover {
 	color: #fff;
-	background: url(../images/common/right-arrow-white.png) no-repeat 78% 50% #0689de;
+	background: url(../images/common/right-arrow-white.png) no-repeat 71px 50% #0689de;
 }
 span.left-button {
 	display: inline-block;
 	text-align: center;
-	padding: 10px 0 9px 0;
+	line-height: 33px;
 	width: 100px;
 	cursor: pointer;
-	background: url(../images/common/left-arrow.png) no-repeat 22% 50%;
+	background: url(../images/common/left-arrow.png) no-repeat 15px 50%;
 }
 span.left-button:hover {
 	color: #fff;
 	background-color: #0689de;
-	background: url(../images/common/left-arrow-white.png) no-repeat 22% 50% #0689de;
+	background: url(../images/common/left-arrow-white.png) no-repeat 15px 50% #0689de;
 }
 input.disable-button {
 	padding: 1px 0 0 0;
