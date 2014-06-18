@@ -133,7 +133,7 @@ $tree_config = array(
 				'plus'			=> array('src' => './images/folders/plus.gif', 'new' => ''),
 				'minus'			=> array('src' => './images/folders/minus.gif', 'new' => ''),
 				'blank'			=> array('src' => './images/folders/blank.gif', 'new' => ''),
-				'root'			=> array('src' => './images/folders/root.png', 'new' => ''),
+				'root'			=> array('src' => './images/folders/contents-root.png', 'new' => ''),
 				'forbidden'		=> array('src' => './images/folders/forbidden.png'),
 				'forbidden_big'	=> array('src' => './images/folders/forbidden-big.png'),
 				'line'			=> array('src' => './images/folders/line.gif', 'new' => ''),
@@ -145,11 +145,11 @@ $tree_config = array(
 				'pain'		=>
 				array(
 					'folder'	=> array('src' => './images/folders/folder-big.png', 'new' => ''),
-					'js'		=> array('src' => './images/folders/file-icon_big.png', 'new' => ''),
-					'swf'		=> array('src' => './images/folders/file-icon_big.png', 'new' => ''),
-					'pdf'		=> array('src' => './images/folders/file-icon_big.png', 'new' => ''),
-					'css'		=> array('src' => './images/folders/file-icon_big.png', 'new' => ''),
-					'misc'		=> array('src' => './images/folders/file-icon_big.png', 'new' => ''),
+					'js'		=> array('src' => './images/folders/file-icon-big.png', 'new' => ''),
+					'swf'		=> array('src' => './images/folders/file-icon-big.png', 'new' => ''),
+					'pdf'		=> array('src' => './images/folders/file-icon-big.png', 'new' => ''),
+					'css'		=> array('src' => './images/folders/file-icon-big.png', 'new' => ''),
+					'misc'		=> array('src' => './images/folders/file-icon-big.png', 'new' => ''),
 				),
 				'detail'	=>
 				array(
