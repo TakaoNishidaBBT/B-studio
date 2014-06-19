@@ -12,8 +12,6 @@
 			// ヘッダー 作成
 			require_once('./config/list_header_config.php');
 			$this->header = new B_Element($list_header_config, $this->user_auth);
-			$obj = $this->header->getElementByName('version_info');
-			$obj->value = $this->version_info;
 
 			// DataGrid 作成,
 			require_once('./config/list_config.php');

@@ -55,14 +55,14 @@ $tree_config = array(
 				'plus'			=> array('src' => './images/folders/plus.gif'),
 				'minus'			=> array('src' => './images/folders/minus.gif'),
 				'blank'			=> array('src' => './images/folders/blank.gif'),
-				'root'			=> array('src' => './images/folders/contents-root.png'),
+				'root'			=> array('src' => './images/folders/contents_root.png'),
 				'trash'			=> array('src' => './images/folders/trash.png'),
 				'forbidden'		=> array('src' => './images/folders/forbidden.png'),
-				'forbidden_big'	=> array('src' => './images/folders/forbidden-big.png'),
+				'forbidden_big'	=> array('src' => './images/folders/forbidden_big.png'),
 				'line'			=> array('src' => './images/folders/line.gif'),
 				'folder'		=> array('src' => './images/folders/folder.png', 'new' => 'newFolder'),
-				'folder_open'	=> array('src' => './images/folders/folder-open.png', 'new' => 'newFolder'),
-				'page'			=> array('src' => './images/folders/file-icon.png', 'new' => 'newPage'),
+				'folder_open'	=> array('src' => './images/folders/folder_open.png', 'new' => 'newFolder'),
+				'page'			=> array('src' => './images/folders/file_icon.png', 'new' => 'newPage'),
 			),
 			'context_menu'		=>
 			array(
@@ -101,7 +101,7 @@ $tree_config = array(
 						array(
 							'menu'		=> 'ページ',
 							'func'		=> 'createNode',
-							'icon'		=> './images/folders/file-icon.png',
+							'icon'		=> './images/folders/file_icon.png',
 							'param'		=> 'node_type=page&node_class=leaf',
 						),
 					),

@@ -236,11 +236,11 @@ span.right-button {
 	line-height: 33px;
 	width: 100px;
 	cursor: pointer;
-	background: url(../images/common/right-arrow.png) no-repeat 71px 50%;
+	background: url(../images/common/right_arrow.png) no-repeat 71px 50%;
 }
 span.right-button:hover {
 	color: #fff;
-	background: url(../images/common/right-arrow-white.png) no-repeat 71px 50% #0689de;
+	background: url(../images/common/right_arrow_white.png) no-repeat 71px 50% #0689de;
 }
 span.left-button {
 	display: inline-block;
@@ -248,12 +248,12 @@ span.left-button {
 	line-height: 33px;
 	width: 100px;
 	cursor: pointer;
-	background: url(../images/common/left-arrow.png) no-repeat 15px 50%;
+	background: url(../images/common/left_arrow.png) no-repeat 15px 50%;
 }
 span.left-button:hover {
 	color: #fff;
 	background-color: #0689de;
-	background: url(../images/common/left-arrow-white.png) no-repeat 15px 50% #0689de;
+	background: url(../images/common/left_arrow_white.png) no-repeat 15px 50% #0689de;
 }
 input.disable-button {
 	padding: 1px 0 0 0;
@@ -562,14 +562,14 @@ table.list td a.edit-button {
 	text-indent:-9999px;
 }
 table.list td a.edit-button:hover {
-	background: url(../images/common/edit-white.png) no-repeat center center #0689de;
+	background: url(../images/common/edit_white.png) no-repeat center center #0689de;
 }
 table.list td a.delete-button {
 	background: url(../images/common/clear.png) no-repeat center center;
 	text-indent:-9999px;
 }
 table.list td a.delete-button:hover {
-	background: url(../images/common/clear-white.png) no-repeat center center #0689de;
+	background: url(../images/common/clear_white.png) no-repeat center center #0689de;
 }
 table.list td a.delete-button-disable {
 	background: url(../images/common/clear_gray.png) no-repeat center center;
@@ -581,10 +581,10 @@ table.list td a.compare-button {
 	text-indent:-9999px;
 }
 table.list td a.compare-button:hover {
-	background: url(../images/common/shuffle-white.png) no-repeat center center #0689de;
+	background: url(../images/common/shuffle_white.png) no-repeat center center #0689de;
 }
 table.list td a.compare-button-disable {
-	background: url(../images/common/shuffle-gray.png) no-repeat center center;
+	background: url(../images/common/shuffle_gray.png) no-repeat center center;
 	text-indent:-9999px;
 	cursor: default;
 }
@@ -770,7 +770,7 @@ ul.page-locator li.page {
 	line-height: 23px;
 	width: 23px;
 	text-align: center;
-	background: url(../images/pagenation/page-back.png); no-repeat top left;
+	background: url(../images/pagenation/page_back.png); no-repeat top left;
 }
 ul.page-locator li.current {
 	font-weight: bold;

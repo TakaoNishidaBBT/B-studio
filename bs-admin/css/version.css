@@ -78,7 +78,7 @@ span.version-button img {
 input.regist-button {
 	padding: 10px 0;
 	line-height: 17px;
-	background: url(../images/common/right-arrow-white.png) 95% center no-repeat #205380;
+	background: url(../images/common/right_arrow_white.png) 95% center no-repeat #205380;
 	color: #fff;
 	width: 150px;
 	overflow: visible;
@@ -93,7 +93,7 @@ input.regist-button:hover {
 input.back-button {
 	padding: 10px 0;
 	line-height: 17px;
-	background: url(../images/common/left-arrow-white.png) 5% center no-repeat #205380;
+	background: url(../images/common/left_arrow_white.png) 5% center no-repeat #205380;
 	color: #fff;
 	width: 150px;
 	overflow: visible;
