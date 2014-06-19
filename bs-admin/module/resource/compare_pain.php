@@ -285,6 +285,7 @@
 			$file_info = $this->util->pathinfo($path->value);
 
 			if($node_class->value == 'folder') {
+$this->log->write('node_status:', $node_status->value);
 				if($node_status->value == 'diff') {
 					if($pos == 'left') {
 						$icon->value = $icon->value_folder_diff_left;
@@ -293,8 +294,9 @@
 						$icon->value = $icon->value_folder_diff_right;
 					}
 				}
-				else if($node_status->value == 'diff-child') {
+				else if($node_status->value == 'diff_child') {
 					$icon->value = $icon->value_folder_diff_child;
+$this->log->write('icon->value:', $icon->value);
 				}
 			}
 			else {
@@ -349,7 +351,7 @@
 						$icon->value = $icon->value_folder_diff_right;
 					}
 				}
-				else if($node_status->value == 'diff-child') {
+				else if($node_status->value == 'diff_child') {
 					$icon->value = $icon->value_folder_diff_child;
 				}
 			}

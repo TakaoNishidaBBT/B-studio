@@ -64,9 +64,9 @@
 			control.appendChild(li);
 			li = createControlButton('images/editor/splitv.png', 'split vertical', splitv);
 			control.appendChild(li);
-			li = createControlButton('images/editor/indent-guide.png', 'show indent guide', indentGuide);
+			li = createControlButton('images/editor/indent_guide.png', 'show indent guide', indentGuide);
 			control.appendChild(li);
-			li = createControlButton('images/editor/invisible-object.png', 'show invisibles', invisible);
+			li = createControlButton('images/editor/invisible_object.png', 'show invisibles', invisible);
 			control.appendChild(li);
 			widget = bframe.searchNodeById(parent, 'open_widgetmanager');
 			if(widget) {

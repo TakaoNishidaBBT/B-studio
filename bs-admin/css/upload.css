@@ -22,7 +22,7 @@ div#upload_content {
 	overflow: auto;
 }
 #selectButton {
-	background: url(../images/common/file-select.png) no-repeat 26px center #444444;
+	background: url(../images/common/file_select.png) no-repeat 26px center #444444;
 	color: #fff;
 	padding: 8px 25px 8px 45px;
 	border: none;
