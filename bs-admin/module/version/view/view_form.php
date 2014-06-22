@@ -1,8 +1,8 @@
 <body>
-	<div id="HEADER"><h2 class="version">バージョン詳細<span><?php echo $this->version_info ?></span></h2></div>
+	<div id="header"><h2 class="version">バージョン詳細<span><?php echo $this->version_info ?></span></h2></div>
 
 	<form name="F1" method="post" action="index.php">
-		<div id="CONTROL">
+		<div id="control">
 			<?php echo $this->control->getHtml(); ?>
 		</div>
 		<?php 
@@ -10,7 +10,7 @@
 				echo '<span class="error-message">' . $this->action_message . '</span>' . "\n";
 			}
 		?>
-		<div id="MAIN" class="bframe_adjustparent" param="margin:120">
+		<div id="main" class="bframe_adjustparent" param="margin:120">
 			<p><span class="require">※</span>：必須項目</p>
 			<?php echo $this->form->getHtml($this->display_mode); ?>
 		</div>

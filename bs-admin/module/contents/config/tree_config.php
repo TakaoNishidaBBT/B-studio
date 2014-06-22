@@ -60,9 +60,9 @@ $tree_config = array(
 				'forbidden'		=> array('src' => './images/folders/forbidden.png'),
 				'forbidden_big'	=> array('src' => './images/folders/forbidden_big.png'),
 				'line'			=> array('src' => './images/folders/line.gif'),
-				'folder'		=> array('src' => './images/folders/folder.png', 'new' => 'newFolder'),
-				'folder_open'	=> array('src' => './images/folders/folder_open.png', 'new' => 'newFolder'),
-				'page'			=> array('src' => './images/folders/file_icon.png', 'new' => 'newPage'),
+				'folder'		=> array('src' => './images/folders/folder.png'),
+				'folder_open'	=> array('src' => './images/folders/folder_open.png'),
+				'page'			=> array('src' => './images/folders/file_icon.png'),
 			),
 			'context_menu'		=>
 			array(

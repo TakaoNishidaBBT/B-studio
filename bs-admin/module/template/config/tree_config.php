@@ -46,17 +46,17 @@ $tree_config = array(
 			),
 			'icon'		=>
 			array(
-				'plus'			=> array('src' => './images/folders/plus.gif', 'new' => ''),
-				'minus'			=> array('src' => './images/folders/minus.gif', 'new' => ''),
-				'blank'			=> array('src' => './images/folders/blank.gif', 'new' => ''),
-				'root'			=> array('src' => './images/folders/template_root.png', 'new' => ''),
-				'trash'			=> array('src' => './images/folders/trash.png', 'new' => ''),
+				'plus'			=> array('src' => './images/folders/plus.gif'),
+				'minus'			=> array('src' => './images/folders/minus.gif'),
+				'blank'			=> array('src' => './images/folders/blank.gif'),
+				'root'			=> array('src' => './images/folders/template_root.png'),
+				'trash'			=> array('src' => './images/folders/trash.png'),
 				'forbidden'		=> array('src' => './images/folders/forbidden.png'),
 				'forbidden_big'	=> array('src' => './images/folders/forbidden_big.png'),
-				'line'			=> array('src' => './images/folders/line.gif', 'new' => ''),
-				'folder'		=> array('src' => './images/folders/folder.png', 'new' => 'newFolder'),
-				'folder_open'	=> array('src' => './images/folders/folder_open.png', 'new' => 'newFolder'),
-				'template'		=> array('src' => './images/folders/template.png', 'new' => 'newTemplate'),
+				'line'			=> array('src' => './images/folders/line.gif'),
+				'folder'		=> array('src' => './images/folders/folder.png'),
+				'folder_open'	=> array('src' => './images/folders/folder_open.png'),
+				'template'		=> array('src' => './images/folders/template.png'),
 			),
 			'context_menu'		=>
 			array(

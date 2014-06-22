@@ -1,9 +1,5 @@
 @charset "UTF-8";
 
-/******************************
- * bframe_editarea
- *
- ******************************/
 div.container {
 	margin: 0;
 	overflow: auto;
@@ -23,17 +19,17 @@ ul.control li {
 	float: left;
 	width: 38px;
 	padding: 0;
-	border-right: 1px solid #555555;
-	border-top: 1px solid #444444;
+	border-right: 1px solid #555;
+	border-top: 1px solid #444;
 	list-style-type: none;
 }
 ul.control li:hover {
 	float: left;
 	width: 38px;
-	border-top: 1px solid #666666;
-	border-right: 1px solid #333333;
-	border-bottom: 1px solid #555555;
-	background-color: #555555;
+	border-top: 1px solid #666;
+	border-right: 1px solid #333;
+	border-bottom: 1px solid #555;
+	background-color: #555;
 	list-style-type: none;
 }
 ul.control li a {

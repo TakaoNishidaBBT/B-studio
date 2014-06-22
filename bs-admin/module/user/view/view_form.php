@@ -1,11 +1,11 @@
 <body>
-	<div id="HEADER"><h2 class="user">ユーザ設定</h2></div>
+	<div id="header"><h2 class="user">ユーザ設定</h2></div>
 
 	<form name="F1" method="post" action="index.php">
-		<div id="CONTROL">
+		<div id="control">
 			<?php echo $this->control->getHtml(); ?>
 		</div>
-		<div id="MAIN" class="bframe_adjustparent" param="margin:120">
+		<div id="main" class="bframe_adjustparent" param="margin:120">
 			<?php 
 				if($this->action_message) {
 					echo '<p class="error-message">' . $this->action_message . '</p>' . "\n";

@@ -3,21 +3,18 @@
 h2.article {
 	margin: 0;
 	padding-left: 10px;
+	line-height: 33px;
 	font-size: 15px;
 	background-color: #8b6b3b;
 	color: #fff;
-	color: #fff;
-	line-height: 33px;
 }
 div.list-header {
-	background-color: #ececec;
 	margin: 0;
 	height: 52px;
+	background-color: #ececec;
 }
-/******************************
- * button
- *
- ******************************/
+
+/* buttons */
 input.regist-button {
 	padding: 2px 4px;
 	border-top: 1px solid #bbf;
@@ -26,6 +23,7 @@ input.regist-button {
 	border-left: 1px solid #bbf;
 	background-color: #305070;
 	color: #fff;
+	cursor: pointer;
 }
 input.regist-button:hover {
 	padding: 2px 4px;
@@ -34,7 +32,6 @@ input.regist-button:hover {
 	border-bottom: 1px solid #204060;
 	border-left: 1px solid #bbf;
 	background-color: #03c;
-	cursor: pointer;
 	color: #fff;
 }
 .settings-button,
@@ -44,21 +41,19 @@ input.regist-button:hover {
 	line-height: 0;
 	padding: 5px;
 	vertical-align: middle;
-	border: 1px solid #dddddd;
+	border: 1px solid #ddd;
 }
 .settings-button:hover,
 .clear-button:hover {
-	background-color: #eeeeee;
-	border: 1px solid #dddddd;
+	background-color: #eee;
+	border: 1px solid #ddd;
 }
-/******************************
- * message
- *
- ******************************/
+/* message */
 span.message {
-	color: #003366;
+	color: #036;
 }
 
+/* table.form */
 table.form table.img-item td {
 	border: none;
 }
@@ -80,17 +75,9 @@ table.form input.checkbox {
 	margin-right: 8px;
 }
 
-/******************************
- * EDITOR
- *
- ******************************/
+/* preview */
+/*
 div#preview {
 	border-top: 3px solid #507090;
 }
-
-div.text_editor textarea {
-	margin: 0;
-	padding: 0px;
-	width: 100%;
-	height: 300px;
-}
+*/

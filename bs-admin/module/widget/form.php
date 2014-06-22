@@ -214,7 +214,7 @@
 
 			$this->html_header->appendProperty('css', '<link href="css/widget_form.css" type="text/css" rel="stylesheet" media="all" />');
 			$this->html_header->appendProperty('css', '<link href="css/texteditor.css" type="text/css" rel="stylesheet" media="all" />');
-			$this->html_header->appendProperty('script', '<script src="js/bframe_tab.js"type="text/javascript"></script>');
+			$this->html_header->appendProperty('script', '<script src="js/bframe_tab.js" type="text/javascript"></script>');
 			$this->html_header->appendProperty('script', '<script src="js/bframe_preview.js" type="text/javascript"></script>');
 			$this->html_header->appendProperty('script', '<script src="js/bframe_edit_check.js" type="text/javascript"></script>');
 			$this->html_header->appendProperty('script', '<script src="js/bframe_effect.js" type="text/javascript"></script>');

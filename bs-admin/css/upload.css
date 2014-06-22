@@ -7,14 +7,9 @@ body {
 	width: 100%;
 	font: 12px/1.4em Helvetica, Arial, sans-serif;
 }
-
-/******************************
- * upload_container
- *
- ******************************/
 div#upload_container_header {
 	height: 18px;
-	background-color: #444444;
+	background-color: #444;
 }
 div#upload_content {
 	border: 1px solid #ccc;
@@ -22,7 +17,7 @@ div#upload_content {
 	overflow: auto;
 }
 #selectButton {
-	background: url(../images/common/file_select.png) no-repeat 26px center #444444;
+	background: url(../images/common/file_select.png) no-repeat 26px center #444;
 	color: #fff;
 	padding: 8px 25px 8px 45px;
 	border: none;
@@ -31,18 +26,15 @@ div#upload_content {
 #selectButton:hover {
 	background-color: #666;
 }
-
 #cancelButton {
 	background-color: #eee;
 	padding: 4px 10px;
 	border: none;
 }
-
 p {
 	margin-top: .25em;
 	margin-bottom: .5em;
 }
-
 #divStatus {
 	margin: 14px 0 12px 4px;
 }
@@ -54,11 +46,9 @@ legend {
 	font: 700 14px Arial, Helvetica, sans-serif;
 	color: #444444;
 }
-
 .progressWrapper {
 	overflow: hidden;
 }
-
 .progressContainer {
 	margin: 5px;
 	padding: 4px;
@@ -66,20 +56,21 @@ legend {
 	background-color: #F7F7F7;
 	overflow: hidden;
 }
-/* Error */
+
+/* error */
 .red {
 	border: solid 1px #B50000;
 	background-color: #FFEBEB;
 }
 
-/* Current */
+/* current */
 .green {
 	background-color: #eee;
 	border-top: solid 1px #f0f0f0;
 	border-bottom: solid 1px #ddd;
 }
 
-/* Complete */
+/* complete */
 .blue {
 	background-color: #ccc;
 	border-top: solid 1px #ddd;
@@ -96,7 +87,6 @@ legend {
 	white-space: nowrap;
 	overflow: hidden;
 }
-
 .progressBarInProgress,
 .progressBarComplete,
 .progressBarError {
@@ -107,19 +97,16 @@ legend {
 	border-bottom: #1298e6 1px solid;
 	margin-top: 2px;
 }
-
 .progressBarComplete {
 	width: 100%;
 	background-color: green;
 	visibility: hidden;
 }
-
 .progressBarError {
 	width: 100%;
 	background-color: red;
 	visibility: hidden;
 }
-
 .progressBarStatus {
 	margin-top: 2px;
 	width: 337px;
@@ -142,20 +129,16 @@ a.progressCancel:hover {
 	background-position: 0px 0px;
 }
 
-/******************************
- * dialog
- *
- ******************************/
+/* dialog */
 #confirmDialog {
-    width:100%;
-    height:100%;
-    position:fixed;
-    top:0;
-    left:0;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
     background-color: rgba(0, 0, 0, 0.3);
     z-index: 100000;
 }
-
 #confirmDialog .box {
     border: 1px solid #666;
     padding: 4px 4px 25px 4px;
@@ -165,8 +148,8 @@ a.progressCancel:hover {
 #confirmDialog .container {
     margin: 0 auto;
     width:  380px;
-    top:35%;
-    position:relative;
+    top: 35%;
+    position: relative;
 	box-shadow: 4px 5px 8px -2px rgba(0,0,0,0.3), 0 2px 20px -7px rgba(0,0,0,0.4);
 }
 #confirmDialog .containerHeader {

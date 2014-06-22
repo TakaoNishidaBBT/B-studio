@@ -6,37 +6,33 @@ h2.version {
 	font-size: 15px;
 	background-color: #5c6c7c;
 	color: #fff;
-	color: #fff;
 	line-height: 33px;
 }
 h2.version span {
+	margin-left: 10px;
 	font-size: 11px;
 	font-weight: normal;
-	margin-left: 10px;
 	line-height: 24px;
 }
 
 div.list-header {
-	background-color: #ececec;
 	margin: 0;
 	height: 52px;
+	background-color: #ececec;
 }
 
-/******************************
- * VERSION_CONTROL
- *
- ******************************/
-#VERSION_CONTROL {
+/* version-control */
+#version-control {
 	margin: 30px 0 0 0;
 	padding: 0;
 	text-align: center;
 }
-ul.version_control {
+#version-control ul {
 	margin: 0;
 	padding:2px 0 0 0;
 	list-style-type: none;
 }
-ul.version_control li {
+#version-control ul li {
 	display: inline;
 	margin: 0;
 	padding: 0;
@@ -52,10 +48,7 @@ div.info {
 	font-size: 13px;
 }
 
-/******************************
- * button
- *
- ******************************/
+/* button */
 span.version-button {
 	display: inline-block;
 	padding: 10px 2px;
@@ -103,35 +96,4 @@ input.back-button {
 }
 input.back-button:hover {
 	background-color: #306390;
-}
-
-/******************************
- * message
- *
- ******************************/
-span.message {
-	color: #003366;
-}
-
-/******************************
- * text_editor
- *
- ******************************/
-div.text_editor {
-	border-top: 3px solid #507090;
-	width: 99%;
-	margin: 0;
-	border-top: 4px solid #507090;
-	border-right: 2px solid #507090;
-	border-left: 1px solid #507090;
-	border-bottom: 1px solid #507090;
-	width: 99%;
-
-}
-div.text_editor textarea {
-	border: none;
-	margin: 0;
-	padding: 0px;
-	width: 100%;
-	height: 300px;
 }

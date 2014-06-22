@@ -7,7 +7,7 @@
 <title><?php echo $this->title ?></title></head>
 <body>
 	<script type="text/javascript">if(window != top) top.location.href='.';</script>
-	<div id="HEADER"><h1><?php echo $this->site_title; ?></h1></div>
+	<div id="title-header"><h1><?php echo $this->site_title; ?></h1></div>
 
 	<div class="login">
 		<form method="post" action="." autocomplete="off">

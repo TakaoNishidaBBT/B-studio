@@ -1,15 +1,11 @@
 @charset "UTF-8";
 
-/******************************
- * bframe_compare_tree
- *
- ******************************/
 div#tree_container {
 	margin: 0;
 }
 div#tree_container_header {
 	height: 18px;
-	background-color: #444444;
+	background-color: #444;
 }
 div#left_tree_box,
 div#right_tree_box {
@@ -81,13 +77,11 @@ div#compare_tree_container_right {
 	float: left;
 	width: 50%;
 }
-/******************************
- * pain thumb
- *
- ******************************/
+
+/* pain thumb */
 div.thumbs li.tree-list div.tree {
 	margin: 0;
-	border-left: 1px solid #444444;
+	border-left: 1px solid #444;
 	width: 120px;
 }
 div.thumbs li.tree-list div.selected {
@@ -166,24 +160,21 @@ div.thumbs img.control {
 	display: none;
 }
 
-/******************************
- * pain detail
- *
- ******************************/
+/* pain detail */
 div.detail table {
 	margin: 0 20px 20px 20px;
 }
 div.detail table div.tree {
 	margin: 0;
 	padding: 5px 4px 1px 4px;
-	border-top: 1px solid #444444;
+	border-top: 1px solid #444;
 	width: 100%;
 }
 div.detail table div.selected {
 	border-top: 1px dotted #f00;
 }
 div.detail table th {
-	border-bottom: 1px solid #ffffff;
+	border-bottom: 1px solid #fff;
 	text-align: left;
 	font-weight: normal;
 	color: #fff;
@@ -210,7 +201,7 @@ div.detail table td span.node-name {
 	font-size: 12px;
 }
 div.detail table td span.selected {
-	background-color: #aaaaaa;
+	background-color: #aaa;
 	color: #fff;
 }
 div.detail a:link {

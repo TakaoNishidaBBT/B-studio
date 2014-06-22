@@ -130,39 +130,26 @@ $tree_config = array(
 			),
 			'icon'		=>
 			array(
-				'plus'			=> array('src' => './images/folders/plus.gif', 'new' => ''),
-				'minus'			=> array('src' => './images/folders/minus.gif', 'new' => ''),
-				'blank'			=> array('src' => './images/folders/blank.gif', 'new' => ''),
-<<<<<<< HEAD
-				'root'			=> array('src' => './images/folders/file_root.png', 'new' => ''),
-=======
-				'root'			=> array('src' => './images/folders/contents-root.png', 'new' => ''),
->>>>>>> origin/master
+				'plus'			=> array('src' => './images/folders/plus.gif'),
+				'minus'			=> array('src' => './images/folders/minus.gif'),
+				'blank'			=> array('src' => './images/folders/blank.gif'),
+				'root'			=> array('src' => './images/folders/file_root.png'),
 				'forbidden'		=> array('src' => './images/folders/forbidden.png'),
 				'forbidden_big'	=> array('src' => './images/folders/forbidden_big.png'),
-				'line'			=> array('src' => './images/folders/line.gif', 'new' => ''),
-				'folder'		=> array('src' => './images/folders/folder.png', 'new' => 'newfolder'),
-				'folder_open'	=> array('src' => './images/folders/folder_open.png', 'new' => 'newFolder'),
-				'page'			=> array('src' => './images/folders/leaf.gif', 'new' => '新しいページ'),
-				'node'			=> array('src' => './images/folders/book.gif', 'new' => '新しいノード'),
-				'file'			=> array('src' => './images/folders/file_icon.png', 'new' => '新しいパーツ'),
+				'line'			=> array('src' => './images/folders/line.gif'),
+				'folder'		=> array('src' => './images/folders/folder.png'),
+				'folder_open'	=> array('src' => './images/folders/folder_open.png'),
+				'page'			=> array('src' => './images/folders/leaf.gif'),
+				'node'			=> array('src' => './images/folders/book.gif'),
+				'file'			=> array('src' => './images/folders/file_icon.png'),
 				'pain'		=>
 				array(
-<<<<<<< HEAD
-					'folder'	=> array('src' => './images/folders/folder_big.png', 'new' => ''),
-					'js'		=> array('src' => './images/folders/file_icon_big.png', 'new' => ''),
-					'swf'		=> array('src' => './images/folders/file_icon_big.png', 'new' => ''),
-					'pdf'		=> array('src' => './images/folders/file_icon_big.png', 'new' => ''),
-					'css'		=> array('src' => './images/folders/file_icon_big.png', 'new' => ''),
-					'misc'		=> array('src' => './images/folders/file_icon_big.png', 'new' => ''),
-=======
-					'folder'	=> array('src' => './images/folders/folder-big.png', 'new' => ''),
-					'js'		=> array('src' => './images/folders/file-icon-big.png', 'new' => ''),
-					'swf'		=> array('src' => './images/folders/file-icon-big.png', 'new' => ''),
-					'pdf'		=> array('src' => './images/folders/file-icon-big.png', 'new' => ''),
-					'css'		=> array('src' => './images/folders/file-icon-big.png', 'new' => ''),
-					'misc'		=> array('src' => './images/folders/file-icon-big.png', 'new' => ''),
->>>>>>> origin/master
+					'folder'	=> array('src' => './images/folders/folder_big.png'),
+					'js'		=> array('src' => './images/folders/file_icon_big.png'),
+					'swf'		=> array('src' => './images/folders/file_icon_big.png'),
+					'pdf'		=> array('src' => './images/folders/file_icon_big.png'),
+					'css'		=> array('src' => './images/folders/file_icon_big.png'),
+					'misc'		=> array('src' => './images/folders/file_icon_big.png'),
 				),
 				'detail'	=>
 				array(

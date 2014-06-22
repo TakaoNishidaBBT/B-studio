@@ -8,7 +8,7 @@ h2 {
 	padding: 0;
 	font-size: 15px;
 	color: #fff;
-	background-color: #555555;
+	background-color: #555;
 	border-top: 1px solid #5e5e5e;
 	line-height: 33px;
 }
@@ -21,8 +21,8 @@ h2 span.accent {
 	background: #555;
 	border-top: 1px solid #606060;
 	border-left: 1px solid #606060;
-	border-right: 1px solid #444444;
-	border-bottom: 1px solid #444444;
+	border-right: 1px solid #444;
+	border-bottom: 1px solid #444;
 }
 h2 span {
 	font-size: 11px;
@@ -43,11 +43,6 @@ div.footer {
 	border-bottom: 1px solid #333;
 	height: 10px;
 }
-
-/******************************
- * iframe
- *
- ******************************/
 iframe.tree {
 	display:block;
 	float:left;
@@ -66,11 +61,6 @@ iframe.form {
 	float:left;
 	margin: 0;
 }
-
-/******************************
- * message
- *
- ******************************/
 span.message {
 	color: #204030;
 }

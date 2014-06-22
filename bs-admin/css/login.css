@@ -11,14 +11,11 @@ h1 {
 	line-height: 32px;
 	font-size: 15px;
 	color: #fff;
-	background-color: #444444;
+	background-color: #444;
 	text-align: center;
 }
 
-/********************
- * LOGIN FORM
- *
- ********************/
+/* login form */
 div.login {
 	width: 60%;
 	min-width: 400px;
@@ -66,10 +63,7 @@ div.login table td input {
 	border-bottom: 1px solid #ddd;
 }
 
-/******************************
- * icon
- *
- ******************************/
+/* icon */
 div.icon {
 	margin: 0 auto;
 	text-align: center;
@@ -81,10 +75,7 @@ div.icon {
 	z-index: 2;
 }
 
-/******************************
- * button
- *
- ******************************/
+/* button */
 ul.submit, ul.transition {
 	margin: -14px 0 0 0;
 	padding: 32px 0 0 0;
@@ -109,14 +100,11 @@ ul.submit li input, ul.transition li input {
 	cursor: pointer;
 }
 ul.submit li input:hover, ul.transition li input:hover {
-	background-color: #666666;
+	background-color: #666;
 	text-shadow: 1px 1px #222;
 }
 
-/********************
- * LOGIN ERROR
- *
- ********************/
+/* login error */
 div.message {
 	width: 60%;
 	height: 190px;
@@ -144,6 +132,7 @@ div.message dl.error dt img {
 div.message dl.error dd {
 	margin: 0;
 }
+
 /* supprt browser */
 div.support {
 	font-family: "メイリオ", "Meiryo", "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "Osaka", verdana, lucida, arial, helvetica, sans-serif;

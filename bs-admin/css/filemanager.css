@@ -8,7 +8,7 @@ h2 {
 	padding: 0;
 	font-size: 15px;
 	color: #fff;
-	background-color: #555555;
+	background-color: #555;
 	border-top: 1px solid #5e5e5e;
 	line-height: 33px;
 }
@@ -21,14 +21,8 @@ h2 span.accent {
 	background: #555;
 	border-top: 1px solid #606060;
 	border-left: 1px solid #606060;
-	border-right: 1px solid #444444;
-	border-bottom: 1px solid #444444;
-}
-h2 span {
-	font-size: 11px;
-	font-weight: normal;
-	margin-left: 10px;
-	line-height: 24px;
+	border-right: 1px solid #444;
+	border-bottom: 1px solid #444;
 }
 div.header {
 	clear: both;
@@ -44,10 +38,7 @@ div.footer {
 	height: 10px;
 }
 
-/******************************
- * iframe
- *
- ******************************/
+/* tree */
 div.bframe_tree_container {
 	display:block;
 	float:left;
@@ -82,15 +73,12 @@ div#bframe_pain ul {
 	padding: 0;
 }
 
-/******************************
- * upload_control
- *
- ******************************/
+/* upload_control */
 ul.upload_control {
 	margin: 0 8px 4px 0;
 	padding: 0 0 0 30px;
 	list-style-type: none;
-	background-color: #444444;
+	background-color: #444;
 	overflow: visible;
 	height: 30px;
 	min-width: 400px;
@@ -104,10 +92,6 @@ ul.upload_control li {
 	overflow: hidden;
 }
 
-/******************************
- * button
- *
- ******************************/
 div.input_container {
 	width: 142px;
 	float: left;
@@ -121,24 +105,24 @@ a:active.upload-button {
 	height: 24px;
 	line-height: 21px;
 	width: 140px;
-	background-color: #666666;
-	border-top: 1px solid #666666;
-	border-left: 1px solid #666666;
-	border-right: 1px solid #666666;
-	border-bottom: 1px solid #666666;
+	background-color: #666;
+	border-top: 1px solid #666;
+	border-left: 1px solid #666;
+	border-right: 1px solid #666;
+	border-bottom: 1px solid #666;
 	color: #eee;
 	text-align: center;
 	text-decoration: none;
-	text-shadow: -1px -1px #55555;
+	text-shadow: -1px -1px #555;
 }
 a:hover.upload-button {
-	background-color: #777777;
-	border-top: 1px solid #777777;
-	border-left: 1px solid #777777;
-	border-right: 1px solid #777777;
-	border-bottom: 1px solid #777777;
+	background-color: #777;
+	border-top: 1px solid #777;
+	border-left: 1px solid #777;
+	border-right: 1px solid #777;
+	border-bottom: 1px solid #777;
 	color: #fff;
-	text-shadow: 1px 1px #55555;
+	text-shadow: 1px 1px #555;
 }
 a.upload-button img {
 	vertical-align: -4px;
@@ -153,45 +137,30 @@ ul.upload_control li select {
 	height: 26px;
 	line-height: 20px;
 	vertical-align: 1px;
-	background-color: #555555;
+	background-color: #555;
 	color: #f0f0f0;
-	border-top: 1px solid #555555;
-	border-left: 1px solid #555555;
-	border-right: 1px solid #555555;
-	border-bottom: 1px solid #555555;
+	border-top: 1px solid #555;
+	border-left: 1px solid #555;
+	border-right: 1px solid #555;
+	border-bottom: 1px solid #555;
 }
 ul.upload_control li option {
 	padding: 5px 12px;
-	border-top: 1px solid #555555;
-	border-left: 1px solid #555555;
-	border-right: 1px solid #555555;
-	border-bottom: 1px solid #555555;
+	border-top: 1px solid #555;
+	border-left: 1px solid #555;
+	border-right: 1px solid #555;
+	border-bottom: 1px solid #555;
 }
-
-/******************************
- * message
- *
- ******************************/
 span.message {
 	color: #204030;
 }
-
-/******************************
- * pain
- *
- ******************************/
 span#bframe_pain_disp_change {
 	display: block;
 	line-height: 26px;
 }
-
-/******************************
- * pain_container
- *
- ******************************/
 div.pain_container {
 	margin: 0 8px 0 0;
 	height: 100%;
 	padding: 0;
-	background-color: #444444;
+	background-color: #444;
 }

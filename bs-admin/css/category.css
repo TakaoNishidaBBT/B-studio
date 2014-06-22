@@ -1,9 +1,6 @@
 @charset "UTF-8";
 
-/******************************
- * bframe_tree
- *
- ******************************/
+/* bframe_tree */
 div#tree_container {
 	margin: 0;
 }
