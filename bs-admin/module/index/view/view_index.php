@@ -20,7 +20,7 @@
 <title><?php echo $this->title ?></title></head>
 <body>
 	<script type="text/javascript">if(window != top) top.location.href='.'</script>
-	<div id="HEADER">
+	<div id="title-header">
 		<h1><?php echo $this->site_title ?></h1>
 		<div class="login-user">
 			<ul>
@@ -35,5 +35,5 @@
 		</div>
 	</div>
 	<?php echo $this->menu->gethtml(); ?>
-	<iframe name="main" id="MAIN" class="main bframe_adjustwindow" src="<?php echo $this->initial_page; ?>"></iframe>
+	<iframe id="main" name="main" class="bframe_adjustwindow" src="<?php echo $this->initial_page; ?>"></iframe>
 </body>

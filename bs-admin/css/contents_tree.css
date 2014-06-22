@@ -1,15 +1,11 @@
 @charset "UTF-8";
 
-/******************************
- * bframe_tree
- *
- ******************************/
 div#tree_container {
 	margin: 0;
 }
 div#tree_container_header {
 	height: 18px;
-	background-color: #444444;
+	background-color: #444;
 }
 div#tree_box {
 	border-top: 1px solid #ddd;
@@ -77,137 +73,5 @@ div.bframe_tree a:active {
 }
 div.bframe_tree a:hover {
 	color: #000;
-	text-decoration: none;
-}
-
-/******************************
- * pain thumb
- *
- ******************************/
-div.thumbs li.tree-list div.tree {
-	margin: 0;
-	border-left: 1px solid #444444;
-	width: 120px;
-}
-div.thumbs li.tree-list div.selected {
-	border-left: 1px dotted #f00;
-}
-div.thumbs li.tree-list input {
-	height: 12px;
-	_height: 18px;
-	padding: 1px 0;
-	font-size: 12px;
-}
-div.thumbs li.tree-list span.node-name {
-	padding: 2px 4px 1px 4px;
-	font-size: 12px;
-}
-div.bframe_pain a:link {
-	text-decoration: none;
-}
-div.bframe_pain a:visited {
-	color: #fff;
-	text-decoration: none;
-}
-div.bframe_pain a:active {
-	color: #fff;
-	text-decoration: none;
-}
-div.bframe_pain a:hover {
-	color: #fff;
-	text-decoration: none;
-}
-div.thumbs li.tree-list {
-	margin: 4px auto;
-	padding: 0;
-	width: 120px;
-	height: 150px;
-	list-style: none;
-	float: left;
-}
-div.thumbs div {
-	text-align: center;
-}
-div.thumbs img {
-	margin: 0;
-}
-div.thumbs input {
-	height: 12px;
-	_height: 18px;
-	padding: 1px 0;
-	font-size: 12px;
-}
-span.current {
-	background-color: #22a8f6 !important;
-	color: #fff !important;
-}
-span.selected {
-	background-color: #ece9d8 !important;
-	color: #333 !important;
-}
-div.thumbs img.control {
-	display: none;
-}
-
-/******************************
- * pain detail
- *
- ******************************/
-div.detail table {
-	margin: 0 20px 20px 20px;
-}
-div.detail table div.tree {
-	margin: 0;
-	padding: 5px 4px 1px 4px;
-	border-top: 1px solid #444444;
-	width: 100%;
-}
-div.detail table div.selected {
-	border-top: 1px dotted #f00;
-}
-div.detail table th {
-	border-bottom: 1px solid #ffffff;
-	text-align: left;
-	font-weight: normal;
-	color: #fff;
-	height: 30px;
-}
-div.detail table th.name {
-	min-width: 250px;
-}
-div.detail table th.create-datetime {
-	width: 100px;
-}
-div.detail table td {
-	height: 20px;
-	white-space: nowrap;
-	color: #fff;
-}
-div.detail table td img {
-	vertical-align: -30%;
-	margin-right: 2px;
-}
-div.detail table td span.node-name {
-	display: inline;
-	padding: 2px 4px 1px 4px;
-	font-size: 12px;
-}
-div.detail table td span.selected {
-	background-color: #aaaaaa;
-	color: #fff;
-}
-div.detail a:link {
-	text-decoration: none;
-}
-div.detail a:visited {
-	color: #fff;
-	text-decoration: none;
-}
-div.detail a:active {
-	color: #fff;
-	text-decoration: none;
-}
-div.detail a:hover {
-	color: #fff;
 	text-decoration: none;
 }

@@ -6,7 +6,7 @@
 <link href="css/login.css" type="text/css" rel="stylesheet" media="all" />
 <title><?php echo $this->title ?></title></head>
 <body>
-	<div id="HEADER"><h1><?php echo $this->site_title ?></h1></div>
+	<div id="title-header"><h1><?php echo $this->site_title ?></h1></div>
 	<div class="message">
 		<dl class="error">
 			<dt><img src="images/login/warning.png" alt="エラー" />エラー</dt>

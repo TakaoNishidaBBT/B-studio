@@ -1,44 +1,31 @@
 @charset "UTF-8";
 
 html, body {
-	background-color: #444444;
+	background-color: #444;
 }
 div#contents_container {
 	margin-top: 0;
 	overflow: hidden;
 }
-div#contents_container_footer {
-	height: 15px;
-	background-image: -moz-linear-gradient(center bottom, #555555 0%, #6e6e6e 100%);
-	margin: 0;
-}
 div#contents {
 	overflow: hidden;
 	background-color: #3a3a3a;
 }
-
-/******************************
- * main_container
- *
- ******************************/
 div.main_container {
 	margin: 0 8px 0 0;
 	padding: 0;
-	background-color: #555555;
+	background-color: #555;
 	overflow: hidden;
 }
 
-/******************************
- * tab control
- *
- ******************************/
+/* tab control */
 ul.tabcontrol {
 	margin: 0;
 	padding: 0;
 	list-style-type: none;
-	background-color: #444444;
-	border-top: 1px solid #444444;
-	border-bottom: 1px solid #444444;
+	background-color: #444;
+	border-top: 1px solid #444;
+	border-bottom: 1px solid #444;
 	overflow: visible;
 	height: 28px;
 	min-width: 1000px;
@@ -49,22 +36,22 @@ ul.tabcontrol li {
 	width: 100px;
 	margin: -1px 0 0 0;
 	padding: 0;
-	border-top: 1px solid #444444;
-	border-right: 1px solid #444444;
-	border-bottom: 1px solid #444444;
-	background-color: #444444;
+	border-top: 1px solid #444;
+	border-right: 1px solid #444;
+	border-bottom: 1px solid #444;
+	background-color: #444;
 	overflow: hidden;
 }
 ul.tabcontrol li.selected {
-	background-color: #555555;
-	border-top: 1px solid #555555;
-	border-right: 1px solid #444444;
-	border-bottom: 1px solid #555555;
+	background-color: #555;
+	border-top: 1px solid #555;
+	border-right: 1px solid #444;
+	border-bottom: 1px solid #555;
 }
 ul.tabcontrol li:hover:not(:last-child) {
-	background-color: #555555;
-	border-top: 1px solid #555555;
-	border-right: 1px solid #444444;
+	background-color: #555;
+	border-top: 1px solid #555;
+	border-right: 1px solid #444;
 }
 ul.tabcontrol li a:visited,
 ul.tabcontrol li a {
@@ -77,8 +64,8 @@ ul.tabcontrol li a {
 	text-decoration: none;
 }
 ul.tabcontrol li a:hover {
-	text-shadow: 1px 1px #333333;
-	background-color: #555555;
+	text-shadow: 1px 1px #333;
+	background-color: #555;
 	color: #fff;
 	text-decoration: none;
 }
@@ -93,14 +80,11 @@ ul.tabcontrol li.regist {
 	padding-top: 1px;
 	width: 300px;
 	text-align: left;
-	border-top: 1px solid #444444;
+	border-top: 1px solid #444;
 	overflow: hidden;
 }
 
-/******************************
- * button
- *
- ******************************/
+/* button */
 div.input_container {
 	width: 140px;
 	float: left;
@@ -111,34 +95,23 @@ span.regist-button {
 	margin: 0;
 	padding: 4px 0;
 	width: 140px;
-	background-color: #666666;
-	border-top: 1px solid #666666;
-	border-left: 1px solid #666666;
-	border-right: 1px solid #666666;
-	border-bottom: 1px solid #666666;
+	background-color: #666;
+	border: 1px solid #666;
 	color: #fff;
-	text-shadow: -1px -1px #555555;
+	text-shadow: -1px -1px #555;
 
 	cursor: pointer;
 }
 span.regist-button:hover {
-	background-color: #777777;
-	border-top: 1px solid #777777;
-	border-left: 1px solid #777777;
-	border-right: 1px solid #777777;
-	border-bottom: 1px solid #777777;
+	background-color: #777;
+	border: 1px solid #777;
 	color: #fff;
-	text-shadow: 1px 1px #555555;
+	text-shadow: 1px 1px #555;
 }
 span.regist-button img {
 	vertical-align: -3px;
 	margin-right: 8px;
 }
-
-/******************************
- * message
- *
- ******************************/
 div.message_container {
 	float: left;
 	margin-left: 10px;
@@ -149,34 +122,26 @@ span#message {
 	height: 26px;
 	color: #fff;
 }
-
-/******************************
- * regist
- *
- ******************************/
 div.regist {
-	background-color: #555555;
+	background-color: #555;
 	margin-right: 8px;
 	padding: 8px 8px;
 	color: #fff;
-	border-top: #666666 1px solid;
+	border-top: #666 1px solid;
 	border-bottom: #3a3a3a 3px solid;
 	overflow: hidden;
 	clear: both;
 }
 
-/******************************
- * editor
- *
- ******************************/
+/* editor */
 div.editor_container {
 	clear: both;
 	margin: 0;
-	background-color: #555555;
+	background-color: #555;
 	padding: 7px 8px 8px 8px;
 }
 div#preview {
-	background-color: #ffffff;
+	background-color: #fff;
 }
 div.text_editor {
 	margin: 0;
@@ -184,7 +149,7 @@ div.text_editor {
 	background-color: #000;
 	width: 100%;
 	overflow:hidden;
-	border-bottom: 1px #777777 solid;
+	border-bottom: 1px #777 solid;
 	position: relative;
 }
 div.text_editor textarea {
@@ -198,7 +163,7 @@ div#config {
 	margin: 0;
 	padding-bottom: 5px;
 	text-align: center;
-	background-color: #555555;
+	background-color: #555;
 	overflow: auto;
 }
 div#config textarea {
@@ -209,7 +174,7 @@ div#config textarea.external_js {
 	height: 80px;
 }
 div.visual_editor {
-	background-color: #444444;
+	background-color: #444;
 	border-top: 1px solid #3a3a3a;
-	border-bottom: 1px solid #777777;
+	border-bottom: 1px solid #777;
 }

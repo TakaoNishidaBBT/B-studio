@@ -6,7 +6,6 @@ h2.settings {
 	font-size: 15px;
 	background-color: #8d8e5b;
 	color: #fff;
-	color: #fff;
 	line-height: 33px;
 }
 h2.settings span {
@@ -15,15 +14,9 @@ h2.settings span {
 	margin-left: 10px;
 	line-height: 24px;
 }
-
-/******************************
- * button
- *
- ******************************/
 input#backToList {
 	width: 140px;
 }
-
 span.download-button {
 	padding: 8px 50px;
 	background-color: #205380;

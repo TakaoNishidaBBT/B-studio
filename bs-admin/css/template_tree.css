@@ -1,9 +1,5 @@
 @charset "UTF-8";
 
-/******************************
- * bframe_tree
- *
- ******************************/
 div#tree_container {
 	margin: 0;
 }
@@ -19,13 +15,12 @@ div#select_container {
 }
 div#tree_container_header {
 	height: 18px;
-	background-color: #444444;
+	background-color: #444;
 }
 div#select_tree_box {
 	border: 1px solid #ddd;
 	overflow: auto;
 }
-
 div.bframe_tree {
 	cursor:default;
 	padding: 8px 0;

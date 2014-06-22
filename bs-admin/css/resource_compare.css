@@ -1,15 +1,15 @@
 @charset "UTF-8";
 
 html, body {
-	background-color: #ffffff;
+	background-color: #fff;
 }
 h2 {
 	margin: 0;
 	padding: 0;
 	font-size: 15px;
 	color: #fff;
-	background-color: #555555;
-	border-top: 1px solid #666666;
+	background-color: #555;
+	border-top: 1px solid #666;
 	border-bottom: 1px solid #333;
 	line-height: 30px;
 }
@@ -22,8 +22,8 @@ h2 span.accent {
 	background: #555;
 	border-top: 1px solid #606060;
 	border-left: 1px solid #606060;
-	border-right: 1px solid #444444;
-	border-bottom: 1px solid #444444;
+	border-right: 1px solid #444;
+	border-bottom: 1px solid #444;
 }
 h2 span {
 	font-size: 11px;
@@ -45,11 +45,6 @@ div.footer {
 	border-bottom: 1px solid #333;
 	height: 10px;
 }
-
-/******************************
- * IFRAME
- *
- ******************************/
 div.bframe_tree_container {
 	display:block;
 	float:left;
@@ -89,15 +84,12 @@ div#bframe_pain ul {
 	padding: 10px 2px 10px 30px;
 }
 
-/******************************
- * upload_control
- *
- ******************************/
+/* upload control */
 ul.upload_control {
 	margin: 0 8px 4px 0;
 	padding: 0 0 0 20px;
 	list-style-type: none;
-	background-color: #444444;
+	background-color: #444;
 	border-top: 1px solid #505050;
 	border-bottom: 1px solid #3a3a3a;
 	overflow: visible;
@@ -112,14 +104,9 @@ ul.upload_control li {
 	padding: 0;
 	overflow: hidden;
 }
-
-/******************************
- * button
- *
- ******************************/
 div.input_container {
-	border-top: 1px solid #222222;
-	border-left: 1px solid #222222;
+	border-top: 1px solid #222;
+	border-left: 1px solid #222;
 	border-right: 1px solid #606060;
 	border-bottom: 1px solid #606060;
 	width: 142px;
@@ -134,11 +121,11 @@ a:active.upload-button {
 	height: 20px;
 	line-height: 20px;
 	width: 140px;
-	background-color: #666666;
-	border-top: 1px solid #888888;
-	border-left: 1px solid #888888;
-	border-right: 1px solid #333333;
-	border-bottom: 1px solid #333333;
+	background-color: #666;
+	border-top: 1px solid #888;
+	border-left: 1px solid #888;
+	border-right: 1px solid #333;
+	border-bottom: 1px solid #333;
 	color: #eee;
 	text-align: center;
 	text-decoration: none;
@@ -149,7 +136,7 @@ a:hover.upload-button {
 	border-right: 1px solid #222;
 	border-bottom: 1px solid #222;
 	border-left: 1px solid #aaa;
-	background-color: #888888;
+	background-color: #888;
 	color: #fff;
 	text-shadow: 1px 1px #333;
 }
@@ -161,52 +148,37 @@ ul.upload_control li select {
 	width: 120px;
 	height: 24px;
 	line-height: 20px;
-	background-color: #555555;
+	background-color: #555;
 	color: #f0f0f0;
-	border-top: 1px solid #666666;
-	border-left: 1px solid #666666;
-	border-right: 1px solid #444444;
-	border-bottom: 1px solid #444444;
+	border-top: 1px solid #666;
+	border-left: 1px solid #666;
+	border-right: 1px solid #444;
+	border-bottom: 1px solid #444;
 }
 ul.upload_control li option {
 	padding: 5px 12px;
-	border-top: 1px solid #666666;
-	border-left: 1px solid #666666;
-	border-right: 1px solid #444444;
-	border-bottom: 1px solid #444444;
+	border-top: 1px solid #666;
+	border-left: 1px solid #666;
+	border-right: 1px solid #444;
+	border-bottom: 1px solid #444;
 }
-
-/******************************
- * message
- *
- ******************************/
 span.message {
 	color: #204030;
 }
-
-/******************************
- * pain
- *
- ******************************/
 span#bframe_pain_disp_change {
 	display: block;
 	line-height: 24px;
 }
-
-/******************************
- * pain_container
- *
- ******************************/
 div.pain_container {
 	margin: 0 8px 0 0;
 	height: 100%;
 	padding: 18px 0 0 10px;
-	background-color: #444444;
+	background-color: #444;
 	border-top: 1px solid #505050;
 }
 div.bframe_pain_container {
 	overflow: auto;
-	background-color: #444444;
+	background-color: #444;
 	margin: 0 8px 0 0;
 }
 table.pain {
@@ -270,8 +242,8 @@ div.thumbs ul {
 	margin: 0;
 }
 span.diff-left img {
-	border-bottom: 3px solid #cc0000;
+	border-bottom: 3px solid #c00;
 }
 span.diff-right img {
-	border-bottom: 3px solid #0000cc;
+	border-bottom: 3px solid #00c;
 }

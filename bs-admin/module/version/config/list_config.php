@@ -244,7 +244,7 @@ array(
 );
 
 $version_control_config = array(
-	'start_html'	=> '<div id="VERSION_CONTROL">',
+	'start_html'	=> '<div id="version-control">',
 	'end_html'	    => '</div>',
 	array(
 		'name'			=> 'confirm',
@@ -255,10 +255,10 @@ $version_control_config = array(
 );
 
 $version_control_confirm_config = array(
-	'start_html'	=> '<div id="VERSION_CONTROL">',
+	'start_html'	=> '<div id="version-control">',
 	'end_html'	    => '</div>',
 	array(
-		'start_html'    => '<ul class="version_control">',
+		'start_html'    => '<ul>',
 		'end_html'	    => '</ul>',
 		array(
 			'start_html'    => '<li>',
@@ -280,10 +280,10 @@ $version_control_confirm_config = array(
 );
 //control
 $version_control_result_config = array(
-	'start_html'	=> '<div id="VERSION_CONTROL">',
+	'start_html'	=> '<div id="version-control">',
 	'end_html'	    => '</div>',
 	array(
-		'start_html'    => '<ul class="version_control">',
+		'start_html'    => '<ul>',
 		'end_html'	    => '</ul>',
 		array(
 			'start_html'    => '<li>',

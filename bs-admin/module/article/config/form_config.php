@@ -460,7 +460,7 @@ $result_config = array(
 
 //control
 $input_control_config = array(
-	'start_html'	=> '<ul class="control">',
+	'start_html'	=> '<ul>',
 	'end_html'		=> '</ul>',
 	array(
 		'name'			=> 'back',
@@ -486,7 +486,7 @@ $input_control_config = array(
 
 //confirm control
 $confirm_control_config = array(
-	'start_html'	=> '<ul class="control">',
+	'start_html'	=> '<ul>',
 	'end_html'		=> '</ul>',
 	array(
 		'name'			=> 'back',
@@ -512,7 +512,7 @@ $confirm_control_config = array(
 
 //delete control
 $delete_control_config = array(
-	'start_html'	=> '<ul class="control">',
+	'start_html'	=> '<ul>',
 	'end_html'		=> '</ul>',
 	array(
 		'name'			=> 'back',
@@ -538,7 +538,7 @@ $delete_control_config = array(
 
 //control
 $result_control_config = array(
-	'start_html'	=> '<ul class="control">',
+	'start_html'	=> '<ul>',
 	'end_html'		=> '</ul>',
 	array(
 		'name'			=> 'backToList',

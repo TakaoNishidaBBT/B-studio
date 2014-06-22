@@ -1,14 +1,16 @@
-a.bframe_calendar {
+@charset "UTF-8";
+
+a.bframe-calendar {
 	text-decoration: none;
 }
 
-a.bframe_calendar:visited {
+a.bframe-calendar:visited {
 	text-decoration: none;
 }
-a.bframe_calendar:active {
+a.bframe-calendar:active {
 	text-decoration: none;
 }
-a.bframe_calendar:hover {
+a.bframe-calendar:hover {
 	text-decoration: none;
 }
 div.wrapper {

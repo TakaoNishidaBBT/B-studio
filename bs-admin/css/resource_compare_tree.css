@@ -1,15 +1,11 @@
 @charset "UTF-8";
 
-/******************************
- * bframe_compare_tree
- *
- ******************************/
 div#tree_container {
 	margin: 0;
 }
 div#tree_container_header {
 	height: 18px;
-	background-color: #444444;
+	background-color: #444;
 }
 div#left_tree_box,
 div#right_tree_box {
@@ -81,13 +77,8 @@ div#compare_tree_container_right {
 	float: left;
 	width: 50%;
 }
-
-/******************************
- * pain thumb
- *
- ******************************/
 div.thumbs {
-	background-color: #444444;
+	background-color: #444;
 }
 div.thumbs li.tree-list div.tree {
 	margin: 0;
@@ -99,7 +90,6 @@ div.thumbs li.tree-list div.selected {
 }
 div.thumbs li.tree-list input {
 	height: 12px;
-	_height: 18px;
 	padding: 1px 0;
 	font-size: 12px;
 }
@@ -138,7 +128,6 @@ div.thumbs img {
 }
 div.thumbs input {
 	height: 12px;
-	_height: 18px;
 	padding: 1px 0;
 	font-size: 12px;
 }
@@ -170,17 +159,14 @@ div.thumbs img.control {
 	display: none;
 }
 
-/******************************
- * pain detail
- *
- ******************************/
+/* pain detail */
 table.file-list {
 	margin: 0 10px 10px 10px;
 }
 table.file-list div.tree {
 	margin: 0;
 	padding: 5px 4px 1px 4px;
-	border-top: 1px solid #444444;
+	border-top: 1px solid #444;
 	width: 100%;
 }
 table.file-list div.selected {
@@ -248,7 +234,7 @@ table.file-list td span.node-name {
 	font-size: 12px;
 }
 table.file-list td span.selected {
-	background-color: #aaaaaa;
+	background-color: #aaa;
 	color: #fff;
 }
 div.detail a:link {

@@ -223,7 +223,7 @@
 			}
 
 			if($select_message) {
-				$select_message = '<p class="select_status"><strong>検索条件&nbsp;</strong>' . $select_message . '</p>';
+				$select_message = '<p class="condition"><strong>検索条件&nbsp;</strong>' . $select_message . '</p>';
 			}
 
 			$this->sql_where = $sql_where . $sql_where_invalid;

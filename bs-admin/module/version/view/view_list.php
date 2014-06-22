@@ -1,10 +1,10 @@
 <body>
-	<div id="HEADER">
+	<div id="header">
 		<?php echo $this->header->gethtml(); ?>
 	</div>
 
-	<div id="LIST_MAIN" class="bframe_adjustparent" param="margin:110">
-		<div class="list_container">
+	<div id="list-main" class="bframe_adjustparent" param="margin:110">
+		<div class="list-container">
 			<form name="F1" id="F1" method="post" action="index.php" target="main">
 			<?php
 				if($this->select_message) {

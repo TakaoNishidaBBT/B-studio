@@ -1,15 +1,11 @@
 @charset "UTF-8";
 
-/******************************
- * bframe_tree
- *
- ******************************/
 div#tree_container {
 	margin: 0;
 }
 div#tree_container_header {
 	height: 18px;
-	background-color: #444444;
+	background-color: #444;
 }
 div#tree_box {
 	border-top: 1px solid #ddd;
@@ -69,13 +65,10 @@ div.bframe_tree a:hover {
 	text-decoration: none;
 }
 
-/******************************
- * pain thumb
- *
- ******************************/
+/* pain thumb */
 div.thumbs li.tree-list div.tree {
 	margin: 0;
-	border-left: 1px solid #444444;
+	border-left: 1px solid #444;
 	width: 120px;
 }
 div.thumbs li.tree-list div.selected {
@@ -100,7 +93,6 @@ div.thumbs li.tree-list span.node-name {
 	font-size: 12px;
 }
 div.thumbs li.tree-list span.edit {
-/*	display: block;*/
 	margin: 2px auto;
 	padding: 0;
 	height: 24px;
@@ -137,7 +129,7 @@ div.clone_node_pain span.img-border, div.thumbs span.img-border {
 	margin: 0 auto;
 	width: 110px;
 	height: 110px;
-	border:1px #555555 solid;
+	border:1px #555 solid;
 	vertical-align: middle;
 }
 div.thumbs img {
@@ -174,17 +166,14 @@ div.thumbs img.control {
 	display: none;
 }
 
-/******************************
- * pain detail
- *
- ******************************/
+/* pain detail */
 div.detail table {
 	margin: 0 20px 20px 20px;
 }
 div.detail table div.tree {
 	margin: 0;
 	padding: 5px 4px 1px 4px;
-	border-top: 1px solid #444444;
+	border-top: 1px solid #444;
 	width: 100%;
 }
 div.detail table div.selected {
@@ -252,7 +241,7 @@ div.detail table td span.node-name {
 	font-size: 12px;
 }
 div.detail table td span.selected {
-	background-color: #aaaaaa;
+	background-color: #aaa;
 	color: #fff;
 }
 div.detail a:link {
