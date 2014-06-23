@@ -75,3 +75,11 @@ div.bframe_tree a:hover {
 	color: #000;
 	text-decoration: none;
 }
+span.current {
+	background-color: #22a8f6 !important;
+	color: #fff !important;
+}
+span.selected {
+	background-color: #ece9d8 !important;
+	color: #333 !important;
+}
