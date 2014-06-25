@@ -11,10 +11,10 @@ $editor_config = array(
 	array('class' => 'B_Hidden', 'name' => 'extension'),
 	array('class' => 'B_Hidden', 'name' => 'update_datetime'),
 	array(
-		'start_html'	=> '<div class="editor_container bframe_adjustwindow" param="margin:6" >',
+		'start_html'	=> '<div class="editor_container bframe_adjustwindow" param="margin:16" >',
 		'end_html'		=> '</div>',
 		array(
-			'start_html'	=> '<div id="text_editor" class="text_editor bframe_adjustparent" param="margin:22">',
+			'start_html'	=> '<div id="text_editor" class="text_editor bframe_adjustparent" param="margin:12">',
 			'end_html'		=> '</div>',
 			array(
 				'name'				=> 'contents',

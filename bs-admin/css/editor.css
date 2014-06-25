@@ -2,26 +2,20 @@
 
 html, body {
 	background-color: #444;
+	overflow: auto;
 }
 
 div#contents_container {
 	margin: 0;
-	overflow: hidden;
-}
-div#contents_container_footer {
-	height: 15px;
-	background-image: -moz-linear-gradient(center bottom, #555 0%, #6e6e6e 100%);
-	margin: 0;
 }
 div#contents {
-	overflow: hidden;
 	background-color: #3a3a3a;
+	min-width: 850px;
 }
 div.main_container {
 	margin: 0 8px 0 0;
 	padding: 0;
 	background-color: #555;
-	overflow: hidden;
 }
 
 /* tab control */
@@ -34,12 +28,10 @@ ul.tabcontrol {
 	border-bottom: 1px solid #444;
 	overflow: visible;
 	height: 28px;
-	min-width: 1000px;
 }
 ul.tabcontrol li {
 	float: left;
 	height: 28px;
-	min-width: 100px;
 	margin: -1px 0 0 0;
 	padding: 0 10px 0 0;
 	border-top: 1px solid #666;
@@ -47,6 +39,9 @@ ul.tabcontrol li {
 	border-bottom: 1px solid #3a3a3a;
 	background-color: #444;
 	overflow: hidden;
+}
+ul.tabcontrol li.filename {
+	min-width: 400px;
 }
 ul.tabcontrol li.selected {
 	background-color: #555;
@@ -95,7 +90,6 @@ ul.tabcontrol li.regist {
 	height: 26px;
 	margin-left: 50px;
 	padding-top: 1px;
-	width: 300px;
 	text-align: left;
 	border-top: 1px solid #444;
 	overflow: hidden;
@@ -222,106 +216,4 @@ div.visual_editor {
 	background-color: #fff;
 	border-top: 1px solid #3a3a3a;
 	border-bottom: 1px solid #777;
-}
-
-/* table.form */
-table.form {
-	width: 99%;
-	margin: 0;
-	border: none;
-	border-collapse: separate;
-	border-spacing: 0;
-}
-table.form th {
-	width: 18%;
-	margin: 0;
-	padding: 15px 20px;
-	background-color: #444;
-	color: #fff;
-	border-top: 1px solid #555;
-	border-left: 1px solid #555;
-	border-bottom: 1px solid #333;
-	border-right: 1px solid #444;
-	font-weight: normal;
-	text-align: left;
-	text-shadow: -1px -1px #444;
-}
-table.form tr:first-child th {
-	border-top: 1px solid #555;
-}
-table.form tr:first-child td {
-	border-top: 1px solid #555;
-}
-table.form th.error{
-	background: #fee;
-}
-table.form th a.button {
-	text-shadow: none;
-	display: block;
-	padding: 0 8px;
-	border-top: 1px solid #555;
-	border-right: 1px solid #333;
-	border-bottom: 1px solid #333;
-	border-left: 1px solid #555;
-	background: #4444;
-	text-align: center;
-	line-height: 20px;
-}
-table.form td {
-	padding: 5px;
-	border-top: 1px solid #555;
-	border-left: 1px solid #555;
-	border-bottom: 1px solid #333;
-	border-right: 1px solid #333;
-	background-color: #444;
-	font-weight: normal;
-	text-align: left;
-}
-table.form td textarea,
-table.form td input {
-	background-color: #111;
-	color: #ccc;
-	border-top: 1px solid #444;
-	border-left: 1px solid #444;
-	border-right: 1px solid #888;
-	border-bottom: 1px solid #888;
-}
-table.form td textarea {
-	height: 60px;
-	padding: 5px;
-	width: 98%;
-}
-table.form td input {
-	height: 22px;
-	padding: 0 5px;
-	width: 80%;
-}
-table.form td input.template {
-	width: 30%;
-}
-table.form td img {
-	vertical-align: -35%;
-	margin-left: 8px;
-}
-table.form a:link.button,
-table.form a:visited.button,
-table.form a:active.button,
-table.form a.button {
-	display: block;
-	padding: 0 8px;
-	border-top: 1px solid #555;
-	border-right: 1px solid #333;
-	border-bottom: 1px solid #333;
-	border-left: 1px solid #555;
-	background-color: #444;
-	color: #fff;
-	text-align: center;
-	line-height: 20px;
-}
-table.form a:hover.button {
-	border-top: 1px solid #6666
-	border-right: 1px solid #333;
-	border-bottom: 1px solid #333;
-	border-left: 1px solid #666;
-	background-color: #555;
 }
