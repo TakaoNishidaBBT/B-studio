@@ -104,7 +104,7 @@ $tree_config = array(
 				'plus'			=> array('src' => './images/folders/plus.gif', 'new' => ''),
 				'minus'			=> array('src' => './images/folders/minus.gif', 'new' => ''),
 				'blank'			=> array('src' => './images/folders/blank.gif', 'new' => ''),
-				'root'			=> array('src' => './images/folders/root.png', 'new' => ''),
+				'root'			=> array('src' => './images/folders/file_root.png', 'new' => ''),
 				'forbidden'		=> array('src' => './images/folders/forbidden.png'),
 				'forbidden_big'	=> array('src' => './images/folders/forbidden_big.png'),
 				'line'			=> array('src' => './images/folders/line.gif', 'new' => ''),
