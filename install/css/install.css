@@ -145,7 +145,7 @@ ul {
 
 div.confirm {
 	text-align: center;
-	margin: 0 0 40px 0;
+	margin: 30px 0 80px 0;
 }
 
 ul.control {
@@ -169,23 +169,16 @@ span.caution {
 }
 
 input.button {
-	padding: 0 40px;
-	line-height: 25px;
-	border-top: 1px solid #fff;
-	border-right: 1px solid #888;
-	border-bottom: 1px solid #888;
-	border-left: 1px solid #fff;
-	border-radius: 2px;
-	background-color: #fff;
-	background: url(../images/button_back.png) repeat-x;
-	overflow: visible;
+	padding: 0 80px;
+	line-height: 45px;
+	border: none;
+	background-color: #333;
+	color: #f0f0f0;
 	vertical-align: middle;
+	cursor: pointer;
 }
 input.button:hover, input.buttonHover {
-	border-right: 1px solid #999;
-	border-bottom: 1px solid #999;
-	cursor: pointer;
-	background: url(../images/button_back_on.png) repeat-x;
+	background-color: #555;
 }
 .htaccess {
 	width: 99%;
