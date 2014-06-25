@@ -169,8 +169,8 @@ span.caution {
 }
 
 input.button {
-	padding: 5px 40px;
-	line-height: 17px;
+	padding: 0 40px;
+	line-height: 25px;
 	border-top: 1px solid #fff;
 	border-right: 1px solid #888;
 	border-bottom: 1px solid #888;
