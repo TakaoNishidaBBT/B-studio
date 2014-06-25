@@ -93,14 +93,14 @@ ul.submit li input, ul.transition li input {
 	height: 42px;
 	width: 250px;
 	border: none;
-	background-color: #3a3a3a;
+	background-color: #333;
 	color: #fff;
 	font-family: "Lucida Grande","Lucida Sans Unicode",Helvetica,Arial,Verdana,sans-serif;
 	text-shadow: -1px -1px #111;
 	cursor: pointer;
 }
 ul.submit li input:hover, ul.transition li input:hover {
-	background-color: #666;
+	background-color: #555;
 	text-shadow: 1px 1px #222;
 }
 
