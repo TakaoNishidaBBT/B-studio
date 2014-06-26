@@ -52,7 +52,7 @@ $tab_control_config = array(
 			array(
 				'name'			=> 'regist',
 				'class'			=> 'B_Button',
-				'special_html'	=> 'class="regist-button" onClick="bframe.ajaxSubmit.submit(\'F1\', \'' . $this->module . '\', \'editor\', \'regist\', \'confirm\', true)"',
+				'special_html'	=> 'class="regist-button" onclick="bframe.ajaxSubmit.submit(\'F1\', \'' . $this->module . '\', \'editor\', \'regist\', \'confirm\', true)"',
 				'value'			=> '　登録　',
 			),
 		),
