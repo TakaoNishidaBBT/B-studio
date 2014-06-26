@@ -9,15 +9,15 @@ $editor_config = array(
 	array('class' => 'B_Hidden', 'name' => 'file_path'),
 	array('class' => 'B_Hidden', 'name' => 'update_datetime'),
 	array(
-		'start_html'	=> '<div class="editor_container bframe_adjustwindow" param="margin:8" >',
+		'start_html'	=> '<div class="editor_container bframe_adjustwindow" param="margin:16" >',
 		'end_html'		=> '</div>',
 		array(
-			'start_html'	=> '<div id="text_editor" class="text_editor bframe_adjustparent" param="margin:22">',
+			'start_html'	=> '<div id="text_editor" class="text_editor bframe_adjustparent" param="margin:12">',
 			'end_html'		=> '</div>',
 			array(
 				'name'				=> 'contents',
 				'class'				=> 'B_TextArea',
-				'special_html'		=> 'class="textarea bframe_adjustparent bframe_texteditor" param="margin:34" %SYNTAX% style="width:100%"',
+				'special_html'		=> 'class="textarea bframe_adjustparent bframe_texteditor" param="margin:32" %SYNTAX% style="width:100%"',
 				'no_trim'			=> true,
 			),
 		),
@@ -51,9 +51,9 @@ $tab_control_config = array(
 			'end_html'		=> '</div>',
 			array(
 				'name'			=> 'regist',
-				'class'			=> 'B_Button',
-				'special_html'	=> 'class="regist-button" onclick="bframe.ajaxSubmit.submit(\'F1\', \'' . $this->module . '\', \'editor\', \'regist\', \'confirm\', true)"',
-				'value'			=> '　登録　',
+				'start_html'	=> '<span id="regist" class="regist-button" onclick="bframe.ajaxSubmit.submit(\'F1\', \'' . $this->module . '\', \'editor\', \'regist\', \'confirm\', true)">',
+				'end_html'		=> '</span>',
+				'value'			=> '<img src="images/common/save.png" alt="保存" />保存',
 			),
 		),
 		array(
