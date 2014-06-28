@@ -1,3 +1,4 @@
+# ignore directories
 /files
 /bs-admin-files
 /bs-admin/archive
@@ -5,15 +6,13 @@
 /bs-admin/log
 /bs-admin/db
 /bs-admin/user
+
+# ignore files
 /.htaccess
 /bs-admin/db/db_connect.php
-
-# git update-index --assume-unchanged bs-admin-files/.htaccess
-# git update-index --assume-unchanged bs-admin-files/files/.gitkeep
-# git update-index --assume-unchanged bs-admin-files/thumbs/.gitkeep
-# git update-index --assume-unchanged bs-admin/.htaccess
-# git update-index --assume-unchanged bs-admin/.htpassword
-# git update-index --assume-unchanged files/.gitkeep
-
-# git update-index --no-assume-unchanged [file-name]
-# git ls-files -v
+/bs-admin-files/.htaccess
+/bs-admin-files/files/.gitkeep
+/bs-admin-files/thumbs/.gitkeep
+/bs-admin/.htaccess
+/bs-admin/.htpassword
+/files/.gitkeep
