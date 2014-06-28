@@ -5,7 +5,8 @@
 /bs-admin/log
 /bs-admin/db
 /bs-admin/user
-.*
+/.htaccess
+/bs-admin/db/db_connect.php
 
 # git update-index --assume-unchanged .htaccess
 # git update-index --assume-unchanged bs-admin-files/.htaccess
