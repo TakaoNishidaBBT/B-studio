@@ -5,13 +5,6 @@
 /bs-admin/log
 /bs-admin/db
 /bs-admin/user
-/.htaccess
-/bs-admin/db/db_connect.php
-/bs-admin-files/.htaccess
-/bs-admin-files/files/.gitkeep
-/bs-admin-files/thumbs/.gitkeep
-/bs-admin/.htaccess
-/bs-admin/.htpassword
 
 # git update-index --assume-unchanged .htaccess
 # git update-index --assume-unchanged bs-admin-files/.htaccess
