@@ -14,7 +14,8 @@
 # git update-index --assume-unchanged bs-admin/.htaccess
 # git update-index --assume-unchanged bs-admin/.htpassword
 # git update-index --assume-unchanged bs-admin/db/db_connect.php
-# git update-index --assume-unchanged files/.gitkeep
+# git update-index --assume-unchanged bs-admin/user/users.php
+# git update-index --assume-unchanged files/.gikeep
 
 # git update-index --no-assume-unchanged [file-name]
 # git ls-files -v
