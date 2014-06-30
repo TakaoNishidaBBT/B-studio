@@ -105,7 +105,7 @@ $tab_control_config = array(
 			'end_html'		=> '</div>',
 			array(
 				'name'			=> 'regist',
-				'start_html'	=> '<span id="regist" class="regist-button" onClick="bframe.ajaxSubmit.submit(\'F1\', \'' . $this->module . '\', \'form\', \'regist\', \'confirm\', true)">',
+				'start_html'	=> '<span id="regist" class="regist-button" onclick="bframe.ajaxSubmit.submit(\'F1\', \'' . $this->module . '\', \'form\', \'regist\', \'confirm\', true)">',
 				'end_html'		=> '</span>',
 				'value'			=> '<img src="images/common/save.png" alt="保存" />保存',
 			),
