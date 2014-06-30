@@ -44,7 +44,7 @@ $form_config = array(
 				'end_html'			=> '</td>',
 				array(
 					'name'				=> 'backup',
-					'start_html'		=> '<span class="download-button" onClick="bframe.submit(\'F1\', \'' . $this->module . '\', \'form\', \'backupDB\', \'\', true)" >',
+					'start_html'		=> '<span class="download-button" onclick="bframe.submit(\'F1\', \'' . $this->module . '\', \'form\', \'backupDB\', \'\', true)" >',
 					'end_html'			=> '</span>',
 					'value'				=> '<img src="images/common/download.png" alt="ダウンロード" />ダウンロード',
 				),
@@ -67,7 +67,7 @@ $form_config = array(
 				'end_html'			=> '</td>',
 				array(
 					'name'				=> 'backup',
-					'start_html'		=> '<span class="download-button" onClick="bframe.submit(\'F1\', \'' . $this->module . '\', \'form\', \'backupAll\', \'\', true)" >',
+					'start_html'		=> '<span class="download-button" onclick="bframe.submit(\'F1\', \'' . $this->module . '\', \'form\', \'backupAll\', \'\', true)" >',
 					'end_html'			=> '</span>',
 					'value'				=> '<img src="images/common/download.png" alt="ダウンロード" />ダウンロード',
 				),
