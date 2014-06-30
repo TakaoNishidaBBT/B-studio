@@ -6,6 +6,7 @@
 /bs-admin/db
 /bs-admin/user
 
+
 # git update-index --assume-unchanged .htaccess
 # git update-index --assume-unchanged bs-admin-files/.htaccess
 # git update-index --assume-unchanged bs-admin-files/files/.gitkeep
