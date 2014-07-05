@@ -94,11 +94,16 @@
 			closedir($handle);
 		}
 
-		function createLimitFile($file_info, $limit) {
-			if(!$limit) return;
-
-			$fp = fopen($file_info, 'w');
-	        fwrite($fp, $limit);
-			fclose($fp);
+		function createLimitFile($file_info, $limit) {	
+			if($limit) {
+				$fp = fopen($file_info, 'w');
+		        fwrite($fp, $limit);
+				fclose($fp);
+			}
+			else {
+				if(file_exists($file_info)) {
+					unlink($file_info);
+				}
+			}
 		}
 	}

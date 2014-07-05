@@ -77,8 +77,8 @@
 			}
 		}
 
-		function addNodes($object) {
-			$this->node[] = &$object;
+		function addNodes(&$object) {
+			$this->node[] = $object;
 		}
 
 		function selectNode($node_id) {
