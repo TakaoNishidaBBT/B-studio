@@ -79,8 +79,8 @@
 			closedir($handle);
 		}
 
-		function addNodes($object) {
-			$this->node[] = &$object;
+		function addNodes(&$object) {
+			$this->node[] = $object;
 		}
 
 		function setConfig($config) {
