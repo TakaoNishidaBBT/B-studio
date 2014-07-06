@@ -113,7 +113,7 @@
 	}
 
 	function reloadTree() {
-		if(typeof bframe_tree !== 'undefined') bframe_tree.getNodeList(bframe_tree.getCurrentFolderId());
+		if(typeof bframe_tree !== 'undefined') bframe_tree.reload();
 	}
 
 	function clearForm(form, row_per_page) {
