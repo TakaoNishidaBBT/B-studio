@@ -68,7 +68,7 @@
 				}
 				else {
 					if($dest->node_type == 'folder' || $dest->node_type == 'root') {
-						$root = new B_FileNode(B_UPLOAD_DIR, 'root', null, null, 'all');
+						$root = new B_FileNode($this->dir, 'root', null, null, 'all');
 						$ret = $root->rename($source->path, B_Util::getPath($dest->path, $source->file_name));
 					}
 					if($ret) {
@@ -122,7 +122,7 @@
 						$ret = $node->remove();
 						if($ret) {
 							$this->status = true;
-							$root = new B_FileNode(B_UPLOAD_DIR, 'root', null, null, 'all');
+							$root = new B_FileNode($this->dir, 'root', null, null, 'all');
 							$this->refleshThumnailCache($root);
 						}
 						else {
@@ -142,10 +142,10 @@
 				$file_info = B_Util::pathinfo($this->request['node_id']);
 				$node_name = trim($this->request['node_name']);
 				$new_node_id = B_Util::getPath($file_info['dirname'], $node_name);
-				$path = B_Util::getPath(B_UPLOAD_DIR , $new_node_id);
+				$path = B_Util::getPath($this->dir , $new_node_id);
 
 				if($this->checkFileName($path, $node_name, $file_info)) {
-					$root = new B_FileNode(B_UPLOAD_DIR, 'root', null, null, 'all');
+					$root = new B_FileNode($this->dir, 'root', null, null, 'all');
 					$ret = $root->rename($this->request['node_id'], $new_node_id);
 					if($ret) {
 						$this->status = true;
@@ -175,7 +175,7 @@
 				$this->message = '日本語は使用できません';
 				return false;
 			}
-			if(!file_exists(B_Util::getPath(B_UPLOAD_DIR, $node_id))) {
+			if(!file_exists(B_Util::getPath($this->dir, $file_info['path']))) {
 				$this->message = '他のユーザに更新されています';
 				return false;
 			}
