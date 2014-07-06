@@ -170,14 +170,7 @@
 
 		function rename($old_name, $new_name) {
 			if($this->node_id == $old_name) {
-				if(strtolower($this->node_id) == strtolower($new_name)) {
-					// windows server can't rename upper-lower case only
-					$ret = rename(B_Util::getPath(B_UPLOAD_DIR, $this->node_id), B_Util::getPath(B_UPLOAD_DIR , $new_name . 'tmp___tmp'));
-					$ret = rename(B_Util::getPath(B_UPLOAD_DIR , $new_name . 'tmp___tmp'), B_Util::getPath(B_UPLOAD_DIR , $new_name));
-				}
-				else {
-					$ret = rename(B_Util::getPath(B_UPLOAD_DIR, $this->node_id), B_Util::getPath(B_UPLOAD_DIR , $new_name));
-				}
+				$ret = rename(B_Util::getPath($this->dir, $this->node_id), B_Util::getPath($this->dir , $new_name));
 				if(!$ret) return false;
 
 				$this->node_id = $new_name;
