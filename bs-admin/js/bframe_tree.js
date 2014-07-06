@@ -139,7 +139,7 @@
 
 			pain_disp_change.appendChild(pain_disp_change_select);
 
-			bframe.addEventListner(pain_disp_change_select, 'change', change_disp_mode);
+			bframe.addEventListner(pain_disp_change_select, 'change', reloadTree);
 			if(property.disp_change.selectedIndex) {
 				pain_disp_change_select.selectedIndex = property.disp_change.selectedIndex;
 			}
@@ -652,7 +652,7 @@
 			}
 		}
 
-		change_disp_mode = function() {
+		reloadTree = function() {
 			getNodeList(current_node.id());
 		}
 
@@ -1064,14 +1064,6 @@
 			}
 		}
 
-		this.getCurrentFolderId = function() {
-			return current_node.id();
-		}
-
-		this.getNodeList = function(id) {
-			getNodeList(id);
-		}
-
 		download = function() {
 			var id;
 
@@ -1099,8 +1091,20 @@
 			}
 		}
 
+		this.getCurrentFolderId = function() {
+			return current_node.id();
+		}
+
+		this.getNodeList = function(id) {
+			getNodeList(id);
+		}
+
 		this.getSelecteNodes = function() {
 			return selected_node.nodes();
+		}
+
+		this.reload = function() {
+			return reloadTree();
 		}
 
 		// -------------------------------------------------------------------------
