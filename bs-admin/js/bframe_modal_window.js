@@ -101,6 +101,14 @@
 			opener = window;
 			var child;
 
+			// arguments
+			for(var i=2 ; i<arguments.length; i++) {
+				var obj = window.document.getElementById(arguments[i]);
+				if(obj) {
+					bframe.setLinkParam(target, arguments[i], obj.value);
+				}
+			}
+
 			if(window_status == 'activate') {
 				for(var i=0 ; i < children.length ; i++) {
 					if(!children[i].getWindowStatus()) {
@@ -138,13 +146,6 @@
 
 			resizeOverlay();
 
-			// arguments
-			for(var i=2 ; i<arguments.length; i++) {
-				var obj = window.document.getElementById(arguments[i]);
-				if(obj) {
-					bframe.setLinkParam(target, arguments[i], obj.value);
-				}
-			}
 			containerBody.src = target.href;
 			containerBody.opener = window;
 
