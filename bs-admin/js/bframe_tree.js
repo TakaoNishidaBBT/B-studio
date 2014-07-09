@@ -39,7 +39,6 @@
 		var trash_ul;
 
 		var node_number = 0;
-		var new_node = new currentNodeControl;
 		var current_node = new currentNodeControl;
 		var selected_node = new currentNodeControl;
 		var current_edit_node;
@@ -520,11 +519,9 @@
 			if(node_info['new_node']) {
 				if(eventSrcObject == pain) {
 					selected_node.set('p'+node_info.node_id);
-					new_node.set('p'+node_info.node_id);
 				}
 				else {
 					selected_node.set('t'+node_info.node_id);
-					new_node.set('t'+node_info.node_id);
 				}
 				editName();
 			}
