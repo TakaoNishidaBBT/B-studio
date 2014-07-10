@@ -94,6 +94,9 @@
 					setTrashContextMenu();
 					setEventHandler();
 				}
+				if(property.selectable == 'true') {
+					target.onclick = resetCurrentObject;
+				}
 				getUploadButton();
 				getPain();
 				getNodeList('');
@@ -220,8 +223,6 @@
 			if(typeof bframe == 'undefined' || !bframe){
 				return;
 			}
-			//
-
 			drag_control.cleanUp();
 			bframe.removeEventListnerAllFrames(top, 'load', hideContextMenuAllFrames);
 			bframe.removeEventListnerAllFrames(top, 'click', hideContextMenu);
@@ -490,6 +491,14 @@
 				if(!selected_node.object()) {
 					selected_node.set(current_node.id());
 				}
+
+				if(response.current_nodes) {
+					var nodes = response.current_nodes.split(',');
+					for(var i=0 ; i<nodes.length ; i++) {
+						current_node.add(nodes[i]);
+					}
+				}
+
 				selected_node.setColor('selected');
 				current_node.setColor('current');
 
@@ -714,10 +723,10 @@
 					rel.location.href = property.relation.deleteNode.url+'&node_id='+encodeURIComponent(selected_node.id().substr(1))+'&in_trash=true';
 				}
 			}
-
 			param = 'terminal_id='+terminal_id;
 			for(var i=0 ; i < selected_node.length() ; i++) {
 				param+= '&delete_node_id[' + i + ']='+encodeURIComponent(selected_node.id(i).substr(1));
+				current_node.del(selected_node.id(i));
 			}
 
 			httpObj = createXMLHttpRequest(showNode);
@@ -893,8 +902,38 @@
 			selected_node.setNodeIdAfterUnload();
 		}
 
+		function checkSelectFilter(node_id) {
+			var node_type = document.getElementById('nt'+node_id);
+			if(!node_type) return;
+			if(!property.select || !property.select.filter) return;
+
+			// check filter
+			for(var i=0 ; i<property.select.filter.length ; i++) {
+				if(property.select.filter[i] == node_type.value) return true;
+			}
+		}
+
+		function checkCurrentFilter(node_id) {
+			var node_type = document.getElementById('nt'+node_id);
+			if(!node_type) return;
+			if(!property.current || !property.current.filter) return;
+
+			// check filter
+			for(var i=0 ; i<property.current.filter.length ; i++) {
+				if(property.current.filter[i] == node_type.value) return true;
+			}
+		}
+
 		function selectObject(node_id) {
+			if(checkSelectFilter(node_id)) return;
 			selected_node.set(node_id);
+			selected_node.setColor('selected');
+			current_node.setColor('current');
+		}
+
+		function currentObject(node_id) {
+			if(checkCurrentFilter(node_id)) return;
+			current_node.set(node_id);
 			selected_node.setColor('selected');
 			current_node.setColor('current');
 		}
@@ -922,7 +961,15 @@
 			current_node.setColor('current');
 		}
 
+		function resetCurrentObject() {
+			selected_node.set();
+			current_node.set();
+			current_node.setColor('current');
+		}
+
 		function addSelectedObject(node_id) {
+			if(checkSelectFilter(node_id)) return;
+
 			if(selected_node.exists(node_id)) {
 				selected_node.del(node_id);
 				var node_span = document.getElementById('s'+node_id);
@@ -930,6 +977,21 @@
 			}
 			else {
 				selected_node.add(node_id);
+			}
+			selected_node.setColor('selected');
+			current_node.setColor('current');
+		}
+
+		function addCurrentObject(node_id) {
+			if(checkCurrentFilter(node_id)) return;
+
+			if(current_node.exists(node_id)) {
+				current_node.del(node_id);
+				var node_span = document.getElementById('s'+node_id);
+				node_span.className = 'node-name ';
+			}
+			else {
+				current_node.add(node_id);
 			}
 			selected_node.setColor('selected');
 			current_node.setColor('current');
@@ -1088,6 +1150,24 @@
 			}
 		}
 
+		open_property = function() {
+			var id;
+
+			if(id = selected_node.id()) {
+				var a = document.createElement('a');
+				document.body.appendChild(a);
+
+				a.href = property.relation.open_property.url+'&node_id='+encodeURIComponent(id.substr(1));
+				a.setAttribute('params', property.relation.open_property.params);
+				a.setAttribute('title', property.relation.open_property.title);
+
+				top.bframe.modalWindow.activate(a, window);
+				if(property.relation.open_property.func) {
+					top.bframe.modalWindow.registCallBackFunction(property.relation.open_property.func);
+				}
+			}
+		}
+
 		this.getCurrentFolderId = function() {
 			return current_node.id();
 		}
@@ -1098,6 +1178,10 @@
 
 		this.getSelecteNodes = function() {
 			return selected_node.nodes();
+		}
+
+		this.getCurrentNodes = function() {
+			return current_node.nodes();
 		}
 
 		this.reload = function() {
@@ -1890,6 +1974,7 @@
 						control.src = property.icon.plus.src;
 					}
 					control.onmousedown = openNode;
+					control.onclick = nop;
 				}
 				else {
 					control.src = property.icon.blank.src;
@@ -2232,8 +2317,11 @@
 				obj.src = property.icon.plus.src;
 				closeNode(node_id);
 			}
+			bframe.stopPropagation(event);
+		}
 
-			return false;
+		function nop(event) {
+			bframe.stopPropagation(event);
 		}
 
 		function selectObjectNode(event) {
@@ -2274,11 +2362,11 @@
 
 			if(property.selectable == 'true') {
 				if(node_type.value != 'folder' && node.id.substr(1) != 'root' && node.id.substr(1) != 'trash') {
-					if(selected_node.id() && selected_node.place() == 'tree' && e.ctrlKey) {
-						addSelectedObject(node.id);
+					if(current_node.id() && current_node.place() == 'tree' && e.ctrlKey) {
+						addCurrentObject(node.id);
 					}
 					else {
-						selectObject(node.id);
+						currentObject(node.id);
 					}
 				}
 			}
@@ -2286,6 +2374,7 @@
 				select(node.id);
 			}
 
+			bframe.stopPropagation(event);
 			if(node.id == current_node.id()) return;
 
 			if(node_type.value != 'folder' && node.id.substr(1) != 'root' && node.id.substr(1) != 'trash') {
