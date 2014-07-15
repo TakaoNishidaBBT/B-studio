@@ -267,7 +267,6 @@ $form_config = array(
 									'module'		=> 'filemanager',
 									'page'			=> 'popup',
 									'method'		=> 'open',
-									'window'		=> 'top.main',
 									'target'		=> 'title_img',
 									'target_id'		=> 'title_img_file',
 									'width'			=> '110',
@@ -316,7 +315,7 @@ $form_config = array(
 					'value'			=> '1',
 					'item'			=>
 					array(
-						'special_html'	=> ' class=radio onclick="articeDetailControl(this, \'external_link\', \'url\', \'external_window\')"',
+						'special_html'	=> ' class=radio onclick="articleDetailControl(this, \'external_link\', \'url\', \'external_window\')"',
 					),
 				),
 			),

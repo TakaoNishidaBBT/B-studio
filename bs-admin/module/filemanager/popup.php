@@ -11,7 +11,6 @@
 
 			$this->dir = B_UPLOAD_DIR;
 
-			$this->_setProperty('window', '');
 			$this->_setProperty('target', '');
 			$this->_setProperty('target_id', '');
 			$this->_setProperty('width', '');
@@ -33,7 +32,6 @@
 
 		function open() {
 			// target
-			$this->_setRequest('window');
 			$this->_setRequest('target');
 			$this->_setRequest('target_id');
 			$this->_setRequest('width');

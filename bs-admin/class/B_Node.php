@@ -153,6 +153,7 @@
 			$list['node_count'] = $this->node_count;
 			$list['folder_count'] = $this->folder_count;
 			$list['create_datetime'] = date('Y/m/d H:i', $this->create_datetime);
+			$list['update_datetime'] = date('Y/m/d H:i', $this->update_datetime);
 			if($dir) {
 				$list['file_size'] = B_Util::human_filesize($this->getFileSize($dir), 1);
 				$list['image_size'] = $this->getImageSize($dir);
@@ -396,11 +397,11 @@
 			$sql = str_replace('%VIEW%', B_DB_PREFIX . $this->view, $sql);
 			$rs = $this->db->query($sql);
 
-			for($cnt=0 ; $row[$cnt] = $this->db->fetch_assoc($rs); $cnt++);
+			for($cnt=0 ; $row[$cnt] = $this->db->fetch_assoc($rs) ; $cnt++);
 
 			$row_data = print_r($row, true);
 
-			for($i=2, $node_name = $default_name;; $node_name = $prefix . $default_name . $extend) {
+			for($i=2, $node_name = $default_name ;; $node_name = $prefix . $default_name . $extend) {
 				for($j=0 ; $j<$cnt && $row[$j]['node_name'] != $node_name; $j++);
 
 				if($j == $cnt) {

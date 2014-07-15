@@ -267,7 +267,6 @@ $form_config = array(
 									'module'		=> 'filemanager',
 									'page'			=> 'popup',
 									'method'		=> 'open',
-									'window'		=> 'top.main',
 									'target'		=> 'title_img',
 									'target_id'		=> 'title_img_file',
 									'width'			=> '110',

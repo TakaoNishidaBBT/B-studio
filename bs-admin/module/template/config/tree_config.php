@@ -52,11 +52,8 @@ $tree_config = array(
 				'root'			=> array('src' => './images/folders/template_root.png'),
 				'trash'			=> array('src' => './images/folders/trash.png'),
 				'forbidden'		=> array('src' => './images/folders/forbidden.png'),
-				'forbidden_big'	=> array('src' => './images/folders/forbidden_big.png'),
 				'line'			=> array('src' => './images/folders/line.gif'),
-				'folder'		=> array('src' => './images/folders/folder.png'),
-				'folder_open'	=> array('src' => './images/folders/folder_open.png'),
-				'template'		=> array('src' => './images/folders/template.png'),
+				'template'		=> array('src' => './images/folders/template.png', 'new' => 'newTemplate'),
 			),
 			'context_menu'		=>
 			array(

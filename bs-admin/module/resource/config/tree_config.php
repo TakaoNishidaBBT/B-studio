@@ -142,7 +142,7 @@ $tree_config = array(
 				'forbidden'		=> array('src' => './images/folders/forbidden.png'),
 				'forbidden_big'	=> array('src' => './images/folders/forbidden_big.png'),
 				'line'			=> array('src' => './images/folders/line.gif'),
-				'folder'		=> array('src' => './images/folders/folder.png'),
+				'folder'		=> array('src' => './images/folders/folder.png', 'new' => 'mewFolder'),
 				'folder_open'	=> array('src' => './images/folders/folder_open.png'),
 				'file'			=> array('src' => './images/folders/file_icon.png', 'ime' => 'true'),
 				'pain'		=>

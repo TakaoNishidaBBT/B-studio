@@ -2269,7 +2269,7 @@
 			span = document.createElement('span');
 			span.className = 'update-datetime';
 			td.appendChild(span);
-			text = document.createTextNode(config.create_datetime);
+			text = document.createTextNode(config.update_datetime);
 			span.appendChild(text);
 
 			// file-size

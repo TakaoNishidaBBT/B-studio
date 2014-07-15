@@ -52,11 +52,10 @@ $tree_config = array(
 				'root'			=> array('src' => './images/folders/widget_root.png'),
 				'trash'			=> array('src' => './images/folders/trash.png'),
 				'forbidden'		=> array('src' => './images/folders/forbidden.png'),
-				'forbidden_big'	=> array('src' => './images/folders/forbidden_big.png'),
 				'line'			=> array('src' => './images/folders/line.gif'),
-				'folder'		=> array('src' => './images/folders/folder.png'),
+				'folder'		=> array('src' => './images/folders/folder.png', 'new' => 'newFolder'),
 				'folder_open'	=> array('src' => './images/folders/folder_open.png'),
-				'widget'		=> array('src' => './images/folders/widget.png'),
+				'widget'		=> array('src' => './images/folders/widget.png', 'new' => 'newWidget'),
 			),
 			'context_menu'		=>
 			array(

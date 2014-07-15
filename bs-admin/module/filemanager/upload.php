@@ -18,14 +18,15 @@
 			switch($this->request['mode']) {
 			case 'confirm':
 			case 'overwrite':
-				$this->confirm($this->request['mode']);
+				$this->_confirm($this->request['mode']);
 				break;
+
 			default:
 				$this->_upload();
 			}
 		}
 
-		function confirm($mode) {
+		function _confirm($mode) {
 			$status = true;
 
 			try {
@@ -113,11 +114,6 @@
 					$status = move_uploaded_file($_FILES['Filedata']['tmp_name'], B_UPLOAD_DIR . $path . $file['basename']);
 					if($status) {
 						chmod(B_UPLOAD_DIR . $path . $file['basename'], 0777);
-						$i = strrpos($file['basename'], '.');
-						if($i) {
-							$file_name = substr($file['basename'], 0, $i);
-							$file_extension = substr($file['basename'], $i+1);
-						}
 						$this->removeThumbnail($path, $file['basename']);
 						$root = new B_FileNode(B_UPLOAD_DIR, 'root', null, null, 'all');
 						$this->refleshThumnailCache($root);
