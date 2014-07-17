@@ -177,8 +177,8 @@
 		return '$apr1$' . $salt . '$' . $tmp;
 	}
 
-	function exception_error_handler($errno, $errstr, $errfile, $errline ) {
-	    if (!(error_reporting() & $errno)) {
+	function exception_error_handler($errno, $errstr, $errfile, $errline) {
+	    if(!(error_reporting() & $errno)) {
 	        // error_reporting 設定に含まれていないエラーコードです
 	        return;
 	    }
