@@ -34,6 +34,7 @@
 		var opener;
 		var baseIndex = 5000;
 		var callBackFunction;
+		var activeWindow = Array();
 
 		overlay.className = 'overlay';
 		overlay.style.display = 'none';
@@ -164,6 +165,7 @@
 			}
 
 			window_status = 'activate';
+			activeWindow.push(containerBody);
 		};
 
 		function onloadModalWindow() {
@@ -201,6 +203,7 @@
 			modal_window.style.opacity = 0;
 			containerBody.src = 'about:blank';
 			window_status = false;
+			activeWindow.pop();
 
 			executeCallBack(param);
 		}
@@ -245,6 +248,14 @@
 
 		function executeCallBack(param) {
 			if(callBackFunction) callBackFunction(param);
+		}
+
+		this.preventKeyEvent = function(window_name) {
+			if(activeWindow.length) {
+				if(window_name != activeWindow[activeWindow.length-1].name) {
+					return true;
+				}
+			}
 		}
 
 		bframe.resize_handler.registCallBackFunction(resizeOverlay);
