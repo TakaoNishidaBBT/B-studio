@@ -448,7 +448,7 @@
 	}
 
     bframe.cancelEvent = function(e) {
-        e.preventDefault? e.preventDefault() : window.event.returnValue = false;
+        e.preventDefault ? e.preventDefault() : window.event.returnValue = false;
     }
 
 	bframe.addEventListner = function(obj, event, func) {

@@ -159,6 +159,10 @@
 		}
 
 		function keydown(event) {
+			// if modal window open and content is not myself
+			if(top.bframe.modalWindow && top.bframe.modalWindow.preventKeyEvent(window.name)) {
+				return;
+			}
 			if(window.event) {
 				var keycode = window.event.keyCode;
 			}
