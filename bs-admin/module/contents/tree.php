@@ -109,7 +109,7 @@
 					}
 				}
 			}
-			$this->response($this->request['node_id'], 'select');
+			$this->response($this->request['destination_node_id'], 'select');
 			exit;
 		}
 
