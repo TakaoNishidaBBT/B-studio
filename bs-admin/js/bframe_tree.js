@@ -135,6 +135,7 @@
 
 		function setDispChange() {
 			pain_disp_change_select = document.createElement('select');
+			pain_disp_change_select.className = 'bframe_selectbox';
 
 			pain_disp_change_select.options[0] = new Option(property.disp_change.options[0].title, property.disp_change.options[0].value);
 			pain_disp_change_select.options[1] = new Option(property.disp_change.options[1].title, property.disp_change.options[1].value);
@@ -1946,7 +1947,7 @@
 
 			li.node_class = config.node_class;
 			li.node_type = config.node_type;
-			li.utime = config.update_datetime;
+			li.utime = config.update_datetime_u;
 
 			div = document.createElement('div');
 			div.name = 'node_div';
@@ -2048,15 +2049,15 @@
 						}
 						else {
 							if(config.thumbnail_image_path) {
-								obj_img.src = config.thumbnail_image_path + '?' + config.update_datetime;
+								obj_img.src = config.thumbnail_image_path + '?' + config.update_datetime_t;
 							}
 							else {
 								var file_name = config.path.substring(config.path.lastIndexOf('/')+1,config.path.length);
 								var dir = config.path.substring(0, config.path.lastIndexOf('/')+1);
 								var extension = file_name.substring(file_name.lastIndexOf('.')+1, file_name.length);
-								obj_img.src = property.thumb_path + property.thumb_prefix + config.contents_id + '.' + extension + '?' + config.update_datetime;
+								obj_img.src = property.thumb_path + property.thumb_prefix + config.contents_id + '.' + extension + '?' + config.update_datetime_t;
 							}
-							a.title = 'size:' + config.image_size + '\n' + 'date:' + config.create_datetime;
+							a.title = 'size:' + config.image_size + '\n' + 'date:' + config.create_datetime_t;
 						}
 						break;
 					default:
@@ -2157,7 +2158,7 @@
 			tr = document.createElement('tr');
 			tr.id = node_id;
 			tr.name = 'node';
-			tr.utime = config.update_datetime;
+			tr.utime = config.update_datetime_u;
 			tr.node_class = config.node_class;
 			parent.appendChild(tr);
 
@@ -2273,7 +2274,7 @@
 			span = document.createElement('span');
 			span.className = 'update-datetime';
 			td.appendChild(span);
-			text = document.createTextNode(config.update_datetime);
+			text = document.createTextNode(config.update_datetime_t);
 			span.appendChild(text);
 
 			// file-size

@@ -152,8 +152,10 @@
 
 			$list['node_count'] = $this->node_count;
 			$list['folder_count'] = $this->folder_count;
-			$list['create_datetime'] = date('Y/m/d H:i', $this->create_datetime);
-			$list['update_datetime'] = date('Y/m/d H:i', $this->update_datetime);
+			$list['create_datetime_u'] = $this->create_datetime;
+			$list['create_datetime_t'] = date('Y/m/d H:i', $this->create_datetime);
+			$list['update_datetime_u'] = $this->update_datetime;
+			$list['update_datetime_t'] = date('Y/m/d H:i', $this->update_datetime);
 			if($dir) {
 				$list['file_size'] = B_Util::human_filesize($this->getFileSize($dir), 1);
 				$list['image_size'] = $this->getImageSize($dir);
