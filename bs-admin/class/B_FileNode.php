@@ -37,7 +37,8 @@
 
 			if(!file_exists($this->fullpath)) return;
 
-			$this->update_datetime = date('Y/m/d H:i', filemtime($this->fullpath));
+			$this->update_datetime_u = filemtime($this->fullpath);
+			$this->update_datetime_t = date('Y/m/d H:i', filemtime($this->fullpath));
 			if(!is_dir($this->fullpath)) {
 				$this->file_size = filesize($this->fullpath);
 				$this->node_type = 'file';
@@ -151,8 +152,8 @@
 			$list['thumbnail_image_path'] = $this->thumbnail_image_path;
 			$list['node_count'] = $this->node_count;
 			$list['folder_count'] = $this->folder_count;
-			$list['update_datetime'] = $this->update_datetime;
-			$list['create_datetime'] = $this->update_datetime;
+			$list['update_datetime_t'] = $this->update_datetime_t;
+			$list['create_datetime_t'] = $this->update_datetime_t;
 			$list['file_size'] = B_Util::human_filesize($this->file_size, 1);
 			if($this->image_size) {
 				$list['image_size'] = $this->image_size;

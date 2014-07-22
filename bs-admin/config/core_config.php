@@ -88,9 +88,11 @@
 	//ダンプファイル
 	define('B_DUMP_FILE', 'dump/');
 
+	// サムネイル
 	define('B_THUMB_PREFIX', 'thumb_');
 	define('B_THUMB_MAX_SIZE', '100');
 
+	// ゴミ箱
 	define('B_TRASH_PATH', 'trash/');
 
 	// ファイル情報

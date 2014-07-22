@@ -504,7 +504,10 @@
 					}
 				}
 
+				// reload and set color
+				selected_node.reload();
 				selected_node.setColor('selected');
+				current_node.reload();
 				current_node.setColor('current');
 
 				if(upload_button) {
@@ -1322,6 +1325,17 @@
 						current_node.splice(i, 1);
 						break;
 					}
+				}
+			}
+
+			this.reload = function() {
+				for(var i=0 ; i < current_node.length ; i++) {
+					var node_id = current_node[i].id;
+					var pt = document.getElementById('p' + node_id);
+					var file_path = pt ? pt.value : '';
+					var nn = document.getElementById('nn' + node_id);
+					var n = nn ? nn.value : 0;
+					current_node.splice(i, 1, {id: node_id, path: file_path, node_number: n});
 				}
 			}
 
