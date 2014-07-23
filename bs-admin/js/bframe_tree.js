@@ -1193,7 +1193,7 @@
 		}
 
 		this.reload = function() {
-			return reloadTree();
+			return reloadTree(current_node.id());
 		}
 
 		// -------------------------------------------------------------------------
