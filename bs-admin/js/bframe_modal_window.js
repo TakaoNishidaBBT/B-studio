@@ -30,7 +30,7 @@
 		var window_height_default = 250;
 		var window_status;
 		var set_window_size = false;
-		var children = Array();
+		var child;
 		var opener;
 		var baseIndex = 5000;
 		var callBackFunction;
@@ -74,17 +74,33 @@
 		containerHeader.onmousemove = onContainerHeaderMouseMove;
 		containerHeader.onmouseup = onContainerHeaderMouseUp;
 
+		containerBody.id = 'modal_window' + window_id;
 		containerBody.name = 'modal_window' + window_id;
 		containerBody.className = 'containerBody';
 		containerBody.style.position = 'relative';
 		containerBody.frameBorder = 0;
 		containerBody.deactivate = deactivate;
-		containerBody.onload = onloadModalWindow;
 		container.appendChild(containerBody);
 
 		bframe.addEventListner(overlay, 'click', deactivate);
 
 		var drag_control = new dragControl();
+
+		function onKeyDown(event) {
+			if(window.event) {
+				var keycode = window.event.keyCode;
+			}
+			else {
+				var keycode = event.keyCode;
+			}
+			if(keycode == 8) {	// BackSpace
+				var ae = containerBody.contentDocument.activeElement.tagName;
+				// active element
+				if(ae && ae.toLowerCase() != 'textarea' && ae.toLowerCase() != 'input') {
+					bframe.stopPropagation(event);
+				}
+			}
+		}
 
 		function onContainerHeaderMouseDown(event) {
 			drag_control.dragStart(event);
@@ -99,9 +115,6 @@
 		}
 
 		this.activate = function(target, window) {
-			opener = window;
-			var child;
-
 			// arguments
 			for(var i=2 ; i<arguments.length; i++) {
 				var obj = window.document.getElementById(arguments[i]);
@@ -111,20 +124,13 @@
 			}
 
 			if(window_status == 'activate') {
-				for(var i=0 ; i < children.length ; i++) {
-					if(!children[i].getWindowStatus()) {
-						child = children[i];
-						break;
-					}
-				}
 				if(!child) {
-					var id = window_id*10 + children.length+1;
+					var id = window_id*10;
 					child = new bframe.modal_window(id);
 					child.setBaseIndex(baseIndex + 1000 + i*10);
 				}
 				child.setOverlayOpacity(0);
 				child.activate(target, window);
-				children.push(child);
 				return;
 			}
 
@@ -147,6 +153,7 @@
 
 			resizeOverlay();
 
+			containerBody.onload = onloadModalWindow;
 			containerBody.src = target.href;
 			containerBody.opener = window;
 
@@ -164,11 +171,15 @@
 				bframe.effect.fadeIn(modal_window, 300, 0, 100, 400);
 			}
 
+			//focus
+			modal_window.focus();
+			frames[containerBody.id].focus();
+
 			window_status = 'activate';
-			activeWindow.push(containerBody);
 		};
 
 		function onloadModalWindow() {
+			containerBody.contentDocument.onkeydown = onKeyDown;
 			if(set_window_size) return;
 
 			try {
@@ -183,7 +194,7 @@
 		
 		function setWindowSize(width, height) {
 			if(!width || !height) return;
-			
+
 			window_width_default = width;
 			window_height_default = height;
 			resizeOverlay();
@@ -191,16 +202,15 @@
 		}
 
 		function deactivate(param) {
-			for(var i=children.length; i > 0; i--) {
-				var child = children[i-1];
-				if(child.getWindowStatus()) {
-					child.deactivate(param);
-					return;
-				}
+			if(child && child.getWindowStatus()) {
+				child.deactivate(param);
+				return;
 			}
+
 			overlay.style.display = 'none';
 			modal_window.style.display = 'none';
 			modal_window.style.opacity = 0;
+			containerBody.onload = '';
 			containerBody.src = 'about:blank';
 			window_status = false;
 			activeWindow.pop();
@@ -236,12 +246,9 @@
 		}
 
 		this.registCallBackFunction = function(func) {
-			for(var i=children.length; i > 0; i--) {
-				var child = children[i-1];
-				if(child.getWindowStatus()) {
-					child.registCallBackFunction(func);
-					return;
-				}
+			if(child && child.getWindowStatus()) {
+				child.registCallBackFunction(func);
+				return;
 			}
 			if(func) callBackFunction = func;
 		}
@@ -250,12 +257,10 @@
 			if(callBackFunction) callBackFunction(param);
 		}
 
-		this.preventKeyEvent = function(window_name) {
-			if(activeWindow.length) {
-				if(window_name != activeWindow[activeWindow.length-1].name) {
-					return true;
-				}
-			}
+		this.getActiveWindow = function(window_name) {
+			if(!window_status) return false;
+			if(child)  return child.getActiveWindow() || containerBody.name;
+			return containerBody.name;
 		}
 
 		bframe.resize_handler.registCallBackFunction(resizeOverlay);
