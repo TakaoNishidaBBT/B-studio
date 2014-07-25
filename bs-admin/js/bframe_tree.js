@@ -160,16 +160,17 @@
 		}
 
 		function keydown(event) {
-			// if modal window open and content is not myself
-			if(top.bframe.modalWindow && top.bframe.modalWindow.preventKeyEvent(window.name)) {
-				return;
-			}
 			if(window.event) {
 				var keycode = window.event.keyCode;
 			}
 			else {
 				var keycode = event.keyCode;
 			}
+
+			// if modal window open and content is not myself
+			if(top.bframe.modalWindow) var active_window_name = top.bframe.modalWindow.getActiveWindow();
+			if(active_window_name && active_window_name != window.name) return;
+
 			switch(keycode) {
 			case 46:	// Delete
 				if(!property.key || !property.key.delete) return;
@@ -948,7 +949,7 @@
 
 		function selectAll() {
 			var node_id = current_node.id().substr(1);
-			var pain = document.getElementById('uu'+node_id);
+			var pain = document.getElementById('uu'+node_id) || document.getElementById('tt'+node_id);
 			if(!pain) return;
 
 			for(var n=pain.firstChild; n; n = n.nextSibling) {
@@ -1193,7 +1194,7 @@
 		}
 
 		this.reload = function() {
-			return reloadTree(current_node.id());
+			return reloadTree();
 		}
 
 		// -------------------------------------------------------------------------
