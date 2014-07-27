@@ -174,11 +174,13 @@
 			return $ret;
 		}
 
-		function human_filesize($bytes, $factor) {
-			if($bytes == 0) return;
+		function human_filesize($bytes, $scale) {
+			$factor = array('B' => 0, 'K' => 1, 'M' => 2, 'G' => 3, 'T' => 4, 'P' => 5);
+			if(!$unit = $factor[$scale]) return $bytes;
 
-			$sz = 'BKMGTP';
-			return sprintf("%.2f", $bytes / pow(1024, $factor)) . @$sz[$factor] . 'B';
+			$value = $bytes / pow(1024, $unit);
+			$value = ceil($value * 100) / 100;
+			return sprintf("%.2f", $value) . $scale . 'B';
 		}
 
 		function decode_human_filesize($filesize) {

@@ -75,7 +75,7 @@
 				}
 			}
 
-			$this->sort();
+			$this->sort('primary');
 
 			closedir($handle);
 		}
@@ -90,20 +90,50 @@
 			}
 		}
 
-		function sort() {
-			if(is_array($this->node)) {
+		function sort($type=null) {
+			if(!is_array($this->node)) return;
+			if($type == 'primary') {
+				usort($this->node, array($this,'_sort_name_callback'));
+			}
+			else {
 				uasort($this->node, array($this,'_sort_name_callback'));
 			}
+			$i=0;
+			foreach($this->node as &$value) {
+				$value->order = $i++;
+			}
+			ksort($this->node);
 		}
 
 		function _sort_name_callback($a, $b) {
+			$key = $this->sort_key ? $this->sort_key : 'file_name';
+			$order = $this->sort_order ? $this->sort_order : 'asc';
+
 			if($a->node_type == $b->node_type) {
-				$ret = ($a->file_name < $b->file_name) ? -1 : 1;
+				if($order == 'asc') {
+					$ret = ($a->$key < $b->$key) ? -1 : 1;
+				}
+				else {
+					$ret = ($a->$key >= $b->$key) ? -1 : 1;
+				}
 			}
 			else {
-				$ret = ($a->node_type > $b->node_type) ? -1 : 1;
+				if($order == 'asc') {
+					$ret = ($a->node_type > $b->node_type) ? -1 : 1;
+				}
+				else {
+					$ret = ($a->node_type <= $b->node_type) ? -1 : 1;
+				}
 			}
 			return $ret;
+		}
+
+		function setSortKey($sort_key) {
+			$this->sort_key = $sort_key;
+		}
+
+		function setSortOrder($sort_order) {
+			$this->sort_order = $sort_order;
 		}
 
 		function getHtml() {
@@ -135,6 +165,9 @@
 			$list = $this->_getNodeList($node_id, $category, $path, $disp_seq);
 
 			if(is_array($this->node)) {
+				if($this->sort_key) {
+					$this->sort();
+				}
 				$disp_seq=0;
 				foreach(array_keys($this->node) as $key) {
 					$child_list[] = $this->node[$key]->getNodeList($node_id, $category, $list['path'], $disp_seq++);
@@ -154,7 +187,10 @@
 			$list['folder_count'] = $this->folder_count;
 			$list['update_datetime_t'] = $this->update_datetime_t;
 			$list['create_datetime_t'] = $this->update_datetime_t;
-			$list['file_size'] = B_Util::human_filesize($this->file_size, 1);
+			if($this->node_type != 'folder') {
+				$list['file_size'] = $this->file_size;
+				$list['human_file_size'] = B_Util::human_filesize($this->file_size, 'K');
+			}
 			if($this->image_size) {
 				$list['image_size'] = $this->image_size;
 			}
@@ -166,6 +202,7 @@
 			}
 			$list['path'] = $path . $list['node_name'];
 			$list['disp_seq'] = $disp_seq;
+			$list['order'] = $this->order;
 			return $list;
 		}
 

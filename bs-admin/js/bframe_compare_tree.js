@@ -126,7 +126,6 @@
 
 		function getNodeList(id) {
 			var param;
-console.log('getNodeList', id);
 			param = 'terminal_id='+terminal_id+'&target_id='+target_id;
 			if(id) {
 				param+= '&node_id='+id.substr(2);
@@ -299,7 +298,6 @@ console.log('getNodeList', id);
 			else {
 				var icon = node_type.value;
 			}
-console.log('icon', icon);
 			obj_img.src = property.icon[icon].src;
 		}
 

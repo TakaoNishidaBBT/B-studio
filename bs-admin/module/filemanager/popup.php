@@ -29,7 +29,7 @@
 				exit;
 			}
 		}
-
+/*
 		function open() {
 			// target
 			$this->_setRequest('target');
@@ -400,7 +400,7 @@
 
 			require_once('./view/view_quick_upload.php');
 		}
-
+*/
 		function view() {
 			// HTTPヘッダー出力
 			$this->sendHttpHeader();

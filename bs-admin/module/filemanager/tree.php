@@ -18,11 +18,20 @@
 			$this->tree->setConfig($this->tree_config);
 
 			$this->status = true;
+			if(!$this->session['sort_order']) $this->session['sort_order'] = 'asc';
+			if(!$this->session['sort_key']) $this->session['sort_key'] = 'file_name';
 		}
 
 		function getNodeList() {
 			$this->session['selected_node'] = '';
 
+			if($this->request['sort_key']) {
+				if($this->request['node_id'] == $this->session['current_node'] && $this->session['sort_key'] == $this->request['sort_key']) {
+					$this->session['sort_order'] = $this->session['sort_order'] == 'asc' ? 'desc' : 'asc';
+				}
+				
+				$this->session['sort_key'] = $this->request['sort_key'];
+			}
 			if($this->request['node_id']) {
 				$this->session['current_node'] = $this->request['node_id'];
 				$this->session['open_nodes'][$this->request['node_id']] = true;
@@ -284,7 +293,16 @@
 			if($this->message) {
 				$response['message'] = $this->message;
 			}
+
 			$root_node = new B_FileNode($this->dir, '/', $this->session['open_nodes'], null, 1);
+			if($this->session['sort_key']) {
+				$current_node = $root_node->getNodeById($this->session['current_node']);
+				if($current_node) {
+					$current_node->setSortKey($this->session['sort_key']);
+					$current_node->setSortOrder($this->session['sort_order']);
+				}
+			}
+
 			$list[] = $root_node->getNodeList($node_id, $category);
 
 			if(!$this->request['node_id']) {
@@ -293,9 +311,12 @@
 			if($this->session['selected_node']) {
 				$response['selected_node'] = $this->session['selected_node'];
 			}
-
 			if($list) {
 				$response['node_info'] = $list;
+			}
+			if($this->session['sort_key']) {
+				$response['sort_key'] = $this->session['sort_key'];
+				$response['sort_order'] = $this->session['sort_order'];
 			}
 
 			header('Content-Type: application/x-javascript charset=utf-8');

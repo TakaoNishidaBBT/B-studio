@@ -25,6 +25,7 @@
 		var target_id = bframe.getID(target);
 
 		var response_wait = false;
+		var response;
 		var httpObj;
 
 		var ret = bframe.getPageInfo();
@@ -70,6 +71,8 @@
 		var upload_button;
 		var upload_button_style_display;
 
+		var sort_key;
+
 		var opener = window.opener;
 
 		init();
@@ -87,7 +90,7 @@
 			if(httpObj.readyState == 4 && httpObj.status == 200 && response_wait){
 				property = eval('('+httpObj.responseText+')');
 				response_wait = false;
-				if(property.editable == 'true' || property.sortable == 'true') {
+				if(property.editable == 'true' || property.sort == 'manual') {
 					setDragControl();
 					setContextMenu();
 					context_menu.setFilter(context_filter);
@@ -110,7 +113,7 @@
 		function getPain() {
 			if(property.relation && property.relation.pain) {
 			    pain = document.getElementById(property.relation.pain.id);
-				if(property.editable == 'true' || property.sortable == 'true') {
+				if(property.editable == 'true' || property.sort == 'manual') {
 					pain.oncontextmenu=showContextMenu;
 					pain.onclick = resetSelectedObject;
 				}
@@ -124,7 +127,7 @@
 		function getUploadButton() {
 			if(property.upload && property.upload.button) {
 			    upload_button = document.getElementById(property.upload.button);
-				if(property.editable == 'true' || property.sortable == 'true') {
+				if(property.editable == 'true' || property.sort == 'manual') {
 					upload_button_style_display = upload_button.style.display;
 				}
 				else {
@@ -432,6 +435,10 @@
 			if(property.relation && property.relation.disp_change) {
 				param+= '&disp_mode='+pain_disp_change_select.selectedIndex;
 			}
+			if(property.sort == 'auto' && sort_key) {
+				param+= '&sort_key='+sort_key;
+				sort_key = '';
+			}
 			httpObj = createXMLHttpRequest(showNode);
 
 			eventHandler(httpObj, property.module, property.file, property.method.getNodeList, 'POST', param);
@@ -546,10 +553,27 @@
 
 			if(node_info.children) {
 				if(pain) {
+					var ul = document.createElement('ul');
+					ul.id = 'tu' + node_info.node_id;
+					ul.name = 'nodes';
+					li.appendChild(ul);
+
+					for(var i=0 ; i < node_info.children.length ; i++) {
+						if(node_info.children[i].node_type == 'file') {
+							continue;
+						}
+						_showNode(ul, node_info.children[i], trash);
+					}
+
 					if(current_node.id() && node_info.node_id == current_node.id().substr(1)) {
 						// create div
 						var div = document.createElement('div');
 						pain.appendChild(div);
+
+						// sort
+						if(property.sort == 'auto') {
+							node_info.children.sort(_sort_callback);
+						}
 
 						if(pain_disp_change && pain_disp_change_select.options[pain_disp_change_select.selectedIndex].value == 'detail') {
 							// detail
@@ -565,7 +589,7 @@
 							ptbody.className = 'pain';
 
 							// title
-							createDetailTitle(ptbody);
+							createDetailTitle(ptbody, response.sort_key, response.sort_order);
 
 							for(var i=0 ; i < node_info.children.length ; i++) {
 								createDetailNodeObject(ptbody, node_info.children[i]);
@@ -583,17 +607,6 @@
 							}
 						}
 					}
-					var ul = document.createElement('ul');
-					ul.id = 'tu' + node_info.node_id;
-					ul.name = 'nodes';
-					li.appendChild(ul);
-
-					for(var i=0 ; i < node_info.children.length ; i++) {
-						if(node_info.children[i].node_type == 'file') {
-							continue;
-						}
-						_showNode(ul, node_info.children[i], trash);
-					}
 				}
 				else {
 					var ul = document.createElement('ul');
@@ -606,6 +619,10 @@
 					}
 				}
 			}
+		}
+
+		function _sort_callback(a, b) {
+			return a['order'] - b['order'];
 		}
 
 		function closeNode(node_id) {
@@ -1626,7 +1643,7 @@
 				destination_node_id = '';
 				destination_node = '';
 
-				if(property.sortable == 'true') {
+				if(property.sort == 'manual') {
 					if(property.relation && property.relation.pain && bframe.searchParentById(node, property.relation.pain.id) &&
 						pain_disp_change_select.options[pain_disp_change_select.selectedIndex].value != 'detail') {
 						// destination is in pain and display mode is icon style
@@ -1737,7 +1754,7 @@
 					}
 				}
 
-				// if the destination node is source node's child and in trash, drag is disabled
+				// if the destination node is source node's child or in trash, drag is prohibited
 				if(isPossible()) {
 					if(drop_forbidden.style.visibility == 'visible') {
 						drop_forbidden.style.visibility = 'hidden';
@@ -2142,9 +2159,8 @@
 		// -------------------------------------------------------------------------
 		// class createDetailTitle
 		// -------------------------------------------------------------------------
-		function createDetailTitle(parent) {
+		function createDetailTitle(parent, sort_key, sort_order) {
 			var tr, th, span, text;
-
 			tr = document.createElement('tr');
 			parent.appendChild(tr);
 
@@ -2157,6 +2173,21 @@
 				span.appendChild(text);
 				th.appendChild(span);
 				tr.appendChild(th);
+				if(property.sort == 'auto' && property.detail.header[i].sort_key) {
+					input = document.createElement('input');
+					input.type = 'hidden';
+					input.name = 'sort_key';
+					input.value = property.detail.header[i].sort_key
+					th.appendChild(input);
+					th.className+= ' sortable';
+					if(sort_key && sort_key == property.detail.header[i].sort_key) {
+						if(sort_order) {
+							th.className+= ' '
+							th.className+= sort_order;
+						}
+					}
+					th.onclick = sort;
+				}
 			}
 		}
 
@@ -2166,7 +2197,7 @@
 		function createDetailNodeObject(parent, config) {
 			if(!config.node_id) return;
 
-			var tr, div, ul, li, control, a, obj_img, span, text, input;
+			var tr, td, div, ul, li, control, a, obj_img, span, text, input;
 
 			var node_id = 'p'+config.node_id;
 
@@ -2281,44 +2312,24 @@
 			text = document.createTextNode(config.node_name);
 			span.appendChild(text);
 
-			// update-datetime
-			td = document.createElement('td');
-			td.className = 'update-datetime';
-			tr.appendChild(td);
+			for(var i=1 ; i<property.detail.header.length ; i++) {
+				td = setColumn(property.detail.header[i], config[property.detail.header[i].name]);
+				tr.appendChild(td);
+			}
+		}
+
+		function setColumn(config, value) {
+			var td = document.createElement('td');
+			td.className = config.className;
 
 			span = document.createElement('span');
-			span.className = 'update-datetime';
+			span.className = config.className;
 			td.appendChild(span);
-			text = document.createTextNode(config.update_datetime_t);
+			if(!value) value = '';
+			text = document.createTextNode(value);
 			span.appendChild(text);
 
-			// file-size
-			td = document.createElement('td');
-			td.className = 'file-size';
-			tr.appendChild(td);
-
-			span = document.createElement('span');
-			span.className = 'file-size';
-			td.appendChild(span);
-			if(config.file_size) {
-				text = document.createTextNode(config.file_size);
-				span.appendChild(text);
-			}
-
-			// image-size
-			td = document.createElement('td');
-			td.className = 'image-size';
-			tr.appendChild(td);
-
-			span = document.createElement('span');
-			span.className = 'image-size';
-			td.appendChild(span);
-			if(config.image_size) {
-				text = document.createTextNode(config.image_size);
-				span.appendChild(text);
-			}
-
-			return;
+			return td;
 		}
 
 		function openNode(event) {
@@ -2475,5 +2486,13 @@
 			if(property.editable == 'true') {
 				drag_control.dragging(event);
 			}
+		}
+
+		function sort(event) {
+			var event_obj = bframe.getEventSrcElement(event);
+			var th = bframe.searchParentByTagName(event_obj, 'th');
+			var sort_obj = bframe.serachNodeByName(th, 'sort_key');
+			sort_key = sort_obj.value;
+			reloadTree();
 		}
 	}

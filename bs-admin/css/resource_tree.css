@@ -183,6 +183,21 @@ div.detail table th span {
 	border-bottom: 1px solid #fff;
 	color: #fff;
 }
+div.detail table th.sortable {
+	cursor: pointer;
+}
+div.detail table th.sortable span {
+	background: url(../images/common/sort.png) no-repeat 100% center transparent;
+}
+div.detail table th.asc span {
+	background: url(../images/common/sort_asc.png) no-repeat 100% center transparent;
+}
+div.detail table th.desc span {
+	background: url(../images/common/sort_desc.png) no-repeat 100% center transparent;
+}
+div.detail table th.sortable:hover span {
+	color: #ccc;
+}
 div.detail table th.file-name {
 	min-width: 240px;
 }
@@ -193,13 +208,13 @@ div.detail table th.update-time span {
 	padding-left: 8px;
 }
 div.detail table th.file-size {
-	min-width: 100px;
+	min-width: 115px;
 }
 div.detail table th.file-size span {
 	padding-left: 4px;
 }
 div.detail table th.image-size {
-	min-width: 100px;
+	min-width: 115px;
 }
 div.detail table th.image-size span {
 	padding-left: 4px;
