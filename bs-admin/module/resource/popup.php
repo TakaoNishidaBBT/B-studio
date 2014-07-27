@@ -48,13 +48,13 @@
 				exit;
 			}
 		}
-
+/*
 		function open() {
 			// target
 			$this->_setRequest('target');
 			$this->_setRequest('target_id');
 		}
-
+/*
 		function openCurrentNode($node_id) {
 			$sql_org = "select parent_node from %VIEW% where node_id='%NODE_ID%'";
 			$sql_org = str_replace('%VIEW%', B_DB_PREFIX . B_WORKING_RESOURCE_NODE_VIEW, $sql_org);
@@ -449,7 +449,7 @@
 
 			exit;
 		}
-
+/*
 		function response($node_id, $category) {
 			$response['status'] = $this->status;
 			if($this->message) {
@@ -496,7 +496,7 @@
 
 			return ${$g_data_set}['node_error'][$error];
 		}
-
+*/
 		function view() {
 			// HTTPヘッダー出力
 			$this->sendHttpHeader();

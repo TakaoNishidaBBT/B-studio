@@ -14,7 +14,7 @@
 	// 		   : 3	node was updated by other user
 	// -------------------------------------------------------------------------
 	class B_Node {
-		function __construct($db, $table, $view, $version, $revision, $node_id, $parent, $expand_level, $open_nodes, $level=0, $row=null) {
+		function __construct($db, $table, $view, $version, $revision, $node_id, $parent, $expand_level, $open_nodes, $sort_mode='manual', $level=0, $row=null) {
 			$this->db = $db;
 			$this->table = $table;
 			$this->view = $view;
@@ -23,6 +23,7 @@
 			$this->node_id = $node_id;
 			$this->status = true;
 			$this->error_no = 0;
+			$this->sort_mode = $sort_mode;
 			$this->level = $level;
 			$this->node_count = 0;
 
@@ -70,6 +71,7 @@
 										, $this
 										, $expand_level
 										, $open_nodes
+										, $sort
 										, $level+1
 										, $row);
 					$this->addNodes($object);
@@ -99,8 +101,12 @@
 				$sql.= "where parent_node is null";
 			}
 			$sql.= " and del_flag='0'";
-			$sql.= " order by disp_seq";
-
+			if($this->sort_mode == 'manual') {
+				$sql.= " order by disp_seq";
+			}
+			else {
+				$sql.= " order by node_name";
+			}
 			$sql = str_replace('%VIEW%', B_DB_PREFIX . $this->view, $sql);
 			$rs = $this->db->query($sql);
 
@@ -111,6 +117,49 @@
 			foreach($config as $key => $value) {
 				$this->$key = $value;
 			}
+		}
+
+		function sort(&$list) {
+			if(!is_array($list)) return;
+
+			uasort($list, array($this,'_sort_callback'));
+
+			$i=0;
+			foreach($list as &$value) {
+				$value['order'] = $i++;
+			}
+			ksort($list);
+		}
+
+		function _sort_callback($a, $b) {
+			$key = $this->sort_key ? $this->sort_key : 'node_name';
+			$order = $this->sort_order ? $this->sort_order : 'asc';
+
+			if($a['node_type'] == $b['node_type']) {
+				if($order == 'asc') {
+					$ret = ($a[$key] < $b[$key]) ? -1 : 1;
+				}
+				else {
+					$ret = ($a[$key] >= $b[$key]) ? -1 : 1;
+				}
+			}
+			else {
+				if($order == 'asc') {
+					$ret = ($a['node_type'] > $b['node_type']) ? -1 : 1;
+				}
+				else {
+					$ret = ($a['node_type'] <= $b['node_type']) ? -1 : 1;
+				}
+			}
+			return $ret;
+		}
+
+		function setSortKey($sort_key) {
+			$this->sort_key = $sort_key;
+		}
+
+		function setSortOrder($sort_order) {
+			$this->sort_order = $sort_order;
 		}
 
 		function getHtml() {
@@ -131,6 +180,9 @@
 			if(is_array($this->node)) {
 				foreach(array_keys($this->node) as $key) {
 					$child_list[] = $this->node[$key]->getNodeList($node_id, $category, $dir, $list['path']);
+				}
+				if($this->sort_key) {
+					$this->sort($child_list);
 				}
 				$list['children'] = $child_list;
 			}
@@ -156,8 +208,9 @@
 			$list['create_datetime_t'] = date('Y/m/d H:i', $this->create_datetime);
 			$list['update_datetime_u'] = $this->update_datetime;
 			$list['update_datetime_t'] = date('Y/m/d H:i', $this->update_datetime);
-			if($dir) {
-				$list['file_size'] = B_Util::human_filesize($this->getFileSize($dir), 1);
+			if($dir && $this->node_type != 'folder') {
+				$list['file_size'] = $this->getFileSize($dir);
+				$list['human_file_size'] = B_Util::human_filesize($list['file_size'], 'K');
 				$list['image_size'] = $this->getImageSize($dir);
 			}
 			$list['level'] = $this->level;
@@ -630,6 +683,18 @@
 			}
 
 			return false;
+		}
+
+		function getNodeById($node_id) {
+			if($this->node_id == $node_id) {
+				return $this;
+			}
+			if(is_array($this->node)) {
+				foreach(array_keys($this->node) as $key) {
+					$ret = $this->node[$key]->getNodeById($node_id);
+					if($ret) return $ret;
+				}
+			}
 		}
 
 		function getRoots($node_id) {

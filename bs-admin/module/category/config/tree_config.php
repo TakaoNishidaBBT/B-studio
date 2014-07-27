@@ -16,7 +16,7 @@ $tree_config = array(
 			'module'		=> $this->module,
 			'file'			=> 'tree',
 			'editable'		=> 'true',
-			'sortable'		=> 'true',
+			'sort'			=> 'manual',
 			'root_name'		=> 'カテゴリ',
 			'method'		=>
 			array(

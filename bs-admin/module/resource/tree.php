@@ -28,6 +28,9 @@
 				$this->openCurrentNode($this->request['node_id']);
 			}
 
+			if(!$this->session['sort_order']) $this->session['sort_order'] = 'asc';
+			if(!$this->session['sort_key']) $this->session['sort_key'] = 'node_name';
+
 			$this->status = true;
 		}
 
@@ -45,6 +48,13 @@
 		}
 
 		function getNodeList() {
+			if($this->request['sort_key']) {
+				if($this->request['node_id'] == $this->session['current_node'] && $this->session['sort_key'] == $this->request['sort_key']) {
+					$this->session['sort_order'] = $this->session['sort_order'] == 'asc' ? 'desc' : 'asc';
+				}
+				
+				$this->session['sort_key'] = $this->request['sort_key'];
+			}
 			if($this->request['node_id']) {
 				$this->session['current_node'] = $this->request['node_id'];
 				$this->session['open_nodes'][$this->request['node_id']] = true;
@@ -544,9 +554,19 @@
 									, 'root'
 									, null
 									, 1
-									, $this->session['open_nodes']);
+									, $this->session['open_nodes']
+									, 'auto');
+
+			if($this->session['sort_key']) {
+				$current_node = $root_node->getNodeById($this->session['current_node']);
+				if($current_node) {
+					$current_node->setSortKey($this->session['sort_key']);
+					$current_node->setSortOrder($this->session['sort_order']);
+				}
+			}
 
 			$list[] = $root_node->getNodeList($node_id, $category, B_RESOURCE_DIR);
+
 			$trash_node = new B_Node($this->db
 									, B_RESOURCE_NODE_TABLE
 									, B_WORKING_RESOURCE_NODE_VIEW
@@ -556,7 +576,16 @@
 									, null
 									, 0
 									, $this->session['open_nodes']
-									, 'trash');
+									, 'trash'
+									, 'auto');
+
+			if($this->session['sort_key']) {
+				$current_node = $trash_node->getNodeById($this->session['current_node']);
+				if($current_node) {
+					$current_node->setSortKey($this->session['sort_key']);
+					$current_node->setSortOrder($this->session['sort_order']);
+				}
+			}
 
 			$list[] = $trash_node->getNodeList('', '', B_RESOURCE_DIR);
 
@@ -565,6 +594,10 @@
 			}
 			if($list) {
 				$response['node_info'] = $list;
+			}
+			if($this->session['sort_key']) {
+				$response['sort_key'] = $this->session['sort_key'];
+				$response['sort_order'] = $this->session['sort_order'];
 			}
 
 			header('Content-Type: application/x-javascript charset=utf-8');

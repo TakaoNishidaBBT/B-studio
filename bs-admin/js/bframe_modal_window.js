@@ -179,7 +179,10 @@
 		};
 
 		function onloadModalWindow() {
-			containerBody.contentDocument.onkeydown = onKeyDown;
+			try {
+				containerBody.contentDocument.onkeydown = onKeyDown;
+			} catch(e) {}
+
 			if(set_window_size) return;
 
 			try {

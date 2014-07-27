@@ -16,7 +16,7 @@ $tree_config = array(
 			'module'		=> $this->module,
 			'file'			=> 'tree',
 			'editable'		=> 'true',
-			'sortable'		=> 'false',
+			'sort'			=> 'auto',
 			'root_name'		=> 'root',
 			'trash_name'	=> 'trash box',
 			'root_path'		=> B_UPLOAD_URL,
@@ -111,22 +111,31 @@ $tree_config = array(
 				'header'	=>
 				array(
 					array(
+						'name'			=> 'file_name',
 						'title'			=> '名前',
 						'className'		=> 'file-name',
+						'sort_key'		=> 'file_name',
 					),
 					array(
+						'name'			=> 'update_datetime_t',
 						'title'			=> '更新日時',
 						'className'		=> 'update-time',
+						'sort_key'		=> 'update_datetime_u',
 					),
 					array(
+						'name'			=> 'human_file_size',
 						'title'			=> 'ファイルサイズ',
 						'className'		=> 'file-size',
+						'sort_key'		=> 'file_size',
 					),
 					array(
+						'name'			=> 'image_size',
 						'title'			=> 'イメージサイズ',
 						'className'		=> 'image-size',
+						'sort_key'		=> 'image_size',
 					),
 				),
+				'sort_key'	=> $this->session['sort_key'],
 			),
 			'icon'		=>
 			array(
