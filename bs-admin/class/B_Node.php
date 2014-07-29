@@ -222,6 +222,7 @@
 				$path.= '/';
 			}
 			$list['path'] = $path . $list['node_name'];
+
 			return $list;
 		}
 
@@ -283,8 +284,15 @@
 		function arias($destination_node_id, $user_id) {
 			if(!$this->node_id) return;
 
+			if($this->property) {
+				foreach($this->property as $key => $value) {
+					$param[$key] = $this->$key;
+				}
+			}
+
 			$node_name = $this->getNewNodeName($destination_node_id, $this->node_name, 'arias');
 
+			$param['node_id'] = '';
 			$param['parent_node'] = $destination_node_id;
 			$param['disp_seq'] = $this->getMaxDispSeq($destination_node_id);
 			$param['node_type'] = 'arias';
@@ -326,8 +334,15 @@
 				if(!$ret = $this->callBack($call_back)) return $ret;
 			}
 
+			if($this->property) {
+				foreach($this->property as $key => $value) {
+					$param[$key] = $this->$key;
+				}
+			}
+
 			$node_name = $this->getNewNodeName($destination_node_id, $this->node_name, 'copy');
 
+			$param['node_id'] = '';
 			$param['parent_node'] = $destination_node_id;
 			$param['disp_seq'] = $this->getMaxDispSeq($destination_node_id);
 			$param['node_type'] = $this->node_type;
@@ -421,6 +436,24 @@
 			$param['revision_id'] = $this->revision;
 
 			return $this->tbl_node->update($param);
+		}
+
+		function physicalDelete() {
+			if(!$this->node_id) return;
+
+			if(count($this->node)) {
+				foreach(array_keys($this->node) as $key) {
+					$ret = $this->node[$key]->physicalDelete();
+					if(!$ret) return $ret;
+				}
+			}
+			$this->cloneNode($this->node_id);
+
+			$param['node_id'] = $this->node_id;
+			$param['version_id'] = $this->version;
+			$param['revision_id'] = $this->revision;
+
+			return $this->tbl_node->deleteByPk($param);
 		}
 
 		function insert($node_type, $node_class, $user_id, &$new_node_id) {
