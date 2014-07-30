@@ -5,8 +5,7 @@
  *
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
-	class 
-article_list extends B_AdminModule {
+	class article_list extends B_AdminModule {
 		function __construct() {
 			parent::__construct(__FILE__);
 
