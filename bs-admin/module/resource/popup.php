@@ -49,6 +49,12 @@
 			}
 		}
 
+		function open() {
+			// target
+			$this->_setRequest('target');
+			$this->_setRequest('target_id');
+		}
+
 		function view() {
 			// HTTPヘッダー出力
 			$this->sendHttpHeader();

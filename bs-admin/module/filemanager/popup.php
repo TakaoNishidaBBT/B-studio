@@ -38,6 +38,15 @@
 			}
 		}
 
+		function open() {
+			// target
+			$this->_setRequest('window');
+			$this->_setRequest('target');
+			$this->_setRequest('target_id');
+			$this->_setRequest('width');
+			$this->_setRequest('height');
+		}
+
 		function view() {
 			// HTTPヘッダー出力
 			$this->sendHttpHeader();
