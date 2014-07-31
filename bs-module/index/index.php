@@ -321,7 +321,7 @@
 		}
 
 		function getContents($contents_id, $table) {
-			$sql = "select * from " . B_DB_PREFIX . $table . " where contents_id='" . $contents_id . "'";
+			$sql = "select * from " . B_DB_PREFIX . $table . " where contents_id='" . $this->db->real_escape_string($contents_id) . "'";
 			$rs = $this->db->query($sql);
 			$contents = $this->db->fetch_assoc($rs);
 
@@ -358,6 +358,9 @@
 		}
 
 		function inline() {
+			global $admin_mode;
+			if(!$admin_mode) return;
+
 			$this->contents = $this->post;
 
 			$this->getContentsNodeForPreview($this->contents['node_id']);
@@ -422,6 +425,9 @@
 		}
 
 		function preview() {
+			global $admin_mode;
+			if(!$admin_mode) return;
+
 			$this->contents = $this->post;
 
 			$this->getContentsNodeForPreview($this->contents['node_id']);
@@ -492,7 +498,7 @@
 
 			$sql_org = str_replace('%CONETNTS_NODE_VIEW%', B_DB_PREFIX . $this->node_view, $sql_org);
 
-			for($i=0, $node_id = $contents_node_id ; $node_id && $node_id != 'root' ; $node_id = $row['parent_node'], $i++) {
+			for($i=0, $node_id = $this->db->real_escape_string($contents_node_id) ; $node_id && $node_id != 'root' ; $node_id = $row['parent_node'], $i++) {
 				$sql = str_replace('%NODE_ID%', $node_id, $sql_org);
 
 				$rs = $this->db->query($sql);
@@ -510,11 +516,14 @@
 		}
 
 		function template_preview() {
+			global $admin_mode;
+			if(!$admin_mode) return;
+
 			$this->contents = $this->post;
 
 			$sql = "select parent_node from %TEMPLATE_NODE_VIEW% where node_id = '%NODE_ID%'";
 			$sql = str_replace('%TEMPLATE_NODE_VIEW%', B_DB_PREFIX . $this->template_node_view, $sql);
-			$sql = str_replace('%NODE_ID%', $this->post['node_id'], $sql);
+			$sql = str_replace('%NODE_ID%', $this->db->real_escape_string($this->post['node_id']), $sql);
 			$rs = $this->db->query($sql);
 			$row = $this->db->fetch_assoc($rs);
 
@@ -553,6 +562,9 @@
 		}
 
 		function widget_preview() {
+			global $admin_mode;
+			if(!$admin_mode) return;
+
 			$this->contents = $this->post;
 
 			// HTML設定
@@ -570,6 +582,8 @@
 		}
 
 		function widget($node_id, $args) {
+			$node_id = $this->db->real_escape_string($node_id);
+
 			$sql = "select a.node_id
 						  ,a.contents_id
 						  ,b.html
