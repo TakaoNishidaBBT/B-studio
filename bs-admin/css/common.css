@@ -82,8 +82,7 @@ hr.clear {
 	margin: 0;
 }
 .ime_on, .ime-on {
-/* commnet out for IE11 */
-/*	ime-mode: active;*/
+	ime-mode: active;
 }
 .ime_off, .ime-off {
 	ime-mode: disabled;

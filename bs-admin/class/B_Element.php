@@ -559,9 +559,10 @@
 							return false;
 						}
 					}
-					else if($this->class == 'B_Radio' && $this->data_value == '' ||
-					   $this->class != 'B_Radio' && $this->value == '' ||
-					   $this->class == 'B_SelectBox' && $this->data_set_value[$this->value] == '') {
+					else if(($this->class == 'B_Radio' && $this->data_value == '') ||
+					   ($this->class == 'B_Checkbox' && !$this->checked) ||
+					   ($this->class != 'B_Radio' && $this->value == '') ||
+					   ($this->class == 'B_SelectBox' && $this->data_set_value[$this->value] == '')) {
 						$err_obj = $this->searchElementByName('error_message');
 						if($err_obj) $err_obj->value = $config['error_message'];
 						return false;
