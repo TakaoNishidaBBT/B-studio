@@ -1029,15 +1029,15 @@
 			var last_id = selected_node.last_id();
 			if(!last_id) return;
 
-			var top_ds = document.getElementById('ds'+top_id);
-			var last_ds = document.getElementById('ds'+last_id);
-			var node_ds = document.getElementById('ds'+node_id);
+			var top_nn = document.getElementById('nn'+top_id);
+			var last_nn = document.getElementById('nn'+last_id);
+			var node_nn = document.getElementById('nn'+node_id);
 
-			if(parseInt(node_ds.value) < parseInt(top_ds.value)) {
+			if(parseInt(node_nn.value) < parseInt(top_nn.value)) {
 				from_node_id = node_id;
 				to_node_id = last_id;
 			}
-			else if(parseInt(node_ds.value) > parseInt(last_ds.value)) {
+			else if(parseInt(node_nn.value) > parseInt(last_nn.value)) {
 				from_node_id = top_id;
 				to_node_id = node_id;
 			}
