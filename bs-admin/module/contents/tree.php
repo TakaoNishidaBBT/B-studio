@@ -357,7 +357,7 @@
 									, 'trash');
 
 			$list[] = $trash_node->getNodeList('', '');
-$this->log->write($list);
+
 			if($list) {
 				$response['node_info'] = $list;
 			}
