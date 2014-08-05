@@ -71,7 +71,7 @@
 										, $this
 										, $expand_level
 										, $open_nodes
-										, $sort
+										, $sort_mode
 										, $level+1
 										, $row);
 					$this->addNodes($object);
