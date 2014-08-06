@@ -155,7 +155,7 @@ span.right-button {
 	display: inline-block;
 	text-align: center;
 	vertical-align: middle;
-	padding: 11px 0;
+	line-height: 35px;
 	width: 100px;
 	cursor: pointer;
 	background: url(../images/common/right_arrow.png) no-repeat 71px 50%;
@@ -168,14 +168,13 @@ span.left-button {
 	display: inline-block;
 	text-align: center;
 	vertical-align: middle;
-	padding: 11px 0;
+	line-height: 35px;
 	width: 100px;
 	cursor: pointer;
 	background: url(../images/common/left_arrow.png) no-repeat 15px 50%;
 }
 span.left-button:hover {
 	color: #fff;
-	background-color: #0689de;
 	background: url(../images/common/left_arrow_white.png) no-repeat 15px 50% #0689de;
 }
 input.disable-button {
