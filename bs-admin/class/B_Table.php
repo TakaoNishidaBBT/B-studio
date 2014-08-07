@@ -13,7 +13,7 @@
 		function __construct(&$db, $table_name, $prefix='') {
 			global $g_data_set, ${$g_data_set};
 
-			$this->db = &$db;
+			$this->db = $db;
 			if($prefix) {
 				$this->prefix = $prefix;
 			}
