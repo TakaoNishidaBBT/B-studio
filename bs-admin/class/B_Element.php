@@ -101,9 +101,12 @@
 				foreach($this->config_org as $key => $value) {
 					if(!is_numeric($key) && $key != 'element') {
 						$config[$key] = $value;
+						$config['id'] = $this->id;
 						$config['name'] = $this->name;
 						$config['value'] = $this->value;
 						$config['data_set'] = $this->data_set;
+						$config['fixedparam'] = $this->fixedparam;
+						$config['param'] = $this->param;
 					}
 				}
 			}
