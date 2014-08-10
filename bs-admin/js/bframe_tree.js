@@ -2089,7 +2089,7 @@
 								var extension = file_name.substring(file_name.lastIndexOf('.')+1, file_name.length);
 								obj_img.src = property.thumb_path + property.thumb_prefix + config.contents_id + '.' + extension + '?' + config.update_datetime_t;
 							}
-							a.title = 'size:' + config.image_size + '\n' + 'date:' + config.create_datetime_t;
+							a.title = 'size:' + config.human_image_size + '\n' + 'date:' + config.create_datetime_t;
 						}
 						break;
 					default:

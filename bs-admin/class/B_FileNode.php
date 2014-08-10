@@ -45,7 +45,8 @@
 				$this->node_class = 'leaf';
 				$image_size = getimagesize($this->fullpath);
 				if(is_array($image_size)) {
-					$this->image_size = $image_size[0] . 'x' . $image_size[1];
+					$this->image_size = $image_size[0] * $image_size[1];
+					$this->human_image_size = $image_size[0] . 'x' . $image_size[1];
 				}
 
 				return;
@@ -193,6 +194,7 @@
 			}
 			if($this->image_size) {
 				$list['image_size'] = $this->image_size;
+				$list['human_image_size'] = $this->human_image_size;
 			}
 			if($this->node_id == $node_id) {
 				$list[$category] = true;

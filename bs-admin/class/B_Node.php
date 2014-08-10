@@ -212,6 +212,7 @@
 				$list['file_size'] = $this->getFileSize($dir);
 				$list['human_file_size'] = B_Util::human_filesize($list['file_size'], 'K');
 				$list['image_size'] = $this->getImageSize($dir);
+				$list['human_image_size'] = $this->getHumanImageSize($dir);
 			}
 			$list['level'] = $this->level;
 			$list['disp_seq'] = $this->disp_seq;
@@ -266,6 +267,22 @@
 		}
 
 		function getImageSize($dir) {
+			if($this->node_type == 'folder') return;
+
+			$info = pathinfo($this->node_name);
+			switch(strtolower($info['extension'])) {
+			case 'jpg':
+			case 'jpeg':
+			case 'gif':
+			case 'png':
+				if(file_exists($dir . $this->contents_id . '.' . $info['extension'])) {
+					$size = getimagesize($dir . $this->contents_id . '.' . $info['extension']);
+					return $size[0] * $size[1];
+				}
+			}
+		}
+
+		function getHumanImageSize($dir) {
 			if($this->node_type == 'folder') return;
 
 			$info = pathinfo($this->node_name);
