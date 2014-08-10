@@ -129,7 +129,7 @@ $tree_config = array(
 						'sort_key'		=> 'file_size',
 					),
 					array(
-						'name'			=> 'image_size',
+						'name'			=> 'human_image_size',
 						'title'			=> 'イメージサイズ',
 						'className'		=> 'image-size',
 						'sort_key'		=> 'image_size',
