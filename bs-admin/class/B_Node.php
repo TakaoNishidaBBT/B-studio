@@ -243,10 +243,15 @@
 		}
 
 		function getPath() {
+			$parent_path = $this->getParentPath();
+			if($parent_path) $$parent_path.= '/';
+
+			return $parent_path . $this->node_name;
+		}
+
+		function getParentPath() {
 			$sql_org = "select * from %VIEW% where node_id = '%parent_node%'";
 			$sql_org = str_replace('%VIEW%', B_DB_PREFIX . $this->view, $sql_org);
-
-			$path = $this->node_name;
 
 			for($node = $this->parent; $node && $node != 'root' && $node != 'trash'; $node = $row['parent_node']) {
 				$sql = str_replace('%parent_node%', $node, $sql_org);
@@ -267,22 +272,16 @@
 		}
 
 		function getImageSize($dir) {
-			if($this->node_type == 'folder') return;
-
-			$info = pathinfo($this->node_name);
-			switch(strtolower($info['extension'])) {
-			case 'jpg':
-			case 'jpeg':
-			case 'gif':
-			case 'png':
-				if(file_exists($dir . $this->contents_id . '.' . $info['extension'])) {
-					$size = getimagesize($dir . $this->contents_id . '.' . $info['extension']);
-					return $size[0] * $size[1];
-				}
-			}
+			$size = $this->_getImageSize($dir);
+			return $size[0] * $size[1];
 		}
 
 		function getHumanImageSize($dir) {
+			$size = $this->_getImageSize($dir);
+			return $size[0] . 'x' . $size[1];
+		}
+
+		function _getImageSize($dir) {
 			if($this->node_type == 'folder') return;
 
 			$info = pathinfo($this->node_name);
@@ -292,8 +291,7 @@
 			case 'gif':
 			case 'png':
 				if(file_exists($dir . $this->contents_id . '.' . $info['extension'])) {
-					$size = getimagesize($dir . $this->contents_id . '.' . $info['extension']);
-					return $size[0] . 'x' . $size[1];
+					return getimagesize($dir . $this->contents_id . '.' . $info['extension']);
 				}
 			}
 		}
