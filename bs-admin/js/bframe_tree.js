@@ -1189,7 +1189,7 @@
 
 				top.bframe.modalWindow.activate(a, window);
 				if(property.relation.open_property.func) {
-					top.bframe.modalWindow.registCallBackFunction(property.relation.open_property.func);
+					top.bframe.modalWindow.registCallBackFunction(eval(property.relation.open_property.func));
 				}
 			}
 		}
