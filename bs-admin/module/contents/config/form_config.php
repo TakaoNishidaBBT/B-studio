@@ -253,7 +253,7 @@ $config_form_config = array(
 						'page'				=> 'select_tree',
 					),
 					'specialchars'		=> 'none',
-					'value'				=> '<img alt="テンプレート" src="images/common/gear_white.png" />',
+					'value'				=> '<img alt="テンプレート" src="images/common/gear_gray.png" />',
 				),
 				array(
 					'class'				=> 'B_Link',
