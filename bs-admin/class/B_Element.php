@@ -1605,11 +1605,11 @@
 				}
 			}
 			else {
-				$name = $this->name . $this->name_index;
+				$name = $this->name_prefix . $this->name . $this->name_index;
+				$id = $this->_gethtmlid();
 				if(!$this->fixed && $this->value) {
 					$name.= '[' . $this->value . ']';
 				}
-				$id = $this->_gethtmlid();
 
 				$html.= '<input type="checkbox" name="' . $name . '" id="' . $id . '" value="' . $this->value . '"';
 				$html.= ' ' . $this->special_html;
@@ -1632,7 +1632,7 @@
 			if(isset($value[$this->name_index])) {
 				$this->name_index = $value[$this->name_index];
 			}
-			$name = $this->name . $this->name_index;
+			$name = $this->name_prefix . $this->name . $this->name_index;
 
 			if(isset($value[$name])) {
 				if(is_array($value[$name])) {
@@ -1658,10 +1658,10 @@
 
 		function _getValue(&$param) {
 			if($this->checked) {
-				$param[$this->name . $this->name_index] = $this->value;
+				$param[$this->name_prefix . $this->name . $this->name_index] = $this->value;
 			}
 			else {
-				$param[$this->name . $this->name_index] = '';
+				$param[$this->name_prefix . $this->name . $this->name_index] = '';
 			}
 		}
 
@@ -1783,7 +1783,7 @@
 			}
 			else {
 				$name = $this->name_prefix . $this->name . $this->name_index;
-				$id = $this->id;
+				$id = $this->_gethtmlid();
 				if($this->index) {
 					$name.= '[' . $this->index . ']';
 					$id.= '[' . $this->index . ']';
@@ -1839,7 +1839,7 @@
 
 		function _getValue(&$param) {
 			if($this->checked) {
-				$param[$this->name . $this->name_index] = $this->value;
+				$param[$this->name_prefix . $this->name . $this->name_index] = $this->value;
 			}
 		}
 
@@ -1929,22 +1929,22 @@
 				return;
 			}
 
-			if($this->config_org['parmalink']) {
+			if(is_array($this->config_org['parmalink'])) {
 				foreach($this->config_org['parmalink'] as $value2) {
 					$this->setParamalink($value[$value2]);
 				}
 			}
-			if($this->config_org['param']) {
+			if(is_array($this->config_org['param'])) {
 				foreach($this->config_org['param'] as $key2 => $value2) {
 					$this->setParamProperty($key2, $value[$value2]);
 				}
 			}
-			if($this->config_org['data_param']) {
+			if(is_array($this->config_org['data_param'])) {
 				foreach($this->config_org['data_param'] as $key2 => $value2) {
 					$this->setParamProperty($key2, $value[$value2]);
 				}
 			}
-			if($this->config_org['fixedparam']) {
+			if(is_array($this->config_org['fixedparam'])) {
 				foreach($this->config_org['fixedparam'] as $key2 => $value2) {
 					$this->setParamProperty($key2, $value2);
 				}
@@ -2133,8 +2133,8 @@
 				}
 			}
 
-			if(isset($value[$this->name])) {
-				$this->value = $this->_prepareInput($value[$this->name]);
+			if(isset($value[$this->name_prefix . $this->name])) {
+				$this->value = $this->_prepareInput($value[$this->name_prefix . $this->name]);
 				$this->value_exist = true;
 			}
 			else {
@@ -2148,7 +2148,7 @@
 				$special_html = ' ' . $this->special_html;
 			}
 			if($this->name) {
-				$name = ' name="' . $this->name . '"';
+				$name = ' name="' . $this->name_prefix . $this->name . '"';
 			}
 			if($this->id) {
 				$id = ' id="' . $this->id . '"';
@@ -2172,7 +2172,7 @@
 	class B_Iframe extends B_Element {
 		function getStartHtml($mode=null) {
 			if($this->name) {
-				$name = ' name="' . $this->name . '"';
+				$name = ' name="' . $this->name_prefix . $this->name . '"';
 				$id = ' id="' . $this->_gethtmlid() . '"';
 			}
 
@@ -2207,7 +2207,7 @@
 
 			return
 				'<img ' .
-				'name="' . $this->name . '" ' .
+				'name="' . $this->name_prefix . $this->name . '" ' .
 				'id="' . $this->_gethtmlid() . '" ' .
 				'src="' . $src . '" ' . 
 				'alt="' . $this->alt . '" ' . 
