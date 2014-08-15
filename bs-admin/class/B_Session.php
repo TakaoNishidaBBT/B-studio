@@ -6,7 +6,7 @@
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
 	// -------------------------------------------------------------------------
-	// class B_Controller
+	// class B_Session
 	// 
 	// -------------------------------------------------------------------------
 	class B_Session {
