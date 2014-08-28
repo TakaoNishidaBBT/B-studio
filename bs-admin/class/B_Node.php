@@ -83,6 +83,17 @@
 			$this->node[] = $object;
 		}
 
+		function isExists($node_name) {
+			if(!is_array($this->node)) return false;
+
+			foreach($this->node as $node) {
+				if($node->node_name == $node_name) {
+					return $node->node_id;
+				}
+			}
+			return false;
+		}
+
 		function selectNode($node_id) {
 			$sql = "select * from %VIEW% where node_id='$node_id'";
 			$sql = str_replace('%VIEW%', B_DB_PREFIX . $this->view, $sql);
@@ -278,7 +289,7 @@
 
 		function getHumanImageSize($dir) {
 			$size = $this->_getImageSize($dir);
-			return $size[0] . 'x' . $size[1];
+			if($size) return $size[0] . 'x' . $size[1];
 		}
 
 		function _getImageSize($dir) {
@@ -290,6 +301,7 @@
 			case 'jpeg':
 			case 'gif':
 			case 'png':
+			case 'bmp':
 				if(file_exists($dir . $this->contents_id . '.' . $info['extension'])) {
 					return getimagesize($dir . $this->contents_id . '.' . $info['extension']);
 				}
@@ -586,7 +598,7 @@
 			return true;
 		}
 
-		function saveName($node_name, $user_id) {
+		function saveName($node_name, $user_id, $option=null) {
 			if(!$this->node_id) return;
 
 			$this->cloneNode($this->node_id);
@@ -597,6 +609,26 @@
 			$param['update_datetime'] = time();
 			$param['version_id'] = $this->version;
 			$param['revision_id'] = $this->revision;
+
+			if(is_array($option)) {
+				foreach($option as $key => $value) {
+					$param[$key] = $value;
+				}
+			}
+
+			return $this->tbl_node->update($param);
+		}
+
+		function updateNode($param, $user_id) {
+			if(!$this->node_id) return;
+
+			$this->cloneNode($this->node_id);
+
+			$param['version_id'] = $this->version;
+			$param['revision_id'] = $this->revision;
+			$param['node_id'] = $this->node_id;
+			$param['update_user'] = $user_id;
+			$param['update_datetime'] = time();
 
 			return $this->tbl_node->update($param);
 		}

@@ -174,32 +174,143 @@
 			return $ret;
 		}
 
-		function human_filesize($bytes, $scale) {
-			$factor = array('B' => 0, 'K' => 1, 'M' => 2, 'G' => 3, 'T' => 4, 'P' => 5);
-			if(!$unit = $factor[$scale]) return $bytes;
-
-			$value = $bytes / pow(1024, $unit);
-			$value = ceil($value * 100) / 100;
-			return sprintf("%.2f", $value) . $scale . 'B';
+		function human_filesize($bytes, $scale=0) {
+			$factor_array = array('B' => 0, 'K' => 1, 'M' => 2, 'G' => 3, 'T' => 4, 'P' => 5);
+			if($scale) {
+				$unit = $factor_array[$scale];
+			}
+			else {
+				for($unit=0, $size=$bytes; $size > 1024 ; $size=($size / 1024), $unit++);
+				$factor_flip = array_flip($factor_array);
+				$scale = $factor_flip[$unit];
+			}
+			$value = $bytes;
+			if($unit) {
+				$value = $bytes / pow(1024, $unit);
+				$value = ceil($value * 10) / 10;
+			}
+			if($scale == 'B') {
+				return sprintf("%d", $value) . $scale;
+			}
+			else {
+				return sprintf("%.1f", $value) . $scale . 'B';
+			}
 		}
 
 		function decode_human_filesize($filesize) {
+			$factor_array = array('B' => 0, 'K' => 1, 'M' => 2, 'G' => 3, 'T' => 4, 'P' => 5);
 			$factor = strtoupper(substr(trim($filesize), -1));
 			$size = substr(trim($filesize), 0, -1);
 			if(!is_numeric($size)) return;
 
-			switch($factor) {
-			case 'K':
-				return round($size * 1024);
-
-			case 'M':
-				return round($size * pow(1024, 2));
-
-			case 'G':
-				return round($size * pow(1024, 3));
-
-			default:
-				return $filesize;
+			$unit = $factor_array[$factor];
+			if($unit) {
+				$size = round($size * pow(1024, $unit));
 			}
+			return $size;
+		}
+
+		function mb_convert_encoding_array($array, $to_encoding, $from_encoding) {
+			if(!is_array($array)) return;
+
+			foreach($array as $key => $value) {
+				$ret[$key] = mb_convert_encoding($value, $to_encoding, $from_encoding);
+			}
+			return $ret;
+		}
+
+		function is_binary($file) {
+			$fp = fopen($file, 'r');
+			while($line = fgets($fp)) {
+				if(strpos($line, "\0") !== false) {
+					fclose($fp);
+					return true;
+				}
+			}
+
+			fclose($fp);
+			return false;
+		}
+
+		function imagecreatefrombmp($filename) {
+			if(!$fp = fopen($filename, 'rb')) return false;
+
+			$file = unpack('vfile_type/Vfile_size/Vreserved/Vbitmap_offset', fread($fp, 14));
+			if($file['file_type'] != 19778) return false;
+
+			$bmp = unpack('Vheader_size/Vwidth/Vheight/vplanes/vbits_per_pixel'.
+					'/Vcompression/Vsize_bitmap/Vhoriz_resolution'.
+					'/Vvert_resolution/Vcolors_used/Vcolors_important', fread($fp, 40));
+			$bmp['colors'] = pow(2, $bmp['bits_per_pixel']);
+
+			if($bmp['size_bitmap'] == 0) $bmp['size_bitmap'] = $file['file_size'] - $file['bitmap_offset'];
+
+			$bmp['bytes_per_pixel'] = $bmp['bits_per_pixel']/8;
+			$bmp['bytes_per_pixel2'] = ceil($bmp['bytes_per_pixel']);
+			$bmp['decal'] = ($bmp['width']*$bmp['bytes_per_pixel']/4);
+			$bmp['decal'] -= floor($bmp['width']*$bmp['bytes_per_pixel']/4);
+			$bmp['decal'] = 4-(4*$bmp['decal']);
+			if($bmp['decal'] == 4) $bmp['decal'] = 0;
+
+			$palette = array();
+			if($bmp['colors'] < 16777216) {
+				$palette = unpack('V'.$bmp['colors'], fread($fp, $bmp['colors']*4));
+			}
+
+			$img = fread($fp, $bmp['size_bitmap']);
+			$vide = chr(0);
+
+			$res = imagecreatetruecolor($bmp['width'], $bmp['height']);
+			$p = 0;
+			$y = $bmp['height']-1;
+			while($y >= 0) {
+				$x=0;
+				while ($x < $bmp['width']) {
+					if ($bmp['bits_per_pixel'] == 24 || $bmp['bits_per_pixel'] == 32) {
+						$color = unpack('V', substr($img, $p, 3).$vide);
+					}
+					else if($bmp['bits_per_pixel'] == 16) {
+						$color = unpack('n', substr($img, $p, 2));
+						$color[1] = $palette[$color[1]+1];
+					}
+					else if($bmp['bits_per_pixel'] == 8) {
+						$color = unpack('n', $vide.substr($img, $p, 1));
+						$color[1] = $palette[$color[1]+1];
+					}
+					else if($bmp['bits_per_pixel'] == 4) {
+						$color = unpack('n',$vide.substr($img, floor($p), 1));
+						if(($p*2)%2 == 0) {
+							$color[1] = ($color[1] >> 4);
+						}
+						else {
+							$color[1] = ($color[1] & 0x0F);
+						}
+						$color[1] = $palette[$color[1]+1];
+					}
+					else if($bmp['bits_per_pixel'] == 1) {
+						$color = unpack('n', $vide.substr($img, floor($p), 1));
+						if(($p*8)%8 == 0) $color[1] = $color[1] >>7;
+						else if(($p*8)%8 == 1) $color[1] = ($color[1] & 0x40)>>6;
+						else if(($p*8)%8 == 2) $color[1] = ($color[1] & 0x20)>>5;
+						else if(($p*8)%8 == 3) $color[1] = ($color[1] & 0x10)>>4;
+						else if(($p*8)%8 == 4) $color[1] = ($color[1] & 0x8)>>3;
+						else if(($p*8)%8 == 5) $color[1] = ($color[1] & 0x4)>>2;
+						else if(($p*8)%8 == 6) $color[1] = ($color[1] & 0x2)>>1;
+						else if(($p*8)%8 == 7) $color[1] = ($color[1] & 0x1);
+						$color[1] = $palette[$color[1]+1];
+					}
+					else {
+						return false;
+					}
+
+					imagesetpixel($res, $x, $y, $color[1]);
+					$x++;
+					$p += $bmp['bytes_per_pixel'];
+				}
+				$y--;
+				$p+=$bmp['decal'];
+			}
+			fclose($fp);
+			return $res;
 		}
 	}
