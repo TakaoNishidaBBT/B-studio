@@ -1099,7 +1099,7 @@
 				if(current_edit_node && current_edit_node.id == node_id) return;
 
 				var func = property.ondblclick.script;
-				window[func](node_id.substr(1), node_name, node_type.value);
+				if(window[func]) window[func](node_id.substr(1), node_name, node_type.value);
 			}
 		}
 
@@ -1127,7 +1127,7 @@
 
 		function insertResourceFile(node_id) {
 			if(property.target_id || property.target) {
-				var image_size_obj = document.getElementById('is' + node_id);
+				var image_size_obj = document.getElementById('his' + node_id);
 				var img_size;
 				if(image_size_obj) {
 					img_size = image_size_obj.value;
@@ -1139,7 +1139,7 @@
 
 		function insertFile(node_id) {
 			if(property.target_id || property.target) {
-				var image_size_obj = document.getElementById('is' + node_id);
+				var image_size_obj = document.getElementById('his' + node_id);
 				var img_size;
 				if(image_size_obj) {
 					img_size = image_size_obj.value;
@@ -2076,6 +2076,7 @@
 					case 'jpeg':
 					case 'gif':
 					case 'png':
+					case 'bmp':
 						if(property.icon.pain[suffix.toLowerCase()]) {
 							obj_img.src = property.icon.pain[suffix.toLowerCase()].src;
 						}
@@ -2132,6 +2133,15 @@
 				input.id = 'is' + node_id;
 				input.name = 'image_size';
 				input.value = config.image_size;
+				a.appendChild(input);
+			}
+
+			if(config.human_image_size) {
+				input = document.createElement('input');
+				input.type = 'hidden';
+				input.id = 'his' + node_id;
+				input.name = 'human_image_size';
+				input.value = config.human_image_size;
 				a.appendChild(input);
 			}
 
