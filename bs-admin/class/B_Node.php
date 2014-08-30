@@ -633,20 +633,6 @@
 			return $this->tbl_node->update($param);
 		}
 
-		function updateNode($param, $user_id) {
-			if(!$this->node_id) return;
-
-			$this->cloneNode($this->node_id);
-
-			$param['version_id'] = $this->version;
-			$param['revision_id'] = $this->revision;
-			$param['node_id'] = $this->node_id;
-			$param['update_user'] = $user_id;
-			$param['update_datetime'] = time();
-
-			return $this->tbl_node->update($param);
-		}
-
 		function getMaxDispSeq($parent_node_id) {
 			$sql = "select ifnull(max(disp_seq)+1, 0) disp_seq from %VIEW% where parent_node='%PARENT_NODE%'";
 			$sql = str_replace('%VIEW%', B_DB_PREFIX . $this->view, $sql);
