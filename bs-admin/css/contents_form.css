@@ -88,7 +88,7 @@ ul.tabcontrol li.regist {
 }
 
 /* button */
-div.input_container {
+div.input-container {
 	width: 140px;
 	float: left;
 }
@@ -116,7 +116,7 @@ span.regist-button img {
 	margin-right: 8px;
 }
 
-div.message_container {
+div.message-container {
 	float: left;
 	margin-left: 10px;
 }

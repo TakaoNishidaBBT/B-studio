@@ -1080,12 +1080,12 @@
 								func = property.method.selectFile.default;
 							}
 							switch(func) {
-							case 'download':
-								download();
+							case 'openEditor':
+								openEditor(node_id);
 								break;
 
 							default:
-								openEditor(node_id);
+								download();
 								break;
 							}
 						}

@@ -183,6 +183,7 @@
 			case 'jpeg':
 			case 'gif':
 			case 'png':
+			case 'bmp':
 				$thumb_file_name = B_RESOURCE_DIR . 'thumb_' . $node->contents_id . '.' . $file['extension'];
 				$new_thumb_file_name = B_RESOURCE_DIR . 'thumb_' . $node->new_contents_id . '.' . $file['extension'];
 				copy($thumb_file_name, $new_thumb_file_name);
