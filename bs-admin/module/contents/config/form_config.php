@@ -148,7 +148,7 @@ $tab_control_config = array(
 		'start_html'		=> '<li class="regist">',
 		'end_html'			=> '</li>',
 		array(
-			'start_html'	=> '<div class="input_container">',
+			'start_html'	=> '<div class="input-container">',
 			'end_html'		=> '</div>',
 			array(
 				'name'			=> 'regist',
@@ -158,7 +158,7 @@ $tab_control_config = array(
 			),
 		),
 		array(
-			'start_html'	=> '<div class="message_container">',
+			'start_html'	=> '<div class="message-container">',
 			'end_html'		=> '</div>',
 			array(
 				'start_html'	=> '<span id="message">',

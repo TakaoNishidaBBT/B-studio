@@ -37,6 +37,7 @@
 		var property_pain;
 		var context_menu = new bframe.contextMenu(3);
 		var context_menu_frame = window;
+		var context_menu_frame_offset;
 		var context_menu_width = 100;
 		var context_menu_height = 100;
 		var context_menu_element = {};
@@ -215,6 +216,8 @@
 				context_menu.setDocument(window);
 			}
 
+			context_menu_frame_offset = bframe.getFrameOffset(window, context_menu_frame);
+
 			if(property.context_menu_width) {
 				context_menu_width = property.context_menu_width;
 			}
@@ -230,7 +233,7 @@
 				tr[i].oncontextmenu = showContextMenu;
 				tr[i].onclick = onClick;
 			}
-			bframe.addEventListner(document, 'click', hideContextMenu);
+			bframe.addEventListner(document, "click", hideContextMenu);
 		}
 
 		function onClick(event){
@@ -291,10 +294,8 @@
 			synchro();
 			var param = 'terminal_id='+terminal_id;
 
-			if(Form) {
-				var data = Form.serialize(property_pain.childNodes[0]);
-			}
-
+			var form = document.forms[property.property_pain];
+			var data = $(form).serialize(); // use jquery
 			if(data) {
 				param+= '&' + data;
 			}
@@ -305,16 +306,15 @@
 			target.style.cursor = 'wait';
 			targetRow = currentRow;
 			response_wait = true;
+			bframe.editCheck_handler.setEditFlag();
 		}
 
 		function selectFieldType(event) {
 			synchro();
 			var param = 'terminal_id='+terminal_id;
 
-			if(Form) {
-				var data = Form.serialize(property_pain.childNodes[0]);
-			}
-
+			var form = document.forms[property.property_pain];
+			var data = $(form).serialize(); // use jquery
 			if(data) {
 				param+= '&' + data;
 			}
@@ -325,6 +325,7 @@
 			target.style.cursor = 'wait';
 			targetRow = currentRow;
 			response_wait = true;
+			bframe.editCheck_handler.setEditFlag();
 		}
 
 		function showItem() {
@@ -342,9 +343,8 @@
 		function showContextMenu(event){
 			if(context_menu.getLength() > 0) {
 				var position = context_menu.getPosition(event);
-				var frame_offset = bframe.getFrameOffset(window, context_menu_frame);
-				position.left += frame_offset.left;
-				position.top += frame_offset.top;
+				position.left += context_menu_frame_offset.left;
+				position.top += context_menu_frame_offset.top;
 
 				context_menu.positionAbsolute(position);
 				context_menu.show();
@@ -532,6 +532,7 @@
 					}
 				}
 			}
+			bframe.editCheck_handler.setEditFlag();
 			return newTR;
 		}
 
@@ -558,65 +559,4 @@
 	    function cancelEvent(e) {
 	        e.preventDefault? e.preventDefault() : e.returnValue = false;
 	    }
-
-		function itemListonkeydown(event) {
-			if(window.event) {
-				var	obj = window.event.srcElement;
-			}
-			else {
-				var	obj = event.target;
-			}
-			var p = obj.parentNode;
-			var tr = searchParentByTagName(obj, 'tr');
-			var i;
-
-			switch(event.keyCode) {
-			case 13: //enter
-				if(_isIE) {
-					var cellIndex = bframe.getAbsoluteIndex(tr, obj.id);
-				}
-				else {
-					var cellIndex = p.cellIndex;
-				}
-
-				for(i=cellIndex+1 ; i<tr.cells.length ; i++) {
-					for(var j=0 ; j<tr.cells[i].childNodes.length ; j++) {
-						var item = tr.cells[i].childNodes[j];
-						if(item.tagName && item.tagName.toLowerCase() == 'input') {
-							item.focus();
-							item.select();
-							break;
-						}
-					}
-					if(j < tr.cells[i].childNodes.length) {
-						break;
-					}
-				}
-				if(i == tr.cells.length) {
-					if(target.rows.length > tr.rowIndex+parseInt(property.header_row_cnt)) {
-						tr = target.rows[tr.rowIndex+1];
-					}
-					else {
-						tr = target.rows[property.header_row_cnt];
-					}
-					for(i=0 ; i<tr.cells.length ; i++) {
-						for(var j=0 ; j<tr.cells[i].childNodes.length ; j++) {
-							var item = tr.cells[i].childNodes[j];
-							if(item.tagName && item.tagName.toLowerCase() == 'input') {
-								item.focus();
-								item.select();
-								break;
-							}
-						}
-						if(j < tr.cells[i].childNodes.length) {
-							break;
-						}
-					}
-				}
-				break;
-
-			default:
-				break;
-			}
-		}
 	}
