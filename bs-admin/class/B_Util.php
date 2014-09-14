@@ -253,31 +253,48 @@
 			if($bmp['decal'] == 4) $bmp['decal'] = 0;
 
 			$palette = array();
-			if($bmp['colors'] < 16777216) {
+			switch($bmp['bits_per_pixel']) {
+			case '1':
+			case '4':
+			case '8':
 				$palette = unpack('V'.$bmp['colors'], fread($fp, $bmp['colors']*4));
-			}
+				$p = $file['bitmap_offset'] + $bmp['colors']*4;
+				break;
 
-			$img = fread($fp, $bmp['size_bitmap']);
+			default:
+				$p = $file['bitmap_offset'];
+				break;
+			}
+			rewind($fp);
+			$img = fread($fp, $file['file_size']);
 			$vide = chr(0);
 
 			$res = imagecreatetruecolor($bmp['width'], $bmp['height']);
-			$p = 0;
 			$y = $bmp['height']-1;
 			while($y >= 0) {
 				$x=0;
 				while ($x < $bmp['width']) {
-					if ($bmp['bits_per_pixel'] == 24 || $bmp['bits_per_pixel'] == 32) {
+					switch($bmp['bits_per_pixel']) {
+					case '32':
+					case '24':
 						$color = unpack('V', substr($img, $p, 3).$vide);
-					}
-					else if($bmp['bits_per_pixel'] == 16) {
-						$color = unpack('n', substr($img, $p, 2));
-						$color[1] = $palette[$color[1]+1];
-					}
-					else if($bmp['bits_per_pixel'] == 8) {
+						break;
+
+					case '16':
+						$color = unpack('v', substr($img, $p, 2));
+						$bin = str_pad(decbin($color[1]), 16, '0', STR_PAD_LEFT);
+						$r = bindec(substr($bin, 1, 5)) * 8;
+						$g = bindec(substr($bin, 6, 5)) * 8;
+						$b = bindec(substr($bin, 11, 5)) * 8;
+						$color[1] = imagecolorallocate($res, $r, $g, $b);
+						break;
+
+					case '8':
 						$color = unpack('n', $vide.substr($img, $p, 1));
 						$color[1] = $palette[$color[1]+1];
-					}
-					else if($bmp['bits_per_pixel'] == 4) {
+						break;
+
+					case '4':
 						$color = unpack('n',$vide.substr($img, floor($p), 1));
 						if(($p*2)%2 == 0) {
 							$color[1] = ($color[1] >> 4);
@@ -286,8 +303,9 @@
 							$color[1] = ($color[1] & 0x0F);
 						}
 						$color[1] = $palette[$color[1]+1];
-					}
-					else if($bmp['bits_per_pixel'] == 1) {
+						break;
+
+					case '1':
 						$color = unpack('n', $vide.substr($img, floor($p), 1));
 						if(($p*8)%8 == 0) $color[1] = $color[1] >>7;
 						else if(($p*8)%8 == 1) $color[1] = ($color[1] & 0x40)>>6;
@@ -298,8 +316,9 @@
 						else if(($p*8)%8 == 6) $color[1] = ($color[1] & 0x2)>>1;
 						else if(($p*8)%8 == 7) $color[1] = ($color[1] & 0x1);
 						$color[1] = $palette[$color[1]+1];
-					}
-					else {
+						break;
+
+					default:
 						return false;
 					}
 
