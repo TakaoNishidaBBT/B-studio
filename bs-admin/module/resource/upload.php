@@ -293,6 +293,13 @@
 			$node_id = $row['node_id'];
 			$contents_id = $row['node_id'] . '_' . $this->version['working_version_id'] . '_' . $this->version['revision_id'];
 			$file_data['node_id'] = $row['node_id'];
+
+			$file_data['file_size'] = filesize($_FILES['Filedata']['tmp_name']);
+			$file_data['human_file_size'] = B_Util::human_filesize($file_data['file_size'], 'K');
+			$size = getimagesize($_FILES['Filedata']['tmp_name']);
+			$file_data['image_size'] = $size[0] * $size[1];
+			$file_data['human_image_size'] = $size[0] . 'x' . $size[1];
+
 			$file_data['contents_id'] = $contents_id;
 			$file_data['version_id'] = $this->version['working_version_id'];
 			$file_data['revision_id'] = $this->version['revision_id'];
