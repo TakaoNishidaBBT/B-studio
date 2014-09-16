@@ -292,22 +292,22 @@
 
 			$node_id = $row['node_id'];
 			$contents_id = $row['node_id'] . '_' . $this->version['working_version_id'] . '_' . $this->version['revision_id'];
-			$file_data['node_id'] = $row['node_id'];
+			$param['node_id'] = $row['node_id'];
+			$param['contents_id'] = $contents_id;
+			$param['version_id'] = $this->version['working_version_id'];
+			$param['revision_id'] = $this->version['revision_id'];
+			$param['update_user'] = $this->user_id;
+			$param['update_datetime'] = time();
+			$param['create_datetime'] = time();
 
-			$file_data['file_size'] = filesize($_FILES['Filedata']['tmp_name']);
-			$file_data['human_file_size'] = B_Util::human_filesize($file_data['file_size'], 'K');
+			// set file size
+			$param['file_size'] = filesize($_FILES['Filedata']['tmp_name']);
+			$param['human_file_size'] = B_Util::human_filesize($param['file_size'], 'K');
 			$size = getimagesize($_FILES['Filedata']['tmp_name']);
-			$file_data['image_size'] = $size[0] * $size[1];
-			$file_data['human_image_size'] = $size[0] . 'x' . $size[1];
+			$param['image_size'] = $size[0] * $size[1];
+			$param['human_image_size'] = $size[0] . 'x' . $size[1];
 
-			$file_data['contents_id'] = $contents_id;
-			$file_data['version_id'] = $this->version['working_version_id'];
-			$file_data['revision_id'] = $this->version['revision_id'];
-			$file_data['update_user'] = $this->user_id;
-			$file_data['update_datetime'] = time();
-			$file_data['create_datetime'] = time();
-
-			$ret = $this->resource_node_table->update($file_data);
+			$ret = $this->resource_node_table->update($param);
 
 			if($ret) {
 				$this->db->commit();
@@ -337,6 +337,15 @@
 			$node->cloneNode($row['node_id']);
 			$contents_id = $row['node_id'] . '_' . $this->version['working_version_id'] . '_' . $this->version['revision_id'];
 			$ret = $node->setContentsId($contents_id, $this->user_id);
+
+			// set file size
+			$param['file_size'] = filesize($_FILES['Filedata']['tmp_name']);
+			$param['human_file_size'] = B_Util::human_filesize($param['file_size'], 'K');
+			$size = getimagesize($_FILES['Filedata']['tmp_name']);
+			$param['image_size'] = $size[0] * $size[1];
+			$param['human_image_size'] = $size[0] . 'x' . $size[1];
+
+			$ret &= $node->updateNode($param, $this->user_id);
 
 			if($ret) {
 				$this->db->commit();
@@ -377,7 +386,17 @@
 
 				$contents_id = $new_node_id . '_' . $this->version['working_version_id'] . '_' . $this->version['revision_id'];
 				$ret = $new_node->setContentsId($contents_id, $this->user_id);
-				$ret &= $new_node->saveName($file_name, $this->user_id);
+
+				$param['node_name'] = $file_name;
+
+				// set file size
+				$param['file_size'] = filesize($_FILES['Filedata']['tmp_name']);
+				$param['human_file_size'] = B_Util::human_filesize($param['file_size'], 'K');
+				$size = getimagesize($_FILES['Filedata']['tmp_name']);
+				$param['image_size'] = $size[0] * $size[1];
+				$param['human_image_size'] = $size[0] . 'x' . $size[1];
+
+				$ret &= $new_node->updateNode($param, $this->user_id);
 
 				$this->db->commit();
 			}

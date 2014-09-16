@@ -156,7 +156,7 @@ div#preview {
 }
 div.text_editor {
 	margin: 0;
-	padding: 0 0 8px 0;
+	padding: 0;
 	background-color: #555;
 	width: 100%;
 	overflow:hidden;

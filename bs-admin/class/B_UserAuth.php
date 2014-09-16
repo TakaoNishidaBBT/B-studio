@@ -23,7 +23,7 @@
 			$sql = "select user_id
 						  ,user_name
 					from " . B_DB_PREFIX . "account
-					where user_id = '%login_id%' and pwd = '%pwd%'";
+					where user_id = binary '%login_id%' and pwd = binary '%pwd%'";
 
 			$sql = str_replace('%login_id%', $db->real_escape_string($login_id), $sql);
 			$sql = str_replace('%pwd%', $db->real_escape_string($pwd), $sql);

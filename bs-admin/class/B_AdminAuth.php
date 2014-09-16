@@ -21,7 +21,7 @@
 				}
 			}
 			$sql = " select user_id, concat(f_name, g_name) user_name, pwd, user_auth from " . B_DB_PREFIX . "user";
-			$sql.= " where user_status = '1' and user_id = '%USER_ID%' and pwd = '%PWD%'";
+			$sql.= " where user_status = '1' and user_id = binary '%USER_ID%' and pwd = binary '%PWD%'";
 
 			$sql = str_replace('%USER_ID%', $db->real_escape_string($user_id), $sql);
 			$sql = str_replace('%PWD%', $db->real_escape_string($pwd), $sql);

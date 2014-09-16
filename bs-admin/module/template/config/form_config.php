@@ -10,13 +10,13 @@ $form_config = array(
 	array('class' => 'B_Hidden', 'name' => 'contents_id'),
 	array('class' => 'B_Hidden', 'name' => 'update_datetime'),
 	array(
-		'start_html'	=> '<div class="editor_container bframe_adjustwindow" param="margin:15">',
+		'start_html'	=> '<div class="editor_container bframe_adjustwindow" param="margin:8">',
 		'end_html'		=> '</div>',
 		array(
 			'start_html'	=> '<div id="html" class="bframe_adjustwindow" param="margin:4">',
 			'end_html'		=> '</div>',
 			array(
-				'start_html'	=> '<div class="bframe_adjustparent text_editor start_html" param="margin:30,height:50%">',
+				'start_html'	=> '<div class="bframe_adjustparent text_editor start_html" param="margin:11,height:50%">',
 				'end_html'		=> '</div>',
 				array(
 					'name'				=> 'start_html',
@@ -40,7 +40,7 @@ $form_config = array(
 				),
 			),
 			array(
-				'start_html'	=> '<div class="bframe_adjustparent text_editor end_html" param="margin:25,height:50%" style="margin-top:7px">',
+				'start_html'	=> '<div class="bframe_adjustparent text_editor end_html" param="margin:12,height:50%" style="margin-top:7px">',
 				'end_html'		=> '</div>',
 				array(
 					'name'				=> 'end_html',
@@ -65,24 +65,24 @@ $form_config = array(
 			),
 		),
 		array(
-			'start_html'	=> '<div id="css" class="text_editor bframe_adjustparent" param="margin:22" style="display:none">',
+			'start_html'	=> '<div id="css" class="text_editor bframe_adjustparent" param="margin:21" style="display:none">',
 			'end_html'		=> '</div>',
 			array(
 				'id'				=> 'css_editor',
 				'name'				=> 'css',
 				'class'				=> 'B_TextArea',
-				'special_html'		=> 'class="textarea bframe_adjustparent bframe_texteditor" param="margin:24" syntax="css" style="width:100%"',
+				'special_html'		=> 'class="textarea bframe_adjustparent bframe_texteditor" param="margin:32" syntax="css" style="width:100%"',
 				'no_trim'			=> true,
 			),
 		),
 		array(
-			'start_html'	=> '<div id="php" class="text_editor bframe_adjustparent" param="margin:22" style="display:none">',
+			'start_html'	=> '<div id="php" class="text_editor bframe_adjustparent" param="margin:21" style="display:none">',
 			'end_html'		=> '</div>',
 			array(
 				'id'				=> 'php_editor',
 				'name'				=> 'php',
 				'class'				=> 'B_TextArea',
-				'special_html'		=> 'class="textarea bframe_adjustparent bframe_texteditor" param="margin:24" syntax="php" style="width:100%"',
+				'special_html'		=> 'class="textarea bframe_adjustparent bframe_texteditor" param="margin:32" syntax="php" style="width:100%"',
 				'no_trim'			=> true,
 			),
 		),
