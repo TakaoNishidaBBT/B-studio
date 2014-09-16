@@ -277,15 +277,15 @@
 					switch($bmp['bits_per_pixel']) {
 					case '32':
 					case '24':
-						$color = unpack('V', substr($img, $p, 3).$vide);
+						$color = unpack('V', substr($img, $p, 3) . $vide);
 						break;
 
 					case '16':
 						$color = unpack('v', substr($img, $p, 2));
 						$bin = str_pad(decbin($color[1]), 16, '0', STR_PAD_LEFT);
-						$r = bindec(substr($bin, 1, 5)) * 8;
-						$g = bindec(substr($bin, 6, 5)) * 8;
-						$b = bindec(substr($bin, 11, 5)) * 8;
+						$r = bindec(substr($bin, 1, 5) . substr($bin, 1, 3));
+						$g = bindec(substr($bin, 6, 5) . substr($bin, 6, 3));
+						$b = bindec(substr($bin, 11, 5) . substr($bin, 11, 3));
 						$color[1] = imagecolorallocate($res, $r, $g, $b);
 						break;
 

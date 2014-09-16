@@ -79,7 +79,7 @@
 
 		function _validate_callback($param) {
 			// IDの二重登録確認
-			$sql = "select count(*) cnt from " . B_DB_PREFIX . $this->table_name . " where user_id='" . $param['value'] . "'";
+			$sql = "select count(*) cnt from " . B_DB_PREFIX . $this->table_name . " where user_id = binary '" . $param['value'] . "'";
 			$rs = $this->db->query($sql);
 			$row = $this->db->fetch_assoc($rs);
 			if($row['cnt'] == 0) {
