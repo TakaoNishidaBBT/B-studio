@@ -656,7 +656,7 @@
 		}
 	}
 
-	function view($__vm
+	function view($__view_mode
 				 ,$__view_file
 				 ,$__templates
 				 ,$__contents
@@ -667,7 +667,7 @@
 				 ,&$bs_url
 				 ,&$bs_html_header) {
 
-		$bs_view_mode = $__vm;
+		$bs_view_mode = $__view_mode;
 		$__archive = new B_Log(B_ARCHIVE_LOG_FILE);
 		$bs_db = new B_DBaccess($__archive);
 		$bs_db->connect(B_DB_SRV, B_DB_USR, B_DB_PWD, B_DB_CHARSET);
@@ -684,6 +684,7 @@
 					   ,$__row
 					   ,&$bs_bread_crumb) {
 
+		$bs_view_mode = $__view_mode;
 		$__archive = new B_Log(B_ARCHIVE_LOG_FILE);
 		$bs_db = new B_DBaccess($__archive);
 		$bs_db->connect(B_DB_SRV, B_DB_USR, B_DB_PWD, B_DB_CHARSET);
