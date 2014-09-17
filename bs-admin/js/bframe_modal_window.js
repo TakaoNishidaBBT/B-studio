@@ -194,12 +194,12 @@
 				bframe.effect.fadeIn(modal_window, 0, 0, 100, 400);
 			}
 		}
-		
+
 		function setWindowSize(width, height) {
 			if(!width || !height) return;
 
-			window_width_default = width;
-			window_height_default = height;
+			window_width_default = width+1;
+			window_height_default = height+1;
 			resizeOverlay();
 			bframe.effect.fadeIn(modal_window, 0, 0, 100, 400);
 		}
@@ -214,7 +214,9 @@
 			modal_window.style.display = 'none';
 			modal_window.style.opacity = 0;
 			containerBody.onload = '';
-			containerBody.src = 'about:blank';
+			containerBody.contentWindow.document.open();
+			containerBody.contentWindow.document.write('');
+			containerBody.contentWindow.document.close();
 			window_status = false;
 			activeWindow.pop();
 

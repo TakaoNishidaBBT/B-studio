@@ -258,11 +258,9 @@
 			case '4':
 			case '8':
 				$palette = unpack('V'.$bmp['colors'], fread($fp, $bmp['colors']*4));
-				$p = $file['bitmap_offset'] + $bmp['colors']*4;
 				break;
 
 			default:
-				$p = $file['bitmap_offset'];
 				break;
 			}
 			rewind($fp);
@@ -270,6 +268,7 @@
 			$vide = chr(0);
 
 			$res = imagecreatetruecolor($bmp['width'], $bmp['height']);
+			$p = $file['bitmap_offset'];
 			$y = $bmp['height']-1;
 			while($y >= 0) {
 				$x=0;
