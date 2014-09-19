@@ -14,7 +14,15 @@ $menu_config = array(
 		array(
 			'start_html'    => '<li class="title">',
 			'end_html'	    => '</li>',
-			'value'			=> 'B-studio',
+			array(
+				'start_html'    => '<a href="' . B_SITE_ROOT . '" title="公開画面を開きます" onclick="window.open(this.href); return false;">',
+				'end_html'	    => '</a>',
+				array(
+					'start_html'	=> '<span class="title">',
+					'end_html'		=> '</span>',
+					'value'			=> 'B-studio',
+				),
+			),
 		),
 		array(
 			'auth_filter'	=> 'super_admin/admin',
