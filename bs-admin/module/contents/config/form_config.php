@@ -197,29 +197,6 @@ $config_form_config = array(
 				),
 			),
 		),
-		// bread crumb 表示名
-		array(
-			'start_html'    => '<tr>',
-			'end_html'	    => '</tr>',
-			array(
-				'start_html'			=> '<th>',
-				'end_html'				=> '</th>',
-				array(
-					'value'				=> 'bread crumb 表示名',
-					'no_linefeed'		=> true,
-				),
-			),
-			array(
-				'start_html'			=> '<td>',
-				'end_html'				=> '</td>',
-				array(
-					'name'					=> 'bread_crumb_name',
-					'class'					=> 'B_InputText',
-					'special_html'			=> 'class="bread_crumb bframe_textarea"" ',
-					'no_trim'				=> true,
-				),
-			),
-		),
 		// テンプレート
 		array(
 			'start_html'    => '<tr>',
@@ -261,6 +238,29 @@ $config_form_config = array(
 					'special_html'		=> 'title="クリア" class="clear-button" onclick="clearText(\'template_name\', \'template_id\'); return false;" ',
 					'specialchars'		=> 'none',
 					'value'				=> '<img alt="クリア" src="images/common/clear_gray.png" />',
+				),
+			),
+		),
+		// bread crumb
+		array(
+			'start_html'    => '<tr>',
+			'end_html'	    => '</tr>',
+			array(
+				'start_html'			=> '<th>',
+				'end_html'				=> '</th>',
+				array(
+					'value'				=> 'bread crumb',
+					'no_linefeed'		=> true,
+				),
+			),
+			array(
+				'start_html'			=> '<td>',
+				'end_html'				=> '</td>',
+				array(
+					'name'					=> 'bread_crumb_name',
+					'class'					=> 'B_InputText',
+					'special_html'			=> 'class="bread_crumb bframe_textarea"" ',
+					'no_trim'				=> true,
 				),
 			),
 		),

@@ -91,17 +91,17 @@ div.pull_down_menu a:visited {
 	line-height: 36px;
 }
 div.pull_down_menu ul li.title {
+	width: 90px;
+}
+div.pull_down_menu ul span.title {
 	color: #5e5e5e;
 	text-shadow: -1px -1px #333;
-	width: 90px;
-	line-height: 39px;
 	font-weight: bold;
 	font-family: Arial,Meiryo,Helvetica,Verdana;
 	-webkit-user-select: none;
 	-moz-user-select: none;
 	-ms-user-select: none;
 	user-select: none;
-	cursor: default;
 }
 
 div.pull_down_menu ul li.terminator {
