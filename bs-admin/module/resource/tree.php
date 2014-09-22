@@ -497,8 +497,8 @@
 					$zip->close();
 
 					// ダウンロード
-					header("Pragma: cache;");
-					header("Cache-Control: public");
+					header('Pragma: cache;');
+					header('Cache-Control: public');
 					header('Content-type: application/x-zip-dummy-content-type');
 					header('Content-Disposition: attachment; filename=' . $file_name);
 					ob_end_clean();
@@ -512,8 +512,8 @@
 					$file_path = B_RESOURCE_DIR . $node->contents_id . '.' . $info['extension'];
 
 					// ダウンロード
-					header("Pragma: cache;");
-					header("Cache-Control: public");
+					header('Pragma: cache;');
+					header('Cache-Control: public');
 
 					switch(strtolower($info['extension'])) {
 					case 'swf':
