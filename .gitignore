@@ -8,15 +8,15 @@
 /bs-admin/db
 /bs-admin/user
 
-# git update-index --assume-unchanged .htaccess
-# git update-index --assume-unchanged bs-admin-files/.htaccess
-# git update-index --assume-unchanged bs-admin-files/files/.gitkeep
-# git update-index --assume-unchanged bs-admin-files/thumbs/.gitkeep
-# git update-index --assume-unchanged bs-admin/.htaccess
-# git update-index --assume-unchanged bs-admin/.htpassword
-# git update-index --assume-unchanged bs-admin/db/db_connect.php
-# git update-index --assume-unchanged bs-admin/user/users.php
-# git update-index --assume-unchanged files/.gikeep
+# git update-index --skip-worktree .htaccess
+# git update-index --skip-worktree bs-admin-files/.htaccess
+# git update-index --skip-worktree bs-admin-files/files/.gitkeep
+# git update-index --skip-worktree bs-admin-files/thumbs/.gitkeep
+# git update-index --skip-worktree bs-admin/.htaccess
+# git update-index --skip-worktree bs-admin/.htpassword
+# git update-index --skip-worktree bs-admin/db/db_connect.php
+# git update-index --skip-worktree bs-admin/user/users.php
+# git update-index --skip-worktree files/.gikeep
 
-# git update-index --no-assume-unchanged [file-name]
+# git update-index --no-skip-worktree [file-name]
 # git ls-files -v
