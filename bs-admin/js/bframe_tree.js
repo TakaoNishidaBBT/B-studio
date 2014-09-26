@@ -838,7 +838,7 @@
 		}
 
 		function saveName(event) {
-			if(typeof bframe == 'undefined' || !bframe) return;
+			if(typeof bframe == 'undefined' || !bframe || response_wait) return;
 
 			// exception
 			var obj = bframe.getEventSrcElement(event);
