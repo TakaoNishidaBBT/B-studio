@@ -154,7 +154,7 @@
 			resizeOverlay();
 
 			containerBody.onload = onloadModalWindow;
-			containerBody.src = target.href;
+			containerBody.contentWindow.location.replace(target.href);
 			containerBody.opener = window;
 
 			// set zIndex
@@ -213,10 +213,7 @@
 			overlay.style.display = 'none';
 			modal_window.style.display = 'none';
 			modal_window.style.opacity = 0;
-			containerBody.onload = '';
-			containerBody.contentWindow.document.open();
-			containerBody.contentWindow.document.write('');
-			containerBody.contentWindow.document.close();
+			containerBody.contentWindow.location.replace('about:blank');
 			window_status = false;
 			activeWindow.pop();
 
