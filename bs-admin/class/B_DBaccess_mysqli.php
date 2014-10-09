@@ -120,7 +120,7 @@
 			return $this->db->escape_string($string);
 		}
 
-		function quoteslahesforlike($string) {
+		function real_escape_string_for_like($string) {
 			$ret = $this->db->escape_string($string);
 			$ret = str_replace("%", "\%", $ret);
 			$ret = str_replace("_", "\_", $ret);

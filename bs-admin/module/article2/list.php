@@ -155,14 +155,14 @@
 		function setSqlWhere() {
 			// 検索条件設定
 			if($this->keyword) {
-				$keyword = $this->db->quoteslahesforlike($this->keyword);
+				$keyword = $this->db->real_escape_string_for_like($this->keyword);
 
 				$sql = "select article_id from %DB_PREFIX%article2
 						where title like '%KEYWORD%' or tag like '%KEYWORD%' or description like '%KEYWORD%'
 						group by article_id";
 
 				$sql = str_replace('%DB_PREFIX%', B_DB_PREFIX, $sql);
-				$sql = str_replace('%KEYWORD%', "%" . $this->db->quoteslahesforlike($this->keyword) . "%", $sql);
+				$sql = str_replace('%KEYWORD%', "%" . $this->db->real_escape_string_for_like($this->keyword) . "%", $sql);
 
 				$rs = $this->db->query($sql);
 				for($i=0 ; $row = $this->db->fetch_assoc($rs) ; $i++) {
