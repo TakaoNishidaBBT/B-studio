@@ -49,9 +49,7 @@
 		};
 
 		function setEditFlag() {
-			if(!editing_obj || (editing_obj && editing_obj.value != start_value)) {
-				edit_flag=true;
-			}
+			edit_flag=true;
 		};
 
 		this.setEditFlag = setEditFlag;
@@ -67,23 +65,11 @@
 			editCheckExecuteResetCallBack();
 		};
 
-		function onFocus(event) {
-			editing_obj = bframe.getEventSrcElement(event);
-			start_value = editing_obj.value;
-		}
-
-		function onBlur(event) {
-			editing_obj = null;
-			start_value = '';
-		}
-
 		function setFunction(tag_name) {
 			var obj = document.getElementsByTagName(tag_name);
 
 			for(i=0 ; i < obj.length ; i++){
 				bframe.addEventListner(obj[i], 'change', setEditFlag);
-				bframe.addEventListner(obj[i], 'focus', onFocus);
-				bframe.addEventListner(obj[i], 'blur', onBlur);
 			}
 		}
 
