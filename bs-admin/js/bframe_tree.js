@@ -44,6 +44,7 @@
 		var selected_node = new currentNodeControl;
 		var current_edit_node;
 		var eventSrcObject;
+		var new_node;
 
 		var drag_control;
 
@@ -533,6 +534,11 @@
 				response_wait = false;
 				node_info = null;
 
+				if(new_node) {
+					editName();
+					new_node = false;
+				}
+
 				if(response.message) {
 					alert(response.message);
 				}
@@ -548,7 +554,7 @@
 				else {
 					selected_node.set('t'+node_info.node_id);
 				}
-				editName();
+				new_node = true;
 			}
 
 			if(node_info.children) {
