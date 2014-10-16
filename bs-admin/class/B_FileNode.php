@@ -303,6 +303,7 @@
 			while(false !== ($file_name = readdir($handle))){
 				if($file_name == '.' || $file_name == '..') continue;
 				$number = substr($file_name, 0, 10);
+				if(!is_numeric($number)) continue;
 				if(!$max || intval($max) < intval($number)) {
 					$max = $number;
 				}
