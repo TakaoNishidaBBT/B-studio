@@ -43,7 +43,6 @@
 	// -------------------------------------------------------------------------
 	bframe.adjustwindow = function(target) {
 		var self = target;
-		var pos = bframe.getElementPosition(self);
 		var param = target.getAttribute('param');
 		var margin = 0;
 
@@ -58,9 +57,7 @@
 
 		bframe.addEventListner(target, 'load' , adjustWindow);
 		bframe.resize_handler.registCallBackFunction(adjustWindow);
-
 		bframe.resize_handler.onResize();
-		adjustWindow();
 
 		function adjustWindow() {
 			if(self.tagName.toLowerCase() == 'iframe') {
@@ -69,6 +66,7 @@
 			}
 			else {
 				var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+				var pos = bframe.getElementPosition(self);
 				self.style.height = h - pos.top - margin + 'px';
 			}
 		}
@@ -93,9 +91,7 @@
 		}
 
 		bframe.resize_handler.registCallBackFunction(adjustParent);
-
 		bframe.resize_handler.onResize();
-		adjustParent();
 
 		function adjustParent() {
 			var p, h;
