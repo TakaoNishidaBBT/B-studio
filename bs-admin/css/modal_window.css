@@ -1,5 +1,10 @@
 ﻿@charset "utf-8";
 
+.overlay {
+	background-color: #000;
+	opacity: 0.5;
+	filter: alpha(opacity=70);
+}
 .modal_window .container {
 	background-color: #fff;
 	padding: 10px;
@@ -10,11 +15,13 @@
 	color: #fff;
 }
 .modal_window .close {
-	display: block;
-	float: right;
+	position: absolute;
+	top: 0;
+	right: 0;
 	cursor: pointer;
 }
 .modal_window .containerHeader {
+	position: relative;
 	height: 20px;
 	background-color: #444;
 	cursor: move;
@@ -27,5 +34,6 @@
 	box-shadow: 0px 0px 24px 10px rgba(0,0,0,0.5);
 }
 .modal_window .containerBody {
+	position: relative;
 	vertical-align: bottom;
 }

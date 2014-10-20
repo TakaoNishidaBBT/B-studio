@@ -26,8 +26,8 @@
 		var containerBody = document.createElement('iframe');
 		var title = document.createElement('span');
 		var close = document.createElement('span');
-		var window_width_default = 250;
-		var window_height_default = 250;
+		var window_width_default;
+		var window_height_default;
 		var window_status;
 		var set_window_size = false;
 		var child;
@@ -42,23 +42,23 @@
 		overlay.style.top = 0;
 		overlay.style.left = 0;
 
-		overlay.style.backgroundColor = '#000';
-		overlay.style.opacity = 0.5;
-
 		document.body.appendChild(overlay);
 
 		modal_window.className = 'modal_window';
 		modal_window.style.display = 'none';
 		modal_window.style.position = 'fixed';
 		modal_window.style.opacity = 0;
+		modal_window.style.filter = 'alpha(opacity=0)';
 		document.body.appendChild(modal_window);
 
 		title_bar.className = 'title_bar';
 		modal_window.appendChild(title_bar);
 
+		title.className = 'title';
 		title_bar.appendChild(title);
 
 		close.className = 'close';
+		close.style.zIndex = baseIndex + 5;
 		close.innerHTML = 'close';
 		bframe.addEventListner(close, 'click', deactivate);
 		title_bar.appendChild(close);
@@ -67,7 +67,6 @@
 		modal_window.appendChild(container);
 
 		containerHeader.className = 'containerHeader';
-		containerHeader.style.position = 'relative';
 		container.appendChild(containerHeader);
 
 		containerHeader.onmousedown = onContainerHeaderMouseDown;
@@ -77,7 +76,6 @@
 		containerBody.id = 'modal_window' + window_id;
 		containerBody.name = 'modal_window' + window_id;
 		containerBody.className = 'containerBody';
-		containerBody.style.position = 'relative';
 		containerBody.frameBorder = 0;
 		containerBody.deactivate = deactivate;
 		container.appendChild(containerBody);
@@ -91,7 +89,7 @@
 				var keycode = window.event.keyCode;
 			}
 			else {
-				var keycode = event.keyCode;
+				if(event) var keycode = event.keyCode;
 			}
 			if(keycode == 8) {	// BackSpace
 				var ae = containerBody.contentDocument.activeElement.tagName;
@@ -115,6 +113,9 @@
 		}
 
 		this.activate = function(target, window) {
+			window_width_default = 10000;
+			window_height_default = 10000;
+
 			// arguments
 			for(var i=2 ; i<arguments.length; i++) {
 				var obj = window.document.getElementById(arguments[i]);
@@ -138,16 +139,17 @@
 				title.innerHTML = t;
 			}
 
-			set_window_size = false;
+			set_width = false;
+			set_height = false;
 			var params = target.getAttribute('params');
 			if(params) {
 				if(w = bframe.getParam('width', params)) {
 					window_width_default = w;
-					set_window_size = true;
+					set_width = true;
 				}
 				if(h = bframe.getParam('height', params)) {
 					window_height_default = h;
-					set_window_size = true;
+					set_height = true;
 				}
 			}
 
@@ -166,8 +168,9 @@
 			overlay.style.display = 'block';
 			modal_window.style.display = 'block';
 			modal_window.style.opacity = 0;
+			modal_window.style.filter = 'alpha(opacity=0)';
 
-			if(set_window_size) {
+			if(set_width && set_height) {
 				bframe.effect.fadeIn(modal_window, 300, 0, 100, 400);
 			}
 
@@ -183,11 +186,16 @@
 				containerBody.contentDocument.onkeydown = onKeyDown;
 			} catch(e) {}
 
-			if(set_window_size) return;
-
 			try {
-				var w = containerBody.contentDocument.body.clientWidth;
-				var h = containerBody.contentDocument.body.clientHeight;
+				w = window_width_default;
+				h = window_height_default;
+
+				if(!set_width) {
+					var w = containerBody.contentDocument.body.clientWidth;
+				}
+				if(!set_height) {
+					var h = containerBody.contentDocument.body.clientHeight;
+				}
 				setWindowSize(w, h);
 			}
 			catch(e) {
@@ -198,8 +206,8 @@
 		function setWindowSize(width, height) {
 			if(!width || !height) return;
 
-			window_width_default = width+1;
-			window_height_default = height+1;
+			window_width_default = parseInt(width)+1;
+			window_height_default = parseInt(height)+1;
 			resizeOverlay();
 			bframe.effect.fadeIn(modal_window, 0, 0, 100, 400);
 		}

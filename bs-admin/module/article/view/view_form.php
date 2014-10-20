@@ -10,7 +10,7 @@
 				echo '<span class="error-message">' . $this->action_message . '</span>' . "\n";
 			}
 		?>
-		<div id="main" class="bframe_adjustparent" param="margin:120">
+		<div id="main" class="bframe_adjustparent" param="margin:108">
 			<p><span class="require">※</span>：必須項目</p>
 			<?php echo $this->form->getHtml($this->display_mode); ?>
 		</div>
