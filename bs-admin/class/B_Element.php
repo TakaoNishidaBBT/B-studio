@@ -362,6 +362,11 @@
 					$value = number_format(str_replace(",", "", $value));
 				}
 			}
+
+			if($this->strip_tags) {
+				$value = strip_tags($value);
+			}
+
 			return $value;
 		}
 
@@ -1886,18 +1891,19 @@
 				}
 			}
 			$this->element_start_html =	'<a href="' .
-								$this->link . $this->param . '" ';
+								$this->link . $this->param . '"';
 			if($this->id) {
-				$this->element_start_html.= 'id="' . $this->_gethtmlid() . '" ';
+				$this->element_start_html.= ' id="' . $this->_gethtmlid() . '"';
 			}
 			if($this->target) {
-				$this->element_start_html.= 'target="' . $this->target . '" ';
+				$this->element_start_html.= ' target="' . $this->target . '"';
 			}
 			if($this->title) {
-				$this->element_start_html.= 'title="' . $this->title . '" ';
+				$this->element_start_html.= ' title="' . $this->title . '"';
 			}
+			if($this->special_html) $this->special_html = ' ' . $this->special_html;
 
-			return $this->start_html . $this->element_start_html . $this->special_html . $this->event . '>';;
+			return $this->start_html . $this->element_start_html . $this->special_html . $this->event . '>';
 		}
 
 		function getEndHtml($mode=null) {
