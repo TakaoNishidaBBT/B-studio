@@ -113,9 +113,6 @@
 		}
 
 		this.activate = function(target, window) {
-			window_width_default = 10000;
-			window_height_default = 10000;
-
 			// arguments
 			for(var i=2 ; i<arguments.length; i++) {
 				var obj = window.document.getElementById(arguments[i]);
@@ -139,6 +136,8 @@
 				title.innerHTML = t;
 			}
 
+			window_width_default = 10000;
+			window_height_default = 10000;
 			set_width = false;
 			set_height = false;
 			var params = target.getAttribute('params');
@@ -170,10 +169,6 @@
 			modal_window.style.opacity = 0;
 			modal_window.style.filter = 'alpha(opacity=0)';
 
-			if(set_width && set_height) {
-				bframe.effect.fadeIn(modal_window, 300, 0, 100, 400);
-			}
-
 			//focus
 			modal_window.focus();
 			frames[containerBody.id].focus();
@@ -197,10 +192,7 @@
 					var h = containerBody.contentDocument.body.clientHeight;
 				}
 				setWindowSize(w, h);
-			}
-			catch(e) {
-				bframe.effect.fadeIn(modal_window, 0, 0, 100, 400);
-			}
+			} catch(e) {}
 		}
 
 		function setWindowSize(width, height) {

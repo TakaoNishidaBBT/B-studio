@@ -16,9 +16,13 @@
 }
 .modal_window .close {
 	position: absolute;
-	top: 0;
+	top: 4px;
 	right: 0;
 	cursor: pointer;
+	background: url(../images/common/close.png) no-repeat 0 0;
+	text-indent: -9999px;
+	width: 12px;
+	overflow: hidden;
 }
 .modal_window .containerHeader {
 	position: relative;

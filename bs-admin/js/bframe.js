@@ -134,6 +134,7 @@
 
 	bframe.AjaxSubmit = function() {
 		var cb = new Array;
+		var cba = new Array;
 		var sfname, smodule, spage, smethod, smode, snocheck;
 
 		submit = function(fname, module, page, method, mode, nocheck) {
@@ -197,6 +198,10 @@
 						return;
 					}
 				}
+				if(!response.status && response.mode && response.mode == 'alert') {
+					alert(response.message);
+					return;
+				}
 				if(response.message && response.message_obj) {
 					if(obj = document.getElementById(response.message_obj)) {
 						obj.innerHTML = response.message;
@@ -210,12 +215,36 @@
 						}
 					}
 				}
+
+				// execute callback function
+				AjaxSubmitExecuteCallBackAfter();
+
 				bframe.response_wait = false;
 				if(bframe.editCheck_handler) {
 					bframe.editCheck_handler.resetEditFlag();
 				}
 			}
 		}
+
+		this.registCallBackFunctionAfter = function(func) {
+			cba.push(func);
+		}
+
+		this.removeCallBackFunctionAfter = function(func) {
+			for(var i=0 ; i<cba.length ; i++) {
+				if(func == cba[i]) {
+					cba.splice(i, 1);
+				}
+			}
+		}
+
+		AjaxSubmitExecuteCallBackAfter = function() {
+			for(var i=0 ; i<cba.length ; i++) {
+				func = cba[i];
+				func();
+			}
+		}
+
 	}
 
 	bframe.ajaxSubmit = new bframe.AjaxSubmit;
