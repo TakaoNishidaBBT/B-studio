@@ -106,4 +106,37 @@
 				}
 			}
 		}
+
+		function getImgHTML($img_path, $max_width, $max_height) {
+			if(!$img_path) return;
+			if(!file_exists($img_path)) return;
+
+			$image_size = getimagesize($img_path);
+
+			if($image_size[0] > $max_width) {
+				if($image_size[0] > $image_size[1]) {
+					$width = $max_widths;
+					$height = $image_size[1] * $width / $image_size[0];
+				}
+				else {
+					$height = $max_height;
+					$width = $image_size[0] * $height / $image_size[1];
+				}
+			}
+			else if($image_size[1] > $max_height) {
+				$height = $max_height;
+				$width = $image_size[0] * $height / $image_size[1];
+			}
+			else {
+				$width = $image_size[0];
+				$height = $image_size[1];
+			}
+
+			$html = '<img src="%IMG_URL%" width="%WIDTH%" height="%HEIGHT%" alt="" />';
+			$html = str_replace('%IMG_URL%', B_UPLOAD_URL . $img_path, $html);
+			$html = str_replace('%WIDTH%', $width, $html);
+			$html = str_replace('%HEIGHT%', $height, $html);
+
+			return $html;
+		}
 	}

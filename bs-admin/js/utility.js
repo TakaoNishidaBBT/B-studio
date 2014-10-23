@@ -12,28 +12,24 @@
 		if(func) top.bframe.modalWindow.registCallBackFunction(func);
 	}
 
-	function insertIMG(file_path, file_name, img_size, img_obj_id, hidden_obj_id, width, height) {
-		window.frameElement.opener._insertIMG(file_path, file_name, img_size, img_obj_id, hidden_obj_id, width, height);
+	function insertIMG(dir, file_path, img_size, img_obj_id, hidden_obj_id, width, height) {
+		window.frameElement.opener._insertIMG(dir, file_path, img_size, img_obj_id, hidden_obj_id, width, height);
 		window.frameElement.deactivate();
 
 		return false;
 	}
 
-	function _insertIMG(file_path, file_name, img_size, img_obj_id, hidden_obj_id, w, h) {
+	function _insertIMG(dir, file_path, img_size, img_obj_id, hidden_obj_id, w, h) {
 		var hidden_target = document.getElementById(hidden_obj_id);
 		if(hidden_target) {
-			hidden_target.value = file_name;
+			// set hidden target value (real value)
+			hidden_target.value = file_path;
 			bframe.fireEvent(hidden_target, 'change');
 		}
 
-		if(!w) {
-			w = 110;
-		}
-		if(!h) {
-			h = 80;
-		}
 		var target = document.getElementById(img_obj_id);
 		if(target) {
+			// set thumbnail to a target child
 			var image = target.getElementsByTagName('img');
 			if(image.length) {
 				var img = image[0];
@@ -41,34 +37,13 @@
 			else {
 				var img = document.createElement('img');
 			}
-
-			img.src = file_path + file_name;
-			var size = img_size.split('x');
-			var width = parseInt(size[0]);
-			var height = parseInt(size[1]);
-
-			if(width > w) {
-				if((width / w) > (height / h)) {
-					height = height * w / width;
-					width = w;
-				}
-				else {
-					width = width * h / height;
-					height = h;
-				}
-			}
-			else if(height > h) {
-				width = width * h / height;
-				height = h;
-			}
-
-			img.width = width;
-			img.height = height;
-
+			var file_path_array = file_path.split('/');
+			file_path_array[file_path_array.length-1] = 'thumb_' + file_path_array[file_path_array.length-1];
+			var thumb = file_path_array.join('/');
+			if(dir.substr(-1) == '/' && thumb.substr(0, 1) == '/') thumb = thumb.substr(1);
+			img.src = dir + thumb;
 			target.appendChild(img);
 		}
-
-		return false;
 	}
 
 	function setTemplate(node_id, node_value) {
@@ -245,4 +220,9 @@
 				external_window.disabled=false;
 			}
 		}
+	}
+
+	function setProperty(module) {
+		bframe.ajaxSubmit.registCallBackFunctionAfter(window.frameElement.deactivate);
+		bframe.ajaxSubmit.submit('F1', module, 'property', 'regist', '', true);
 	}

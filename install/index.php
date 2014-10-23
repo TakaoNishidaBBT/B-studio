@@ -87,17 +87,9 @@
 
 	function setHtaccess($root_htaccess) {
 		// setup htaccess
-		if(file_exists('../.htaccess')) {
-			$htaccess = file_get_contents('../.htaccess') . "\n";
-		}
 		$contents = file_get_contents('./config/htaccess.txt');
 		$contents = str_replace('%REWRITE_BASE%', ROOT_DIR, $contents);
-
-		if(trim($htaccess)) {
-			$param['htaccess'] = $htaccess;
-		}
 		$param['htaccess'].= $contents;
-
 		$root_htaccess->setValue($param);
 	}
 

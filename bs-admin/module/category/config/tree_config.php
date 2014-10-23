@@ -29,10 +29,21 @@ $tree_config = array(
 				'createNode'	=> 'createNode',
 				'updateDispSeq'	=> 'updateDispSeq',
 				'saveName'		=> 'saveName',
+				'property'		=> 'property',
 			),
 			'ondblclick'	=>
 			array(
 				'script'	=> 'setCategory',
+			),
+			'relation'	=>
+			array(
+				'open_property'	=>
+				array(
+					'url'		=> DISPATCH_URL . '&module=' . $this->module . '&page=property&method=select',
+					'params'	=> 'width:360,height:330',
+					'title'		=> 'プロパティー',
+					'func'		=> 'reloadTree',
+				),
 			),
 
 			'icon'		=>
@@ -83,6 +94,10 @@ $tree_config = array(
 				array(
 					'menu'		=> '名前の変更',
 					'func'		=> 'editName',
+				),
+				array(
+					'menu'		=> 'プロパティー',
+					'func'		=> 'open_property',
 				),
 			),
 			'context_menu_width'	=> '138',

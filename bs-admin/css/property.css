@@ -1,0 +1,302 @@
+@charset "UTF-8";
+
+html, body {
+	background-color: #fff;
+}
+
+div#contents_container {
+	margin: 0;
+	overflow: hidden;
+}
+div#contents {
+	overflow: hidden;
+	background-color: #fff;
+	border: 1px solid #444444;
+}
+div.main_container {
+	margin: 8px;
+	padding: 0;
+	background-color: #fff;
+	overflow: hidden;
+}
+
+/* tab control */
+ul.tabcontrol {
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+	background-color: #fff;
+	border-bottom: 1px solid #999999;
+	overflow: visible;
+	height: 28px;
+	min-width: 1000px;
+}
+ul.tabcontrol li {
+	float: left;
+	height: 27px;
+	width: 100px;
+	margin: 0;
+	padding: 0;
+	border-top: 1px solid #cccccc;
+	border-bottom: 1px solid #999999;
+	background-color: #eee;
+	overflow: hidden;
+}
+ul.tabcontrol li:first-child {
+	border-left: 1px solid #bbbbbb;
+}
+ul.tabcontrol li:last-child {
+	border-right: 1px solid #bbbbbb;
+}
+ul.tabcontrol li.selected {
+	height: 28px;
+	background-color: #fff;
+	border-top: 1px solid #999999;
+	border-right: 1px solid #777777;
+	border-left: 1px solid #777777;
+	border-bottom: none;
+}
+ul.tabcontrol li a:visited,
+ul.tabcontrol li a {
+	padding-left: 10px;
+	display: block;
+	text-align: left;
+	line-height: 28px;
+	color: #aaa;
+	text-decoration: none;
+}
+ul.tabcontrol li a:hover {
+	background-color: #fff;
+	color: #000;
+	text-decoration: none;
+}
+ul.tabcontrol li.selected a {
+	color: #3a3a3a;
+}
+div.control {
+	padding: 15px 0 0 0;
+}
+div.control p.message {
+	float: left;
+}
+/* button */
+.cancel-button,
+.regist-button {
+	padding: 5px 20px;
+	line-height: 17px;
+	border: none;
+	background-color: #ddd;
+	overflow: visible;
+	vertical-align: middle;
+	cursor: pointer;
+}
+.cancel-button:hover,
+.regist-button:hover {
+	background-color: #ccc;
+}
+.cancel-button {
+	margin-right: 10px;
+}
+
+/* message */
+div.message_container {
+	float: left;
+	margin-left: 10px;
+}
+span#message {
+	display: table-cell;
+	vertical-align: middle;
+	height: 24px;
+	color: #fff;
+}
+div.editor_container {
+	clear: both;
+	margin: 0;
+	padding: 6px 8px 8px 8px;
+	border-left: 1px solid #777;
+	border-right: 1px solid #777;
+	border-bottom: 1px solid #777;
+	overflow: auto;
+}
+fieldset {
+	margin: 15px 0;
+	border: 1px solid #ccc;
+}
+fieldset.first-child {
+	margin-top: 10px;
+}
+fieldset.last-child {
+	margin-bottom: 0;
+}
+legend {
+	padding: 0 8px;
+	text-align: left;
+}
+ul.list-item {
+	margin: 0;
+	padding: 0;
+}
+ul.list-item li {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	float: left;
+	margin-right: 20px;
+}
+ul.list-item li input {
+	vertical-align: -2px;
+	margin-right: 4px;
+}
+.property textarea {
+	background-color: #fff;
+	color: #ccc;
+	border-top: 1px solid #444;
+	border-left: 1px solid #444;
+	border-right: 1px solid #888;
+	border-bottom: 1px solid #888;
+	color: #000;
+	padding: 5px;
+	width: 97%;
+}
+
+/* table.form */
+table.form {
+	width: 99%;
+	margin: 0;
+	border: none;
+	border-collapse: separate;
+	border-spacing: 0;
+}
+table.form th {
+	min-width: 10px;
+	margin: 0;
+	padding: 7px 0;
+	background-color: #fff;
+	color: #444;
+	font-weight: normal;
+	text-align: left;
+	border: none;
+}
+table.form tr:first-child th {
+	border-top: 1px solid #fff;
+}
+table.form tr:first-child td {
+	border-top: 1px solid #fff;
+}
+table.file-title th {
+	width: 100px;
+}
+table.form th.error{
+	background: #fee;
+}
+table.form span.require{
+	margin: 0;
+}
+table.form th a.button {
+	text-shadow: none;
+	display: block;
+	padding: 0 8px;
+	border-top: 1px solid #555;
+	border-right: 1px solid #333;
+	border-bottom: 1px solid #333;
+	border-left: 1px solid #555;
+	background: #444;
+	text-align: center;
+	line-height: 20px;
+}
+table.form td {
+	padding: 3px 2px;
+	border-top: 1px solid #555;
+	border-left: 1px solid #555;
+	border-bottom: 1px solid #333;
+	border-right: 1px solid #333;
+	border: none;
+	background-color: #fff;
+	font-weight: normal;
+	text-align: left;
+	white-space: nowrap;
+}
+table.form td.clear {
+	width: 52px;
+}
+table.form td textarea,
+table.form td input {
+	background-color: #fff;
+	color: #ccc;
+	border: 1px solid #999;
+	color: #000;
+}
+table.form td textarea {
+	height: 60px;
+	padding: 5px;
+	width: 98%;
+}
+table.form td input {
+	height: 26px;
+	padding: 0 4px;
+	width: 98%;
+}
+table.form td input.color,
+table.form td input.background-color {
+	width: 116px;
+	margin-left: 2px;
+	vertical-align: middle;
+}
+table.form td input.icon {
+	width: 300px;
+	vertical-align: middle;
+}
+
+table.form a:link.button,
+table.form a:visited.button,
+table.form a:active.button,
+table.form a.button {
+	display: block;
+	padding: 0 8px;
+	border-top: 1px solid #555;
+	border-right: 1px solid #333;
+	border-bottom: 1px solid #333;
+	border-left: 1px solid #555;
+	background-color: #444;
+	color: #fff;
+	text-align: center;
+	line-height: 20px;
+}
+table.form a:hover.button {
+	border-top: 1px solid #666;
+	border-right: 1px solid #333;
+	border-bottom: 1px solid #333;
+	border-left: 1px solid #666;
+	background-color: #555;
+}
+table.form tr:last-child th {
+	border: none;
+}
+
+/* table.form */
+table.form table.img-item td {
+	border: none;
+}
+table.form img {
+	vertical-align: -38%;
+}
+table.img-item td#icon {
+	width: 120px;
+	height:90px;
+	border: 1px solid #999;
+	text-align: center;
+}
+.settings-button,
+.clear-button {
+	display: inline-block;
+	text-align: center;
+	line-height: 0;
+	padding: 5px;
+	vertical-align: middle;
+	border: 1px solid #ddd;
+}
+.settings-button:hover,
+.clear-button:hover {
+	background-color: #eee;
+	border: 1px solid #ddd;
+}
