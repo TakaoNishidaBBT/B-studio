@@ -334,7 +334,7 @@
 						continue;
 					}
 
-					$sql.= $line;
+					$sql.= str_replace('%PREFIX%', B_DB_PREFIX, $line);
 
 					if(substr(trim($line), -1, 1) == ';') {
 						$this->query($sql);
