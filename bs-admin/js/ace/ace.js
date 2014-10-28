@@ -3786,84 +3786,71 @@ var TextInput = function(parentNode, host) {
         });
     }
 
-	var compare_timer;
-	var last_value;
+	var onCompositionStart = function(e) {
+		if (inComposition || !host.onCompositionStart || host.$readOnly) return;
+		inComposition = {};
+		host.onCompositionStart();
+		setTimeout(onCompositionUpdate, 0);
+		host.on("mousedown", onCompositionEnd);
+		if (!host.selection.isEmpty()) {
+		    host.insert("");
+		    host.session.markUndoGroup();
+		    host.selection.clearSelection();
+		}
+		host.session.markUndoGroup();
+	};
 
-    var onCompositionStart = function(e) {
-        if (inComposition) return;
-        inComposition = {};
-        host.onCompositionStart();
-        setTimeout(onCompositionUpdate, 0);
-        host.on("mousedown", onCompositionEnd);
-        if (!host.selection.isEmpty()) {
-            host.insert("");
-            host.session.markUndoGroup();
-            host.selection.clearSelection();
-        }
-        host.session.markUndoGroup();
-		compare_timer = setInterval(compare, 50);
-    };
+	var onCompositionUpdate = function() {
+		if (!inComposition || !host.onCompositionUpdate || host.$readOnly) return;
+		text.value = text.value.replace(/\x01/g, "");
+		var val = text.value;
+		if (inComposition.lastValue === val) return;
 
-	var compare = function() {
-		if(text.value != last_value) {
-			last_value = text.value;
-			onCompositionUpdate();
-	    }
-	}
+		host.onCompositionUpdate(val);
+		if (inComposition.lastValue) host.undo();
 
-    var onCompositionUpdate = function() {
-        if (!inComposition) return;
-        host.onCompositionUpdate(text.value);
-        if (inComposition.lastValue)
-            host.undo();
-        inComposition.lastValue = text.value.replace(/\x01/g, "")
-        if (inComposition.lastValue) {
-            var r = host.selection.getRange();
-            host.insert(inComposition.lastValue);
-            host.session.markUndoGroup();
-            inComposition.range = host.selection.getRange();
-            host.selection.setRange(r);
-            host.selection.clearSelection();
-        }
-    };
+		inComposition.lastValue = val;
+		if (inComposition.lastValue) {
+			var r = host.selection.getRange();
+			host.insert(inComposition.lastValue);
+			host.session.markUndoGroup();
+			inComposition.range = host.selection.getRange();
+			host.selection.setRange(r);
+			host.selection.clearSelection();
+		}
+	};
 
     var onCompositionEnd = function(e) {
-        var c = inComposition;
-        inComposition = false;
-		clearInterval(compare_timer);
-
-        var timer = setTimeout(function() {
-            var str = text.value.replace(/\x01/g, "");
-            if (inComposition)
-                return
-            else if (str == c.lastValue)
-                resetValue();
-            else if (!c.lastValue && str) {
-                resetValue();
-                sendText(str);
-            }
-        });
-        inputHandler = function compositionInputHandler(str) {
-            clearTimeout(timer);
-            str = str.replace(/\x01/g, "");
-            if (str == c.lastValue || !c.lastValue)
-                return "";
-            if (c.lastValue)
-                host.undo();
-            return str;
-        }        
-        host.onCompositionEnd();
-        host.removeListener("mousedown", onCompositionEnd);
-        if (e.type == "compositionend" && c.range) {
-            host.selection.setRange(c.range);
-        }
-		if(!useragent.isWebKit) {
-			text.blur();
-			text.focus();
+		if (!host.onCompositionEnd || host.$readOnly) return;
+		var c = inComposition;
+		inComposition = false;
+		var timer = setTimeout(function() {
+			timer = null;
+			var str = text.value.replace(/\x01/g, "");
+			if (inComposition)
+				return;
+			else if (str == c.lastValue)
+				resetValue();
+			else if (!c.lastValue && str) {
+				resetValue();
+				sendText(str);
+			}
+		});
+		inputHandler = function compositionInputHandler(str) {
+			if (timer) clearTimeout(timer);
+			str = str.replace(/\x01/g, "");
+			if (str == c.lastValue)
+				return "";
+			if (c.lastValue && timer)
+				host.undo();
+			return str;
+        };
+		host.onCompositionEnd();
+		host.removeListener("mousedown", onCompositionEnd);
+		if (e.type == "compositionend" && c.range) {
+			host.selection.setRange(c.range);
 		}
-    };
-    
-    
+	};
 
     var syncComposition = lang.delayedCall(onCompositionUpdate, 50);
 
