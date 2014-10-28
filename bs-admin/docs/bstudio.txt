@@ -54,6 +54,14 @@ shit+F3キーをfindprevious2コマンドとして登録
 
 4.mode-php.jsを修正
 
+    this.$rules = {
+        "start" : [
+            {
+                token : "comment",
+//              regex : /(?:#|\/\/)(?:[^?]|\?[^>])*/ fixed (T.Nishida 2013/04/22)
+                regex : /(?:#|\/\/)((?!\?>).)*(\s)?/
+            },
+
 5.theme-twilight.jsを修正
 
 6.aceエディターはporotype.jsとコンフリクトするためjqueryに変更（フォームのシリアライズ処理）
@@ -131,12 +139,17 @@ line：14218
             host.selection.setRange(c.range);
         }
 
-// 下記コードを追加（入力テキストの確定:for firefo)
+// 下記コードを追加（入力テキストの確定:for firefox)
 		if(!useragent.isWebKit) {
 			text.blur();
 			text.focus();
 		}
     };
+
+8. その後Firefoxの動きが変わったため下記ファンクションを最新版にアップデート（上記内容は破棄）
+onCompositionStart
+onCompositionUpdate
+onCompositionEnd
 
 
 ■CKEditor
