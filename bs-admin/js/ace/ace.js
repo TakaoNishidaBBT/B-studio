@@ -3790,7 +3790,8 @@ var TextInput = function(parentNode, host) {
 		if (inComposition || !host.onCompositionStart || host.$readOnly) return;
 		inComposition = {};
 		host.onCompositionStart();
-		setTimeout(onCompositionUpdate, 0);
+// 2014/10/29 updated by T.Nishida
+//		setTimeout(onCompositionUpdate, 0);
 		host.on("mousedown", onCompositionEnd);
 		if (!host.selection.isEmpty()) {
 		    host.insert("");
@@ -3798,12 +3799,21 @@ var TextInput = function(parentNode, host) {
 		    host.selection.clearSelection();
 		}
 		host.session.markUndoGroup();
+// 2014/10/29 updated by T.Nishida
+		onCompositionUpdate();
 	};
 
 	var onCompositionUpdate = function() {
 		if (!inComposition || !host.onCompositionUpdate || host.$readOnly) return;
-		text.value = text.value.replace(/\x01/g, "");
-		var val = text.value;
+// 2014/10/29 updated by T.Nishida
+		if(useragent.isMozilla) {
+			text.value = text.value.replace(/\x01/g, "");
+			var val = text.value;
+		}
+		else {
+	        var val = text.value.replace(/\x01/g, "");
+		}
+
 		if (inComposition.lastValue === val) return;
 
 		host.onCompositionUpdate(val);

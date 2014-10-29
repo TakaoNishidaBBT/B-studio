@@ -79,77 +79,84 @@ line：14218
         var replaceReg = /\t|&|<|( +)|([\x00-\x1f\x80-\xa0\u1680\u180E\u2000-\u200f\u2028\u2029\u202F\u205F\u3000\uFEFF])|[\u1100-\u115F\u11A3-\u11A7\u11FA-\u11FF\u2010-\u2E80\u2E80-\u2E99\u2E9B-\u2EF3\u2F00-\u2FD5\u2FF0-\u2FFB\u3000-\u303E\u3041-\u3096\u3099-\u30FF\u3105-\u312D\u3131-\u318E\u3190-\u31BA\u31C0-\u31E3\u31F0-\u321E\u3220-\u3247\u3250-\u32FE\u3300-\u4DBF\u4E00-\uA48C\uA490-\uA4C6\uA960-\uA97C\uAC00-\uD7A3\uD7B0-\uD7C6\uD7CB-\uD7FB\uF900-\uFAFF\uFE10-\uFE19\uFE30-\uFE52\uFE54-\uFE66\uFE68-\uFE6B\uFF01-\uFF60\uFFE0-\uFFE6]/g;
         var replaceFunc = function(c, a, b, tabIdx, idx4) {
 
-8.firefoxではIMEモードでkeyupイベントが発生しないため入力エリアのサイズが自動的に拡張しない件を修正。
-　また、マウスクリックにより入力終了時にテキストの確定処理が行われない件もあわせて修正。
 
-    var onCompositionStart = function(e) {
-        if (inComposition) return;
-        inComposition = {};
-        host.onCompositionStart();
-        setTimeout(onCompositionUpdate, 0);
-        host.on("mousedown", onCompositionEnd);
-        if (!host.selection.isEmpty()) {
-            host.insert("");
-            host.session.markUndoGroup();
-            host.selection.clearSelection();
-        }
-        host.session.markUndoGroup();
-// setIntervalにより変更をチェックする処理を追加
-		compare_timer = setInterval(compare, 50);
-    };
+8. 日本語入力部分を最新にアップデート　かつfirefoxで01の記号が表示される件を修正（0x01はIEで必要である模様）
 
-	var compare = function() {
-		if(text.value != last_value) {
-			last_value = text.value;
-			onCompositionUpdate();
-	    }
-	}
+	var onCompositionStart = function(e) {
+		if (inComposition || !host.onCompositionStart || host.$readOnly) return;
+		inComposition = {};
+		host.onCompositionStart();
+// 2014/10/29 updated by T.Nishida
+//		setTimeout(onCompositionUpdate, 0);
+		host.on("mousedown", onCompositionEnd);
+		if (!host.selection.isEmpty()) {
+		    host.insert("");
+		    host.session.markUndoGroup();
+		    host.selection.clearSelection();
+		}
+		host.session.markUndoGroup();
+// 2014/10/29 updated by T.Nishida
+		onCompositionUpdate();
+	};
 
+	var onCompositionUpdate = function() {
+		if (!inComposition || !host.onCompositionUpdate || host.$readOnly) return;
+// 2014/10/29 updated by T.Nishida
+		if(useragent.isMozilla) {
+			text.value = text.value.replace(/\x01/g, "");
+			var val = text.value;
+		}
+		else {
+	        var val = text.value.replace(/\x01/g, "");
+		}
+
+		if (inComposition.lastValue === val) return;
+
+		host.onCompositionUpdate(val);
+		if (inComposition.lastValue) host.undo();
+
+		inComposition.lastValue = val;
+		if (inComposition.lastValue) {
+			var r = host.selection.getRange();
+			host.insert(inComposition.lastValue);
+			host.session.markUndoGroup();
+			inComposition.range = host.selection.getRange();
+			host.selection.setRange(r);
+			host.selection.clearSelection();
+		}
+	};
 
     var onCompositionEnd = function(e) {
-        var c = inComposition;
-        inComposition = false;
-// タイマークリアを追加
-		clearInterval(compare_timer);
-
-        var timer = setTimeout(function() {
-            var str = text.value.replace(/\x01/g, "");
-            if (inComposition)
-                return
-            else if (str == c.lastValue)
-                resetValue();
-            else if (!c.lastValue && str) {
-                resetValue();
-                sendText(str);
-            }
-        });
-        inputHandler = function compositionInputHandler(str) {
-            clearTimeout(timer);
-            str = str.replace(/\x01/g, "");
-// !c.lastValue の条件を追加
-            if (str == c.lastValue || !c.lastValue)
-                return "";
-            if (c.lastValue)
-                host.undo();
-            return str;
-        }        
-        host.onCompositionEnd();
-        host.removeListener("mousedown", onCompositionEnd);
-        if (e.type == "compositionend" && c.range) {
-            host.selection.setRange(c.range);
-        }
-
-// 下記コードを追加（入力テキストの確定:for firefox)
-		if(!useragent.isWebKit) {
-			text.blur();
-			text.focus();
+		if (!host.onCompositionEnd || host.$readOnly) return;
+		var c = inComposition;
+		inComposition = false;
+		var timer = setTimeout(function() {
+			timer = null;
+			var str = text.value.replace(/\x01/g, "");
+			if (inComposition)
+				return;
+			else if (str == c.lastValue)
+				resetValue();
+			else if (!c.lastValue && str) {
+				resetValue();
+				sendText(str);
+			}
+		});
+		inputHandler = function compositionInputHandler(str) {
+			if (timer) clearTimeout(timer);
+			str = str.replace(/\x01/g, "");
+			if (str == c.lastValue)
+				return "";
+			if (c.lastValue && timer)
+				host.undo();
+			return str;
+        };
+		host.onCompositionEnd();
+		host.removeListener("mousedown", onCompositionEnd);
+		if (e.type == "compositionend" && c.range) {
+			host.selection.setRange(c.range);
 		}
-    };
-
-8. その後Firefoxの動きが変わったため下記ファンクションを最新版にアップデート（上記内容は破棄）
-onCompositionStart
-onCompositionUpdate
-onCompositionEnd
+	};
 
 
 ■CKEditor
