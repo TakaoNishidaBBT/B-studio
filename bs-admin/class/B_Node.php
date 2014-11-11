@@ -268,40 +268,6 @@
 			return $path;
 		}
 
-		function getFileSize($dir) {
-			if($this->node_type == 'folder') return;
-			$info = pathinfo($this->node_name);
-			if(file_exists($dir . $this->contents_id . '.' . $info['extension'])) {
-				return filesize($dir . $this->contents_id . '.' . $info['extension']);
-			}
-		}
-
-		function getImageSize($dir) {
-			$size = $this->_getImageSize($dir);
-			return $size[0] * $size[1];
-		}
-
-		function getHumanImageSize($dir) {
-			$size = $this->_getImageSize($dir);
-			if($size) return $size[0] . 'x' . $size[1];
-		}
-
-		function _getImageSize($dir) {
-			if($this->node_type == 'folder') return;
-
-			$info = pathinfo($this->node_name);
-			switch(strtolower($info['extension'])) {
-			case 'jpg':
-			case 'jpeg':
-			case 'gif':
-			case 'png':
-			case 'bmp':
-				if(file_exists($dir . $this->contents_id . '.' . $info['extension'])) {
-					return getimagesize($dir . $this->contents_id . '.' . $info['extension']);
-				}
-			}
-		}
-
 		function arias($destination_node_id, $user_id) {
 			if(!$this->node_id) return;
 
