@@ -194,14 +194,14 @@
 
 			if($row) {
 				if($row['version_id'] == $this->version['working_version_id'] && $row['revision_id'] == $this->version['revision_id']) {
-					return $this->update($row, $node_id, $contents_id);
+					return $this->update($node->fullpath, $row, $node_id, $contents_id);
 				}
 				else {
-					return $this->updateNode($row, $node_id, $contents_id);
+					return $this->updateNode($node->fullpath, $row, $node_id, $contents_id);
 				}
 			}
 			else {
-				return $this->insert($parent_node, $node->file_name, $node->node_type, $node->node_class, $node_id, $contents_id);
+				return $this->insert($node->fullpath, $parent_node, $node->file_name, $node->node_type, $node->node_class, $node_id, $contents_id);
 			}
 		}
 
@@ -213,6 +213,166 @@
 				$this->createthumbnail($this->dir, $contents_id, $file['extension'], B_THUMB_PREFIX, B_THUMB_MAX_SIZE);
 				$this->removeCacheFile();
 			}
+		}
+
+		function _regist($file_name, &$contents_id) {
+			$parent_node = $this->current_folder;
+			$this->resource_node_table = new B_Table($this->db, B_RESOURCE_NODE_TABLE);
+
+			$sql = "select * from %NODE_VIEW%
+					where parent_node = '%PARENT_NODE%'
+					and node_name='%FILE_NAME%'
+					and del_flag = '0'";
+			$sql = str_replace('%NODE_VIEW%', B_DB_PREFIX . B_WORKING_RESOURCE_NODE_VIEW, $sql);
+			$sql = str_replace('%PARENT_NODE%', $this->current_folder, $sql);
+			$sql = str_replace('%FILE_NAME%', $file_name, $sql);
+			$rs = $this->db->query($sql);
+			$row = $this->db->fetch_assoc($rs);
+
+			if($row) {
+				if($row['version_id'] == $this->version['working_version_id'] && $row['revision_id'] == $this->version['revision_id']) {
+					return $this->update($_FILES['Filedata']['tmp_name'], $row, $node_id, $contents_id);
+				}
+				else {
+					return $this->updateNode($_FILES['Filedata']['tmp_name'], $row, $node_id, $contents_id);
+				}
+			}
+			else {
+				return $this->insert($_FILES['Filedata']['tmp_name'], $parent_node, $file_name, 'file', 'leaf', $node_id, $contents_id);
+			}
+		}
+
+		function update($filepath, $row, &$node_id, &$contents_id) {
+			// start transaction
+			$this->db->begin();
+
+			$node_id = $row['node_id'];
+			$contents_id = $row['node_id'] . '_' . $this->version['working_version_id'] . '_' . $this->version['revision_id'];
+			$param['node_id'] = $row['node_id'];
+			$param['contents_id'] = $contents_id;
+			$param['version_id'] = $this->version['working_version_id'];
+			$param['revision_id'] = $this->version['revision_id'];
+			$param['update_user'] = $this->user_id;
+			$param['update_datetime'] = time();
+			$param['create_datetime'] = time();
+
+			// set file size
+			if($row['node_type'] == 'file') {
+				$param['file_size'] = filesize($filepath);
+				$param['human_file_size'] = B_Util::human_filesize($param['file_size'], 'K');
+			}
+			$size = getimagesize($filepath);
+			if($size) {
+				$param['image_size'] = $size[0] * $size[1];
+				$param['human_image_size'] = $size[0] . 'x' . $size[1];
+			}
+
+			$ret = $this->resource_node_table->update($param);
+
+			if($ret) {
+				$this->db->commit();
+			}
+			if(!$ret) {
+				$this->db->rollback();
+			}
+
+			return $ret;
+		}
+
+		function updateNode($filepath, $row, &$node_id, &$contents_id) {
+			$node_id = $row['node_id'];
+
+			$node = new B_Node($this->db
+							, B_RESOURCE_NODE_TABLE
+							, B_WORKING_RESOURCE_NODE_VIEW
+							, $this->version['working_version_id']
+							, $this->version['revision_id']
+							, $row['node_id']
+							, null
+							, 1
+							, null);
+
+			// start transaction
+			$this->db->begin();
+			$node->cloneNode($row['node_id']);
+			$contents_id = $row['node_id'] . '_' . $this->version['working_version_id'] . '_' . $this->version['revision_id'];
+			$ret = $node->setContentsId($contents_id, $this->user_id);
+
+			// set file size
+			if($row['node_type'] == 'file') {
+				$param['file_size'] = filesize($filepath);
+				$param['human_file_size'] = B_Util::human_filesize($param['file_size'], 'K');
+			}
+			$size = getimagesize($filepath);
+			if($size) {
+				$param['image_size'] = $size[0] * $size[1];
+				$param['human_image_size'] = $size[0] . 'x' . $size[1];
+			}
+
+
+			$ret &= $node->updateNode($param, $this->user_id);
+
+			if($ret) {
+				$this->db->commit();
+				$node_id = $new_node_id;
+			}
+			if(!$ret) {
+				$this->db->rollback();
+			}
+
+			return $ret;
+		}
+
+		function insert($filepath, $parent_node, $file_name, $node_type, $node_class, &$node_id, &$contents_id) {
+			$node = new B_Node($this->db
+							, B_RESOURCE_NODE_TABLE
+							, B_WORKING_RESOURCE_NODE_VIEW
+							, $this->version['working_version_id']
+							, $this->version['revision_id']
+							, $parent_node
+							, null
+							, 1
+							, null);
+
+			// start transaction
+			$this->db->begin();
+			$ret = $node->insert($node_type, $node_class, $this->user_id, $new_node_id);
+			if($ret) {
+				$node_id = $new_node_id;
+				$new_node = new B_Node($this->db
+									, B_RESOURCE_NODE_TABLE
+									, B_WORKING_RESOURCE_NODE_VIEW
+									, $this->version['working_version_id']
+									, $this->version['revision_id']
+									, $new_node_id
+									, null
+									, 1
+									, null);
+
+				$contents_id = $new_node_id . '_' . $this->version['working_version_id'] . '_' . $this->version['revision_id'];
+				$ret = $new_node->setContentsId($contents_id, $this->user_id);
+
+				$param['node_name'] = $file_name;
+
+				// set file size
+				if($node_type == 'file') {
+					$param['file_size'] = filesize($filepath);
+					$param['human_file_size'] = B_Util::human_filesize($param['file_size'], 'K');
+				}
+				$size = getimagesize($filepath);
+				if($size) {
+					$param['image_size'] = $size[0] * $size[1];
+					$param['human_image_size'] = $size[0] . 'x' . $size[1];
+				}
+
+				$ret &= $new_node->updateNode($param, $this->user_id);
+
+				$this->db->commit();
+			}
+			else {
+				$this->db->rollback();
+			}
+			return $ret;
 		}
 
 		function _move_uploaded_file($source, $destination) {
@@ -257,153 +417,6 @@
 			}
 
 			return true;
-		}
-
-		function _regist($file_name, &$contents_id) {
-			$parent_node = $this->current_folder;
-			$this->resource_node_table = new B_Table($this->db, B_RESOURCE_NODE_TABLE);
-
-			$sql = "select * from %NODE_VIEW%
-					where parent_node = '%PARENT_NODE%'
-					and node_name='%FILE_NAME%'
-					and del_flag = '0'";
-			$sql = str_replace('%NODE_VIEW%', B_DB_PREFIX . B_WORKING_RESOURCE_NODE_VIEW, $sql);
-			$sql = str_replace('%PARENT_NODE%', $this->current_folder, $sql);
-			$sql = str_replace('%FILE_NAME%', $file_name, $sql);
-			$rs = $this->db->query($sql);
-			$row = $this->db->fetch_assoc($rs);
-
-			if($row) {
-				if($row['version_id'] == $this->version['working_version_id'] && $row['revision_id'] == $this->version['revision_id']) {
-					return $this->update($row, $node_id, $contents_id);
-				}
-				else {
-					return $this->updateNode($row, $node_id, $contents_id);
-				}
-			}
-			else {
-				return $this->insert($parent_node, $file_name, 'file', 'leaf', $node_id, $contents_id);
-			}
-		}
-
-		function update($row, &$node_id, &$contents_id) {
-			// start transaction
-			$this->db->begin();
-
-			$node_id = $row['node_id'];
-			$contents_id = $row['node_id'] . '_' . $this->version['working_version_id'] . '_' . $this->version['revision_id'];
-			$param['node_id'] = $row['node_id'];
-			$param['contents_id'] = $contents_id;
-			$param['version_id'] = $this->version['working_version_id'];
-			$param['revision_id'] = $this->version['revision_id'];
-			$param['update_user'] = $this->user_id;
-			$param['update_datetime'] = time();
-			$param['create_datetime'] = time();
-
-			// set file size
-			$param['file_size'] = filesize($_FILES['Filedata']['tmp_name']);
-			$param['human_file_size'] = B_Util::human_filesize($param['file_size'], 'K');
-			$size = getimagesize($_FILES['Filedata']['tmp_name']);
-			$param['image_size'] = $size[0] * $size[1];
-			$param['human_image_size'] = $size[0] . 'x' . $size[1];
-
-			$ret = $this->resource_node_table->update($param);
-
-			if($ret) {
-				$this->db->commit();
-			}
-			if(!$ret) {
-				$this->db->rollback();
-			}
-
-			return $ret;
-		}
-
-		function updateNode($row, &$node_id, &$contents_id) {
-			$node_id = $row['node_id'];
-
-			$node = new B_Node($this->db
-							, B_RESOURCE_NODE_TABLE
-							, B_WORKING_RESOURCE_NODE_VIEW
-							, $this->version['working_version_id']
-							, $this->version['revision_id']
-							, $row['node_id']
-							, null
-							, 1
-							, null);
-
-			// start transaction
-			$this->db->begin();
-			$node->cloneNode($row['node_id']);
-			$contents_id = $row['node_id'] . '_' . $this->version['working_version_id'] . '_' . $this->version['revision_id'];
-			$ret = $node->setContentsId($contents_id, $this->user_id);
-
-			// set file size
-			$param['file_size'] = filesize($_FILES['Filedata']['tmp_name']);
-			$param['human_file_size'] = B_Util::human_filesize($param['file_size'], 'K');
-			$size = getimagesize($_FILES['Filedata']['tmp_name']);
-			$param['image_size'] = $size[0] * $size[1];
-			$param['human_image_size'] = $size[0] . 'x' . $size[1];
-
-			$ret &= $node->updateNode($param, $this->user_id);
-
-			if($ret) {
-				$this->db->commit();
-				$node_id = $new_node_id;
-			}
-			if(!$ret) {
-				$this->db->rollback();
-			}
-
-			return $ret;
-		}
-
-		function insert($parent_node, $file_name, $node_type, $node_class, &$node_id, &$contents_id) {
-			$node = new B_Node($this->db
-							, B_RESOURCE_NODE_TABLE
-							, B_WORKING_RESOURCE_NODE_VIEW
-							, $this->version['working_version_id']
-							, $this->version['revision_id']
-							, $parent_node
-							, null
-							, 1
-							, null);
-
-			// start transaction
-			$this->db->begin();
-			$ret = $node->insert($node_type, $node_class, $this->user_id, $new_node_id);
-			if($ret) {
-				$node_id = $new_node_id;
-				$new_node = new B_Node($this->db
-									, B_RESOURCE_NODE_TABLE
-									, B_WORKING_RESOURCE_NODE_VIEW
-									, $this->version['working_version_id']
-									, $this->version['revision_id']
-									, $new_node_id
-									, null
-									, 1
-									, null);
-
-				$contents_id = $new_node_id . '_' . $this->version['working_version_id'] . '_' . $this->version['revision_id'];
-				$ret = $new_node->setContentsId($contents_id, $this->user_id);
-
-				$param['node_name'] = $file_name;
-
-				// set file size
-				$param['file_size'] = filesize($_FILES['Filedata']['tmp_name']);
-				$param['human_file_size'] = B_Util::human_filesize($param['file_size'], 'K');
-				$size = getimagesize($_FILES['Filedata']['tmp_name']);
-				$param['image_size'] = $size[0] * $size[1];
-				$param['human_image_size'] = $size[0] . 'x' . $size[1];
-
-				$ret &= $new_node->updateNode($param, $this->user_id);
-
-				$this->db->commit();
-			}
-			else {
-				$this->db->rollback();
-			}
-			return $ret;
 		}
 
 		function createthumbnail($dir, $file_name, $file_extension, $prefix, $max_size) {
