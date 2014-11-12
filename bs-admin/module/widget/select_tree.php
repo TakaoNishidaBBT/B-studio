@@ -64,7 +64,7 @@
 			}
 
 			header('Content-Type: application/x-javascript charset=utf-8');
-			echo $this->util->json_encode($response);
+			echo json_encode($response);
 			exit;
 
 		}
@@ -74,7 +74,7 @@
 
 			header('Content-Type: application/x-javascript charset=utf-8');
 			$response['status'] = true;
-			echo $this->util->json_encode($response);
+			echo json_encode($response);
 			exit;
 		}
 	}

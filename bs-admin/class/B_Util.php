@@ -74,28 +74,6 @@
 			return $str;
 		}
 
-		function json_encode($data) {
-			foreach($data as $key => $value) {
-				if($json) $json .= ',';
-				if(!is_numeric($key)) {
-					$json.= $this->stringToCode($key) . ':';
-				}
-				if(is_array($value)) {
-					$json.= $this->json_encode($value);
-				}
-				else {
-					$json.= $this->stringToCode($value);
-				}
-			}
-			if($this->isKeyExist($data)) {
-				$json = '{' . $json . '}';
-			}
-			else {
-				$json = '[' . $json . ']';
-			}
-			return $json;
-		}
-
 		function stringToCode($val) {
 			static $from = array('\\',  "\n", "\r", '"');
 			static $to   = array('\\\\','\\n','\\r','\\"');

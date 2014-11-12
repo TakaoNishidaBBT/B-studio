@@ -157,7 +157,7 @@
 					$obj = $value->getElementById($this->request['id']);
 					if($obj) {
 						$data = $this->util->mb_convert_encoding($obj->script[$this->request['class']], 'UTF-8', 'auto');
-						$data = $this->util->json_encode($data);
+						$data = json_encode($data);
 						return $data;
 					}
 					break;
@@ -165,13 +165,13 @@
 				case 'B_DataGrid':
 					if($value->id == $this->request['id']) {
 						$data = $this->util->mb_convert_encoding($value->script[$this->request['class']], 'UTF-8', 'auto');
-						$data = $this->util->json_encode($data);
+						$data = json_encode($data);
 						return $data;
 					}
 
 					$obj = $value->getElementByNameFromRowInstance($this->request['id']);
 					if($obj) {
-						$data = $this->util->json_encode($obj->script[$this->request['class']]);
+						$data = json_encode($obj->script[$this->request['class']]);
 						return $data;
 					}
 					break;
@@ -181,7 +181,7 @@
 				case 'B_FileNode':
 					if($value->id == $this->request['id']) {
 						$data = $this->util->mb_convert_encoding($value->script[$this->request['class']], 'UTF-8', 'auto');
-						$data = $this->util->json_encode($data);
+						$data = json_encode($data);
 						return $data;
 					}
 					break;
