@@ -362,6 +362,10 @@
 				$image = @imagecreatefrompng($this->fullpath);
 				break;
 
+			case 'bmp':
+				$image = B_Util::imagecreatefrombmp($this->fullpath);
+				break;
+
 			default:
 				return;
 			}
@@ -393,6 +397,7 @@
 			switch(strtolower($file_info['extension'])) {
 			case 'jpg':
 			case 'jpeg':
+			case 'bmp':
 				ImageJPEG($new_image, $thumbnail_file_path, 100);
 				break;
 

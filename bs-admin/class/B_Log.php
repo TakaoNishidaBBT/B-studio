@@ -54,3 +54,24 @@
 			return $str;
 		}
 	}
+
+	// -------------------------------------------------------------------------
+	// class console
+	// 
+	// -------------------------------------------------------------------------
+	class console {
+		function log() {
+			for($i=0 ; $i<func_num_args(); $i++) {
+				$param = func_get_arg($i);
+				$message[] = $param;
+			}
+			$json = json_encode($message);
+			echo '<script type="text/javascript">' . "console.log({$json})</script>";
+		}
+
+		function trace() {
+			$message = debug_backtrace();
+			$json = json_encode($message);
+			echo '<script type="text/javascript">' . "console.log({$json})</script>";
+		}
+	}

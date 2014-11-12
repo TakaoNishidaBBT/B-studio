@@ -50,7 +50,7 @@
 
 			header('Content-Type: application/x-javascript charset=utf-8');
 			$param['status'] = true;
-			echo $this->util->json_encode($param);
+			echo json_encode($param);
 			exit;
 		}
 
@@ -308,7 +308,7 @@
 			}
 
 			header('Content-Type: application/x-javascript charset=utf-8');
-			echo $this->util->json_encode($response);
+			echo json_encode($response);
 		}
 
 		function getErrorMessage($error) {
