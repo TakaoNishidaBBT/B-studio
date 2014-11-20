@@ -79,50 +79,30 @@
 			}
 
 			if($this->contents_node) {
-				// HTML作成
 				$this->html = $this->createHTML();
-
-				// テンプレート外部CSS設定
 				$this->setTemplateExternalCss();
-
-				// テンプレート外部スクリプト設定
 				$this->setTemplateExternalScript();
-
-				// テンプレートヘッダー要素設定
 				$this->setTemplateHeaderElement();
-
-				// 自外部CSS設定
 				$this->setCss($this->contents['external_css']);
-
-				// 自外部スクリプト設定
 				$this->setScript($this->contents['external_js']);
-
-				// 自ヘッダー要素設定
 				$this->setHeaderElement($this->contents['header_element']);
-
-				// テンプレートCSS設定
 				$this->setTemplateCssLink();
 
 				if($this->contents['css']) {
-					// 自コンテンツのCSSリンクを設定
 					$this->html_header->appendProperty('css',
 						'<link rel="stylesheet" href="C' . $this->contents_node['contents_id'] . '.css" type="text/css" media="all" />');
 				}
 
-				// タイトル設定
 				$this->setTitle(htmlspecialchars($this->contents['title'], ENT_QUOTES, B_CHARSET));
 
-				// キーワード設定
 				if($this->contents['keyword']) {
 					$this->html_header->appendMeta('keyword', $this->contents['keyword']);
 				}
 
-				// ディスクリプション設定
 				if($this->contents['description']) {
 					$this->html_header->appendMeta('description', $this->contents['description']);
 				}
 
-				// VIEWファイル設定
 				$this->view_file = './view/view_index.php';
 			}
 			else {
@@ -226,11 +206,11 @@
 		}
 
 		function createHTML() {
-			// contents取得（from DB)
+			//  get contents from DB
 			$this->contents = $this->getContents($this->contents_node['contents_id'], $this->contents_view);
 			$this->innerHTML = $this->contents['html1'];
 
-			// テンプレート（配列）取得
+			// get templates array
 			$this->getTemplates($this->contents['template_id']);
 
 			for($i=0 ; $i<count($this->templates) ; $i++) {
@@ -369,7 +349,6 @@
 				$this->createBreadCrumb($this->contents_node[$i], $level);
 			}
 
-			// テンプレートHTML取得
 			$this->getTemplates($this->contents['template_id']);
 
 			for($i=0 ; $i<count($this->templates) ; $i++) {
@@ -377,26 +356,20 @@
 				$this->end_html.= $this->templates[$i]['end_html'];
 			}
 
-			// HTML設定
 			$this->innerHTML = '<div id="inline_editor" class="bframe_inlineeditor" bframe_inlineeditor_param="filebrowser:bs-admin/index.php?terminal_id=' . $this->post['terminal_id'] . '&amp;module=resource&amp;page=popup">' . $this->contents['html1'] . '</div>';
 
-			// テンプレート外部CSS設定
 			$this->setTemplateExternalCss();
 
-			// テンプレートCSS設定
 			$this->setTemplateCssLink();
 
-			// 自外部CSS設定
 			$this->setCss($this->contents['external_css']);
 
-			// style設定
 			if($this->contents['css']) {
 				$this->html_header->appendProperty('css', '<style>' . $this->contents['css'] . '</style>');
 			}
 
-			// ビジュアルエディタ用テンプレート設定
 			$serializedString = file_get_contents(B_FILE_INFO_W);
-		    $info = unserialize($serializedString);
+			$info = unserialize($serializedString);
 			if($info[B_CONTENTS_INLINE_TEMPLATES]) {
 				$this->html_header->appendMeta('visual_editor_templates', B_CONTENTS_INLINE_TEMPLATES);
 			}
@@ -405,20 +378,16 @@
 			$this->html_header->appendProperty('script', '<script src="' . B_ADMIN_ROOT . 'js/ckeditor/ckeditor.js" type="text/javascript"></script>');
 			$this->html_header->appendProperty('script', '<script src="' . B_ADMIN_ROOT . 'js/bframe_inlineeditor.js" type="text/javascript"></script>');
 
-			// ページタイトル設定
 			$this->setTitle(htmlspecialchars($this->contents['title'], ENT_QUOTES, B_CHARSET));
 
-			// キーワード設定
 			if($this->contents['keyword']) {
 				$this->html_header->appendMeta('keyword', $this->contents['keyword']);
 			}
 
-			// ディスクリプション設定
 			if($this->contents['description']) {
 				$this->html_header->appendMeta('description', $this->contents['description']);
 			}
 
-			// VIEWファイル設定
 			$this->view_file = './view/view_inline.php';
 
 			ini_set('display_errors','On');
@@ -436,7 +405,6 @@
 				$this->createBreadCrumb($this->contents_node[$i], $level);
 			}
 
-			// テンプレートHTML取得
 			$this->getTemplates($this->contents['template_id']);
 
 			for($i=0 ; $i<count($this->templates) ; $i++) {
@@ -444,43 +412,27 @@
 				$this->end_html.= $this->templates[$i]['end_html'];
 			}
 
-			// HTML設定
 			$this->innerHTML = $this->contents['html1'];
-
-			// テンプレート外部スクリプト設定
 			$this->setTemplateExternalScript();
-
-			// テンプレート外部CSS設定
 			$this->setTemplateExternalCss();
-
-			// テンプレートCSS設定
 			$this->setTemplateCssLink();
-
-			// 自外部スクリプト設定
 			$this->setScript($this->contents['external_js']);
-
-			// 自外部CSS設定
 			$this->setCss($this->contents['external_css']);
 
-			// style設定
 			if($this->contents['css']) {
 				$this->html_header->appendProperty('css', '<style>' . $this->contents['css'] . '</style>');
 			}
 
-			// ページタイトル設定
 			$this->setTitle(htmlspecialchars($this->contents['title'], ENT_QUOTES, B_CHARSET));
 
-			// キーワード設定
 			if($this->contents['keyword']) {
 				$this->html_header->appendMeta('keyword', $this->contents['keyword']);
 			}
 
-			// ディスクリプション設定
 			if($this->contents['description']) {
 				$this->html_header->appendMeta('description', $this->contents['description']);
 			}
 
-			// VIEWファイル設定
 			$this->view_file = './view/view_index.php';
 
 			ini_set('display_errors','On');
@@ -527,7 +479,6 @@
 			$rs = $this->db->query($sql);
 			$row = $this->db->fetch_assoc($rs);
 
-			// テンプレートHTML取得
 			$this->getTemplates($row['parent_node']);
 
 			for($i=0 ; $i<count($this->templates) ; $i++) {
@@ -535,27 +486,16 @@
 				$end_html.= $this->templates[$i]['end_html'];
 			}
 
-			// HTML設定
 			$this->innerHTML = $start_html . $this->post['start_html'] . $this->post['end_html'] . $end_html;
-
-			// テンプレートスクリプト設定
 			$this->setTemplateExternalScript();
-
-			// 自スクリプト設定
 			$this->setScript($this->post['external_js']);
-
-			// テンプレート外部CSS設定
 			$this->setCss($this->post['external_css']);
-
-			// CSS設定
 			$this->setTemplateCssLink();
 
-			// style設定
 			if($this->post['css']) {
 				$this->html_header->appendProperty('css', '<style>' . $this->post['css'] . '</style>');
 			}
 
-			// VIEWファイル設定
 			$this->view_file = './view/view_index.php';
 
 			ini_set('display_errors','On');
@@ -566,16 +506,12 @@
 			if(!$admin_mode) return;
 
 			$this->contents = $this->post;
-
-			// HTML設定
 			$this->innerHTML = $this->post['html'];
 
-			// style設定
 			if($this->post['css']) {
 				$this->html_header->appendProperty('css', '<style>' . $this->post['css'] . '</style>');
 			}
 
-			// VIEWファイル設定
 			$this->view_file = './view/view_index.php';
 
 			ini_set('display_errors','On');
@@ -600,7 +536,6 @@
 			$__row = $this->db->fetch_assoc($rs);
 
 			if($__row['css']) {
-				// 自コンテンツのCSSリンクを設定
 				$this->html_header->appendProperty('css',
 					'<link rel="stylesheet" href="W' . $__row['contents_id'] . '.css" type="text/css" media="all" />');
 			}
@@ -611,10 +546,8 @@
 		function view() {
 			global $admin_mode;
 
-			// バッファリング
 			ob_start();
 
-			// HTML 出力
 			view($this->view_mode
 				,$this->view_file
 				,$this->templates
@@ -626,10 +559,8 @@
 				,$this->url
 				,$this->html_header);
 
-			// バッファ取得
 			$out = ob_get_clean();
 
-			// HTTPヘッダー出力
 			$this->sendHttpHeader();
 			if($this->http_status == '404') {
 				header("HTTP/1.1 404 Not Found");
@@ -638,19 +569,15 @@
 				header("X-XSS-Protection: 0");
 			}
 
-			// HTML ヘッダー出力
 			$this->showHtmlHeader();
 
-			// バッファ出力
 			echo $out;
 		}
 
 		function notFound() {
-			// HTTPヘッダー出力
 			$this->sendHttpHeader();
 			header("HTTP/1.1 404 Not Found");
 
-			// HTML ヘッダー出力
 			$this->showHtmlHeader();
 			include('./view/view_not_found.php');
 		}
@@ -700,4 +627,11 @@
 		$args = func_get_args();
 		$obj = $GLOBALS['current_obj'];
 		$obj->widget($node_id, $args);
+	}
+
+	function notfound() {
+		$_REQUEST['url'] = 'notfound.html';
+		chdir(B_DOC_ROOT . B_CURRENT_ROOT);
+		require('./bs-controller/controller.php');
+		exit;
 	}

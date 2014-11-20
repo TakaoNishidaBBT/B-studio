@@ -53,7 +53,7 @@
 
 	if(file_exists($file_info)) {
 		$serializedString = file_get_contents($file_info);
-	    $info = unserialize($serializedString);
+		$info = unserialize($serializedString);
 
 		// if requested file exists in resource cache file
 		if($info[$url]) {
@@ -102,7 +102,7 @@
 
 	if($admin_mode && file_exists(B_FILE_INFO_THUMB)) {
 		$serializedString = file_get_contents(B_FILE_INFO_THUMB);
-	    $info = unserialize($serializedString);
+		$info = unserialize($serializedString);
 		if($info[B_CURRENT_ROOT . $url]) {
 			header('Content-Type: image/' . strtolower($file['extension']));
 			readfile(B_UPLOAD_THUMBDIR . $info[B_CURRENT_ROOT . $url]);
@@ -116,7 +116,6 @@
 	case 'jpeg':
 	case 'gif':
 	case 'png':
-		// HTTPヘッダー出力
 		header("HTTP/1.1 404 Not Found");
 		exit;
 	}
@@ -144,7 +143,7 @@
 
 		// write serialized data into cache file
 		$fp = fopen($file_info, 'w');
-        fwrite($fp, serialize($data));
+		fwrite($fp, serialize($data));
 		fclose($fp);
 
 		// close and unlink semaphore
