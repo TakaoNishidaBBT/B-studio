@@ -235,8 +235,9 @@
 							  ,b.external_js
 							  ,b.header_element
 						from %TEMPLATE_NODE_VIEW% a
-							,%TEMPLATE_VIEW%  b
-						where a.contents_id = b.contents_id and a.node_id='%NODE_ID%'";
+						left join %TEMPLATE_VIEW%  b
+						on a.contents_id = b.contents_id
+						where a.node_id='%NODE_ID%'";
 
 			$sql_org = str_replace('%TEMPLATE_NODE_VIEW%', B_DB_PREFIX . $this->template_node_view, $sql_org);
 			$sql_org = str_replace('%TEMPLATE_VIEW%', B_DB_PREFIX . $this->template_view, $sql_org);
