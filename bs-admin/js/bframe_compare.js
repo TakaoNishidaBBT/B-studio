@@ -27,8 +27,6 @@
 		var left_source = bframe.serachNodeByClassName(target, 'bframe_compare_left');
 		var right_source = bframe.serachNodeByClassName(target, 'bframe_compare_right');
 
-		var ap = new bframe.adjustparent(target);
-
         $(document).ready(function () {
 			$(target).mergely({
 				width: 'auto',
@@ -49,6 +47,7 @@
 					right_source.style.display = 'none';
 				}
 			});
+			setTimeout(resize, 10);
 		});
 
 		bframe.addEventListner(target.parentNode, 'focus', resize);

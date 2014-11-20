@@ -53,9 +53,8 @@
 			CKEDITOR.config.language = 'ja';
 			CKEDITOR.config.autoParagraph = false;
 
-			// Bold and Italic tags change to default because icons are "B" and "I"
-			CKEDITOR.config.coreStyles_bold = {element : 'b'};
-			CKEDITOR.config.coreStyles_italic = {element : 'i'};
+			CKEDITOR.config.coreStyles_bold = {element : 'span', attributes : {'style' : 'font-weight:bold' }};
+			CKEDITOR.config.coreStyles_italic = {element : 'span', attributes : {'style' : 'font-style:italic' }};
 
 			// for HTML5 tags(cancel Automatic ACF Mode)
 			CKEDITOR.config.allowedContent = true;
@@ -101,7 +100,7 @@
 								breakBeforeOpen : false,
 								breakAfterOpen : false,
 								breakBeforeClose : false,
-								breakAfterClose : true
+								breakAfterClose : false
 							});
 						}
 						for(var i=0; i<tag_group3.length; i++) {
