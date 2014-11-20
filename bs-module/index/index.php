@@ -357,11 +357,8 @@
 			}
 
 			$this->innerHTML = '<div id="inline_editor" class="bframe_inlineeditor" bframe_inlineeditor_param="filebrowser:bs-admin/index.php?terminal_id=' . $this->post['terminal_id'] . '&amp;module=resource&amp;page=popup">' . $this->contents['html1'] . '</div>';
-
 			$this->setTemplateExternalCss();
-
 			$this->setTemplateCssLink();
-
 			$this->setCss($this->contents['external_css']);
 
 			if($this->contents['css']) {
@@ -488,9 +485,10 @@
 
 			$this->innerHTML = $start_html . $this->post['start_html'] . $this->post['end_html'] . $end_html;
 			$this->setTemplateExternalScript();
+			$this->setTemplateExternalCss();
+			$this->setTemplateCssLink();
 			$this->setScript($this->post['external_js']);
 			$this->setCss($this->post['external_css']);
-			$this->setTemplateCssLink();
 
 			if($this->post['css']) {
 				$this->html_header->appendProperty('css', '<style>' . $this->post['css'] . '</style>');
