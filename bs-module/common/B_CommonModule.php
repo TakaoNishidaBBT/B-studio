@@ -9,8 +9,8 @@
 		function __construct($file_path) {
 			parent::__construct($file_path);
 
-			// HTMLヘッダー
-			require_once(B_DOC_ROOT . B_CURRENT_ROOT . 'bs-module/common/config/html_header_config.php');
+			// HTML header (require_once -> require : for case of notfound function)
+			require(B_DOC_ROOT . B_CURRENT_ROOT . 'bs-module/common/config/html_header_config.php');
 			$this->html_header_config = $html_header_config;
 			$this->createHtmlHeader($html_header_config);
 		}
