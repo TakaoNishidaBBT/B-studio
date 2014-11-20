@@ -66,15 +66,14 @@
 				var h = target.style.height;
 			}
 
-			// Bold and Italic tags change to default because icons are "B" and "I"
-			CKEDITOR.config.coreStyles_bold = {element : 'b'};
-			CKEDITOR.config.coreStyles_italic = {element : 'i'};
+			CKEDITOR.config.coreStyles_bold = {element : 'span', attributes : {'style' : 'font-weight:bold' }};
+			CKEDITOR.config.coreStyles_italic = {element : 'span', attributes : {'style' : 'font-style:italic' }};
 
 			// protect php
 			CKEDITOR.config.protectedSource.push( /<\?[\s\S]*?\?>/g );
 
 			// root dir
-			var root_dir = document.getElementById('door_dir');
+			var root_dir = document.getElementById('root_dir');
 			if(root_dir) {
 				CKEDITOR.config.root_dir =  root_dir.value;
 			}
@@ -141,7 +140,7 @@
 									breakBeforeOpen : false,
 									breakAfterOpen : false,
 									breakBeforeClose : false,
-									breakAfterClose : true
+									breakAfterClose : false
 								});
 							}
 							for(var i=0; i<tag_group3.length; i++) {
@@ -201,7 +200,7 @@
 									breakBeforeOpen : false,
 									breakAfterOpen : false,
 									breakBeforeClose : false,
-									breakAfterClose : true
+									breakAfterClose : false
 								});
 							}
 							for(var i=0; i<tag_group3.length; i++) {

@@ -37,12 +37,8 @@
 
 	bframe.submit = function(fname, module, page, method, mode, nocheck) {
 		// set form object
-		if(fname) {
-			var form = document.forms[fname];
-		}
-		else {
-			var form = document.forms[0];
-		}
+		var form = fname ? document.forms[fname] : document.forms[0];
+
 		// set hidden object
 		info = bframe.getPageInfo();
 		bframe.appendHiddenElement(form, 'terminal_id', info['terminal_id']);
@@ -69,12 +65,7 @@
 
 	bframe.submitOverFrame = function(target, fname, module, page, method, mode, nocheck) {
 		// set form object
-		if(fname) {
-			var form = document.forms[fname];
-		}
-		else {
-			var form = document.forms[0];
-		}
+		var form = fname ? document.forms[fname] : document.forms[0];
 		form.target = target;
 
 		// set hidden object
@@ -99,12 +90,7 @@
 
 	bframe.checkAndSubmit = function(obj_id, msg, fname, module, page, method, mode, nocheck) {
 		// set form object
-		if(fname) {
-			var form = document.forms[fname];
-		}
-		else {
-			var form = document.forms[0];
-		}
+		var form = fname ? document.forms[fname] : document.forms[0];
 		target = document.getElementById(obj_id);
 
 		if(target && target.value == ''){
@@ -144,23 +130,26 @@
 			smethod = method;
 			smode = mode;
 			snocheck = nocheck;
+			var info = bframe.getPageInfo();
 
 			// execute callback function
 			AjaxSubmitExecuteCallBack();
 
+			httpObj = new XMLHttpRequest();
+			httpObj.onreadystatechange = ajaxResponse;
+
 			// set form object
-			if(fname) {
-				var form = document.forms[fname];
-			}
-			else {
-				var form = document.forms[0];
-			}
-			info = bframe.getPageInfo();
-			bframe.appendHiddenElement(form, 'terminal_id', info['terminal_id']);
-			bframe.appendHiddenElement(form, 'mode', mode);
-			var param = $(form).serialize(); // use jquery
-			httpObj = createXMLHttpRequest(ajaxResponse);
-			eventHandler(httpObj, module, page, method, 'POST', param);
+			var form = fname ? document.forms[fname] : document.forms[0];
+			var form_data = new FormData(form);
+
+			form_data.append('terminal_id', info['terminal_id']);
+			form_data.append('module', module);
+			form_data.append('page', page);
+			form_data.append('method', method);
+			form_data.append('mode', mode);
+
+			httpObj.open('POST','index.php');
+			httpObj.send(form_data);
 			bframe.response_wait = true;
 		}
 
