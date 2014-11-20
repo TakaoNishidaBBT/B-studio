@@ -351,6 +351,7 @@
 				context_menu.disableElement('deleteNode');
 				context_menu.disableElement('editName');
 				context_menu.enableElement('createNode');
+				context_menu.enableElement('download');
 				break;
 
 			default:
@@ -359,6 +360,7 @@
 				context_menu.enableElement('deleteNode');
 				context_menu.enableElement('editName');
 				context_menu.enableElement('createNode');
+				context_menu.enableElement('download');
 
 				break;
 			}
@@ -391,7 +393,6 @@
 			if(selected_node.place() == 'pain') {
 				context_menu.disableElement('createNode');
 			}
-
 			if(eventSrcObject == pain) {
 				context_menu.disableElement('cutNode');
 				context_menu.disableElement('copyNode');

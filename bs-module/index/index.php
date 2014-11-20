@@ -541,10 +541,13 @@
 			// テンプレートスクリプト設定
 			$this->setTemplateExternalScript();
 
-			// 自スクリプト設定
+			// テンプレート外部CSS設定
+			$this->setTemplateExternalCss();
+
+			// 自外部スクリプト設定
 			$this->setScript($this->post['external_js']);
 
-			// テンプレート外部CSS設定
+			// 自外部CSS設定
 			$this->setCss($this->post['external_css']);
 
 			// CSS設定
