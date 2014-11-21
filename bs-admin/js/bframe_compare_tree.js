@@ -35,11 +35,11 @@
 			for(var i=0 ; i<trees.length ; i++) {
 				if(trees[i].getTarget() == target) continue;
 
-				var p = bframe.serachNodeByNameAndValue(trees[i].getTarget(), 'path', path);
+				var p = bframe.seatchNodeByNameAndValue(trees[i].getTarget(), 'path', path);
 				if(!p) return;
 
 				var node = bframe.searchParentByName(p, 'node');
-				var control = bframe.serachNodeByName(node, 'node_control');
+				var control = bframe.searchNodeByName(node, 'node_control');
 				trees[i].openRelativeNode(control);
 			}
 		}
@@ -48,7 +48,7 @@
 			for(var i=0 ; i<trees.length ; i++) {
 				if(trees[i].getTarget() == target) continue;
 
-				var p = bframe.serachNodeByNameAndValue(trees[i].getTarget(), 'path', path);
+				var p = bframe.searchNodeByNameAndValue(trees[i].getTarget(), 'path', path);
 				if(!p) {
 					trees[i].clearCurrentNode();
 					return;
@@ -327,7 +327,7 @@
 
 		function getNextSibling(li, status) {
 			if(!status) {
-				var child = bframe.serachNodeByName(li, 'nodes');
+				var child = bframe.searchNodeByName(li, 'nodes');
 				if(child && child.display != 'none') {
 					return child.firstChild;
 				}
@@ -422,7 +422,7 @@
 				if(current_node_id) {
 					var node = self.object();
 					if(node) {
-						var span = bframe.serachNodeByName(node, 'node_span');
+						var span = bframe.searchNodeByName(node, 'node_span');
 						span.className = 'node-name';
 					}
 				}
@@ -434,7 +434,7 @@
 				if(current_node_id) {
 					var node = self.object();
 					if(node) {
-						var span = bframe.serachNodeByName(node, 'node_span');
+						var span = bframe.searchNodeByName(node, 'node_span');
 						span.className = 'node-name';
 					}
 				}
@@ -450,7 +450,7 @@
 				if(!current_node_id) return;
 				var node = self.object();
 				if(node) {
-					var span = bframe.serachNodeByName(node, 'node_span');
+					var span = bframe.searchNodeByName(node, 'node_span');
 
 					switch(mode) {
 					case 'selected':
@@ -469,7 +469,7 @@
 
 				var node = self.object();
 				if(node) {
-					var span = bframe.serachNodeByName(node, 'node_span');
+					var span = bframe.searchNodeByName(node, 'node_span');
 					span.className = 'node-name ';
 				}
 			}
@@ -620,7 +620,7 @@
 			obj = bframe.getEventSrcElement(event);
 			var node = bframe.searchParentByName(obj, 'node');
 			var node_id = node.id;
-			var p = bframe.serachNodeByName(node, 'path');
+			var p = bframe.searchNodeByName(node, 'path');
 			if(bframe.getFileName(obj.src) == bframe.getFileName(property.icon.plus.src)) {
 				var ul = document.getElementById(target_index + 'u' + node_id.substr(2));
 				ul.style.display='block';
@@ -645,7 +645,7 @@
 		this.openRelativeNode = function(obj) {
 			var node = bframe.searchParentByName(obj, 'node');
 			var node_id = node.id;
-			var p = bframe.serachNodeByName(node, 'path');
+			var p = bframe.searchNodeByName(node, 'path');
 			if(bframe.getFileName(obj.src) == bframe.getFileName(property.icon.plus.src)) {
 				var ul = document.getElementById(target_index + 'u' + node_id.substr(2));
 				ul.style.display='block';
@@ -691,7 +691,7 @@
 			var node = getEventNode(event);
 
 			// relation with other tree
-			var p = bframe.serachNodeByName(node, 'path');
+			var p = bframe.searchNodeByName(node, 'path');
 			tc.selectRelativeNode(target, p.value);
 
 			if(node != current_node.object() || node != selected_node.object()) {
