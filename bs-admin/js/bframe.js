@@ -662,7 +662,7 @@
 		return false;
 	};
 
-	bframe.serachNodeByName = function(node, name) {
+	bframe.searchNodeByName = function(node, name) {
 		if(!node.childNodes) return false;
 
 		var object;
@@ -672,7 +672,7 @@
 				return child;
 			}
 			else {
-				if(object = this.serachNodeByName(child, name)) {
+				if(object = this.searchNodeByName(child, name)) {
 					return object;
 				}
 			}
@@ -680,7 +680,7 @@
 		return false;
 	};
 
-	bframe.serachNodeByClassName = function(node, className) {
+	bframe.searchNodeByClassName = function(node, className) {
 		if(!node.childNodes) return false;
 
 		var object;
@@ -690,7 +690,7 @@
 				return child;
 			}
 			else {
-				if(object = this.serachNodeByName(child, className)) {
+				if(object = this.searchNodeByName(child, className)) {
 					return object;
 				}
 			}
@@ -698,7 +698,24 @@
 		return false;
 	};
 
-	bframe.serachNodeByNameAndValue = function(node, name, value) {
+	bframe.searchNodesByClassName = function(node, className) {
+		var result = Array();
+		this._searchNodesByClassName(node, className, result);
+		return result;
+	}
+
+	bframe._searchNodesByClassName = function(node, className, result) {
+		if(!node.childNodes) return;
+		if(bframe.checkClassName(className, node)) {
+			result.push(node);
+		}
+		for(var i=0; i<node.childNodes.length; i++) {
+			this._searchNodesByClassName(node.childNodes[i], className, result);
+		}
+		return;
+	};
+
+	bframe.searchNodeByNameAndValue = function(node, name, value) {
 		if(!node.childNodes) return false;
 
 		var object;
@@ -708,7 +725,7 @@
 				return child;
 			}
 			else {
-				if(object = this.serachNodeByNameAndValue(child, name, value)) {
+				if(object = this.searchNodeByNameAndValue(child, name, value)) {
 					return object;
 				}
 			}
@@ -716,7 +733,7 @@
 		return false;
 	};
 
-	bframe.serachNodeByTagName = function(node, tag) {
+	bframe.searchNodeByTagName = function(node, tag) {
 		if(!node.childNodes) return false;
 
 		var object;
@@ -727,7 +744,7 @@
 				return child;
 			}
 			else {
-				if(object = this.serachNodeByTagName(child, tag)) {
+				if(object = this.searchNodeByTagName(child, tag)) {
 					return object;
 				}
 			}

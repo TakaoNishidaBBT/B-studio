@@ -24,8 +24,8 @@
 		var self = this;
 		var target_id = bframe.getID(target);
 
-		var left_source = bframe.serachNodeByClassName(target, 'bframe_compare_left');
-		var right_source = bframe.serachNodeByClassName(target, 'bframe_compare_right');
+		var left_source = bframe.searchNodeByClassName(target, 'bframe_compare_left');
+		var right_source = bframe.searchNodeByClassName(target, 'bframe_compare_right');
 
         $(document).ready(function () {
 			$(target).mergely({

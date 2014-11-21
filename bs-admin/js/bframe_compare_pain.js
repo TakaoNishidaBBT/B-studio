@@ -38,7 +38,7 @@
 		node_id = document.getElementById('node_id').value;
 		target_id = document.getElementById('target_id').value;
 		pain_disp_change = document.getElementById('bframe_pain_disp_change');
-		pain_disp_change_select = bframe.serachNodeByTagName(pain_disp_change, 'select');
+		pain_disp_change_select = bframe.searchNodeByTagName(pain_disp_change, 'select');
 		bframe.addEventListner(pain_disp_change_select, 'change', change_disp_mode);
 
 		this.setPains = function(p) {
