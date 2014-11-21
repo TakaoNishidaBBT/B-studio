@@ -18,7 +18,7 @@
 	// check timezone
 	date("Ymd");
 
-	require_once('config/form_config.php');
+	require_once('config/_form_config.php');
 	require_once('../bs-admin/class/B_Element.php');
 	require_once('../bs-admin/class/B_Session.php');
 	$db_install_form = new B_Element($db_install_form_config);
@@ -87,7 +87,7 @@
 
 	function setHtaccess($root_htaccess) {
 		// setup htaccess
-		$contents = file_get_contents('./config/htaccess.txt');
+		$contents = file_get_contents('./config/_htaccess.txt');
 		$contents = str_replace('%REWRITE_BASE%', ROOT_DIR, $contents);
 		$param['htaccess'].= $contents;
 		$root_htaccess->setValue($param);
