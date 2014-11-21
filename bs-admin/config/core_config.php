@@ -118,7 +118,7 @@
 	define('B_CHARSET_XML_HEADER', 'UTF-8');
 
 	// TESTサーバ設定
-	if(preg_match('/www.test-server.com/', B_HTTP_HOST)) {
+	if(preg_match('/www.event-info3.com/', B_HTTP_HOST)) {
 		define('B_TITLE_PREFIX', '【テスト】');
 		define('B_ARCHIVE_LOG_MODE', 'DEBUG');
 	}
