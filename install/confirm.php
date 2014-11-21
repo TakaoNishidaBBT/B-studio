@@ -13,7 +13,7 @@
 	define('B_CHARSET', 'UTF-8');
 	mb_internal_encoding(B_CHARSET);
 
-	require_once('config/form_config.php');
+	require_once('config/_form_config.php');
 	require_once('../bs-admin/class/B_Element.php');
 	require_once('../bs-admin/class/B_Session.php');
 	$db_install_form = new B_Element($db_install_form_config);
@@ -79,7 +79,7 @@
 			file_put_contents('../.htaccess', $obj->value);
 
 			// setup bs-admin htaccess basic authentication
-			$contents = file_get_contents('./config/admin_htaccess.txt');
+			$contents = file_get_contents('./config/_admin_htaccess.txt');
 			$contents = str_replace('%AUTH_USER_FILE%', DOC_ROOT . ROOT_DIR . 'bs-admin/.htpassword', $contents);
 			file_put_contents('../bs-admin/.htaccess', $contents);
 			file_put_contents('../bs-admin-files/.htaccess', $contents);
@@ -89,20 +89,20 @@
 			file_put_contents('../bs-admin/.htpassword', $password);
 
 			// setup admin user file
-			$contents = file_get_contents('./config/users.php_');
+			$contents = file_get_contents('./config/_users.php');
 			$contents = str_replace('%USER_NAME%',  $param['admin_user_name'], $contents);
 			$contents = str_replace('%USER_ID%',  $param['admin_user_id'], $contents);
 			$contents = str_replace('%PASSWORD%', md5($param['admin_user_pwd']), $contents);
 			file_put_contents('../bs-admin/user/users.php', $contents);
 
 			// setup core_config(current_root)
-			$contents = file_get_contents('./config/core_config.php_');
+			$contents = file_get_contents('./config/_core_config.php');
 			$contents = str_replace('%CURRENT_ROOT%', ROOT_DIR, $contents);
 			$contents = str_replace('%DB_PREFIX%', $param['db_prefix'], $contents);
 			file_put_contents('../bs-admin/config/core_config.php', $contents);
 
 			// setup db_connect(current_root)
-			$contents = file_get_contents('./config/db_connect.php_');
+			$contents = file_get_contents('./config/_db_connect.php');
 			$contents = str_replace('%B_DB_NME%', $param['db_nme'], $contents);
 			$contents = str_replace('%B_DB_USR%', $param['db_usr'], $contents);
 			$contents = str_replace('%B_DB_PWD%', $param['db_pwd'], $contents);
