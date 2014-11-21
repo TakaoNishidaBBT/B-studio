@@ -116,7 +116,16 @@
 			// create bread crumb
 			$this->createBreadCrumb($node, $level);
 
-			if(!count($url)) {
+			if(count($url)) {
+				if($node && $node['node_type'] == 'page') {
+					// parmalink
+					$param = implode('/', $url);
+					$param_array = explode('?', $param);
+					$_REQUEST['id'] = $param_array[0];
+					return $node;
+				}
+			}
+			else {
 				if($node['node_type'] != 'folder') {
 					return $node;
 				}
@@ -149,11 +158,6 @@
 			$row = $this->db->fetch_assoc($rs);
 
 			if(!$row) {
-				if($node && $node['node_type'] == 'page') {
-					$param_array = explode('?', $node_name);
-					$_REQUEST['id'] = $param_array[0];
-					return $node;
-				}
 				return;
 			}
 
