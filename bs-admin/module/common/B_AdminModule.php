@@ -44,9 +44,11 @@
 			// open semaphore for lock
 			$fp_semaphore = fopen($semaphore, 'w');
 
+			// create serialized resource cache file
 			$node = new B_Node($this->db, B_RESOURCE_NODE_TABLE, $node_view, '', '', 'root', null, 'all', '');
 			$node->serialize($data);
 
+			// write serialized data into cache file
 			$fp = fopen($file_info, 'w');
 	        fwrite($fp, serialize($data));
 			fclose($fp);

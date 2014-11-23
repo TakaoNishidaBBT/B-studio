@@ -17,8 +17,6 @@
 
 		function showHtmlHeader() {
 			echo $this->html_header->getHtml();
-
-			$this->printDebugInfo();
 		}
 
 		function setTitle($title) {

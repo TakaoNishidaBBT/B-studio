@@ -549,6 +549,7 @@
 		function view() {
 			global $admin_mode;
 
+			// start buffering
 			ob_start();
 
 			view($this->view_mode
@@ -562,8 +563,10 @@
 				,$this->url
 				,$this->html_header);
 
-			$out = ob_get_clean();
+			// get buffer
+			$contents = ob_get_clean();
 
+			// send HTTP header
 			$this->sendHttpHeader();
 			if($this->http_status == '404') {
 				header("HTTP/1.1 404 Not Found");
@@ -572,9 +575,11 @@
 				header("X-XSS-Protection: 0");
 			}
 
+			// send HTML header
 			$this->showHtmlHeader();
 
-			echo $out;
+			// send HTML body
+			echo $contents;
 		}
 
 		function notFound() {

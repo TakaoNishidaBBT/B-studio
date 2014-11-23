@@ -21,7 +21,7 @@
 
 			$this->util = new B_Util();
 
-			// set variables
+			// set properties
 			$this->file_path = $file_path;
 			$this->module = $this->getModuleName();
 			$this->page = $this->getPageName();
@@ -96,12 +96,12 @@
 			// set default
 			$this->$property = $default;
 
-			// over write if exist in session variables
+			// over write when data exists in session variables
 			if(isset($this->session[$property])) {
 				$this->$property = $this->session[$property];
 			}
 
-			// save variables in session
+			// save variables in session variables
 			$this->session[$property] = $this->$property;
 		}
 
@@ -129,8 +129,6 @@
 			$this->html_header->appendMeta('source_page', $this->page);
 
 			echo $this->html_header->getHtml();
-
-			$this->printDebugInfo();
 		}
 
 		function initScript() {
@@ -194,15 +192,6 @@
 					}
 					break;
 				}
-			}
-		}
-
-		function printDebugInfo() {
-			if(B_DEBUG_MODE == 'ON') {
-				echo 'REQUEST: ';
-				print_r($_REQUEST);
-				echo '<br>' . 'SESSION: ';
-				print_r($_SESSION);
 			}
 		}
 	}
