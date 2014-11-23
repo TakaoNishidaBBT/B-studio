@@ -70,6 +70,11 @@
 				$html.= $this->_outValue($this->declaration);
 			}
 
+			// set console log
+			if(console::$buffer) {
+				$this->appendProperty('script', console::$buffer);
+			}
+
 			$html.= $this->_outValue($this->doc_type);
 			$html.= $this->_outValue($this->html);
 			$html.= '<head>' . "\n";

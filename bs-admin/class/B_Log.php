@@ -60,18 +60,24 @@
 	// 
 	// -------------------------------------------------------------------------
 	class console {
+		public static $buffer;
+
 		function log() {
 			for($i=0 ; $i<func_num_args(); $i++) {
 				$param = func_get_arg($i);
 				$message[] = $param;
 			}
 			$json = json_encode($message);
-			echo '<script type="text/javascript">' . "console.log({$json})</script>";
+			self::$buffer.= '<script type="text/javascript">' . "console.log({$json})</script>" . "\n";
 		}
 
 		function trace() {
 			$message = debug_backtrace();
 			$json = json_encode($message);
-			echo '<script type="text/javascript">' . "console.log({$json})</script>";
+			self::$buffer.= '<script type="text/javascript">' . "console.log({$json})</script>" . "\n";
 		}
+
+		function buffer() {
+			return self::$buffer;
+		}			
 	}
