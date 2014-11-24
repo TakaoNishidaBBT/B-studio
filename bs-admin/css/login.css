@@ -67,18 +67,20 @@ div.login table td input {
 div.icon {
 	margin: 0 auto;
 	text-align: center;
-	line-height: 34px;
 	border-radius: 50%;
-	width: 27px;
-	height: 27px;
+	width: 33px;
+	height: 33px;
 	background-color: #ddd;
 	z-index: 2;
+}
+div.icon img {
+	vertical-align: -15px;
 }
 
 /* button */
 ul.submit, ul.transition {
-	margin: -14px 0 0 0;
-	padding: 32px 0 0 0;
+	margin: -17px 0 0 0;
+	padding: 40px 0 0 0;
 	list-style: none;
 	border-top: 1px solid #ddd;
 }
@@ -111,6 +113,7 @@ div.message {
 	margin: 40px auto;
 	padding: 0;
 	text-align: center;
+	font-family: "メイリオ","Meryo","ＭＳ Ｐゴシック","MS PGothic","Hiragino Kaku Gothic Pro","ヒラギノ角ゴ Pro W3","Lucida Grande","Lucida Sans Unicode",Helvetica,Arial,Verdana,sans-serif;
 }
 div.message dl.error {
 	margin: 0 auto;
@@ -139,7 +142,7 @@ div.support {
 	text-align: center;
 }
 div.support p {
-	padding: 40px 0 20px 0;
+	padding: 45px 0 35px 0;
 	font-size: 16px;
 }
 div.support table.browsers {
@@ -148,9 +151,9 @@ div.support table.browsers {
 }
 div.support td.icon {
 	width: 100px;
-	padding: 8px 0
+	padding: 8px 35px;
 }
 div.support td.name {
-	text-align: left;
+	text-align: center;
 	font-size: 20px;
 }
