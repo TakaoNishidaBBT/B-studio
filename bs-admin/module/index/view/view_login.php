@@ -27,7 +27,7 @@
 			</div>
 
 			<div class="icon">
-				<img src="images/login/lock.png" alt="login" />
+				<img src="images/login/lock.png" alt="lock" />
 			</div>
 
 			<ul class="submit">

@@ -142,7 +142,7 @@ a.progressCancel:hover {
 #confirmDialog .box {
     border: 1px solid #666;
     padding: 4px 4px 25px 4px;
-	background: url(../images/common/warning_big.png) 70px 26px no-repeat #fff;
+	background: url(../images/common/warning.png) 80px 26px no-repeat #fff;
 	overflow: hidden;
 }
 #confirmDialog .container {
@@ -154,36 +154,24 @@ a.progressCancel:hover {
 }
 #confirmDialog .containerHeader {
 	background-color: #505050;
-	height: 15px;
+	height: 17px;
 }
 #confirmDialog .buttons {
 	margin: 0 auto;
 	text-align: center;
 }
 #confirmDialog a.button {
-	padding: 5px 14px;
+	padding: 7px 16px;
 	margin: 0 4px;
 	line-height: 17px;
-	border-top: 1px solid #fff;
-	border-right: 1px solid #888;
-	border-bottom: 1px solid #888;
-	border-left: 1px solid #fff;
-	border-radius: 2px;
-	background-color: #fff;
-	background: url(../images/common/button_back.png) repeat-x;
-	overflow: visible;
-	vertical-align: middle;
-	display: inline;
-	width: 30px;
+	background-color: #444;
+	color: #fff;
 	cursor: pointer;
 }
 #confirmDialog a.button:hover {
-	border-right: 1px solid #999;
-	border-bottom: 1px solid #999;
-	cursor: pointer;
-	background-position: 0 -27px;
+	background-color: #666;
 }
 #confirmDialog .message {
-	padding: 15px 25px 30px 110px;
+	padding: 15px 25px 30px 120px;
 	line-height: 20px;
 }

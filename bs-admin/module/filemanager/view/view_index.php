@@ -12,7 +12,7 @@
 			<li class="select"><span id="bframe_pain_disp_change">表示 ： </span></li>
 			<li>
 				<div id="upload_button" class="input_container">
-					<a href="index.php?terminal_id=<?php echo TERMINAL_ID ?>&module=filemanager&page=upload&method=init&session=<?php echo $this->module ?>" title="アップロード" class="upload-button bframe_upload" onclick="activateModalWindow(this, 440, 500, reloadTree); return false;"><img src="images/common/save.png" alt="アップロード" />アップロード</a>
+					<a href="index.php?terminal_id=<?php echo TERMINAL_ID ?>&module=filemanager&page=upload&method=init&session=<?php echo $this->module ?>" title="アップロード" class="upload-button bframe_upload" onclick="activateModalWindow(this, 440, 500, reloadTree); return false;"><img src="images/common/upload.png" alt="アップロード" />アップロード</a>
 				</div>
 			</li>
 		</ul>

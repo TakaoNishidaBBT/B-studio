@@ -72,7 +72,7 @@
 		}
 
 		function trace() {
-			$message = debug_backtrace();
+			$message = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);
 			$json = json_encode($message);
 			self::$buffer.= '<script type="text/javascript">' . "console.log({$json})</script>" . "\n";
 		}
