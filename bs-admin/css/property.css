@@ -119,12 +119,14 @@ div.editor_container {
 	overflow: auto;
 }
 fieldset {
-	margin: 15px 0;
+	margin: 10px 0 0 0;
 	border: 1px solid #ccc;
 }
+/*
 fieldset.first-child {
 	margin-top: 10px;
 }
+*/
 fieldset.last-child {
 	margin-bottom: 0;
 }

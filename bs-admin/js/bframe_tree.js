@@ -1447,6 +1447,7 @@
 			var window_offset;
 			var pain_flag = false;
 			var div_overwrap, div_tree, div_pain;
+			var overwrap_remove;
 			var clone_control;
 			var myFrame = parent.document.getElementsByName(window.name)[0];
 			var baseZindex = bframe.getZindex(myFrame);
@@ -1471,6 +1472,7 @@
 				myFrame.style.position = 'relative';
 				myFrame.style.zIndex = parseInt(baseZindex);
 				parent.document.body.appendChild(div_overwrap);
+				overwrap_remove = true;
 			}
 
 			div_tree = frame.document.getElementById('bframe_tree_drag_tree_div');
@@ -1524,7 +1526,7 @@
 			setEventHandler();
 
 			this.cleanUp = function() {
-				if(div_overwrap) parent.document.body.removeChild(div_overwrap);
+				if(div_overwrap && overwrap_remove) parent.document.body.removeChild(div_overwrap);
 			}
 
 			function setEventHandler() {
