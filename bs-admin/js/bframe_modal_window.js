@@ -113,9 +113,6 @@
 		}
 
 		this.activate = function(target, window) {
-			window_width_default = 10000;
-			window_height_default = 10000;
-
 			// arguments
 			for(var i=2 ; i<arguments.length; i++) {
 				var obj = window.document.getElementById(arguments[i]);
@@ -138,6 +135,9 @@
 			if(t = target.getAttribute('title')) {
 				title.innerHTML = t;
 			}
+
+			window_width_default = 10000;
+			window_height_default = 10000;
 
 			set_width = false;
 			set_height = false;
