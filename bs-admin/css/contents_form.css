@@ -197,7 +197,7 @@ table.form th {
 	color: #fff;
 	border-top: 1px solid #555;
 	border-left: none;
-	border-bottom: 1px solid #404040;
+	border-bottom: 1px solid #444;
 	border-right: 1px solid #444;
 	font-weight: normal;
 	text-align: left;
@@ -207,7 +207,7 @@ table.form tr:first-child th {
 	border-top: 1px solid #555;
 }
 table.form tr:last-child th {
-	border-bottom: 1px solid #404040;
+	border-bottom: 1px solid #444;
 }
 table.form tr:first-child td {
 	border-top: 1px solid #555;
@@ -231,7 +231,7 @@ table.form td {
 	padding: 5px;
 	border-top: 1px solid #555;
 	border-left: 1px solid #555;
-	border-bottom: 1px solid #404040;
+	border-bottom: 1px solid #444;
 	border-right: none;
 	background-color: #444;
 	font-weight: normal;

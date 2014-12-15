@@ -55,13 +55,12 @@
 		}
 
 		function getHtml() {
-			// callbackパラメータ設定
+			// callback parameters
 			$this->callback_param = array(
 				'holiday' 		=> $this->holiday,
 				'year'			=> $this->year,
 				'month'			=> $this->month,
 			);
-			// コールバック設定
 			$this->cal->setCallBack($this,'_holiday_callback', array('param' => $this->callback_param));
 
 			$this->cal->bind($this->data);
