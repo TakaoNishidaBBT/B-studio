@@ -10,11 +10,18 @@
 	// 
 	// -------------------------------------------------------------------------
 	class B_Log {
-		function __construct($file_name) {
-			$prefix = date('Ymd');
-			$path = substr($file_name, 0, strrpos($file_name, '/')+1);
-			$file = substr($file_name, strrpos($file_name, '/')+1, strlen($file_name));
-			$this->file_name = $path . $prefix . '_' . $file;
+		function __construct($file_name, $option=null) {
+			if($option == 'one-file') {
+				$path = substr($file_name, 0, strrpos($file_name, "/")+1);
+				$file = substr($file_name, strrpos($file_name, "/")+1, strlen($file_name));
+				$this->file_name = $path . $file;
+			}
+			else {
+				$prefix = date('Ymd');
+				$path = substr($file_name, 0, strrpos($file_name, '/')+1);
+				$file = substr($file_name, strrpos($file_name, '/')+1, strlen($file_name));
+				$this->file_name = $path . $prefix . '_' . $file;
+			}
 
 			$this->fp = fopen($this->file_name, 'at+');
 		}
@@ -79,5 +86,5 @@
 
 		function buffer() {
 			return self::$buffer;
-		}			
+		}
 	}
