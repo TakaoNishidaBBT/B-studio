@@ -5,6 +5,10 @@
  *
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
+	error_reporting(E_ALL & ~E_DEPRECATED & ~E_NOTICE & ~E_STRICT);
+	ini_set('display_errors','Off');
+	set_error_handler('exception_error_handler');
+
 	// CHARSET
 	define('B_CHARSET', 'UTF-8');
 	mb_internal_encoding(B_CHARSET);
@@ -25,4 +29,12 @@
 
 	// HTML 出力
 	include('./view/view_complete.php');
-	exit;
+
+	function exception_error_handler($errno, $errstr, $errfile, $errline) {
+	    if(!(error_reporting() & $errno)) {
+	        // error_reporting 設定に含まれていないエラーコードです
+	        return;
+	    }
+
+	    throw new ErrorException($errstr, 0, $errno, $errfile, $errline);
+	}

@@ -9,7 +9,7 @@
 		echo 'mbstringモジュールを有効にしてください。';
 		exit;
 	}
-	error_reporting(E_ALL & ~E_NOTICE & ~E_STRICT);
+	error_reporting(E_ALL & ~E_DEPRECATED & ~E_NOTICE & ~E_STRICT);
 	define('B_CHARSET', 'UTF-8');
 	mb_internal_encoding(B_CHARSET);
 	ini_set('display_errors', 'On');
@@ -105,6 +105,7 @@
 		$status&= checkPermission(DOC_ROOT . ROOT_DIR . 'bs-admin/log', $message);
 		$status&= checkPermission(DOC_ROOT . ROOT_DIR . 'bs-admin/user/users.php', $message);
 		$status&= checkPermission(DOC_ROOT . ROOT_DIR . 'bs-admin-files', $message);
+		$status&= checkPermission(DOC_ROOT . ROOT_DIR . 'bs-admin-files/.htaccess', $message);
 		$status&= checkPermission(DOC_ROOT . ROOT_DIR . 'bs-admin-files/files', $message);
 		$status&= checkPermission(DOC_ROOT . ROOT_DIR . 'bs-admin-files/thumbs', $message);
 		$status&= checkPermission(DOC_ROOT . ROOT_DIR . 'files', $message);

@@ -24,10 +24,10 @@
 		function replaceText($values) {
 			foreach(array_keys($this->elements) as $key) {
 				foreach($values as $key2 => $value2) {
-					$replace_string = "%" . $key2 . "%";
+					$replace_string = '%' . $key2 . '%';
 					$this->elements[$key] = str_replace($replace_string, $value2, $this->elements[$key]);
 				}
-				if($key == "subject") {
+				if($key == 'subject') {
 					$this->elements[$key] = B_TITLE_PREFIX . $this->elements[$key];
 				}
 			}
@@ -44,22 +44,19 @@
 		}
 
 		function setHeader() {
-			//送信者アドレス
-			$from = mb_encode_mimeheader($this->elements['from_name']) . "<" . $this->elements['from_addr']. ">";
+			$from = mb_encode_mimeheader($this->elements['from_name']) . '<' . $this->elements['from_addr']. '>';
+			$this->err_mail = '-f ' . $this->elements['from_addr'];
 
-			// 宛先不明メール戻り先
-			$this->err_mail = "-f " . $this->elements['from_addr'];
-
-			$header = "Return-path:" . $from . "\r\n";
+			$header = 'Return-path:' . $from . "\r\n";
 			if($this->elements['cc']) {
-				$header.= "Cc:" . $this->elements['cc'] . "\r\n";
+				$header.= 'Cc:' . $this->elements['cc'] . "\r\n";
 			}
 			if($this->elements['bcc']) {
-				$header.= "Bcc:" . $this->elements['bcc'] . "\r\n";
+				$header.= 'Bcc:' . $this->elements['bcc'] . "\r\n";
 			}
-			$header.= "From:" . $from . "\r\n";
-			$header.= "Reply-To:" . $from . "\nX-Mailer:system";
-			$header.= "Content-Type: text/plain; charset='iso-2022-jp'Content-Transfer-Encoding: 7bit";
+			$header.= 'From:' . $from . "\r\n";
+			$header.= 'Reply-To:' . $from . '\nX-Mailer:system';
+			$header.= 'Content-Type: text/plain; charset=iso-2022-jp Content-Transfer-Encoding: 7bit';
 
 			$this->header = $header;
 		}
@@ -76,13 +73,13 @@
 			}
 			$this->mail_log = new B_Log(B_MAIL_LOG_FILE);
 			$this->mail_log->write(
-				"to_addr:" . $this->elements['to_addr'] . "\n" .
-				"from_addr:" . $this->elements['from_addr'] . "\n" .
-				"subject:" . $this->elements['subject'] . "\n" .
-				"body:" . $this->replaceLFcode($this->elements['body']) . "\n" .
-				"mail header:" . $this->replaceLFcode($this->header) . "\n" .
-				"mail header(decode):" . mb_decode_mimeheader($this->header) . "\n" .
-				"err_mail:" . $this->err_mail . "\n"
+				'to_addr:' . $this->elements['to_addr'] . "\n" .
+				'from_addr:' . $this->elements['from_addr'] . "\n" .
+				'subject:' . $this->elements['subject'] . "\n" .
+				'body:' . $this->replaceLFcode($this->elements['body']) . "\n" .
+				'mail header:' . $this->replaceLFcode($this->header) . "\n" .
+				'mail header(decode):' . mb_decode_mimeheader($this->header) . "\n" .
+				'err_mail:' . $this->err_mail . "\n"
 			);
 
 			return $ret;
