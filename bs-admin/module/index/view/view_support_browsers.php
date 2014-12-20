@@ -28,7 +28,7 @@
 			</tr>
 			<tr>
 				<td class="name">Safari</td>
-				<td class="name">Internet Explorer<br /> 10,11</td>
+				<td class="name">Internet Explorer<br />10,11</td>
 				<td class="name">Firefox</td>
 				<td class="name">Chrome</td>
 				<td class="name">Opera</td>

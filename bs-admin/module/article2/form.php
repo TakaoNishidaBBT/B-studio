@@ -31,7 +31,7 @@
 				$this->filter = 'delete';
 				$this->control = new B_Element($this->delete_control_config);
 				$row = $this->main_table->selectByPk($this->request);
-				$this->setPhoto($row['title_img_file']);
+				$this->setThumnail($row['title_img_file']);
 				$this->form->setValue($row);
 				$this->display_mode = 'confirm';
 				break;
@@ -52,7 +52,7 @@
 					$rs=$this->db->query($sql);
 					$row=$this->db->fetch_assoc($rs);
 
-					$this->setPhoto($row['title_img_file']);
+					$this->setThumnail($row['title_img_file']);
 					$this->form->setValue($row);
 					if($row['description_flag'] != '1') {
 						$obj =&$this->form->getElementByName('preview');
@@ -64,7 +64,7 @@
 		}
 
 		function confirm() {
-			$this->setPhoto($this->post['title_img_file']);
+			$this->setThumnail($this->post['title_img_file']);
 
 			$this->form->setValue($this->request);
 
@@ -107,40 +107,15 @@
 			}
 		}
 
-		function setPhoto($img_path) {
-			if($img_path) {
-				if(!file_exists(B_UPLOAD_DIR . $img_path)) {
-					return;
-				}
+		function setThumnail($img_path) {
+			if(!$img_path) return;
+			if(!file_exists(B_UPLOAD_DIR . $img_path)) return;
 
-				$image_size = getimagesize(B_UPLOAD_DIR . $img_path);
-
-				if($image_size[0] > 110) {
-					if($image_size[0] > $image_size[1]) {
-						$width = 110;
-						$height = $image_size[1] * $width / $image_size[0];
-					}
-					else {
-						$height = 80;
-						$width = $image_size[0] * $height / $image_size[1];
-					}
-				}
-				else if($image_size[1] > 80) {
-					$height = 80;
-					$width = $image_size[0] * $height / $image_size[1];
-				}
-				else {
-					$width = $image_size[0];
-					$height = $image_size[1];
-				}
-
-				$html = '<img src="%IMG_URL%" width="%WIDTH%" height="%HEIGHT%" />';
-				$html = str_replace('%IMG_URL%', B_UPLOAD_URL . $img_path, $html);
-				$html = str_replace('%WIDTH%', $width, $html);
-				$html = str_replace('%HEIGHT%', $height, $html);
-				$obj =& $this->form->getElementByName('title_img');
-				$obj->value = $html;
-			}
+			$file_info = $this->util->pathinfo($img_path);
+			$thumnail_path = $this->util->getPath(B_UPLOAD_URL, $this->util->getPath($file_info['dirname'], B_THUMB_PREFIX . $file_info['basename']));
+			$html = '<img src="' . $thumnail_path . '" alt="" />';
+			$obj = $this->form->getElementByName('title_img');
+			$obj->value = $html;
 		}
 
 		function regist() {
@@ -203,7 +178,7 @@
 
 		function back() {
 			$this->form->setValue($this->session['request']);
-			$this->setPhoto($this->session['request']['title_img_file']);
+			$this->setThumnail($this->session['request']['title_img_file']);
 
 			$this->control = new B_Element($this->input_control_config);
 		}

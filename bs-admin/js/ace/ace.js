@@ -11788,7 +11788,7 @@ var EventEmitter = require("./lib/event_emitter").EventEmitter;
 var editorCss = ".ace_editor {\
 position: relative;\
 overflow: hidden;\
-font-family: 'Consolas', 'Monaco', 'Menlo', 'Ubuntu Mono', 'source-code-pro', monospace;\
+font-family: 'Consolas', 'Menlo', 'Monaco', 'Ubuntu Mono', 'source-code-pro', monospace;\
 font-size: 12px;\
 line-height: normal;\
 color: black;\
