@@ -33,6 +33,7 @@
 
 	// カレントルート
 	define('B_CURRENT_ROOT', '/bstudio/');
+	define('B_CURRENT_DIR', B_DOC_ROOT . B_CURRENT_ROOT);
 
 	// Adminルート
 	define('B_ADMIN_ROOT', B_CURRENT_ROOT . 'bs-admin/');
