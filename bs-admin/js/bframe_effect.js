@@ -46,13 +46,18 @@
 			self.style.opacity = (++opacity / 100);
 		}
 
-		this.fadeOut = function(target, s, e, m) {
+		this.fadeOut = function(target, delay, s, e, m) {
 			self = target;
 			start = s;
 			end = e;
 			millisec = m;
 
-			fadeOutStart();
+			if(delay) {
+				delay_timer = setTimeout(fadeOutStart, delay);
+			}
+			else {
+				fadeOutStart();
+			}
 		}
 
 		function fadeOutStart() {
