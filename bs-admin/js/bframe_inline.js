@@ -13,6 +13,8 @@
 		var bcb = new Array;
 
 		this.submit = function(fname, url, method, iframe_name) {
+			var info = bframe.getPageInfo();
+
 			inlineExecuteCallBack();
 
 			// set form object
@@ -29,6 +31,7 @@
 			form.action = url;
 			form.target = iframe_name;
 
+			bframe.appendHiddenElement(form, 'terminal_id', info['terminal_id']);
 			bframe.appendHiddenElement(form, 'method', method);
 
 			form.submit();
