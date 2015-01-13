@@ -442,6 +442,17 @@
 				$image = B_Util::imagecreatefrombmp($source_file_path);
 				break;
 
+			case 'avi':
+			case 'flv':
+			case 'mp4':
+			case 'mpg':
+			case 'mpeg':
+			case 'wmv':
+				$source_file_path = $this->createMovieThumbnail($source_file_path);
+				if(!function_exists('imagecreatefromjpeg')) return;
+				$image = @imagecreatefromjpeg($source_file_path);
+				break;
+
 			default:
 				return;
 			}
@@ -486,9 +497,40 @@
 			case 'png':
 				ImagePNG($new_image, $thumbnail_file_path);
 				break;
+
+			case 'avi':
+			case 'flv':
+			case 'mp4':
+			case 'mpg':
+			case 'mpeg':
+			case 'wmv':
+				$thumbnail_file_path = $dir . $prefix . $file_name . '.jpg';
+				ImageJPEG($new_image, $thumbnail_file_path, 100);
+				unlink($source_file_path);
+				break;
 			}
 
 			chmod($thumbnail_file_path, 0777);
+		}
+
+		function createMovieThumbnail($filename) {
+			$ffmpeg = FFMPEG;
+			$output = B_RESOURCE_WORK_DIR . time() . 'tmp.jpg';
+			if(substr(PHP_OS, 0, 3) === 'WIN') {
+				$cmdline = "$ffmpeg -ss 3 -i $filename -f image2 -vframes 1 $output 2>&1";
+				$p = popen($cmdline, 'r');
+				if($p) {
+		            pclose($p);
+				}
+				else {
+					$this->log->write('error');
+				}
+			}
+			else {
+				$cmdline = "ffmpeg -ss 3 -i $filename -f image2 -vframes 1 $output";
+				exec("$cmdline > /dev/null &");
+			}
+			return $output;
 		}
 
 		function view() {

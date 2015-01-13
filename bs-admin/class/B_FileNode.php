@@ -343,34 +343,46 @@
 			$index++;
 			$file_info = pathinfo($this->path);
 			$max_size = B_THUMB_MAX_SIZE;
-			$thumbnail_file_path = B_UPLOAD_THUMBDIR . str_pad($index, 10, '0', STR_PAD_LEFT) . '.' . $file_info['extension'];
+			$thumbnail_file_path = str_pad($index, 10, '0', STR_PAD_LEFT) . '.' . $file_info['extension'];
+			$source_file_path = $this->fullpath;
 
 			switch(strtolower($file_info['extension'])) {
 			case 'jpg':
 			case 'jpeg':
 				if(!function_exists('imagecreatefromjpeg')) return;
-				$image = @imagecreatefromjpeg($this->fullpath);
+				$image = @imagecreatefromjpeg($source_file_path);
 				break;
 
 			case 'gif':
 				if(!function_exists('imagecreatefromgif')) return;
-				$image = @imagecreatefromgif($this->fullpath);
+				$image = @imagecreatefromgif($source_file_path);
 				break;
 
 			case 'png':
 				if(!function_exists('imagecreatefrompng')) return;
-				$image = @imagecreatefrompng($this->fullpath);
+				$image = @imagecreatefrompng($source_file_path);
 				break;
 
 			case 'bmp':
-				$image = B_Util::imagecreatefrombmp($this->fullpath);
+				$image = B_Util::imagecreatefrombmp($source_file_path);
+				break;
+
+			case 'avi':
+			case 'flv':
+			case 'mp4':
+			case 'mpg':
+			case 'mpeg':
+			case 'wmv':
+				$source_file_path = $this->createMovieThumbnail($source_file_path);
+				if(!function_exists('imagecreatefromjpeg')) return;
+				$image = @imagecreatefromjpeg($source_file_path);
 				break;
 
 			default:
 				return;
 			}
 
-			$image_size = getimagesize($this->fullpath);
+			$image_size = getimagesize($source_file_path);
 			$width = $image_size[0];
 			$height = $image_size[1];
 
@@ -398,24 +410,55 @@
 			case 'jpg':
 			case 'jpeg':
 			case 'bmp':
-				ImageJPEG($new_image, $thumbnail_file_path, 100);
+				ImageJPEG($new_image, B_UPLOAD_THUMBDIR . $thumbnail_file_path, 100);
 				break;
 
 			case 'gif':
-				ImageGIF($new_image, $thumbnail_file_path);
+				ImageGIF($new_image, B_UPLOAD_THUMBDIR . $thumbnail_file_path);
 				break;
 
 			case 'png':
-				ImagePNG($new_image, $thumbnail_file_path);
+				ImagePNG($new_image, B_UPLOAD_THUMBDIR . $thumbnail_file_path);
+				break;
+
+			case 'avi':
+			case 'flv':
+			case 'mp4':
+			case 'mpg':
+			case 'mpeg':
+			case 'wmv':
+				$thumbnail_file_path = str_pad($index, 10, '0', STR_PAD_LEFT) . '.jpg';
+				ImageJPEG($new_image, B_UPLOAD_THUMBDIR . $thumbnail_file_path, 100);
+				unlink($source_file_path);
 				break;
 
 			default:
 				return;
 			}
 			chmod($thumbnail_file_path, 0777);
-			$data[$this->thumbnail_image_path] = str_pad($index, 10, '0', STR_PAD_LEFT) . '.' . $file_info['extension'];
+			$data[$this->thumbnail_image_path] = $thumbnail_file_path;
 
 			return;
+		}
+
+		function createMovieThumbnail($filename) {
+			$ffmpeg = FFMPEG;
+			$output = B_RESOURCE_WORK_DIR . time() . 'tmp.jpg';
+			if(substr(PHP_OS, 0, 3) === 'WIN') {
+				$cmdline = "$ffmpeg -ss 3 -i $filename -f image2 -vframes 1 $output 2>&1";
+				$p = popen($cmdline, 'r');
+				if($p) {
+		            pclose($p);
+				}
+				else {
+					$this->log->write('error');
+				}
+			}
+			else {
+				$cmdline = "ffmpeg -ss 3 -i $filename -f image2 -vframes 1 $output";
+				exec("$cmdline > /dev/null &");
+			}
+			return $output;
 		}
 
 		function getNodeById($node_id) {

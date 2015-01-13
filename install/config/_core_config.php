@@ -131,6 +131,9 @@
 		define('B_ARCHIVE_LOG_MODE', '');
 	}
 
+	// ffmpeg
+	define(FFMPEG, B_DOC_ROOT . B_ADMIN_ROOT . 'class/ffmpeg.exe');
+
 	// Table
 	define('B_CONTENTS_NODE_TABLE', 'contents_node');
 	define('B_TEMPLATE_NODE_TABLE', 'template_node');
