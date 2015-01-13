@@ -2102,6 +2102,30 @@
 							a.title = 'size:' + config.human_image_size + '\n' + 'date:' + config.create_datetime_t;
 						}
 						break;
+
+					case 'avi':
+					case 'flv':
+					case 'mp4':
+					case 'mpeg':
+					case 'mpg':
+					case 'wmv':
+						if(property.icon.pain[suffix.toLowerCase()]) {
+							obj_img.src = property.icon.pain[suffix.toLowerCase()].src;
+						}
+						else {
+							if(config.thumbnail_image_path) {
+								obj_img.src = config.thumbnail_image_path + '?' + config.update_datetime_t;
+							}
+							else {
+								var file_name = config.path.substring(config.path.lastIndexOf('/')+1,config.path.length);
+								var dir = config.path.substring(0, config.path.lastIndexOf('/')+1);
+								var extension = file_name.substring(file_name.lastIndexOf('.')+1, file_name.length);
+								obj_img.src = property.thumb_path + property.thumb_prefix + config.contents_id + '.' + 'jpg' + '?' + config.update_datetime_t;
+							}
+							a.title = 'size:' + config.human_image_size + '\n' + 'date:' + config.create_datetime_t;
+						}
+						break;
+
 					default:
 						obj_img.src = property.icon.pain.misc.src;
 						break;
