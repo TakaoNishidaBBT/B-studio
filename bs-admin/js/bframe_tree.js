@@ -2105,6 +2105,7 @@
 
 					case 'avi':
 					case 'flv':
+					case 'mov':
 					case 'mp4':
 					case 'mpeg':
 					case 'mpg':

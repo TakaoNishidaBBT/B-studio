@@ -369,6 +369,7 @@
 
 			case 'avi':
 			case 'flv':
+			case 'mov':
 			case 'mp4':
 			case 'mpg':
 			case 'mpeg':
@@ -423,6 +424,7 @@
 
 			case 'avi':
 			case 'flv':
+			case 'mov':
 			case 'mp4':
 			case 'mpg':
 			case 'mpeg':

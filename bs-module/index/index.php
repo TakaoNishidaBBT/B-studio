@@ -95,8 +95,8 @@
 
 				$this->setTitle(htmlspecialchars($this->contents['title'], ENT_QUOTES, B_CHARSET));
 
-				if($this->contents['keyword']) {
-					$this->html_header->appendMeta('keyword', $this->contents['keyword']);
+				if($this->contents['keywords']) {
+					$this->html_header->appendMeta('keywords', $this->contents['keywords']);
 				}
 
 				if($this->contents['description']) {
@@ -382,8 +382,8 @@
 
 			$this->setTitle(htmlspecialchars($this->contents['title'], ENT_QUOTES, B_CHARSET));
 
-			if($this->contents['keyword']) {
-				$this->html_header->appendMeta('keyword', $this->contents['keyword']);
+			if($this->contents['keywords']) {
+				$this->html_header->appendMeta('keywords', $this->contents['keywords']);
 			}
 
 			if($this->contents['description']) {
@@ -427,8 +427,8 @@
 
 			$this->setTitle(htmlspecialchars($this->contents['title'], ENT_QUOTES, B_CHARSET));
 
-			if($this->contents['keyword']) {
-				$this->html_header->appendMeta('keyword', $this->contents['keyword']);
+			if($this->contents['keywords']) {
+				$this->html_header->appendMeta('keywords', $this->contents['keywords']);
 			}
 
 			if($this->contents['description']) {
