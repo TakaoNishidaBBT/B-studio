@@ -204,7 +204,7 @@ div#config {
 	background-color: #555;
 	overflow: auto;
 }
-div#config textarea.keyword,
+div#config textarea.keywords,
 div#config textarea.description {
 	height: 40px;
 }

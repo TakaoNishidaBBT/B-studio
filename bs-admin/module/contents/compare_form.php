@@ -196,7 +196,7 @@
 				$param['php_left'] = $row['php'];
 				$param['title_left'] = $row['title'];
 				$param['bread_crumb_name_left'] = $row['bread_crumb_name'];
-				$param['keyword_left'] = $row['keyword'];
+				$param['keywords_left'] = $row['keywords'];
 				$param['description_left'] = $row['description'];
 				$param['external_css_left'] = $row['external_css'];
 				$param['external_js_left'] = $row['external_js'];
@@ -250,7 +250,7 @@
 				$param['title_right'] = $row['title'];
 				$param['bread_crumb_name_right'] = $row['bread_crumb_name'];
 				$param['template_name_right'] = $row['template_name'];
-				$param['keyword_right'] = $row['keyword'];
+				$param['keywords_right'] = $row['keywords'];
 				$param['description_right'] = $row['description'];
 				$param['external_css_right'] = $row['external_css'];
 				$param['external_js_right'] = $row['external_js'];

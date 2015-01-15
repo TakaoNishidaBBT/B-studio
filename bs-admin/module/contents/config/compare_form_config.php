@@ -243,7 +243,7 @@ $config_form_config = array(
 				),
 			),
 		),
-		// keyword
+		// keywords
 		array(
 			'start_html'    => '<tr>',
 			'end_html'	    => '</tr>',
@@ -252,20 +252,20 @@ $config_form_config = array(
 				'start_html'			=> '<th>',
 				'invalid_start_html'	=> '<th class="diff">',
 				'end_html'				=> '</th>',
-				'value'					=> 'keyword',
+				'value'					=> 'keywords',
 			),
 			array(
 				'start_html'			=> '<td>',
 				'end_html'				=> '</td>',
 				array(
-					'name'					=> 'keyword_left',
+					'name'					=> 'keywords_left',
 					'class'					=> 'B_TextArea',
-					'special_html'			=> 'class="keyword ime-on"',
+					'special_html'			=> 'class="keywords ime-on"',
 					'validate'				=>
 					array(
 						array(
 							'type' 				=> 'match',
-							'target' 			=> 'keyword_right',
+							'target' 			=> 'keywords_right',
 						),
 					),
 				),
@@ -274,9 +274,9 @@ $config_form_config = array(
 				'start_html'			=> '<td>',
 				'end_html'				=> '</td>',
 				array(
-					'name'					=> 'keyword_right',
+					'name'					=> 'keywords_right',
 					'class'					=> 'B_TextArea',
-					'special_html'			=> 'class="keyword ime-on"',
+					'special_html'			=> 'class="keywords ime-on"',
 				),
 			),
 		),

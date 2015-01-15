@@ -444,6 +444,7 @@
 
 			case 'avi':
 			case 'flv':
+			case 'mov':
 			case 'mp4':
 			case 'mpg':
 			case 'mpeg':
@@ -500,6 +501,7 @@
 
 			case 'avi':
 			case 'flv':
+			case 'mov':
 			case 'mp4':
 			case 'mpg':
 			case 'mpeg':
@@ -520,6 +522,7 @@
 				$cmdline = "$ffmpeg -ss 3 -i $filename -f image2 -vframes 1 $output 2>&1";
 				$p = popen($cmdline, 'r');
 				if($p) {
+					$this->log->write(fread($p, 2096));
 		            pclose($p);
 				}
 				else {
@@ -527,8 +530,8 @@
 				}
 			}
 			else {
-				$cmdline = "ffmpeg -ss 3 -i $filename -f image2 -vframes 1 $output";
-				exec("$cmdline > /dev/null &");
+				$cmdline = "$ffmpeg -ss 3 -i $filename -f image2 -vframes 1 $output";
+				exec("$cmdline");
 			}
 			return $output;
 		}

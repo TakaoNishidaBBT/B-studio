@@ -312,7 +312,20 @@
 			while($row = $this->db->fetch_assoc($rs)) {
 				$info = pathinfo($row['node_name']);
 				$file_name = B_RESOURCE_DIR . $row['contents_id'] . '.' . strtolower($info['extension']);
-				$thumb_file_name = B_RESOURCE_DIR . B_THUMB_PREFIX . $row['contents_id'] . '.' . strtolower($info['extension']);
+				switch($info['extension']) {
+				case 'avi':
+				case 'flv':
+				case 'mp4':
+				case 'mpg':
+				case 'mpeg':
+				case 'wmv':
+					$thumb_file_name = B_RESOURCE_DIR . B_THUMB_PREFIX . $row['contents_id'] . '.jpg';
+					break;
+
+				default:
+					$thumb_file_name = B_RESOURCE_DIR . B_THUMB_PREFIX . $row['contents_id'] . '.' . strtolower($info['extension']);
+					break;
+				}
 				if(file_exists($file_name)) {
 					unlink($file_name);
 				}

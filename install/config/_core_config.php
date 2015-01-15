@@ -132,7 +132,15 @@
 	}
 
 	// ffmpeg
-	define(FFMPEG, B_DOC_ROOT . B_ADMIN_ROOT . 'class/ffmpeg.exe');
+	if(substr(PHP_OS, 0, 3) === 'WIN') {
+		define(FFMPEG, B_DOC_ROOT . B_ADMIN_ROOT . 'class/ffmpeg/ffmpeg_for_windows.exe');
+	}
+	else if(substr(PHP_OS, 0, 5) === 'Linux') {
+		define(FFMPEG, B_DOC_ROOT . B_ADMIN_ROOT . 'class/ffmpeg/ffmpeg_for_linux');
+	}
+	else {
+		define(FFMPEG, B_DOC_ROOT . B_ADMIN_ROOT . 'class/ffmpeg/ffmpeg_for_mac');
+	}
 
 	// Table
 	define('B_CONTENTS_NODE_TABLE', 'contents_node');

@@ -150,7 +150,7 @@
 			'html4'						=> array('mediumtext', 	'', 	'', 	''),
 			'css'						=> array('mediumtext', 	'', 	'', 	''),
 			'php'						=> array('mediumtext', 	'', 	'', 	''),
-			'keyword'					=> array('text', 		'', 	'', 	''),
+			'keywords'					=> array('text', 		'', 	'', 	''),
 			'description'				=> array('text', 		'', 	'', 	''),
 			'external_css'				=> array('text', 		'', 	'', 	''),
 			'external_js'				=> array('text', 		'', 	'', 	''),
