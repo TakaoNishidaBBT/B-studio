@@ -87,14 +87,14 @@
 			case 'html':
 				$contents = file_get_contents(B_RESOURCE_DIR . $info[$url]);
 				$encoding = mb_detect_encoding($contents, ${$g_data_set}['encoding']);
-				header("Content-Type: text/html; charset=$encoding");
+				header('Content-Type: text/html; charset=' . $encoding);
 				break;
 
 			default:
 				header('Content-Type: application/' . strtolower($file['extension']));
 				break;
 			}
-			header( "Last-Modified: " . gmdate( "D, d M Y H:i:s", filemtime($file_info)) . " GMT" );
+			header('Last-Modified: ' . gmdate('D, d M Y H:i:s', filemtime($file_info)) . ' GMT');
 			readfile(B_RESOURCE_DIR . $info[$url]);
 			exit;
 		}
@@ -116,7 +116,7 @@
 	case 'jpeg':
 	case 'gif':
 	case 'png':
-		header("HTTP/1.1 404 Not Found");
+		header('HTTP/1.1 404 Not Found');
 		exit;
 	}
 
