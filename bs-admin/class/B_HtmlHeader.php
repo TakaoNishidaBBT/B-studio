@@ -64,7 +64,7 @@
 				break;
 			}
 
-			$html = "";
+			$html = '';
 
 			if(!(preg_match('/Windows/', $_SERVER['HTTP_USER_AGENT']) && preg_match('/MSIE 6/', $_SERVER['HTTP_USER_AGENT']))) {
 				$html.= $this->_outValue($this->declaration);
