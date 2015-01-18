@@ -194,7 +194,7 @@
 				if(response.message && response.message_obj) {
 					if(obj = document.getElementById(response.message_obj)) {
 						obj.innerHTML = response.message;
-						bframe.effect.fadeOut(obj, 100, 0, 6000);
+						bframe.effect.fadeOut(obj, 0, 100, 0, 6000);
 					}
 				}
 				if(response.values) {
