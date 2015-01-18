@@ -113,9 +113,6 @@
 		}
 
 		function getContentsNode($url, $node='', $level=0) {
-			// create bread crumb
-			$this->createBreadCrumb($node, $level);
-
 			if(count($url)) {
 				if($node && $node['node_type'] == 'page') {
 					// parmalink
@@ -161,10 +158,13 @@
 				return;
 			}
 
+			// create bread crumb
+			$this->createBreadCrumbs($node, $level);
+
 			return $this->getContentsNode($url, $row, $level+1);
 		}
 
-		function createBreadCrumb($node, $level) {
+		function createBreadCrumbs($node, $level) {
 			if(is_array($node) && ($node['node_name'] == 'index.html' || $node['node_name'] == 'index.htm')) {
 				return;
 			}
@@ -199,13 +199,13 @@
 			$rs = $this->db->query($sql);
 			$row = $this->db->fetch_assoc($rs);
 
-			$this->bread_crumb[$level]['value'] = $row['bread_crumb_name'];
+			$this->breadcrumbs[$level]['value'] = $row['breadcrumbs_name'];
 
 			if($level == 0) {
-				$this->bread_crumb[$level]['url'] = B_CURRENT_ROOT;
+				$this->breadcrumbs[$level]['url'] = B_CURRENT_ROOT;
 			}
 			else {
-				$this->bread_crumb[$level]['url'] = $this->bread_crumb[$level-1]['url'] . $node['node_name'] . $url_suffix;
+				$this->breadcrumbs[$level]['url'] = $this->breadcrumbs[$level-1]['url'] . $node['node_name'] . $url_suffix;
 			}
 		}
 
@@ -351,7 +351,7 @@
 			$this->getContentsNodeForPreview($this->contents['node_id']);
 
 			for($i=count($this->contents_node), $level=0 ; $i>=0 ; $i--, $level++) {
-				$this->createBreadCrumb($this->contents_node[$i], $level);
+				$this->createBreadCrumbs($this->contents_node[$i], $level);
 			}
 
 			$this->getTemplates($this->contents['template_id']);
@@ -404,7 +404,7 @@
 			$this->getContentsNodeForPreview($this->contents['node_id']);
 
 			for($i=count($this->contents_node), $level=0 ; $i>=0 ; $i--, $level++) {
-				$this->createBreadCrumb($this->contents_node[$i], $level);
+				$this->createBreadCrumbs($this->contents_node[$i], $level);
 			}
 
 			$this->getTemplates($this->contents['template_id']);
@@ -543,7 +543,7 @@
 					'<link rel="stylesheet" href="W' . $__row['contents_id'] . '.css" type="text/css" media="all" />');
 			}
 
-			widgetExec($this->view_mode, './view/view_widget.php', $__row, $this->bread_crumb);
+			widgetExec($this->view_mode, './view/view_widget.php', $__row, $this->breadcrumbs);
 		}
 
 		function view() {
@@ -559,7 +559,7 @@
 				,$this->start_html
 				,$this->innerHTML
 				,$this->end_html
-				,$this->bread_crumb
+				,$this->breadcrumbs
 				,$this->url
 				,$this->html_header);
 
@@ -598,7 +598,7 @@
 				 ,$__start_html
 				 ,$__innerHTML
 				 ,$__end_html
-				 ,&$bs_bread_crumb
+				 ,&$bs_breadcrumbs
 				 ,&$bs_url
 				 ,&$bs_html_header) {
 		global $admin_mode;
@@ -619,7 +619,7 @@
 	function widgetExec($__view_mode
 					   ,$__view_file
 					   ,$__row
-					   ,&$bs_bread_crumb) {
+					   ,&$bs_breadcrumbs) {
 
 		$bs_view_mode = $__view_mode;
 		$__archive = new B_Log(B_ARCHIVE_LOG_FILE);

@@ -143,7 +143,7 @@
 			'contents_date'				=> array('char', 		'10', 	'', 	''),
 			'template_id'				=> array('char', 		'10', 	'', 	''),
 			'title'						=> array('text', 		'', 	'', 	''),
-			'bread_crumb_name'			=> array('text', 		'', 	'', 	''),
+			'breadcrumbs'				=> array('text', 		'', 	'', 	''),
 			'html1'						=> array('mediumtext', 	'', 	'', 	''),
 			'html2'						=> array('mediumtext', 	'', 	'', 	''),
 			'html3'						=> array('mediumtext', 	'', 	'', 	''),

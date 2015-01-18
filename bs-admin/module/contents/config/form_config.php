@@ -241,7 +241,7 @@ $config_form_config = array(
 				),
 			),
 		),
-		// bread crumb
+		// breadcrumbs
 		array(
 			'start_html'    => '<tr>',
 			'end_html'	    => '</tr>',
@@ -249,7 +249,7 @@ $config_form_config = array(
 				'start_html'			=> '<th>',
 				'end_html'				=> '</th>',
 				array(
-					'value'				=> 'bread crumb',
+					'value'				=> 'breadcrumbs',
 					'no_linefeed'		=> true,
 				),
 			),
@@ -257,27 +257,27 @@ $config_form_config = array(
 				'start_html'			=> '<td>',
 				'end_html'				=> '</td>',
 				array(
-					'name'					=> 'bread_crumb_name',
+					'name'					=> 'breadcrumbs',
 					'class'					=> 'B_InputText',
-					'special_html'			=> 'class="bread_crumb bframe_textarea"" ',
+					'special_html'			=> 'class="breadcrumbs bframe_textarea"" ',
 					'no_trim'				=> true,
 				),
 			),
 		),
-		// keyword
+		// keywords
 		array(
 			'start_html'    => '<tr>',
 			'end_html'	    => '</tr>',
 			array(
 				'start_html'			=> '<th>',
 				'end_html'				=> '</th>',
-				'value'					=> 'keyword',
+				'value'					=> 'keywords',
 			),
 			array(
 				'start_html'			=> '<td>',
 				'end_html'				=> '</td>',
 				array(
-					'name'					=> 'keyword',
+					'name'					=> 'keywords',
 					'class'					=> 'B_TextArea',
 					'special_html'			=> 'class="keyword bframe_textarea"',
 				),
