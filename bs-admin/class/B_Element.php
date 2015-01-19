@@ -2213,8 +2213,6 @@
 
 			return
 				'<img ' .
-				'name="' . $this->name_prefix . $this->name . '" ' .
-				'id="' . $this->_gethtmlid() . '" ' .
 				'src="' . $src . '" ' . 
 				'alt="' . $this->alt . '" ' . 
 				$this->special_html .

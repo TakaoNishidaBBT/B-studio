@@ -109,13 +109,20 @@
 	}
 
 	bframe.appendHiddenElement = function(form, id, value) {
-		var element = document.createElement('input');
-		element.id = id;
-		element.type = 'hidden';
-		element.name = id;
-		element.value = value;
+		var element;
 
-		form.appendChild(element);
+		element = document.getElementById(id);
+		if(element) {
+			element.value = value;
+		}
+		else {
+			element = document.createElement('input');
+			element.id = id;
+			element.type = 'hidden';
+			element.name = id;
+			element.value = value;
+			form.appendChild(element);
+		}
 	}
 
 	bframe.AjaxSubmit = function() {
