@@ -66,7 +66,7 @@
 		function checkFilter($filter, $value) {
 			if(!isset($filter)) return true;
 
-			$filter_array = explode("/", $filter);
+			$filter_array = explode('/', $filter);
 			foreach($filter_array as $f) {
 				if($this->_checkFilter($f, $value)) {
 					return true;
@@ -200,7 +200,7 @@
 					}
 				}
 			}
-			$class = explode("/", $className);
+			$class = explode('/', $className);
 			foreach($class as $c) {
 				if(get_class($this) == $c) {
 					$target[] = $this;
@@ -255,7 +255,7 @@
 
 		function replaceText($text, $data) {
 			foreach($data as $key => $value) {
-				$replace_string = "%" . $key . "%";
+				$replace_string = '%' . $key . '%';
 				$text = str_replace($replace_string, $value, $text);
 			}
 			return $text;
@@ -359,7 +359,7 @@
 
 			if($this->number_format && is_numeric($value)) {
 				if($value || !$this->zero_suppress) {
-					$value = number_format(str_replace(",", "", $value));
+					$value = number_format(str_replace(',', '', $value));
 				}
 			}
 
@@ -371,7 +371,7 @@
 		}
 
 		function shortenText($item, $length) {
-			$text = mb_strimwidth($item, 0, $length, "...");
+			$text = mb_strimwidth($item, 0, $length, '...');
 			return $text;
 		}
 
@@ -428,7 +428,11 @@
 			else if(!$this->no_trim) {
 				$value = $this->mb_trim($value);
 			}
-			$value = mb_convert_kana($value, "KV"); // convert sigle byte to multi byte
+
+			// convert sigle byte to multi byte
+			$value = mb_convert_kana($value, 'KV');
+
+			// convert
 			if($this->convert) {
 				$value = mb_convert_kana($value, $this->convert);
 			}
@@ -454,7 +458,7 @@
 				return $value;
 			}
 			foreach($config as $val) {
-				$arr = explode("/", $val['from']);
+				$arr = explode('/', $val['from']);
 				if($arr) {
 					foreach($arr as $from) {
 						$value = str_replace($from, $val['to'], $value);
@@ -466,7 +470,7 @@
 
 		function convert_dateformat($value, $config) {
 			if($value) {
-				$date = explode("/", $value);
+				$date = explode('/', $value);
 				return sprintf($config, $date[0], $date[1], $date[2]);
 			}
 		}
@@ -495,7 +499,7 @@
 
 			if(!$status) {
 				$err_obj = $this->searchElementByName('error_message');
-				$err_obj->value = $error_message;
+				if($err_obj) $err_obj->value = $error_message;
 				$this->validation = false;
 			}
 
@@ -598,7 +602,7 @@
 					break;
 
 				case 'kana':
-					$this->value = mb_convert_kana($this->value, "CKV");
+					$this->value = mb_convert_kana($this->value, 'CKV');
 					if(!$this->checkKana($this->value)) {
 						$err_obj = $this->searchElementByName('error_message');
 						if($err_obj) $err_obj->value = $config['error_message'];
@@ -607,7 +611,7 @@
 					break;
 
 				case 'hiragana':
-					$this->value = mb_convert_kana($this->value, "cHV");
+					$this->value = mb_convert_kana($this->value, 'cHV');
 					if(!$this->checkKana($this->value)) {
 						$err_obj = $this->searchElementByName('error_message');
 						if($err_obj) $err_obj->value = $config['error_message'];
@@ -972,7 +976,7 @@
 		}
 
 		function checkEmailMX($item) {
-			$exp = explode("@", $item);
+			$exp = explode('@', $item);
 			$domain = $exp[1];
 			//check MX
 			if(!checkdnsrr($domain, 'MX')) {
@@ -997,7 +1001,7 @@
 			if(!$target) {
 				return true;
 			}
-			$name = explode("/", $target);
+			$name = explode('/', $target);
 			$i=0;
 			foreach($name as $value) {
 				$target = $this->getElementByName($value);
@@ -1082,7 +1086,7 @@
 				$value = htmlspecialchars($this->value, ENT_QUOTES, B_CHARSET);
 			}
 
-			return str_replace("\n", "<br />", $value);
+			return str_replace("\n", '<br />', $value);
 		}
 
 		function _getHiddenHtml() {
@@ -1994,12 +1998,12 @@
 
 		function setParamProperty($key, $value) {
 			if($this->param && substr($this->param, 0, 1) != '/') {
-				$this->param.= "&amp;";
+				$this->param.= '&amp;';
 			}
 			else{
-				$this->param.= "?";
+				$this->param.= '?';
 			}
-			$this->param.= $key . "=" . $value;
+			$this->param.= $key . '=' . $value;
 		}
 
 		function setParam(&$param, $value) {
@@ -2010,7 +2014,7 @@
 		}
 
 		function setParamalink($value) {
-			$this->param = "/" . $value;
+			$this->param = '/' . $value;
 		}
 	}
 
@@ -2052,7 +2056,7 @@
 		function myDate($format, $value) {
 			// convert to UTF-8
 			$encoding = mb_internal_encoding();
-			mb_internal_encoding("UTF-8");
+			mb_internal_encoding('UTF-8');
 			$formatUtf8 = mb_convert_encoding($format,'UTF-8', $encoding);
 			$resultUtf8 = date($formatUtf8, $value);
 			$result = mb_convert_encoding($resultUtf8, $encoding, 'UTF-8');

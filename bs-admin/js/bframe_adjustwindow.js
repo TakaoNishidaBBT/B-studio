@@ -67,7 +67,10 @@
 			else {
 				var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
 				var pos = bframe.getElementPosition(self);
-				self.style.height = h - pos.top - margin + 'px';
+				var height = h - pos.top - margin;
+				if(height > 0) {
+					self.style.height = height + 'px';
+				}
 			}
 		}
 	}

@@ -28,7 +28,6 @@
 
 		function write() {
 			if($this->fp) {
-				$date_time = date('Y/m/d H:i:s');
 				for($i=0 ; $i<func_num_args(); $i++) {
 					$param = func_get_arg($i);
 					if(is_array($param)) {
@@ -39,7 +38,7 @@
 					}
 					$message.= $param;
 				}
-				fwrite($this->fp, $date_time . ' ' . $message . "\n");
+				fwrite($this->fp, date('Y/m/d H:i:s') . ' ' . $message . "\n");
 			}
 		}
 

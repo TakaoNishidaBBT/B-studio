@@ -60,10 +60,10 @@
 			$status = false;
 
 			foreach($this->config as $key => $value) {
-				if($value[2] == '1' &&  isset($param[$key]) && $param[$key] != "") { // primary key
+				if($value[2] == '1' &&  isset($param[$key]) && $param[$key] != '') { // primary key
 					switch($value[0]) {	// type
-					case "char":
-					case "text":
+					case 'char':
+					case 'text':
 						if(isset($sql)) {
 							$sql.= " and";
 						}
@@ -73,8 +73,8 @@
 						$sql.= " $key='" . $this->db->real_escape_string($param[$key]) . "'";
 						break;
 
-					case "int":
-					case "decimal":
+					case 'int':
+					case 'decimal':
 						if(isset($sql)) {
 							$sql.= " and";
 						}
@@ -95,9 +95,9 @@
 			if(!is_array($param)) return false;
 			foreach($param as $key => $value) {
 				if(!isset($this->config[$key])) continue;
-				if($this->config[$key][2] == "1") continue; // pk
+				if($this->config[$key][2] == '1') continue; // pk
 
-				if(isset($v)) $v.= ",";
+				if(isset($v)) $v.= ',';
 				$v.= $this->setUpdateVlues($key, $value);
 			}
 
@@ -161,9 +161,9 @@
 			return $ret;
 		}
 
-		function selectInsert($param, $sql_where="") {
+		function selectInsert($param, $sql_where='') {
 			foreach($this->config as $key => $config) {
-				if(isset($v)) $v.= ",";
+				if(isset($v)) $v.= ',';
 				$v.= $this->setInsertValues($key, $config, $param);
 			}
 			$sql = "insert into $this->prefix$this->table select $v from $this->prefix$this->table $sql_where";
@@ -172,9 +172,9 @@
 			return $ret;
 		}
 
-		function selectInsertFromDifferntTable($param, $from, $sql_where="") {
+		function selectInsertFromDifferntTable($param, $from, $sql_where='') {
 			foreach($this->config as $key => $config) {
-				if(isset($v)) $v.= ",";
+				if(isset($v)) $v.= ',';
 				$v.= $this->setInsertValues($key, $config, $param);
 			}
 			$sql = "insert into $this->prefix$this->table select $v from $this->prefix$from $sql_where";
@@ -190,7 +190,7 @@
 			if($ret) {
 				// insert
 				foreach($this->config as $key => $config) {
-					if(isset($v)) $v.= ",";
+					if(isset($v)) $v.= ',';
 					$v.= $this->setInsertValues($key, $config, $param);
 				}
 				$sql = "insert into $this->prefix$this->table values($v)";
@@ -201,7 +201,7 @@
 		}
 
 		function setInsertValues($key, $config, $param) {
-			if($config[3] == "1" && (!isset($param[$key]) || $param[$key] == "")) { // auto increment
+			if($config[3] == '1' && (!isset($param[$key]) || $param[$key] == '')) { // auto increment
 				switch($config[0]) { // data type
 				case 'char':
 				case 'text':
@@ -244,7 +244,7 @@
 
 			case 'int':
 			case 'decimal':
-				if(isset($param[$key]) && $param[$key] != "") {
+				if(isset($param[$key]) && $param[$key] != '') {
 					if(is_array($param[$key])) {
 						foreach($param[$key] as $value) {
 							if(isset($v)) {
@@ -281,8 +281,8 @@
 			return $this->db->query($sql);
 		}
 
-		function selectMaxValue($field) {
-			$sql = "select max($field) $field from $this->prefix$this->table";
+		function selectMaxValue($field,  $sql_where='') {
+			$sql = "select max($field) $field from $this->prefix$this->table $sql_where";
 
 			$rs = $this->db->query($sql);
 			$row = $this->db->fetch_assoc($rs);
@@ -292,7 +292,7 @@
 
 		function selectMaxValuePlusOne($field) {
 			$config = $this->config[$field];
-			if($config[3] == "1" && (!isset($param[$key]) || $param[$key] == "")) { // auto increment
+			if($config[3] == '1' && (!isset($param[$key]) || $param[$key] == '')) { // auto increment
 				switch($config[0]) { // data type
 				case 'char':
 				case 'text':
@@ -313,8 +313,75 @@
 			return $row[$field];
 		}
 
+		function copy($param, $sql_where='') {
+			foreach($this->config as $key => $config) {
+				if(isset($v)) $v.= ',';
+				$v.= $this->setCopyValues($key, $config, $param);
+			}
+			$sql = "insert into $this->prefix$this->table select $v from $this->prefix$this->table $sql_where";
+			$ret = $this->db->query($sql);
+
+			return $ret;
+		}
+
+		function setCopyValues($key, $config, $param) {
+			switch($config[0]) { // data type
+			case 'char':
+			case 'text':
+			case 'mediumtext':
+				if(isset($param[$key])) {
+					if(is_array($param[$key])) {
+						foreach($param[$key] as $value) {
+							if(isset($v)) {
+								$v.= '/' . $value;
+							}
+							else {
+								$v = $value;
+							}
+						}
+						$sql = "'" . $v . "'";
+					}
+					// single
+					else {
+						$sql = "'" . $this->db->real_escape_string($param[$key]) . "'";
+					}
+				}
+				else {
+					$sql = $key;
+				}
+				break;
+
+			case 'int':
+			case 'decimal':
+				if(isset($param[$key]) && $param[$key] != '') {
+					if(is_array($param[$key])) {
+						foreach($param[$key] as $value) {
+							if(isset($v)) {
+								$sql.= '/' . $value;
+							}
+							else {
+								$sql = $value;
+							}
+						}
+					}
+					else {
+						$sql = $this->db->real_escape_string($param[$key]);
+					}
+				}
+				else {
+					$sql = $key;
+				}
+				break;
+
+			default:
+				break;
+			}
+
+			return $sql;
+		}
+
 		function load($file_name, $delimiter, $title, $convert_kana, $status_file, $log) {
-			$fp = fopen($file_name, "r");
+			$fp = fopen($file_name, 'r');
 			if(!$fp) return;
 
 			for($i=0 ; !feof($fp) ; $i++) {
@@ -324,7 +391,7 @@
 			$count = $i;
 			rewind($fp);
 
-			$fp_status = fopen($status_file, "w");
+			$fp_status = fopen($status_file, 'w');
 			if(!$fp_status) return;
 
 			for($i=0, $percentage=0 ; !feof($fp) ; $i++) {
@@ -339,9 +406,9 @@
 				}
 
 				for($j=0 ; $j<count($buf) ; $j++) {
-					$buf[$j] = mb_convert_encoding($buf[$j], B_CHARSET, "sjis-win");
+					$buf[$j] = mb_convert_encoding($buf[$j], B_CHARSET, 'sjis-win');
 					if($convert_kana) {
-						$buf[$j] = mb_convert_kana($buf[$j], "KV", B_CHARSET);
+						$buf[$j] = mb_convert_kana($buf[$j], 'KV', B_CHARSET);
 					}
 				}
 				$ret = $this->selectInsertForLoad($buf);
@@ -364,15 +431,15 @@
 			flock($fp_status, LOCK_EX);
 			rewind($fp_status);
 			ftruncate($fp_status, 0);
-			fwrite($fp_status, "100");
+			fwrite($fp_status, '100');
 			fclose($fp_status);
 			return true;
 		}
 
-		function selectInsertForLoad($param, $sql_where="") {
+		function selectInsertForLoad($param, $sql_where='') {
 			$i=0;
 			foreach($this->config as $key => $config) {
-				if(isset($v)) $v.= ",";
+				if(isset($v)) $v.= ',';
 				$v.= $this->setInsertValuesForLoad($key, $config, $param, $i);
 			}
 			$sql = "insert into $this->prefix$this->table select $v from $this->prefix$this->table $sql_where";
@@ -383,7 +450,7 @@
 
 		function setInsertValuesForLoad($key, $config, $param, &$index) {
 			$value = $param[$index];
-			if($config[3] == "1") { // auto increment
+			if($config[3] == '1') { // auto increment
 				switch($config[0]) { // data type
 				case 'char':
 				case 'text':
@@ -421,7 +488,7 @@
 		function create() {
 			foreach($this->config as $key => $config) {
 				// column
-				if(isset($v)) $v.= ",";
+				if(isset($v)) $v.= ',';
 				$v.= $this->setCreateColumn($key, $config);
 
 				// primary key
@@ -478,7 +545,7 @@
 			}
 			foreach($this->config as $key => $config) {
 				// column
-				if(isset($v)) $v.= ",";
+				if(isset($v)) $v.= ',';
 				$v.= $column[$key] ? $key : '';
 			}
 
