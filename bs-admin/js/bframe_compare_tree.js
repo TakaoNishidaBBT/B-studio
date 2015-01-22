@@ -35,7 +35,7 @@
 			for(var i=0 ; i<trees.length ; i++) {
 				if(trees[i].getTarget() == target) continue;
 
-				var p = bframe.seatchNodeByNameAndValue(trees[i].getTarget(), 'path', path);
+				var p = bframe.searchNodeByNameAndValue(trees[i].getTarget(), 'path', path);
 				if(!p) return;
 
 				var node = bframe.searchParentByName(p, 'node');
@@ -126,6 +126,7 @@
 
 		function getNodeList(id) {
 			var param;
+console.log('getNodeList', id);
 			param = 'terminal_id='+terminal_id+'&target_id='+target_id;
 			if(id) {
 				param+= '&node_id='+id.substr(2);
@@ -298,6 +299,7 @@
 			else {
 				var icon = node_type.value;
 			}
+console.log('icon', icon);
 			obj_img.src = property.icon[icon].src;
 		}
 

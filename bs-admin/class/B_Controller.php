@@ -12,20 +12,20 @@
 	class B_Controller {
 		function __construct() {
 			$this->log = new B_Log(B_ACCESS_LOG_FILE);
-			$this->log->write(print_r($_REQUEST, true));
+			$this->log->write('----- start -----' . "\n", '$_REQUEST:', $_REQUEST);
 		}
 
 		function dispatch($dir, $file, $class=null, $method=null) {
-			$this->log->write("DIR:" . $dir . " FILE:" . $file . " CLASS:" . $class . " METHOD:" . $method);
+			$this->log->write("DIR: $dir FILE: $file CLASS: $class METHOD: $method");
 
 			// change directory and read file
-			$file_name = $dir . "/" . $file;
+			$file_name = $dir . '/' . $file;
 			if(preg_match('/\.\./', $file_name)) {
-				$this->log->write("file:" . $file_name . " access denied (include .. dot dot)");
+				$this->log->write("file: $file_name access denied (include .. dot dot)");
 				return false;
 			}
 			if(!file_exists($file_name)) {
-				$this->log->write("file:" . $file_name . " not exist");
+				$this->log->write("file: $file_name . not exist");
 				return false;
 			}
 			chdir($dir);
@@ -33,7 +33,7 @@
 
 			// create class
 			if(!class_exists($class)) {
-				$this->log->write("file:" . $file_name . " class:" . $class . " not exist");
+				$this->log->write("file: $file_name class: $class not exist");
 				return false;
 			}
 

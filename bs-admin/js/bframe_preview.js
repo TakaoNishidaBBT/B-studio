@@ -36,7 +36,16 @@
 
 				// change action and target from parameter
 				form.action = url;
-				form.target = iframe_name;
+				if(iframe_name) {
+					form.target = iframe_name;
+				}
+				else {
+					title = 'preview';
+					form.target = title;
+					settings='top=1,left=1,width=1000,height=700,scrollbars=yes,resizable=yes,menubar=no,location=no,toolbar=no,directories=no,status=yes,dependent=no';
+					preview=window.open('about:blank', title, settings);
+					preview.focus();
+				}
 
 				// append method from parameter
 				bframe.appendHiddenElement(form, 'method', method);

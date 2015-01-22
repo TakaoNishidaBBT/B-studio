@@ -14,6 +14,7 @@
 			$this->db = $db;
 			$this->page_no = 1;
 			$this->callback_index = 0;
+			$this->csv_callback_index = 0;
 			$this->excel_callback_index = 0;
 			$this->config = $config;
 			$this->auth_filter = $auth_filter;
@@ -442,57 +443,44 @@
 			$this->createSQL($sql, $sql_limit);
 			$this->csv_config = $config;
 
+			ob_start();
+
+			$fp = fopen('php://output', 'w');
+
 			// get header html
 			if($this->csv_config['header']) {
-				$this->echoHeaderCsv();		// echo header csv
+				fputcsv($fp, $this->csv_config['header'], $this->csv_config['delimiter']);
 			}
 
 			// get record data
 			$rs = $this->db->query($sql . $sql_limit);
 			for($record_cnt=0 ; $row = $this->db->fetch_assoc($rs) ; $record_cnt++) {
-				$this->echoRowCsv($row);		// echo row csv
+				fputcsv($fp, $this->getRowData($row, $record_cnt), $this->csv_config['delimiter']);
 			}
 
-			return;
+			$str = ob_get_clean();
+			return mb_convert_encoding($str, 'sjis-win', 'auto');
 		}
 
-		function echoHeaderCsv() {
-			unset($csv);
-
-			foreach($this->csv_config['header'] as $value) {
-				if($csv) {
-					$csv.= $this->csv_config['delimiter'];
-				}
-				$csv.= $value;
-			}
-
-			// convert charcter set to sjis-win
-			$csv = mb_convert_encoding($csv, 'sjis-win', 'auto');
-			echo $csv . "\n";
-		}
-
-		function echoRowCsv($row) {
+		function getRowData($row, $record_cnt) {
 			global $g_data_set, ${$g_data_set};
 			unset($csv);
-
 			// csv call back
 			for($i=0 ; $i < $this->csv_callback_index ; $i++) {
-				for($j=0 ; $j < count($this->row) ; $j++) {
-					$param = array('row' => &$this->row[$j], 'cnt' => $j);
+				$param = array('row' => &$row, 'cnt' => $record_cnt);
 
-					if($this->csv_callback[$i]['param']) {
-						if(is_array($this->csv_callback[$i]['param'])) {
-							foreach($this->csv_callback[$i]['param'] as $key => $value) {
-								$param[$key] = $value;
-							}
+				if($this->csv_callback[$i]['param']) {
+					if(is_array($this->csv_callback[$i]['param'])) {
+						foreach($this->csv_callback[$i]['param'] as $key => $value) {
+							$param[$key] = $value;
 						}
 					}
+				}
 
-					$obj = $this->csv_callback[$i]['obj'];
-					$method = $this->csv_callback[$i]['method'];
-					if(method_exists($obj, $method)) {
-						$obj->$method($param);
-					}
+				$obj = $this->csv_callback[$i]['obj'];
+				$method = $this->csv_callback[$i]['method'];
+				if(method_exists($obj, $method)) {
+					$obj->$method($param);
 				}
 			}
 
@@ -534,22 +522,19 @@
 						}
 
 						$a = explode('/', $row[$key]);
-						$i=0;
 						foreach($data_set as $key2 => $value2) {
-							if(substr($key2, 0, 2) == 'LF') {
-								continue;
-							}
-							if($i) {
-								$item.= $this->csv_config['delimiter'];
-							}
+							unset($item);
+							if(substr($key2, 0, 2) == 'LF') continue;
 							foreach($a as $v) {
 								if($key2 == $v) {
-									$item.= $config['value'];
+									$item = $config['value'];
 									break;
 								}
 							}
-							$i++;
+
+							$csv[] = $item;
 						}
+						continue 2;
 					}
 					break;
 
@@ -561,28 +546,14 @@
 					$item = $this->convertText($row[$key], $config);
 					break;
 
-				case 'textarea':
-					$row[$key] = str_replace("\r\n", ' ', $row[$key]);
-					$row[$key] = str_replace("\n", ' ', $row[$key]);
-					$item = $row[$key];
-					break;
-
 				default:
 					$item = $row[$key];
 					break;
 				}
 
-				if($csv) {
-					$csv.= $this->csv_config['delimiter'];
-				}
-				$csv.= $item;
+				$csv[] = $item;
 			}
-
-			// convert charcter set to sjis-win
-			$csv = mb_convert_encoding($csv, 'sjis-win', 'auto');
-			echo $csv . "\n";
-
-			return;
+			return $csv;
 		}
 
 		function convertText($value, $config) {

@@ -133,6 +133,14 @@
 			return @mysql_real_escape_string($string);
 		}
 
+		function real_escape_string_for_like($string) {
+			$ret = @mysql_real_escape_string($string);
+			$ret = str_replace("%", "\%", $ret);
+			$ret = str_replace("_", "\_", $ret);
+
+			return $ret;
+		}
+
 		function dump($file_name) {
 			if(!$this->is_connect) return false;
 
@@ -339,7 +347,7 @@
 						continue;
 					}
 
-					$sql.= $line;
+					$sql.= str_replace('%PREFIX%', B_DB_PREFIX, $line);
 
 					if(substr(trim($line), -1, 1) == ';') {
 						$this->query($sql);

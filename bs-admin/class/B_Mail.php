@@ -55,7 +55,8 @@
 				$header.= 'Bcc:' . $this->elements['bcc'] . "\r\n";
 			}
 			$header.= 'From:' . $from . "\r\n";
-			$header.= 'Reply-To:' . $from . '\nX-Mailer:system';
+			$header.= 'Reply-To:' . $from . "\r\n";
+			$header.= 'X-Mailer:system' . "\r\n";
 			$header.= 'Content-Type: text/plain; charset=iso-2022-jp Content-Transfer-Encoding: 7bit';
 
 			$this->header = $header;

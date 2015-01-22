@@ -308,7 +308,7 @@
 			return true;
 		}
 
-		function copy($destination_node_id, $user_id, $call_back=null) {
+		function copy($destination_node_id, &$node_id, $user_id, $callback=null) {
 			if(!$this->node_id) return;
 
 			// if destination node is my child
@@ -317,8 +317,10 @@
 				return false;
 			}
 
-			if($call_back) {
-				if(!$ret = $this->callBack($call_back)) return $ret;
+			$this->copy_node_name = $this->getNewNodeName($destination_node_id, $this->node_name, 'copy');
+
+			if($callback) {
+				if(!$ret = $this->callBack($callback)) return $ret;
 			}
 
 			if($this->property) {
@@ -327,14 +329,12 @@
 				}
 			}
 
-			$node_name = $this->getNewNodeName($destination_node_id, $this->node_name, 'copy');
-
 			$param['node_id'] = '';
 			$param['parent_node'] = $destination_node_id;
 			$param['disp_seq'] = $this->getMaxDispSeq($destination_node_id);
 			$param['node_type'] = $this->node_type;
 			$param['node_class'] = $this->node_class;
-			$param['node_name'] = $node_name;
+			$param['node_name'] = $this->copy_node_name;
 			$param['contents_id'] = $this->new_contents_id;
 			$param['del_flag'] = '0';
 			$param['create_datetime'] = time();
@@ -351,7 +351,7 @@
 			$node_id = $this->tbl_node->selectMaxValue('node_id');
 			if(count($this->node)) {
 				foreach(array_keys($this->node) as $key) {
-					$ret = $this->node[$key]->copy($node_id, $user_id, $call_back);
+					$ret = $this->node[$key]->copy($node_id, $dummy, $user_id, $call_back);
 					if(!$ret) return $ret;
 				}
 			}
@@ -425,16 +425,19 @@
 			return $this->tbl_node->update($param);
 		}
 
-		function physicalDelete() {
+		function physicalDelete($callback=null) {
 			if(!$this->node_id) return;
+
+			if($callback) {
+				if(!$ret = $this->callBack($callback)) return $ret;
+			}
 
 			if(count($this->node)) {
 				foreach(array_keys($this->node) as $key) {
-					$ret = $this->node[$key]->physicalDelete();
+					$ret = $this->node[$key]->physicalDelete($callback);
 					if(!$ret) return $ret;
 				}
 			}
-			$this->cloneNode($this->node_id);
 
 			$param['node_id'] = $this->node_id;
 			$param['version_id'] = $this->version;

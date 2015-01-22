@@ -94,21 +94,21 @@
 	}
 
 	function confirmPermission(&$message) {
-		$status = checkPermission(DOC_ROOT . ROOT_DIR . '.htaccess', $message);
-		$status = checkPermission(DOC_ROOT . ROOT_DIR . 'bs-admin/.htaccess', $message);
-		$status = checkPermission(DOC_ROOT . ROOT_DIR . 'bs-admin/.htpassword', $message);
-		$status&= checkPermission(DOC_ROOT . ROOT_DIR . 'bs-admin/archive', $message);
-		$status&= checkPermission(DOC_ROOT . ROOT_DIR . 'bs-admin/cache', $message);
-		$status&= checkPermission(DOC_ROOT . ROOT_DIR . 'bs-admin/config/core_config.php', $message);
-		$status&= checkPermission(DOC_ROOT . ROOT_DIR . 'bs-admin/db/db_connect.php', $message);
-		$status&= checkPermission(DOC_ROOT . ROOT_DIR . 'bs-admin/download', $message);
-		$status&= checkPermission(DOC_ROOT . ROOT_DIR . 'bs-admin/log', $message);
-		$status&= checkPermission(DOC_ROOT . ROOT_DIR . 'bs-admin/user/users.php', $message);
-		$status&= checkPermission(DOC_ROOT . ROOT_DIR . 'bs-admin-files', $message);
-		$status&= checkPermission(DOC_ROOT . ROOT_DIR . 'bs-admin-files/.htaccess', $message);
-		$status&= checkPermission(DOC_ROOT . ROOT_DIR . 'bs-admin-files/files', $message);
-		$status&= checkPermission(DOC_ROOT . ROOT_DIR . 'bs-admin-files/thumbs', $message);
-		$status&= checkPermission(DOC_ROOT . ROOT_DIR . 'files', $message);
+		$status  = checkPermission(DOC_ROOT . ROOT_DIR . '.htaccess', $message);
+		$status &= checkPermission(DOC_ROOT . ROOT_DIR . 'bs-admin/.htaccess', $message);
+		$status &= checkPermission(DOC_ROOT . ROOT_DIR . 'bs-admin/.htpassword', $message);
+		$status &= checkPermission(DOC_ROOT . ROOT_DIR . 'bs-admin/archive', $message);
+		$status &= checkPermission(DOC_ROOT . ROOT_DIR . 'bs-admin/cache', $message);
+		$status &= checkPermission(DOC_ROOT . ROOT_DIR . 'bs-admin/config/core_config.php', $message);
+		$status &= checkPermission(DOC_ROOT . ROOT_DIR . 'bs-admin/db/db_connect.php', $message);
+		$status &= checkPermission(DOC_ROOT . ROOT_DIR . 'bs-admin/download', $message);
+		$status &= checkPermission(DOC_ROOT . ROOT_DIR . 'bs-admin/log', $message);
+		$status &= checkPermission(DOC_ROOT . ROOT_DIR . 'bs-admin/user/users.php', $message);
+		$status &= checkPermission(DOC_ROOT . ROOT_DIR . 'bs-admin-files', $message);
+		$status &= checkPermission(DOC_ROOT . ROOT_DIR . 'bs-admin-files/.htaccess', $message);
+		$status &= checkPermission(DOC_ROOT . ROOT_DIR . 'bs-admin-files/files', $message);
+		$status &= checkPermission(DOC_ROOT . ROOT_DIR . 'bs-admin-files/thumbs', $message);
+		$status &= checkPermission(DOC_ROOT . ROOT_DIR . 'files', $message);
 		return $status;
 	}
 
