@@ -477,8 +477,6 @@
 
 			for($cnt=0 ; $row[$cnt] = $this->db->fetch_assoc($rs) ; $cnt++);
 
-			$row_data = print_r($row, true);
-
 			for($i=2, $node_name = $default_name ;; $node_name = $prefix . $default_name . $extend) {
 				for($j=0 ; $j<$cnt && $row[$j]['node_name'] != $node_name; $j++);
 
@@ -491,7 +489,12 @@
 					break;
 
 				case 'copy':
-					$prefix.= 'copy_of_';
+					if($prefix) {
+						$extend = '(' . $i++ . ')';
+					}
+					else {
+						$prefix.= 'copy_of_';
+					}
 					break;
 
 				case 'arias':
