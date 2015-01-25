@@ -7,7 +7,6 @@
 /bs-admin/log
 /bs-admin/db
 /bs-admin/user
-.htaccess
 
 # git update-index --skip-worktree .htaccess
 # git update-index --skip-worktree bs-admin-files/.htaccess
