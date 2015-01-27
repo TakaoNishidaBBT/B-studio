@@ -108,18 +108,17 @@
 		return false;
 	}
 
-	bframe.appendHiddenElement = function(form, id, value) {
+	bframe.appendHiddenElement = function(form, name, value) {
 		var element;
 
-		element = document.getElementById(id);
+		element = bframe.searchNodeByName(form, name);
 		if(element) {
 			element.value = value;
 		}
 		else {
 			element = document.createElement('input');
-			element.id = id;
 			element.type = 'hidden';
-			element.name = id;
+			element.name = name;
 			element.value = value;
 			form.appendChild(element);
 		}
