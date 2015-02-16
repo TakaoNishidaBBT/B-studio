@@ -308,7 +308,7 @@
 			return true;
 		}
 
-		function copy($destination_node_id, &$node_id, $user_id, $callback=null) {
+		function copy($destination_node_id, $user_id, $callback=null) {
 			if(!$this->node_id) return;
 
 			// if destination node is my child
@@ -351,7 +351,7 @@
 			$node_id = $this->tbl_node->selectMaxValue('node_id');
 			if(count($this->node)) {
 				foreach(array_keys($this->node) as $key) {
-					$ret = $this->node[$key]->copy($node_id, $dummy, $user_id, $call_back);
+					$ret = $this->node[$key]->copy($node_id, $user_id, $call_back);
 					if(!$ret) return $ret;
 				}
 			}
@@ -477,8 +477,14 @@
 
 			for($cnt=0 ; $row[$cnt] = $this->db->fetch_assoc($rs) ; $cnt++);
 
-			for($i=2, $node_name = $default_name ;; $node_name = $prefix . $default_name . $extend) {
-				for($j=0 ; $j<$cnt && $row[$j]['node_name'] != $node_name; $j++);
+			$info = pathinfo($default_name);
+			for($i=2, $node_name = $info['filename'] ;; $node_name = $prefix . $info['filename'] . $extend) {
+				if($info['extension']) {
+					for($j=0 ; $j<$cnt && $row[$j]['node_name'] != $node_name . '.' . $info['extension']; $j++);
+				}
+				else {
+					for($j=0 ; $j<$cnt && $row[$j]['node_name'] != $node_name; $j++);
+				}
 
 				if($j == $cnt) {
 					break;
@@ -502,7 +508,12 @@
 					break;
 				}
 			}
-			return $node_name;
+			if($info['extension']) {
+				return $node_name . '.' . $info['extension'];
+			}
+			else {
+				return $node_name;
+			}
 		}
 
 		function setContentsId($contents_id, $user_id) {
