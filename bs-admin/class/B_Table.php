@@ -183,6 +183,16 @@
 			return $ret;
 		}
 
+		function upsert($param) {
+			$row = $this->selectByPk($param);
+			if($row) {
+				return $this->update($param);
+			}
+			else {
+				return $this->insert($param);
+			}
+		}
+
 		function deleteInsert($param) {
 			// delete
 			$ret = $this->deleteByPk($param);
