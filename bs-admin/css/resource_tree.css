@@ -188,6 +188,7 @@ div.detail table th.sortable {
 }
 div.detail table th.sortable span {
 	background: url(../images/common/sort.png) no-repeat 100% center transparent;
+	padding-right: 16px;
 }
 div.detail table th.asc span {
 	background: url(../images/common/sort_asc.png) no-repeat 100% center transparent;
