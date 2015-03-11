@@ -101,15 +101,16 @@
 				foreach($this->config_org as $key => $value) {
 					if(!is_numeric($key) && $key != 'element') {
 						$config[$key] = $value;
-						$config['id'] = $this->id;
-						$config['name'] = $this->name;
-						$config['value'] = $this->value;
-						$config['data_set'] = $this->data_set;
-						$config['fixedparam'] = $this->fixedparam;
-						$config['param'] = $this->param;
 					}
 				}
 			}
+			if($this->id) $config['id'] = $this->id;
+			if($this->name) $config['name'] = $this->name;
+			if($this->value) $config['value'] = $this->value;
+			if($this->data_set) $config['data_set'] = $this->data_set;
+			if($this->fixedparam) $config['fixedparam'] = $this->fixedparam;
+			if($this->param) $config['param'] = $this->param;
+
 			if(isset($this->elements)) {
 				foreach($this->elements as $element) {
 					$config[] = $element->getConfig();
@@ -431,6 +432,9 @@
 
 			// convert sigle byte to multi byte
 			$value = mb_convert_kana($value, 'KV');
+
+			// remove backslash
+			$value = str_replace('\\', '', $value);
 
 			// convert
 			if($this->convert) {
@@ -1464,9 +1468,7 @@
 		}
 
 		function _getValue(&$param) {
-			if($this->value && $this->parent->checked) {
-				$param[$this->name] = $this->value;
-			}
+			$param[$this->name] = $this->value;
 		}
 	}
 
@@ -1679,6 +1681,15 @@
 		}
 
 		function _checkAlt($row) {
+			$name = $this->name_prefix . $this->name . $this->name_index;
+			if(is_array($row[$name])) {
+				if(!$this->checked && isset($row[$name][$this->value])) return false;
+				if($this->checked && !isset($row[$name][$this->value])) return false;
+			}
+			else {
+				if(!$this->checked && array_search($this->value, explode('/', $row[$name])) !== FALSE) return false;
+				if($this->checked && array_search($this->value, explode('/', $row[$name])) === FALSE) return false;
+			}
 			return true;
 		}
 	}

@@ -696,7 +696,7 @@
 				return child;
 			}
 			else {
-				if(object = this.searchNodeByName(child, className)) {
+				if(object = this.searchNodeByClassName(child, className)) {
 					return object;
 				}
 			}

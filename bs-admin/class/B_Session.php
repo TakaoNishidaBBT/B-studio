@@ -32,12 +32,12 @@
 		}
 
 		function end() {
-			unset($_SESSION);
-			session_destroy();
+			$_SESSION = array();
 			if(ini_get('session.use_cookies')) {
 				$params = session_get_cookie_params();
 				setcookie(session_name(), '', time() - 42000, $params['path'], $params['domain'], $params['secure']);
 			}
+			session_destroy();
 		}
 
 		function read($session_name) {
