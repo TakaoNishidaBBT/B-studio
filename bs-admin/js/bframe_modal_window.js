@@ -35,6 +35,8 @@
 		var baseIndex = 5000;
 		var callBackFunction;
 		var activeWindow = Array();
+		var set_width = false;
+		var set_height = false;
 
 		overlay.className = 'overlay';
 		overlay.style.display = 'none';
@@ -78,6 +80,12 @@
 		containerBody.className = 'containerBody';
 		containerBody.frameBorder = 0;
 		containerBody.deactivate = deactivate;
+		if(containerBody.attachEvent) {
+			containerBody.attachEvent('onload', onloadModalWindow);
+		}
+		else {
+			containerBody.onload = onloadModalWindow;
+		}
 		container.appendChild(containerBody);
 
 		bframe.addEventListner(overlay, 'click', deactivate);
@@ -113,6 +121,12 @@
 		}
 
 		this.activate = function(target, window) {
+			window_width_default = 10000;
+			window_height_default = 10000;
+
+			containerBody.style.width = window_width_default + 'px';
+			containerBody.style.height = window_height_default + 'px';
+
 			// arguments
 			for(var i=2 ; i<arguments.length; i++) {
 				var obj = window.document.getElementById(arguments[i]);
@@ -132,12 +146,11 @@
 				return;
 			}
 
+			window_status = 'activate';
+
 			if(t = target.getAttribute('title')) {
 				title.innerHTML = t;
 			}
-
-			window_width_default = 10000;
-			window_height_default = 10000;
 
 			set_width = false;
 			set_height = false;
@@ -153,9 +166,6 @@
 				}
 			}
 
-			resizeOverlay();
-
-			containerBody.onload = onloadModalWindow;
 			containerBody.contentWindow.location.replace(target.href);
 			containerBody.opener = window;
 
@@ -170,39 +180,26 @@
 			modal_window.style.opacity = 0;
 			modal_window.style.filter = 'alpha(opacity=0)';
 
-			if(set_width && set_height) {
-				bframe.effect.fadeIn(modal_window, 300, 0, 100, 400);
-				containerBody.onload = '';
-			}
-
 			//focus
 			modal_window.focus();
 			frames[containerBody.id].focus();
-
-			window_status = 'activate';
 		};
 
 		function onloadModalWindow() {
-			try {
-				containerBody.contentDocument.onkeydown = onKeyDown;
-			} catch(e) {}
+			containerBody.contentDocument.onkeydown = onKeyDown;
 
-			try {
-				w = window_width_default;
-				h = window_height_default;
+			w = window_width_default;
+			h = window_height_default;
 
-				if(!set_width) {
-					var w = containerBody.contentDocument.body.clientWidth;
-				}
-				if(!set_height) {
-					var h = containerBody.contentDocument.body.clientHeight;
-				}
-				setWindowSize(w, h);
+			if(!set_width) {
+				var w = containerBody.contentDocument.body.clientWidth;
 			}
-			catch(e) {
-				bframe.effect.fadeIn(modal_window, 0, 0, 100, 400);
+			if(!set_height) {
+				var h = containerBody.contentDocument.body.clientHeight;
 			}
-			containerBody.onload = '';
+			setWindowSize(w, h);
+
+			bframe.effect.fadeIn(modal_window, 0, 0, 100, 400);
 		}
 
 		function setWindowSize(width, height) {
@@ -211,7 +208,6 @@
 			window_width_default = parseInt(width)+1;
 			window_height_default = parseInt(height)+1;
 			resizeOverlay();
-			bframe.effect.fadeIn(modal_window, 0, 0, 100, 400);
 		}
 
 		function deactivate(param) {
@@ -225,6 +221,7 @@
 			modal_window.style.opacity = 0;
 			containerBody.contentWindow.location.replace('about:blank');
 			window_status = false;
+
 			activeWindow.pop();
 
 			executeCallBack(param);
@@ -236,6 +233,8 @@
 			overlay.style.width = ow + 'px';
 			overlay.style.height = oh + 'px';
 			var margin = 65;
+
+			if(window_status != 'activate') return;
 
 			w = Math.round(ow * 0.6) < window_width_default ? Math.round(ow * 0.6) : window_width_default;
 			h = Math.round(oh * 0.8) - margin < window_height_default ? Math.round(oh * 0.8) - margin : window_height_default;

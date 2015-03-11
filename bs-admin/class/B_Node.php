@@ -477,7 +477,15 @@
 
 			for($cnt=0 ; $row[$cnt] = $this->db->fetch_assoc($rs) ; $cnt++);
 
-			$info = pathinfo($default_name);
+			if(strlen($default_name) == mb_strlen($default_name)) {
+				$info = pathinfo($default_name);
+			}
+			else {
+				$info['filename'] = $default_name;
+				$info['extension'] = '';
+				$info['dir_name'] = '';
+			}
+
 			for($i=2, $node_name = $info['filename'] ;; $node_name = $prefix . $info['filename'] . $extend) {
 				if($info['extension']) {
 					for($j=0 ; $j<$cnt && $row[$j]['node_name'] != $node_name . '.' . $info['extension']; $j++);

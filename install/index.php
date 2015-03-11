@@ -16,7 +16,7 @@
 	set_error_handler('exception_error_handler');
 
 	// check timezone
-	date("Ymd");
+	date('Ymd');
 
 	require_once('config/_form_config.php');
 	require_once('../bs-admin/class/B_Element.php');
