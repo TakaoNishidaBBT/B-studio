@@ -480,6 +480,35 @@
 			if(!$height) $height=1;
 
 			$new_image = ImageCreateTrueColor($width, $height);
+
+			switch(strtolower($file_extension)) {
+			case 'gif':
+				$trnprt_indx = imagecolortransparent($image);
+				if($trnprt_indx >= 0) {
+					$trnprt_color = imagecolorsforindex($image, $trnprt_indx);
+					$trnprt_indx = imagecolorallocate($new_image, $trnprt_color['red'], $trnprt_color['green'], $trnprt_color['blue']);
+					imagefill($new_image, 0, 0, $trnprt_indx);
+					imagecolortransparent($new_image, $trnprt_indx);
+
+				} 
+				break;
+
+			case 'png':
+				$trnprt_indx = imagecolortransparent($image);
+				if($trnprt_indx >= 0) {
+					$trnprt_color = imagecolorsforindex($image, $trnprt_indx);
+					$trnprt_indx = imagecolorallocate($new_image, $trnprt_color['red'], $trnprt_color['green'], $trnprt_color['blue']);
+					imagefill($new_image, 0, 0, $trnprt_indx);
+					imagecolortransparent($new_image, $trnprt_indx);
+
+				} 
+		        imagealphablending($new_image, false);
+		        $color = imagecolorallocatealpha($new_image, 0, 0, 0, 127);
+		        imagefill($new_image, 0, 0, $color);
+		        imagesavealpha($new_image, true);
+				break;
+			}
+
 			ImageCopyResampled($new_image, $image, 0, 0, 0, 0, $width, $height, $image_size[0], $image_size[1]);
 
 			$thumbnail_file_path = $dir . $prefix . $file_name . '.' . $file_extension;
