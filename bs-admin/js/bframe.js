@@ -190,8 +190,8 @@
 				if(response.status && response.mode && response.mode == 'confirm') {
 					if(confirm(response.message)) {
 						submit(sfname, smodule, spage, smethod, '', snocheck);
-						return;
 					}
+					return;
 				}
 				if(!response.status && response.mode && response.mode == 'alert') {
 					alert(response.message);
