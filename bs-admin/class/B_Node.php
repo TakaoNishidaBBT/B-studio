@@ -739,7 +739,7 @@
 
 		function isMyParent($node_id) {
 			if($this->node_id == $node_id) return true;
-			$roots = $this->getRoots($this->parent);
+			$roots = $this->getRoots($this->node_id);
 
 			if(is_array($roots)) {
 				foreach($roots as $value) {
