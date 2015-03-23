@@ -8,8 +8,6 @@
 	require_once('./config/config.php');
 	require_once('./module/common/B_AdminModule.php');
 
-	mb_language('Japanese');
-
 	// セッションスタート
 	$ses = new B_Session;
 	$ses->start('nocache', B_ADMIN_SESSION_NAME, B_CURRENT_ROOT);
