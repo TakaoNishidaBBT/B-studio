@@ -281,7 +281,7 @@
 				}
 				var trash = document.getElementById('ttrash');
 				nodes = bframe.searchParentByName(event_node, 'nodes');
-				if(!bframe.searchNodeById(trash, nodes.id) && !bframe.searchParentById(event_node, 'ttrash')) {
+				if(!bframe.searchNodeById(trash, nodes.id) && !bframe.searchParentById(event_node, 'ttrash') && !bframe.searchParentById(event_node, 'uutrash')) {
 					var position = context_menu.getPosition(event);
 					var frame_offset = bframe.getFrameOffset(window, context_menu_frame);
 					position.left += frame_offset.left;
@@ -792,6 +792,9 @@
 			var sn = selected_node.object();
 			if(!sn) return;
 			if(sn.id == 'troot' || sn.id == 'ttrash') return;
+			if(bframe.searchParentById(sn, 'ttrash')) return;
+			if(bframe.searchParentById(sn, 'uutrash')) return;
+
 			if(!current_edit_node) {
 				current_edit_node = sn;
 			}
@@ -1793,7 +1796,7 @@
 					return true;
 				}
 				if(bframe.searchParentById(destination_node, 'ttrash')) return false;
-				if(bframe.searchParentById(destination_node, 'utrash')) return false;
+				if(bframe.searchParentById(destination_node, 'uutrash')) return false;
 				if(selected_node.exists(destination_node_id)) return false;
 				if(selected_node.isChild(destination_node_id)) return false;
 				if(destination_node_id.substr(0, 1) == 'p') {
