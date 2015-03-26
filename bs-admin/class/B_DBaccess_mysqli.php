@@ -298,7 +298,7 @@
 					$result.= "DROP TABLE IF EXISTS `$view`;\n";
 					$result.= "DROP VIEW IF EXISTS `$view`;\n";
 
-					$string = preg_replace('/DEFINER=`\w*`@`[A-Za-z0-9_%.]*`/', '', $row[1]);
+					$string = preg_replace('/DEFINER=`[A-Za-z0-9_\-%.]*`@`[A-Za-z0-9_\-%.]*`/', '', $row[1]);
 					$string = preg_replace('/ALGORITHM=\w*/', '', $string);
 					$string = preg_replace('/ SQL SECURITY DEFINER/', '', $string);
 
