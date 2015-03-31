@@ -83,12 +83,7 @@
 			$html.= $this->_outValue($this->base);
 			$html.= $this->_outValue($this->css);
 			$html.= $this->_outValue($this->script);
-			if($this->title) {
-				$html.= '<title>' . $this->title . '</title>';
-			}
-			else {
-				$html.= $this->_outValue($this->title);
-			}
+			$html.= '<title>' . $this->title . '</title>';
 
 			$html.= "\n" . '</head>' . "\n";
 
