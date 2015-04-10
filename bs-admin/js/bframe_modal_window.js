@@ -166,6 +166,8 @@
 				}
 			}
 
+			resizeOverlay();
+
 			containerBody.contentWindow.location.replace(target.href);
 			containerBody.opener = window;
 
