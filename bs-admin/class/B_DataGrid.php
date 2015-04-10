@@ -674,16 +674,6 @@
 			$refrow = $this->excel_config['detail_start_row'];
 			$refcol = $this->excel_config['detail_start_col'];
 
-			for($i=0 ; $i < $this->excel_callback_index ; $i++) {
-				$param = array( 'row' => &$row);
-
-				$obj = $this->excel_callback[$i]['obj'];
-				$method = $this->excel_callback[$i]['method'];
-				if(method_exists($obj, $method)) {
-					$obj->$method($param);
-				}
-			}
-
 			$col_num = $this->excel_config['detail_start_col'];
 			foreach($this->excel_config['row'] as $key => $config) {
 				unset($item);
@@ -733,6 +723,25 @@
 				default:
 					$item = $row[$key];
 					break;
+				}
+
+				$refcol = $col_num;
+
+				for($i=0 ; $i < $this->excel_callback_index ; $i++) {
+					$param = array( 'row'		=> &$row,
+									'key'		=> &$key,
+									'sheet'		=> &$sheet,
+									'col_num'	=> &$col_num,
+									'row_num'	=> &$row_num,
+									'refsheet'	=> &$refsheet,
+									'refcol'	=> &$refcol,
+									'refrow'	=> &$refrow);
+
+					$obj = $this->excel_callback[$i]['obj'];
+					$method = $this->excel_callback[$i]['method'];
+					if(method_exists($obj, $method)) {
+						$obj->$method($param);
+					}
 				}
 
 				$this->excel->_addString($sheet, $row_num, $col_num, $item, $refrow, $refcol, $refsheet);
