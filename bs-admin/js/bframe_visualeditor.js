@@ -37,10 +37,9 @@
 
 			CKEDITOR.config.toolbar = [
 			 ['Undo','Redo','-','Bold','Italic','Underline','Strike','-','Subscript','Superscript']
-			,['Outdent','Indent']
-			,['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock']
+			,['JustifyLeft','JustifyCenter','JustifyRight']
 			,['Link','Unlink','Anchor']
-			,['Image','Flash','Table']
+			,['Image','Table']
 			,'/'
 			,['Styles','Format','FontSize']
 			,['TextColor','BGColor']
