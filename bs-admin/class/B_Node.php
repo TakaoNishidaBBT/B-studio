@@ -351,7 +351,7 @@
 			$node_id = $this->tbl_node->selectMaxValue('node_id');
 			if(count($this->node)) {
 				foreach(array_keys($this->node) as $key) {
-					$ret = $this->node[$key]->copy($node_id, $user_id, $call_back);
+					$ret = $this->node[$key]->copy($node_id, $user_id, $callback);
 					if(!$ret) return $ret;
 				}
 			}
