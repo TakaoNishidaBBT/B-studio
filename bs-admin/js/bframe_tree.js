@@ -255,7 +255,7 @@
 			}
 
 			context_menu.setWidth(context_menu_width);
-			context_menu.createElementFromObject(property.context_menu, this);
+			context_menu.createElementFromObject(property.context_menu, self);
 			context_menu_element.size = context_menu.getElementSize();
 			context_menu_height = context_menu_element.size.height;
 
@@ -313,7 +313,7 @@
 			}
 
 			trash_context_menu.setWidth(context_menu_width);
-			trash_context_menu.createElementFromObject(property.trash_context_menu, this);
+			trash_context_menu.createElementFromObject(property.trash_context_menu, self);
 			trash_context_menu_element.size = trash_context_menu.getElementSize();
 			trash_context_menu_height = trash_context_menu_element.size.height;
 
@@ -343,7 +343,7 @@
 			return false;
 		}
 
-		context_filter = function() {
+		function context_filter() {
 			switch(selected_node.id()) {
 			case 'troot':
 				context_menu.disableElement('cutNode');
@@ -416,6 +416,7 @@
 			message = message.replace('%NODE_COUNT%', node_count);
 			callback.setTmpConfirmMessage(message);
 		}
+		this.context_filter = context_filter;
 
 		function hideContextMenu(event){
 			if(!context_menu || !document || typeof bframe == 'undefined' || !bframe) return;
@@ -442,7 +443,6 @@
 				sort_key = '';
 			}
 			httpObj = createXMLHttpRequest(showNode);
-
 			eventHandler(httpObj, property.module, property.file, property.method.getNodeList, 'POST', param);
 			target.style.cursor = 'wait';
 			if(pain) pain.style.cursor = 'wait';
@@ -691,11 +691,12 @@
 			}
 		}
 
-		reloadTree = function() {
+		function reloadTree() {
 			getNodeList(current_node.id());
 		}
+		this.reloadTree = reloadTree;
 
-		cutNode = function() {
+		function cutNode() {
 			if(clipboard.target) delete clipboard.target;
 			clipboard.target = new Array();
 
@@ -705,8 +706,9 @@
 			clipboard.mode = 'cut';
 			context_menu.enableElement(context_paste_index);
 		}
+		this.cutNode = cutNode;
 
-		copyNode = function() {
+		function copyNode() {
 			if(clipboard.target) delete clipboard.target;
 			clipboard.target = new Array();
 
@@ -716,8 +718,9 @@
 			clipboard.mode = 'copy';
 			context_menu.enableElement(context_paste_index);
 		}
+		this.copyNode = copyNode;
 
-		pasteNode = function() {
+		function pasteNode() {
 			if(clipboard.target) {
 				var param;
 
@@ -731,8 +734,9 @@
 				response_wait = true;
 			}
 		}
+		this.pasteNode = pasteNode;
 
-		pasteAriasNode = function() {
+		function pasteAriasNode() {
 			if(clipboard.target) {
 				var param;
 
@@ -746,8 +750,9 @@
 				response_wait = true;
 			}
 		}
+		this.pasteAriasNode = pasteAriasNode;
 
-		deleteNode = function() {
+		function deleteNode() {
 			var param;
 
 			if(property.relation && property.relation.deleteNode) {
@@ -771,8 +776,9 @@
 			}
 			response_wait = true;
 		}
+		this.deleteNode = deleteNode;
 
-		truncateNode = function() {
+		function truncateNode() {
 			var param;
 
 			if(property.relation && property.relation.truncateNode) {
@@ -787,8 +793,9 @@
 			eventHandler(httpObj, property.module, property.file, property.method.truncateNode, 'POST', param);
 			response_wait = true;
 		}
+		this.truncateNode = truncateNode;
 
-		editName = function() {
+		function editName() {
 			var sn = selected_node.object();
 			if(!sn) return;
 			if(sn.id == 'troot' || sn.id == 'ttrash') return;
@@ -830,8 +837,9 @@
 			input.focus();
 			bframe.addEventListner(input, 'keydown', enterName);
 		}
+		this.editName = editName;
 
-		enterName = function(event) {
+		function enterName(event) {
 			if(window.event) {
 				var keycode = window.event.keyCode;
 			}
@@ -846,6 +854,7 @@
 				break;
 			}
 		}
+		this.enterName = enterName;
 
 		function saveName(event) {
 			if(typeof bframe == 'undefined' || !bframe || response_wait) return;
@@ -886,7 +895,7 @@
 			}
 		}
 
-		createNode = function(p) {
+		function createNode(p) {
 			var param;
 
 			param = 'terminal_id='+terminal_id;
@@ -895,6 +904,7 @@
 			eventHandler(httpObj, property.module, property.file, property.method.createNode, 'POST', param);
 			response_wait = true;
 		}
+		this.createNode = createNode;
 
 		function select(node_id) {
 			if((node_id == current_node.id() && node_id != selected_node.id())) {
@@ -1159,7 +1169,7 @@
 			}
 		}
 
-		download = function() {
+		function download() {
 			var id;
 
 			if(id = selected_node.id()) {
@@ -1173,8 +1183,9 @@
 				download_iframe.location.href = property.relation.download.url+'&node_id='+encodeURIComponent(id.substr(1));
 			}
 		}
+		this.download = download;
 
-		preview = function() {
+		function preview() {
 			var id;
 
 			if(id = selected_node.id()) {
@@ -1185,8 +1196,9 @@
 				}
 			}
 		}
+		this.preview = preview;
 
-		open_property = function() {
+		function open_property() {
 			var id;
 
 			if(id = selected_node.id()) {
@@ -1203,6 +1215,7 @@
 				}
 			}
 		}
+		this.open_property = open_property;
 
 		this.getCurrentFolderId = function() {
 			return current_node.id();
