@@ -34,9 +34,8 @@
 		var opener;
 		var baseIndex = 5000;
 		var callBackFunction;
-		var activeWindow = Array();
-		var set_width = false;
-		var set_height = false;
+		var set_width;
+		var set_height;
 
 		overlay.className = 'overlay';
 		overlay.style.display = 'none';
@@ -80,6 +79,7 @@
 		containerBody.className = 'containerBody';
 		containerBody.frameBorder = 0;
 		containerBody.deactivate = deactivate;
+		containerBody.scrolling = 'no';
 		if(containerBody.attachEvent) {
 			containerBody.attachEvent('onload', onloadModalWindow);
 		}
@@ -121,12 +121,6 @@
 		}
 
 		this.activate = function(target, window) {
-			window_width_default = 10000;
-			window_height_default = 10000;
-
-			containerBody.style.width = window_width_default + 'px';
-			containerBody.style.height = window_height_default + 'px';
-
 			// arguments
 			for(var i=2 ; i<arguments.length; i++) {
 				var obj = window.document.getElementById(arguments[i]);
@@ -147,6 +141,12 @@
 			}
 
 			window_status = 'activate';
+
+			window_width_default = 10000;
+			window_height_default = 10000;
+
+			containerBody.style.width = window_width_default + 'px';
+			containerBody.style.height = window_height_default + 'px';
 
 			if(t = target.getAttribute('title')) {
 				title.innerHTML = t;
@@ -223,8 +223,6 @@
 			modal_window.style.opacity = 0;
 			containerBody.contentWindow.location.replace('about:blank');
 			window_status = false;
-
-			activeWindow.pop();
 
 			executeCallBack(param);
 		}
