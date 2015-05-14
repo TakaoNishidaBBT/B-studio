@@ -73,6 +73,29 @@ $form_config = array(
 				),
 			),
 	    ),
+
+		// 再インストール用バックアップ
+		array(
+			'name'			=> 'full_backup2',
+			'display'		=> 'none',
+			'start_html'    => '<tr>',
+			'end_html'	    => '</tr>',
+			array(
+				'start_html'		=> '<th>',
+				'end_html'			=> '</th>',
+				'value'				=> '再インストール用バックアップ',
+			),
+			array(
+				'start_html'		=> '<td>',
+				'end_html'			=> '</td>',
+				array(
+					'name'				=> 'backup',
+					'start_html'		=> '<span class="download-button" onclick="bframe.submit(\'F1\', \'' . $this->module . '\', \'form\', \'backupAll\', \'install\', true)" >',
+					'end_html'			=> '</span>',
+					'value'				=> '<img src="images/common/download.png" alt="ダウンロード" />ダウンロード',
+				),
+			),
+	    ),
 	),
 );
 

@@ -22,6 +22,8 @@
 			if(class_exists('ZipArchive')) {
 				$obj = $this->form->getElementByName('full_backup');
 				$obj->display = 'block';
+				$obj = $this->form->getElementByName('full_backup2');
+				$obj->display = 'block';
 			}
 		}
 
@@ -140,7 +142,7 @@
 
 			$dump_file_name = B_SITE_NAME . '_' . date("YmdHis") . '.sql';
 			$dump_file_path = B_DOWNLOAD_DIR . $dump_file_name;
-			if(!$this->db->backupTables($dump_file_path)) {
+			if(!$this->db->backupTables($dump_file_path, $this->request['mode'])) {
 				$this->result = new B_Element($this->result_config);
 				$this->result_control = new B_Element($this->result_control_config);
 				$param['action_message'] = '<p class="error-message">' . $this->db->getErrorMsg() . '</p>';

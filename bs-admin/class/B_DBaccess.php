@@ -170,7 +170,7 @@
 			return true;
 		}
 
-		function backupTables($file_name, $tables=null, $views=null) {
+		function backupTables($file_name, $install=null, $tables=null, $views=null) {
 			try {
 				if(!$this->is_connect) return false;
 
@@ -211,11 +211,15 @@
 
 				// Temporary table structure for view
 				foreach($views as $view) {
+					$view_with_prefix = $view;
+					if($install == 'install') {
+						$view_with_prefix = preg_replace('/^' . B_PREFIX . '/', '%PREFIX%', $view);
+					}
 					$result.= "--\n";
-					$result.= "-- Temporary table structure for view `$view`\n";
+					$result.= "-- Temporary table structure for view `$view_with_prefix`\n";
 					$result.= "--\n";
-					$result.= "DROP TABLE IF EXISTS `$view`;\n";
-					$result.= "DROP VIEW IF EXISTS `$view`;\n";
+					$result.= "DROP TABLE IF EXISTS `$view_with_prefix`;\n";
+					$result.= "DROP VIEW IF EXISTS `$view_with_prefix`;\n";
 
 					$fields = '';
 					$rs = $this->iquery("SHOW COLUMNS FROM " . $view);
@@ -225,7 +229,7 @@
 						if($fields) $fields.=",\n";
 						$fields.= "  `$field` $type";
 					}
-					$result.= "CREATE TABLE `$view` (\n";
+					$result.= "CREATE TABLE `$view_with_prefix` (\n";
 					$result.= $fields;
 					$result.= "\n);\n\n";
 				}
@@ -247,16 +251,20 @@
 				}
 
 				foreach($tables as $table) {
+					$table_with_prefix = $table;
+					if($install == 'install') {
+						$table_with_prefix = preg_replace('/^' . B_PREFIX . '/', '%PREFIX%', $table);
+					}
 					$result.= "--\n";
-					$result.= "-- Definition of table `$table`\n";
+					$result.= "-- Definition of table `$table_with_prefix`\n";
 					$result.= "--\n\n";
 
 					$row = $this->fetch_row($this->iquery('SHOW CREATE TABLE ' . $table));
-					$result.= "DROP TABLE IF EXISTS `$table`;\n";
+					$result.= "DROP TABLE IF EXISTS `$table_with_prefix`;\n";
 					$result.= $row[1] . ";\n\n";
 
 					$result.= "--\n";
-					$result.= "-- Dumping data for table `$table`\n";
+					$result.= "-- Dumping data for table `$table_with_prefix`\n";
 					$result.= "--\n\n";
 
 					$rs = $this->iquery("select * from " . $table);
@@ -268,9 +276,9 @@
 						if($fields) $fields.= ',';
 						$fields.= "`" . $field[$i]->name . "`";
 					}
-					$result.= "/*!40000 ALTER TABLE `$table` DISABLE KEYS */;\n";
+					$result.= "/*!40000 ALTER TABLE `$table_with_prefix` DISABLE KEYS */;\n";
 					if($this->num_rows($rs)) {
-						$result.= "INSERT INTO `$table` ($fields) VALUES \n";
+						$result.= "INSERT INTO `$table_with_prefix` ($fields) VALUES \n";
 
 						$fields = '';
 						while($row = $this->fetch_assoc($rs)) {
@@ -298,22 +306,29 @@
 						}
 						$result.= $fields . ";\n";
 					}
-					$result.= "/*!40000 ALTER TABLE `$table` ENABLE KEYS */;\n\n\n";
+					$result.= "/*!40000 ALTER TABLE `$table_with_prefix` ENABLE KEYS */;\n\n\n";
 				}
 
 				// views
 				foreach($views as $view) {
+					$view_with_prefix = $view;
+					if($install == 'install') {
+						$view_with_prefix = preg_replace('/^' . B_PREFIX . '/', '%PREFIX%', $view);
+					}
 					$result.= "--\n";
-					$result.= "-- Definition of view `$view`\n";
+					$result.= "-- Definition of view `$view_with_prefix`\n";
 					$result.= "--\n\n";
 
 					$row = $this->fetch_row($this->iquery('SHOW CREATE TABLE ' . $view));
-					$result.= "DROP TABLE IF EXISTS `$view`;\n";
-					$result.= "DROP VIEW IF EXISTS `$view`;\n";
+					$result.= "DROP TABLE IF EXISTS `$view_with_prefix`;\n";
+					$result.= "DROP VIEW IF EXISTS `$view_with_prefix`;\n";
 
 					$string = preg_replace('/DEFINER=`\w*`@`[A-Za-z0-9_%.]*`/', '', $row[1]);
 					$string = preg_replace('/ALGORITHM=\w*/', '', $string);
 					$string = preg_replace('/ SQL SECURITY DEFINER/', '', $string);
+					if($install == 'install') {
+						$string = preg_replace('/' . B_DB_PREFIX . '/',  '%PREFIX%', $string);
+					}
 
 					$result.= $string . ";\n\n";
 				}
