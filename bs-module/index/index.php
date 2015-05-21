@@ -620,7 +620,9 @@
 					   ,$__view_file
 					   ,$__row
 					   ,&$bs_breadcrumbs) {
+		global $admin_mode;
 
+		$bs_admin_mode = $admin_mode;
 		$bs_view_mode = $__view_mode;
 		$__archive = new B_Log(B_ARCHIVE_LOG_FILE);
 		$bs_db = new B_DBaccess($__archive);
