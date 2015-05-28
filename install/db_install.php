@@ -83,6 +83,9 @@
 			$this->createView('cre_v_category.sql');
 			$this->createView('cre_v_category2.sql');
 			$this->createView('cre_v_category3.sql');
+			$this->createView('cre_v_admin_article.sql');
+			$this->createView('cre_v_admin_article2.sql');
+			$this->createView('cre_v_admin_article3.sql');
 			$this->createView('cre_v_article.sql');
 			$this->createView('cre_v_article2.sql');
 			$this->createView('cre_v_article3.sql');

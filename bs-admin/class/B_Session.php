@@ -11,24 +11,10 @@
 	// -------------------------------------------------------------------------
 	class B_Session {
 		function start($limiter, $name, $path, $secure=false) {
-			if(!$this->checkPHPSISSID()) {
-				session_cache_limiter($limiter);
-				session_name($name);
-				session_set_cookie_params(0, $path, null, $secure);
-			}
+			session_cache_limiter($limiter);
+			session_name($name);
+			session_set_cookie_params(0, $path, null, $secure);
 			session_start();
-		}
-
-		function checkPHPSISSID() {
-			if(isset($_POST['PHPSESSID'])) {
-				session_id($_POST['PHPSESSID']);
-				return true;
-			}
-			if(isset($_GET['PHPSESSID'])) {
-				session_id($_GET['PHPSESSID']);
-				return true;
-			}
-			return false;
 		}
 
 		function end() {

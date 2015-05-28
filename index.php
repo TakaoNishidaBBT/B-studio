@@ -26,11 +26,19 @@
 		$file_info = B_FILE_INFO_W;
 		$semaphore = B_FILE_INFO_SEMAPHORE_W;
 		$node_view = B_WORKING_RESOURCE_NODE_VIEW;
+
+		define('B_ARTICLE_VIEW',  B_DB_PREFIX . 'v_admin_article');
+		define('B_ARTICLE_VIEW2', B_DB_PREFIX . 'v_admin_article2');
+		define('B_ARTICLE_VIEW3', B_DB_PREFIX . 'v_admin_article3');
 	}
 	else {
 		$file_info = B_FILE_INFO_C;
 		$semaphore = B_FILE_INFO_SEMAPHORE_C;
 		$node_view = B_CURRENT_RESOURCE_NODE_VIEW;
+
+		define('B_ARTICLE_VIEW',  B_DB_PREFIX . 'v_article');
+		define('B_ARTICLE_VIEW2', B_DB_PREFIX . 'v_article2');
+		define('B_ARTICLE_VIEW3', B_DB_PREFIX . 'v_article3');
 
 		if(file_exists(B_LIMIT_FILE_INFO)) {
 			if($fp_limit = fopen(B_LIMIT_FILE_INFO, 'r')) {

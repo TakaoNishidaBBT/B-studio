@@ -8,4 +8,4 @@ select 	  a.*
 from %DB_PREFIX%article a
 left join %DB_PREFIX%v_category b
 on a.category_id = b.node_id
-where a.del_flag='0'
+where a.del_flag='0' and publication='1'
