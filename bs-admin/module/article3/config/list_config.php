@@ -10,7 +10,7 @@ array(
 	'start_html'	=> '<table class="list">',
 	'end_html'		=> '</table>',
 
-	'select_sql'	=> "select * from " . B_DB_PREFIX . "v_article3 where 1=1 ",
+	'select_sql'	=> "select * from " . B_DB_PREFIX . "v_admin_article3 where 1=1 ",
 
 	'empty_message'	=> '<strong>　該当レコードはありません</strong>',
 
