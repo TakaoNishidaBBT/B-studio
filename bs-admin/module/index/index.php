@@ -75,6 +75,9 @@
 				$auth = new B_AdminAuth;
 				$ret = $auth->login($this->db, $_POST['user_id'], $_POST['password']);
 				if($ret) {
+					// セッションIDを再設定
+					session_regenerate_id(true);
+
 					$path = B_SITE_BASE . 'bs-admin/';
 					header("Location:$path");
 					exit;
