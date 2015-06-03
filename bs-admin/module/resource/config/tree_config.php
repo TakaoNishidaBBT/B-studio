@@ -40,6 +40,8 @@ $tree_config = array(
 				'download'		=> 'download',
 				'selectFile'	=>
 				array(
+					'htm'		=> 'openEditor',
+					'html'		=> 'openEditor',
 					'css'		=> 'openEditor',
 					'js'		=> 'openEditor',
 					'php'		=> 'openEditor',
