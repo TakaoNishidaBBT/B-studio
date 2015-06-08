@@ -219,6 +219,14 @@
 			$list['create_datetime_t'] = date('Y/m/d H:i', $this->create_datetime);
 			$list['update_datetime_u'] = $this->update_datetime;
 			$list['update_datetime_t'] = date('Y/m/d H:i', $this->update_datetime);
+			if($this->node_type != 'folder') {
+				$list['file_size'] = $this->file_size;
+				$list['human_file_size'] = B_Util::human_filesize($this->file_size, 'K');
+			}
+			if($this->image_size) {
+				$list['image_size'] = $this->image_size;
+				$list['human_image_size'] = $this->human_image_size;
+			}
 			$list['level'] = $this->level;
 			$list['disp_seq'] = $this->disp_seq;
 			if($this->node_id == $node_id) {
