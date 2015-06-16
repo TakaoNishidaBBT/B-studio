@@ -114,7 +114,7 @@
 
 	function checkPermission($path, &$message) {
 		if(!file_exists($path)) {
-			$message.= '<span class="status_ok">' . $path  . ' の書き込み権限はOKです。(file not exist))</span><br />';
+			$message.= '<span class="status_ok">' . $path  . ' の書き込み権限はOKです。(file not exist)</span><br />';
 			return true;
 		}
 		else {
