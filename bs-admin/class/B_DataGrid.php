@@ -324,6 +324,7 @@
 
 			//pager bottom
 			if($this->pager && $this->pager['location']['bottom'] == 'true') {
+				if(!$pager_html) $pager_html = $this->showPager();
 				$html.= $pager_html;
 			}
 
