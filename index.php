@@ -27,9 +27,9 @@
 		$semaphore = B_FILE_INFO_SEMAPHORE_W;
 		$node_view = B_WORKING_RESOURCE_NODE_VIEW;
 
-		define('B_ARTICLE_VIEW',  B_DB_PREFIX . 'v_admin_article');
-		define('B_ARTICLE_VIEW2', B_DB_PREFIX . 'v_admin_article2');
-		define('B_ARTICLE_VIEW3', B_DB_PREFIX . 'v_admin_article3');
+		define('B_ARTICLE_VIEW',  B_DB_PREFIX . 'v_preview_article');
+		define('B_ARTICLE_VIEW2', B_DB_PREFIX . 'v_preview_article2');
+		define('B_ARTICLE_VIEW3', B_DB_PREFIX . 'v_preview_article3');
 	}
 	else {
 		$file_info = B_FILE_INFO_C;
