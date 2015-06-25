@@ -433,9 +433,6 @@
 			// convert sigle byte to multi byte
 			$value = mb_convert_kana($value, 'KV');
 
-			// remove backslash
-			$value = str_replace('\\', '', $value);
-
 			// convert
 			if($this->convert) {
 				$value = mb_convert_kana($value, $this->convert);
