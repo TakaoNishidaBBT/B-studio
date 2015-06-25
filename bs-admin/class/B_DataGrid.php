@@ -20,10 +20,6 @@
 			$this->auth_filter = $auth_filter;
 			$this->config_filter = $config_filter;
 			$this->row_instance = new B_Element($this->config['row'], $this->auth_filter, $this->config_filter);
-			if($config['header']) {
-				$this->header_conf = $config['header'];
-			}
-
 			$this->select_sql = $config['select_sql'];
 			$this->count_sql = $config['count_sql'];
 			$this->empty_message = $config['empty_message'];
@@ -74,9 +70,24 @@
 			$this->row = '';
 			$this->bind_data = '';
 
+			// create caption objects
+			if($this->config['caption']) {
+				$this->caption = new B_Element($this->config['caption'], $this->auth_filter, $this->config_filter);
+			}
+
+			// create thead objects
+			if($this->config['thead']) {
+				$this->thead = new B_Element($this->config['thead'], $this->auth_filter, $this->config_filter);
+			}
+
 			// create header objects
-			if($this->header_conf) {
-				$this->header = new B_Element($this->header_conf, $this->auth_filter, $this->config_filter);
+			if($this->config['header']) {
+				$this->header = new B_Element($this->config['header'], $this->auth_filter, $this->config_filter);
+			}
+
+			// create tbody objects
+			if($this->config['tbody']) {
+				$this->tbody = new B_Element($this->config['tbody'], $this->auth_filter, $this->config_filter);
 			}
 
 			if(is_array($data)) {
@@ -157,7 +168,17 @@
 		}
 
 		function setCaption($caption) {
-			$this->caption = $caption;
+			if($this->caption) {
+				$this->caption->setValue($caption);
+			}
+			else {
+				$config = array(
+					'start_html'	=> '<caption>',
+					'end_html'		=> '</caption>',
+					'value'			=> $caption,
+				);
+				$this->caption = new B_Element($config, $this->auth_filter, $this->config_filter);
+			}
 		}
 
 		function setCallBack($obj, $method, $param=NULL) {
@@ -311,12 +332,14 @@
 
 			// get caption html
 			if($this->caption) {
-				$html.= '<caption>' . $this->caption . '</caption>';
+				$html.= $this->caption->getHtml($mode);
 			}
+
 			// get header html
 			if($this->header) {
 				$html.= $this->getHeaderHtml($mode);
 			}
+
 			// get row html
 			$html.= $this->getRowHtml($mode);
 
@@ -341,7 +364,14 @@
 					$obj->special_html.= ' ' . $obj->cond_html;
 				}
 			}
-			return $this->header->getHtml($mode);
+
+			$html = $this->header->getHtml($mode);
+
+			if($this->thead) {
+				return $this->thead->start_html . $html . $this->thead->end_html;
+			}
+
+			return $html;
 		}
 
 		function getRowHtml($mode) {
@@ -355,6 +385,12 @@
 				}
 				$html.= $row->getHtml($mode);
 			}
+
+			// get tbody html
+			if($this->tbody) {
+				return $this->tbody->start_html . $html . $this->tbody->end_html;
+			}
+
 			return $html;
 		}
 
@@ -675,6 +711,16 @@
 			$refrow = $this->excel_config['detail_start_row'];
 			$refcol = $this->excel_config['detail_start_col'];
 
+			for($i=0 ; $i < $this->excel_callback_index ; $i++) {
+				$param = array( 'row' => &$row);
+
+				$obj = $this->excel_callback[$i]['obj'];
+				$method = $this->excel_callback[$i]['method'];
+				if(method_exists($obj, $method)) {
+					$obj->$method($param);
+				}
+			}
+
 			$col_num = $this->excel_config['detail_start_col'];
 			foreach($this->excel_config['row'] as $key => $config) {
 				unset($item);
@@ -724,25 +770,6 @@
 				default:
 					$item = $row[$key];
 					break;
-				}
-
-				$refcol = $col_num;
-
-				for($i=0 ; $i < $this->excel_callback_index ; $i++) {
-					$param = array( 'row'		=> &$row,
-									'key'		=> &$key,
-									'sheet'		=> &$sheet,
-									'col_num'	=> &$col_num,
-									'row_num'	=> &$row_num,
-									'refsheet'	=> &$refsheet,
-									'refcol'	=> &$refcol,
-									'refrow'	=> &$refrow);
-
-					$obj = $this->excel_callback[$i]['obj'];
-					$method = $this->excel_callback[$i]['method'];
-					if(method_exists($obj, $method)) {
-						$obj->$method($param);
-					}
 				}
 
 				$this->excel->_addString($sheet, $row_num, $col_num, $item, $refrow, $refcol, $refsheet);
@@ -856,17 +883,19 @@
 				$html.= $disp_image['last_image']['end_html'];
 			}
 
-			$html.= $disp_image['information']['start_html'];
-			$html.= $disp_image['information']['record_cnt']['start_html'];
-			$html.= $this->record_cnt;
-			$html.= $disp_image['information']['record_cnt']['end_html'];
-			$html.= $disp_image['information']['record_from']['start_html'];
-			$html.= $record_from;
-			$html.= $disp_image['information']['record_from']['end_html'];
-			$html.= $disp_image['information']['record_to']['start_html'];
-			$html.= $record_to;
-			$html.= $disp_image['information']['record_to']['end_html'];
-			$html.= $disp_image['information']['end_html'];
+			if($disp_image['information']) {
+				$html.= $disp_image['information']['start_html'];
+				$html.= $disp_image['information']['record_cnt']['start_html'];
+				$html.= $this->record_cnt;
+				$html.= $disp_image['information']['record_cnt']['end_html'];
+				$html.= $disp_image['information']['record_from']['start_html'];
+				$html.= $record_from;
+				$html.= $disp_image['information']['record_from']['end_html'];
+				$html.= $disp_image['information']['record_to']['start_html'];
+				$html.= $record_to;
+				$html.= $disp_image['information']['record_to']['end_html'];
+				$html.= $disp_image['information']['end_html'];
+			}
 
 			$html.= $this->pager['end_html'] . "\n";
 
