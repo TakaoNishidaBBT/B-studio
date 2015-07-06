@@ -437,7 +437,7 @@
 			default:
 				return;
 			}
-			chmod($thumbnail_file_path, 0777);
+			chmod(B_UPLOAD_THUMBDIR . $thumbnail_file_path, 0777);
 			$data[$this->thumbnail_image_path] = $thumbnail_file_path;
 
 			return;
