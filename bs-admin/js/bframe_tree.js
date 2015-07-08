@@ -548,15 +548,7 @@
 
 		function _showNode(parent_node, node_info, trash) {
 			li = createNodeObject(parent_node, node_info, 'tree', trash);
-			if(node_info['new_node']) {
-				if(eventSrcObject == pain) {
-					selected_node.set('p'+node_info.node_id);
-				}
-				else {
-					selected_node.set('t'+node_info.node_id);
-				}
-				new_node = true;
-			}
+			setNewNode(node_info);
 
 			if(node_info.children) {
 				if(pain) {
@@ -600,6 +592,7 @@
 
 							for(var i=0 ; i < node_info.children.length ; i++) {
 								createDetailNodeObject(ptbody, node_info.children[i]);
+								setNewNode(node_info.children[i]);
 							}
 						}
 						else {
@@ -611,6 +604,7 @@
 							div.appendChild(pul);
 							for(var i=0 ; i < node_info.children.length ; i++) {
 								createNodeObject(pul, node_info.children[i], 'pain', trash);
+								setNewNode(node_info.children[i]);
 							}
 						}
 					}
@@ -625,6 +619,18 @@
 						_showNode(ul, node_info.children[i], trash);
 					}
 				}
+			}
+		}
+
+		function setNewNode(node_info) {
+			if(node_info['new_node']) {
+				if(eventSrcObject == pain) {
+					selected_node.set('p'+node_info.node_id);
+				}
+				else {
+					selected_node.set('t'+node_info.node_id);
+				}
+				new_node = true;
 			}
 		}
 

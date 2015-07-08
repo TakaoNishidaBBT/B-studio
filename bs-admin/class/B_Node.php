@@ -454,15 +454,15 @@
 			return $this->tbl_node->deleteByPk($param);
 		}
 
-		function insert($node_type, $node_class, $user_id, &$new_node_id) {
+		function insert($node_type, $node_class, $user_id, &$new_node_id, &$new_node_name) {
 			if(!$this->node_id) return;
 
 			$default_node_name = $this->script['bframe_tree']['icon'];
-			$node_name = $this->getNewNodeName($this->node_id, $default_node_name[$node_type]['new'], 'insert');
+			$new_node_name = $this->getNewNodeName($this->node_id, $default_node_name[$node_type]['new'], 'insert');
 			$param['parent_node'] = $this->node_id;
 			$param['node_type'] = $node_type;
 			$param['node_class'] = $node_class;
-			$param['node_name'] = $node_name;
+			$param['node_name'] = $new_node_name;
 			$param['disp_seq'] = $this->getMaxDispSeq($this->node_id);
 			$param['del_flag'] = '0';
 			$param['create_datetime'] = time();
@@ -659,18 +659,17 @@
 		}
 
 		function checkDuplicateById($parent_node_id, $node_id) {
-			for($nodes='', $i=0 ; $i<count($node_id) ; $i++) {
+			for($nodes='', $i=0; $i<count($node_id); $i++) {
 				if($nodes) $nodes.= ',';
 				$nodes.= "'" . $node_id[$i] . "'";
 			}
 
 			$sql = "select node_name, count(*) cnt
 					from %VIEW%
-					where node_id in (%NODES%)
+					where node_id in ($nodes)
 					group by node_name
 					having cnt > 1";
 
-			$sql = str_replace('%NODES%', $nodes, $sql);
 			$sql = str_replace('%VIEW%', B_DB_PREFIX . $this->view, $sql);
 
 			$rs = $this->db->query($sql);
@@ -684,11 +683,10 @@
 						where parent_node='$parent_node_id') a,
 						(select node_id, node_name
 						from %VIEW%
-						where node_id in (%NODES%))b
+						where node_id in ($nodes))b
 					where a.node_id <> b.node_id
 					and a.node_name = b.node_name";
 
-			$sql = str_replace('%NODES%', $nodes, $sql);
 			$sql = str_replace('%VIEW%', B_DB_PREFIX . $this->view, $sql);
 
 			$rs = $this->db->query($sql);
