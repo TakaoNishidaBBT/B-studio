@@ -166,6 +166,18 @@ $tree_config = array(
 			'context_menu'		=>
 			array(
 				array(
+					'menu'		=> '切り取り',
+					'func'		=> 'cutNode',
+				),
+				array(
+					'menu'		=> 'コピー',
+					'func'		=> 'copyNode',
+				),
+				array(
+					'menu'		=> '貼り付け',
+					'func'		=> 'pasteNode',
+				),
+				array(
 					'menu'		=> '削除',
 					'func'		=> 'deleteNode',
 					'confirm'	=>
@@ -184,6 +196,12 @@ $tree_config = array(
 							'func'		=> 'createNode',
 							'icon'		=> './images/folders/folder.png',
 							'param'		=> 'node_type=folder&node_class=folder',
+						),
+						array(
+							'menu'		=> 'ファイル',
+							'func'		=> 'createNode',
+							'icon'		=> './images/folders/file_icon.png',
+							'param'		=> 'node_type=file&node_class=leaf',
 						),
 					),
 					'submenu_width'	=> '120',

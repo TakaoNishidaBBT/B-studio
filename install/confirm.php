@@ -118,6 +118,10 @@
 	}
 
 	function db_install(&$error_message) {
+		if(file_exists('./default/bstudio.zip')) {
+			return true;
+		}
+
 		require_once('db_install.php');
 		$db_install = new db_install();
 		$status = $db_install->install();

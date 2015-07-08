@@ -298,6 +298,28 @@
 			return $ret;
 		}
 
+		function createFile($node_name, $extension, &$new_node_id) {
+			if(!is_dir($this->fullpath)) {
+				return false;
+			}
+$log = new B_Log(B_LOG_FILE);
+			$file = $node_name;
+$log->write('filepath:', B_Util::getPath($this->fullpath, $file) . '.' . $extension);
+			for($i=2, $file = $node_name; file_exists(B_Util::getPath($this->fullpath, $file) . '.' . $extension); $file = $node_name . $extend) {
+				$extend = '(' . $i++ . ')';
+$log->write('filepath:', $i, ':', B_Util::getPath($this->fullpath, $file));
+			}
+			$file = $file . '.' . $extension;
+			$file_name = B_Util::getPath($this->fullpath, $file);
+			$fp = fopen($file_name, 'w');
+			fclose($fp);
+			chmod($file_name, 0666);
+
+			$new_node_id = B_Util::getPath($this->path, $file);
+
+			return true;
+		}
+
 		function getMaxThumbnailNo() {
 			$handle = opendir(B_UPLOAD_THUMBDIR);
 			while(false !== ($file_name = readdir($handle))){

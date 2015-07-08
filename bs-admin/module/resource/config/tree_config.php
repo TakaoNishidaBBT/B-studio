@@ -140,9 +140,9 @@ $tree_config = array(
 				'forbidden'		=> array('src' => './images/folders/forbidden.png'),
 				'forbidden_big'	=> array('src' => './images/folders/forbidden_big.png'),
 				'line'			=> array('src' => './images/folders/line.gif'),
-				'folder'		=> array('src' => './images/folders/folder.png', 'new' => 'mewFolder'),
+				'folder'		=> array('src' => './images/folders/folder.png', 'new' => 'newFolder'),
 				'folder_open'	=> array('src' => './images/folders/folder_open.png'),
-				'file'			=> array('src' => './images/folders/file_icon.png', 'ime' => 'true'),
+				'file'			=> array('src' => './images/folders/file_icon.png', 'new' => 'newFile.txt', 'ime' => 'true'),
 				'pain'		=>
 				array(
 					'folder'	=> array('src' => './images/folders/folder_big.png'),
@@ -201,6 +201,12 @@ $tree_config = array(
 							'func'		=> 'createNode',
 							'icon'		=> './images/folders/folder.png',
 							'param'		=> 'node_type=folder&node_class=folder',
+						),
+						array(
+							'menu'		=> 'ファイル',
+							'func'		=> 'createNode',
+							'icon'		=> './images/folders/file_icon.png',
+							'param'		=> 'node_type=file&node_class=leaf',
 						),
 					),
 					'submenu_width'	=> '120',

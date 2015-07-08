@@ -104,7 +104,13 @@
 			$this->session['open_nodes'][$this->request['destination_node_id']] = true;
 			$node = new B_FileNode($this->dir, $this->request['destination_node_id']);
 
-			$ret = $node->createFolder('newFolder', $new_node_id);
+			if($this->request['node_type'] == 'folder') {
+				$ret = $node->createFolder('newFolder', $new_node_id);
+			}
+			else {
+				$ret = $node->createFile('newFile', 'txt', $new_node_id);
+			}
+
 			if($ret) {
 				$this->status = true;
 				$this->session['selected_node'] = $new_node_id;
