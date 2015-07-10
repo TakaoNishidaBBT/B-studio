@@ -1902,8 +1902,8 @@
 					$this->setParamProperty($key2, $value2);
 				}
 			}
-			$this->element_start_html =	'<a href="' .
-								$this->link . $this->param . '"';
+			$this->element_start_html =	'<a href="' . $this->link . $this->param . '"';
+
 			if($this->id) {
 				$this->element_start_html.= ' id="' . $this->_gethtmlid() . '"';
 			}

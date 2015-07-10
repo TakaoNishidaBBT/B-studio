@@ -60,42 +60,84 @@
 
 		function pasteNode() {
 			$dest = new B_FileNode($this->dir, $this->request['destination_node_id']);
-			foreach($this->request['source_node_id'] as $node_id) {
-				$source = new B_FileNode($this->dir, $node_id);
 
-				if(!file_exists($source->fullpath)) {
-					$this->message = '他のユーザに更新されています';
-					$this->status = false;
-				}
-				if(!file_exists($dest->fullpath)) {
-					$this->message = '他のユーザに更新されています';
-					$this->status = false;
-				}
-				else if(file_exists($dest->fullpath . '/' . $source->file_name)) {
-					$this->message = '既に存在しています';
-					$this->status = false;
-				}
-				else {
-					if($dest->node_type == 'folder' || $dest->node_type == 'root') {
-						$root = new B_FileNode($this->dir, 'root', null, null, 'all');
-						$ret = $root->rename($source->path, B_Util::getPath($dest->path, $source->file_name));
+			switch($this->request['mode']) {
+			case 'copy':
+				$this->session['selected_node'] = '';
+
+				foreach($this->request['source_node_id'] as $node_id) {
+					$source = new B_FileNode($this->dir, $node_id, null, null, 'all');
+
+					if(!file_exists($source->fullpath)) {
+						$this->message = '他のユーザに更新されています';
+						$this->status = false;
 					}
-					if($ret) {
-						$this->status = true;
-						if($this->session['current_node'] == $this->request['node_id']) {
-							$this->session['current_node'] = $new_node_id;
-						}
-						$this->session['open_nodes'][$this->request['node_id']] = false;
-						$this->session['open_nodes'][$new_node_id] = true;
-						$this->refleshThumnailCache($root);
+					if(!file_exists($dest->fullpath)) {
+						$this->message = '他のユーザに更新されています';
+						$this->status = false;
 					}
 					else {
-						$this->status = false;
-						$this->message = 'エラーが発生しました';
+						if($dest->node_type == 'folder' || $dest->node_type == 'root') {
+							$ret = $source->copy($dest->fullpath, $new_node_name, true);
+						}
+						if($ret) {
+							$this->status = true;
+							$this->session['selected_node'][] = $dest->path . '/' . $new_node_name;
+						}
+						else {
+							$this->status = false;
+						}
 					}
 				}
+				if($this->status) {
+					$root = new B_FileNode($this->dir, 'root', null, null, 'all');
+					$this->refleshThumnailCache($root);
+				}
+				break;
+
+			case 'cut':
+				foreach($this->request['source_node_id'] as $node_id) {
+					$source = new B_FileNode($this->dir, $node_id);
+
+					if(!file_exists($source->fullpath)) {
+						$this->message = '他のユーザに更新されています';
+						$this->status = false;
+					}
+					if(!file_exists($dest->fullpath)) {
+						$this->message = '他のユーザに更新されています';
+						$this->status = false;
+					}
+					else if(file_exists($dest->fullpath . '/' . $source->file_name)) {
+						$this->message = '既に存在しています';
+						$this->status = false;
+					}
+					else {
+						if($dest->node_type == 'folder' || $dest->node_type == 'root') {
+							$ret = $dest->move($source->fullpath);
+						}
+						if($ret) {
+							$this->status = true;
+							if($this->session['current_node'] == $this->request['node_id']) {
+								$this->session['current_node'] = $new_node_id;
+							}
+							$this->session['open_nodes'][$this->request['node_id']] = false;
+							$this->session['open_nodes'][$new_node_id] = true;
+						}
+						else {
+							$this->status = false;
+						}
+					}
+				}
+				if($this->status) {
+					$root = new B_FileNode($this->dir, 'root', null, null, 'all');
+					$this->refleshThumnailCache($root);
+				}
+				break;
 			}
 
+			if(!$this->status && !$this->message) {
+				$this->message = $this->getErrorMessage($source->getErrorNo());
+			}
 			$this->response($this->request['node_id'], 'select');
 			exit;
 		}
@@ -108,7 +150,7 @@
 				$ret = $node->createFolder('newFolder', $new_node_id);
 			}
 			else {
-				$ret = $node->createFile('newFile', 'txt', $new_node_id);
+				$ret = $node->createFile('newFile.txt', $new_node_id);
 			}
 
 			if($ret) {
@@ -120,7 +162,6 @@
 				$this->status = false;
 				$this->message = 'エラーが発生しました';
 			}
-
 			$this->response($new_node_id, 'new_node');
 			exit;
 		}
@@ -164,7 +205,8 @@
 					$ret = $root->rename($this->request['node_id'], $new_node_id);
 					if($ret) {
 						$this->status = true;
-						$this->session['selected_node'] = $new_node_id;
+						$this->session['selected_node'] = '';
+						$this->session['selected_node'][0] = $new_node_id;
 						if($this->session['current_node'] == $this->request['node_id']) {
 							$this->session['current_node'] = $new_node_id;
 						}
@@ -311,9 +353,8 @@
 
 			$list[] = $root_node->getNodeList($node_id, $category);
 
-			if(!$this->request['node_id']) {
-				$response['current_node'] = $this->session['current_node'];
-			}
+			$response['current_node'] = $this->session['current_node'];
+
 			if($this->session['selected_node']) {
 				$response['selected_node'] = $this->session['selected_node'];
 			}
@@ -327,6 +368,12 @@
 
 			header('Content-Type: application/x-javascript charset=utf-8');
 			echo json_encode($response);
+		}
+
+		function getErrorMessage($error) {
+			global $g_data_set, ${$g_data_set};
+
+			return ${$g_data_set}['node_error'][$error];
 		}
 
 		function view() {

@@ -119,8 +119,10 @@
 													, 'all'
 													, null);
 
-							$ret = $source_node->copy($this->request['destination_node_id'], $this->user_id, array('obj' => $this, 'method' => 'copy_callback'));
+							$ret = $source_node->copy($this->request['destination_node_id'], $this->user_id, $new_node_id, array('obj' => $this, 'method' => 'copy_callback'));
 							if(!$ret) break;
+							$this->selected_node[] = $new_node_id[0];
+							$new_node_id = '';
 						}
 						break;
 
@@ -626,6 +628,11 @@
 			if(!$this->request['node_id']) {
 				$response['current_node'] = $this->session['current_node'];
 			}
+
+			if($this->selected_node) {
+				$response['selected_node'] = $this->selected_node;
+			}
+
 			if($list) {
 				$response['node_info'] = $list;
 			}

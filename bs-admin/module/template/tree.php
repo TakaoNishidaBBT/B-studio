@@ -85,7 +85,7 @@
 
 					case 'copy':
 						$callback = array('obj' => $this, 'method' => '_callback_copy');
-						$ret = $source_node->copy($this->request['destination_node_id'], $this->user_id, $callback);
+						$ret = $source_node->copy($this->request['destination_node_id'], $this->user_id, $new_node_id, $callback);
 						break;
 
 					case 'cut':

@@ -316,7 +316,7 @@
 			return true;
 		}
 
-		function copy($destination_node_id, $user_id, $callback=null) {
+		function copy($destination_node_id, $user_id, &$new_node_id, $callback=null) {
 			if(!$this->node_id) return;
 
 			// if destination node is my child
@@ -357,9 +357,11 @@
 			if(!$ret) return $ret;
 
 			$node_id = $this->tbl_node->selectMaxValue('node_id');
+			$new_node_id[] = $node_id;
+
 			if(count($this->node)) {
 				foreach(array_keys($this->node) as $key) {
-					$ret = $this->node[$key]->copy($node_id, $user_id, $callback);
+					$ret = $this->node[$key]->copy($node_id, $user_id, $new_node_id, $callback);
 					if(!$ret) return $ret;
 				}
 			}
