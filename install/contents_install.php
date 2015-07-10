@@ -50,15 +50,15 @@
 		function copy() {
 			// b-admin-files/files
 			$node = new B_FileNode(B_RESOURCE_EXTRACT_DIR . 'bs-admin-files/', 'files', null, null, 'all');
-			$node->copy(B_ADMIN_FILES_DIR, true);
+			$node->_copy(B_ADMIN_FILES_DIR, true);
 
 			// b-admin-files/thumbs
 			$node = new B_FileNode(B_RESOURCE_EXTRACT_DIR . 'bs-admin-files/', 'thumbs', null, null, 'all');
-			$node->copy(B_ADMIN_FILES_DIR);
+			$node->_copy(B_ADMIN_FILES_DIR);
 
 			// files
 			$node = new B_FileNode(B_RESOURCE_EXTRACT_DIR, 'files', null, null, 'all');
-			$node->copy(B_DOC_ROOT . B_CURRENT_ROOT, true);
+			$node->_copy(B_DOC_ROOT . B_CURRENT_ROOT, true);
 		}
 
 		function import() {
