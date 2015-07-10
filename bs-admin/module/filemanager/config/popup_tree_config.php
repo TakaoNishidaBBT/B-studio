@@ -23,6 +23,7 @@ $tree_config = array(
 			'root_url'		=> B_UPLOAD_FILES,
 			'thumb_path'	=> B_UPLOAD_URL,
 			'thumb_prefix'	=> B_THUMB_PREFIX,
+			'window'		=> $this->window,
 			'target'		=> $this->target,
 			'target_id'		=> $this->target_id,
 			'method'		=>
@@ -99,7 +100,7 @@ $tree_config = array(
 						'sort_key'		=> 'file_size',
 					),
 					array(
-						'name'			=> 'image_size',
+						'name'			=> 'human_image_size',
 						'title'			=> 'イメージサイズ',
 						'className'		=> 'image-size',
 						'sort_key'		=> 'image_size',
@@ -109,26 +110,26 @@ $tree_config = array(
 			),
 			'icon'		=>
 			array(
-				'plus'			=> array('src' => './images/folders/plus.gif', 'new' => ''),
-				'minus'			=> array('src' => './images/folders/minus.gif', 'new' => ''),
-				'blank'			=> array('src' => './images/folders/blank.gif', 'new' => ''),
-				'root'			=> array('src' => './images/folders/file_root.png', 'new' => ''),
+				'plus'			=> array('src' => './images/folders/plus.gif'),
+				'minus'			=> array('src' => './images/folders/minus.gif'),
+				'blank'			=> array('src' => './images/folders/blank.gif'),
+				'root'			=> array('src' => './images/folders/file_root.png'),
 				'forbidden'		=> array('src' => './images/folders/forbidden.png'),
 				'forbidden_big'	=> array('src' => './images/folders/forbidden_big.png'),
-				'line'			=> array('src' => './images/folders/line.gif', 'new' => ''),
-				'folder'		=> array('src' => './images/folders/folder.png', 'new' => 'newfolder'),
-				'folder_open'	=> array('src' => './images/folders/folder_open.png', 'new' => 'newFolder'),
-				'page'			=> array('src' => './images/folders/leaf.gif', 'new' => '新しいページ'),
-				'node'			=> array('src' => './images/folders/book.gif', 'new' => '新しいノード'),
-				'file'			=> array('src' => './images/folders/file_icon.png', 'new' => '新しいパーツ'),
+				'line'			=> array('src' => './images/folders/line.gif'),
+				'folder'		=> array('src' => './images/folders/folder.png'),
+				'folder_open'	=> array('src' => './images/folders/folder_open.png'),
+				'page'			=> array('src' => './images/folders/leaf.gif'),
+				'node'			=> array('src' => './images/folders/book.gif'),
+				'file'			=> array('src' => './images/folders/file_icon.png'),
 				'pain'		=>
 				array(
-					'folder'	=> array('src' => './images/folders/folder_big.png', 'new' => ''),
-					'js'		=> array('src' => './images/folders/file_icon_big.png', 'new' => ''),
-					'swf'		=> array('src' => './images/folders/file_icon_big.png', 'new' => ''),
-					'pdf'		=> array('src' => './images/folders/file_icon_big.png', 'new' => ''),
-					'css'		=> array('src' => './images/folders/file_icon_big.png', 'new' => ''),
-					'misc'		=> array('src' => './images/folders/file_icon_big.png', 'new' => ''),
+					'folder'	=> array('src' => './images/folders/folder_big.png'),
+					'js'		=> array('src' => './images/folders/file_icon_big.png'),
+					'swf'		=> array('src' => './images/folders/file_icon_big.png'),
+					'pdf'		=> array('src' => './images/folders/file_icon_big.png'),
+					'css'		=> array('src' => './images/folders/file_icon_big.png'),
+					'misc'		=> array('src' => './images/folders/file_icon_big.png'),
 				),
 				'detail'	=>
 				array(
@@ -149,6 +150,18 @@ $tree_config = array(
 			'context_menu'		=>
 			array(
 				array(
+					'menu'		=> '切り取り',
+					'func'		=> 'cutNode',
+				),
+				array(
+					'menu'		=> 'コピー',
+					'func'		=> 'copyNode',
+				),
+				array(
+					'menu'		=> '貼り付け',
+					'func'		=> 'pasteNode',
+				),
+				array(
 					'menu'		=> '削除',
 					'func'		=> 'deleteNode',
 					'confirm'	=>
@@ -167,6 +180,12 @@ $tree_config = array(
 							'func'		=> 'createNode',
 							'icon'		=> './images/folders/folder.png',
 							'param'		=> 'node_type=folder&node_class=folder',
+						),
+						array(
+							'menu'		=> 'ファイル',
+							'func'		=> 'createNode',
+							'icon'		=> './images/folders/file_icon.png',
+							'param'		=> 'node_type=file&node_class=leaf',
 						),
 					),
 					'submenu_width'	=> '120',

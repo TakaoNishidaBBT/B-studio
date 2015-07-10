@@ -5,7 +5,7 @@
  *
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
-	class category_property extends B_AdminModule {
+	class category2_property extends B_AdminModule {
 		function __construct() {
 			parent::__construct(__FILE__);
 
@@ -35,7 +35,7 @@
 
 		function getNodeInfo($node_id) {
 			$sql = "select * from %VIEW% where node_id='$node_id'";
-			$sql = str_replace('%VIEW%', B_DB_PREFIX . B_CATEGORY_VIEW, $sql);
+			$sql = str_replace('%VIEW%', B_DB_PREFIX . B_CATEGORY2_VIEW, $sql);
 			$rs = $this->db->query($sql);
 			$row = $this->db->fetch_assoc($rs);
 			return $row;
@@ -78,7 +78,7 @@
 			$file_data['update_user'] = $this->user_id;
 			$file_data['update_datetime'] = time();
 
-			$this->resource_node_table = new B_Table($this->db, B_CATEGORY_TABLE);
+			$this->resource_node_table = new B_Table($this->db, B_CATEGORY2_TABLE);
 			$ret = $this->resource_node_table->update($file_data);
 
 			if($ret) {

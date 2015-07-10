@@ -265,6 +265,29 @@
 			return true;
 		}
 
+		function _copy($destination, $recursive=false) {
+			if(file_exists($this->fullpath)) {
+				if(is_dir($this->fullpath)) {
+					$destination = B_Util::getPath($destination, $this->file_name);
+					if(!file_exists($destination)) {
+						mkdir($destination);
+						chmod($destination, 0777);
+					}
+				}
+				else {
+					copy($this->fullpath, B_Util::getPath($destination, $this->file_name));
+					chmod($this->fullpath, 0777);
+				}
+			}
+			if($recursive && is_array($this->node)) {
+				foreach(array_keys($this->node) as $key) {
+					$this->node[$key]->copy($destination, $recursive);
+				}
+			}
+
+			return true;
+		}
+
 		function move($source) {
 			if(file_exists($this->fullpath)) {
 				if(is_dir($this->fullpath)) {

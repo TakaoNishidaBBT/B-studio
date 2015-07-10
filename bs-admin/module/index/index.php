@@ -7,7 +7,7 @@
 */
 	class index_index extends B_AdminModule {
 		function __construct() {
-			if(B_ADMIN_SSL == 'ON' && !preg_match('/localhost/', HTTP_HOST)) {
+			if(B_ADMIN_SSL == 'ON' && !preg_match('/localhost/', B_HTTP_HOST)) {
 				if(empty($_SERVER['HTTPS']) === true || $_SERVER['HTTPS'] !== 'on') {
 					// httpsへリダイレクト
 					$path = B_SITE_ROOT_SSL . 'bs-admin/';

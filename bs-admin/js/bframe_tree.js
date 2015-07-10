@@ -213,18 +213,22 @@
 
 			case 67:	// ctrl+c
 				if(event.ctrlKey) {
-					if(selected_node.length()) {
-						copyNode();
+					if(pain) {
+						if(selected_node.length()) {
+							copyNode();
+						}
+						bframe.stopPropagation(event);
 					}
-					bframe.stopPropagation(event);
 				}
 				break;
 
 			case 86:	// ctrl+v
 				if(event.ctrlKey) {
-					selected_node.set(current_node.id());
-					pasteNode();
-					bframe.stopPropagation(event);
+					if(pain) {
+						selected_node.set(current_node.id());
+						pasteNode();
+						bframe.stopPropagation(event);
+					}
 				}
 				break;
 
