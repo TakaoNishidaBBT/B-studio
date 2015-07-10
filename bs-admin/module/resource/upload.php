@@ -336,7 +336,7 @@
 
 			// start transaction
 			$this->db->begin();
-			$ret = $node->insert($node_type, $node_class, $this->user_id, $new_node_id);
+			$ret = $node->insert($node_type, $node_class, $this->user_id, $new_node_id, $new_node_name);
 			if($ret) {
 				$node_id = $new_node_id;
 				$new_node = new B_Node($this->db

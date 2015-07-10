@@ -234,18 +234,26 @@
 			return true;
 		}
 
-		function copy($destination, $recursive=false) {
+		function copy($destination, &$new_node_name, $recursive=false) {
+			// if destination node is my child
+			if($this->isMyChild($destination)) {
+				$this->error_no = 1;
+				return false;
+			}
+
 			if(file_exists($this->fullpath)) {
 				if(is_dir($this->fullpath)) {
-					$destination = B_Util::getPath($destination, $this->file_name);
+					$new_node_name = $this->getNewNodeName($destination, $this->file_name, 'copy');
+					$destination = B_Util::getPath($destination, $new_node_name);
 					if(!file_exists($destination)) {
 						mkdir($destination);
 						chmod($destination, 0777);
 					}
 				}
 				else {
-					copy($this->fullpath, B_Util::getPath($destination, $this->file_name));
-					chmod($this->fullpath, 0777);
+					$new_node_name = $this->getNewNodeName($destination, $this->file_name, 'copy');
+					copy($this->fullpath, B_Util::getPath($destination, $new_node_name));
+					chmod(B_Util::getPath($destination, $new_node_name), 0777);
 				}
 			}
 			if($recursive && is_array($this->node)) {
@@ -257,8 +265,13 @@
 			return true;
 		}
 
-		function move($source, $destination) {
-			return rename($source, $destination);
+		function move($source) {
+			if(file_exists($this->fullpath)) {
+				if(is_dir($this->fullpath)) {
+					$info = pathinfo($source);
+					return rename($source, B_Util::getPath($this->fullpath, $info['basename']));
+				}
+			}
 		}
 
 		function remove() {
@@ -298,26 +311,68 @@
 			return $ret;
 		}
 
-		function createFile($node_name, $extension, &$new_node_id) {
+		function createFile($node_name, &$new_node_id) {
 			if(!is_dir($this->fullpath)) {
 				return false;
 			}
-$log = new B_Log(B_LOG_FILE);
-			$file = $node_name;
-$log->write('filepath:', B_Util::getPath($this->fullpath, $file) . '.' . $extension);
-			for($i=2, $file = $node_name; file_exists(B_Util::getPath($this->fullpath, $file) . '.' . $extension); $file = $node_name . $extend) {
-				$extend = '(' . $i++ . ')';
-$log->write('filepath:', $i, ':', B_Util::getPath($this->fullpath, $file));
-			}
-			$file = $file . '.' . $extension;
-			$file_name = B_Util::getPath($this->fullpath, $file);
+			$new_node_name = $this->getNewNodeName($this->fullpath, $node_name, 'insert');
+			$file_name = B_Util::getPath($this->fullpath, $new_node_name);
 			$fp = fopen($file_name, 'w');
 			fclose($fp);
 			chmod($file_name, 0666);
 
-			$new_node_id = B_Util::getPath($this->path, $file);
+			$new_node_id = B_Util::getPath($this->path, $new_node_name);
 
 			return true;
+		}
+
+		function getNewNodeName($dir, $default_name, $mode) {
+			$info = pathinfo($default_name);
+
+			for($i=2, $node_name = $info['filename'];; $node_name = $prefix . $info['filename'] . $extend) {
+				if($info['extension']) {
+					if(!file_exists(B_Util::getPath($dir, $node_name) . '.' . $info['extension'])) break;
+				}
+				else {
+					if(!file_exists(B_Util::getPath($dir, $node_name))) break;
+				}
+				switch($mode) {
+				case 'insert':
+					$extend = '(' . $i++ . ')';
+					break;
+
+				case 'copy':
+					if($prefix) {
+						$extend = '(' . $i++ . ')';
+					}
+					else {
+						$prefix.= 'copy_of_';
+					}
+					break;
+
+				case 'arias':
+					$prefix.= 'arias_of_';
+					break;
+				}
+			}
+			if($info['extension']) {
+				return $node_name . '.' . $info['extension'];
+			}
+			else {
+				return $node_name;
+			}
+		}
+
+		function isMyChild($path) {
+			$path_array = explode('/', $path);
+
+			for($i=0, $dir=$path; $i<count($path_array); $dir = dirname($dir), $i++) {
+				if($this->fullpath == $dir) {
+					return true;
+				}
+			}
+
+			return false;
 		}
 
 		function getMaxThumbnailNo() {
@@ -514,5 +569,9 @@ $log->write('filepath:', $i, ':', B_Util::getPath($this->fullpath, $file));
 					$data[$path] = '';
 				}
 			}
+		}
+
+		function getErrorNo() {
+			return $this->error_no;
 		}
 	}
