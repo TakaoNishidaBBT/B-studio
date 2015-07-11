@@ -178,14 +178,17 @@
 						$ret = $node->remove();
 						if($ret) {
 							$this->status = true;
-							$root = new B_FileNode($this->dir, 'root', null, null, 'all');
-							$this->refleshThumnailCache($root);
 						}
 						else {
 							$this->status = false;
 							$this->message = 'エラーが発生しました';
+							break;
 						}
 					}
+				}
+				if($this->status) {
+					$root = new B_FileNode($this->dir, 'root', null, null, 'all');
+					$this->refleshThumnailCache($root);
 				}
 			}
 
@@ -249,7 +252,8 @@
 		}
 
 		function refleshThumnailCache($root) {
-			$root->createthumbnail($data);
+			$max = $root->getMaxThumbnailNo();
+			$root->createthumbnail($data, $max);
 			$fp = fopen(B_FILE_INFO_THUMB, 'w+');
 	        fwrite($fp, serialize($data));
 			fclose($fp);
