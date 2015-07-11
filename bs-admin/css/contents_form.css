@@ -107,7 +107,7 @@ span.regist-button {
 }
 span.regist-button:hover {
 	background-color: #777;
-	border: 1px solid #7777
+	border: 1px solid #7777;
 	color: #fff;
 	text-shadow: 1px 1px #555;
 }

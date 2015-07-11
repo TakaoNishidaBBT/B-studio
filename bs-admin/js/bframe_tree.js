@@ -212,7 +212,7 @@
 				break;
 
 			case 67:	// ctrl+c
-				if(event.ctrlKey) {
+				if(event.ctrlKey || event.metaKey) {
 					if(pain) {
 						if(selected_node.length()) {
 							copyNode();
@@ -223,7 +223,7 @@
 				break;
 
 			case 86:	// ctrl+v
-				if(event.ctrlKey) {
+				if(event.ctrlKey || event.metaKey) {
 					if(pain) {
 						selected_node.set(current_node.id());
 						pasteNode();
@@ -1617,7 +1617,7 @@
 				else {
 					var e = event;
 				}
-				if(!e.ctrlKey && !e.shiftKey && !selected_node.exists(node_id)) {
+				if(!e.ctrlKey && !e.shiftKey && !e.metaKey && !selected_node.exists(node_id)) {
 					selectObject(node_id);
 				}
 
@@ -2440,7 +2440,7 @@
 			if(e.button == 2) return;
 
 			var node = getEventNode(event);
-			if(selected_node.id() && selected_node.place() == 'pain' && e.ctrlKey) {
+			if(selected_node.id() && selected_node.place() == 'pain' && (e.ctrlKey || e.metaKey)) {
 				addSelectedObject(node.id);
 			}
 			else if(selected_node.id() && selected_node.place() == 'pain' && e.shiftKey) {
