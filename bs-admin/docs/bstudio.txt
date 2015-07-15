@@ -158,6 +158,29 @@ line：14218
 		}
 	};
 
+9. ライン最初のタブの次に全角スペースがあった場合、invisibleオブジェクトを表示するとタブの数に全角スペースも含まれてしまう。
+	正規表現の\sには全角スペースが含まれるため（utf8の場合）
+	正規表現の適宜：	this.$indentGuideRe =  /\s\S| \t|\t |\s$/;
+
+
+    this.renderIndentGuide = function(stringBuilder, value) {
+		// 2015.07.15 updated by T.Nishida for multi byte space
+		var tmp = value.replace(/　/, 'X');	⇒　全角スペースを一時的に「X」に変換してsearchするように変更
+
+        var cols = tmp.search(this.$indentGuideRe);
+        if (cols <= 0)
+            return value;
+        if (value[0] == " ") {
+            cols -= cols % this.tabSize;
+            stringBuilder.push(lang.stringRepeat(this.$tabStrings[" "], cols/this.tabSize));
+            return value.substr(cols);
+        } else if (value[0] == "\t") {
+            stringBuilder.push(lang.stringRepeat(this.$tabStrings["\t"], cols));
+            return value.substr(cols);
+        }
+        return value;
+    };
+
 
 ■CKEditor
 
