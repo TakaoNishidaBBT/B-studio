@@ -14060,7 +14060,9 @@ var Text = function(parentEl) {
     };
 
     this.renderIndentGuide = function(stringBuilder, value) {
-        var cols = value.search(this.$indentGuideRe);
+		// 2015.07.15 updated by T.Nishida for multi byte space
+		var tmp = value.replace(/　/, 'X');	
+        var cols = tmp.search(this.$indentGuideRe);
         if (cols <= 0)
             return value;
         if (value[0] == " ") {
