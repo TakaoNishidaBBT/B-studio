@@ -309,7 +309,6 @@
 				$param['human_image_size'] = $size[0] . 'x' . $size[1];
 			}
 
-
 			$ret &= $node->updateNode($param, $this->user_id);
 
 			if($ret) {
