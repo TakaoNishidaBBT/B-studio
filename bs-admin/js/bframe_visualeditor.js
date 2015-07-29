@@ -118,10 +118,10 @@
 					height: h,
 			        on : {
 			            instanceReady : function( ev ) {
-							var tag_group1 = new Array('div', 'p', 'ul', 'ol', 'dl', 'dt', 'dd', 'li'
+							var tag_group1 = new Array('h1', 'h2', 'h3', 'h4', 'h5', 'div', 'p', 'ul', 'ol', 'dl', 'dt', 'dd', 'li'
 													, 'section', 'nav', 'article', 'aside', 'header', 'footer', 'figure', 'figcaption'
 													, 'embed', 'video', 'canvas', 'audio', 'source');
-							var tag_group2 = new Array('h1', 'h2', 'h3', 'h4', 'h5', 'span', 'a', 'img', 'td', 'time', 'mark');
+							var tag_group2 = new Array('span', 'a', 'img', 'td', 'time', 'mark');
 							var tag_group3 = new Array('tr');
 
 							for(var i=0; i<tag_group1.length; i++) {
@@ -178,10 +178,10 @@
 					height: h,
 			        on : {
 			            instanceReady : function( ev ) {
-							var tag_group1 = new Array('div', 'p', 'ul', 'ol', 'dl', 'dt', 'dd', 'li'
+							var tag_group1 = new Array('h1', 'h2', 'h3', 'h4', 'h5', 'div', 'p', 'ul', 'ol', 'dl', 'dt', 'dd', 'li'
 													, 'section', 'nav', 'article', 'aside', 'header', 'footer', 'figure', 'figcaption'
 													, 'embed', 'video', 'canvas', 'audio', 'source');
-							var tag_group2 = new Array('h1', 'h2', 'h3', 'h4', 'h5', 'span', 'a', 'img', 'td', 'time', 'mark');
+							var tag_group2 = new Array('span', 'a', 'img', 'td', 'time', 'mark');
 							var tag_group3 = new Array('tr');
 
 							for(var i=0; i<tag_group1.length; i++) {
