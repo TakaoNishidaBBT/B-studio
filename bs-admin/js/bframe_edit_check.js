@@ -14,7 +14,6 @@
 	// class bframe.editCheck
 	// 
 	// -------------------------------------------------------------------------
-
 	bframe.editCheck = function() {
 		var edit_flag = false;
 		var editing_obj;
@@ -28,6 +27,11 @@
 			setFunction('input');
 			setFunction('select');
 			setFunction('textarea');
+
+			var error_obj = document.getElementsByClassName('error-message');
+			if(error_obj.length) {
+				setEditFlag();
+			}
 		}
 
 		function caution(event) {
@@ -68,16 +72,9 @@
 		function setFunction(tag_name) {
 			var obj = document.getElementsByTagName(tag_name);
 
-			for(i=0 ; i < obj.length ; i++){
+			for(var i=0; i < obj.length; i++) {
+				if(bframe.checkClassName('no-check', obj[i])) continue;
 				bframe.addEventListner(obj[i], 'change', setEditFlag);
-			}
-		}
-
-		var p = document.getElementsByTagName('p');
-		for(var i in p) {
-			if(p[i].className == 'error-message') {
-				setEditFlag();
-				break;
 			}
 		}
 
@@ -86,7 +83,7 @@
 		}
 
 		this.removeCallBackFunction = function(func) {
-			for(var i=0 ; i<cb.length ; i++) {
+			for(var i=0; i<cb.length; i++) {
 				if(func == cb[i]) {
 					cb.splice(i, 1);
 				}
@@ -94,7 +91,7 @@
 		}
 
 		function editCheckExecuteCallBack() {
-			for(var i=0 ; i<cb.length ; i++) {
+			for(var i=0; i<cb.length; i++) {
 				func = cb[i];
 				func();
 			}
@@ -107,7 +104,7 @@
 		}
 
 		this.removeResetCallBackFunction = function(func) {
-			for(var i=0 ; i<rcb.length ; i++) {
+			for(var i=0; i<rcb.length; i++) {
 				if(func == rcb[i]) {
 					rcb.splice(i, 1);
 				}
@@ -115,7 +112,7 @@
 		}
 
 		function editCheckExecuteResetCallBack() {
-			for(var i=0 ; i<rcb.length ; i++) {
+			for(var i=0; i<rcb.length; i++) {
 				func = rcb[i];
 				func();
 			}
