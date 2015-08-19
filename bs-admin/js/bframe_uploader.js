@@ -102,7 +102,12 @@
 
 		function confirmResult() {
 			if(httpObj.readyState == 4 && httpObj.status == 200){
-				var response = eval('('+httpObj.responseText+')');
+				try {
+					var response = eval('('+httpObj.responseText+')');
+				}
+				catch(e) {
+					var response = {status: false, message: 'セッションが切れました' };
+				}
 
 				if(response.status) {
 					if(response.mode == 'confirm'){
