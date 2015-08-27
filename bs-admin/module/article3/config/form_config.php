@@ -146,23 +146,44 @@ $form_config = array(
 			),
 	    ),
 
-		// タグ
+		// keywords
 		array(
 			'error_group'	=> true,
 			'start_html'    => '<tr>',
 			'end_html'	    => '</tr>',
 			array(
-				'start_html'			=> '<th>',
-				'end_html'				=> '</th>',
-				'value'					=> 'タグ',
+				'start_html'	=> '<th>',
+				'end_html'		=> '</th>',
+				'value'			=> 'keywords',
 			),
 			array(
 				'start_html'    => '<td>',
 				'end_html'	    => '</td>',
 				array(
-					'name'					=> 'tag',
-					'class'					=> 'B_InputText',
-					'special_html'			=> 'class="textbox" size="120" maxlength="100"',
+					'name'				=> 'keywords',
+					'class'				=> 'B_InputText',
+					'special_html'		=> 'class="textbox" size="120" maxlength="100"',
+				),
+			),
+		),
+
+		// description
+		array(
+			'error_group'	=> true,
+			'start_html'    => '<tr>',
+			'end_html'	    => '</tr>',
+			array(
+				'start_html'	=> '<th>',
+				'end_html'		=> '</th>',
+				'value'			=> 'description',
+			),
+			array(
+				'start_html'    => '<td>',
+				'end_html'	    => '</td>',
+				array(
+					'name'				=> 'description',
+					'class'				=> 'B_TextArea',
+					'special_html'		=> 'class="textarea title ime_on" size="120" maxlength="100"',
 				),
 			),
 		),
@@ -399,7 +420,7 @@ $form_config = array(
 		// 詳細
 		array(
 			'error_group'	=> true,
-			'name'			=> 'description_row',
+			'name'			=> 'contents_row',
 			'start_html'    => '<tr>',
 			'end_html'	    => '</tr>',
 			array(
@@ -411,7 +432,7 @@ $form_config = array(
 				'start_html'    => '<td>',
 				'end_html'	    => '</td>',
 				array(
-					'name'			=> 'description',
+					'name'			=> 'contents',
 					'class'			=> 'B_TextArea',
 					'special_html'	=> 'class="textarea bframe_visualeditor" style="height:400px"',
 				),
