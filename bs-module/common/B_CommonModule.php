@@ -16,10 +16,9 @@
 		}
 
 		function showHtmlHeader() {
+			if($this->html_header) {
+				$this->html_header->setTitle(B_TITLE_PREFIX . $this->html_header->title);
+			}
 			echo $this->html_header->getHtml();
-		}
-
-		function setTitle($title) {
-			parent::setTitle(B_TITLE_PREFIX . $title);
 		}
 	}

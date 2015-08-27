@@ -87,7 +87,7 @@
 					$obj->display = 'none';
 				}
 				else {
-					$obj = $this->form->getElementByName('description_row');
+					$obj = $this->form->getElementByName('contents_row');
 					$obj->display = 'none';
 
 					if(!$this->post['external_link']) {
