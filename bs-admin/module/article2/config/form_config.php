@@ -64,7 +64,7 @@ $form_config = array(
 					'filter'			=> 'select',
 					'id'				=> 'schedule_calendar1',
 					'class'				=> 'B_Link',
-					'special_html'		=> 'class="bframe_calendar" title="カレンダー"',
+					'special_html'		=> 'class="bframe_calendar settings-button" title="カレンダー"',
 					'script'			=>
 					array(
 						'bframe_calendar'	=>

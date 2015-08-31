@@ -626,6 +626,7 @@ table.form td {
 }
 table.form td textarea.textarea {
 	width: 99%;
+	padding: 2px 5px;
 }
 
 /* page-locator */

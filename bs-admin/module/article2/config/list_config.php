@@ -53,17 +53,6 @@ array(
 			'param'			=> '&amp;module=' . $this->module . '&amp;page=list&amp;method=sort&amp;sort_key=category',
 		),
 		array(
-			'name'			=> 'tag',
-			'class'			=> 'B_Link',
-			'start_html'	=> '<th class="sortable" style="width:100px">',
-			'end_html'		=> '</th>',
-			'value'			=> 'タグ',
-			'link'			=> DISPATCH_URL,
-			'cond_html'		=> 'class="current-key"',
-			'sort_key'		=> 'tag',
-			'param'			=> '&amp;module=' . $this->module . '&amp;page=list&amp;method=sort&amp;sort_key=tag',
-		),
-		array(
 			'name'			=> 'title',
 			'class'			=> 'B_Link',
 			'start_html'	=> '<th class="sortable" style="width:260px">',
@@ -119,13 +108,6 @@ array(
 			'name'			=> 'category',
 			'start_html'	=> '<td class="left">',
 			'end_html'		=> '</td>',
-		),
-		array(
-			'name'			=> 'tag',
-			'start_html'	=> '<td class="left">',
-			'end_html'		=> '</td>',
-			'shorten_text'	=> '30',
-			'trimmarker'	=> '…',
 		),
 		array(
 			'name'			=> 'title',
