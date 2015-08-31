@@ -1,4 +1,4 @@
-<body spellcheck="false" style="opacity:0" class="fadein">
+<body spellcheck="false" onload="bframe.effect.fadeIn(document.body, 100, 0, 100, 50);" style="opacity:0">
 	<div class="bframe_adjustparent bframe_shortcut" id="contents_container">
 		<div id="contents">
 			<div class="main_container bframe_adjustwindow" param="margin:0" >
