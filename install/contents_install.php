@@ -20,6 +20,11 @@
 				$this->zip->extractTo(B_RESOURCE_EXTRACT_DIR);
 				$this->zip->close();
 
+				// remove all files in B_RESOURCE_DIR, B_UPLOAD_THUMBDIR and B_UPLOAD_DIR
+				$this->remove(B_RESOURCE_DIR);
+				$this->remove(B_UPLOAD_THUMBDIR);
+				$this->remove(B_UPLOAD_DIR);
+
 				$this->copy();
 				$this->import();
 
@@ -45,6 +50,11 @@
 			}
 
 			return true;
+		}
+
+		function remove($dir) {
+			$node = new B_FileNode($dir, 'root', null, null, 'all');
+			$node->removeChild();
 		}
 
 		function copy() {

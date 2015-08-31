@@ -48,7 +48,6 @@
 		modal_window.className = 'modal_window';
 		modal_window.style.display = 'none';
 		modal_window.style.position = 'fixed';
-		modal_window.style.opacity = 0;
 		modal_window.style.filter = 'alpha(opacity=0)';
 		document.body.appendChild(modal_window);
 
@@ -121,6 +120,12 @@
 		}
 
 		this.activate = function(target, window) {
+			// for PC only
+			if(bframe.getDevice() != 'pc') {
+				window.location.href = target.href;
+				return;
+			}
+
 			// arguments
 			for(var i=2 ; i<arguments.length; i++) {
 				var obj = window.document.getElementById(arguments[i]);
@@ -179,8 +184,8 @@
 
 			overlay.style.display = 'block';
 			modal_window.style.display = 'block';
-			modal_window.style.opacity = 0;
 			modal_window.style.filter = 'alpha(opacity=0)';
+			modal_window.className = 'modal_window pre-fadein';
 
 			//focus
 			modal_window.focus();
@@ -188,20 +193,27 @@
 		};
 
 		function onloadModalWindow() {
-			containerBody.contentDocument.onkeydown = onKeyDown;
+			if(containerBody.contentWindow.location == 'about:blank') return;
 
-			w = window_width_default;
-			h = window_height_default;
+			try {
+				containerBody.contentDocument.onkeydown = onKeyDown;
+			} catch(e) {}
 
-			if(!set_width) {
-				var w = containerBody.contentDocument.body.clientWidth;
-			}
-			if(!set_height) {
-				var h = containerBody.contentDocument.body.clientHeight;
-			}
-			setWindowSize(w, h);
+			try {
+				w = window_width_default;
+				h = window_height_default;
 
-			bframe.effect.fadeIn(modal_window, 0, 0, 100, 400);
+				if(!set_width) {
+					var w = containerBody.contentDocument.body.clientWidth;
+				}
+				if(!set_height) {
+					var h = containerBody.contentDocument.body.clientHeight;
+				}
+
+				setWindowSize(w, h);
+				modal_window.className = modal_window.className.replace(' pre-fadein', ' fadein');
+				modal_window.style.filter = 'alpha(opacity=100)';
+			} catch(e) {}
 		}
 
 		function setWindowSize(width, height) {
@@ -220,7 +232,9 @@
 
 			overlay.style.display = 'none';
 			modal_window.style.display = 'none';
-			modal_window.style.opacity = 0;
+			modal_window.style.filter = 'alpha(opacity=0)';
+			modal_window.className = modal_window.className.replace(' fadein', '');
+
 			containerBody.contentWindow.location.replace('about:blank');
 			window_status = false;
 
@@ -228,18 +242,20 @@
 		}
 
 		function resizeOverlay() {
+			if(window_status != 'activate') return;
+
+			var margin_w = 20;
+			var margin_h = 60;
+
 			var ow = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
 			var oh = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
 			overlay.style.width = ow + 'px';
 			overlay.style.height = oh + 'px';
-			var margin = 65;
 
-			if(window_status != 'activate') return;
-
-			w = Math.round(ow * 0.6) < window_width_default ? Math.round(ow * 0.6) : window_width_default;
-			h = Math.round(oh * 0.8) - margin < window_height_default ? Math.round(oh * 0.8) - margin : window_height_default;
-			modal_window.style.left = ((ow - w) / 2) + 'px';
-			modal_window.style.top = ((oh - h - margin) / 2) + 'px';
+			w = Math.round(ow * 0.8) - margin_w < window_width_default ? Math.round(ow * 0.8) - margin_w : window_width_default;
+			h = Math.round(oh * 0.8) - margin_h < window_height_default ? Math.round(oh * 0.8) - margin_h : window_height_default;
+			modal_window.style.left = ((ow - w - margin_w) / 2) + 'px';
+			modal_window.style.top = ((oh - h - margin_h) / 2) + 'px';
 			containerBody.style.width = w + 'px';
 			containerBody.style.height = h + 'px';
 		}
