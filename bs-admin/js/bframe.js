@@ -869,6 +869,17 @@
 		alert(properties);
 	}
 
+	bframe.getDevice = function() {
+		var ua = navigator.userAgent;
+		if(ua.indexOf('iPhone') > 0 || ua.indexOf('iPod') > 0 || ua.indexOf('Android') > 0 && ua.indexOf('Mobile') > 0){
+			return 'sp';
+		}else if(ua.indexOf('iPad') > 0 || ua.indexOf('Android') > 0){
+			return 'tab';
+		}else{
+			return 'pc';
+		}
+	}
+
 	var _isFF = false;
 	var _isIE = false;
 	var _isIE8 = false;

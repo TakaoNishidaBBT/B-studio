@@ -304,8 +304,8 @@
 				}
 			}
 			if(is_dir($this->fullpath)) {
+				usleep(1000);
 				rmdir($this->fullpath);
-
 			}
 			else if(file_exists($this->fullpath)) {
 				unlink($this->fullpath);
@@ -314,6 +314,15 @@
 				}
 			}
 
+			return true;
+		}
+
+		function removeChild() {
+			if(is_array($this->node)) {
+				foreach(array_keys($this->node) as $key) {
+					$this->node[$key]->remove();
+				}
+			}
 			return true;
 		}
 
