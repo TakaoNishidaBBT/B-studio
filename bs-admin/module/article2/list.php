@@ -158,7 +158,7 @@
 				$keyword = $this->db->real_escape_string_for_like($this->keyword);
 
 				$sql = "select article_id from %DB_PREFIX%article2
-						where title like '%KEYWORD%' or tag like '%KEYWORD%' or description like '%KEYWORD%'
+						where title like '%KEYWORD%' or description like '%KEYWORD%'
 						group by article_id";
 
 				$sql = str_replace('%DB_PREFIX%', B_DB_PREFIX, $sql);
