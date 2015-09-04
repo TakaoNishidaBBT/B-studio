@@ -23,7 +23,6 @@ $tree_config = array(
 			'root_url'		=> B_UPLOAD_FILES,
 			'thumb_path'	=> B_UPLOAD_URL,
 			'thumb_prefix'	=> B_THUMB_PREFIX,
-			'window'		=> $this->window,
 			'target'		=> $this->target,
 			'target_id'		=> $this->target_id,
 			'method'		=>
