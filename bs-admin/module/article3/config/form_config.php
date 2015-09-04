@@ -290,8 +290,6 @@ $form_config = array(
 									'method'		=> 'open',
 									'target'		=> 'title_img',
 									'target_id'		=> 'title_img_file',
-									'width'			=> '110',
-									'height'		=> '80',
 								),
 								'specialchars'	=> 'none',
 								'value'			=> '<img alt="画像選択" src="images/common/gear.png" />',

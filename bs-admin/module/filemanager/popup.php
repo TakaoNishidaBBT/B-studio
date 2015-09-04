@@ -13,14 +13,10 @@
 
 			$this->_setProperty('target', '');
 			$this->_setProperty('target_id', '');
-			$this->_setProperty('width', '');
-			$this->_setProperty('height', '');
 
 			require_once('./config/popup_tree_config.php');
-			$this->tree_config = $tree_config;
 			$this->tree = new B_FileNode($this->dir, '');
-
-			$this->tree->setConfig($this->tree_config);
+			$this->tree->setConfig($tree_config);
 
 			if(is_array($_FILES['upload'])) {
 				$response['CKEditorFuncNum'] = $this->request['CKEditorFuncNum'];
@@ -40,11 +36,8 @@
 
 		function open() {
 			// target
-			$this->_setRequest('window');
 			$this->_setRequest('target');
 			$this->_setRequest('target_id');
-			$this->_setRequest('width');
-			$this->_setRequest('height');
 		}
 
 		function view() {

@@ -175,6 +175,23 @@
 			return NULL;
 		}
 
+		function getElementsByName($name) {
+			$target = array();
+
+			if(isset($this->elements)) {
+				foreach($this->elements as $element) {
+					$t = $element->getElementsByName($name);
+					if(is_array($t)) {
+						$target = array_merge($target, $t);
+					}
+				}
+			}
+			if($name == $this->name) {
+				$target[] = $this;
+			}
+			return $target;
+		}
+
 		function getElementByFieldName($field_name, $name) {
 			if($name == $this->$field_name) {
 				return $this;
@@ -1902,8 +1919,8 @@
 					$this->setParamProperty($key2, $value2);
 				}
 			}
-			$this->element_start_html =	'<a href="' . $this->link . $this->param . '"';
-
+			$this->element_start_html =	'<a href="' .
+								$this->link . $this->param . '"';
 			if($this->id) {
 				$this->element_start_html.= ' id="' . $this->_gethtmlid() . '"';
 			}
@@ -2001,7 +2018,7 @@
 				}
 				$this->event = $html;
 			}
-			$this->param_exist = treu;
+			$this->param_exist = true;
 		}
 
 		function setParamProperty($key, $value) {
