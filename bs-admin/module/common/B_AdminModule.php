@@ -117,7 +117,7 @@
 
 			if($image_size[0] > $max_width) {
 				if($image_size[0] > $image_size[1]) {
-					$width = $max_widths;
+					$width = $max_width;
 					$height = $image_size[1] * $width / $image_size[0];
 				}
 				else {
