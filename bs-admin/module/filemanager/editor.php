@@ -51,7 +51,7 @@
 				if($obj) $obj->value = $update_datetime;
 
 				$obj = $this->tab_control->getElementByName('text_editor_index');
-				if($obj) $obj->value = $file_path;
+				if($obj) $obj->value = B_Util::getPath(B_SITE_BASE . B_UPLOAD_FILES, $this->request['node_id']);
 
 				$this->setTitle($info['basename']);
 			}
@@ -93,10 +93,11 @@
 
 			$this->html_header->appendProperty('css', '<link href="css/editor.css" type="text/css" rel="stylesheet" media="all" />');
 			$this->html_header->appendProperty('css', '<link href="css/texteditor.css" type="text/css" rel="stylesheet" media="all" />');
-			$this->html_header->appendProperty('script', '<script src="js/bframe_tab.js" type="text/javascript"></script>');
+			$this->html_header->appendProperty('css', '<link href="css/selectbox.css" type="text/css" rel="stylesheet" media="all" />');
 			$this->html_header->appendProperty('script', '<script src="js/bframe_edit_check.js" type="text/javascript"></script>');
 			$this->html_header->appendProperty('script', '<script src="js/bframe_effect.js" type="text/javascript"></script>');
 			$this->html_header->appendProperty('script', '<script src="js/bframe_texteditor.js" type="text/javascript"></script>');
+			$this->html_header->appendProperty('script', '<script src="js/bframe_selectbox.js" type="text/javascript"></script>');
 			$this->html_header->appendProperty('script', '<script src="js/ace/ace.js" type="text/javascript"></script>');
 			$this->html_header->appendProperty('script', '<script src="js/ace/ext-split.js" type="text/javascript"></script>');
 			$this->html_header->appendProperty('script', '<script src="js/ace/theme-twilight.js" type="text/javascript"></script>');

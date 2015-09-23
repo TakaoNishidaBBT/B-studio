@@ -40,40 +40,24 @@ ul.tabcontrol li {
 	background-color: #444;
 	overflow: hidden;
 }
+ul.tabcontrol li a:visited,
+ul.tabcontrol li a {
+	padding-left: 10px;
+	display: inline-block;
+	text-align: left;
+	color: #fff;
+	text-decoration: none;
+	font-size: 13px;
+}
 ul.tabcontrol li.filename {
 	min-width: 400px;
-}
-ul.tabcontrol li.selected {
+	padding-left: 10px;
+	line-height: 28px;
+	color: #fff;
 	background-color: #555;
 	border-top: 1px solid #777;
 	border-right: 1px solid #3a3a3a;
 	border-bottom: 1px solid #555;
-}
-ul.tabcontrol li:hover:not(:last-child, :nth-last-child(2)) {
-	background-color: #555;
-	border-top: 1px solid #777;
-	border-right: 1px solid #3a3a3a;
-}
-ul.tabcontrol li a:visited,
-ul.tabcontrol li a {
-	padding-left: 10px;
-	text-shadow: -1px -1px #111;
-	display: block;
-	text-align: left;
-	line-height: 28px;
-	color: #aaa;
-	text-decoration: none;
-}
-ul.tabcontrol li a:hover {
-	text-shadow: 1px 1px #333;
-	background-color: #555;
-	color: #fff;
-	text-decoration: none;
-}
-ul.tabcontrol li.selected a {
-	color: #fff;
-	text-shadow: -1px -1px #333;
-	font-size: 13px;
 }
 ul.tabcontrol li.encoding {
 	border: none;
@@ -84,6 +68,14 @@ ul.tabcontrol li.encoding {
 	text-align: left;
 	border-top: 1px solid #505050;
 	overflow: hidden;
+}
+ul.tabcontrol li.encoding a {
+	height: 23px;
+}
+ul.tabcontrol li.encoding a:hover {
+	background-color: #777;
+	color: #fff;
+	text-decoration: none;
 }
 ul.tabcontrol li.regist {
 	border: none;

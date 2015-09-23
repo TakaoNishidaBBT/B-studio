@@ -74,6 +74,7 @@
 
 		var property;
 		var ext_width = 0;
+		var opened;
 
 		var context_menu;
 		var context_menu_frame = window;
@@ -84,6 +85,7 @@
 
 		this.hidePullDownMenu = hidePullDownMenu;
 		this.reload = init;
+		bframe.addEventListner(target, 'mousedown', showContextMenu);
 		bframe.addEventListner(target, 'click', showContextMenu);
 
 		init();
@@ -97,7 +99,7 @@
 			response_wait = true;
 		}
 
-		function initResponse(){
+		function initResponse() {
 			var rel;
 
 			if(httpObj.readyState == 4 && httpObj.status == 200 && response_wait){
@@ -114,15 +116,15 @@
 		function setEventHandler() {
 			// set event handller
 			bframe.addEventListnerAllFrames(top, 'load', hidePullDownMenuAllFrames);
-			bframe.addEventListnerAllFrames(top, 'click', hidePullDownMenu);
+			bframe.addEventListnerAllFrames(top, 'mousedown', hidePullDownMenu);
 		}
 
 		function hidePullDownMenuAllFrames(event) {
-			bframe.addEventListnerAllFrames(top, 'click', hidePullDownMenu);
+			bframe.addEventListnerAllFrames(top, 'mousedown', hidePullDownMenu);
 			bframe.addEventListnerAllFrames(top, 'load', hidePullDownMenuAllFrames);
 		}
 
-		function setMark(){
+		function setMark() {
 			if(mark_span) return;
 			mark_span = document.createElement('span');
 			mark_span.style.fontSize = '11px';
@@ -131,7 +133,7 @@
 			mark_span.appendChild(mark_text);
 		}
 
-		function setContextMenu(){
+		function setContextMenu() {
 			context_menu = new bframe.contextMenu(2000);
 
 			if(property.context_menu_frame) {
@@ -158,18 +160,20 @@
 		}
 
 		function showContextMenu(event) {
+			bframe.stopPropagation(event);
+			if(opened) return false;
+
 			if(bframe.isObject(property)) {
 				menu_container.closeAll();
-
 				var position = bframe.getElementPosition(target);
 				position.left += context_menu_frame_offset.left;
 				position.top += context_menu_frame_offset.top+1;
 				context_menu.positionAbsolute(position);
 
 				context_menu.show();
+				opened = true;
 				bframe.addEventListner(document, 'mousewheel', bframe.cancelEvent);
 			}
-			bframe.stopPropagation(event);
 			return false;
 		}
 
@@ -177,6 +181,7 @@
 			if(document.detachEvent) {
 				document.detachEvent('onmousewheel', bframe.cancelEvent);
 			}
+			opened = false;
 			context_menu.hide();
 		}
 
@@ -186,5 +191,6 @@
 				var rel = bframe.getFrameByName(top, p[1]);
 				rel.location.href = p[0].replace(/&amp;/, '&');
 			}
+			menu_container.closeAll();
 		}
 	}

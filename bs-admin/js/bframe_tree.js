@@ -150,6 +150,9 @@
 			if(property.disp_change.selectedIndex) {
 				pain_disp_change_select.selectedIndex = property.disp_change.selectedIndex;
 			}
+			if(bframe.selectBoxContainer) {
+				bframeSelectBoxAdd();
+			}
 		}
 
 		function setEventHandler() {
