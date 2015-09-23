@@ -41,6 +41,7 @@
 		var mouse_position = {x:0, y:0};
 		var menu_position;
 		var close_timer;
+		var close_timer_value = 2000;
 
 		var _filter;
 
@@ -154,6 +155,7 @@
 						if(data[i].param) {
 							c.setParam(data[i].param);
 						}
+						tr.onmousedown = onMouseDown;
 						tr.onclick = c.func;
 					}
 				}
@@ -168,8 +170,16 @@
 			return element;
 		}
 
+		function onMouseDown(event) {
+			bframe.stopPropagation(event);
+		}
+
 		function clickSubmenuParent(event) {
 			bframe.stopPropagation(event);
+		}
+
+		this.setElementClassName = function(className) {
+			element.className = className;
 		}
 
 		this.disableElement = function(index) {
@@ -210,6 +220,14 @@
 			element.style.width = width;
 		}
 
+		this.getElementWidth = function() {
+			return element.style.width;
+		}
+
+		this.getOffsetWidth = function() {
+			return element.offsetWidth;
+		}
+
 		this.setWidth = function(width) {
 			element_width = width;
 		}
@@ -218,6 +236,10 @@
 			return element_width;
 		}
 
+		this.getRealWidth = function() {
+			return element_width > element.offsetWidth ? element_width :  element.offsetWidth;
+		}
+		
 		this.setOffsetHeight = function(height) {
 			offsetHeight = height;
 		}
@@ -252,6 +274,10 @@
 			if(select_func) {
 				select_func(row_index);
 			}
+		}
+
+		this.setCloseTimerValue = function(value) {
+			close_timer_value = value;
 		}
 
 		function onMouseOver(event){
@@ -332,11 +358,13 @@
 		}
 
 		this.setTimer = function(event) {
+			if(!close_timer_value) return;
+
 			if(parent_menu) {
 				parent_menu.setTimer();
 			}
 			else {
-				close_timer = setTimeout(self.hide, 2000);
+				close_timer = setTimeout(self.hide, close_timer_value);
 			}
 		}
 

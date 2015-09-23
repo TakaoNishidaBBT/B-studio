@@ -1,0 +1,81 @@
+@charset "UTF-8";
+
+a.selectbox,
+a:visited.selectbox,
+a:link.selectbox,
+a:active.selectbox {
+	display: inline-block;
+	margin: 0;
+	padding-left: 10px;
+	line-height: 24px;
+	background-color: #666;
+	border-top: 1px solid #666;
+	border-left: 1px solid #666;
+	border-right: 1px solid #666;
+	border-bottom: 1px solid #666;
+	color: #eee;
+	text-decoration: none;
+	text-shadow: -1px -1px #555;
+	cursor: pointer;
+	background: url(../images/common/select_down.png) center right 4px no-repeat #666;
+}
+a.opened {
+	background-image: url(../images/common/select_up.png);
+	background-color: #777;
+	border-bottom: 1px solid #777;
+}
+a:hover.selectbox {
+	background-color: #777;
+	border-top: 1px solid #777;
+	border-left: 1px solid #777;
+	border-right: 1px solid #777;
+	border-bottom: 1px solid #777;
+	color: #fff;
+	text-shadow: 1px 1px #555;
+	-webkit-user-select: none;
+}
+a.selectbox img {
+	vertical-align: -4px;
+	margin-right: 6px;
+}
+
+table.selectbox {
+	width: 100%;
+	margin: 0;
+	padding: 3px 4px;
+	background-color: #777;
+	color: #fff;
+	border-collapse: separate;
+	border-spacing: 0;
+	border: 1px solid #777;
+}
+table.selectbox td {
+	padding: 2px 6px;
+	line-height: 18px;
+	height: 22px;
+	border-top: 1px solid #777;
+	border-bottom: 1px solid #777;
+	font-weight: normal;
+	color: #fff;
+	vertical-align: middle;
+}
+table.selectbox td.selected {
+	background-color: #666;
+	color: #fff;
+}
+table.selectbox td.disabled {
+	color: #ccc;
+}
+table.selectbox td.disabled img {
+	display: none;
+}
+table.selectbox td img {
+	margin: 0 2px 0 0;
+	vertical-align: middle;
+	vertical-align: -30%;
+}
+table.selectbox td span {
+	margin: 0;
+	padding: 0 6px;
+	vertical-align: middle;
+}

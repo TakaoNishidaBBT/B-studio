@@ -32,10 +32,8 @@ $tab_control_config = array(
 	'end_html'		=> '</ul>',
 	array(
 		'name'				=> 'text_editor_index',
-		'class'				=> 'B_Link',
 		'start_html'		=> '<li class="filename">',
 		'end_html'			=> '</li>',
-		'link'				=> 'text_editor',
 		'special_html'		=> 'class="bframe_tab"',
 	),
 	array(
@@ -44,6 +42,7 @@ $tab_control_config = array(
 		'name'				=> 'encoding',
 		'class'				=> 'B_SelectBox',
 		'data_set'			=> 'encoding',
+		'special_html'		=> 'class="bframe_selectbox',
 	),
 	array(
 		'start_html'		=> '<li class="regist">',

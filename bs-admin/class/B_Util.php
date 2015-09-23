@@ -152,7 +152,7 @@
 			return $ret;
 		}
 
-		function human_filesize($bytes, $scale=0) {
+		public static function human_filesize($bytes, $scale=0) {
 			$factor_array = array('B' => 0, 'K' => 1, 'M' => 2, 'G' => 3, 'T' => 4, 'P' => 5);
 			if($scale) {
 				$unit = $factor_array[$scale];

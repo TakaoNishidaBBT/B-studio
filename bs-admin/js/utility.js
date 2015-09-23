@@ -123,6 +123,7 @@
 			else {
 				obj[i].value = '';
 			}
+			bframe.fireEvent(obj[i], 'change');
 		}
 	}
 
