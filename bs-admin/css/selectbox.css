@@ -57,10 +57,13 @@ table.selectbox td {
 	border-bottom: 1px solid #777;
 	font-weight: normal;
 	color: #fff;
+	background: url(../images/common/popup_menu_back_gray.png) repeat-x;
 	vertical-align: middle;
 }
 table.selectbox td.selected {
-	background-color: #666;
+	background-position: 0 -30px;
+	border-top: 1px solid #28abfb;
+	border-bottom: 1px solid #208ed8;
 	color: #fff;
 }
 table.selectbox td.disabled {
