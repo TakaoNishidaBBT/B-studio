@@ -90,6 +90,9 @@ div.pull_down_menu a:visited {
 	text-align: center;
 	line-height: 36px;
 }
+div.pull_down_menu a:hover {
+	text-shadow: -1px -1px #006699;
+}
 div.pull_down_menu ul li.title {
 	width: 90px;
 }

@@ -87,6 +87,7 @@
 				element.rows[i].onmouseover = onMouseOver;
 				element.rows[i].onmousemove = onMouseOver;
 				element.rows[i].onclick = onClickFunc;
+				element.rows[i].onmouseup = onClickFunc;
 			}
 		}
 
@@ -157,6 +158,7 @@
 						}
 						tr.onmousedown = onMouseDown;
 						tr.onclick = c.func;
+						tr.onmouseup = c.func;
 					}
 				}
 				disabled_index[data[i].func] = i;
