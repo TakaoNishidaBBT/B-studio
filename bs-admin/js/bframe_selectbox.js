@@ -102,6 +102,7 @@
 			// set event handller
 			bframe.addEventListnerAllFrames(top, 'load', hidePullDownMenuAllFrames);
 			bframe.addEventListnerAllFrames(top, 'mousedown', hidePullDownMenu);
+			bframe.addEventListnerAllFrames(top, 'keydown', keydown);
 		}
 
 		function hidePullDownMenuAllFrames(event) {
@@ -158,6 +159,7 @@
 
 		function onblur(event) {
 			focused = false;
+			if(opened) hidePullDownMenu();
 		}
 
 		function onchange(event) {
@@ -177,8 +179,8 @@
 			position.left += context_menu_frame_offset.left;
 			position.top += context_menu_frame_offset.top+1;
 			context_menu.positionAbsolute(position);
-
 			context_menu.show();
+			context_menu.select(target.selectedIndex);
 			bframe.addEventListner(document, 'mousewheel', bframe.cancelEvent);
 			selectbox.className+= ' opened';
 			opened = true;
@@ -193,6 +195,48 @@
 			context_menu.hide();
 			selectbox.className = selectbox.className.replace(' opened', '');
 			opened = false;
+		}
+
+		function keydown(event) {
+			if(!focused) return;
+
+			if(window.event) {
+				var keycode = window.event.keyCode;
+			}
+			else {
+				var keycode = event.keyCode;
+			}
+
+			switch(keycode) {
+			case 13: //enter
+				if(opened) hidePullDownMenu();
+				return;
+
+			case 38: //Å™
+				var length = context_menu.getLength();
+				var index = context_menu.getRowIndex();
+				if(index <= 0) return;
+				index--;
+				context_menu.select(index);
+				target.options[index].selected = 'selected';
+				selectbox.innerHTML = target.options[target.selectedIndex].text;
+				bframe.fireEvent(target, 'change');
+
+				break;
+
+			case 40: //Å´
+				var length = context_menu.getLength();
+				var index = context_menu.getRowIndex();
+				if(index < 0) index = 0;
+				index++;
+				if(index >= length) return;
+				context_menu.select(index);
+				target.options[index].selected = 'selected';
+				selectbox.innerHTML = target.options[target.selectedIndex].text;
+				bframe.fireEvent(target, 'change');
+
+				break;
+			}
 		}
 
 		init();
