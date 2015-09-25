@@ -70,6 +70,7 @@
 			$this->contents_node = $this->getContentsNode($url_array);
 
 			if(!$this->contents_node) {
+				unset($this->breadcrumbs);		// unset bread crumbs
 				$url_array = explode('/', 'notfound.html');
 				$this->contents_node = $this->getContentsNode($url_array);
 				$this->http_status = '404';
@@ -113,6 +114,10 @@
 		}
 
 		function getContentsNode($url, $node='', $level=0) {
+
+			// create bread crumbs
+			$this->createBreadCrumbs($node, $level);
+
 			if(count($url)) {
 				if($node && $node['node_type'] == 'page') {
 					// parmalink
@@ -124,10 +129,11 @@
 			}
 			else {
 				if($node['node_type'] != 'folder') {
+					// page found
 					return $node;
 				}
 				else {
-					// redirect
+					// directory and index.html is not exists
 					$path = B_CURRENT_ROOT . $this->url . '/';
 					header("Location:$path");
 					exit;
@@ -157,9 +163,6 @@
 			if(!$row) {
 				return;
 			}
-
-			// create bread crumb
-			$this->createBreadCrumbs($node, $level);
 
 			return $this->getContentsNode($url, $row, $level+1);
 		}
@@ -199,7 +202,7 @@
 			$rs = $this->db->query($sql);
 			$row = $this->db->fetch_assoc($rs);
 
-			$this->breadcrumbs[$level]['value'] = $row['breadcrumbs_name'];
+			$this->breadcrumbs[$level]['value'] = $row['breadcrumbs'];
 
 			if($level == 0) {
 				$this->breadcrumbs[$level]['url'] = B_CURRENT_ROOT;
