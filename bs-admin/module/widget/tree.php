@@ -122,7 +122,7 @@
 
 			// start transaction
 			$this->db->begin();
-			$ret = $node->insert($this->request['node_type'], $this->request['node_class'], $this->user_id, $new_node_id);
+			$ret = $node->insert($this->request['node_type'], $this->request['node_class'], $this->user_id, $new_node_id, $new_node_name);
 			if($ret) {
 				$this->db->commit();
 				$this->status = true;
