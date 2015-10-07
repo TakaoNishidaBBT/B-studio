@@ -160,7 +160,7 @@
 
 			// set event handller
 			bframe.addEventListnerAllFrames(top, 'load', hideContextMenuAllFrames);
-			bframe.addEventListnerAllFrames(top, 'click', hideContextMenu);
+			bframe.addEventListnerAllFrames(top, 'mouseup', hideContextMenu);
 			bframe.addEventListnerAllFrames(top, 'mouseup', drag_control.onMouseUp);
 			bframe.addEventListnerAllFrames(top, 'mousedown', saveName);
 			bframe.addEventListnerAllFrames(top, 'keydown', keydown);
@@ -1188,18 +1188,21 @@
 		}
 
 		function download() {
-			var id;
+			var  param='';
 
-			if(id = selected_node.id()) {
-				iframe = document.getElementById('download_iframe');
-				if(!iframe) {
-					var iframe = document.createElement('iframe');
-					iframe.id = 'download_iframe';
-					iframe.name = 'download_iframe';
-					document.body.appendChild(iframe);
-				}
-				download_iframe.location.href = property.relation.download.url+'&node_id='+encodeURIComponent(id.substr(1));
+			if(!selected_node.length()) return;
+
+			for(var i=0; i < selected_node.length(); i++) {
+				param+= '&download_node_id[' + i + ']='+encodeURIComponent(selected_node.id(i).substr(1));
 			}
+			iframe = document.getElementById('download_iframe');
+			if(!iframe) {
+				var iframe = document.createElement('iframe');
+				iframe.id = 'download_iframe';
+				iframe.name = 'download_iframe';
+				document.body.appendChild(iframe);
+			}
+			download_iframe.location.href = property.relation.download.url+param;
 		}
 		this.download = download;
 

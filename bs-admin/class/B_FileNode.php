@@ -585,21 +585,23 @@
 			}
 		}
 
-		function serializeForDownload(&$data) {
+		function serializeForDownload(&$data, $path='') {
+			if($path) $path.= '/';
+			$mypath = $path . $this->file_name;
 			if(is_array($this->node)) {
 				foreach(array_keys($this->node) as $key) {
-					$this->node[$key]->serializeForDownload($data);
+					$this->node[$key]->serializeForDownload($data, $mypath);
 				}
 			}
-			else if($this->parent) {
+			else {
 				if(substr($this->path, 0, 1) == '/') {
 					$path = substr($this->path, 1);
 				}
 				if($this->node_type != 'folder' && $this->node_type != 'root') {
-					$data[$path] = $this->fullpath;
+					$data[$mypath] = $this->fullpath;
 				}
 				else {
-					$data[$path] = '';
+					$data[$mypath] = '';
 				}
 			}
 		}

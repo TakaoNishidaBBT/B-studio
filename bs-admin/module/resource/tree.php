@@ -40,7 +40,6 @@
 
 			for($id = $node_id; $id && $id != 'root'; $id = $row['parent_node']) {
 				$this->session['open_nodes'][$id] = true;
-
 				$sql = str_replace('%NODE_ID%', $id, $sql_org);
 				$rs = $this->db->query($sql);
 				$row = $this->db->fetch_assoc($rs);
@@ -490,61 +489,21 @@
 		}
 
 		function download() {
-			if($this->request['node_id'] && $this->request['node_id'] != 'null') {
-				$node = new B_Node($this->db
-								, B_RESOURCE_NODE_TABLE
-								, B_WORKING_RESOURCE_NODE_VIEW
-								, $this->version['working_version_id']
-								, $this->version['revision_id']
-								, $this->request['node_id']
-								, null
-								, 'all'
-								, null);
-
-				if($node->node_type == 'folder' || $this->request['node_id'] == 'root') {
-					if(!class_exists('ZipArchive')) exit;
-
-					$zip = new ZipArchive();
-					if($this->request['node_id'] == 'root') {
-						$file_name = 'root.zip';
-					}
-					else {
-						$file_name = $node->node_name . '.zip';
-					}
-
-					$file_path = B_DOWNLOAD_DIR . $this->user_id . time() . $file_name;
-
-					if(!$zip->open($file_path, ZipArchive::CREATE)) {
-						exit;
-					}
-
-					$node->serializeForDownload($data);
-					foreach($data as $key => $value) {
-						if($value) {
-							$file = B_RESOURCE_DIR . $value;
-							$zip->addFile($file, $key);
-						}
-						else {
-							$zip->addEmptyDir($key);
-						}
-					}
-
-					$zip->close();
-
-					// ダウンロード
-					header('Pragma: cache;');
-					header('Cache-Control: public');
-					header('Content-type: application/x-zip-dummy-content-type');
-					header('Content-Disposition: attachment; filename=' . $file_name);
-					ob_end_clean();
-					readfile($file_path);
-
-					// 削除
-					unlink($file_path);
+			if($this->request['download_node_id'] && $this->request['download_node_id'] != 'null') {
+				foreach($this->request['download_node_id'] as $node_id) {
+					$nodes[] = new B_Node($this->db
+									, B_RESOURCE_NODE_TABLE
+									, B_WORKING_RESOURCE_NODE_VIEW
+									, $this->version['working_version_id']
+									, $this->version['revision_id']
+									, $node_id
+									, null
+									, 'all'
+									, null);
 				}
-				else {
-					$info = pathinfo($node->node_name);
-					$file_path = B_RESOURCE_DIR . $node->contents_id . '.' . $info['extension'];
+				if(count($nodes) == 1 && $nodes[0]->node_type == 'file') {
+					$info = pathinfo($nodes[0]->node_name);
+					$file_path = B_RESOURCE_DIR . $nodes[0]->contents_id . '.' . $info['extension'];
 
 					// ダウンロード
 					header('Pragma: cache;');
@@ -567,9 +526,57 @@
 						header('Content-Type: image/' . strtolower($info['extension']));
 						break;
 					}
-					header('Content-Disposition: attachment; filename=' . $node->node_name);
+					header('Content-Disposition: attachment; filename=' . $nodes[0]->node_name);
 					ob_end_clean();
 					readfile($file_path);
+				}
+				else {
+					if(!class_exists('ZipArchive')) exit;
+
+					$zip = new ZipArchive();
+
+					if(count($nodes) == 1) {
+						if($this->request['download_node_id'][0] == 'root') {
+							$file_name = 'root.zip';
+						}
+						else {
+							$file_name = $nodes[0]->node_name . '.zip';
+						}
+					}
+					else {
+						$file_name = 'resources.zip';
+					}
+
+					$file_path = B_DOWNLOAD_DIR . $this->user_id . time() . $file_name;
+
+					if(!$zip->open($file_path, ZipArchive::CREATE)) {
+						exit;
+					}
+
+					foreach($nodes as $node) {
+						$node->serializeForDownload($data);
+						foreach($data as $key => $value) {
+							if($value) {
+								$file = B_RESOURCE_DIR . $value;
+								$zip->addFile($file, $key);
+							}
+							else {
+								$zip->addEmptyDir($key);
+							}
+						}
+					}
+					$zip->close();
+
+					// ダウンロード
+					header('Pragma: cache;');
+					header('Cache-Control: public');
+					header('Content-type: application/x-zip-dummy-content-type');
+					header('Content-Disposition: attachment; filename=' . $file_name);
+					ob_end_clean();
+					readfile($file_path);
+
+					// 削除
+					unlink($file_path);
 				}
 			}
 

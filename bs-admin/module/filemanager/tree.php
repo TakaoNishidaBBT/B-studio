@@ -260,54 +260,16 @@
 		}
 
 		function download() {
-			if($this->request['node_id'] && $this->request['node_id'] != 'null') {
-				$node = new B_FileNode($this->dir, $this->request['node_id'], null, null, 'all');
-				if($node->node_type == 'folder' || $node->node_type == 'root') {
-					if(!class_exists('ZipArchive')) exit;
-
-					$zip = new ZipArchive();
-					if($this->request['node_id'] == 'root') {
-						$file_name = 'root.zip';
-					}
-					else {
-						$file_name = $node->file_name . '.zip';
-					}
-
-					$file_path = B_DOWNLOAD_DIR . $this->user_id . time() . $file_name;
-
-					if(!$zip->open($file_path, ZipArchive::CREATE)) {
-						exit;
-					}
-
-					$node->serializeForDownload($data);
-					foreach($data as $key => $value) {
-						if($value) {
-							$zip->addFile($value, $key);
-						}
-						else {
-							$zip->addEmptyDir($key);
-						}
-					}
-
-					$zip->close();
-
-					// ダウンロード
-					header("Pragma: cache;");
-					header("Cache-Control: public");
-					header('Content-type: application/x-zip-dummy-content-type');
-					header('Content-Disposition: attachment; filename=' . $file_name);
-					ob_end_clean();
-					readfile($file_path);
-
-					// 削除
-					unlink($file_path);
+			if($this->request['download_node_id'] && $this->request['download_node_id'] != 'null') {
+				foreach($this->request['download_node_id'] as $node_id) {
+					$nodes[] = new B_FileNode($this->dir, $node_id, null, null, 'all');
 				}
-				else {
-					$info = B_Util::pathinfo($node->file_name);
+				if(count($nodes) == 1 && $nodes[0]->node_type == 'file') {
+					$info = B_Util::pathinfo($nodes[0]->file_name);
 
 					// ダウンロード
-					header("Pragma: cache;");
-					header("Cache-Control: public");
+					header('Pragma: cache;');
+					header('Cache-Control: public');
 
 					switch(strtolower($info['extension'])) {
 					case 'swf':
@@ -326,9 +288,55 @@
 						header('Content-Type: image/' . strtolower($info['extension']));
 						break;
 					}
-					header('Content-Disposition: attachment; filename=' . $node->file_name);
+					header('Content-Disposition: attachment; filename=' . $nodes[0]->file_name);
 					ob_end_clean();
-					readfile($node->fullpath);
+					readfile($nodes[0]->fullpath);
+				}
+				else {
+					if(!class_exists('ZipArchive')) exit;
+
+					$zip = new ZipArchive();
+					if(count($nodes) == 1) {
+						if($this->request['download_node_id'][0] == 'root') {
+							$file_name = 'root.zip';
+						}
+						else {
+							$file_name = $node->file_name . '.zip';
+						}
+					}
+					else {
+						$file_name = 'files.zip';
+					}
+
+					$file_path = B_DOWNLOAD_DIR . $this->user_id . time() . $file_name;
+
+					if(!$zip->open($file_path, ZipArchive::CREATE)) {
+						exit;
+					}
+
+					foreach($nodes as $node) {
+						$node->serializeForDownload($data);
+						foreach($data as $key => $value) {
+							if($value) {
+								$zip->addFile($value, $key);
+							}
+							else {
+								$zip->addEmptyDir($key);
+							}
+						}
+					}
+					$zip->close();
+
+					// ダウンロード
+					header('Pragma: cache;');
+					header('Cache-Control: public');
+					header('Content-type: application/x-zip-dummy-content-type');
+					header('Content-Disposition: attachment; filename=' . $file_name);
+					ob_end_clean();
+					readfile($file_path);
+
+					// 削除
+					unlink($file_path);
 				}
 			}
 

@@ -16,7 +16,7 @@
 
 			$this->html_header->appendProperty('css', '<link href="css/contents.css" type="text/css" rel="stylesheet" media="all" />');
 			$this->html_header->appendProperty('script', '<script src="js/bframe_splitter.js" type="text/javascript"></script>');
-			$this->html_header->appendProperty('script','<script src="js/bframe_effect.js" type="text/javascript"></script>');
+			$this->html_header->appendProperty('script', '<script src="js/bframe_effect.js" type="text/javascript"></script>');
 
 			// HTMLヘッダー出力
 			$this->showHtmlHeader();

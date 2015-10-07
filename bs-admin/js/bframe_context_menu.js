@@ -33,6 +33,8 @@
 		var confirm_message_index = new Array();
 		var confirm_message = new Array();
 
+		var event_mode = 'normal';
+
 		var max_height;
 		var element_width = 100;
 		var offsetHeight = 0;
@@ -86,8 +88,7 @@
 			for(i=0 ; i<element.rows.length ; i++) {
 				element.rows[i].onmouseover = onMouseOver;
 				element.rows[i].onmousemove = onMouseOver;
-				element.rows[i].onclick = onClickFunc;
-				element.rows[i].onmouseup = onClickFunc;
+				element.rows[i].onmouseup = onMouseUpFunc;
 			}
 		}
 
@@ -157,7 +158,6 @@
 							c.setParam(data[i].param);
 						}
 						tr.onmousedown = onMouseDown;
-						tr.onclick = c.func;
 						tr.onmouseup = c.func;
 					}
 				}
@@ -178,6 +178,10 @@
 
 		function clickSubmenuParent(event) {
 			bframe.stopPropagation(event);
+		}
+
+		this.setEventMode = function(mode) {
+			event_mode = mode;
 		}
 
 		this.setElementClassName = function(className) {
@@ -389,7 +393,7 @@
 			return event;
 		}
 
-		function onClickFunc(event) {
+		function onMouseUpFunc(event) {
 			if(onclick_func) {
 				if(window.event) {
 					var	obj = window.event.srcElement;
