@@ -180,10 +180,6 @@
 			bframe.stopPropagation(event);
 		}
 
-		this.setEventMode = function(mode) {
-			event_mode = mode;
-		}
-
 		this.setElementClassName = function(className) {
 			element.className = className;
 		}
