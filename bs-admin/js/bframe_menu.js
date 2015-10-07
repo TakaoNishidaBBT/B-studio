@@ -160,6 +160,7 @@
 		}
 
 		function showContextMenu(event) {
+			if(bframe.getButton(event) != 'L') return;
 			bframe.stopPropagation(event);
 			if(opened) return false;
 

@@ -810,6 +810,12 @@
 			foreach($this->pager['param'] as $key => $value) {
 				$this->setParam($param, $key, $value);
 			}
+			if($param) {
+				$connector = '&';
+			}
+			else {
+				$connector = '?';
+			}
 
 			if($this->page_no == 1) {
 				$html.= $disp_image['top_image']['start_html'];
@@ -822,13 +828,13 @@
 			}
 			else {
 				$html.= $disp_image['top_image']['start_html'];
-				$html.= '<a href="' . $this->pager['link'] . $param . '&page_no=1">';
+				$html.= '<a href="' . $this->pager['link'] . $param . $connector . 'page_no=1">';
 				$html.= $disp_image['top_image']['value'];
 				$html.= '</a>';
 				$html.= $disp_image['top_image']['end_html'];
 
 				$html.= $disp_image['prev_image']['start_html'];
-				$html.= '<a href="' . $this->pager['link'] . $param . '&page_no=' . ($this->page_no - 1) . '">';
+				$html.= '<a href="' . $this->pager['link'] . $param . $connector . 'page_no=' . ($this->page_no - 1) . '">';
 				$html.= $disp_image['prev_image']['value'];
 				$html.= '</a> ' . "\n";
 				$html.= $disp_image['prev_image']['end_html'];
@@ -856,20 +862,20 @@
 				}
 				else {
 					$html.= $disp_image['other_page']['start_html'];
-					$html.= '<a href="' . $this->pager['link'] . $param . '&page_no=' . ($i + $start_page) . '">'. ($i + $start_page) . '</a>';
+					$html.= '<a href="' . $this->pager['link'] . $param . $connector . 'page_no=' . ($i + $start_page) . '">'. ($i + $start_page) . '</a>';
 					$html.= $disp_image['other_page']['end_html'];
 				}
 			}
 
 			if($this->page_no < $total_page_cnt) {
 				$html.= $disp_image['next_image']['start_html'];
-				$html.= '<a href="' . $this->pager['link'] . $param . '&page_no=' . ($this->page_no + 1) . '">';
+				$html.= '<a href="' . $this->pager['link'] . $param . $connector . 'page_no=' . ($this->page_no + 1) . '">';
 				$html.= $disp_image['next_image']['value'];
 				$html.= '</a>';
 				$html.= $disp_image['next_image']['end_html'];
 
 				$html.= $disp_image['last_image']['start_html'];
-				$html.= '<a href="' . $this->pager['link'] . $param . '&page_no=' . $total_page_cnt . '">';
+				$html.= '<a href="' . $this->pager['link'] . $param . $connector .'page_no=' . $total_page_cnt . '">';
 				$html.= $disp_image['last_image']['value'];
 				$html.= '</a>';
 				$html.= $disp_image['last_image']['end_html'];
