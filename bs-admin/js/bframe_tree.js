@@ -160,7 +160,7 @@
 
 			// set event handller
 			bframe.addEventListnerAllFrames(top, 'load', hideContextMenuAllFrames);
-			bframe.addEventListnerAllFrames(top, 'mouseup', hideContextMenu);
+			bframe.addEventListnerAllFrames(top, 'click', hideContextMenu);
 			bframe.addEventListnerAllFrames(top, 'mouseup', drag_control.onMouseUp);
 			bframe.addEventListnerAllFrames(top, 'mousedown', saveName);
 			bframe.addEventListnerAllFrames(top, 'keydown', keydown);
