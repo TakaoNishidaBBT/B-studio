@@ -1,15 +1,15 @@
-��module/editor
+■module/editor
  function regist
 
- �Z�[�u����O�Ƀo�[�W�������`�F�b�N���A�ς���Ă���ꍇ�̓R���e���cID���X�V����B
-�@updateNode�t�@���N�V�����ōs���B
-�@�o�[�W�����폜���������ꍇ�A���t�@�C�������݂���\�������邪���̏ꍇ�́u���ꂩ���X�V���Ă���v�_�C�A���O���\������遨���傤���Ȃ��B
+ セーブする前にバージョンをチェックし、変わっている場合はコンテンツIDを更新する。
+　updateNodeファンクションで行う。
+　バージョン削除があった場合、旧ファイルが存在する可能性があるがその場合は「だれかが更新している」ダイアログが表示される→しょうがない。
 
-��module/resource
+■module/resource
  function saveName
 
- �t�@�C������ύX�����ꍇ�A�ʏ�̓R���e���cID�͕ύX���Ȃ��i�摜�t�@�C���̓o�[�W�����Ԃŋ��L�j
-�@�A���A�g���q��ς����ꍇ�̓t�@�C���̊g���q�������ɕύX����̂Ńo�[�W����������Ă���ꍇ�́A�ʃt�@�C�����쐬���R���e���cID��ύX����B
-�@�T���l�C���t�@�C���������ɍX�V����B
+ ファイル名を変更した場合、通常はコンテンツIDは変更しない（画像ファイルはバージョン間で共有）
+　但し、拡張子を変えた場合はファイルの拡張子も同時に変更するのでバージョンが違っている場合は、別ファイルを作成しコンテンツIDを変更する。
+　サムネイルファイルも同時に更新する。
 
 

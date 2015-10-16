@@ -81,7 +81,26 @@ line：14218
 
 
 8. 日本語入力部分を最新にアップデート　かつfirefoxで01の記号が表示される件を修正（0x01はIEで必要である模様）
+ 　FireFoxがアップデートされたため再修正
 
+3509行目
+// 2015.10.16 updated T.Nishida　FireFoxのみPLACEHOLDERは無しにする
+	if(useragent.isMozilla) {
+	    var PLACEHOLDER = "";
+	}
+	else {
+	    var PLACEHOLDER = "\x01\x01";
+	}
+
+3584行目
+    var isAllSelected = function(text) {
+// 2015.10.16 updated T.Nishida　PLACEHOLDERが空だと全選択になってしまう件を修正（FireFoxのみに影響）
+		if(!text.value.length) return false;
+
+        return text.selectionStart === 0 && text.selectionEnd === text.value.length;
+    };
+
+3798行目
 	var onCompositionStart = function(e) {
 		if (inComposition || !host.onCompositionStart || host.$readOnly) return;
 		inComposition = {};
@@ -102,13 +121,14 @@ line：14218
 	var onCompositionUpdate = function() {
 		if (!inComposition || !host.onCompositionUpdate || host.$readOnly) return;
 // 2014/10/29 updated by T.Nishida
-		if(useragent.isMozilla) {
-			text.value = text.value.replace(/\x01/g, "");
-			var val = text.value;
-		}
-		else {
+// 2015.10.16 updated T.Nishida　結局この部分は、元に戻す
+//		if(useragent.isMozilla) {
+//			text.value = text.value.replace(/\x01/g, "");
+//			var val = text.value;
+//		}
+//		else {
 	        var val = text.value.replace(/\x01/g, "");
-		}
+//		}
 
 		if (inComposition.lastValue === val) return;
 
