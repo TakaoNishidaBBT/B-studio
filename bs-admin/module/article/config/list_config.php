@@ -114,6 +114,7 @@ $list_config = array(
 			'end_html'		=> '</td>',
 			'shorten_text'	=> '100',
 			'trimmarker'	=> '…',
+			'strip_tags'	=> true,
 		),
 		array(
 			'name'			=> 'publication',
