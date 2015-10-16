@@ -3506,7 +3506,13 @@ var TextInput = function(parentNode, host) {
     text.style.bottom = "2000em";
     parentNode.insertBefore(text, parentNode.firstChild);
 
-    var PLACEHOLDER = "\x01\x01";
+// 2015.10.16 updated T.Nishida
+	if(useragent.isMozilla) {
+	    var PLACEHOLDER = "";
+	}
+	else {
+	    var PLACEHOLDER = "\x01\x01";
+	}
 
     var cut = false;
     var copied = false;
@@ -3576,6 +3582,9 @@ var TextInput = function(parentNode, host) {
 
 
     var isAllSelected = function(text) {
+// 2015.10.16 updated T.Nishida
+		if(!text.value.length) return false;
+
         return text.selectionStart === 0 && text.selectionEnd === text.value.length;
     };
     if (!text.setSelectionRange && text.createTextRange) {
@@ -3806,13 +3815,14 @@ var TextInput = function(parentNode, host) {
 	var onCompositionUpdate = function() {
 		if (!inComposition || !host.onCompositionUpdate || host.$readOnly) return;
 // 2014/10/29 updated by T.Nishida
-		if(useragent.isMozilla) {
-			text.value = text.value.replace(/\x01/g, "");
-			var val = text.value;
-		}
-		else {
+// 2015.10.16 updated T.Nishida
+//		if(useragent.isMozilla) {
+//			text.value = text.value.replace(/\x01/g, "");
+//			var val = text.value;
+//		}
+//		else {
 	        var val = text.value.replace(/\x01/g, "");
-		}
+//		}
 
 		if (inComposition.lastValue === val) return;
 
