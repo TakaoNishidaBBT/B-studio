@@ -39,7 +39,7 @@
 			$method = $_REQUEST['method'];
 		}
 	}
-	catch (Exception $e) {
+	catch(Exception $e) {
 		$module_dir = 'module/';
 		$dir = $module_dir . 'index';
 		$page = 'index.php';

@@ -59,14 +59,16 @@
 		}
 
 		function pasteNode() {
-			$dest = new B_FileNode($this->dir, $this->request['destination_node_id']);
+			$root = new B_FileNode($this->dir, 'root', null, null, 'all');
+			$dest = $root->getNodeById($this->request['destination_node_id']);
 
 			switch($this->request['mode']) {
 			case 'copy':
 				$this->session['selected_node'] = '';
 
 				foreach($this->request['source_node_id'] as $node_id) {
-					$source = new B_FileNode($this->dir, $node_id, null, null, 'all');
+					$source = $root->getNodeById($node_id);
+//					$source = new B_FileNode($this->dir, $node_id, null, null, 'all');
 
 					if(!file_exists($source->fullpath)) {
 						$this->message = '他のユーザに更新されています';
@@ -96,8 +98,9 @@
 				break;
 
 			case 'cut':
+
 				foreach($this->request['source_node_id'] as $node_id) {
-					$source = new B_FileNode($this->dir, $node_id);
+					$source = $root->getNodeById($node_id);
 
 					if(!file_exists($source->fullpath)) {
 						$this->message = '他のユーザに更新されています';
@@ -113,7 +116,7 @@
 					}
 					else {
 						if($dest->node_type == 'folder' || $dest->node_type == 'root') {
-							$ret = $dest->move($source->fullpath);
+							$ret = $dest->move($source);
 						}
 						if($ret) {
 							$this->status = true;
@@ -129,7 +132,6 @@
 					}
 				}
 				if($this->status) {
-					$root = new B_FileNode($this->dir, 'root', null, null, 'all');
 					$this->refleshThumnailCache($root);
 				}
 				break;
@@ -198,7 +200,7 @@
 
 		function saveName() {
 			if($this->request['node_id'] && $this->request['node_id'] != 'null') {
-				$file_info = B_Util::pathinfo($this->request['node_id']);
+				$file_info = pathinfo($this->request['node_id']);
 				$node_name = trim($this->request['node_name']);
 				$new_node_id = B_Util::getPath($file_info['dirname'], $node_name);
 				$path = B_Util::getPath($this->dir , $new_node_id);

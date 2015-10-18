@@ -125,7 +125,7 @@
 			return $info;
 		}
 
-		function getPath($dir, $file_name) {
+		public static function getPath($dir, $file_name) {
 			$dir = str_replace('\\', '/', $dir);
 			if(substr($dir, -1) == '/') {
 				$dir = substr($dir, 0, -1);
