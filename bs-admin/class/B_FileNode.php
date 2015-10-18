@@ -85,6 +85,10 @@
 			$this->node[] = $object;
 		}
 
+		function removeNodes(&$object) {
+			unset($this->node[array_search($object, $this->node)]);
+		}
+
 		function setConfig($config) {
 			foreach($config as $key => $value) {
 				$this->$key = $value;
@@ -209,8 +213,8 @@
 		}
 
 		function rename($old_name, $new_name) {
-			if($this->node_id == $old_name) {
-				$ret = rename(B_Util::getPath($this->dir, $this->node_id), B_Util::getPath($this->dir , $new_name));
+			if($this->node_id === $old_name) {
+				$ret = rename(B_Util::getPath($this->dir, $old_name), B_Util::getPath($this->dir , $new_name));
 				if(!$ret) return false;
 
 				$this->node_id = $new_name;
@@ -290,11 +294,20 @@
 		}
 
 		function move($source) {
-			if(file_exists($this->fullpath)) {
-				if(is_dir($this->fullpath)) {
-					$info = pathinfo($source);
-					return rename($source, B_Util::getPath($this->fullpath, $info['basename']));
+			try {
+				if(file_exists($this->fullpath)) {
+					if(is_dir($this->fullpath)) {
+						$info = pathinfo($source->fullpath);
+						$source->parent->removeNodes($source);
+						$this->addNodes($source);
+						$source->parent = $this;
+						$this->rename($source->node_id, B_Util::getPath($this->path, $source->file_name));
+						return true;
+					}
 				}
+			}
+			catch(Exception $e) {
+				return false;
 			}
 		}
 
@@ -450,10 +463,7 @@
 				return;
 			}
 
-			$index++;
 			$file_info = pathinfo($this->path);
-			$max_size = B_THUMB_MAX_SIZE;
-			$thumbnail_file_path = str_pad($index, 10, '0', STR_PAD_LEFT) . '.' . $file_info['extension'];
 			$source_file_path = $this->fullpath;
 
 			switch(strtolower($file_info['extension'])) {
@@ -493,9 +503,12 @@
 				return;
 			}
 
+			$index++;
+			$thumbnail_file_path = str_pad($index, 10, '0', STR_PAD_LEFT) . '.' . $file_info['extension'];
 			$image_size = getimagesize($source_file_path);
 			$width = $image_size[0];
 			$height = $image_size[1];
+			$max_size = B_THUMB_MAX_SIZE;
 
 			if($width > $max_size) {
 				if($width > $height) {
