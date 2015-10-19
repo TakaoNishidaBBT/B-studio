@@ -111,7 +111,7 @@
 			if(!$img_path) return;
 			if(!file_exists(B_UPLOAD_DIR . $img_path)) return;
 
-			$file_info = $this->util->pathinfo($img_path);
+			$file_info = pathinfo($img_path);
 			$thumnail_path = $this->util->getPath(B_UPLOAD_URL, $this->util->getPath($file_info['dirname'], B_THUMB_PREFIX . $file_info['basename']));
 			$html = '<img src="' . $thumnail_path . '" alt="" />';
 			$obj = $this->form->getElementByName('title_img');

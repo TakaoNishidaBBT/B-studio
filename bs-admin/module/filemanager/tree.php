@@ -68,7 +68,6 @@
 
 				foreach($this->request['source_node_id'] as $node_id) {
 					$source = $root->getNodeById($node_id);
-//					$source = new B_FileNode($this->dir, $node_id, null, null, 'all');
 
 					if(!file_exists($source->fullpath)) {
 						$this->message = '他のユーザに更新されています';
@@ -157,7 +156,7 @@
 
 			if($ret) {
 				$this->status = true;
-				$this->session['selected_node'] = $new_node_id;
+				$this->session['selected_node'] = '';
 				$this->session['open_nodes'][$this->request['destination_node_id']] = true;
 			}
 			else {
@@ -267,7 +266,7 @@
 					$nodes[] = new B_FileNode($this->dir, $node_id, null, null, 'all');
 				}
 				if(count($nodes) == 1 && $nodes[0]->node_type == 'file') {
-					$info = B_Util::pathinfo($nodes[0]->file_name);
+					$info = pathinfo($nodes[0]->file_name);
 
 					// ダウンロード
 					header('Pragma: cache;');

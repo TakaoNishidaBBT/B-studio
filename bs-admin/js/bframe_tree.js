@@ -576,16 +576,7 @@
 
 		function _showNode(parent_node, node_info, trash) {
 			li = createNodeObject(parent_node, node_info, 'tree', trash);
-
-			if(node_info['new_node']) {
-				if(eventSrcObject == pain) {
-					selected_node.set('p'+node_info.node_id);
-				}
-				else {
-					selected_node.set('t'+node_info.node_id);
-				}
-				new_node = true;
-			}
+			setNewNode(node_info);
 
 			if(node_info.children) {
 				var ul = document.createElement('ul');
@@ -629,6 +620,7 @@
 
 						for(var i=0; i < node_info.children.length; i++) {
 							createDetailNodeObject(ptbody, node_info.children[i]);
+							setNewNode(node_info.children[i]);
 						}
 					}
 					else {
@@ -640,9 +632,22 @@
 						div.appendChild(pul);
 						for(var i=0 ; i < node_info.children.length ; i++) {
 							createNodeObject(pul, node_info.children[i], 'pain', trash);
+							setNewNode(node_info.children[i]);
 						}
 					}
 				}
+			}
+		}
+
+		function setNewNode(node_info) {
+			if(node_info['new_node']) {
+				if(eventSrcObject == pain) {
+					selected_node.set('p'+node_info.node_id);
+				}
+				else {
+					selected_node.set('t'+node_info.node_id);
+				}
+				new_node = true;
 			}
 		}
 
@@ -814,7 +819,9 @@
 		this.truncateNode = truncateNode;
 
 		function editName() {
+console.log('editName');
 			var sn = selected_node.object();
+console.log('sn', sn);
 			if(!sn) return;
 			if(sn.id == 'troot' || sn.id == 'ttrash') return;
 			if(bframe.searchParentById(sn, 'ttrash')) return;
@@ -823,6 +830,7 @@
 			if(!current_edit_node) {
 				current_edit_node = sn;
 			}
+console.log('sn2', sn);
 
 			var span = bframe.searchNodeByName(current_edit_node, 'node_span');
 

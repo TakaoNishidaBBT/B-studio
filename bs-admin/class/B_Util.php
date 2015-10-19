@@ -10,7 +10,7 @@
 	// 
 	// -------------------------------------------------------------------------
 	class B_Util {
-		function getRandomText($length){
+		public static function getRandomText($length){
 			$base = 'abcdefghijkmnprstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ2345678';
 			for($i=0 ; $i<$length ; $i++){
 				$pwd.= $base{mt_rand(0, strlen($base)-1)};
@@ -18,11 +18,11 @@
 			return $pwd;
 		}
 
-		function removeComma($value) {
+		public static function removeComma($value) {
 			return str_replace(',', '', $value);
 		}
 
-		function addMonth($year, $month, $add) {
+		public static function addMonth($year, $month, $add) {
 			$yearmonth = mktime(0, 0, 0, $month, 1, $year);
 			$param = $add . ' month';
 			$date['year'] = date('Y', strtotime($param, $yearmonth));
@@ -31,7 +31,7 @@
 			return $date;
 		}
 
-		function computeDate($year, $month, $day, $add) {
+		public static function computeDate($year, $month, $day, $add) {
 			$date['year'] = date('Y', mktime( 0,0,0,(int)$month, (int)($day+$add) , (int)$year ));
 			$date['month'] = date('m', mktime( 0,0,0,(int)$month, (int)($day+$add) , (int)$year ));
 			$date['day'] = date('d', mktime( 0,0,0,(int)$month, (int)$day+$add , (int)$year ));
@@ -39,42 +39,11 @@
 			return $date;
 		}
 
-		function getLastDayofMonth($year, $month) {
+		public static function getLastDayofMonth($year, $month) {
 			return date('t', mktime(0, 0, 0, (int)$month, 1, (int)$year));
 		}
 
-		function print_r_xml($tag, $arr) {
-			if(is_numeric($tag)) {
-				$tag = 'array';
-			}
-			$output = '<' . $tag . '>';
-			foreach($arr as $key => $val) {
-				if(is_array($val)) {
-					$output.= $this->print_r_xml($key, $val);
-				}
-				else {
-					$output.= '<' . htmlspecialchars($key) . '>';
-					$output.= htmlspecialchars($val);
-					$output.= '</' . htmlspecialchars($key) . ">\n";
-				}
-			}
-			$output.= '</' . $tag . '>';
-			return $output;
-		}
-
-		function mb_convert_encoding($str, $to_encoding, $from_encoding=NULL) {
-			if(is_array($str)) {
-				foreach($str as $key => $value) {
-					$str[$key] = $this->mb_convert_encoding($value, $to_encoding, $from_encoding);
-				}
-			}
-			else {
-				$str = mb_convert_encoding($str, $to_encoding, $from_encoding);
-			}
-			return $str;
-		}
-
-		function stringToCode($val) {
+		public static function stringToCode($val) {
 			static $from = array('\\',  "\n", "\r", '"');
 			static $to   = array('\\\\','\\n','\\r','\\"');
 			static $cmap = array(0x80, 0xFFFF, 0, 0xFFFF);
@@ -85,7 +54,7 @@
 			) . '"';
 		}
 
-		function isKeyExist($array) {
+		public static function isKeyExist($array) {
 			$i=0;
 			foreach($array as $key => $value) {
 				if($key !== $i) {
@@ -94,35 +63,6 @@
 				$i++;
 			}
 			return false;
-		}
-
-		function pathinfo($path) {
-			$info['path'] = $path;
-			$info['dirname'] = '';
-			$info['basename'] = '';
-			$info['filename'] = '';
-			$info['extension'] = '';
-
-			$i = strrpos($path, '/');
-			if($i !== false ){
-				if($i) $info['dirname'] = substr($path, 0, $i);
-				else $info['dirname'] = substr($path, 0, $i+1);
-				$info['basename'] = substr($path, $i+1);
-			}
-			else {
-				$info['basename'] = $path;
-			}
-
-			$i = strrpos($info['basename'], '.');
-			if($i) {
-				$info['filename'] = substr($info['basename'], 0, $i);
-				$info['extension'] = substr($info['basename'], $i+1);
-			}
-			else {
-				$info['filename'] = $info['basename'];
-			}
-
-			return $info;
 		}
 
 		public static function getPath($dir, $file_name) {
@@ -137,7 +77,7 @@
 			return $dir . '/' . $file_name;
 		}
 
-		function encodeNumericEntity($str) {
+		public static function encodeNumericEntity($str) {
 			$convmap = array(0, 0x2FFFF, 0, 0xFFFF);
 
 			for($i=0 ; $i<mb_strlen($str) ; $i++) {
@@ -175,7 +115,7 @@
 			}
 		}
 
-		function decode_human_filesize($filesize) {
+		public static function decode_human_filesize($filesize) {
 			$factor_array = array('B' => 0, 'K' => 1, 'M' => 2, 'G' => 3, 'T' => 4, 'P' => 5);
 			$factor = strtoupper(substr(trim($filesize), -1));
 			$size = substr(trim($filesize), 0, -1);
@@ -188,7 +128,7 @@
 			return $size;
 		}
 
-		function mb_convert_encoding_array($array, $to_encoding, $from_encoding) {
+		public static function mb_convert_encoding_array($array, $to_encoding, $from_encoding) {
 			if(!is_array($array)) return;
 
 			foreach($array as $key => $value) {
@@ -197,7 +137,7 @@
 			return $ret;
 		}
 
-		function is_binary($file) {
+		public static function is_binary($file) {
 			$fp = fopen($file, 'r');
 			while($line = fgets($fp)) {
 				if(strpos($line, "\0") !== false) {
@@ -210,7 +150,7 @@
 			return false;
 		}
 
-		function imagecreatefrombmp($filename) {
+		public static function imagecreatefrombmp($filename) {
 			if(!$fp = fopen($filename, 'rb')) return false;
 
 			$file = unpack('vfile_type/Vfile_size/Vreserved/Vbitmap_offset', fread($fp, 14));
@@ -308,5 +248,36 @@
 			}
 			fclose($fp);
 			return $res;
+		}
+
+		function print_r_xml($tag, $arr) {
+			if(is_numeric($tag)) {
+				$tag = 'array';
+			}
+			$output = '<' . $tag . '>';
+			foreach($arr as $key => $val) {
+				if(is_array($val)) {
+					$output.= $this->print_r_xml($key, $val);
+				}
+				else {
+					$output.= '<' . htmlspecialchars($key) . '>';
+					$output.= htmlspecialchars($val);
+					$output.= '</' . htmlspecialchars($key) . ">\n";
+				}
+			}
+			$output.= '</' . $tag . '>';
+			return $output;
+		}
+
+		function mb_convert_encoding($str, $to_encoding, $from_encoding=NULL) {
+			if(is_array($str)) {
+				foreach($str as $key => $value) {
+					$str[$key] = $this->mb_convert_encoding($value, $to_encoding, $from_encoding);
+				}
+			}
+			else {
+				$str = mb_convert_encoding($str, $to_encoding, $from_encoding);
+			}
+			return $str;
 		}
 	}
