@@ -45,7 +45,7 @@
 				}
 
 	 			// check file name
-				$file = $this->util->pathinfo($_POST['filename']);
+				$file = pathinfo($_POST['filename']);
 				if(strlen($file['basename']) != mb_strlen($file['basename'])) {
 					throw new Exception('日本語ファイル名は使用できません。');
 				}
@@ -94,7 +94,7 @@
 				}
 
 				// get file info
-				$file = $this->util->pathinfo($_FILES['Filedata']['name']);
+				$file = pathinfo($_FILES['Filedata']['name']);
 
 				if(strtolower($file['extension']) == 'zip' && class_exists('ZipArchive')) {
 					$zip_file = B_RESOURCE_WORK_DIR . $file['basename'];

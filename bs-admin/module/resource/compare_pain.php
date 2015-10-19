@@ -282,7 +282,7 @@
 			$node_class = $row->getElementByName('node_class');
 			$img_border = $row->getElementByName('img_border');
 			$icon = $row->getElementByName('icon');
-			$file_info = $this->util->pathinfo($path->value);
+			$file_info = pathinfo($path->value);
 
 			if($node_class->value == 'folder') {
 				if($node_status->value == 'diff') {

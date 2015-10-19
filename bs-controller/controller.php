@@ -10,7 +10,7 @@
 	require_once('./bs-module/common/B_CommonModule.php');
 
 	$util = new B_Util();
-	$url = $util->pathinfo($_REQUEST['url']);
+	$url = pathinfo($_REQUEST['url']);
 
 	// dispatch rule
 	$dir = $url['dirname'] ? $url['dirname'] : '.';

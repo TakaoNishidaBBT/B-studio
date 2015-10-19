@@ -46,7 +46,7 @@
 					throw new Exception('ファイルサイズが大きすぎます。アップロードできるのは' . $limit . 'までです');
 				}
 				// get file info
-				$file = $this->util->pathinfo($_POST['filename']);
+				$file = pathinfo($_POST['filename']);
 
 				// unify extension to lowercase for windows system
 				$file['extension'] = strtolower($file['extension']);
@@ -107,7 +107,7 @@
 
 			try {
 				// get file info
-				$file = $this->util->pathinfo($_FILES['Filedata']['name']);
+				$file = pathinfo($_FILES['Filedata']['name']);
 
 				if(!is_dir($this->dir)) {
 					if(mkdir($this->dir)) {

@@ -18,7 +18,7 @@
 		function open() {
 			if($this->request['node_id']) {
 				$file_path = B_Util::getPath(B_UPLOAD_DIR , $this->request['node_id']);
-				$info = B_Util::pathinfo($file_path);
+				$info = pathinfo($file_path);
 				$update_datetime = filemtime($file_path);
 				$contents = file_get_contents($file_path);
 				$encoding = mb_detect_encoding($contents, "auto");

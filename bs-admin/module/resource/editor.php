@@ -24,7 +24,7 @@
 				$rs = $this->db->query($sql);
 				$row = $this->db->fetch_assoc($rs);
 
-				$info = B_Util::pathinfo($row['node_name']);
+				$info = pathinfo($row['node_name']);
 				$file_path = B_RESOURCE_DIR . $row['contents_id'] . '.' . $info['extension'];
 				$update_datetime = filemtime($file_path);
 				$contents = file_get_contents($file_path);

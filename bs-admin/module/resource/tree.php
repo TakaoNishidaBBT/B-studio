@@ -229,7 +229,7 @@
 					$contents_id = $new_node_id . '_' . $this->version['working_version_id'] . '_' . $this->version['revision_id'];
 					$ret = $new_node->setContentsId($contents_id, $this->user_id);
 
-					$file_info = B_Util::pathinfo($new_node_name);
+					$file_info = pathinfo($new_node_name);
 					$file_name = B_RESOURCE_DIR . $new_node_id . '_' . $this->version['working_version_id'] . '_' . $this->version['revision_id'] . '.' . $file_info['extension'];
 					$fp = fopen($file_name, 'w');
 					fclose($fp);
@@ -609,7 +609,6 @@
 			}
 
 			$list[] = $root_node->getNodeList($node_id, $category, B_RESOURCE_DIR);
-
 			$trash_node = new B_Node($this->db
 									, B_RESOURCE_NODE_TABLE
 									, B_WORKING_RESOURCE_NODE_VIEW
