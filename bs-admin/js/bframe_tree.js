@@ -1484,7 +1484,12 @@ console.log('sn2', sn);
 			var destination_node_id;
 			var destination_node;
 			var drag_type;
+			var clone_control;
 			var clone_node;
+			var clone_img;
+			var clone_img_span;
+			var clone_span;
+			var clone_text;
 			var drop_forbidden;
 			var start_position = {};
 			var frame_offset;
@@ -1492,7 +1497,6 @@ console.log('sn2', sn);
 			var pain_flag = false;
 			var div_overwrap, div_tree, div_pain;
 			var overwrap_remove;
-			var clone_control;
 			var myFrame = parent.document.getElementsByName(window.name)[0];
 			var baseZindex = bframe.getZindex(myFrame);
 			this.onMouseUp = onMouseUp;
@@ -1536,17 +1540,18 @@ console.log('sn2', sn);
 
 			clone_node = frame.document.createElement('div');
 			clone_img_span = frame.document.createElement('span');
-			clone_img_span.className = 'img-border';
-
 			clone_img = frame.document.createElement('img');
 			clone_span = frame.document.createElement('span');
-			clone_span.className = 'node-name';
 			clone_text = frame.document.createTextNode('');
-			clone_span.appendChild(clone_text);
+
+			clone_img_span.className = 'img-border';
+			clone_span.className = 'node-name';
 
 			clone_node.appendChild(clone_img_span);
-			clone_img_span.appendChild(clone_img);
 			clone_node.appendChild(clone_span);
+			clone_span.appendChild(clone_text);
+			clone_img_span.appendChild(clone_img);
+
 			with(clone_node.style) {
 				position = 'absolute';
 				whiteSpace = 'nowrap';

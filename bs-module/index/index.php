@@ -59,12 +59,9 @@
 		}
 
 		function getHtml() {
-			if($_SERVER[REQUEST_URI] == $_SERVER[SCRIPT_NAME]) {
-				$this->url = 'index.php';
-			}
-			else {
-				$this->url = $this->request['url'];
-			}
+			$this->url = preg_replace('?/{2,}?', '/', $_SERVER[REQUEST_URI]);
+			$this->url = preg_replace('?^' . B_CURRENT_ROOT . '?', '', $this->url);
+			$this->url = preg_replace('?^/?', '', $this->url);
 
 			$url_array = explode('/', $this->url);
 			$this->contents_node = $this->getContentsNode($url_array);
