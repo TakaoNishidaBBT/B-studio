@@ -304,20 +304,16 @@
 		obj.className = obj.className.replace(class_name, '');
 	}
 
-	bframe.getParam = function(param, parameters) {
-		var value;
-		var parameterArray = parameters.split(',');
-		var compareString = param+':';
-		var compareLength = compareString.length;
+	bframe.getParam = function(param, parameters, separator, splitter) {
+		var sep = separator ? separator : ',';
+		var spl = splitter ? splitter : ':'; 
+		var parameterArray = parameters.split(sep);
 		for (var i = 0; i < parameterArray.length; i++) {
-			if (parameterArray[i].substr(0, compareLength) == compareString) {
-				var currentParameter = parameterArray[i].split(':');
-				value = currentParameter[1];
-				break;
+			var currentParameter = parameterArray[i].split(spl);
+			if(currentParameter[0].trim() == param.trim()) {
+				return currentParameter[1].trim();
 			}
 		}
-		if (!value) return false;
-		else return unescape(value);
 	}
 
 	bframe.setLinkParam = function(a, key, value) {
