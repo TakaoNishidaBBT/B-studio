@@ -113,12 +113,25 @@
 				h = h.replace('px', '');
 			}
 
-			var height = h - margin;
+			var style = window.getComputedStyle(self);
+			var margin_top = parseInt(style.marginTop);	
+			var margin_bottom = parseInt(style.marginBottom);	
+			var height = h - margin - margin_top - margin_bottom;
+			if(style.transform) {
+				var transform = style.transform.replace('matrix', '').replace('(', '').replace(')', '').split(',');
+				var scaleY = transform[3];
+			}
 			if(param_height) {
 				height = height * param_height / 100;
 			}
 			if(self.tagName.toLowerCase() == 'iframe') {
-				self.height = height + 'px';
+				if(scaleY) {
+					self.height = (height / scaleY) + 'px';
+console.log('self.height', self.height, transform);
+				}
+				else {
+					self.height = height + 'px';					
+				}
 			}
 			else {
 				self.style.height = height + 'px';

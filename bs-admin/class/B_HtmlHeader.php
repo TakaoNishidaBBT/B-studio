@@ -47,6 +47,10 @@
 			$this->title = $title;
 		}
 
+		function setViewPort($content) {
+			$this->viewport = $content;
+		}
+
 		function getHtml() {
 			switch($this->charset) {
 			case 'SJIS':
@@ -78,6 +82,7 @@
 			$html.= $this->_outValue($this->doc_type);
 			$html.= $this->_outValue($this->html);
 			$html.= '<head>' . "\n";
+			$html.= $this->_outValue($this->viewport);
 			$html.= $this->_outValue($this->meta);
 			$html.= $this->_outValue($this->misc);
 			$html.= $this->_outValue($this->base);

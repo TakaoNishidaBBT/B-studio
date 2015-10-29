@@ -75,11 +75,15 @@ $form_config = array(
 			),
 		),
 		array(
-			'start_html'	=> '<div id="preview" class="bframe_adjustparent" param="margin:22" style="display:none">',
+			'start_html'	=> '<div id="preview" class="bframe_adjustparent" param="margin:22" style="display:none;position:relative;">',
 			'end_html'		=> '</div>',
 			array(
 				'start_html'	=> '<iframe id="preview_frame" name="preview_frame" class="bframe_adjustparent" frameborder="0" align="top" scrolling="auto" noresize="noresize" width="100%">',
 				'end_html'		=> '</iframe>',
+			),
+			array(
+				'start_html'	=> '<div class="bframe_emulator">',
+				'end_html'		=> '</div>',
 			),
 		),
 	),
