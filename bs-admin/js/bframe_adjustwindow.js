@@ -115,7 +115,7 @@
 
 			var style = window.getComputedStyle(self);
 			var margin_top = parseInt(style.marginTop);	
-			var margin_bottom = parseInt(style.marginBottom);	
+			var margin_bottom = parseInt(style.marginBottom);
 			var height = h - margin - margin_top - margin_bottom;
 			if(style.transform) {
 				var transform = style.transform.replace('matrix', '').replace('(', '').replace(')', '').split(',');
@@ -127,10 +127,9 @@
 			if(self.tagName.toLowerCase() == 'iframe') {
 				if(scaleY) {
 					self.height = (height / scaleY) + 'px';
-console.log('self.height', self.height, transform);
 				}
 				else {
-					self.height = height + 'px';					
+					self.height = height + 'px';
 				}
 			}
 			else {
