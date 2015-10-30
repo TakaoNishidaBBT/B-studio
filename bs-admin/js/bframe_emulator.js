@@ -75,6 +75,7 @@
 		function resize_pc() {
 			iframe.style.transform = 'none';
 
+			iframe.parentNode.style.width = '100%';
 			iframe.style.marginTop = '';
 			iframe.style.marginBottom = '';
 			iframe.style.maxHeight = '';
@@ -84,19 +85,41 @@
 		}
 
 		function resize_tablet_vertical() {
-			iframe.style.marginTop = '20px';
-			iframe.style.marginBottom = '60px';
-			iframe.style.maxHeight = '1024px';
-			iframe.style.maxWidth = '768px';			
+			if(viewport_width == 'device-width') {
+				iframe.style.maxHeight = '1024px';
+				iframe.style.maxWidth = '768px';
+			}
+			else {
+				var ratio = 768 / viewport_width;
+				iframe.parentNode.style.width = '768px';
+				iframe.style.width = viewport_width + 'px';
+				iframe.style.maxHeight = (1024 * viewport_width / 768) + 'px';
+				iframe.style.transformOrigin = '0 0';
+				iframe.style.transform = 'scale(' + ratio + ')';
+			}
+
+			iframe.style.marginTop = margin_top + 'px';
+			iframe.style.marginBottom = margin_bottom + 'px';
 
 			bframe.fireEvent(window, 'resize');
 		}
 
 		function resize_tablet_horizontal() {
-			iframe.style.marginTop = '20px';
-			iframe.style.marginBottom = '60px';
-			iframe.style.maxHeight = '768px';
-			iframe.style.maxWidth = '1024px';
+			if(viewport_width == 'device-width') {
+				iframe.style.maxHeight = '768px';
+				iframe.style.maxWidth = '1024px';
+			}
+			else {
+				var ratio = 1024 / viewport_width;
+				iframe.parentNode.style.width = '1024px';
+				iframe.style.width = viewport_width + 'px';
+				iframe.style.maxHeight = (768 * viewport_width / 1024) + 'px';
+				iframe.style.transformOrigin = '0 0';
+				iframe.style.transform = 'scale(' + ratio + ')';
+			}
+
+			iframe.style.marginTop = margin_top + 'px';
+			iframe.style.marginBottom = margin_bottom + 'px';
 
 			bframe.fireEvent(window, 'resize');
 		}
@@ -108,11 +131,13 @@
 			}
 			else {
 				var ratio = 320 / viewport_width;
-				iframe.style.maxWidth = viewport_width + 'px';
+				iframe.parentNode.style.width = '320px';
+				iframe.style.width = viewport_width + 'px';
 				iframe.style.maxHeight = (480 * viewport_width / 320) + 'px';
-				iframe.style.transformOrigin = '50% 0';
+				iframe.style.transformOrigin = '0 0';
 				iframe.style.transform = 'scale(' + ratio + ')';
 			}
+
 			iframe.style.marginTop = margin_top + 'px';
 			iframe.style.marginBottom = margin_bottom + 'px';
 
@@ -120,10 +145,21 @@
 		}
 
 		function resize_smart_phone_horizontal() {
-			iframe.style.marginTop = '20px';
-			iframe.style.marginBottom = '60px';
-			iframe.style.maxHeight = '320px';
-			iframe.style.maxWidth = '480px';
+			if(viewport_width == 'device-width') {
+				iframe.style.maxHeight = '320px';
+				iframe.style.maxWidth = '480px';
+			}
+			else {
+				var ratio = 480 / viewport_width;
+				iframe.parentNode.style.width = '480px';
+				iframe.style.width = viewport_width + 'px';
+				iframe.style.maxHeight = (320 * viewport_width / 480) + 'px';
+				iframe.style.transformOrigin = '0 0';
+				iframe.style.transform = 'scale(' + ratio + ')';
+			}
+
+			iframe.style.marginTop = margin_top + 'px';
+			iframe.style.marginBottom = margin_bottom + 'px';
 
 			bframe.fireEvent(window, 'resize');
 		}
