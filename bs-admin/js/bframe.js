@@ -305,6 +305,7 @@
 	}
 
 	bframe.getParam = function(param, parameters, separator, splitter) {
+		if(!parameters) return;
 		var sep = separator ? separator : ',';
 		var spl = splitter ? splitter : ':'; 
 		var parameterArray = parameters.split(sep);
