@@ -17,7 +17,7 @@
 			var scale = bframe.getParam('initial-scale', meta['viewport'], ',', '=');
 		}
 
-		if(width && width.toLowerCase() != 'device_width') {
+		if(width && width.toLowerCase() != 'device-width') {
 			width = parseInt(width);
 		}
 		if(!width) {
