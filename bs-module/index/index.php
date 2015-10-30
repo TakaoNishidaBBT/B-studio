@@ -646,6 +646,7 @@
 
 	function notfound() {
 		$_REQUEST['url'] = 'notfound.html';
+		unset($_POST['method']);
 		chdir(B_DOC_ROOT . B_CURRENT_ROOT);
 		require('./bs-controller/controller.php');
 		exit;
