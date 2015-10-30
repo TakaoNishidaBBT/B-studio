@@ -76,6 +76,7 @@
 			iframe.style.transform = 'none';
 
 			iframe.parentNode.style.width = '100%';
+			iframe.style.width = '100%';
 			iframe.style.marginTop = '';
 			iframe.style.marginBottom = '';
 			iframe.style.maxHeight = '';
