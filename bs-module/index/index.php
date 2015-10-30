@@ -437,7 +437,7 @@
 			}
 
 			$this->html_header->appendProperty('script', '<script src="bs-admin/js/bframe.js" type="text/javascript"></script>');
-			$this->html_header->appendProperty('script', '<script src="bs-admin/js/bframe_emulator2.js" type="text/javascript"></script>');
+			$this->html_header->appendProperty('script', '<script src="bs-admin/js/bframe_device_emulator.js" type="text/javascript"></script>');
 			$this->view_file = './view/view_index.php';
 
 			ini_set('display_errors','On');

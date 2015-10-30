@@ -126,6 +126,7 @@
 		}
 
 		function resize_smart_phone_vertical() {
+console.log('viewport_width', viewport_width);
 			if(viewport_width == 'device-width') {
 				iframe.style.maxHeight = '480px';
 				iframe.style.maxWidth = '320px';
