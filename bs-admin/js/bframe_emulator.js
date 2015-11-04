@@ -102,6 +102,9 @@
 		}
 
 		function resize(width, height) {
+			// consider scroll bar width (about 20px)
+			width += 20;
+
 			if(viewport_width == 'device-width') {
 				iframe.style.maxWidth = width + 'px';
 				iframe.style.maxHeight = height + 'px';
@@ -114,7 +117,6 @@
 				iframe.style.transformOrigin = '0 0';
 				iframe.style.transform = 'scale(' + ratio + ')';
 			}
-
 			iframe.style.marginTop = margin_top + 'px';
 			iframe.style.marginBottom = margin_bottom + 'px';
 

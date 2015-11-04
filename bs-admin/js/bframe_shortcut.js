@@ -38,8 +38,8 @@
 				var keycode = event.keyCode;
 			}
 			switch(keycode) {
-			case 83:	// Delete
-				if(e.ctrlKey) {
+			case 83:	// save
+				if(e.ctrlKey || e.metaKey) {
 					var obj = bframe.getEventSrcElement(event);
 					bframe.fireEvent(obj, 'focus');
 					bframe.fireEvent(regist_button, 'click');

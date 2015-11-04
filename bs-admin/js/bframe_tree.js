@@ -206,7 +206,7 @@
 				break;
 
 			case 65:	// ctrl+a
-				if(event.ctrlKey) {
+				if(event.ctrlKey || event.metaKey) {
 					if(!current_edit_node) {
 						selectAll();
 					}
@@ -216,7 +216,7 @@
 
 			case 67:	// ctrl+c
 				if(event.ctrlKey || event.metaKey) {
-					if(pain) {
+					if(pain && !current_edit_node) {
 						if(selected_node.length()) {
 							copyNode();
 						}
@@ -227,7 +227,7 @@
 
 			case 86:	// ctrl+v
 				if(event.ctrlKey || event.metaKey) {
-					if(pain) {
+					if(pain && clipboard.target) {
 						selected_node.set(current_node.id());
 						pasteNode();
 						bframe.stopPropagation(event);
