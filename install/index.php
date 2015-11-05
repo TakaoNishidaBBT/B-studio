@@ -195,7 +195,7 @@
 	}
 
 	function exception_error_handler($errno, $errstr, $errfile, $errline ) {
-	    if (!(error_reporting() & $errno)) {
+	    if(!(error_reporting() & $errno)) {
 	        // error_reporting 設定に含まれていないエラーコードです
 	        return;
 	    }
