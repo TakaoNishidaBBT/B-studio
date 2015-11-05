@@ -896,15 +896,18 @@
 			var input = bframe.searchNodeByName(current_edit_node, 'node_input');
 
 			if(current_edit_save_value == input.value.trim()) {
+				span.firstChild.nodeValue = current_edit_save_value;
+				current_edit_save_value = '';
+				span.className = 'node-name';
+				span.removeChild(input);
 				if(current_edit_node.id == current_node.id()) {
+					current_edit_node = '';
 					selected_node.setColor('current');
 				}
 				else if(current_edit_node.id == selected_node.id()) {
+					current_edit_node = '';
 					selected_node.setColor('selected');
 				}
-				span.firstChild.nodeValue = current_edit_save_value;
-				current_edit_node = '';
-				span.removeChild(input);
 			}
 			else {
 				var param;
