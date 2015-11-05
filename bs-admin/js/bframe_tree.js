@@ -819,9 +819,7 @@
 		this.truncateNode = truncateNode;
 
 		function editName() {
-console.log('editName');
 			var sn = selected_node.object();
-console.log('sn', sn);
 			if(!sn) return;
 			if(sn.id == 'troot' || sn.id == 'ttrash') return;
 			if(bframe.searchParentById(sn, 'ttrash')) return;
@@ -830,7 +828,6 @@ console.log('sn', sn);
 			if(!current_edit_node) {
 				current_edit_node = sn;
 			}
-console.log('sn2', sn);
 
 			var span = bframe.searchNodeByName(current_edit_node, 'node_span');
 
@@ -900,14 +897,13 @@ console.log('sn2', sn);
 
 			if(current_edit_save_value == input.value.trim()) {
 				if(current_edit_node.id == current_node.id()) {
-					current_edit_node = '';
 					selected_node.setColor('current');
 				}
 				else if(current_edit_node.id == selected_node.id()) {
-					current_edit_node = '';
 					selected_node.setColor('selected');
 				}
 				span.firstChild.nodeValue = current_edit_save_value;
+				current_edit_node = '';
 				span.removeChild(input);
 			}
 			else {
