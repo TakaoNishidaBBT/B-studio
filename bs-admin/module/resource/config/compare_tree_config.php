@@ -24,10 +24,10 @@ $left_tree_config = array(
 			),
 			'relation'	=>
 			array(
-				'pain'			=>	true,
+				'pane'			=>	true,
 				'selectNode'	=>
 				array(
-					'url'		=> DISPATCH_URL . '&module=' . $this->module . '&page=compare_pain&method=select',
+					'url'		=> DISPATCH_URL . '&module=' . $this->module . '&page=compare_pane&method=select',
 					'frame'		=> 'resource_form',
 				),
 			),
@@ -72,10 +72,10 @@ $right_tree_config = array(
 			),
 			'relation'	=>
 			array(
-				'pain'			=>	true,
+				'pane'			=>	true,
 				'selectNode'	=>
 				array(
-					'url'		=> DISPATCH_URL . '&module=' . $this->module . '&page=compare_pain&method=select',
+					'url'		=> DISPATCH_URL . '&module=' . $this->module . '&page=compare_pane&method=select',
 					'frame'		=> 'resource_form',
 				),
 			),

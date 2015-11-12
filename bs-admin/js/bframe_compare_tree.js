@@ -90,7 +90,7 @@
 
 		var clipboard = {};
 
-		var pain;
+		var pane;
 		var upload_button;
 		var upload_button_style_display;
 
@@ -112,15 +112,15 @@
 
 			if(httpObj.readyState == 4 && httpObj.status == 200 && response_wait){
 				property = eval('('+httpObj.responseText+')');
-				getPain();
+				getPane();
 				response_wait = false;
 				getNodeList('');
 			}
 		}
 
-		function getPain() {
-			if(property.relation && property.relation.pain) {
-			    pain = true;
+		function getPane() {
+			if(property.relation && property.relation.pane) {
+			    pane = true;
 			}
 		}
 
@@ -206,7 +206,7 @@ console.log('getNodeList', id);
 			li = createNodeObject(parent_node, node_info, 'tree');
 
 			if(node_info.children) {
-				if(pain) {
+				if(pane) {
 					var ul = document.createElement('ul');
 					ul.id = target_index + 'u' + node_info.node_id;
 					ul.name = 'nodes';
@@ -445,7 +445,7 @@ console.log('icon', icon);
 			}
 
 			this.place = function() {
-				return current_node_id.substr(1, 1) == 't' ? 'tree' : 'pain';
+				return current_node_id.substr(1, 1) == 't' ? 'tree' : 'pane';
 			}
 
 			this.setColor = function(mode) {
@@ -537,7 +537,7 @@ console.log('icon', icon);
 			div.appendChild(a);
 
 			a.onclick = selectNode;
-			if((pain && config.folder_count > 0 ) || (!pain && config.node_count > 0)) {
+			if((pane && config.folder_count > 0 ) || (!pane && config.node_count > 0)) {
 				if(config.children && config.opened) {
 					control.src = property.icon.minus.src;
 				}

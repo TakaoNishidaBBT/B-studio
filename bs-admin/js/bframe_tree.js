@@ -66,9 +66,9 @@
 
 		var clipboard = {};
 
-		var pain;
-		var pain_disp_change;
-		var pain_disp_change_select
+		var pane;
+		var pane_disp_change;
+		var pane_disp_change_select
 		var upload_button;
 		var upload_button_style_display;
 
@@ -102,7 +102,7 @@
 					target.onclick = resetCurrentObject;
 				}
 				getUploadButton();
-				getPain();
+				getPane();
 				getNodeList('');
 			}
 		}
@@ -111,15 +111,15 @@
 			drag_control = new dragControl(top.window);
 		}
 
-		function getPain() {
-			if(property.relation && property.relation.pain) {
-			    pain = document.getElementById(property.relation.pain.id);
+		function getPane() {
+			if(property.relation && property.relation.pane) {
+			    pane = document.getElementById(property.relation.pane.id);
 				if(property.editable == 'true' || property.sort == 'manual') {
-					pain.oncontextmenu=showContextMenu;
-					pain.onclick = resetSelectedObject;
+					pane.oncontextmenu=showContextMenu;
+					pane.onclick = resetSelectedObject;
 				}
 				if(property.relation.disp_change) {
-					pain_disp_change = document.getElementById(property.relation.disp_change.id);
+					pane_disp_change = document.getElementById(property.relation.disp_change.id);
 					setDispChange();
 				}
 			}
@@ -138,17 +138,17 @@
 		}
 
 		function setDispChange() {
-			pain_disp_change_select = document.createElement('select');
-			pain_disp_change_select.className = 'bframe_selectbox';
+			pane_disp_change_select = document.createElement('select');
+			pane_disp_change_select.className = 'bframe_selectbox';
 
-			pain_disp_change_select.options[0] = new Option(property.disp_change.options[0].title, property.disp_change.options[0].value);
-			pain_disp_change_select.options[1] = new Option(property.disp_change.options[1].title, property.disp_change.options[1].value);
+			pane_disp_change_select.options[0] = new Option(property.disp_change.options[0].title, property.disp_change.options[0].value);
+			pane_disp_change_select.options[1] = new Option(property.disp_change.options[1].title, property.disp_change.options[1].value);
 
-			pain_disp_change.appendChild(pain_disp_change_select);
+			pane_disp_change.appendChild(pane_disp_change_select);
 
-			bframe.addEventListner(pain_disp_change_select, 'change', reloadTree);
+			bframe.addEventListner(pane_disp_change_select, 'change', reloadTree);
 			if(property.disp_change.selectedIndex) {
-				pain_disp_change_select.selectedIndex = property.disp_change.selectedIndex;
+				pane_disp_change_select.selectedIndex = property.disp_change.selectedIndex;
 			}
 			if(bframe.selectBoxContainer) {
 				bframeSelectBoxAdd();
@@ -216,7 +216,7 @@
 
 			case 67:	// ctrl+c
 				if(event.ctrlKey || event.metaKey) {
-					if(pain && !current_edit_node) {
+					if(pane && !current_edit_node) {
 						if(selected_node.length()) {
 							copyNode();
 						}
@@ -227,7 +227,7 @@
 
 			case 86:	// ctrl+v
 				if(event.ctrlKey || event.metaKey) {
-					if(pain && clipboard.target) {
+					if(pane && clipboard.target) {
 						selected_node.set(current_node.id());
 						pasteNode();
 						bframe.stopPropagation(event);
@@ -289,7 +289,7 @@
 		function showContextMenu(event) {
 			if(context_menu.getLength() > 0 && !response_wait) {
 				eventSrcObject = bframe.getEventSrcElement(event);
-				if(eventSrcObject == pain) {
+				if(eventSrcObject == pane) {
 					selected_node.set(current_node.id());
 					selected_node.setColor('selected');
 					current_node.setColor('current');
@@ -414,10 +414,10 @@
 				context_menu.disableElement('preview');
 			}
 
-			if(selected_node.place() == 'pain') {
+			if(selected_node.place() == 'pane') {
 				context_menu.disableElement('createNode');
 			}
-			if(eventSrcObject == pain) {
+			if(eventSrcObject == pane) {
 				context_menu.disableElement('cutNode');
 				context_menu.disableElement('copyNode');
 				context_menu.disableElement('deleteNode');
@@ -460,7 +460,7 @@
 				param+= '&node_id='+id.substr(1);
 			}
 			if(property.relation && property.relation.disp_change) {
-				param+= '&disp_mode='+pain_disp_change_select.selectedIndex;
+				param+= '&disp_mode='+pane_disp_change_select.selectedIndex;
 			}
 			if(property.sort == 'auto' && sort_key) {
 				param+= '&sort_key='+sort_key;
@@ -469,7 +469,7 @@
 			httpObj = createXMLHttpRequest(showNode);
 			eventHandler(httpObj, property.module, property.file, property.method.getNodeList, 'POST', param);
 			target.style.cursor = 'wait';
-			if(pain) pain.style.cursor = 'wait';
+			if(pane) pane.style.cursor = 'wait';
 			if(obj = document.getElementById('a' + id)) {
 				obj.style.cursor = 'wait';
 			}
@@ -488,7 +488,7 @@
 				catch(e) {
 					alert(property.session_timeout);
 					target.style.cursor = 'default';
-					if(pain) pain.style.cursor = 'default';
+					if(pane) pane.style.cursor = 'default';
 					response_wait = false;
 					return;
 				}
@@ -503,9 +503,9 @@
 					target.removeChild(target.firstChild);
 				}
 
-				// remove pain
-				if(pain && pain.hasChildNodes()) {
-					pain.removeChild(pain.firstChild);
+				// remove pane
+				if(pane && pane.hasChildNodes()) {
+					pane.removeChild(pane.firstChild);
 				}
 
 				// create root tree
@@ -558,7 +558,7 @@
 				}
 
 				target.style.cursor = 'default';
-				if(pain) pain.style.cursor = 'default';
+				if(pane) pane.style.cursor = 'default';
 				response_wait = false;
 				node_info = null;
 
@@ -585,24 +585,24 @@
 				li.appendChild(ul);
 
 				for(var i=0; i < node_info.children.length; i++) {
-					if(pain && node_info.children[i].node_type == 'file') {
+					if(pane && node_info.children[i].node_type == 'file') {
 						continue;
 					}
 					_showNode(ul, node_info.children[i], trash);
 				}
 
-				// create pain
-				if(pain && current_node.id() && node_info.node_id == current_node.id().substr(1)) {
+				// create pane
+				if(pane && current_node.id() && node_info.node_id == current_node.id().substr(1)) {
 					// create div
 					var div = document.createElement('div');
-					pain.appendChild(div);
+					pane.appendChild(div);
 
 					// sort mode
 					if(property.sort == 'auto') {
 						node_info.children.sort(_sort_callback);
 					}
 
-					if(pain_disp_change && pain_disp_change_select.options[pain_disp_change_select.selectedIndex].value == 'detail') {
+					if(pane_disp_change && pane_disp_change_select.options[pane_disp_change_select.selectedIndex].value == 'detail') {
 						// detail mode
 						div.className = 'detail';
 						var ptable = document.createElement('table');
@@ -613,7 +613,7 @@
 
 						ptbody.id = 'tt' + node_info.node_id;
 						ptbody.name = 'nodes';
-						ptbody.className = 'pain';
+						ptbody.className = 'pane';
 
 						// title
 						createDetailTitle(ptbody, response.sort_key, response.sort_order);
@@ -631,7 +631,7 @@
 						pul.name = 'nodes';
 						div.appendChild(pul);
 						for(var i=0 ; i < node_info.children.length ; i++) {
-							createNodeObject(pul, node_info.children[i], 'pain', trash);
+							createNodeObject(pul, node_info.children[i], 'pane', trash);
 							setNewNode(node_info.children[i]);
 						}
 					}
@@ -641,7 +641,7 @@
 
 		function setNewNode(node_info) {
 			if(node_info['new_node']) {
-				if(eventSrcObject == pain) {
+				if(eventSrcObject == pane) {
 					selected_node.set('p'+node_info.node_id);
 				}
 				else {
@@ -954,7 +954,7 @@
 				}
 			}
 
-			if(pain || !property.relation) {
+			if(pane || !property.relation) {
 				selected_node.set(node_id);
 				selected_node.setColor('selected');
 			}
@@ -1011,11 +1011,11 @@
 
 		function selectAll() {
 			var node_id = current_node.id().substr(1);
-			var pain = document.getElementById('uu'+node_id) || document.getElementById('tt'+node_id);
-			if(!pain) return;
+			var pane = document.getElementById('uu'+node_id) || document.getElementById('tt'+node_id);
+			if(!pane) return;
 
-			for(var n=pain.firstChild; n; n=n.nextSibling) {
-				if(n == pain.firstChild) {
+			for(var n=pane.firstChild; n; n=n.nextSibling) {
+				if(n == pane.firstChild) {
 					selected_node.set(n.id);
 				}
 				else {
@@ -1408,7 +1408,7 @@
 			}
 
 			this.place = function() {
-				return current_node[0].id.substr(0, 1) == 't' ? 'tree' : 'pain';
+				return current_node[0].id.substr(0, 1) == 't' ? 'tree' : 'pane';
 			}
 
 			this.setColor = function(mode) {
@@ -1493,8 +1493,8 @@
 			var start_position = {};
 			var frame_offset;
 			var window_offset;
-			var pain_flag = false;
-			var div_overwrap, div_tree, div_pain;
+			var pane_flag = false;
+			var div_overwrap, div_tree, div_pane;
 			var overwrap_remove;
 			var myFrame = parent.document.getElementsByName(window.name)[0];
 			var baseZindex = bframe.getZindex(myFrame);
@@ -1529,12 +1529,12 @@
 				frame.document.body.appendChild(div_tree);
 			}
 
-			div_pain = frame.document.getElementById('bframe_tree_drag_pain_div');
-			if(!div_pain) {
-				div_pain = frame.document.createElement('div');
-				div_tree.id = 'bframe_tree_drag_pain_div';
-				div_pain.className = 'bframe_pain';
-				frame.document.body.appendChild(div_pain);
+			div_pane = frame.document.getElementById('bframe_tree_drag_pane_div');
+			if(!div_pane) {
+				div_pane = frame.document.createElement('div');
+				div_tree.id = 'bframe_tree_drag_pane_div';
+				div_pane.className = 'bframe_pane';
+				frame.document.body.appendChild(div_pane);
 			}
 
 			clone_node = frame.document.createElement('div');
@@ -1615,14 +1615,14 @@
 					div_overwrap.style.width = wsize.width + 'px';
 					div_overwrap.style.height = wsize.height + 'px';
 				}
-				if(bframe.searchParentById(event_obj, 'bframe_pain') && pain_disp_change_select.options[pain_disp_change_select.selectedIndex].value != 'detail') {
-					pain_flag = true;
-					div_pain.appendChild(clone_node);
-					clone_node.className = 'clone_node_pain';
+				if(bframe.searchParentById(event_obj, 'bframe_pane') && pane_disp_change_select.options[pane_disp_change_select.selectedIndex].value != 'detail') {
+					pane_flag = true;
+					div_pane.appendChild(clone_node);
+					clone_node.className = 'clone_node_pane';
 					drop_forbidden.src = property.icon.forbidden_big.src;
 				}
 				else {
-					pain_flag = false;
+					pane_flag = false;
 					div_tree.appendChild(clone_node);
 					clone_node.className = 'clone_node';
 					drop_forbidden.src = property.icon.forbidden.src;
@@ -1701,9 +1701,9 @@
 				destination_node = '';
 
 				if(property.sort == 'manual') {
-					if(property.relation && property.relation.pain && bframe.searchParentById(node, property.relation.pain.id) &&
-						pain_disp_change_select.options[pain_disp_change_select.selectedIndex].value != 'detail') {
-						// destination is in pain and display mode is icon style
+					if(property.relation && property.relation.pane && bframe.searchParentById(node, property.relation.pane.id) &&
+						pane_disp_change_select.options[pane_disp_change_select.selectedIndex].value != 'detail') {
+						// destination is in pane and display mode is icon style
 						if(node.node_class == 'leaf') {
 							if(position.left < pageX) {
 								if(pageX < position.left + div.offsetWidth/2) {
@@ -1743,7 +1743,7 @@
 						}
 					}
 					else {
-						// destination is in tree or detail list in pain
+						// destination is in tree or detail list in pane
 						if(node.node_class == 'leaf') {
 							if(position.top < pageY) {
 								if(pageY < position.top + div.offsetHeight/2) {
@@ -1783,8 +1783,8 @@
 				}
 				else {
 					// sort is disabled
-					if(property.relation && property.relation.pain && bframe.searchParentById(node, property.relation.pain.id)) {
-						// destination is in pain
+					if(property.relation && property.relation.pane && bframe.searchParentById(node, property.relation.pane.id)) {
+						// destination is in pane
 						if(node.node_class != 'leaf' && position.left < pageX && pageX < position.left + div.offsetWidth) {
 							destination_node_id = node.id;
 							destination_node = node;
@@ -1833,7 +1833,7 @@
 
 				var trash = document.getElementById('ttrash');
 
-				if(drag_type == 'move' && selected_node.place() == 'pain' && destination_node_id == current_node.id()) return false;
+				if(drag_type == 'move' && selected_node.place() == 'pane' && destination_node_id == current_node.id()) return false;
 				if(destination_node_id == 'ttrash') {
 					if(bframe.searchNodeById(trash, source_node_id)){
 						return false;
@@ -1885,7 +1885,7 @@
 					httpObj = createXMLHttpRequest(showNode);
 					eventHandler(httpObj, property.module, property.file, property.method.pasteNode, 'POST', param);
 					target.style.cursor = 'wait';
-					if(pain) pain.style.cursor = 'wait';
+					if(pane) pane.style.cursor = 'wait';
 					response_wait = true;
 				}
 
@@ -1947,7 +1947,7 @@
 					httpObj = createXMLHttpRequest(showNode);
 					eventHandler(httpObj, property.module, property.file, property.method.updateDispSeq, 'POST', param);
 					target.style.cursor = 'wait';
-					if(pain) pain.style.cursor = 'wait';
+					if(pane) pane.style.cursor = 'wait';
 					response_wait = true;
 				}
 				destination_node_id = '';
@@ -2060,7 +2060,7 @@
 			if(place == 'tree') {
 				a.onclick = selectNode;
 				a.ondblclick = selectResourceNode;
-				if((pain && config.folder_count > 0 ) || (!pain && config.node_count > 0)) {
+				if((pane && config.folder_count > 0 ) || (!pane && config.node_count > 0)) {
 					if(config.children) {
 						control.src = property.icon.minus.src;
 					}
@@ -2105,11 +2105,11 @@
 			obj_img.id = 'i' + node_id;
 			img_span.appendChild(obj_img);
 
-			if(place == 'pain') {
+			if(place == 'pane') {
 				a.style.cursor = 'pointer';
 
 				if(config.node_class == 'folder') {
-					obj_img.src = property.icon.pain.folder.src;
+					obj_img.src = property.icon.pane.folder.src;
 				}
 				else {
 					a.ondblclick = selectResourceNode;
@@ -2117,16 +2117,16 @@
 
 					switch(suffix.toLowerCase()) {
 					case 'js':
-						obj_img.src = property.icon.pain.js.src;
+						obj_img.src = property.icon.pane.js.src;
 						break;
 					case 'swf':
-						obj_img.src = property.icon.pain.swf.src;
+						obj_img.src = property.icon.pane.swf.src;
 						break;
 					case 'css':
-						obj_img.src = property.icon.pain.css.src;
+						obj_img.src = property.icon.pane.css.src;
 						break;
 					case 'pdf':
-						obj_img.src = property.icon.pain.pdf.src;
+						obj_img.src = property.icon.pane.pdf.src;
 						break;
 
 					case 'jpg':
@@ -2134,8 +2134,8 @@
 					case 'gif':
 					case 'png':
 					case 'bmp':
-						if(property.icon.pain[suffix.toLowerCase()]) {
-							obj_img.src = property.icon.pain[suffix.toLowerCase()].src;
+						if(property.icon.pane[suffix.toLowerCase()]) {
+							obj_img.src = property.icon.pane[suffix.toLowerCase()].src;
 						}
 						else {
 							if(config.thumbnail_image_path) {
@@ -2158,8 +2158,8 @@
 					case 'mpeg':
 					case 'mpg':
 					case 'wmv':
-						if(property.icon.pain[suffix.toLowerCase()]) {
-							obj_img.src = property.icon.pain[suffix.toLowerCase()].src;
+						if(property.icon.pane[suffix.toLowerCase()]) {
+							obj_img.src = property.icon.pane[suffix.toLowerCase()].src;
 						}
 						else {
 							if(config.thumbnail_image_path) {
@@ -2176,13 +2176,13 @@
 						break;
 
 					default:
-						obj_img.src = property.icon.pain.misc.src;
+						obj_img.src = property.icon.pane.misc.src;
 						break;
 					}
 				}
 			}
 			else {
-				if(config.node_type == 'folder' && config.children && ((pain && config.folder_count > 0 ) || (!pain && config.node_count > 0))) {
+				if(config.node_type == 'folder' && config.children && ((pane && config.folder_count > 0 ) || (!pane && config.node_count > 0))) {
 					obj_img.src = property.icon['folder_open'].src;
 				}
 				else {
@@ -2458,10 +2458,10 @@
 			if(e.button == 2) return;
 
 			var node = getEventNode(event);
-			if(selected_node.id() && selected_node.place() == 'pain' && (e.ctrlKey || e.metaKey)) {
+			if(selected_node.id() && selected_node.place() == 'pane' && (e.ctrlKey || e.metaKey)) {
 				addSelectedObject(node.id);
 			}
-			else if(selected_node.id() && selected_node.place() == 'pain' && e.shiftKey) {
+			else if(selected_node.id() && selected_node.place() == 'pane' && e.shiftKey) {
 				addRangeSelectedObject(node.id);
 			}
 			else {
@@ -2504,7 +2504,7 @@
 				return;
 			}
 			var control = document.getElementById('c' + node.id);
-			if(pain) {
+			if(pane) {
 				current_node.set('t' + node.id.substr(1));
 				getNodeList(node.id);
 			}

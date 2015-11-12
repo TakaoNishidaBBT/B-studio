@@ -51,13 +51,13 @@ $tree_config = array(
 			),
 			'relation'	=>
 			array(
-				'pain'			=>
+				'pane'			=>
 				array(
-					'id'		=> 'bframe_pain',
+					'id'		=> 'bframe_pane',
 				),
 				'disp_change'	=>
 				array(
-					'id'		=> 'bframe_pain_disp_change',
+					'id'		=> 'bframe_pane_disp_change',
 				),
 				'insertFile'	=>
 				array(
@@ -143,7 +143,7 @@ $tree_config = array(
 				'folder'		=> array('src' => './images/folders/folder.png', 'new' => 'newFolder'),
 				'folder_open'	=> array('src' => './images/folders/folder_open.png'),
 				'file'			=> array('src' => './images/folders/file_icon.png', 'new' => 'newFile.txt', 'ime' => 'true'),
-				'pain'		=>
+				'pane'		=>
 				array(
 					'folder'	=> array('src' => './images/folders/folder_big.png'),
 					'js'		=> array('src' => './images/folders/file_icon_big.png'),

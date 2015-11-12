@@ -97,18 +97,18 @@ div.thumbs li.tree-list span.node-name {
 	padding: 2px 4px 1px 4px;
 	font-size: 12px;
 }
-div.bframe_pain a:link {
+div.bframe_pane a:link {
 	text-decoration: none;
 }
-div.bframe_pain a:visited {
+div.bframe_pane a:visited {
 	color: #fff;
 	text-decoration: none;
 }
-div.bframe_pain a:active {
+div.bframe_pane a:active {
 	color: #fff;
 	text-decoration: none;
 }
-div.bframe_pain a:hover {
+div.bframe_pane a:hover {
 	color: #fff;
 	text-decoration: none;
 }
@@ -159,7 +159,7 @@ div.thumbs img.control {
 	display: none;
 }
 
-/* pain detail */
+/* pane detail */
 table.file-list {
 	margin: 0 10px 10px 10px;
 }

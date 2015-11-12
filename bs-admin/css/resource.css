@@ -75,11 +75,11 @@ div.splitter {
 	border-right: #3a3a3a 2px solid;
 	visibility: hidden;
 }
-div.bframe_splitter_pain {
+div.bframe_splitter_pane {
 	overflow: hidden;
 	background-color: #fff;
 }
-div#resource_pain {
+div#resource_pane {
 	overflow: hidden;
 	background-color: #3a3a3a;
 }
@@ -89,14 +89,14 @@ div.upload_control {
 div.upload_control {
 	margin: 0;
 }
-div#bframe_pain {
+div#bframe_pane {
 	overflow: auto;
 	overflow-x: hidden;
 	margin: 0;
 	padding: 30px 0 0 30px;
 	height: 100%;
 }
-div#bframe_pain ul {
+div#bframe_pane ul {
 	margin: 0;
 	padding: 0;
 }
@@ -154,7 +154,7 @@ a.upload-button img {
 	vertical-align: -4px;
 	margin-right: 6px;
 }
-span#bframe_pain_disp_change {
+span#bframe_pane_disp_change {
 	color: #fff;
 }
 ul.upload_control li select {
@@ -180,11 +180,11 @@ ul.upload_control li option {
 span.message {
 	color: #204030;
 }
-span#bframe_pain_disp_change {
+span#bframe_pane_disp_change {
 	display: block;
 	line-height: 26px;
 }
-div.pain_container {
+div.pane_container {
 	margin: 0 8px 0 0;
 	height: 100%;
 	padding: 0;

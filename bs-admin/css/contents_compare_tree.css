@@ -78,7 +78,7 @@ div#compare_tree_container_right {
 	width: 50%;
 }
 
-/* pain thumb */
+/* pane thumb */
 div.thumbs li.tree-list div.tree {
 	margin: 0;
 	border-left: 1px solid #444;
@@ -97,18 +97,18 @@ div.thumbs li.tree-list span.node-name {
 	padding: 2px 4px 1px 4px;
 	font-size: 12px;
 }
-div.bframe_pain a:link {
+div.bframe_pane a:link {
 	text-decoration: none;
 }
-div.bframe_pain a:visited {
+div.bframe_pane a:visited {
 	color: #fff;
 	text-decoration: none;
 }
-div.bframe_pain a:active {
+div.bframe_pane a:active {
 	color: #fff;
 	text-decoration: none;
 }
-div.bframe_pain a:hover {
+div.bframe_pane a:hover {
 	color: #fff;
 	text-decoration: none;
 }
@@ -160,7 +160,7 @@ div.thumbs img.control {
 	display: none;
 }
 
-/* pain detail */
+/* pane detail */
 div.detail table {
 	margin: 0 20px 20px 20px;
 }

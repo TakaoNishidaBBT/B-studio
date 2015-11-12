@@ -5,7 +5,7 @@
  *
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
-	class resource_compare_pain extends B_AdminModule {
+	class resource_compare_pane extends B_AdminModule {
 		function __construct() {
 			parent::__construct(__FILE__);
 
@@ -145,7 +145,7 @@
 			// start tramsaction
 			$this->db->begin();
 
-			// left pain
+			// left pane
 			if($this->left_node_info) {
 				$version_id = $this->version_left['version_id'];
 				$revision_id = $this->version_left['revision_id'];
@@ -165,7 +165,7 @@
 				$this->left_list[] = $left_node->getNodeList($this->session['open_nodes'], $node_id, $category, B_RESOURCE_DIR);
 			}
 
-			// right pain
+			// right pane
 			if($this->right_node_info) {
 				$version_id = $this->version_right['version_id'];
 				$revision_id = $this->version_right['revision_id'];
@@ -191,28 +191,28 @@
 			$this->left_tree_config = $left_tree_config['script']['bframe_tree'];
 			$this->right_tree_config = $left_right_config['script']['bframe_tree'];
 
-			require_once('./config/compare_pain_config.php');
+			require_once('./config/compare_pane_config.php');
 			if($this->session['disp_mode'] == 'detail') {
-				$this->left = new B_DataGrid($this->db, $compare_pain_detail_config);
+				$this->left = new B_DataGrid($this->db, $compare_pane_detail_config);
 				$param['pos'] = 'left';
 				$this->left->setCallBack($this, '_detail_callback', $param);
 
-				$this->right = new B_DataGrid($this->db, $compare_pain_detail_config);
+				$this->right = new B_DataGrid($this->db, $compare_pane_detail_config);
 				$param['pos'] = 'right';
 				$this->right->setCallBack($this, '_detail_callback', $param);
 
-				$this->view_file = './view/view_compare_pain_detail.php';
+				$this->view_file = './view/view_compare_pane_detail.php';
 			}
 			else {
-				$this->left = new B_DataGrid($this->db, $compare_pain_config);
+				$this->left = new B_DataGrid($this->db, $compare_pane_config);
 				$param['pos'] = 'left';
 				$this->left->setCallBack($this, '_thumb_callback', $param);
 
-				$this->right = new B_DataGrid($this->db, $compare_pain_config);
+				$this->right = new B_DataGrid($this->db, $compare_pane_config);
 				$param['pos'] = 'right';
 				$this->right->setCallBack($this, '_thumb_callback', $param);
 
-				$this->view_file = './view/view_compare_pain.php';
+				$this->view_file = './view/view_compare_pane.php';
 			}
 			if(is_array($this->left_list[0]['children'])) {
 				$this->left->bind($this->left_list[0]['children']);
@@ -221,7 +221,7 @@
 				$this->right->bind($this->right_list[0]['children']);
 			}
 
-			$this->disp_change = new B_Element($compare_pain_disp_change_config);
+			$this->disp_change = new B_Element($compare_pane_disp_change_config);
 			$this->disp_change->setValue($this->session);
 		}
 
@@ -374,7 +374,7 @@
 
 			$this->html_header->appendProperty('css', '<link href="css/resource_compare.css" type="text/css" rel="stylesheet" media="all" />');
 			$this->html_header->appendProperty('css', '<link href="css/resource_compare_tree.css" type="text/css" rel="stylesheet" media="all" />');
-			$this->html_header->appendProperty('script', '<script src="js/bframe_compare_pain.js" type="text/javascript"></script>');
+			$this->html_header->appendProperty('script', '<script src="js/bframe_compare_pane.js" type="text/javascript"></script>');
 
 			// HTMLヘッダー出力
 			$this->showHtmlHeader();

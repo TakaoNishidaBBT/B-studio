@@ -714,17 +714,17 @@ div.clone_node span.node-name {
 	padding: 1px 4px 1px 8px;
 }
 
-/* clone node_pain */
-div.clone_node_pain {
+/* clone node_pane */
+div.clone_node_pane {
 	text-align: center;
 	width: 120px;
 }
-div.clone_node_pain img.forbidden {
+div.clone_node_pane img.forbidden {
 	position: absolute;
 	top: 40px;
 	left: 40px;
 }
-div.clone_node_pain span.img-border, div.thumbs span.img-border {
+div.clone_node_pane span.img-border, div.thumbs span.img-border {
 	display: table-cell;
 	margin: 0 auto 4px auto;
 	width: 110px;
@@ -735,7 +735,7 @@ div.clone_node_pain span.img-border, div.thumbs span.img-border {
 div.thumbs span.img-border:hover {
 	box-shadow: 4px 5px 8px -2px rgba(0,0,0,0.3), 0 2px 20px -7px rgba(0,0,0,0.4);
 }
-div.clone_node_pain span.node-name, div.thumbs span.node-name {
+div.clone_node_pane span.node-name, div.thumbs span.node-name {
 	display: block;
 	margin: 0 auto;
 	padding: 2px 4px 1px 4px;
@@ -744,7 +744,7 @@ div.clone_node_pain span.node-name, div.thumbs span.node-name {
 	word-wrap: break-word;
 	width: 85%;
 }
-div.clone_node_pain span.node-name {
+div.clone_node_pane span.node-name {
 	background-color: #ece9d8;
 	color: #333;
 }
