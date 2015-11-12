@@ -48,13 +48,13 @@ $tree_config = array(
 			),
 			'relation'	=>
 			array(
-				'pain'			=>
+				'pane'			=>
 				array(
-					'id'		=> 'bframe_pain',
+					'id'		=> 'bframe_pane',
 				),
 				'disp_change'	=>
 				array(
-					'id'		=> 'bframe_pain_disp_change',
+					'id'		=> 'bframe_pane_disp_change',
 				),
 				'insertFile'	=>
 				array(
@@ -137,7 +137,7 @@ $tree_config = array(
 				'page'			=> array('src' => './images/folders/leaf.gif'),
 				'node'			=> array('src' => './images/folders/book.gif'),
 				'file'			=> array('src' => './images/folders/file_icon.png'),
-				'pain'		=>
+				'pane'		=>
 				array(
 					'folder'	=> array('src' => './images/folders/folder_big.png'),
 					'js'		=> array('src' => './images/folders/file_icon_big.png'),

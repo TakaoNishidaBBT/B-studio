@@ -34,7 +34,7 @@
 		var drag_obj;
 		var property;
 
-		var property_pain;
+		var property_pane;
 		var context_menu = new bframe.contextMenu(3);
 		var context_menu_frame = window;
 		var context_menu_frame_offset;
@@ -172,7 +172,7 @@
 
 			if(httpObj.readyState == 4 && httpObj.status == 200 && response_wait){
 				property = eval('('+httpObj.responseText+')');
-				setPropertyPain();
+				setPropertyPane();
 				setControl();
 				setContextMenu();
 				selectFirstRow();
@@ -186,9 +186,9 @@
 			bframe.fireEvent(tr[0], 'click');
 		}
 
-		function setPropertyPain() {
-			if(property.property_pain) {
-				property_pain = document.getElementById(property.property_pain);
+		function setPropertyPane() {
+			if(property.property_pane) {
+				property_pane = document.getElementById(property.property_pane);
 			}
 		}
 
@@ -246,11 +246,11 @@
 				var td = tr.cells[i];
 				if(bframe.checkClassName('bframe_form_property', td)) {
 					var clone = td.childNodes[0].reflectionNode(true);
-					if(property_pain.firstChild) {
-						property_pain.replaceChild(clone, property_pain.firstChild);
+					if(property_pane.firstChild) {
+						property_pane.replaceChild(clone, property_pane.firstChild);
 					}
 					else {
-						property_pain.appendChild(clone);
+						property_pane.appendChild(clone);
 					}
 
 					addEventListnerAllEditableElement(clone, 'input', 'blur', synchro);
@@ -273,7 +273,7 @@
 		}
 
 		function synchro(event) {
-			var clone = property_pain.childNodes[0].reflectionNode(true);
+			var clone = property_pane.childNodes[0].reflectionNode(true);
 			for(var i=0 ; i < currentRow.cells.length ; i++) {
 				var td = currentRow.cells[i];
 				if(bframe.checkClassName('bframe_form_property', td)) {
@@ -294,7 +294,7 @@
 			synchro();
 			var param = 'terminal_id='+terminal_id;
 
-			var form = document.forms[property.property_pain];
+			var form = document.forms[property.property_pane];
 			var data = $(form).serialize(); // use jquery
 			if(data) {
 				param+= '&' + data;
@@ -313,7 +313,7 @@
 			synchro();
 			var param = 'terminal_id='+terminal_id;
 
-			var form = document.forms[property.property_pain];
+			var form = document.forms[property.property_pane];
 			var data = $(form).serialize(); // use jquery
 			if(data) {
 				param+= '&' + data;

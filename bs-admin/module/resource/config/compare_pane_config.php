@@ -5,7 +5,7 @@
  *
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
-$compare_pain_config = array(
+$compare_pane_config = array(
 	'start_html'	=> '<ul>',
 	'end_html'		=> '</ul>',
 
@@ -65,7 +65,7 @@ $compare_pain_config = array(
 		),
 	),
 );
-$compare_pain_detail_config = array(
+$compare_pane_detail_config = array(
 	'start_html'	=> '<table class="file-list">',
 	'end_html'		=> '</table>',
 
@@ -187,11 +187,11 @@ $compare_pain_detail_config = array(
 	),
 );
 
-$compare_pain_disp_change_config = array(
+$compare_pane_disp_change_config = array(
 	'start_html'	=> '<li class="select">',
 	'end_html'		=> '</li>',
 	array(
-		'start_html'	=> '<span id="bframe_pain_disp_change">',
+		'start_html'	=> '<span id="bframe_pane_disp_change">',
 		'end_html'		=> '</span>',
 		'value'			=> '表示 ： ',
 		array(

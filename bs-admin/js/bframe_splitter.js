@@ -42,11 +42,11 @@
 		target.style.cursor = 'e-resize';
 		self.style.cursor = 'e-resize';
 		var splitbar = new bframe.splitbar(this, target);
-		var pain = new bframe.pain(self);
+		var pane = new bframe.pane(self);
 		var ep = bframe.getElementPosition(self);
-		pain.setTotalWidth(w);
-		pain.setElementPosition(ep);
-		pain.position(ep);
+		pane.setTotalWidth(w);
+		pane.setElementPosition(ep);
+		pane.position(ep);
 
 		var size = {width: target.offsetWidth, height: target.offsetHeight};
 		bframe.resize_handler.registCallBackFunction(_adjustWindow);
@@ -105,10 +105,10 @@
 
 			var mp = bframe.getMousePosition(event);
 			var ep = bframe.getElementPosition(self);
-			pain.setElementPosition(ep);
+			pane.setElementPosition(ep);
 			start_x = mp.screenX - ep.left;
 			var w = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-			pain.setTotalWidth(w);
+			pane.setTotalWidth(w);
 			splitbar.position(ep);
 			splitbar.show();
 			self.style.visibility = 'hidden';
@@ -136,7 +136,7 @@
 			var mp = bframe.getMousePosition(event);
 			var ep = bframe.getElementPosition(self);
 			ep.left = parseInt(mp.screenX - start_x);
-			pain.position(ep);
+			pane.position(ep);
 			splitbar.hide();
 			self.style.visibility = 'visible';
 			drag_overlay.style.display = 'none';
@@ -152,10 +152,10 @@
 			size.height = h - pos.top - margin;
 			target.style.height = size.height + 'px';
 			splitbar.size(size);
-			pain.setTotalWidth(w);
+			pane.setTotalWidth(w);
 			var ep = bframe.getElementPosition(self);
-			pain.setElementPosition(ep);
-			pain.position(ep);
+			pane.setElementPosition(ep);
+			pane.position(ep);
 		}
 	}
 
@@ -229,32 +229,32 @@
 	}
 
 	// -------------------------------------------------------------------------
-	// class bframe.pain
+	// class bframe.pane
 	// 
 	// -------------------------------------------------------------------------
-	bframe.pain = function(splitbar) {
-		var left_pain, right_pain;
+	bframe.pane = function(splitbar) {
+		var left_pane, right_pane;
 		var splitbar_width = splitbar.offsetWidth;
 		var total_width;
 		var element_position;
-		var right_pain_width;
+		var right_pane_width;
 
 	    var iframe = document.getElementsByTagName('iframe');
-		setPain(iframe);
+		setPane(iframe);
 
-		if(!left_pain && !right_pain) {
+		if(!left_pane && !right_pane) {
 		    var div = document.getElementsByTagName('div');
-			setPain(div);
+			setPane(div);
 		}
 
-		function setPain(obj) {
+		function setPane(obj) {
 		    for(var i=0; i<obj.length; i++) {
-				if(bframe.checkClassName('bframe_splitter_pain', obj[i])) {
-					if(!left_pain) {
-						left_pain = obj[i];
+				if(bframe.checkClassName('bframe_splitter_pane', obj[i])) {
+					if(!left_pane) {
+						left_pane = obj[i];
 					}
 					else {
-						right_pain = obj[i];
+						right_pane = obj[i];
 						break;
 					}
 				}
@@ -266,14 +266,14 @@
 		}
 
 		this.position = function(p) {
-			left_pain.style.width = parseInt(p.left + left_pain.offsetWidth - element_position.left)+ 'px';
-			if(right_pain.tagName.toLowerCase() == 'iframe') {
-				right_pain.style.width = parseInt(total_width - p.left - splitbar_width) + 'px';
+			left_pane.style.width = parseInt(p.left + left_pane.offsetWidth - element_position.left)+ 'px';
+			if(right_pane.tagName.toLowerCase() == 'iframe') {
+				right_pane.style.width = parseInt(total_width - p.left - splitbar_width) + 'px';
 			}
 		}
 
 		this.positionLeft = function(p) {
-			left_pain.style.width = parseInt(p.left + left_pain.offsetWidth - element_position.left)+ 'px';
+			left_pane.style.width = parseInt(p.left + left_pane.offsetWidth - element_position.left)+ 'px';
 		}
 
 		this.setTotalWidth = function(width) {
@@ -281,7 +281,7 @@
 				total_width = width;
 			}
 			else {
-				total_width = left_pain.offsetWidth+ right_pain.offsetWidth;
+				total_width = left_pane.offsetWidth+ right_pane.offsetWidth;
 			}
 		}
 	}
