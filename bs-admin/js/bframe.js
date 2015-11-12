@@ -200,7 +200,7 @@
 				if(response.message && response.message_obj) {
 					if(obj = document.getElementById(response.message_obj)) {
 						obj.innerHTML = response.message;
-						bframe.effect.fadeOut(obj, 0, 100, 0, 6000);
+						obj.className = 'fadeout';
 					}
 				}
 				if(response.values) {
@@ -212,7 +212,7 @@
 				}
 
 				// execute callback function
-				AjaxSubmitExecuteCallBackAfter();
+				AjaxSubmitExecuteCallBackAfter(response);
 
 				bframe.response_wait = false;
 				if(bframe.editCheck_handler) {
@@ -233,10 +233,10 @@
 			}
 		}
 
-		AjaxSubmitExecuteCallBackAfter = function() {
+		AjaxSubmitExecuteCallBackAfter = function(response) {
 			for(var i=0 ; i<cba.length ; i++) {
 				func = cba[i];
-				func();
+				func(response);
 			}
 		}
 
