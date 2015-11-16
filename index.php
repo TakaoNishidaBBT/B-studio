@@ -112,7 +112,20 @@
 		$serializedString = file_get_contents(B_FILE_INFO_THUMB);
 		$info = unserialize($serializedString);
 		if($info[B_CURRENT_ROOT . $url]) {
-			header('Content-Type: image/' . strtolower($file['extension']));
+			switch($file['extension']) {
+			case 'avi':
+			case 'flv':
+			case 'mov':
+			case 'mp4':
+			case 'mpg':
+			case 'mpeg':
+			case 'wmv':
+				header('Content-Type: image/jpg');
+				break;
+			default:
+				header('Content-Type: image/' . strtolower($file['extension']));
+				break;
+			}
 			readfile(B_UPLOAD_THUMBDIR . $info[B_CURRENT_ROOT . $url]);
 			exit;
 		}
