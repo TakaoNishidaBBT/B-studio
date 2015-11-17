@@ -83,6 +83,10 @@ div.thumbs li.tree-list div.tree {
 	border-left: 1px solid transparent;
 	width: 120px;
 }
+div.thumbs li.tree-list div.tree a {
+	display: block;
+	width: 110px;
+}
 div.thumbs li.tree-list div.selected {
 	border-left: 1px dotted #f00;
 }
@@ -163,7 +167,7 @@ div.detail table {
 }
 div.detail table div.tree {
 	margin: 0;
-	padding: 5px 4px 1px 4px;
+	padding: 7px 4px 1px 4px;
 	border-top: 1px solid #444;
 	width: 100%;
 }
@@ -240,7 +244,7 @@ div.detail table td.image-size {
 	padding-right: 18px;
 }
 div.detail table td img {
-	vertical-align: -30%;
+	vertical-align: -25%;
 	margin-right: 2px;
 }
 div.detail table td span.node-name {
