@@ -268,6 +268,8 @@
 			$this->sendHttpHeader();
 
 			$this->html_header->appendProperty('css', '<link href="css/version.css" type="text/css" rel="stylesheet" media="all" />');
+			$this->html_header->appendProperty('css', '<link href="css/selectbox_white.css" type="text/css" rel="stylesheet" media="all" />');
+			$this->html_header->appendProperty('script', '<script src="js/bframe_selectbox.js" type="text/javascript"></script>');
 
 			// HTML ヘッダー出力
 			$this->showHtmlHeader();
