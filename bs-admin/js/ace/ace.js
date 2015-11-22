@@ -3491,6 +3491,7 @@ var useragent = require("../lib/useragent");
 var dom = require("../lib/dom");
 var lang = require("../lib/lang");
 var BROKEN_SETDATA = useragent.isChrome < 18;
+var USE_IE_MIME_TYPE =  useragent.isIE;
 
 var TextInput = function(parentNode, host) {
     var text = dom.createElement("textarea");
@@ -3691,6 +3692,69 @@ var TextInput = function(parentNode, host) {
         resetValue();
     };
 
+// 2015.11.22 updated T.Nishida
+    var handleClipboardData = function(e, data) {
+        var clipboardData = e.clipboardData || window.clipboardData;
+        if (!clipboardData || BROKEN_SETDATA)
+            return;
+        var mime = USE_IE_MIME_TYPE ? "Text" : "text/plain";
+        if (data) {
+            return clipboardData.setData(mime, data) !== false;
+        } else {
+            return clipboardData.getData(mime);
+        }
+    };
+
+    var doCopy = function(e, isCut) {
+        var data = host.getCopyText();
+        if (!data)
+            return event.preventDefault(e);
+
+        if (handleClipboardData(e, data)) {
+            isCut ? host.onCut() : host.onCopy();
+            event.preventDefault(e);
+        } else {
+            copied = true;
+            text.value = data;
+            text.select();
+            setTimeout(function(){
+                copied = false;
+                resetValue();
+                resetSelection();
+                isCut ? host.onCut() : host.onCopy();
+            });
+        }
+    };
+    
+    var onCut = function(e) {
+        doCopy(e, true);
+    };
+    
+    var onCopy = function(e) {
+        doCopy(e, false);
+    };
+    
+    var onPaste = function(e) {
+        var clipboardData = e.clipboardData || window.clipboardData;
+        
+        if (clipboardData) {
+            var data = clipboardData.getData("Text");
+        }
+        
+        var data = handleClipboardData(e);
+        if (typeof data == "string") {
+            if (data)
+                host.onPaste(data, e);
+            if (useragent.isIE)
+                setTimeout(resetSelection);
+            event.preventDefault(e);
+        }
+        else {
+            text.value = "";
+            pasted = true;
+        }
+    };
+/*
     var onCut = function(e) {
         var data = host.getCopyText();
         if (!data) {
@@ -3765,6 +3829,8 @@ var TextInput = function(parentNode, host) {
             pasted = true;
         }
     };
+*/
+// 2015.11.22 updated T.Nishida
 
     event.addCommandKeyListener(text, host.onCommandKey.bind(host));
 

@@ -201,6 +201,29 @@ line：14218
         return value;
     };
 
+10.　safariのコピー＆ペーストで改行が余分に入ることを修正
+	onCopy, onCut, onPasteを最新ソースと入れ替え
+
+	3695行目から
+
+// 2015.11.22 updated T.Nishida
+    var handleClipboardData = function(e, data) {
+        var clipboardData = e.clipboardData || window.clipboardData;
+        if (!clipboardData || BROKEN_SETDATA)
+            return;
+        var mime = USE_IE_MIME_TYPE ? "Text" : "text/plain";
+
+        ↓
+
+        else {
+            text.value = "";
+            pasted = true;
+        }
+    };
+*/
+// 2015.11.22 updated T.Nishida
+	3833行目まで
+
 
 ■CKEditor
 
