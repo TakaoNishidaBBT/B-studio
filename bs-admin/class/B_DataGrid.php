@@ -65,7 +65,7 @@
 			$this->page_no = $page_no;
 		}
 
-		function bind($data=NULL) {
+		function bind($data=null) {
 			// data clear
 			$this->row = '';
 			$this->bind_data = '';
@@ -103,10 +103,11 @@
 				$this->record_cnt = count($data);
 			}
 			else {
-				$this->createSQL($sql, $sql_limit);
+				// data bind from DB
+				$sql = $this->createSQL();
 
 				// get record data
-				$rs = $this->db->query($sql . $sql_limit);
+				$rs = $this->db->query($sql);
 
 				for($record_cnt=0 ; $value = $this->db->fetch_assoc($rs) ; $record_cnt++) {
 					$this->bind_data[] = $value;
@@ -127,44 +128,34 @@
 			}
 		}
 
-		function createSQL(&$sql, &$sql_limit) {
-			// data bind from sql
+		function createSQL() {
 			if(isset($this->pager) && $this->pager['row_per_page'] != 'all') {
 				$start_record = ($this->page_no - 1) * $this->pager['row_per_page'];
 
-				if($this->limit_mode == 'replace') {
-					$this->select_sql = str_replace('%limit_from%', $start_record, $this->select_sql);
-					$this->select_sql = str_replace('%limit_to%', $this->pager['row_per_page'], $this->select_sql);
+				$this->sql_limit =
+					' limit ' .
+					$start_record . ',' .
+					$this->pager['row_per_page'];
 
-					$sql = 
-						$this->select_sql . 
-						$this->sql_where . 
-						$this->sql_group_by . 
-						$this->sql_order_by;
-				}
-				else {
-					$sql_limit = 
-						' limit ' .
-						$start_record . ',' .
-						$this->pager['row_per_page'];
+				$sql =
+					$this->select_sql .
+					$this->sql_where .
+					$this->sql_group_by .
+					$this->sql_order_by .
+					$this->sql_limit;
 
-					$sql = 
-						$this->select_sql . 
-						$this->sql_where . 
-						$this->sql_group_by .
-						$this->sql_order_by;
-				}
 				$sql = preg_replace('/select/i', 'select sql_calc_found_rows', $sql, 1);
 			}
 			else {
-				$sql = 
-					$this->select_sql . 
-					$this->sql_where . 
+				$sql =
+					$this->select_sql .
+					$this->sql_where .
 					$this->sql_group_by .
-					$this->sql_order_by;
+					$this->sql_order_by .
+					$this->sql_limit;
 			}
 
-			return;
+			return $sql;
 		}
 
 		function setCaption($caption) {
@@ -477,7 +468,7 @@
 		}
 
 		function getCsv($config) {
-			$this->createSQL($sql, $sql_limit);
+			$sql = $this->createSQL();
 			$this->csv_config = $config;
 
 			ob_start();
@@ -490,7 +481,7 @@
 			}
 
 			// get record data
-			$rs = $this->db->query($sql . $sql_limit);
+			$rs = $this->db->query($sql);
 			for($record_cnt=0 ; $row = $this->db->fetch_assoc($rs) ; $record_cnt++) {
 				fputcsv($fp, $this->getRowData($row, $record_cnt), $this->csv_config['delimiter']);
 			}
@@ -689,8 +680,8 @@
 				}
 			}
 			else {
-				$this->createSQL($sql, $sql_limit);
-				$rs = $this->db->query($sql . $sql_limit);
+				$sql = $this->createSQL();
+				$rs = $this->db->query($sql);
 				for($record_cnt=0 ; $row = $this->db->fetch_assoc($rs) ; $record_cnt++) {
 					$this->_getRowExcel($sheet, $row_num, $row);
 					$row_num++;
