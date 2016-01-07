@@ -117,6 +117,8 @@
 		}
 
 		function regist() {
+			$this->db->begin();
+
 			$sql = "select * from " . B_DB_PREFIX . "v_current_version";
 			$rs = $this->db->query($sql);
 			$row = $this->db->fetch_assoc($rs);

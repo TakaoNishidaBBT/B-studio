@@ -121,6 +121,10 @@
 				var tr = element.insertRow(i);
 				var td = tr.insertCell(0);
 				td.style.whiteSpace='nowrap';
+				if(data[i].divider) {
+					tr.className = 'divider';
+					continue;
+				}
 				if(data[i].icon) {
 					var icon = document.createElement('img');
 					icon.src = data[i].icon;
