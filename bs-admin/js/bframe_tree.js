@@ -4,12 +4,12 @@
  *
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
-	bframe.addEventListner(window, 'load' , bframeTreeInit);
+	bframe.addEventListner(window, 'load', bframeTreeInit);
 
-	function bframeTreeInit(){
-	    var div = document.getElementsByTagName('div');
+	function bframeTreeInit() {
+		var div = document.getElementsByTagName('div');
 
-	    for(var i=0; i<div.length; i++) {
+		for(var i=0; i<div.length; i++) {
 			if(bframe.checkClassName('bframe_tree', div[i])) {
 				bframe_tree = new bframe.tree(div[i]);
 			}
@@ -40,8 +40,8 @@
 		var trash_ul;
 
 		var node_number = 0;
-		var current_node = new currentNodeControl;
-		var selected_node = new currentNodeControl;
+		var current_node = new currentNodeControl();
+		var selected_node = new currentNodeControl();
 		var current_edit_node;
 		var eventSrcObject;
 		var new_node;
@@ -68,7 +68,7 @@
 
 		var pane;
 		var pane_disp_change;
-		var pane_disp_change_select
+		var pane_disp_change_select;
 		var upload_button;
 		var upload_button_style_display;
 
@@ -113,7 +113,7 @@
 
 		function getPane() {
 			if(property.relation && property.relation.pane) {
-			    pane = document.getElementById(property.relation.pane.id);
+				pane = document.getElementById(property.relation.pane.id);
 				if(property.editable == 'true' || property.sort == 'manual') {
 					pane.oncontextmenu=showContextMenu;
 					pane.onclick = resetSelectedObject;
@@ -127,7 +127,7 @@
 
 		function getUploadButton() {
 			if(property.upload && property.upload.button) {
-			    upload_button = document.getElementById(property.upload.button);
+				upload_button = document.getElementById(property.upload.button);
 				if(property.editable == 'true' || property.sort == 'manual') {
 					upload_button_style_display = upload_button.style.display;
 				}
@@ -167,15 +167,18 @@
 		}
 
 		function keydown(event) {
+			var keycode;
+			var active_window_name;
+
 			if(window.event) {
-				var keycode = window.event.keyCode;
+				keycode = window.event.keyCode;
 			}
 			else {
-				var keycode = event.keyCode;
+				keycode = event.keyCode;
 			}
 
 			// if modal window open and content is not myself
-			if(top.bframe.modalWindow) var active_window_name = top.bframe.modalWindow.getActiveWindow();
+			if(top.bframe.modalWindow) active_window_name = top.bframe.modalWindow.getActiveWindow();
 			if(active_window_name && active_window_name != window.name) return;
 
 			switch(keycode) {
@@ -630,7 +633,7 @@
 						pul.id = 'uu' + node_info.node_id;
 						pul.name = 'nodes';
 						div.appendChild(pul);
-						for(var i=0 ; i < node_info.children.length ; i++) {
+						for(var i=0; i < node_info.children.length; i++) {
 							createNodeObject(pul, node_info.children[i], 'pane', trash);
 							setNewNode(node_info.children[i]);
 						}
