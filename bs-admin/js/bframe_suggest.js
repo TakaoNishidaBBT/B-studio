@@ -23,8 +23,11 @@
 		if(!bframe.checkClassName('bframe_suggest', target)) {
 			return false;
 		}
-
+		var self = this;
 		var target_id = bframe.getID(target);
+
+		var	response_wait = false;
+		var httpObj;
 
 		var ret = bframe.getPageInfo();
 		var terminal_id = ret.terminal_id;
@@ -32,12 +35,10 @@
 		var page = ret.source_page;
 
 		var open = false;
-		var	response_wait = false;
 		var row_no = -1;
 		var timer;
 		var select_status = false;
 
-		var httpObj;
 		var xmlData;
 
 		var last_value = '';
@@ -79,17 +80,27 @@
 
 			if(httpObj.readyState == 4 && httpObj.status == 200 && response_wait){
 				property = eval('('+httpObj.responseText+')');
-				if(property.relation) {
-					if(bframe.isArray(property.relation)) {
-						for(var i=0; i<property.relation.length; i++) {
-							if(rel = bframe.getRelationObject(target, property.relation[i])) {
-								relation_object[relation_object_cnt++] = rel;
+				if(property.relation && bframe.isArray(property.relation)) {
+					for(var i=0; i<property.relation.length; i++) {
+						if(property.relation[i].id) {
+							if(rel = bframe.getRelationObject(target, property.relation[i].id)) {
+								property.relation[i].obj = rel;
+							}
+							else if(rel = document.getElementById(property.relation[i].id)) {
+								property.relation[i].obj = rel;
 							}
 						}
 					}
-					else {
-						if(rel = bframe.getRelationObject(target, property.relation)) {
-							relation_object[relation_object_cnt++] = rel;
+				}
+				if(property.post && bframe.isArray(property.post)) {
+					for(var i=0; i<property.post.length; i++) {
+						if(property.post[i].id) {
+							if(rel = bframe.getRelationObject(target, property.post[i].id)) {
+								property.post[i].obj = rel;
+							}
+							else if(rel = document.getElementById(property.post[i].id)) {
+								property.post[i].obj = rel;
+							}
 						}
 					}
 				}
@@ -115,7 +126,6 @@
 				if(property.display && property.display.ext_width) {
 					ext_width = property.display.ext_width;
 				}
-				bframe.context_menu.setBorder('1px #ACA899 solid');
 
 				response_wait = false;
 			}
@@ -160,14 +170,13 @@
 					}
 				}
 				else {
-					var param = 'terminal_id='+terminal_id;
-
-					for(var i in property.value) {
-						var value_obj = bframe.getRelationObject(target, property.value[i]);
-						if(value_obj) {
-							param += '&' + property.value[i] + '='+value_obj.value;
+					param = 'terminal_id=' + terminal_id + '&name=' + target.value;
+					if(property.post) {
+						for(var i=0; i<property.post.length; i++) {
+							param+= '&' + property.post[i].id + '=' + property.post[i].obj.value;
 						}
 					}
+
 					httpObj = createXMLHttpRequest(show);
 					eventHandler(httpObj, property.module, property.file, property.method, 'POST', param);
 					document.body.style.cursor = 'wait';
@@ -190,6 +199,7 @@
 					var position = bframe.getElementPosition(display_object);
 					var frame_offset = bframe.getFrameOffset(window, context_menu_frame);
 					position.left += frame_offset.left;
+					position.left += 1;
 					position.top += frame_offset.top;
 					bframe.context_menu.setWidth(display_object.offsetWidth-2 + parseInt(ext_width));
 					bframe.context_menu.setOffsetHeight(display_object.offsetHeight-1);
@@ -231,8 +241,8 @@
 			}
 
 			switch(keycode) {
-			case 37: //©
-			case 39: //¨
+			case 37: //â†
+			case 39: //â†’
 				return;
 
 			case 9:  //tab
@@ -248,7 +258,7 @@
 				}
 				return;
 
-			case 38: //ª
+			case 38: //â†‘
 				if(!open) return;
 
 				if(element = bframe.context_menu.getElement()) {
@@ -275,7 +285,7 @@
 				}
 				return;
 
-			case 40: //«
+			case 40: //â†“
 				if(!open) return;
 
 				if(element = bframe.context_menu.getElement()) {
@@ -341,11 +351,19 @@
 		function _setValue(node) {
 			var obj;
 
+			if(!property.relation) return;
+
 			for(var i=0; i<node.childNodes.length; i++) {
 				var child = node.childNodes[i];
 
 				if(child.tagName && child.tagName != 'array' && child.tagName != target_id) {
-					if(obj = bframe.getRelationObject(target, child.tagName)) {
+					for(var j=0, obj=''; j<property.relation.length; j++) {
+						if(child.tagName == property.relation[j].id) {
+							obj = property.relation[j].obj;
+							break;
+						}
+					}
+					if(obj) {
 						switch(obj.tagName.toLowerCase()) {
 						case 'input':
 							if(child.childNodes.length) {
@@ -375,16 +393,15 @@
 							break;
 
 						case 'select':
-							obj.innerHTML = "";
-							var ids = child.getElementsByTagName('id');
-							var values = child.getElementsByTagName('value');
-
-							for(var j=0; j<ids.length; j++) {
-								obj.options[j] = new Option(values[j].childNodes[0].nodeValue, ids[j].childNodes[0].nodeValue);
+							if(child.childNodes.length) {
+								obj.value = child.childNodes[0].nodeValue;
 							}
-							obj.options[0].selected = true;
+							else {
+								obj.value = '';
+							}
 							break;
 						}
+						bframe.fireEvent(obj, 'change');
 					}
 				}
 				else if(child.childNodes.length) {
@@ -394,41 +411,22 @@
 		}
 
 		function clear() {
-			for(var i=0; i<relation_object.length ; i++) {
-				if(!setDefault(relation_object[i])) {
-					switch(relation_object[i].tagName.toLowerCase()) {
+			if(property.relation) {
+				for(var i=0; i<property.relation.length; i++) {
+					switch(property.relation[i].obj.tagName.toLowerCase()) {
 					case 'input':
-						relation_object[i].value = '';
-						break;
-
 					case 'select':
-						for(var j=relation_object[i].options.length-1; j>=0; j--) {
-							relation_object[i].removeChild(relation_object[i].options[j]);
+						if(property.relation[i].default) {
+							property.relation[i].obj.value = property.relation[i].default;
 						}
+						else {
+							property.relation[i].obj.value = '';
+						}
+						bframe.fireEvent(property.relation[i].obj, 'change');
 						break;
 					}
 				}
 			}
 			select_status = false;
-		}
-
-		function setDefault(object) {
-			var ret = false;
-
-			if(property.default_value) {
-				for(var i=0; i<property.default_value.length; i++) {
-					if(property.default_value[i].id == object.id) {
-						if(object.value && property.default_value[i].value) {
-							object.value = property.default_value[i].value;
-							ret = true;
-						}
-						if(object.src && property.default_value[i].src) {
-							object.src = property.default_value[i].src;
-							ret = true;
-						}
-					}
-				}
-			}
-			return ret;
 		}
 	}

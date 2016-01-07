@@ -116,7 +116,7 @@
 			$image_size = getimagesize($img_path);
 
 			if($image_size[0] > $max_width) {
-				if($image_size[0] > $image_size[1]) {
+				if(($image_size[0] / $max_width) > ($image_size[1] / $max_height)) {
 					$width = $max_width;
 					$height = $image_size[1] * $width / $image_size[0];
 				}

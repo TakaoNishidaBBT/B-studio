@@ -683,6 +683,23 @@
 		return false;
 	};
 
+	bframe.searchNodesByName = function(node, name) {
+		var result = Array();
+		this._searchNodesByName(node, name, result);
+		return result;
+	}
+
+	bframe._searchNodesByName = function(node, name, result) {
+		if(!node) return false;
+		if(node.name == name) {
+			result.push(node);
+		}
+		for(var i=0; i<node.childNodes.length; i++) {
+			this._searchNodesByName(node.childNodes[i], name, result);
+		}
+		return;
+	};
+
 	bframe.searchNodeByClassName = function(node, className) {
 		if(!node.childNodes) return false;
 
