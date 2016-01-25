@@ -100,7 +100,7 @@
 			set_time_limit(180);
 
 			$zip = new ZipArchive();
-			$file_name = B_SITE_NAME . '_' . date("YmdHis") . '.zip';
+			$file_name = 'bstudio_' . date('YmdHis') . '.zip';
 			$file_path = B_DOWNLOAD_DIR . $this->user_id . time() . $file_name;
 
 			if(!$zip->open($file_path, ZipArchive::CREATE)) {
@@ -140,7 +140,7 @@
 				}
 			}
 
-			$dump_file_name = B_SITE_NAME . '_' . date("YmdHis") . '.sql';
+			$dump_file_name = 'bstudio_' . date('YmdHis') . '.sql';
 			$dump_file_path = B_DOWNLOAD_DIR . $dump_file_name;
 			if(!$this->db->backupTables($dump_file_path, $this->request['mode'])) {
 				$this->result = new B_Element($this->result_config);
@@ -171,7 +171,7 @@
 			// continue whether a client disconnect or not
 			ignore_user_abort(true);
 
-			$dump_file_name = B_SITE_NAME . '_' . date("YmdHis") . '.sql';
+			$dump_file_name = 'bstudio_' . date('YmdHis') . '.sql';
 			$file_path = B_DOWNLOAD_DIR . $dump_file_name;
 			if(!$this->db->backupTables($file_path)) {
 				$this->result = new B_Element($this->result_config);

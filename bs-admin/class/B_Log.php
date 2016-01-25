@@ -68,7 +68,7 @@
 	class console {
 		public static $buffer;
 
-		function log() {
+		public static function log() {
 			for($i=0 ; $i<func_num_args(); $i++) {
 				$param = func_get_arg($i);
 				$message[] = $param;
@@ -77,13 +77,13 @@
 			self::$buffer.= '<script type="text/javascript">' . "console.log({$json})</script>" . "\n";
 		}
 
-		function trace() {
+		public static function trace() {
 			$message = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);
 			$json = json_encode($message);
 			self::$buffer.= '<script type="text/javascript">' . "console.log({$json})</script>" . "\n";
 		}
 
-		function buffer() {
+		public static function buffer() {
 			return self::$buffer;
 		}
 	}

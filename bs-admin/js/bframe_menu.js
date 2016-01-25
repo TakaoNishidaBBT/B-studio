@@ -74,7 +74,6 @@
 
 		var property;
 		var ext_width = 0;
-		var opened;
 
 		var context_menu;
 		var context_menu_frame = window;
@@ -162,7 +161,7 @@
 		function showContextMenu(event) {
 			if(bframe.getButton(event) != 'L') return;
 			bframe.stopPropagation(event);
-			if(opened) return false;
+			if(context_menu.opened()) return false;
 
 			if(bframe.isObject(property)) {
 				menu_container.closeAll();
@@ -172,7 +171,6 @@
 				context_menu.positionAbsolute(position);
 
 				context_menu.show();
-				opened = true;
 				bframe.addEventListner(document, 'mousewheel', bframe.cancelEvent);
 			}
 			return false;
@@ -182,7 +180,6 @@
 			if(document.detachEvent) {
 				document.detachEvent('onmousewheel', bframe.cancelEvent);
 			}
-			opened = false;
 			context_menu.hide();
 		}
 
