@@ -54,10 +54,6 @@
 
 					$this->setThumnail($row['title_img_file']);
 					$this->form->setValue($row);
-					if($row['description_flag'] != '1') {
-						$obj =&$this->form->getElementByName('preview');
-						$obj->disabled = 'disabled';
-					}
 				}
 				break;
 			}
