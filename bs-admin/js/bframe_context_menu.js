@@ -43,7 +43,7 @@
 		var mouse_position = {x:0, y:0};
 		var menu_position;
 		var close_timer;
-		var close_timer_value = 2000;
+		var close_timer_value = 0;
 
 		var _filter;
 
@@ -53,6 +53,8 @@
 		var frame;
 		var document;
 		var arrow_img = 'images/common/arrow_right.png';
+
+		var opened;
 
 		this.setDocument = function(w) {
 			frame = w;
@@ -569,6 +571,7 @@
 				bframe.addEventListnerAllFrames(top, 'mousewheel', bframe.cancelEvent);
 			}
 			popup.show();
+			opened = true;
 		}
 
 		this.hide = function() {
@@ -584,6 +587,11 @@
 			}
 			popup.hide();
 			self.clearTimer();
+			opened = false;
+		}
+
+		this.opened = function() {
+			return opened;
 		}
 
 		function filter() {

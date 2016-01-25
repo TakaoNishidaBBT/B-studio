@@ -1110,6 +1110,13 @@
 		function _getHiddenHtml() {
 			if(!isset($this->name)) return;
 
+			if($this->specialchars == 'none') {
+				$value = $this->value;
+			}
+			else {
+				$value = htmlspecialchars($this->value, ENT_QUOTES, B_CHARSET);
+			}
+
 			return	'<input type="hidden" ' .
 					'name="' . $this->name_prefix . $this->name . '" ' .
 					'id="' . $this->_gethtmlid() . '" ' .

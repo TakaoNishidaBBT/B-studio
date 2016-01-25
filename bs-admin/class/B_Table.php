@@ -323,12 +323,12 @@
 			return $row[$field];
 		}
 
-		function copy($param, $sql_where='') {
+		function copy($param, $from, $sql_where='') {
 			foreach($this->config as $key => $config) {
 				if(isset($v)) $v.= ',';
 				$v.= $this->setCopyValues($key, $config, $param);
 			}
-			$sql = "insert into $this->prefix$this->table select $v from $this->prefix$this->table $sql_where";
+			$sql = "insert into $this->prefix$this->table select $v from $this->prefix$from $sql_where";
 			$ret = $this->db->query($sql);
 
 			return $ret;
