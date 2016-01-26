@@ -48,6 +48,10 @@ div.info {
 	font-size: 13px;
 }
 
+p.error-message {
+	text-align: center;
+}
+
 /* button */
 span.version-button {
 	display: inline-block;

@@ -11,6 +11,10 @@
 					echo $this->select_message;
 				}
 				echo $this->dg->getHtml($this->page_no);
+
+				if($this->error_message) {
+					echo '<p class="error-message">' . $this->error_message . '</p>' . "\n";
+				}
 				echo $this->version_control->getHtml();
 			?>
 			</form>

@@ -82,38 +82,44 @@
 		}
 
 		function confirm() {
-			$this->version_table = new B_Table($this->db, 'version');
-			$this->reserved_version_id = $this->post['reserved_version'];
-			$this->working_version_id = $this->post['working_version'];
-
-			$row = $this->version_table->selectByPk(array('version_id' => $this->reserved_version_id));
-			$this->reserved_version = $row['version'];
-			if($row['publication_datetime_u'] && $row['publication_datetime_u'] > time()) {
-				$sql = "select * from " . B_DB_PREFIX . "v_current_version";
-				$rs = $this->db->query($sql);
-				$current_version = $this->db->fetch_assoc($rs);
-				if($current_version['current_version_id'] != $this->reserved_version_id) {
-					$this->reserve_datetime = $row['publication_datetime_t'] . '予約登録';
-				}
-				else {
-					$this->reserve_datetime = '即時反映（このバージョンを予約登録するにはそれまでに公開されるバージョンを設定してから再度、予約登録する必要があります）';
-				}
+			if(!$this->post['reserved_version'] || !$this->post['working_version']) {
+				$this->error_message.= '<strong>バージョンを選択してください</strong>';
+				$this->back();
 			}
 			else {
-				$this->reserve_datetime = '即時反映';
+				$this->version_table = new B_Table($this->db, 'version');
+				$this->reserved_version_id = $this->post['reserved_version'];
+				$this->working_version_id = $this->post['working_version'];
+
+				$row = $this->version_table->selectByPk(array('version_id' => $this->reserved_version_id));
+				$this->reserved_version = $row['version'];
+				if($row['publication_datetime_u'] && $row['publication_datetime_u'] > time()) {
+					$sql = "select * from " . B_DB_PREFIX . "v_current_version";
+					$rs = $this->db->query($sql);
+					$current_version = $this->db->fetch_assoc($rs);
+					if($current_version['current_version_id'] != $this->reserved_version_id) {
+						$this->reserve_datetime = $row['publication_datetime_t'] . '予約登録';
+					}
+					else {
+						$this->reserve_datetime = '即時反映（このバージョンを予約登録するにはそれまでに公開されるバージョンを設定してから再度、予約登録する必要があります）';
+					}
+				}
+				else {
+					$this->reserve_datetime = '即時反映';
+				}
+
+				$row = $this->version_table->selectByPk(array('version_id' => $this->working_version_id));
+				$this->working_version = $row['version'];
+
+				$this->_setRequest('reserved_version');
+				$this->_setRequest('working_version');
+				$this->session['reserve_datetime'] = $this->reserve_datetime;
+
+				$this->session['reserved_version_name'] = $this->reserved_version;
+				$this->session['working_version_name'] = $this->working_version;
+
+				$this->setView('view_confirm');
 			}
-
-			$row = $this->version_table->selectByPk(array('version_id' => $this->working_version_id));
-			$this->working_version = $row['version'];
-
-			$this->_setRequest('reserved_version');
-			$this->_setRequest('working_version');
-			$this->session['reserve_datetime'] = $this->reserve_datetime;
-
-			$this->session['reserved_version_name'] = $this->reserved_version;
-			$this->session['working_version_name'] = $this->working_version;
-
-			$this->setView('view_confirm');
 		}
 
 		function regist() {
