@@ -114,7 +114,6 @@
 				'UTF-8'		=> 'UTF-8',
 				'EUC-JP'	=> 'EUC-JP',
 				'SJIS'		=> 'SJIS',
-				'sjis-win'	=> 'sjis-win',
 		);
 
 	${$g_data_set}['table']['contents_node'] =

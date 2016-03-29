@@ -43,6 +43,13 @@
 			return date('t', mktime(0, 0, 0, (int)$month, 1, (int)$year));
 		}
 
+		public static function checkdate($date) {
+			if(!$date) return true;
+
+			$date_array = explode('/', $date);
+			return @checkdate($date_array[1], $date_array[2], $date_array[0]);
+		}
+
 		public static function stringToCode($val) {
 			static $from = array('\\',  "\n", "\r", '"');
 			static $to   = array('\\\\','\\n','\\r','\\"');

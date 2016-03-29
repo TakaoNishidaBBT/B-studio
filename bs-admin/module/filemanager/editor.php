@@ -21,7 +21,7 @@
 				$info = pathinfo($file_path);
 				$update_datetime = filemtime($file_path);
 				$contents = file_get_contents($file_path);
-				$encoding = mb_detect_encoding($contents, "auto");
+				$encoding = mb_detect_encoding($contents, 'UTF-8, EUC-JP, SJIS');
 				$obj = $this->editor->getElementByName('contents');
 				$obj->value = mb_convert_encoding($contents, 'UTF-8', 'auto');
 				switch(strtolower($info['extension'])) {

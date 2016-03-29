@@ -7,13 +7,14 @@
 	bframe.addEventListner(window, 'load' , bframeCalendarInit);
 
 	function bframeCalendarInit(){
-		var c = new Array();
+		var cc = new bframe.calendar_container();
 	    var a = document.getElementsByTagName('a');
+		var c = new Array();
 		var cnt=0;
 
 	    for(var i=0; i<a.length; i++) {
 			if(bframe.checkClassName('bframe_calendar', a[i])) {
-				c[cnt++] = new bframe.calendar(a[i]);
+				c[cnt++] = new bframe.calendar(a[i], cc);
 			}
 		}
 
@@ -21,43 +22,32 @@
 
 	    for(i=0; i<input.length; i++) {
 			if(bframe.checkClassName('bframe_calendar', input[i])) {
-				c[cnt++] = new bframe.calendar(input[i]);
+				c[cnt++] = new bframe.calendar(input[i], cc);
 			}
 		}
+
+		cc.setCalendars(c);
+
+		bframe.calendarContainer = cc;
 	}
 
 	// -------------------------------------------------------------------------
-	// class bframe.calendarContainer
+	// class bframe.calendar_container
 	// 
 	// -------------------------------------------------------------------------
-	bframe.calendarContainer = function(zindex, drop_shadow, transparent) {
-		if(!zindex) {
-			zindex = 1;
-		}
-		var popup = new bframe.popup(window, zindex, drop_shadow, transparent);
+	bframe.calendar_container = function() {
+		var calendars;
 
-		this.setPopUpPosition = function(position) {
-			popup.position(position);
+		this.setCalendars = function(obj) {
+			calendars = obj;
 		}
 
-		this.setPopUpSize = function(size) {
-			popup.size(size);
-		}
-
-		this.setPopUpContents = function(contents) {
-			popup.contents(contents);
-		}
-
-		this.getContents = function() {
-			return popup.getContents();
-		}
-
-		this.showPopUp = function() {
-			popup.show();
-		}
-
-		this.hidePopUp = function() {
-			popup.hide();
+		this.closeAll = function() {
+			for(var i=0 ; i<calendars.length; i++) {
+				if(calendars[i].hide) {
+					calendars[i].hide();
+				}
+			}
 		}
 	}
 
@@ -65,11 +55,12 @@
 	// class bframe.calendar
 	// 
 	// -------------------------------------------------------------------------
-	bframe.calendar = function(obj) {
+	bframe.calendar = function(target, cc) {
+		var calendar_container = cc;
 		var	response_wait = false;
 		var property;
 		var httpObj;
-		var cc;
+		var popup;
 
 		var ret = bframe.getPageInfo();
 		var terminal_id = ret.terminal_id;
@@ -77,16 +68,17 @@
 		var page = ret.source_page;
 
 		var zindex = 10;
-		var position = bframe.getElementPosition(obj);
+		var position;
 		var size;
 
 		var year = 0;
 		var month = 0;
+		var day = 0;
 		var mode = '';
 
 		var target;
 
-		bframe.addEventListner(obj, 'click' , show);
+		bframe.addEventListner(target, 'click' , show);
 		bframe.addEventListnerAllFrames(top, 'click', hide);
 
 		init();
@@ -94,7 +86,7 @@
 		function init() {
 			var param;
 
-			param = 'terminal_id='+terminal_id+'&mode='+mode+'&class=bframe_calendar&id='+obj.id;
+			param = 'terminal_id='+terminal_id+'&mode='+mode+'&class=bframe_calendar&id='+target.id;
 			httpObj = createXMLHttpRequest(initResponse);
 			eventHandler(httpObj, module, page, 'initScript', 'POST', param);
 			response_wait = true;
@@ -103,32 +95,43 @@
 		function initResponse(){
 			if(httpObj.readyState == 4 && httpObj.status == 200 && response_wait){
 				property = eval('('+httpObj.responseText+')');
-				if(property.offsetLeft) {
-					position.left += parseInt(property.offsetLeft);
-				}
 				size = {width:property.width, height:property.height};
 
 				target = document.getElementById(property.target);
 
-				cc = new bframe.calendarContainer(100, property.drop_shadow, property.transparent);
+				popup = new bframe.calendarPopup(100, property.drop_shadow, property.transparent);
 
 				response_wait = false;
 			}
 		}
 
 		function hide() {
-			cc.hidePopUp();
+			popup.hidePopUp();
 		}
+		this.hide = hide;
 
 		function show(event) {
+			if(popup.isOpen()) {
+				hide();
+				bframe.stopPropagation(event);
+				return false;
+			}
 			var param;
 
 			year = 0;
 			month = 0;
+			day = 0;
 			mode = '';
 
+			if(target.value) {
+				var date = target.value.split('/');
+				year = date[0];
+				month = date[1];
+				day = date[2];
+			}
+
 			param = 'terminal_id='+terminal_id+'&mode='+mode;
-			param += '&year='+year+'&month='+month;
+			param += '&year='+year+'&month='+month+'&day='+day;
 
 			httpObj = createXMLHttpRequest(showResponse);
 
@@ -136,6 +139,12 @@
 			response_wait = true;
 
 			bframe.stopPropagation(event);
+			bframe.fireEvent(document, 'click');
+
+			position = bframe.getElementPosition(target);
+			if(property.offsetLeft) {
+				position.left += parseInt(property.offsetLeft);
+			}
 
 			return false;
 		}
@@ -146,11 +155,11 @@
 				year = xmlData.getElementsByTagName('year')[0].firstChild.nodeValue;
 				month = xmlData.getElementsByTagName('month')[0].firstChild.nodeValue;
 
-				cc.setPopUpContents(xmlData.getElementsByTagName('innerHTML')[0].firstChild.nodeValue);
-				cc.setPopUpPosition(position);
-				cc.setPopUpSize(size);
+				popup.setPopUpContents(xmlData.getElementsByTagName('innerHTML')[0].firstChild.nodeValue);
+				popup.setPopUpPosition(position);
+				popup.setPopUpSize(size);
 
-				var element = cc.getContents();
+				var element = popup.getContents();
 				var table = element.getElementsByTagName('table')[0];
 				var link = table.caption.getElementsByTagName('a');
 				link[0].onclick = prevMonth;
@@ -170,7 +179,8 @@
 
 				element.onclick = nop;
 
-				cc.showPopUp();
+				calendar_container.closeAll();
+				popup.showPopUp();
 
 				response_wait = false;
 			}
@@ -219,5 +229,48 @@
 
 		function nop(event) {
 			bframe.stopPropagation(event);
+		}
+	}
+
+	// -------------------------------------------------------------------------
+	// class bframe.calendarPopup
+	// 
+	// -------------------------------------------------------------------------
+	bframe.calendarPopup = function(zindex, drop_shadow, transparent) {
+		var opened;
+
+		if(!zindex) {
+			zindex = 1;
+		}
+		var popup = new bframe.popup(window, zindex, drop_shadow, transparent);
+
+		this.setPopUpPosition = function(position) {
+			popup.position(position);
+		}
+
+		this.setPopUpSize = function(size) {
+			popup.size(size);
+		}
+
+		this.setPopUpContents = function(contents) {
+			popup.contents(contents);
+		}
+
+		this.getContents = function() {
+			return popup.getContents();
+		}
+
+		this.showPopUp = function() {
+			popup.show();
+			opened = true;
+		}
+
+		this.hidePopUp = function() {
+			popup.hide();
+			opened = false;
+		}
+
+		this.isOpen = function() {
+			return opened;
 		}
 	}

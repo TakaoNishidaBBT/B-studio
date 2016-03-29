@@ -13,7 +13,7 @@
 	// 
 	// -------------------------------------------------------------------------
 	bframe.getPageInfo = function() {
-		var arr = new Array();
+		var arr = [];
 		var node = document.getElementsByTagName('meta');
 
 		for(var i in node) {
@@ -22,14 +22,14 @@
 		return arr;
 	}
 
-	bframe.submit_cb = new Array();
+	bframe.submit_cb = [];
 
 	bframe.registSubmitCallBackFunction = function(func) {
 		bframe.submit_cb.push(func);
 	}
 
 	bframe.executeCallBack = function() {
-		for(var i=0 ; i<bframe.submit_cb.length ; i++) {
+		for(var i=0; i<bframe.submit_cb.length; i++) {
 			func = bframe.submit_cb[i];
 			func();
 		}
@@ -125,8 +125,8 @@
 	}
 
 	bframe.AjaxSubmit = function() {
-		var cb = new Array;
-		var cba = new Array;
+		var cb = [];
+		var cba = [];
 		var sfname, smodule, spage, smethod, smode, snocheck;
 
 		submit = function(fname, module, page, method, mode, nocheck) {
@@ -166,7 +166,7 @@
 		}
 
 		this.removeCallBackFunction = function(func) {
-			for(var i=0 ; i<cb.length ; i++) {
+			for(var i=0; i<cb.length; i++) {
 				if(func == cb[i]) {
 					cb.splice(i, 1);
 				}
@@ -174,7 +174,7 @@
 		}
 
 		AjaxSubmitExecuteCallBack = function() {
-			for(var i=0 ; i<cb.length ; i++) {
+			for(var i=0; i<cb.length; i++) {
 				func = cb[i];
 				func();
 			}
@@ -226,7 +226,7 @@
 		}
 
 		this.removeCallBackFunctionAfter = function(func) {
-			for(var i=0 ; i<cba.length ; i++) {
+			for(var i=0; i<cba.length; i++) {
 				if(func == cba[i]) {
 					cba.splice(i, 1);
 				}
@@ -234,7 +234,7 @@
 		}
 
 		AjaxSubmitExecuteCallBackAfter = function(response) {
-			for(var i=0 ; i<cba.length ; i++) {
+			for(var i=0; i<cba.length; i++) {
 				func = cba[i];
 				func(response);
 			}
@@ -282,7 +282,7 @@
 		if(obj.className) {
 			var arr = obj.className.split(' ');
 			for(var j=0; j<arr.length; j++) {
-		        if(arr[j] == class_name) {
+				if(arr[j] == class_name) {
 					return true;
 				}
 			}
@@ -337,7 +337,7 @@
 
 	bframe.getLinkParam = function(link) {
 		if(link.split('?').length < 2) return;
-		var hash = new Array();
+		var hash = [];
 		var param = link.split('?')[1];
         var parray = param.split('&');
         for(var i=0;i<parray.length;i++){
@@ -358,7 +358,7 @@
 	}
 
 	bframe.getZindex = function(element) {
-		for(var e=element ; e ; e=e.parentNode) {
+		for(var e=element; e; e=e.parentNode) {
 			if(e.style && e.style.zIndex) {
 				return e.style.zIndex;
 			}
@@ -367,12 +367,12 @@
 
 	bframe.getStyle = function(element) {
 		if(document.defaultView && document.defaultView.getComputedStyle) {
-		    // firefox, opera
-		    style = document.defaultView.getComputedStyle(element, '');
+			// firefox, opera
+			style = document.defaultView.getComputedStyle(element, '');
 		}
 		else if(element.currentStyle) {
-		    // ie
-		    style = element.currentStyle;
+			// ie
+			style = element.currentStyle;
 		}
 		return style;
 	}
@@ -633,7 +633,7 @@
 		if(!node) return false;
 
 		var object;
-		if(node.tagName.toLowerCase() == 'tr' || !node.parentNode) {
+		if(!node.parentNode || node.tagName.toLowerCase() == 'tr') {
 			if(object = bframe.searchNodeById(node, id)) {
 				return object;
 			}
@@ -684,7 +684,7 @@
 	};
 
 	bframe.searchNodesByName = function(node, name) {
-		var result = Array();
+		var result = [];
 		this._searchNodesByName(node, name, result);
 		return result;
 	}
@@ -719,7 +719,7 @@
 	};
 
 	bframe.searchNodesByClassName = function(node, className) {
-		var result = Array();
+		var result = [];
 		this._searchNodesByClassName(node, className, result);
 		return result;
 	}
@@ -802,9 +802,9 @@
 	}
 
 	bframe.getAbsoluteIndex = function(tr, id) {
-		for(i=0 ; i<tr.cells.length ; i++) {
+		for(i=0; i<tr.cells.length; i++) {
 			cell=tr.cells[i];
-			for(var j=0 ; j < cell.childNodes.length ; j++) {
+			for(var j=0; j < cell.childNodes.length; j++) {
 				if(cell.childNodes[j].id && cell.childNodes[j].id == id) {
 					return i;
 				}
@@ -817,7 +817,7 @@
 		if(window.name == name) {
 			return window;
 		}
-		for(var i=0 ; i<window.frames.length; i++) {
+		for(var i=0; i<window.frames.length; i++) {
 			w = bframe.getFrameByName(window.frames[i], name);
 			if(w) {
 				return w;
@@ -854,10 +854,10 @@
 	}
 
 	bframe.getUrlParam = function(paramName) {
-		var reParam = new RegExp('(?:[\?&]|&amp;)' + paramName + '=([^&]+)', 'i') ;
-		var match = window.location.search.match(reParam) ;
+		var reParam = new RegExp('(?:[\?&]|&amp;)' + paramName + '=([^&]+)', 'i');
+		var match = window.location.search.match(reParam);
 
-		return (match && match.length > 1) ? match[1] : '' ;
+		return (match && match.length > 1) ? match[1] : '';
 	}
 
 	bframe.isObject = function(obj) {

@@ -14,15 +14,22 @@
 		}
 
 		function getCalendar() {
-			if($this->request['year'] && $this->request['month']) {
+			// check request date
+			$this->request['day'] = $this->request['day'] ? $this->request['day'] : '01';
+			$request_date = $this->request['year'] . '/' . $this->request['month'] . '/' . $this->request['day'];
+			$ret = B_Util::checkdate($request_date);
+
+			if($ret && $this->request['year'] && $this->request['month']) {
 				$this->year = $this->request['year'];
 				$this->month = $this->request['month'];
+				if($this->request['day']) {
+					$this->day = $this->request['day'];
+				}
 			}
 			else {
 				$this->year = date('Y');
 				$this->month = date('m');
 			}
-
 			switch($this->request['mode']) {
 			case 'prev':
 				$date = $this->util->addMonth($this->year, $this->month, -1);
@@ -37,7 +44,7 @@
 				break;
 			}
 
-			$this->cal->setProperty($this->year, (int)$this->month);
+			$this->cal->setProperty($this->year, (int)$this->month, (int)$this->day);
 
 			$this->response();
 			exit;

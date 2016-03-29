@@ -71,7 +71,7 @@ $form_config = array(
 						array(
 							'width'			=> '170',
 							'height'		=> '195',
-							'offsetLeft'	=> '26',
+							'offsetLeft'	=> '174',
 							'drop_shadow'	=> 'true',
 							'target'		=> 'article_date_t',
 							'ajax'			=>

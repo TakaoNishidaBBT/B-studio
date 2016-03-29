@@ -39,7 +39,7 @@ $tab_control_config = array(
 		'name'				=> 'encoding',
 		'class'				=> 'B_SelectBox',
 		'data_set'			=> 'encoding',
-		'special_html'		=> 'class="bframe_selectbox',
+		'special_html'		=> 'class="bframe_selectbox"',
 	),
 	array(
 		'start_html'		=> '<li class="regist">',

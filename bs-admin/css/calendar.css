@@ -84,6 +84,11 @@ table.calendar td.holiday {
 	color: #c00;
 	background-color: #ffc0c0;
 }
+table.calendar td.today {
+	font-weight: bold;
+	background-position: 0 -30px;
+	color: #fff;
+}
 table.calendar td.day:hover {
 	font-weight: bold;
 	background-position: 0 -30px;
