@@ -10,9 +10,7 @@
 	    var input = document.getElementsByTagName('img');
 
 	    for(var i=0; i<input.length; i++) {
-			if(bframe.checkClassName('bframe_combo_box', input[i])) {
-				var s = new bframe.comboBox(input[i]);
-			}
+			var s = new bframe.comboBox(input[i]);
 		}
 	}
 
@@ -21,8 +19,9 @@
 	// 
 	// -------------------------------------------------------------------------
 	bframe.comboBox = function(target) {
-		var target_id = bframe.getID(target);
+		if(!bframe.checkClassName('bframe_combo_box', target)) return;
 
+		var target_id = bframe.getID(target);
 		var open = false;
 		var	response_wait = false;
 		var httpObj;
