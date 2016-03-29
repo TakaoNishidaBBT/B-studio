@@ -18,9 +18,10 @@
 			$this->caption = new B_Element($this->config['caption']);
 		}
 
-		function setProperty($year, $month, $start_day_of_the_week=0) {
+		function setProperty($year, $month, $day=0, $start_day_of_the_week=0) {
 			$this->year = $year;
 			$this->month = str_pad($month, 2, '0', STR_PAD_LEFT);
+			$this->day = str_pad($day, 2, '0', STR_PAD_LEFT);
 			$this->start_day_of_the_week = $start_day_of_the_week;
 
 			$this->data = $this->setWeekArray();
@@ -60,6 +61,7 @@
 				'holiday' 		=> $this->holiday,
 				'year'			=> $this->year,
 				'month'			=> $this->month,
+				'day'			=> $this->day,
 			);
 			$this->cal->setCallBack($this,'_holiday_callback', array('param' => $this->callback_param));
 
@@ -74,6 +76,7 @@
 			$param = &$array['param'];
 			$year = $param['year'];
 			$month = $param['month'];
+			$day = $param['day'];
 			$holiday = $param['holiday'];
 
 			if(is_array($holiday)) {
@@ -88,6 +91,20 @@
 					}
 				}
 			}
+
+			// today
+			for($i=0; $i<7; $i++) {
+				$obj = $row->getElementByName($i+1);
+				if($obj->value == $day) {
+					if($obj->start_html == '<td class="holiday day">') {
+						$obj->start_html = '<td class="holiday today day">';
+					}
+					else {
+						$obj->start_html = '<td class="today day">';
+					}
+				}
+			}
+
 			for($i=0; $i<7; $i++) {
 				$obj = $row->getElementByName($i+1);
 				if(!$obj->value) {
