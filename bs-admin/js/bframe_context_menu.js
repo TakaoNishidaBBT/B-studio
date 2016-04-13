@@ -149,7 +149,7 @@
 					submenu[i].setDocument(frame);
 					submenu[i].setWidth(data[i].submenu_width);
 					submenu[i].createElementFromObject(data[i].submenu, obj, self);
-					tr.onclick = clickSubmenuParent;
+					tr.onmousedown = mousedownSubmenuParent;
 				}
 				else {
 					if(data[i].func) {
@@ -182,7 +182,7 @@
 			bframe.stopPropagation(event);
 		}
 
-		function clickSubmenuParent(event) {
+		function mousedownSubmenuParent(event) {
 			bframe.stopPropagation(event);
 		}
 
