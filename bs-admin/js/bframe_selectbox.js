@@ -177,7 +177,7 @@
 
 			var position = bframe.getElementPosition(selectbox);
 			position.left += context_menu_frame_offset.left;
-			position.top += context_menu_frame_offset.top+1;
+			position.top += context_menu_frame_offset.top + window.pageYOffset;
 			context_menu.positionAbsolute(position);
 			context_menu.show();
 			context_menu.select(target.selectedIndex);

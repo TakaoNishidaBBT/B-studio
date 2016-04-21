@@ -9,7 +9,6 @@
 	require_once('./bs-admin/module/common/B_AdminModule.php');
 	require_once('./bs-module/common/B_CommonModule.php');
 
-	$util = new B_Util();
 	$url = pathinfo($_REQUEST['url']);
 
 	// dispatch rule
