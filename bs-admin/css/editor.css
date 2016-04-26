@@ -52,7 +52,7 @@ ul.tabcontrol li a {
 ul.tabcontrol li.filename {
 	min-width: 400px;
 	padding-left: 10px;
-	line-height: 28px;
+	line-height: 33px;
 	color: #fff;
 	background-color: #555;
 	border-top: 1px solid #777;
@@ -66,7 +66,7 @@ ul.tabcontrol li.encoding {
 	padding-top: 3px;
 	width: 140px;
 	text-align: left;
-	border-top: 1px solid #505050;
+	border-top: 1px solid #444;
 	overflow: hidden;
 }
 ul.tabcontrol li.encoding a {
