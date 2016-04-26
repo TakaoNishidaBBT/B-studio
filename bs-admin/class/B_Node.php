@@ -147,6 +147,7 @@
 			$order = $this->sort_order ? $this->sort_order : 'asc';
 
 			if($a['node_type'] == $b['node_type']) {
+				if($a[$key] == $b[$key]) $key = 'node_name';
 				if($order == 'asc') {
 					$ret = ($a[$key] < $b[$key]) ? -1 : 1;
 				}
@@ -159,7 +160,7 @@
 					$ret = ($a['node_type'] > $b['node_type']) ? -1 : 1;
 				}
 				else {
-					$ret = ($a['node_type'] <= $b['node_type']) ? -1 : 1;
+					$ret = ($a['node_type'] < $b['node_type']) ? -1 : 1;
 				}
 			}
 			return $ret;
