@@ -219,8 +219,8 @@
 		function setWindowSize(width, height) {
 			if(!width || !height) return;
 
-			window_width_default = parseInt(width)+1;
-			window_height_default = parseInt(height)+1;
+			window_width_default = parseInt(width);
+			window_height_default = parseInt(height);
 			resizeOverlay();
 		}
 
