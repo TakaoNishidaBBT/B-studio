@@ -62,7 +62,7 @@
 
 			$handle = opendir($this->fullpath);
 
-			while(false !== ($file_name = readdir($handle))){
+			while(false !== ($file_name = readdir($handle))) {
 				if($file_name == '.' || $file_name == '..') continue;
 
 				$this->node_count++;

@@ -13,18 +13,7 @@
 			$this->current_folder = $this->global_session['resource']['current_node'];
 		}
 
-		function upload() {
-			switch($this->request['mode']) {
-			case 'confirm':
-			case 'overwrite':
-				$this->confirm($this->request['mode']);
-				break;
-			default:
-				$this->_upload();
-			}
-		}
-
-		function confirm($mode) {
+		function confirm() {
 			$status = true;
 
 			try {
@@ -58,10 +47,23 @@
 					throw new Exception('ファイル名／フォルダ名に次の文字は使えません \ / : * ? " < > | スペース');
 				}
 
-	 			// confirm overwrite
-				if($mode == 'confirm'){
-					$ret = $this->file_exists($file['basename']);
-					if($ret) {
+				if($file['extension'] == 'zip') {
+					switch($this->request['extract_mode']) {
+					case 'confirm':
+						$response_mode = 'zipConfirm';
+						$message = $file['basename'] . 'を展開しますか？';
+						break;
+
+					case 'noextract':
+						if($this->file_exists($file['basename']) && $this->request['mode'] == 'confirm') {
+							$response_mode = 'confirm';
+							$message = $file['basename'] . 'は既に存在します。<br />上書きしてもよろしいですか？';
+						}
+						break;
+					}
+				}
+				else {
+					if($this->request['mode'] == 'confirm' && $this->file_exists($file['basename'])) {
 						$response_mode = 'confirm';
 						$message = $file['basename'] . 'は既に存在します。<br />上書きしてもよろしいですか？';
 					}
@@ -102,7 +104,7 @@
 			}
 		}
 
-		function _upload() {
+		function upload() {
 			$status = true;
 
 			try {
@@ -118,13 +120,15 @@
 					}
 				}
 
-				if(strtolower($file['extension']) == 'zip' && class_exists('ZipArchive')) {
-
+				if(strtolower($file['extension']) == 'zip' && class_exists('ZipArchive') && $this->request['extract_mode'] == 'extract') {
 					// set time limit to 10 minutes
 					set_time_limit(600);
 
 					// continue whether a client disconnect or not
 					ignore_user_abort(true);
+
+					// check zip file inside
+					$this->checkZipFile($_FILES['Filedata']['tmp_name']);
 
 					$zip_file = B_RESOURCE_WORK_DIR . $file['basename'];
 					if($status = $this->_move_uploaded_file($_FILES['Filedata']['tmp_name'], $zip_file)) {
@@ -157,9 +161,23 @@
 			exit;
 		}
 
+		function checkZipFile($zip_file) {
+			$zip = new ZipArchive();
+			$zip->open($zip_file);
+
+			for($i=0; $i < $zip->numFiles; $i++) {
+				$stat = $zip->statIndex($i);
+				$file_name = mb_convert_encoding($stat['name'], 'UTF-8', 'auto');
+				if(strlen($file_name) != mb_strlen($file_name)) {
+					throw new Exception('日本語ファイル名は使用できません。（zipファイル中）');
+				}
+			}
+		}
+
 		function regist_archive($node) {
 			if(!$node->parent) return;
 
+			$file = pathinfo($node->file_name);
 			$ret = $this->_regist_archive($node, $node_id, $contents_id);
 			if($ret) {
 				$node->db_node_id = $node_id;
