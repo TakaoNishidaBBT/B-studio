@@ -177,7 +177,6 @@
 		function regist_archive($node) {
 			if(!$node->parent) return;
 
-			$file = pathinfo($node->file_name);
 			$ret = $this->_regist_archive($node, $node_id, $contents_id);
 			if($ret) {
 				$node->db_node_id = $node_id;
