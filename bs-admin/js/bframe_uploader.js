@@ -31,6 +31,7 @@
 		var upload_queue= new Array();
 		var index;
 		var mode;
+		var extract_mode;
 		var form_data = new FormData();
 
 		select_button.onclick = selectFiles;
@@ -50,6 +51,7 @@
 			upload_count = 0;
 			queueComplete(0);
 			mode = 'confirm';
+			extract_mode = 'confirm';
 			var files = event.target.files;
 
 			bframe.removeAllChild(progressFieldId);
@@ -91,8 +93,9 @@
 			form_data.append('terminal_id', terminal_id);
 			form_data.append('module', module);
 			form_data.append('page', page);
-			form_data.append('method', 'upload');
+			form_data.append('method', 'confirm');
 			form_data.append('mode', mode);
+			form_data.append('extract_mode', extract_mode);
 			form_data.append('filename', upload_queue[index].file['name']);
 			form_data.append('filesize', upload_queue[index].file['size']);
 
@@ -110,7 +113,10 @@
 				}
 
 				if(response.status) {
-					if(response.mode == 'confirm'){
+					if(response.mode == 'zipConfirm'){
+						showZipConfirmDialog(response.message, extract, extractAll, noextract, cancelAll);
+					}
+					else if(response.mode == 'confirm'){
 						showConfirmDialog(response.message, overwrite, overwriteAll, cancel, cancelAll);
 					}
 					else {
@@ -151,6 +157,8 @@
 			form_data.append('page', page);
 			form_data.append('method', 'upload');
 			form_data.append('mode', 'regist');
+
+			form_data.append('extract_mode', extract_mode);
 			form_data.append('Filedata', upload_queue[index].file);
 
 			httpObj.open('POST','index.php');
@@ -176,6 +184,23 @@
 				progress.setError();
 				progress.setStatus(responseObj.message);
 			}
+		}
+
+		function extract() {
+			extract_mode = 'extract';
+			upload(index);
+			extract_mode = 'confirm';
+		}
+
+		function extractAll() {
+			extract_mode = 'extract';
+			upload(index);
+		}
+
+		function noextract() {
+			extract_mode = 'noextract';
+			confirm(index);
+			extract_mode = 'confirm';
 		}
 
 		function overwrite() {
@@ -207,6 +232,38 @@
 
 		function queueComplete(numFilesUploaded) {
 			upload_status.innerHTML = numFilesUploaded + ' file' + (numFilesUploaded < 2 ? '' : 's') + ' uploaded.';
+		}
+
+		function showZipConfirmDialog(msg, funcExtract, funcExtractAll, funcNoExtract, cancel) {
+			var params = {
+				'id': 'confirmDialog',
+				'title': '',
+				'message': msg,
+				'buttons': [
+					{
+						'name': 'はい',
+						'className': 'button',
+						'action': funcExtract
+					},
+					{
+						'name': 'すべて展開',
+						'className': 'button',
+						'action': funcExtractAll
+					},
+					{
+						'name': 'いいえ',
+						'className': 'button',
+						'action': funcNoExtract
+					},
+					{
+						'name': 'キャンセル',
+						'className': 'button',
+						'action': cancel
+					}
+				]
+			};
+
+			var dialog = new bframe.dialog(params);
 		}
 
 		function showConfirmDialog(msg, funcYes, funcYesToAll, funcNo, funcNoToAll) {
