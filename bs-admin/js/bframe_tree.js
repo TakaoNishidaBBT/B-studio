@@ -2137,6 +2137,7 @@
 					case 'gif':
 					case 'png':
 					case 'bmp':
+					case 'svg':
 						if(property.icon.pane[suffix.toLowerCase()]) {
 							obj_img.src = property.icon.pane[suffix.toLowerCase()].src;
 						}
@@ -2148,9 +2149,18 @@
 								var file_name = config.path.substring(config.path.lastIndexOf('/')+1,config.path.length);
 								var dir = config.path.substring(0, config.path.lastIndexOf('/')+1);
 								var extension = file_name.substring(file_name.lastIndexOf('.')+1, file_name.length);
-								obj_img.src = property.thumb_path + property.thumb_prefix + config.contents_id + '.' + extension + '?' + config.update_datetime_t;
+								if(suffix.toLowerCase() == 'svg') {
+									obj_img.src = property.thumb_path + config.contents_id + '.' + extension + '?' + config.update_datetime_t;
+								}
+								else {
+									obj_img.src = property.thumb_path + property.thumb_prefix + config.contents_id + '.' + extension + '?' + config.update_datetime_t;
+								}
 							}
 							a.title = 'size:' + config.human_image_size + '\n' + 'date:' + config.create_datetime_t;
+							if(suffix.toLowerCase() == 'svg') {
+								obj_img.width = '80';
+								obj_img.height = '80';
+							}
 						}
 						break;
 
