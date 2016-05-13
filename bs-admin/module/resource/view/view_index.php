@@ -12,7 +12,7 @@
 			<li class="select"><span id="bframe_pane_disp_change">表示 ： </span></li>
 			<li>
 				<div id="upload_button" class="input_container">
-					<a href="index.php?terminal_id=<?php echo TERMINAL_ID ?>&module=resource&page=upload" title="アップロード" class="upload-button bframe_upload" onclick="activateModalWindow(this, 440, 500, reloadTree); return false;"><img src="images/common/upload.png" alt="アップロード" />アップロード</a>
+					<a href="index.php?terminal_id=<?php echo TERMINAL_ID ?>&module=resource&page=upload" title="アップロード" class="upload-button bframe_upload" onclick="bstudio.activateModalWindow(this, 440, 500, bstudio.reloadTree); return false;"><img src="images/common/upload.png" alt="アップロード" />アップロード</a>
 				</div>
 			</li>
 		</ul>

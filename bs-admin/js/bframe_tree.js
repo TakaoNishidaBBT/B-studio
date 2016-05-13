@@ -967,7 +967,7 @@
 				var node_span = document.getElementById('s'+node_id);
 				var node_type = document.getElementById('nt'+node_id);
 				var node_name = node_span.innerHTML;
-				window[func](node_id.substr(1), node_name, node_type.value);
+				bstudio[func](node_id.substr(1), node_name, node_type.value);
 			}
 		}
 
@@ -1147,7 +1147,7 @@
 				if(current_edit_node && current_edit_node.id == node_id) return;
 
 				var func = property.ondblclick.script;
-				if(window[func]) window[func](node_id.substr(1), node_name, node_type.value);
+				if(bstudio[func]) bstudio[func](node_id.substr(1), node_name, node_type.value);
 			}
 		}
 
@@ -1181,7 +1181,7 @@
 					img_size = image_size_obj.value;
 				}
 				var path = document.getElementById('p' + node_id).value;
-				insertIMG(property.root_path, path, img_size, property.target, property.target_id);
+				bstudio.insertIMG(property.root_path, path, img_size, property.target, property.target_id);
 			}
 		}
 
@@ -1193,7 +1193,7 @@
 					img_size = image_size_obj.value;
 				}
 
-				insertIMG(property.root_path, node_id.substr(1), img_size, property.target, property.target_id);
+				bstudio.insertIMG(property.root_path, node_id.substr(1), img_size, property.target, property.target_id);
 			}
 		}
 

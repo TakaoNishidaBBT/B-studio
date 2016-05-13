@@ -1,10 +1,23 @@
 /*
- * B-frame : php web application framework
+ * B-studio : Contents Management System
  * Copyright (c) BigBeat Inc. all rights reserved. (http://www.bigbeat.co.jp)
  *
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
-	function activateModalWindow(a, w, h, func) {
+	if(typeof bstudio == 'undefined' || !bstudio){
+		var bstudio = {};
+	}
+
+	// -------------------------------------------------------------------------
+	// class bstudio
+	// 
+	// -------------------------------------------------------------------------
+	bstudio.focusLoginId = function() {
+		var user_id = document.getElementById('user_id');
+		user_id.focus();
+	}
+
+	bstudio.activateModalWindow = function(a, w, h, func) {
 		var p = 'width:' + w + ',height:' + h;
 		a.setAttribute('params', p);
 
@@ -12,14 +25,14 @@
 		if(func) top.bframe.modalWindow.registCallBackFunction(func);
 	}
 
-	function insertIMG(dir, file_path, img_size, img_obj_id, hidden_obj_id, width, height) {
-		window.frameElement.opener._insertIMG(dir, file_path, img_size, img_obj_id, hidden_obj_id, width, height);
+	bstudio.insertIMG = function(dir, file_path, img_size, img_obj_id, hidden_obj_id, width, height) {
+		window.frameElement.opener.bstudio._insertIMG(dir, file_path, img_size, img_obj_id, hidden_obj_id, width, height);
 		window.frameElement.deactivate();
 
 		return false;
 	}
 
-	function _insertIMG(dir, file_path, img_size, img_obj_id, hidden_obj_id, w, h) {
+	bstudio._insertIMG = function(dir, file_path, img_size, img_obj_id, hidden_obj_id, w, h) {
 		var hidden_target = document.getElementById(hidden_obj_id);
 		if(hidden_target) {
 			// set hidden target value (real value)
@@ -46,23 +59,23 @@
 		}
 	}
 
-	function setTemplate(node_id, node_value) {
+	bstudio.setTemplate = function(node_id, node_value) {
 		if(node_id == 'root') return;
-		insertValue(window.frameElement.opener, 'template_id', node_id, 'template_name', node_value);
+		bstudio.insertValue(window.frameElement.opener, 'template_id', node_id, 'template_name', node_value);
 		window.frameElement.deactivate();
 	}
 
-	function setCategory(node_id, node_value) {
+	bstudio.setCategory = function(node_id, node_value) {
 		if(node_id == 'root') return;
-		insertValue(window.frameElement.opener, 'category_id', node_id, 'category_name', node_value);
+		bstudio.insertValue(window.frameElement.opener, 'category_id', node_id, 'category_name', node_value);
 		window.frameElement.deactivate();
 	}
 
-	function insertValue(opener, target_id, target_value, hidden_target_id, hidden_target_value) {
-		opener._insertValue(target_id, target_value, hidden_target_id, hidden_target_value);
+	bstudio.insertValue = function(opener, target_id, target_value, hidden_target_id, hidden_target_value) {
+		opener.bstudio._insertValue(target_id, target_value, hidden_target_id, hidden_target_value);
 	}
 
-	function _insertValue(target_id, target_value, hidden_target_id, hidden_target_value) {
+	bstudio._insertValue = function(target_id, target_value, hidden_target_id, hidden_target_value) {
 		var target = document.getElementById(target_id);
 		if(!target) {
 			return;
@@ -77,21 +90,21 @@
 		return false;
 	}
 
-	function setWidget(node_id, node_value, node_type) {
+	bstudio.setWidget = function(node_id, node_value, node_type) {
 		if(node_type != 'widget') return;
-		var code = window.frameElement.opener._setWidget(node_id, node_value);
+		var code = window.frameElement.opener.bstudio._setWidget(node_id, node_value);
 		window.frameElement.deactivate(code);
 	}
 
-	function _setWidget(node_id, node_value) {
+	bstudio._setWidget = function(node_id, node_value) {
 		return "<?php widget('" + node_id + "'); // " + node_value + " ?>";
 	}
 
-	function reloadTree() {
+	bstudio.reloadTree = function() {
 		if(typeof bframe_tree !== 'undefined') bframe_tree.reload();
 	}
 
-	function clearForm(form, row_per_page) {
+	bstudio.clearForm = function(form, row_per_page) {
 		var element = document.getElementById(form);
 
 		var obj = element.getElementsByTagName('input');
@@ -127,7 +140,7 @@
 		}
 	}
 
-	function clearIMG(target_id, hidden_target_id, hidden_target_id2) {
+	bstudio.clearIMG = function(target_id, hidden_target_id, hidden_target_id2) {
 		var target = document.getElementById(target_id);
 		if(!target) return;
 
@@ -155,7 +168,7 @@
 		return false;
 	}
 
-	function clearText(target_id1, target_id2) {
+	bstudio.clearText = function(target_id1, target_id2) {
 		var target1 = document.getElementById(target_id1);
 		if(target1 && target1.value) {
 			target1.value = '';
@@ -170,32 +183,32 @@
 		}
 	}
 
-	function updateHtml(html) {
+	bstudio.updateHtml = function(html) {
 		var target = document.getElementById('html1');
 		target.value = html;
 		bframe.fireEvent(target, 'change');
 	}
 
-	function reloadMenu() {
+	bstudio.reloadMenu = function() {
 		if(top.bframe.menuContainer) {
 			top.bframe.menuContainer.reload();
 		}
 	}
 
-	function articleDetailInit(flag1, flag2) {
+	bstudio.articleDetailInit = function(flag1, flag2) {
 		description_flag_1 = document.getElementById(flag1);
 		description_flag_2 = document.getElementById(flag2);
 		if(description_flag_1 && description_flag_2) {
 			if(description_flag_1.checked == true) {
-				articleDetailControl(description_flag_1, 'external_link', 'url', 'external_window');
+				bstudio.articleDetailControl(description_flag_1, 'external_link', 'url', 'external_window');
 			}
 			else {
-				articleDetailControl(description_flag_2, 'external_link', 'url', 'external_window');
+				bstudio.articleDetailControl(description_flag_2, 'external_link', 'url', 'external_window');
 			}
 		}
 	}
 
-	function articleDetailControl(me, external_link_id, external_url_id, external_window_id) {
+	bstudio.articleDetailControl = function(me, external_link_id, external_url_id, external_window_id) {
 		external_link = document.getElementById(external_link_id);
 		external_url = document.getElementById(external_url_id);
 		external_window = document.getElementById(external_window_id);
@@ -223,7 +236,8 @@
 		}
 	}
 
-	function setProperty(module) {
+	bstudio.setProperty = function(module) {
 		bframe.ajaxSubmit.registCallBackFunctionAfter(window.frameElement.deactivate);
 		bframe.ajaxSubmit.submit('F1', module, 'property', 'regist', '', true);
 	}
+

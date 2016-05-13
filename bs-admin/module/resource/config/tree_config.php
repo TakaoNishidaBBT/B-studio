@@ -46,6 +46,7 @@ $tree_config = array(
 					'js'		=> 'openEditor',
 					'php'		=> 'openEditor',
 					'txt'		=> 'openEditor',
+					'svg'		=> 'openEditor',
 					'default'	=> 'download',
 				),
 			),

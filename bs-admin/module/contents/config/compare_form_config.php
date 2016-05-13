@@ -22,13 +22,17 @@ $form_config = array(
 				'end_html'		=> '</div>',
 				array(
 					'name'				=> 'html_left',
-					'class'				=> 'B_TextArea',
-					'special_html'		=> 'class="textarea bframe_compare_left"',
+					'class'				=> 'B_Hidden',
+					'special_html'		=> 'class="bframe_compare_left"',
 				),
 				array(
 					'name'				=> 'html_right',
-					'class'				=> 'B_TextArea',
-					'special_html'		=> 'class="textarea bframe_compare_right"',
+					'class'				=> 'B_Hidden',
+					'special_html'		=> 'class="bframe_compare_right"',
+				),
+				array(
+					'start_html'		=> '<div id="compare_html_display_field" class="bframe_compare_display_field" style="height: 100%">',
+					'end_html'			=> '</div>',
 				),
 			),
 		),
@@ -40,13 +44,17 @@ $form_config = array(
 				'end_html'		=> '</div>',
 				array(
 					'name'				=> 'css_left',
-					'class'				=> 'B_TextArea',
+					'class'				=> 'B_Hidden',
 					'special_html'		=> 'class="textarea bframe_compare_left"',
 				),
 				array(
 					'name'				=> 'css_right',
-					'class'				=> 'B_TextArea',
+					'class'				=> 'B_Hidden',
 					'special_html'		=> 'class="textarea bframe_compare_right"',
+				),
+				array(
+					'start_html'		=> '<div id="compare_css_display_field" class="bframe_compare_display_field" style="height: 100%">',
+					'end_html'			=> '</div>',
 				),
 			),
 		),
@@ -58,13 +66,17 @@ $form_config = array(
 				'end_html'		=> '</div>',
 				array(
 					'name'				=> 'php_left',
-					'class'				=> 'B_TextArea',
+					'class'				=> 'B_Hidden',
 					'special_html'		=> 'class="textarea bframe_compare_left"',
 				),
 				array(
 					'name'				=> 'php_right',
-					'class'				=> 'B_TextArea',
+					'class'				=> 'B_Hidden',
 					'special_html'		=> 'class="textarea bframe_compare_right"',
+				),
+				array(
+					'start_html'		=> '<div id="compare_php_display_field" class="bframe_compare_display_field" style="height: 100%">',
+					'end_html'			=> '</div>',
 				),
 			),
 		),
@@ -117,6 +129,31 @@ $tab_control_config = array(
 		'link'				=> 'config',
 		'value'				=> '設定',
 		'special_html'		=> 'class="bframe_tab"',
+	),
+	array(
+		'start_html'		=> '<li class="view-mode">',
+		'end_html'			=> '</li>',
+		array(
+			'start_html'		=> '<span id="unified">',
+			'end_html'			=> '</span>',
+			'value'				=> '<img src="images/common/splith.png" title="unified" alt="unified" />',
+		),
+		array(
+			'start_html'		=> '<span id="split">',
+			'end_html'			=> '</span>',
+			'value'				=> '<img src="images/common/splitv.png" title="split" alt="split" />',
+		),
+		array(
+			'value'				=> '<input id="mode" type="hidden" value="s">',
+		),
+		array(
+			'value'				=> '<input id="range" type="checkBox" value="1">',
+		),
+		array(
+			'start_html'		=> '<span id="view-all">',
+			'end_html'			=> '</span>',
+			'value'				=> '<img src="images/common/view_all.png" title="view all" alt="view all" />',
+		),
 	),
 );
 

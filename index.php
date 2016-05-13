@@ -92,6 +92,10 @@
 				header('Content-Type: image/' . strtolower($file['extension']));
 				break;
 
+			case 'svg':
+				header('Content-type: image/svg+xml');
+				break;
+
 			case 'html':
 				$contents = file_get_contents(B_RESOURCE_DIR . $info[$url]);
 				$encoding = mb_detect_encoding($contents, ${$g_data_set}['encoding']);

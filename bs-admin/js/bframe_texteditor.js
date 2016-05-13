@@ -185,7 +185,7 @@
 		}
 
 		function openWidget(event) {
-			activateModalWindow(widget, 350, 400, insert);
+			bstudio.activateModalWindow(widget, 350, 400, insert);
 			bframe.stopPropagation(event);
 		}
 

@@ -1063,8 +1063,8 @@
 			return	'<input type="hidden" ' .
 					'name="' . $this->name . '" ' .
 					'id="' . $this->_gethtmlid() . '" ' .
-					'value="' . htmlspecialchars($this->value, ENT_QUOTES, B_CHARSET) . '" ' . 
-					$this->special_html . 
+					'value="' . htmlspecialchars($this->value, ENT_QUOTES, B_CHARSET) . '" ' .
+					$this->special_html .
 					' />' . "\n";
 		}
 	}
@@ -1080,12 +1080,12 @@
 			}
 			else {
 				return 
-					'<textarea ' . 
+					'<textarea ' .
 					$this->special_html . ' ' .
-					'id="' . $this->_gethtmlid() . '" ' . 
+					'id="' . $this->_gethtmlid() . '" ' .
 					'name="' . $this->name_prefix . $this->name . '" ' .
 					$this->html .'>' . "\n" .
-					htmlspecialchars($this->value, ENT_QUOTES, B_CHARSET) . 
+					htmlspecialchars($this->value, ENT_QUOTES, B_CHARSET) .
 					'</textarea>' . "\n";
 			}
 		}
@@ -1120,8 +1120,8 @@
 			return	'<input type="hidden" ' .
 					'name="' . $this->name_prefix . $this->name . '" ' .
 					'id="' . $this->_gethtmlid() . '" ' .
-					'value="' . $value . '" ' . 
-					$this->special_html . 
+					'value="' . $value . '" ' .
+					$this->special_html .
 					' />' . "\n";
 		}
 	}
@@ -1165,7 +1165,7 @@
 				'type="text" ' .
 				'name="' . $this->name_prefix . $this->name . '" ' .
 				'id="' . $this->_gethtmlid() . '" ' .
-				'value="' . $value . '" ' . 
+				'value="' . $value . '" ' .
 				' />';
 			return $html;
 		}
@@ -1196,7 +1196,7 @@
 				'src="' . $this->src . '" ' .
 				'name="' . $this->name_prefix . $this->name . '" ' .
 				'id="' . $this->_gethtmlid() . '" ' .
-				'value="' . $value . '" ' . 
+				'value="' . $value . '" ' .
 				' />';
 
 			return $html;
@@ -1252,7 +1252,7 @@
 				'type="button" ' .
 				'name="' . $this->name_prefix . $this->name . '" ' .
 				'id="' . $this->_gethtmlid() . '" ' .
-				'value="' . $this->value . '" ' . 
+				'value="' . $this->value . '" ' .
 				$this->special_html .
 				$disabled .
 				' />';
@@ -1280,7 +1280,7 @@
 				'type="password" ' .
 				'name="' . $this->name_prefix . $this->name . '" ' .
 				'id="' . $this->_gethtmlid() . '" ' .
-				'value="' . $this->value . '" ' . 
+				'value="' . $this->value . '" ' .
 				' />' . "\n";
 
 			return $html;
@@ -1299,7 +1299,7 @@
 				'type="submit" ' .
 				'name="' . $this->name_prefix . $this->name . '" ' .
 				'id="' . $this->_gethtmlid() . '" ' .
-				'value="' . $this->value . '" ' . 
+				'value="' . $this->value . '" ' .
 				' />' . "\n";
 		}
 	}
@@ -1316,7 +1316,7 @@
 				'type="reset" ' .
 				'name="' . $this->name_prefix . $this->name . '" ' .
 				'id="' . $this->_gethtmlid() . '" ' .
-				'value="' . $this->value . '" ' . 
+				'value="' . $this->value . '" ' .
 				' />' . "\n";
 		}
 	}
@@ -1334,8 +1334,8 @@
 							'type="hidden" ' .
 							'name="' . $this->name_prefix . $this->name . '[]" ' .
 							'id="' . $this->_gethtmlid() . '[]" ' .
-							'value="' . htmlspecialchars($value2, ENT_QUOTES, B_CHARSET) . '" ' . 
-							$this->special_html . 
+							'value="' . htmlspecialchars($value2, ENT_QUOTES, B_CHARSET) . '" ' .
+							$this->special_html .
 							' />' . "\n";
 				}
 			}
@@ -1349,8 +1349,8 @@
 					'type="hidden" ' .
 					'name="' . $this->name_prefix . $name . '" ' .
 					'id="' . $this->_gethtmlid() . '" ' .
-					'value="' . htmlspecialchars($this->value, ENT_QUOTES, B_CHARSET) . '" ' . 
-					$this->special_html . 
+					'value="' . htmlspecialchars($this->value, ENT_QUOTES, B_CHARSET) . '" ' .
+					$this->special_html .
 					' />' . "\n";
 			}
 
@@ -1385,7 +1385,7 @@
 			if(isset($this->data_set_value) && is_array($this->data_set_value)) {
 				foreach($this->data_set_value as $key => $value) {
 					$html.=
-						'  <option value="' .	
+						'  <option value="' .
 						$key . '" ';
 					if(isset($this->value)) {
 						if($key == $this->value) {
@@ -1454,8 +1454,8 @@
 			return	'<input type="hidden" ' .
 					'name="' . $this->name_prefix . $this->name . '" ' .
 					'id="' . $this->_gethtmlid() . '" ' .
-					'value="' . htmlspecialchars($this->value, ENT_QUOTES, B_CHARSET) . '" ' . 
-					$this->special_html . 
+					'value="' . htmlspecialchars($this->value, ENT_QUOTES, B_CHARSET) . '" ' .
+					$this->special_html .
 					' />' . "\n";
 		}
 	}
@@ -1479,7 +1479,7 @@
 					'type="text" ' .
 					'name="' . $this->name_prefix . $this->name . '" ' .
 					'id="' . $id . '" ' .
-					'value="' . htmlspecialchars($this->value, ENT_QUOTES, B_CHARSET) . '" ' . 
+					'value="' . htmlspecialchars($this->value, ENT_QUOTES, B_CHARSET) . '" ' .
 					' />' . "\n";
 				if($this->label) {
 					$html = '<label for="' . $id . '">' . $this->label . '</label>'. $html;
@@ -1926,8 +1926,7 @@
 					$this->setParamProperty($key2, $value2);
 				}
 			}
-			$this->element_start_html =	'<a href="' .
-								$this->link . $this->param . '"';
+			$this->element_start_html =	'<a href="' . $this->link . $this->param . '"';
 			if($this->id) {
 				$this->element_start_html.= ' id="' . $this->_gethtmlid() . '"';
 			}
@@ -2029,13 +2028,13 @@
 		}
 
 		function setParamProperty($key, $value) {
-			if($this->param && substr($this->param, 0, 1) != '/') {
+			if(($this->param && substr($this->param, 0, 1) != '/') || strstr($this->link, '?')) {
 				$this->param.= '&amp;';
 			}
 			else{
 				$this->param.= '?';
 			}
-			$this->param.= $key . '=' . $value;
+			$this->param.= $key . '=' . urlencode($value);
 		}
 
 		function setParam(&$param, $value) {
@@ -2102,8 +2101,8 @@
 			return	'<input type="hidden" ' .
 					'name="' . $this->name_prefix . $this->name . '" ' .
 					'id="' . $this->_gethtmlid() . '" ' .
-					'value="' . htmlspecialchars($this->value, ENT_QUOTES, B_CHARSET) . '" ' . 
-					$this->special_html . 
+					'value="' . htmlspecialchars($this->value, ENT_QUOTES, B_CHARSET) . '" ' .
+					$this->special_html .
 					' />' . "\n";
 		}
 	}
@@ -2220,7 +2219,7 @@
 
 			return
 				'<iframe' . $id . $name .
-				' src="' . $this->src . '"' . 
+				' src="' . $this->src . '"' .
 				$this->special_html .
 				'>';
 		}
@@ -2249,8 +2248,8 @@
 
 			return
 				'<img ' .
-				'src="' . $src . '" ' . 
-				'alt="' . $this->alt . '" ' . 
+				'src="' . $src . '" ' .
+				'alt="' . $this->alt . '" ' .
 				$this->special_html .
 				' />' . "\n";
 		}
