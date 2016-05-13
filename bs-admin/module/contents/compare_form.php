@@ -289,14 +289,18 @@
 
 			$this->html_header->appendProperty('css', '<link href="css/contents_form.css" type="text/css" rel="stylesheet" media="all" />');
 			$this->html_header->appendProperty('css', '<link href="css/texteditor.css" type="text/css" rel="stylesheet" media="all" />');
-			$this->html_header->appendProperty('css', '<link href="css/mergely/codemirror.css" type="text/css" rel="stylesheet" media="all" />');
-			$this->html_header->appendProperty('css', '<link href="css/mergely/mergely.css" type="text/css" rel="stylesheet" media="all" />');
-			$this->html_header->appendProperty('script', '<script src="js/jquery/jquery.min.js" type="text/javascript"></script>');
-			$this->html_header->appendProperty('script', '<script src="js/mergely/codemirror.js" type="text/javascript"></script>');
-			$this->html_header->appendProperty('script', '<script src="js/mergely/mergely.js" type="text/javascript"></script>');
-			$this->html_header->appendProperty('script', '<script src="js/bframe_compare.js" type="text/javascript"></script>');
+			$this->html_header->appendProperty('css', '<link href="css/diff2html/diff2html.css" type="text/css" rel="stylesheet" media="all" />');
+
 			$this->html_header->appendProperty('script', '<script src="js/bframe_tab.js" type="text/javascript"></script>');
+			$this->html_header->appendProperty('script', '<script src="js/bframe_compare.js" type="text/javascript"></script>');
 			$this->html_header->appendProperty('script', '<script src="js/bframe_preview.js" type="text/javascript"></script>');
+
+			$this->html_header->appendProperty('script', '<script src="js/jquery/jquery.min.js" type="text/javascript"></script>');
+			$this->html_header->appendProperty('script', '<script src="js/diff2html/highlight.min.js" type="text/javascript"></script>');
+			$this->html_header->appendProperty('script', '<script src="js/diff2html/scala.min.js" type="text/javascript"></script>');
+			$this->html_header->appendProperty('script', '<script src="js/diff2html/difflib.js" type="text/javascript"></script>');
+			$this->html_header->appendProperty('script', '<script src="js/diff2html/diff2html.js" type="text/javascript"></script>');
+			$this->html_header->appendProperty('script', '<script src="js/diff2html/diff2html-ui.js" type="text/javascript"></script>');
 
 			// HTMLヘッダー出力
 			$this->showHtmlHeader();

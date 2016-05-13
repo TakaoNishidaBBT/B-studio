@@ -13,7 +13,7 @@ $html_header_config = array(
 	),
 	'script'	=> 
 	array(
-		'<script src="js/utility.js" type="text/javascript"></script>',
+		'<script src="js/bstudio.js" type="text/javascript"></script>',
 		'<script src="js/bframe.js" type="text/javascript"></script>',
 		'<script src="js/bframe_adjustwindow.js" type="text/javascript"></script>',
 		'<script src="js/bframe_ajax.js" type="text/javascript"></script>',

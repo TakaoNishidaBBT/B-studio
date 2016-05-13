@@ -243,7 +243,7 @@ $config_form_config = array(
 				array(
 					'class'				=> 'B_Link',
 					'link'				=> '#',
-					'special_html'		=> 'title="クリア" class="clear-button" onclick="clearText(\'template_name\', \'template_id\'); return false;" ',
+					'special_html'		=> 'title="クリア" class="clear-button" onclick="bstudio.clearText(\'template_name\', \'template_id\'); return false;" ',
 					'specialchars'		=> 'none',
 					'value'				=> '<img alt="クリア" src="images/common/clear_gray.png" />',
 				),

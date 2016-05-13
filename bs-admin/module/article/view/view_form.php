@@ -1,4 +1,4 @@
-<body onload="articleDetailInit('description_flag_1', 'description_flag_2')">
+<body onload="bstudio.articleDetailInit('description_flag_1', 'description_flag_2')">
 	<div id="header"><h2 class="article">記事詳細</h2></div>
 
 	<form name="F1" method="post" action="index.php">

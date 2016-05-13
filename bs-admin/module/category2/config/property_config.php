@@ -141,7 +141,7 @@ $config_form_config = array(
 										'name'			=> 'open_filelist',
 										'class'			=> 'B_Link',
 										'link'			=> 'index.php',
-										'special_html'	=> 'title="画像選択" class="settings-button" onclick="activateModalWindow(this, 850, 500); return false;"',
+										'special_html'	=> 'title="画像選択" class="settings-button" onclick="bstudio.activateModalWindow(this, 850, 500); return false;"',
 										'fixedparam'	=>
 										array(
 											'terminal_id'	=> TERMINAL_ID,

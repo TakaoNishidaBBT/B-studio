@@ -138,7 +138,7 @@ $form_config = array(
 					'filter'			=> 'select',
 					'class'				=> 'B_Link',
 					'link'				=> '#',
-					'special_html'		=> 'title="クリア" class="clear-button" onclick="clearText(\'category_id\', \'category_name\'); return false;"',
+					'special_html'		=> 'title="クリア" class="clear-button" onclick="bstudio.clearText(\'category_id\', \'category_name\'); return false;"',
 					'specialchars'		=> 'none',
 					'value'				=> '<img alt="クリア" src="images/common/clear.png" />',
 				),
@@ -281,7 +281,7 @@ $form_config = array(
 								'name'			=> 'open_filelist',
 								'class'			=> 'B_Link',
 								'link'			=> 'index.php',
-								'special_html'	=> 'title="画像選択" class="settings-button" onclick="activateModalWindow(this, 850, 500); return false;"',
+								'special_html'	=> 'title="画像選択" class="settings-button" onclick="bstudio.activateModalWindow(this, 850, 500); return false;"',
 								'fixedparam'	=>
 								array(
 									'terminal_id'	=> TERMINAL_ID,
@@ -298,7 +298,7 @@ $form_config = array(
 								'filter'			=> 'select',
 								'class'				=> 'B_Link',
 								'link'				=> '#',
-								'special_html'		=> 'title="クリア" class="clear-button" onclick="clearIMG(\'title_img\', \'title_img_file\'); return false;"',
+								'special_html'		=> 'title="クリア" class="clear-button" onclick="bstudio.clearIMG(\'title_img\', \'title_img_file\'); return false;"',
 								'specialchars'		=> 'none',
 								'value'				=> '<img alt="クリア" src="images/common/clear.png" />',
 							),
@@ -334,7 +334,7 @@ $form_config = array(
 					'value'			=> '1',
 					'item'			=>
 					array(
-						'special_html'	=> ' class=radio onclick="articleDetailControl(this, \'external_link\', \'url\', \'external_window\')"',
+						'special_html'	=> ' class=radio onclick="bstudio.articleDetailControl(this, \'external_link\', \'url\', \'external_window\')"',
 					),
 				),
 			),
