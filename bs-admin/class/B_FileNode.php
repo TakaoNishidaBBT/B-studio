@@ -447,11 +447,14 @@
 
 		function getThumbnailImgPath() {
 			$file_info = pathinfo($this->path);
+			if(strtolower($file_info['extension']) != 'svg') {
+				$thumb_prefix = B_THUMB_PREFIX;
+			}
 			if($file_info['dirname'] != '.' && $file_info['dirname'] != '\\') {
-				return B_Util::getPath(B_Util::getPath(B_UPLOAD_URL, $file_info['dirname']), B_THUMB_PREFIX . $file_info['basename']);
+				return B_Util::getPath(B_Util::getPath(B_UPLOAD_URL, $file_info['dirname']), $thumb_prefix . $file_info['basename']);
 			}
 			else {
-				return B_Util::getPath(B_UPLOAD_URL, B_THUMB_PREFIX . $file_info['basename']);
+				return B_Util::getPath(B_UPLOAD_URL, $thumb_prefix . $file_info['basename']);
 			}
 		}
 
