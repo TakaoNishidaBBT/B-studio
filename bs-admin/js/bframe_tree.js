@@ -916,7 +916,7 @@
 				var param;
 
 				param = 'terminal_id='+terminal_id+'&node_id='+encodeURIComponent(current_edit_node.id.substr(1));
-				param+= '&node_name='+encodeURIComponent(input.value);
+				param+= '&node_name='+encodeURIComponent(input.value.trim());
 				httpObj = createXMLHttpRequest(showNode);
 				eventHandler(httpObj, property.module, property.file, property.method.saveName, 'POST', param);
 				response_wait = true;

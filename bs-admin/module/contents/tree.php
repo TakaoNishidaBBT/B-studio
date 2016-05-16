@@ -260,8 +260,8 @@
 				$this->message = '次の拡張子は使用できません css swf jpg jpeg gif png';
 				return false;
 			}
-			if(preg_match('/[\\\\:\/\*\?<>\|]/', $file_name)) {
-				$this->message = 'ファイル名／フォルダ名に次の文字は使えません \ / : * ? " < > |';
+			if(preg_match('/[\\\\:\/\*\?<>\|\s]/', $file_name)) {
+				$this->message = 'ファイル名／フォルダ名に次の文字は使えません \ / : * ? " < > | スペース';
 				return false;
 			}
 
