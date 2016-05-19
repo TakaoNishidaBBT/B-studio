@@ -113,7 +113,7 @@
 
 		function setProperty() {
 			// 表示件数
-			$this->default_row_per_page = 10;
+			$this->default_row_per_page = 20;
 
 			$this->_setProperty('keyword', '');
 			$this->_setProperty('category_id', '');
@@ -125,13 +125,14 @@
 		}
 
 		function setHeader() {
-			$obj = $this->header->getElementByName('default_row_per_page');
-			$obj->value = $this->default_row_per_page;
-
 			// ヘッダー情報設定
 			if($this->session) {
 				$this->header->setValue($this->session);
 			}
+
+			// 表示件数（デフォルト）
+			$obj = $this->header->getElementByName('row_per_page');
+			$obj->special_html.= ' data-default="' . $this->default_row_per_page . '"';
 		}
 
 		function setData() {

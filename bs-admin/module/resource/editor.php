@@ -131,7 +131,7 @@
 				}
 				if(!$ret) {
 					$this->db->rollback();
-					$message = "登録に失敗しました";
+					$message = '登録に失敗しました';
 				}
 			}
 
@@ -163,7 +163,7 @@
 					touch(B_FILE_INFO_C);
 				}
 
-				$message = "保存しました";
+				$message = '保存しました';
 			}
 		}
 

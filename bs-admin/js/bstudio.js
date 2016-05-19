@@ -104,34 +104,29 @@
 		if(typeof bframe_tree !== 'undefined') bframe_tree.reload();
 	}
 
-	bstudio.clearForm = function(form, row_per_page) {
+	bstudio.clearForm = function(form) {
 		var element = document.getElementById(form);
+		var value;
 
 		var obj = element.getElementsByTagName('input');
-		for(i=0 ; i < obj.length ; i++){
+		for(i=0; i < obj.length; i++){
 			if(obj[i].type == 'text') {
-				obj[i].value = '';
+				if(value = obj[i].getAttribute('data-default')) {
+					obj[i].value = value;
+				}
+				else {
+					obj[i].value = '';
+				}
 			}
 			if(obj[i].type == 'checkbox') {
 				obj[i].checked = false;
 			}
-			if(obj[i].type == 'hidden') {
-				if(obj[i].name != 'terminal_id' && obj[i].name != 'default_row_per_page') {
-					obj[i].value = '';
-				}
-			}
 		}
 		var obj = element.getElementsByTagName('select');
-		var default_row_per_page = document.getElementById('default_row_per_page');
 
-		for(i=0 ; i < obj.length ; i++){
-			if(obj[i].name == 'row_per_page') {
-				if(default_row_per_page) {
-					obj[i].value = default_row_per_page.value;
-				}
-				else {
-					obj[i].value = row_per_page;
-				}
+		for(i=0; i < obj.length; i++){
+			if(value = obj[i].getAttribute('data-default')) {
+				obj[i].value = value;
 			}
 			else {
 				obj[i].value = '';
