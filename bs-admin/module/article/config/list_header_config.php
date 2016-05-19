@@ -63,7 +63,6 @@ $list_header_config = array(
 						'class'					=> 'B_SelectBox',
 						'data_set'				=> 'row_per_page',
 						'special_html'			=> 'class="bframe_selectbox"',
-						'value'					=> '10',
 					),
 				),
 				array(
@@ -77,7 +76,7 @@ $list_header_config = array(
 					'class'			=> 'B_Button',
 					'start_html'	=> '<li>',
 					'end_html'		=> '</li>',
-					'special_html'	=> 'class="button" onclick="clearForm(\'F1\', 20)"',
+					'special_html'	=> 'class="button" onclick="bstudio.clearForm(\'F1\')"',
 					'value'			=> 'クリア',
 				),
 				array(

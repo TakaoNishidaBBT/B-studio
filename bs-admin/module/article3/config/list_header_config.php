@@ -77,7 +77,7 @@ $list_header_config = array(
 					'class'			=> 'B_Button',
 					'start_html'	=> '<li>',
 					'end_html'		=> '</li>',
-					'special_html'	=> 'class="button" onclick="clearForm(\'F1\', 20)"',
+					'special_html'	=> 'class="button" onclick="bstudio.clearForm(\'F1\')"',
 					'value'			=> 'クリア',
 				),
 				array(
