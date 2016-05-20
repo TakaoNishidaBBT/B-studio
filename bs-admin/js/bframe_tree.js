@@ -2461,6 +2461,7 @@
 		}
 
 		function selectObjectNode(event) {
+			hideContextMenu(event);
 			if(window.event) {
 				var e = window.event;
 			}
@@ -2484,6 +2485,7 @@
 		}
 
 		function selectNode(event) {
+			hideContextMenu(event);
 			if(window.event) {
 				var e = window.event;
 			}
