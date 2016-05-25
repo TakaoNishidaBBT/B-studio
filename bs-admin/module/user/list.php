@@ -89,7 +89,7 @@
 
 		function setProperty() {
 			// 表示件数
-			$this->default_row_per_page = 10;
+			$this->default_row_per_page = 20;
 
 			$this->_setProperty('keyword', '');
 
@@ -101,13 +101,14 @@
 		}
 
 		function setHeader() {
-			$obj =& $this->header->getElementByName('default_row_per_page');
-			$obj->value = $this->default_row_per_page;
-
 			// ヘッダー情報設定
 			if($this->session) {
 				$this->header->setValue($this->session);
 			}
+
+			// 表示件数（デフォルト）
+			$obj = $this->header->getElementByName('row_per_page');
+			$obj->special_html.= ' data-default="' . $this->default_row_per_page . '"';
 		}
 
 		function setData() {
@@ -191,6 +192,8 @@
 
 			// HTML ヘッダー出力
 			$this->html_header->appendProperty('css', '<link href="css/user.css" type="text/css" rel="stylesheet" media="all">');
+			$this->html_header->appendProperty('css', '<link href="css/selectbox_white.css" type="text/css" rel="stylesheet" media="all" />');
+			$this->html_header->appendProperty('script', '<script src="js/bframe_selectbox.js" type="text/javascript"></script>');
 			$this->showHtmlHeader();
 
 			require_once('./view/view_list.php');

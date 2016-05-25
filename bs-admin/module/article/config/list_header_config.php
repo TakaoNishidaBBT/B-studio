@@ -11,7 +11,7 @@ $list_header_config = array(
 		'start_html'    => '<div class="list-header">',
 		'end_html'	    => '</div>',
 		array(
-			'start_html'    => '<form name="F1" id="F1" method="post" action="index.php" target="main">',
+			'start_html'    => '<form name="header_form" id="header_form" method="post" action="index.php" target="main">',
 			'end_html'	    => '</form>',
 			array(
 				'start_html'			=> '<ul class="search">',
@@ -69,14 +69,14 @@ $list_header_config = array(
 					'class'			=> 'B_Button',
 					'start_html'	=> '<li>',
 					'end_html'		=> '</li>',
-					'special_html'	=> 'class="search-button" onclick="bframe.submit(\'F1\', \'' . $this->module . '\', \'list\', \'select\')"',
+					'special_html'	=> 'class="search-button" onclick="bframe.submit(\'header_form\', \'' . $this->module . '\', \'list\', \'select\')"',
 					'value'			=> '検索',
 				),
 				array(
 					'class'			=> 'B_Button',
 					'start_html'	=> '<li>',
 					'end_html'		=> '</li>',
-					'special_html'	=> 'class="button" onclick="bstudio.clearForm(\'F1\')"',
+					'special_html'	=> 'class="button" onclick="bstudio.clearForm(\'header_form\')"',
 					'value'			=> 'クリア',
 				),
 				array(
@@ -84,7 +84,7 @@ $list_header_config = array(
 					'start_html'	=> '<li class="insert">',
 					'end_html'		=> '</li>',
 					'name'			=> 'insert',
-					'special_html'	=> 'class="insert-button" onclick="bframe.submit(\'F1\', \'' . $this->module . '\', \'form\', \'select\', \'insert\')"',
+					'special_html'	=> 'class="insert-button" onclick="bframe.submit(\'header_form\', \'' . $this->module . '\', \'form\', \'select\', \'insert\')"',
 					'value'			=> '新規作成',
 				),
 			),

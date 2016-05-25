@@ -53,10 +53,10 @@ $list_header_config = array(
 						'value'					=> '表示',
 					),
 					array(
-						'class'					=> 'B_SelectBox',
 						'name'					=> 'row_per_page',
+						'class'					=> 'B_SelectBox',
+						'special_html'			=> 'class="bframe_selectbox"',
 						'data_set'				=> 'row_per_page',
-						'value'					=> '10',
 					),
 				),
 				array(
@@ -70,7 +70,7 @@ $list_header_config = array(
 					'class'			=> 'B_Button',
 					'start_html'	=> '<li>',
 					'end_html'		=> '</li>',
-					'special_html'	=> 'class="button" onclick="clearForm(\'header_form\', 20);"',
+					'special_html'	=> 'class="button" onclick="bstudio.clearForm(\'header_form\')"',
 					'value'			=> 'クリア',
 				),
 				array(
