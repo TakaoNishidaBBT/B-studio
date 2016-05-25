@@ -74,11 +74,72 @@
 
 		function setProperty() {
 			// 表示件数
-			$this->default_row_per_page = 10;
+			$this->default_row_per_page = 20;
 
 			$this->_setProperty('keyword', '');
 			$this->_setProperty('page_no', 1);
 			$this->_setProperty('row_per_page', $this->default_row_per_page);
+		}
+
+		function setHeader() {
+			// ヘッダー情報設定
+			if($this->session) {
+				$this->header->setValue($this->session);
+			}
+
+			// 表示件数（デフォルト）
+			$obj = $this->header->getElementByName('row_per_page');
+			$obj->special_html.= ' data-default="' . $this->default_row_per_page . '"';
+		}
+
+		function setData() {
+			$this->dg->setSqlWhere($this->sql_where);
+			$this->dg->setRowPerPage($this->row_per_page);
+			$this->dg->setSqlOrderBy(" order by version_id desc ");
+
+			// データバインド
+			$this->dg->setPage($this->page_no);
+			$this->dg->bind();
+		}
+
+		function setSqlWhere() {
+			// 検索条件設定
+			if($this->keyword) {
+				$keyword = $this->db->real_escape_string_for_like($this->keyword);
+
+				$sql = "select version_id from %DB_PREFIX%version
+						where version like '%KEYWORD%' or memo like '%KEYWORD%'";
+
+				$sql = str_replace("%DB_PREFIX%", B_DB_PREFIX, $sql);
+				$sql = str_replace("%KEYWORD%", "%" . $keyword . "%", $sql);
+
+				$rs = $this->db->query($sql);
+				for($i=0 ; $row = $this->db->fetch_assoc($rs) ; $i++) {
+					if($sql_where_tmp) {
+						$sql_where_tmp.= ",";
+					}
+					$sql_where_tmp.= "'" . $row['version_id'] . "'";
+				}
+				$sql_where_tmp.= ")";
+
+				if($i) {
+					$sql_where.= "and version_id in (";
+					$sql_where.= $sql_where_tmp;
+				}
+				else {
+					$sql_where.= " and 0=1 ";
+				}
+
+				$select_message.= 'キーワード： <em>' . htmlspecialchars($this->keyword, ENT_QUOTES) . '</em>　';
+			}
+
+			if($select_message) {
+				$select_message = '<p class="condition"><strong>検索条件&nbsp;</strong>' . $select_message . '</p>';
+			}
+
+			$this->sql_where = $sql_where . $sql_where_invalid;
+			$this->select_message = $select_message;
+			return;
 		}
 
 		function confirm() {
@@ -177,66 +238,6 @@
 			$this->createLimitFile(B_LIMIT_FILE_INFO, $row['publication_datetime_u']);
 
 			$this->setView('view_result');
-		}
-
-		function setHeader() {
-			$obj =& $this->header->getElementByName('default_row_per_page');
-			$obj->value = $this->default_row_per_page;
-
-			// ヘッダー情報設定
-			if($this->session) {
-				$this->header->setValue($this->session);
-			}
-		}
-
-		function setData() {
-			$this->dg->setSqlWhere($this->sql_where);
-			$this->dg->setRowPerPage($this->row_per_page);
-			$this->dg->setSqlOrderBy(" order by version_id desc ");
-
-			// データバインド
-			$this->dg->setPage($this->page_no);
-			$this->dg->bind();
-		}
-
-		function setSqlWhere() {
-			// 検索条件設定
-			if($this->keyword) {
-				$keyword = $this->db->real_escape_string_for_like($this->keyword);
-
-				$sql = "select version_id from %DB_PREFIX%version
-						where version like '%KEYWORD%' or memo like '%KEYWORD%'";
-
-				$sql = str_replace("%DB_PREFIX%", B_DB_PREFIX, $sql);
-				$sql = str_replace("%KEYWORD%", "%" . $keyword . "%", $sql);
-
-				$rs = $this->db->query($sql);
-				for($i=0 ; $row = $this->db->fetch_assoc($rs) ; $i++) {
-					if($sql_where_tmp) {
-						$sql_where_tmp.= ",";
-					}
-					$sql_where_tmp.= "'" . $row['version_id'] . "'";
-				}
-				$sql_where_tmp.= ")";
-
-				if($i) {
-					$sql_where.= "and version_id in (";
-					$sql_where.= $sql_where_tmp;
-				}
-				else {
-					$sql_where.= " and 0=1 ";
-				}
-
-				$select_message.= 'キーワード： <em>' . htmlspecialchars($this->keyword, ENT_QUOTES) . '</em>　';
-			}
-
-			if($select_message) {
-				$select_message = '<p class="condition"><strong>検索条件&nbsp;</strong>' . $select_message . '</p>';
-			}
-
-			$this->sql_where = $sql_where . $sql_where_invalid;
-			$this->select_message = $select_message;
-			return;
 		}
 
 		function _list_callback(&$array) {
