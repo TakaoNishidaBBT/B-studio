@@ -206,6 +206,7 @@
 			if($this->right_node_info['contents_id']) {
 				$version_id = $this->version_right['version_id'];
 				$contents_id = $this->right_node_info['contents_id'];
+
 				$sql = "select *
 						from " . B_DB_PREFIX . "template a
 						where concat(a.version_id, a.revision_id) = (
@@ -244,7 +245,7 @@
 			// HTTPヘッダー出力
 			$this->sendHttpHeader();
 
-			$this->html_header->appendProperty('css', '<link href="css/template_form.css" type="text/css" rel="stylesheet" media="all" />');
+			$this->html_header->appendProperty('css', '<link href="css/template_compare_form.css" type="text/css" rel="stylesheet" media="all" />');
 			$this->html_header->appendProperty('css', '<link href="css/texteditor.css" type="text/css" rel="stylesheet" media="all" />');
 			$this->html_header->appendProperty('css', '<link href="css/diff2html/diff2html.css" type="text/css" rel="stylesheet" media="all" />');
 

@@ -7,21 +7,23 @@ div#contents_container {
 	margin: 0;
 	overflow: hidden;
 }
+div#contents_container_footer {
+	height: 15px;
+	background-image: -moz-linear-gradient(center bottom, #555 0%, #6e6e6e 100%);
+	margin: 0;
+}
 div#contents {
 	overflow: hidden;
 	background-color: #3a3a3a;
 }
-div#settings {
-	overflow: auto;
-}
 div.main_container {
 	margin: 0 8px 0 0;
 	padding: 0;
-	background-color: #555;
+	background-color: #555555;
 	overflow: hidden;
 }
 
-/* tab */
+/* tab control */
 ul.tabcontrol {
 	margin: 0;
 	padding: 0;
@@ -108,9 +110,7 @@ ul.tabcontrol li.regist {
 	border-top: 1px solid #444;
 	overflow: hidden;
 }
-
-/* button */
-div.input-container {
+div.input_container {
 	width: 140px;
 	float: left;
 }
@@ -121,15 +121,20 @@ span.regist-button {
 	padding: 4px 0;
 	width: 140px;
 	background-color: #666;
-	border: 1px solid #666;
+	border-top: 1px solid #666;
+	border-left: 1px solid #666;
+	border-right: 1px solid #666;
+	border-bottom: 1px solid #666;
 	color: #fff;
 	text-shadow: -1px -1px #555;
-
 	cursor: pointer;
 }
 span.regist-button:hover {
 	background-color: #777;
-	border: 1px solid #777;
+	border-top: 1px solid #777;
+	border-left: 1px solid #777;
+	border-right: 1px solid #777;
+	border-bottom: 1px solid #777;
 	color: #fff;
 	text-shadow: 1px 1px #555;
 }
@@ -137,8 +142,7 @@ span.regist-button img {
 	vertical-align: -3px;
 	margin-right: 8px;
 }
-
-div.message-container {
+div.message_container {
 	float: left;
 	margin-left: 10px;
 }
@@ -148,33 +152,40 @@ span#message {
 	height: 26px;
 	color: #fff;
 }
-
 div.regist {
+	background-color: #555;
 	margin-right: 8px;
 	padding: 8px 8px;
 	color: #fff;
+	border-top: #666 1px solid;
+	border-bottom: #3a3a3a 3px solid;
 	overflow: hidden;
 	clear: both;
 }
-
-/* editor */
 div.editor_container {
 	clear: both;
 	margin: 0;
 	background-color: #555;
 	padding: 7px 8px 8px 8px;
 }
+div#html {
+	overflow: auto;
+	margin: 0;
+}
 div#preview {
-	background-color: #232323;
-	text-align: center;
+	background-color: #fff;
 }
 div.text_editor {
 	margin: 0;
 	padding: 0;
+	background-color: #555;
 	width: 100%;
-	overflow: hidden;
+	overflow-y: auto;
 	border-bottom: 1px #777 solid;
 	position: relative;
+}
+.bframe_compare_container {
+	overflow: hidden;
 }
 div.text_editor textarea {
 	border: none;
@@ -190,18 +201,12 @@ div#config {
 	background-color: #555;
 	overflow: auto;
 }
-div#config textarea.keywords,
-div#config textarea.description {
-	height: 40px;
-}
 div#config textarea.external_css,
 div#config textarea.external_js {
 	height: 80px;
 }
 div.visual_editor {
 	background-color: #fff;
-	border-top: 1px solid #3a3a3a;
-	border-bottom: 1px solid #777;
 }
 
 /* table.form */
@@ -220,7 +225,7 @@ table.form th {
 	color: #fff;
 	border-top: 1px solid #555;
 	border-left: none;
-	border-bottom: 1px solid #444;
+	border-bottom: 1px solid #404040;
 	border-right: 1px solid #444;
 	font-weight: normal;
 	text-align: left;
@@ -230,7 +235,7 @@ table.form tr:first-child th {
 	border-top: 1px solid #555;
 }
 table.form tr:last-child th {
-	border-bottom: 1px solid #444;
+	border-bottom: 1px solid #404040;
 }
 table.form tr:first-child td {
 	border-top: 1px solid #555;
@@ -246,7 +251,7 @@ table.form th a.button {
 	border-right: 1px solid #333;
 	border-bottom: 1px solid #333;
 	border-left: 1px solid #555;
-	background: #444;
+	background: #4444;
 	text-align: center;
 	line-height: 20px;
 }
@@ -254,7 +259,7 @@ table.form td {
 	padding: 5px;
 	border-top: 1px solid #555;
 	border-left: 1px solid #555;
-	border-bottom: 1px solid #444;
+	border-bottom: 1px solid #404040;
 	border-right: none;
 	background-color: #444;
 	font-weight: normal;
@@ -278,10 +283,13 @@ table.form td input {
 	height: 22px;
 	padding: 2px 5px;
 	width: 80%;
-	vertical-align: middle;
 }
 table.form td input.template {
 	width: 30%;
+}
+table.form td img {
+	vertical-align: -35%;
+	margin-left: 8px;
 }
 table.form a:link.button,
 table.form a:visited.button,
@@ -306,53 +314,12 @@ table.form a:hover.button {
 	background-color: #555;
 }
 
-table.form th.diff {
-	background-color: #889900;
-	border-top: 1px solid #99aa00;
-	border-bottom: 1px solid #889900;
-	border-right: 1px solid #889900;
-	text-shadow: -1px -1px #777;
-}
-table.form .settings-button,
-table.form .clear-button {
-	display: inline-block;
-	line-height: 0;
-	padding: 5px;
-	border: 1px solid #555;
-	vertical-align: middle;
-}
-table.form .settings-button:hover,
-table.form .clear-button:hover {
-	background-color: #555;
-	border: 1px solid #666;
+/* compare */
+.bframe_compare_container {
+	height: 300px;
+	margin: 0 0 8px 0;
 }
 
-/* emulator */
-div.bframe_emulator {
-	position: absolute;
-	bottom: 0;
-	width: 100%;
-	background-color: #3a3a3a;
-	opacity: 0.7;
-}
-div.bframe_emulator ul {
-	display: table;
-	width: 300px;
-	margin: 0 auto;
-	padding: 0;
-	list-style: none;
-}
-div.bframe_emulator ul li {
-	display: table-cell;
-	width: 50px;
-	text-align: center;
-	vertical-align: middle;
-}
-div.bframe_emulator ul li:hover {
-	background-color: #555555;
-}
-div.bframe_emulator ul li a {
-	display: block;
-	cursor: pointer;
-	padding: 8px 0;
+.start_html, .end_html {
+	overflow: auto;
 }

@@ -172,7 +172,7 @@ div.text_editor {
 	margin: 0;
 	padding: 0;
 	width: 100%;
-	overflow: hidden;
+	overflow-y: auto;
 	border-bottom: 1px #777 solid;
 	position: relative;
 }
