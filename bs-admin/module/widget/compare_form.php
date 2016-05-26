@@ -269,7 +269,7 @@
 			// HTTPヘッダー出力
 			$this->sendHttpHeader();
 
-			$this->html_header->appendProperty('css', '<link href="css/widget_form.css" type="text/css" rel="stylesheet" media="all" />');
+			$this->html_header->appendProperty('css', '<link href="css/widget_compare_form.css" type="text/css" rel="stylesheet" media="all" />');
 			$this->html_header->appendProperty('css', '<link href="css/texteditor.css" type="text/css" rel="stylesheet" media="all" />');
 			$this->html_header->appendProperty('css', '<link href="css/diff2html/diff2html.css" type="text/css" rel="stylesheet" media="all" />');
 

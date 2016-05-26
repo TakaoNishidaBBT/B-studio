@@ -126,7 +126,7 @@
 
 		function getNodeList(id) {
 			var param;
-console.log('getNodeList', id);
+
 			param = 'terminal_id='+terminal_id+'&target_id='+target_id;
 			if(id) {
 				param+= '&node_id='+id.substr(2);
@@ -293,13 +293,13 @@ console.log('getNodeList', id);
 			var obj_img = document.getElementById(target_index + 'i' + node_id);
 			var node_status = document.getElementById(target_index + 'ns' + node_id);
 			var node_type = document.getElementById(target_index + 'nt' + node_id);
-			if(node_type.value != 'root' && node_type.value != 'trash' && node_type.value == 'folder' && node_status.value) {
+			if(node_type.value != 'root' && node_type.value != 'trash' && (node_type.value == 'folder' || node_type.value == 'template') && node_status.value) {
 				var icon = node_type.value + '_' + node_status.value;
 			}
 			else {
 				var icon = node_type.value;
 			}
-console.log('icon', icon);
+
 			obj_img.src = property.icon[icon].src;
 		}
 
