@@ -54,17 +54,15 @@
 		function getHtml() {
 			switch($this->charset) {
 			case 'SJIS':
-				$this->appendProperty('declaration', '<?xml version="1.0" encoding="Shift-JIS"?>');
-				$this->appendProperty('meta', '<meta http-equiv="Content-Type" content="text/html; charset=SJIS" />');
+				$this->appendProperty('meta', '<meta charset="SJIS" />');
 				break;
 
 			case 'EUC':
-				$this->appendProperty('declaration', '<?xml version="1.0" encoding="EUC-JP"?>');
-				$this->appendProperty('meta', '<meta http-equiv="Content-Type" content="text/html; charset=EUC-JP" />');
+				$this->appendProperty('meta', '<meta charset="EUC-JP" />');
 				break;
 
 			default:
-				$this->appendProperty('meta', '<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />');
+				$this->appendProperty('meta', '<meta charset="UTF-8" />');
 				break;
 			}
 
