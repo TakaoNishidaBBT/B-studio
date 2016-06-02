@@ -1,4 +1,5 @@
 <body onload="bframe.effect.fadeIn(document.body, 100, 0, 100, 50);" style="opacity:0">
+	<script type="text/javascript">if(window == top) top.location.href='.';</script>
 	<h2><span class="accent"></span>コンテンツ<span><?php echo $this->version_info; ?></span></h2>
 	<div class="header"></div>
 	<iframe id="contents_tree" name="contents_tree" class="tree bframe_splitter_pane bframe_adjustwindow" param="margin:10" frameborder="0"
