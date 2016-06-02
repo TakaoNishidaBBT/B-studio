@@ -6,7 +6,7 @@
 */
 	bframe.addEventListner(window, 'load' , bframeAdjustWindowInit);
 
-	function bframeAdjustWindowInit(){
+	function bframeAdjustWindowInit() {
 		var i, aw, ap;
 
 		var div = document.getElementsByTagName('div');
