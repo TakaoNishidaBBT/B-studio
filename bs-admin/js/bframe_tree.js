@@ -47,6 +47,7 @@
 		var new_node;
 
 		var drag_control;
+		var file_upload;
 
 		var context_menu = new bframe.contextMenu(10000);
 		var context_menu_frame = window;
@@ -69,8 +70,9 @@
 		var pane;
 		var pane_disp_change;
 		var pane_disp_change_select;
-		var upload_button;
-		var upload_button_style_display;
+
+		var pane_ul;
+		var pane_tbody;
 
 		var sort_key;
 
@@ -93,6 +95,7 @@
 				response_wait = false;
 				if(property.editable == 'true' || property.sort == 'manual') {
 					setDragControl();
+					setFileUpload();
 					setContextMenu();
 					context_menu.setFilter(context_filter);
 					setTrashContextMenu();
@@ -101,7 +104,7 @@
 				if(property.selectable == 'true') {
 					target.onclick = resetCurrentObject;
 				}
-				getUploadButton();
+				file_upload.init();
 				getPane();
 				getNodeList('');
 			}
@@ -109,6 +112,10 @@
 
 		function setDragControl() {
 			drag_control = new dragControl(top.window);
+		}
+
+		function setFileUpload() {
+			file_upload = new fileUpload();
 		}
 
 		function getPane() {
@@ -121,18 +128,6 @@
 				if(property.relation.disp_change) {
 					pane_disp_change = document.getElementById(property.relation.disp_change.id);
 					setDispChange();
-				}
-			}
-		}
-
-		function getUploadButton() {
-			if(property.upload && property.upload.button) {
-				upload_button = document.getElementById(property.upload.button);
-				if(property.editable == 'true' || property.sort == 'manual') {
-					upload_button_style_display = upload_button.style.display;
-				}
-				else {
-					upload_button.style.display = 'none';
 				}
 			}
 		}
@@ -495,7 +490,6 @@
 					response_wait = false;
 					return;
 				}
-
 				// set current node
 				if(response.current_node) {
 					current_node.set('t'+response.current_node);
@@ -509,6 +503,8 @@
 				// remove pane
 				if(pane && pane.hasChildNodes()) {
 					pane.removeChild(pane.firstChild);
+					pane_ul = '';
+					pane_tbody = '';
 				}
 
 				// create root tree
@@ -549,17 +545,6 @@
 				selected_node.setColor('selected');
 				current_node.reload();
 				current_node.setColor('current');
-
-				if(upload_button) {
-					var node = current_node.object();
-					if(bframe.searchParentById(node, 'ttrash')) {
-						upload_button.style.display = 'none';
-					}
-					else {
-						upload_button.style.display = upload_button_style_display;
-					}
-				}
-
 				target.style.cursor = 'default';
 				if(pane) pane.style.cursor = 'default';
 				response_wait = false;
@@ -611,30 +596,30 @@
 						var ptable = document.createElement('table');
 						div.appendChild(ptable);
 
-						var ptbody = document.createElement('tbody');
-						ptable.appendChild(ptbody);
+						pane_tbody = document.createElement('tbody');
+						ptable.appendChild(pane_tbody);
 
-						ptbody.id = 'tt' + node_info.node_id;
-						ptbody.name = 'nodes';
-						ptbody.className = 'pane';
+						pane_tbody.id = 'tt' + node_info.node_id;
+						pane_tbody.name = 'nodes';
+						pane_tbody.className = 'pane';
 
 						// title
-						createDetailTitle(ptbody, response.sort_key, response.sort_order);
+						createDetailTitle(pane_tbody, response.sort_key, response.sort_order);
 
 						for(var i=0; i < node_info.children.length; i++) {
-							createDetailNodeObject(ptbody, node_info.children[i]);
+							createDetailNodeObject(pane_tbody, node_info.children[i]);
 							setNewNode(node_info.children[i]);
 						}
 					}
 					else {
 						// thumb nail mode
 						div.className = 'thumbs';
-						var pul = document.createElement('ul');
-						pul.id = 'uu' + node_info.node_id;
-						pul.name = 'nodes';
-						div.appendChild(pul);
+						pane_ul = document.createElement('ul');
+						pane_ul.id = 'uu' + node_info.node_id;
+						pane_ul.name = 'nodes';
+						div.appendChild(pane_ul);
 						for(var i=0; i < node_info.children.length; i++) {
-							createNodeObject(pul, node_info.children[i], 'pane', trash);
+							createNodeObject(pane_ul, node_info.children[i], 'pane', trash);
 							setNewNode(node_info.children[i]);
 						}
 					}
@@ -789,9 +774,13 @@
 			}
 			param = 'terminal_id='+terminal_id;
 			for(var i=0 ; i < selected_node.length() ; i++) {
+				if(!selected_node.id(i)) continue;
 				param+= '&delete_node_id[' + i + ']='+encodeURIComponent(selected_node.id(i).substr(1));
-				current_node.del(selected_node.id(i));
+				if(selected_node.exists(current_node.id())) {
+					current_node.set(current_node.parent().id);
+				}
 			}
+			param+= '&node_id='+encodeURIComponent(current_node.id().substr(1));
 
 			httpObj = createXMLHttpRequest(showNode);
 			if(bframe.searchParentById(selected_node.object(), 'trash')) {
@@ -928,6 +917,7 @@
 
 			param = 'terminal_id='+terminal_id;
 			param+= '&'+p+'&destination_node_id='+encodeURIComponent(selected_node.id().substr(1));
+			param+= '&node_id='+encodeURIComponent(current_node.id().substr(1));
 			httpObj = createXMLHttpRequest(showNode);
 			eventHandler(httpObj, property.module, property.file, property.method.createNode, 'POST', param);
 			response_wait = true;
@@ -1203,6 +1193,7 @@
 			if(!selected_node.length()) return;
 
 			for(var i=0; i < selected_node.length(); i++) {
+				if(!selected_node.id(i)) continue;
 				param+= '&download_node_id[' + i + ']='+encodeURIComponent(selected_node.id(i).substr(1));
 			}
 			iframe = document.getElementById('download_iframe');
@@ -1328,6 +1319,12 @@
 				}
 
 				return false;
+			}
+
+			this.parent = function() {
+				if(!current_node.length) return false;
+				var current_obj = document.getElementById('t'+current_node[0].id.substr(1));
+				return bframe.searchParentByTagName(current_obj.parentNode, 'li');
 			}
 
 			this.length = function() {
@@ -1881,6 +1878,7 @@
 					param = 'terminal_id='+terminal_id+'&mode=cut';
 
 					for(var i=0 ; i < selected_node.length() ; i++) {
+						if(!selected_node.id(i)) continue;
 						param+= '&source_node_id[' + i + ']='+encodeURIComponent(selected_node.id(i).substr(1));
 					}
 
@@ -2017,9 +2015,681 @@
 		}
 
 		// -------------------------------------------------------------------------
+		// class fileUpload
+		// -------------------------------------------------------------------------
+		function fileUpload() {
+			var upload_button;
+			var upload_button_style_display;
+			var upload_file;
+
+			var upload_queue= new Array();
+			var index;
+			var upload_count;
+			var mode;
+			var extract_mode;
+			var form_data = new FormData();
+			var progressFieldId;
+
+			var httpObj;
+			var files;
+			var module;
+			var page;
+
+			function init() {
+				if(property.upload) {
+					if(property.upload.button) {
+						upload_button = document.getElementById(property.upload.button);
+						if(property.editable == 'true' || property.sort == 'manual') {
+							upload_button_style_display = upload_button.style.display;
+						}
+						else {
+							upload_button.style.display = 'none';
+						}
+					}
+					if(property.upload.file) {
+						upload_file = document.getElementById(property.upload.file);
+					}
+					module = property.upload.module;
+					page = property.upload.page;
+					upload_button.onclick = selectFiles;
+					upload_file.onchange = uploadFiles;
+				}
+			}
+			this.init = init;
+
+			function display() {
+
+			}
+
+			function selectFiles(event) {
+				if(upload_queue[index]) return false;
+
+				bframe.fireEvent(upload_file, 'click');
+			}
+
+			function uploadFiles(event) {
+				index = 0;
+				upload_queue.length = 0;
+				upload_count = 0;
+//				queueComplete(0);
+				mode = 'confirm';
+				extract_mode = 'confirm';
+				var files = event.target.files;
+
+				var tree_id = 'tu' + current_node.id().substr(1);
+				var pane_id, disp_type;
+				if(pane_disp_change && pane_disp_change_select.options[pane_disp_change_select.selectedIndex].value == 'detail') {
+					pane_id = pane_tbody.id;
+					disp_type = 'detail';
+				}
+				else {
+					pane_id = pane_ul.id;
+					disp_type = 'thumbnail';
+				}
+
+				for(var i=0; i<files.length; i++){
+					files[i].id = i;
+					var progress = new FileProgress(files[i], tree_id, pane_id, disp_type);
+//					progress.setStatus('Pending...');
+					upload_queue[i] = {'file' : files[i], 'progress' : progress};
+				}
+				confirm(0);
+				true;
+			}
+
+			function confirm(index) {
+				var info = upload_queue[index];
+				if(!info) return;
+
+				httpObj = new XMLHttpRequest();
+
+				if(httpObj.upload){
+					httpObj.onreadystatechange = confirmResult;
+					progress = upload_queue[index].progress;
+					progress.setStatus('Uploading...');
+				}
+
+				var form_data = new FormData();
+
+				form_data.append('terminal_id', terminal_id);
+				form_data.append('module', module);
+				form_data.append('page', page);
+				form_data.append('method', 'confirm');
+				form_data.append('mode', mode);
+				form_data.append('extract_mode', extract_mode);
+				form_data.append('filename', upload_queue[index].file['name']);
+				form_data.append('filesize', upload_queue[index].file['size']);
+
+				httpObj.open('POST','index.php');
+				httpObj.send(form_data);
+			}
+
+			function confirmResult() {
+				if(httpObj.readyState == 4 && httpObj.status == 200){
+					try {
+						var response = eval('('+httpObj.responseText+')');
+					}
+					catch(e) {
+						var response = {status: false, message: 'セッションが切れました' };
+					}
+
+					if(response.status) {
+						if(response.mode == 'zipConfirm'){
+							showZipConfirmDialog(response.message, extract, extractAll, noextract, cancelAll);
+						}
+						else if(response.mode == 'confirm'){
+							showConfirmDialog(response.message, overwrite, overwriteAll, cancel, cancelAll);
+						}
+						else {
+							overwrite();
+						}
+					}
+					else {
+						var progress = upload_queue[index].progress;
+						progress.setError();
+						progress.setStatus(response.message);
+						confirm(++index);
+					}
+				}
+			}
+
+			function upload(index) {
+				var info = upload_queue[index];
+				if(!info) return;
+
+				httpObj = new XMLHttpRequest();
+
+				if(httpObj.upload){
+					httpObj.onreadystatechange = setUploadResult;
+					var progress = upload_queue[index].progress;
+					progress.setStatus('Uploading...');
+
+					httpObj.upload.onprogress = function (e){
+						var percent = Math.ceil((e.loaded / e.total) * 100);
+						progress.setProgress(percent);
+						progress.setStatus('Uploading...');
+					};
+				}
+
+				var form_data = new FormData();
+
+				form_data.append('terminal_id', terminal_id);
+				form_data.append('module', module);
+				form_data.append('page', page);
+				form_data.append('method', 'upload');
+				form_data.append('mode', 'regist');
+
+				form_data.append('extract_mode', extract_mode);
+				form_data.append('Filedata', upload_queue[index].file);
+
+				httpObj.open('POST','index.php');
+				httpObj.send(form_data);
+			}
+
+			function setUploadResult() {
+				if(httpObj.readyState == 4 && httpObj.status == 200){
+					var response = eval('('+httpObj.responseText+')');
+
+					result(response);
+					confirm(++index);
+				}
+			}
+
+			function result(responseObj) {
+				var progress = upload_queue[index].progress;
+				if(responseObj.status == true) {
+					progress.setComplete(responseObj.node_info);
+					progress.setStatus('Complete.');
+					queueComplete(++upload_count);
+				}
+				else {
+					progress.setError();
+					progress.setStatus(responseObj.message);
+				}
+			}
+
+			function extract() {
+				extract_mode = 'extract';
+				upload(index);
+				extract_mode = 'confirm';
+			}
+
+			function extractAll() {
+				extract_mode = 'extract';
+				upload(index);
+			}
+
+			function noextract() {
+				extract_mode = 'noextract';
+				confirm(index);
+				extract_mode = 'confirm';
+			}
+
+			function overwrite() {
+				upload(index);
+			}
+
+			function overwriteAll() {
+				mode = 'overwrite';
+				upload(index);
+			}
+
+			function cancel() {
+				upload_queue[index].progress.setCancelled();
+				upload_queue[index].progress.setStatus('Cancelled.');
+				confirm(++index);
+			}
+
+			function cancelAll() {
+				for(; upload_queue[index]; index++){
+					cancelUpload();
+				}
+			}
+
+			function cancelUpload() {
+				upload_queue[index].progress.setCancelled();
+				upload_queue[index].progress.setStatus('Cancelled.');
+
+			}
+
+			function queueComplete(numFilesUploaded) {
+//				upload_status.innerHTML = numFilesUploaded + ' file' + (numFilesUploaded < 2 ? '' : 's') + ' uploaded.';
+			}
+
+			function showZipConfirmDialog(msg, funcExtract, funcExtractAll, funcNoExtract, cancel) {
+				var params = {
+					'id': 'confirmDialog',
+					'title': '',
+					'message': msg,
+					'buttons': [
+						{
+							'name': 'はい',
+							'className': 'button',
+							'action': funcExtract
+						},
+						{
+							'name': 'すべて展開',
+							'className': 'button',
+							'action': funcExtractAll
+						},
+						{
+							'name': 'いいえ',
+							'className': 'button',
+							'action': funcNoExtract
+						},
+						{
+							'name': 'キャンセル',
+							'className': 'button',
+							'action': cancel
+						}
+					]
+				};
+
+				var dialog = new bframe.dialog(params);
+			}
+
+			function showConfirmDialog(msg, funcYes, funcYesToAll, funcNo, funcNoToAll) {
+				var params = {
+					'id': 'confirmDialog',
+					'title': '',
+					'message': msg,
+					'buttons': [
+						{
+							'name': 'はい',
+							'className': 'button',
+							'action': funcYes
+						},
+						{
+							'name': 'すべて上書き',
+							'className': 'button',
+							'action': funcYesToAll
+						},
+						{
+							'name': 'いいえ',
+							'className': 'button',
+							'action': funcNo
+						},
+						{
+							'name': 'キャンセル',
+							'className': 'button',
+							'action': funcNoToAll
+						}
+					]
+				};
+
+				var dialog = new bframe.dialog(params);
+			}
+
+			// -------------------------------------------------------------------------
+			// class FileProgress
+			// -------------------------------------------------------------------------
+			function FileProgress(file, tree_id, pain_id, disp_type) {
+				var tree = document.getElementById(tree_id);
+				var pain = document.getElementById(pain_id);
+				this.fileProgressID = file.id;
+				this.opacity = 100;
+				this.height = 0;
+				this.filename = file.name;
+
+				this.fileProgressWrapper = document.getElementById(this.fileProgressID);
+
+				FileProgress.prototype.setTimer = function(timer) {
+					this.fileProgressElement['FP_TIMER'] = timer;
+				};
+				FileProgress.prototype.getTimer = function(timer) {
+					return this.fileProgressElement['FP_TIMER'] || null;
+				};
+
+				FileProgress.prototype.reset = function() {
+					this.fileProgressElement.className = 'progressContainer';
+
+					this.fileProgressElement.childNodes[0].innerHTML = '&nbsp;';
+					this.fileProgressElement.childNodes[0].className = 'progressBarStatus';
+
+					this.fileProgressElement.childNodes[1].className = 'progressBarInProgress';
+					this.fileProgressElement.childNodes[1].style.width = '0%';
+					this.appear();
+				};
+
+				FileProgress.prototype.setProgress = function(percentage) {
+					this.fileProgressElement.className = 'progressContainer green';
+					this.fileProgressElement.childNodes[1].className = 'progressBarInProgress';
+					this.fileProgressElement.childNodes[1].style.width = percentage + '%';
+
+					this.appear();
+				};
+
+				FileProgress.prototype.setComplete = function(node_info) {
+					var li;
+
+					if(disp_type == 'thumbnail') {
+						for(var i=0; i<node_info.length; i++) {
+							if(node_info[i].node_type == 'folder') {
+								li = _createNodeObject(node_info[i], 'tree', false);
+								for(var n=tree.firstChild; n; n=n.nextSibling) {
+									if(node_info[i].path == bframe.searchNodeByName(n, 'path').value) {
+										var node_number = document.getElementById('nn'+n.id).value;
+										tree.replaceChild(li, n);
+										var nn = document.getElementById('nn'+li.id);
+										nn.value = node_number;
+										break;
+									}
+								}
+								if(!n) {
+									tree.appendChild(li);
+								}
+							}
+							li = _createNodeObject(node_info[i], 'pane', false);
+
+							for(var n=pain.firstChild; n; n=n.nextSibling) {
+								if(node_info[i].path == bframe.searchNodeByName(n, 'path').value) {
+									var node_number = document.getElementById('nn'+n.id).value;
+									pain.replaceChild(li, n);
+									var nn = document.getElementById('nn'+li.id);
+									nn.value = node_number;
+									if(this.fileProgressWrapper) {
+										pain.removeChild(this.fileProgressWrapper);
+										this.fileProgressWrapper = '';
+									}
+									break;
+								}
+							}
+							if(!n) {
+								if(this.fileProgressWrapper) {
+									pain.replaceChild(li, this.fileProgressWrapper);
+									this.fileProgressWrapper = '';
+								}
+								else {
+									pain.appendChild(li);
+								}
+							}
+						}
+					}
+					else {
+						for(var i=0; i<node_info.length; i++) {
+							if(node_info[i].node_type == 'folder') {
+								li = _createNodeObject(node_info[i], 'tree', false);
+								for(var n=tree.firstChild; n; n=n.nextSibling) {
+									if(node_info[i].path == bframe.searchNodeByName(n, 'path').value) {
+										var node_number = document.getElementById('nn'+n.id).value;
+										tree.replaceChild(li, n);
+										var nn = document.getElementById('nn'+li.id);
+										nn.value = node_number;
+										break;
+									}
+								}
+								if(!n) {
+									tree.appendChild(li);
+								}
+							}
+							tr = _createDetailNodeObject(node_info[i])
+
+							for(var n=pain.firstChild; n; n=n.nextSibling) {
+								if(node_info[i].path == bframe.searchNodeByName(n, 'path').value) {
+									var node_number = document.getElementById('nn'+n.id).value;
+									pain.replaceChild(tr, n);
+									var nn = document.getElementById('nn'+tr.id);
+									nn.value = node_number;
+									if(this.fileProgressWrapper) {
+										pain.removeChild(this.fileProgressWrapper);
+										this.fileProgressWrapper = '';
+									}
+									break;
+								}
+							}
+							if(!n) {
+								if(this.fileProgressWrapper) {
+									pain.replaceChild(tr, this.fileProgressWrapper);
+									this.fileProgressWrapper = '';
+								}
+								else {
+									pain.appendChild(tr);
+								}
+							}
+						}
+					}
+				};
+
+				FileProgress.prototype.setError = function() {
+					this.fileProgressElement.className = 'progressContainer red';
+					this.fileProgressElement.childNodes[1].className = 'progressBarError';
+					this.fileProgressElement.childNodes[1].style.width = '';
+
+					var oSelf = this;
+					this.setTimer(setTimeout(function () {
+						oSelf.disappear();
+					}, 10000));
+				};
+				FileProgress.prototype.setCancelled = function() {
+					this.fileProgressElement.className = 'progressContainer';
+					this.fileProgressElement.childNodes[1].className = 'progressBarError';
+					this.fileProgressElement.childNodes[1].style.width = '';
+
+					var oSelf = this;
+					this.setTimer(setTimeout(function() {
+						oSelf.disappear();
+					}, 10000));
+				};
+				FileProgress.prototype.setStatus = function(status) {
+					this.fileProgressElement.childNodes[0].innerHTML = status;
+				};
+
+				FileProgress.prototype.appear = function() {
+					if(this.getTimer() !== null) {
+						clearTimeout(this.getTimer());
+						this.setTimer(null);
+					}
+
+					if(this.fileProgressWrapper.filters) {
+						try {
+							this.fileProgressWrapper.filters.item('DXImageTransform.Microsoft.Alpha').opacity = 100;
+						} catch (e) {
+							// If it is not set initially, the browser will throw an error.  This will set it if it is not set yet.
+							this.fileProgressWrapper.style.filter = 'progid:DXImageTransform.Microsoft.Alpha(opacity=100)';
+						}
+					}
+					else {
+						this.fileProgressWrapper.style.opacity = 1;
+					}
+
+					this.fileProgressWrapper.style.height = '';
+
+					this.height = this.fileProgressWrapper.offsetHeight;
+					this.opacity = 100;
+					this.fileProgressWrapper.style.display = '';
+
+				};
+
+				// Fades out and clips away the FileProgress box.
+				FileProgress.prototype.disappear = function () {
+
+					var reduceOpacityBy = 15;
+					var reduceHeightBy = 4;
+					var rate = 30;	// 15 fps
+
+					if (this.opacity > 0) {
+						this.opacity -= reduceOpacityBy;
+						if (this.opacity < 0) {
+							this.opacity = 0;
+						}
+
+						if (this.fileProgressWrapper.filters) {
+							try {
+								this.fileProgressWrapper.filters.item('DXImageTransform.Microsoft.Alpha').opacity = this.opacity;
+							} catch (e) {
+								// If it is not set initially, the browser will throw an error.  This will set it if it is not set yet.
+								this.fileProgressWrapper.style.filter = 'progid:DXImageTransform.Microsoft.Alpha(opacity=' + this.opacity + ')';
+							}
+						} else {
+							this.fileProgressWrapper.style.opacity = this.opacity / 100;
+						}
+					}
+
+					if (this.height > 0) {
+						this.height -= reduceHeightBy;
+						if (this.height < 0) {
+							this.height = 0;
+						}
+
+						this.fileProgressWrapper.style.height = this.height + 'px';
+					}
+
+					if (this.height > 0 || this.opacity > 0) {
+						var oSelf = this;
+						this.setTimer(setTimeout(function () {
+							oSelf.disappear();
+						}, rate));
+					} else {
+						this.fileProgressWrapper.style.display = 'none';
+						this.setTimer(null);
+					}
+				};
+
+				if(disp_type == 'thumbnail') {
+					this.fileProgressWrapper = document.createElement('li');
+					this.fileProgressWrapper.className = 'tree-list';
+
+					this.fileProgressTree = document.createElement('div');
+					this.fileProgressTree.className = 'tree';
+
+					this.fileProgressLink = document.createElement('a');
+
+					this.fileProgressBorder = document.createElement('div');
+					this.fileProgressBorder.className = 'img-border';
+
+					this.fileProgressFilename = document.createElement('span');
+					this.fileProgressFilename.className = 'node-name';
+					this.fileProgressFilename.appendChild(document.createTextNode(file.name));
+
+					this.fileProgressElement = document.createElement('div');
+					this.fileProgressElement.className = 'progressContainer white';
+
+					var progressStatus = document.createElement('div');
+					progressStatus.className = 'progressBarStatus';
+					progressStatus.innerHTML = '&nbsp;';
+
+					var progressBar = document.createElement('div');
+					progressBar.className = 'progressBarInProgress';
+
+					this.fileProgressElement.appendChild(progressStatus);
+					this.fileProgressElement.appendChild(progressBar);
+					this.fileProgressWrapper.appendChild(this.fileProgressTree);
+					this.fileProgressTree.appendChild(this.fileProgressLink);
+					this.fileProgressLink.appendChild(this.fileProgressBorder);
+					this.fileProgressLink.appendChild(this.fileProgressFilename);
+					this.fileProgressBorder.appendChild(this.fileProgressElement);
+
+					for(var li=pain.firstChild; li; li=li.nextSibling) {
+						if(file.name == bframe.searchNodeByName(li, 'path').value) {
+							var pos = bframe.getElementPosition(li);
+							this.fileProgressWrapper.style.position = 'absolute';
+							this.fileProgressWrapper.style.left = pos.left + 'px';
+							this.fileProgressWrapper.style.top = pos.top + 'px';
+							this.fileProgressWrapper.style.margin = 0;
+							li.style.opacity = 0.2;
+							break;
+						}
+					}
+					pain.appendChild(this.fileProgressWrapper);
+				}
+				else {
+					this.fileProgressWrapper = document.createElement('tr');
+
+					this.fileProgressTd = document.createElement('td');
+					this.fileProgressTd.className = 'file-name';
+
+					this.fileProgressTree = document.createElement('div');
+					this.fileProgressTree.className = 'tree';
+
+					this.fileProgressLink = document.createElement('a');
+
+					this.fileProgressBorder = document.createElement('span');
+					this.fileProgressBorder.className = 'img-border';
+
+					this.fileProgressImg = document.createElement('img');
+					this.fileProgressImg.src = property.icon.detail.misc.src;
+
+					this.fileProgressFilename = document.createElement('span');
+					this.fileProgressFilename.className = 'node-name';
+					this.fileProgressFilename.appendChild(document.createTextNode(file.name));
+
+					this.fileProgressTd2 = document.createElement('td');
+					this.fileProgressTd2.className = 'progress-bar';
+					this.fileProgressTd2.colSpan = property.detail.header.length;
+
+					this.fileProgressElement = document.createElement('div');
+					this.fileProgressElement.className = 'progressContainer white';
+
+					var progressStatus = document.createElement('div');
+					progressStatus.className = 'progressBarStatus';
+					progressStatus.innerHTML = '&nbsp;';
+
+					var progressBar = document.createElement('div');
+					progressBar.className = 'progressBarInProgress';
+
+					this.fileProgressLink.appendChild(this.fileProgressBorder);
+					this.fileProgressLink.appendChild(this.fileProgressImg);
+					this.fileProgressLink.appendChild(this.fileProgressFilename);
+					this.fileProgressTree.appendChild(this.fileProgressLink);
+					this.fileProgressTd.appendChild(this.fileProgressTree);
+
+					this.fileProgressWrapper.appendChild(this.fileProgressTd);
+
+					this.fileProgressElement.appendChild(progressStatus);
+					this.fileProgressElement.appendChild(progressBar);
+					this.fileProgressTd2.appendChild(this.fileProgressElement);
+
+					this.fileProgressWrapper.appendChild(this.fileProgressTd2);
+
+					for(var tr=pain.firstChild; tr; tr=tr.nextSibling) {
+						if(file.name == bframe.searchNodeByName(tr, 'path').value) {
+							var pos = bframe.getElementPosition(tr);
+							this.fileProgressWrapper.style.position = 'absolute';
+							this.fileProgressWrapper.style.left = pos.left  + 'px';
+							this.fileProgressWrapper.style.top = pos.top + 'px';
+							this.fileProgressWrapper.style.margin = 0;
+
+							bframe.searchNodeByName(tr, 'path')
+							tr.style.opacity = 0;
+
+							this.fileProgressWrapper.style.width = tr.clientWidth + 'px';
+							this.fileProgressWrapper.style.height = tr.clientHeight + 'px';
+
+							var i, width1=0, width2=0;
+							for(var td=tr.firstChild, i=0; td; td=td.nextSibling, i++) {
+								if(i == 0) {
+									width1 = td.offsetWidth;
+								}
+								else {
+									width2 += td.offsetWidth;
+								}
+							}
+							this.fileProgressTd.style.width = width1 + 'px';
+							this.fileProgressTd2.style.width = width2 + 'px';
+
+							break;
+						}
+					}
+
+					pain.appendChild(this.fileProgressWrapper);
+				}
+
+				this.height = this.fileProgressWrapper.offsetHeight;
+				this.setTimer(null);
+			}
+		}
+
+		// -------------------------------------------------------------------------
 		// class createNodeObject
 		// -------------------------------------------------------------------------
 		function createNodeObject(parent, config, place, trash) {
+			var li = _createNodeObject(config, place, trash)
+			parent.appendChild(li);
+
+			return li;
+		}
+
+		function _createNodeObject(config, place, trash) {
 			if(!config.node_id) return;
 
 			if(place == 'tree') {
@@ -2032,7 +2702,6 @@
 
 			li = document.createElement('li');
 			li.name = 'node';
-			parent.appendChild(li);
 
 			li.className = 'tree-list';
 			li.id = node_id;
@@ -2143,17 +2812,17 @@
 						}
 						else {
 							if(config.thumbnail_image_path) {
-								obj_img.src = config.thumbnail_image_path + '?' + config.update_datetime_t;
+								obj_img.src = config.thumbnail_image_path + '?' + config.update_datetime_u;
 							}
 							else {
 								var file_name = config.path.substring(config.path.lastIndexOf('/')+1,config.path.length);
 								var dir = config.path.substring(0, config.path.lastIndexOf('/')+1);
 								var extension = file_name.substring(file_name.lastIndexOf('.')+1, file_name.length);
 								if(suffix.toLowerCase() == 'svg') {
-									obj_img.src = property.thumb_path + config.contents_id + '.' + extension + '?' + config.update_datetime_t;
+									obj_img.src = property.thumb_path + config.contents_id + '.' + extension + '?' + config.update_datetime_u;
 								}
 								else {
-									obj_img.src = property.thumb_path + property.thumb_prefix + config.contents_id + '.' + extension + '?' + config.update_datetime_t;
+									obj_img.src = property.thumb_path + property.thumb_prefix + config.contents_id + '.' + extension + '?' + config.update_datetime_u;
 								}
 							}
 							a.title = 'size:' + config.human_image_size + '\n' + 'date:' + config.create_datetime_t;
@@ -2176,13 +2845,13 @@
 						}
 						else {
 							if(config.thumbnail_image_path) {
-								obj_img.src = config.thumbnail_image_path + '?' + config.update_datetime_t;
+								obj_img.src = config.thumbnail_image_path + '?' + config.update_datetime_u;
 							}
 							else {
 								var file_name = config.path.substring(config.path.lastIndexOf('/')+1,config.path.length);
 								var dir = config.path.substring(0, config.path.lastIndexOf('/')+1);
 								var extension = file_name.substring(file_name.lastIndexOf('.')+1, file_name.length);
-								obj_img.src = property.thumb_path + property.thumb_prefix + config.contents_id + '.' + 'jpg' + '?' + config.update_datetime_t;
+								obj_img.src = property.thumb_path + property.thumb_prefix + config.contents_id + '.' + 'jpg' + '?' + config.update_datetime_u;
 							}
 							a.title = 'size:' + config.human_image_size + '\n' + 'date:' + config.create_datetime_t;
 						}
@@ -2302,6 +2971,11 @@
 		function createDetailNodeObject(parent, config) {
 			if(!config.node_id) return;
 
+			var tr = _createDetailNodeObject(config);
+			parent.appendChild(tr);
+		}
+
+		function _createDetailNodeObject(config) {
 			var tr, td, div, ul, li, control, a, obj_img, span, text, input;
 
 			var node_id = 'p'+config.node_id;
@@ -2311,7 +2985,6 @@
 			tr.name = 'node';
 			tr.utime = config.update_datetime_u;
 			tr.node_class = config.node_class;
-			parent.appendChild(tr);
 
 			td = document.createElement('td');
 			td.className = 'file-name';
@@ -2421,6 +3094,8 @@
 				td = setColumn(property.detail.header[i], config[property.detail.header[i].name]);
 				tr.appendChild(td);
 			}
+
+			return tr;
 		}
 
 		function setColumn(config, value) {

@@ -142,10 +142,38 @@
 						$node->walk($this, regist_archive);
 						$node->remove();
 						$this->removeCacheFile();
+
+						
+						foreach($this->registered_archive_node as $value) {
+							$node = new B_Node($this->db
+												, B_RESOURCE_NODE_TABLE
+												, B_WORKING_RESOURCE_NODE_VIEW
+												, $this->version['working_version_id']
+												, $this->version['revision_id']
+												, $value
+												, ''
+												, 0
+												, ''
+												, 'auto');
+							$path = $node->getParentPath();
+							$response['node_info'][] = $node->getNodeList('', '', B_RESOURCE_DIR, $path);
+						}
 					}
 				}
 				else {
-					$this->regist($file);
+					$node_id = $this->regist($file);
+					$node = new B_Node($this->db
+										, B_RESOURCE_NODE_TABLE
+										, B_WORKING_RESOURCE_NODE_VIEW
+										, $this->version['working_version_id']
+										, $this->version['revision_id']
+										, $node_id
+										, ''
+										, 1
+										, ''
+										, 'auto');
+					$path = $node->getParentPath();
+					$response['node_info'][] = $node->getNodeList('', '', B_RESOURCE_DIR, $path);
 				}
 			}
 			catch(Exception $e) {
@@ -188,6 +216,10 @@
 					$this->createthumbnail($this->dir, $contents_id, $file['extension'], B_THUMB_PREFIX, B_THUMB_MAX_SIZE);
 				}
 			}
+
+			if(!$node->parent->db_node_id) {
+				$this->registered_archive_node[] = $node_id;
+			}
 		}
 
 		function _regist_archive($node, &$node_id, &$contents_id) {
@@ -223,16 +255,18 @@
 		}
 
 		function regist($file) {
-			if(!$this->_regist($file['basename'], $contents_id)) exit;
+			$this->_regist($file['basename'], $node_id, $contents_id);
 
 			if($this->_move_uploaded_file($_FILES['Filedata']['tmp_name'], $this->dir . $contents_id . '.' . $file['extension'])) {
 				chmod($this->dir . $contents_id . '.' . $file['extension'], 0777);
 				$this->createthumbnail($this->dir, $contents_id, $file['extension'], B_THUMB_PREFIX, B_THUMB_MAX_SIZE);
 				$this->removeCacheFile();
 			}
+
+			return $node_id;
 		}
 
-		function _regist($file_name, &$contents_id) {
+		function _regist($file_name, &$node_id, &$contents_id) {
 			$parent_node = $this->current_folder;
 			$this->resource_node_table = new B_Table($this->db, B_RESOURCE_NODE_TABLE);
 
@@ -374,11 +408,11 @@
 				if($node_type == 'file') {
 					$param['file_size'] = filesize($filepath);
 					$param['human_file_size'] = B_Util::human_filesize($param['file_size'], 'K');
-				}
-				$size = getimagesize($filepath);
-				if($size) {
-					$param['image_size'] = $size[0] * $size[1];
-					$param['human_image_size'] = $size[0] . 'x' . $size[1];
+					$size = getimagesize($filepath);
+					if($size) {
+						$param['image_size'] = $size[0] * $size[1];
+						$param['human_image_size'] = $size[0] . 'x' . $size[1];
+					}
 				}
 
 				$ret &= $new_node->updateNode($param, $this->user_id);
