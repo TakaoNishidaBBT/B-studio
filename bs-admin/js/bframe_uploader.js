@@ -311,6 +311,7 @@
 			FileProgress.prototype.setTimer = function(timer) {
 				this.fileProgressElement['FP_TIMER'] = timer;
 			};
+
 			FileProgress.prototype.getTimer = function(timer) {
 				return this.fileProgressElement['FP_TIMER'] || null;
 			};
@@ -332,6 +333,7 @@
 
 				this.appear();
 			};
+
 			FileProgress.prototype.setComplete = function() {
 				this.fileProgressElement.className = 'progressContainer blue';
 				this.fileProgressElement.childNodes[3].className = 'progressBarComplete';
@@ -342,6 +344,7 @@
 					oSelf.disappear();
 				}, 10000));
 			};
+
 			FileProgress.prototype.setError = function() {
 				this.fileProgressElement.className = 'progressContainer red';
 				this.fileProgressElement.childNodes[3].className = 'progressBarError';
@@ -352,6 +355,7 @@
 					oSelf.disappear();
 				}, 10000));
 			};
+
 			FileProgress.prototype.setCancelled = function() {
 				this.fileProgressElement.className = 'progressContainer';
 				this.fileProgressElement.childNodes[3].className = 'progressBarError';
@@ -362,6 +366,7 @@
 					oSelf.disappear();
 				}, 10000));
 			};
+
 			FileProgress.prototype.setStatus = function(status) {
 				this.fileProgressElement.childNodes[2].innerHTML = status;
 			};
@@ -411,45 +416,47 @@
 				var reduceHeightBy = 4;
 				var rate = 30;	// 15 fps
 
-				if (this.opacity > 0) {
+				if(this.opacity > 0) {
 					this.opacity -= reduceOpacityBy;
-					if (this.opacity < 0) {
+					if(this.opacity < 0) {
 						this.opacity = 0;
 					}
 
-					if (this.fileProgressWrapper.filters) {
+					if(this.fileProgressWrapper.filters) {
 						try {
 							this.fileProgressWrapper.filters.item('DXImageTransform.Microsoft.Alpha').opacity = this.opacity;
 						} catch (e) {
 							// If it is not set initially, the browser will throw an error.  This will set it if it is not set yet.
 							this.fileProgressWrapper.style.filter = 'progid:DXImageTransform.Microsoft.Alpha(opacity=' + this.opacity + ')';
 						}
-					} else {
+					}
+					else {
 						this.fileProgressWrapper.style.opacity = this.opacity / 100;
 					}
 				}
 
-				if (this.height > 0) {
+				if(this.height > 0) {
 					this.height -= reduceHeightBy;
-					if (this.height < 0) {
+					if(this.height < 0) {
 						this.height = 0;
 					}
 
 					this.fileProgressWrapper.style.height = this.height + 'px';
 				}
 
-				if (this.height > 0 || this.opacity > 0) {
+				if(this.height > 0 || this.opacity > 0) {
 					var oSelf = this;
 					this.setTimer(setTimeout(function () {
 						oSelf.disappear();
 					}, rate));
-				} else {
+				}
+				else {
 					this.fileProgressWrapper.style.display = 'none';
 					this.setTimer(null);
 				}
 			};
 
-			if (!this.fileProgressWrapper) {
+			if(!this.fileProgressWrapper) {
 				this.fileProgressWrapper = document.createElement('div');
 				this.fileProgressWrapper.className = 'progressWrapper';
 				this.fileProgressWrapper.id = this.fileProgressID;

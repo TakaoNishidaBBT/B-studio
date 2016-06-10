@@ -51,7 +51,6 @@
 				if($this->request['node_id'] == $this->session['current_node'] && $this->session['sort_key'] == $this->request['sort_key']) {
 					$this->session['sort_order'] = $this->session['sort_order'] == 'asc' ? 'desc' : 'asc';
 				}
-				
 				$this->session['sort_key'] = $this->request['sort_key'];
 			}
 			if($this->request['node_id']) {
@@ -90,6 +89,7 @@
 						// start transaction
 						$this->db->begin();
 						foreach($this->request['source_node_id'] as $node_id) {
+							if(!$node_id) continue;
 							$source_node = new B_Node($this->db
 													, B_RESOURCE_NODE_TABLE
 													, B_WORKING_RESOURCE_NODE_VIEW
@@ -108,6 +108,7 @@
 						// start transaction
 						$this->db->begin();
 						foreach($this->request['source_node_id'] as $node_id) {
+							if(!$node_id) continue;
 							$source_node = new B_Node($this->db
 													, B_RESOURCE_NODE_TABLE
 													, B_WORKING_RESOURCE_NODE_VIEW
@@ -129,6 +130,7 @@
 						// start transaction
 						$this->db->begin();
 						foreach($this->request['source_node_id'] as $node_id) {
+							if(!$node_id) continue;
 							$source_node = new B_Node($this->db
 													, B_RESOURCE_NODE_TABLE
 													, B_WORKING_RESOURCE_NODE_VIEW
@@ -251,6 +253,8 @@
 
 				$disp_seq = 0;
 				foreach($this->request['delete_node_id'] as $node_id) {
+					if(!$node_id) continue;
+
 					$source_node = new B_Node($this->db
 											, B_RESOURCE_NODE_TABLE
 											, B_WORKING_RESOURCE_NODE_VIEW
@@ -664,7 +668,9 @@
 			$this->html_header->appendProperty('css', '<link href="css/resource.css" type="text/css" rel="stylesheet" media="all" />');
 			$this->html_header->appendProperty('css', '<link href="css/resource_tree.css" type="text/css" rel="stylesheet" media="all" />');
 			$this->html_header->appendProperty('css', '<link href="css/selectbox.css" type="text/css" rel="stylesheet" media="all" />');
+			$this->html_header->appendProperty('css', '<link href="css/resource_upload.css" type="text/css" rel="stylesheet" media="all" />');
 			$this->html_header->appendProperty('script', '<script src="js/bframe_tree.js" type="text/javascript"></script>');
+			$this->html_header->appendProperty('script', '<script src="js/bframe_dialog.js" type="text/javascript"></script>');
 			$this->html_header->appendProperty('script', '<script src="js/bframe_splitter.js" type="text/javascript"></script>');
 			$this->html_header->appendProperty('script', '<script src="js/bframe_effect.js" type="text/javascript"></script>');
 			$this->html_header->appendProperty('script', '<script src="js/bframe_selectbox.js" type="text/javascript"></script>');
