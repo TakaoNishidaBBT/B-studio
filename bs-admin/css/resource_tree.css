@@ -108,7 +108,7 @@ div.thumbs li.tree-list span.edit input {
 div.thumbs li.tree-list span.node-name {
 	display: block;
 	margin: 2px auto;
-	padding: 4px 4px 1px 4px;
+	padding: 4px 0 1px 0;
 	font-size: 12px;
 }
 div.bframe_pane a:link {

@@ -822,6 +822,7 @@
 			}
 
 			var span = bframe.searchNodeByName(current_edit_node, 'node_span');
+			var name = bframe.searchNodeByName(current_edit_node, 'node_name');
 
 			var input = document.createElement('input');
 			input.name = 'node_input';
@@ -843,8 +844,8 @@
 				input.style.imeMode = '';
 			}
 
-			current_edit_save_value = span.firstChild.nodeValue;
-			input.value = span.firstChild.nodeValue;
+			current_edit_save_value = name.value;
+			input.value = name.value;
 			span.firstChild.nodeValue = '';
 			span.className = 'edit';
 			span.appendChild(input);
@@ -888,7 +889,7 @@
 			var input = bframe.searchNodeByName(current_edit_node, 'node_input');
 
 			if(current_edit_save_value == input.value.trim()) {
-				span.firstChild.nodeValue = current_edit_save_value;
+				span.firstChild.nodeValue = shortenText(current_edit_save_value);
 				current_edit_save_value = '';
 				span.className = 'node-name';
 				span.removeChild(input);
@@ -1185,6 +1186,15 @@
 
 				bstudio.insertIMG(property.root_path, node_id.substr(1), img_size, property.target, property.target_id);
 			}
+		}
+
+		function shortenText(text) {
+			if(pane_disp_change && pane_disp_change_select.options[pane_disp_change_select.selectedIndex].value == 'thumb') {
+				if(text.length > 30 && property.abbr) {
+					return text.substr(0, 22) + property.abbr + text.substr(-7);
+				}
+			}
+			return text;
 		}
 
 		function download() {
@@ -2923,8 +2933,15 @@
 			input.value = node_number++;
 			a.appendChild(input);
 
+			input = document.createElement('input');
+			input.type = 'hidden';
+			input.id = 'nm' + node_id;
+			input.name = 'node_name';
+			input.value = config.node_name;
+			a.appendChild(input);
+
 			span.className = 'node-name';
-			text = document.createTextNode(config.node_name);
+			text = document.createTextNode(shortenText(config.node_name));
 			span.appendChild(text);
 
 			return li;
@@ -3085,6 +3102,13 @@
 			input.id = 'nn' + node_id;
 			input.name = 'node_number';
 			input.value = node_number++;
+			a.appendChild(input);
+
+			input = document.createElement('input');
+			input.type = 'hidden';
+			input.id = 'nm' + node_id;
+			input.name = 'node_name';
+			input.value = config.node_name;
 			a.appendChild(input);
 
 			text = document.createTextNode(config.node_name);
