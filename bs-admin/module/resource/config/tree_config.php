@@ -170,6 +170,7 @@ $tree_config = array(
 					'gif'		=> array('src' => './images/folders/file_icon.png'),
 					'png'		=> array('src' => './images/folders/file_icon.png'),
 					'misc'		=> array('src' => './images/folders/file_icon.png'),
+					'upload'	=> array('src' => './images/folders/file_upload_icon.png'),
 				),
 			),
 			'context_menu'		=>

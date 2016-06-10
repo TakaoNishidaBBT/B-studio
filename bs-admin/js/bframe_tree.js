@@ -2607,7 +2607,7 @@
 					this.fileProgressBorder.className = 'img-border';
 
 					this.fileProgressImg = document.createElement('img');
-					this.fileProgressImg.src = property.icon.detail.misc.src;
+					this.fileProgressImg.src = property.icon.detail.upload.src;
 
 					this.fileProgressFilename = document.createElement('span');
 					this.fileProgressFilename.className = 'node-name';

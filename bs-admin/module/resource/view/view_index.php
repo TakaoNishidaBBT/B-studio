@@ -12,7 +12,13 @@
 			<li class="select"><span id="bframe_pane_disp_change">表示 ： </span></li>
 			<li>
 				<div id="upload_button" class="input_container">
-					<a href="index.php?terminal_id=<?php echo TERMINAL_ID ?>&module=resource&page=upload" title="アップロード" class="upload-button bframe_upload" onclick="bstudio.activateModalWindow(this, 440, 500, bstudio.reloadTree); return false;"><img src="images/common/upload.png" alt="アップロード" />アップロード</a>
+					<form id="form1" method="post" enctype="multipart/form-data">
+						<div>
+							<input id="upload_file" type="file" multiple="multiple" name="Filedata[]" class="bframe_uploader" style="display:none;" />
+							<input id="upload_button" class="upload-button" type="button" value="アップロード" />
+						</div>
+					</form>
+
 				</div>
 			</li>
 		</ul>
