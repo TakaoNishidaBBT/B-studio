@@ -84,6 +84,9 @@ $tree_config = array(
 			'upload'		=>
 			array(
 				'button'		=> 'upload_button',
+				'file'			=> 'upload_file',
+				'module'		=> $this->module,
+				'page'			=> 'upload',
 			),
 			'disp_change'	=>
 			array(

@@ -123,25 +123,22 @@ div.input_container {
 	width: 142px;
 	float: left;
 }
-a.upload-button,
-a:visited.upload-button,
-a:link.upload-button,
-a:active.upload-button {
+input.upload-button {
 	display: block;
 	margin: 0;
-	line-height: 24px;
-	width: 140px;
-	background-color: #666;
+	padding: 0 0 0 22px;
+	line-height: 22px;
+	width: 142px;
+	background: #666 url("../images/common/upload.png") no-repeat scroll 29px center;
 	border-top: 1px solid #666;
 	border-left: 1px solid #666;
 	border-right: 1px solid #666;
 	border-bottom: 1px solid #666;
 	color: #eee;
-	text-align: center;
-	text-decoration: none;
 	text-shadow: -1px -1px #555;
 }
-a:hover.upload-button {
+input:hover.upload-button {
+	padding: 0 0 0 22px;
 	background-color: #777;
 	border-top: 1px solid #777;
 	border-left: 1px solid #777;
@@ -150,7 +147,7 @@ a:hover.upload-button {
 	color: #fff;
 	text-shadow: 1px 1px #555;
 }
-a.upload-button img {
+input.upload-button img {
 	vertical-align: -4px;
 	margin-right: 6px;
 }

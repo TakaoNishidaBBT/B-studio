@@ -164,6 +164,10 @@ div.thumbs img.control {
 /* pane detail */
 div.detail table {
 	margin: 0 20px 20px 20px;
+	border-collapse: collapse;
+}
+div.detail table tr {
+	box-sizing: boreder-box;
 }
 div.detail table div.tree {
 	margin: 0;
@@ -175,6 +179,7 @@ div.detail table div.selected {
 	border-top: 1px dotted #f00;
 }
 div.detail table th {
+	box-sizing: boreder-box;
 	text-align: left;
 	font-weight: normal;
 	height: 30px;
@@ -203,28 +208,29 @@ div.detail table th.desc span {
 div.detail table th.sortable:hover span {
 	color: #ccc;
 }
-div.detail table th.file-name {
+div.detail table .file-name {
 	min-width: 240px;
 }
-div.detail table th.update-time {
+div.detail table .update-time {
 	min-width: 125px;
 }
-div.detail table th.update-time span {
+div.detail table .update-time span {
 	padding-left: 8px;
 }
-div.detail table th.file-size {
+div.detail table .file-size {
 	min-width: 115px;
 }
-div.detail table th.file-size span {
+div.detail table .file-size span {
 	padding-left: 4px;
 }
-div.detail table th.image-size {
+div.detail table .image-size {
 	min-width: 115px;
 }
-div.detail table th.image-size span {
+div.detail table .image-size span {
 	padding-left: 4px;
 }
 div.detail table td {
+	box-sizing: border-box;
 	height: 20px;
 	white-space: nowrap;
 	color: #fff;
