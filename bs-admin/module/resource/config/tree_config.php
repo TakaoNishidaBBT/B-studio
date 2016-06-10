@@ -236,6 +236,7 @@ $tree_config = array(
 			'context_menu_width'	=> '138',
 			'context_menu_frame'	=> 'top',
 			'session_timeout'		=> 'セッションが切れました。ログインしなおしてください。',
+			'abbr'					=> '…',
 		),
 	),
 );
