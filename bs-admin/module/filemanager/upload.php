@@ -8,10 +8,9 @@
 	class filemanager_upload extends B_AdminModule {
 		function __construct() {
 			parent::__construct(__FILE__);
-		}
-
-		function init() {
-			$this->session['relation'] = $this->request['session'];
+			if($this->request['session']) {
+				$this->session['relation'] = $this->request['session'];
+			}
 		}
 
 		function confirm() {
@@ -128,7 +127,6 @@
 							$node = new B_FileNode(B_UPLOAD_DIR, $path, null, null, 1);
 							$response['node_info'][] = $node->getNodeList('', '');
 						}
-$this->log->write('node_info', $response['node_info']);
 					}
 				}
 				else {
