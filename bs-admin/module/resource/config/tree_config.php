@@ -56,10 +56,6 @@ $tree_config = array(
 				array(
 					'id'		=> 'bframe_pane',
 				),
-				'disp_change'	=>
-				array(
-					'id'		=> 'bframe_pane_disp_change',
-				),
 				'insertFile'	=>
 				array(
 					'node_type'	=> 'file',
@@ -75,11 +71,11 @@ $tree_config = array(
 			),
 			'editor'		=>
 			array(
-				'module'	=> $this->module,
-				'file'		=> 'editor',
-				'method'	=> 'open',
-				'width'		=> '1000',
-				'height'	=> '600',
+				'module'		=> $this->module,
+				'file'			=> 'editor',
+				'method'		=> 'open',
+				'width'			=> '1000',
+				'height'		=> '600',
 			),
 			'upload'		=>
 			array(
@@ -88,20 +84,17 @@ $tree_config = array(
 				'module'		=> $this->module,
 				'page'			=> 'upload',
 			),
-			'disp_change'	=>
+			'display_mode'	=>
 			array(
-				'options'	=>
+				'thumbnail'	=> 
 				array(
-					array(
-						'title'		=> 'サムネイル',
-						'value'		=> 'thumb',
-					),
-					array(
-						'title'		=> '詳細',
-						'value'		=> 'detail',
-					),
+					'id'		=> 'display_thumbnail',
 				),
-				'selectedIndex'	=> $this->session['disp_mode'],
+				'detail'		=> 
+				array(
+					'id'		=> 'display_detail',
+				),
+				'default'		=> $this->session['display_mode'],
 			),
 			'detail'	=>
 			array(

@@ -203,7 +203,7 @@
 			if($this->node_id == $node_id) {
 				$list[$category] = true;
 			}
-			if($path) {
+			if($path && substr($path, -1) != '/') {
 				$path.= '/';
 			}
 			$list['path'] = $path . $list['node_name'];

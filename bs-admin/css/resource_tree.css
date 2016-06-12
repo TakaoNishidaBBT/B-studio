@@ -212,19 +212,22 @@ div.detail table .file-name {
 	min-width: 240px;
 }
 div.detail table .update-time {
-	min-width: 125px;
+	min-width: 145px;
 }
 div.detail table .update-time span {
 	padding-left: 8px;
 }
+div.detail table .update-time span.update-time {
+	padding-top:7px;
+}
 div.detail table .file-size {
-	min-width: 115px;
+	min-width: 125px;
 }
 div.detail table .file-size span {
 	padding-left: 4px;
 }
 div.detail table .image-size {
-	min-width: 115px;
+	min-width: 125px;
 }
 div.detail table .image-size span {
 	padding-left: 4px;
@@ -235,6 +238,7 @@ div.detail table td {
 	white-space: nowrap;
 	color: #fff;
 	padding-left: 4px;
+	vertical-align: bottom;
 }
 div.detail table td span.update-datetime {
 	padding-left: 4px;

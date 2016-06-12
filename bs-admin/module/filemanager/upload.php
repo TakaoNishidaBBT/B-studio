@@ -89,9 +89,9 @@
 			try {
 				// set path
 				if($this->global_session[$this->session['relation']]['current_node'] != 'root') {
-					$path = $this->global_session[$this->session['relation']]['current_node'] . '/';
-					if(substr($path, 0, 1) == '/') {
-						$path = substr($path, 1);
+					$this->path = $this->global_session[$this->session['relation']]['current_node'] . '/';
+					if(substr($this->path, 0, 1) == '/') {
+						$this->path = substr($this->path, 1);
 					}
 				}
 
@@ -114,21 +114,32 @@
 					if($status) {
 						$zip = new ZipArchive();
 						$zip->open($zip_file);
-						$zip->extractTo(B_UPLOAD_DIR . $path);
+						$zip->extractTo(B_RESOURCE_EXTRACT_DIR);
+						$node = new B_FileNode(B_RESOURCE_EXTRACT_DIR, '/', null, null, 'all');
+						$node->walk($this, regist_archive);
+
 						$zip->close();
 						unlink($zip_file);
 						$this->removeThumbnailCacheFile();
 						$root = new B_FileNode(B_UPLOAD_DIR, 'root', null, null, 'all');
 						$this->refleshThumnailCache($root);
+
+						foreach($this->registered_archive_node as $path) {
+							$node = new B_FileNode(B_UPLOAD_DIR, $path, null, null, 1);
+							$response['node_info'][] = $node->getNodeList('', '');
+						}
+$this->log->write('node_info', $response['node_info']);
 					}
 				}
 				else {
-					$status = move_uploaded_file($_FILES['Filedata']['tmp_name'], B_UPLOAD_DIR . $path . $file['basename']);
+					$status = move_uploaded_file($_FILES['Filedata']['tmp_name'], B_UPLOAD_DIR . $this->path . $file['basename']);
 					if($status) {
-						chmod(B_UPLOAD_DIR . $path . $file['basename'], 0777);
-						$this->removeThumbnail($path, $file['basename']);
+						chmod(B_UPLOAD_DIR . $this->path . $file['basename'], 0777);
+						$this->removeThumbnail($this->path, $file['basename']);
 						$root = new B_FileNode(B_UPLOAD_DIR, 'root', null, null, 'all');
 						$this->refleshThumnailCache($root);
+						$node = new B_FileNode(B_UPLOAD_DIR, $this->path . $file['basename'], null, null, 1);
+						$response['node_info'][] = $node->getNodeList('', '');
 					}
 				}
 				if(!$status) {
@@ -193,6 +204,15 @@
 				if(strlen($file_name) != mb_strlen($file_name)) {
 					throw new Exception('日本語ファイル名は使用できません。（zipファイル中）');
 				}
+			}
+		}
+
+		function regist_archive($node) {
+			if(!$node->parent || $node->parent->path != '/') return;
+
+			rename($node->fullpath, B_UPLOAD_DIR . $this->path . $node->filename);
+			if(!$node->parent->db_node_id) {
+				$this->registered_archive_node[] = $this->path . $node->filename;
 			}
 		}
 
