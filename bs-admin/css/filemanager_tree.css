@@ -68,7 +68,7 @@ div.bframe_tree a:hover {
 /* pane thumb */
 div.thumbs li.tree-list div.tree {
 	margin: 0;
-	border-left: 1px solid #444;
+	border-left: 1px solid transparent;
 	width: 120px;
 }
 div.thumbs li.tree-list div.tree a {
@@ -78,63 +78,51 @@ div.thumbs li.tree-list div.tree a {
 div.thumbs li.tree-list div.selected {
 	border-left: 1px dotted #f00;
 }
-div.thumbs li.tree-list input {
-	padding: 0;
+div.thumbs li.tree-list span.selected input,
+div.thumbs li.tree-list span.edit input {
+	height: 12px;
 	font-size: 12px;
-	background-color: #ece9d8;
-	background-color: #fff;
-	border: 1px solid #ece9d8;
-	border: 1px solid #444;
 	ime-mode: disabled;
 	text-align: center;
-	height: 20px;
-	width: 90%;
+	width: 102px;
+	margin: 1px auto;
+	padding: 5px 4px 3px 6px;
+	border-top: 1px solid #333;
+	border-right: 1px solid #444;
+	border-bottom: 1px solid #444;
+	border-left: 1px solid #333;
+	background-color: #fafafa;
 }
 div.thumbs li.tree-list span.node-name {
 	display: block;
 	margin: 2px auto;
-	padding: 4px 4px 2px 4px;
+	padding: 4px 0 1px 0;
 	font-size: 12px;
-}
-div.thumbs li.tree-list span.edit {
-	margin: 2px auto;
-	padding: 0;
-	height: 24px;
-	background-color: #fff;
 }
 div.bframe_pane a:link {
 	text-decoration: none;
 }
 div.bframe_pane a:visited {
-	color: #03c;
+	color: #fff;
 	text-decoration: none;
 }
 div.bframe_pane a:active {
-	color: #f00;
+	color: #fff;
 	text-decoration: none;
 }
 div.bframe_pane a:hover {
-	color: #000;
+	color: #fff;
 	text-decoration: none;
 }
 div.thumbs li.tree-list {
 	margin: 4px auto;
 	padding: 0;
-	width: 120px;
 	height: 150px;
 	list-style: none;
 	float: left;
 }
 div.thumbs div {
 	text-align: center;
-}
-div.clone_node_pane span.img-border, div.thumbs span.img-border {
-	display: table-cell;
-	margin: 0 auto;
-	width: 110px;
-	height: 110px;
-	border:1px #555 solid;
-	vertical-align: middle;
 }
 div.thumbs img {
 	margin: 0;
@@ -144,15 +132,6 @@ div.thumbs input {
 	_height: 18px;
 	padding: 1px 0;
 	font-size: 12px;
-}
-div.clone_node_pane span.node-name, div.thumbs span.node-name {
-	display: block;
-	margin: 0 auto;
-	padding: 2px 4px 1px 4px;
-	font-size: 12px;
-	color: #fff;
-	word-wrap: break-word;
-	width: 85%;
 }
 span.current {
 	background-color: #22a8f6 !important;
@@ -173,6 +152,10 @@ div.thumbs img.control {
 /* pane detail */
 div.detail table {
 	margin: 0 20px 20px 20px;
+	border-collapse: collapse;
+}
+div.detail table tr {
+	box-sizing: boreder-box;
 }
 div.detail table div.tree {
 	margin: 0;
@@ -184,6 +167,7 @@ div.detail table div.selected {
 	border-top: 1px dotted #f00;
 }
 div.detail table th {
+	box-sizing: boreder-box;
 	text-align: left;
 	font-weight: normal;
 	height: 30px;
@@ -212,32 +196,37 @@ div.detail table th.desc span {
 div.detail table th.sortable:hover span {
 	color: #ccc;
 }
-div.detail table th.file-name {
+div.detail table .file-name {
 	min-width: 240px;
 }
-div.detail table th.update-time {
-	min-width: 125px;
+div.detail table .update-time {
+	min-width: 145px;
 }
-div.detail table th.update-time span {
+div.detail table .update-time span {
 	padding-left: 8px;
 }
-div.detail table th.file-size {
-	min-width: 115px;
+div.detail table .update-time span.update-time {
+	padding-top:7px;
 }
-div.detail table th.file-size span {
+div.detail table .file-size {
+	min-width: 125px;
+}
+div.detail table .file-size span {
 	padding-left: 4px;
 }
-div.detail table th.image-size {
-	min-width: 115px;
+div.detail table .image-size {
+	min-width: 125px;
 }
-div.detail table th.image-size span {
+div.detail table .image-size span {
 	padding-left: 4px;
 }
 div.detail table td {
+	box-sizing: border-box;
 	height: 20px;
 	white-space: nowrap;
 	color: #fff;
 	padding-left: 4px;
+	vertical-align: bottom;
 }
 div.detail table td span.update-datetime {
 	padding-left: 4px;

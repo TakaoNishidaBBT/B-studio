@@ -53,10 +53,6 @@ $tree_config = array(
 				array(
 					'id'		=> 'bframe_pane',
 				),
-				'disp_change'	=>
-				array(
-					'id'		=> 'bframe_pane_disp_change',
-				),
 				'insertFile'	=>
 				array(
 					'node_type'	=> 'file',
@@ -78,20 +74,24 @@ $tree_config = array(
 				'width'		=> '1000',
 				'height'	=> '600',
 			),
-			'disp_change'	=>
+			'upload'		=>
 			array(
-				'options'	=>
+				'button'		=> 'upload_button',
+				'file'			=> 'upload_file',
+				'module'		=> $this->module,
+				'page'			=> 'upload',
+			),
+			'display_mode'	=>
+			array(
+				'thumbnail'	=> 
 				array(
-					array(
-						'title'		=> 'サムネイル',
-						'value'		=> 'thumb',
-					),
-					array(
-						'title'		=> '詳細',
-						'value'		=> 'detail',
-					),
+					'id'		=> 'display_thumbnail',
 				),
-				'selectedIndex'	=> $this->session['disp_mode'],
+				'detail'		=> 
+				array(
+					'id'		=> 'display_detail',
+				),
+				'default'		=> $this->session['display_mode'],
 			),
 			'detail'	=>
 			array(
@@ -161,6 +161,7 @@ $tree_config = array(
 					'gif'		=> array('src' => './images/folders/file_icon.png'),
 					'png'		=> array('src' => './images/folders/file_icon.png'),
 					'misc'		=> array('src' => './images/folders/file_icon.png'),
+					'upload'	=> array('src' => './images/folders/file_upload_icon.png'),
 				),
 			),
 			'context_menu'		=>
@@ -218,6 +219,7 @@ $tree_config = array(
 			'context_menu_width'	=> '138',
 			'context_menu_frame'	=> 'top',
 			'session_timeout'		=> 'セッションが切れました。ログインしなおしてください。',
+			'abbr'					=> '…',
 		),
 	),
 );

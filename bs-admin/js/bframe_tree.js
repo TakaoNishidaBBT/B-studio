@@ -68,13 +68,12 @@
 		var clipboard = {};
 
 		var pane;
-		var pane_disp_change;
-		var pane_disp_change_select;
-
 		var pane_ul;
 		var pane_tbody;
-
 		var sort_key;
+		var display_mode;
+		var display_thumbnail;
+		var display_detail;
 
 		var opener = window.opener;
 
@@ -93,6 +92,8 @@
 			if(httpObj.readyState == 4 && httpObj.status == 200 && response_wait){
 				property = eval('('+httpObj.responseText+')');
 				response_wait = false;
+				getPane();
+
 				if(property.editable == 'true' || property.sort == 'manual') {
 					setDragControl();
 					setFileUpload();
@@ -104,8 +105,6 @@
 				if(property.selectable == 'true') {
 					target.onclick = resetCurrentObject;
 				}
-				file_upload.init();
-				getPane();
 				getNodeList('');
 			}
 		}
@@ -116,6 +115,7 @@
 
 		function setFileUpload() {
 			file_upload = new fileUpload();
+			file_upload.init();
 		}
 
 		function getPane() {
@@ -125,29 +125,40 @@
 					pane.oncontextmenu=showContextMenu;
 					pane.onclick = resetSelectedObject;
 				}
-				if(property.relation.disp_change) {
-					pane_disp_change = document.getElementById(property.relation.disp_change.id);
+				if(property.display_mode) {
 					setDispChange();
 				}
 			}
 		}
-
+		
+						
 		function setDispChange() {
-			pane_disp_change_select = document.createElement('select');
-			pane_disp_change_select.className = 'bframe_selectbox';
+			display_thumbnail = document.getElementById(property.display_mode.thumbnail.id);
+			display_detail = document.getElementById(property.display_mode.detail.id);
 
-			pane_disp_change_select.options[0] = new Option(property.disp_change.options[0].title, property.disp_change.options[0].value);
-			pane_disp_change_select.options[1] = new Option(property.disp_change.options[1].title, property.disp_change.options[1].value);
-
-			pane_disp_change.appendChild(pane_disp_change_select);
-
-			bframe.addEventListner(pane_disp_change_select, 'change', reloadTree);
-			if(property.disp_change.selectedIndex) {
-				pane_disp_change_select.selectedIndex = property.disp_change.selectedIndex;
+			bframe.addEventListner(display_thumbnail, 'click', display_thumbnail_mode);
+			bframe.addEventListner(display_detail, 'click', display_detail_mode);
+			display_mode = property.display_mode.default;
+			if(display_mode == 'thumbnail') {
+				bframe.appendClass('current', display_thumbnail);
 			}
-			if(bframe.selectBoxContainer) {
-				bframeSelectBoxAdd();
+			else {
+				bframe.appendClass('current', display_detail);
 			}
+		}
+
+		function display_thumbnail_mode(event) {
+			if(display_mode == 'thumbnail') return;
+
+			display_mode = 'thumbnail';
+			getNodeList(current_node.id());
+		}
+
+		function display_detail_mode(event) {
+			if(display_mode == 'detail') return;
+
+			display_mode = 'detail';
+			getNodeList(current_node.id());
 		}
 
 		function setEventHandler() {
@@ -457,8 +468,8 @@
 			if(id) {
 				param+= '&node_id='+id.substr(1);
 			}
-			if(property.relation && property.relation.disp_change) {
-				param+= '&disp_mode='+pane_disp_change_select.selectedIndex;
+			if(display_mode) {
+				param+= '&display_mode='+display_mode;
 			}
 			if(property.sort == 'auto' && sort_key) {
 				param+= '&sort_key='+sort_key;
@@ -578,51 +589,60 @@
 					}
 					_showNode(ul, node_info.children[i], trash);
 				}
+			}
 
-				// create pane
-				if(pane && current_node.id() && node_info.node_id == current_node.id().substr(1)) {
-					// create div
-					var div = document.createElement('div');
-					pane.appendChild(div);
+			// create pane
+			if(pane && current_node.id() && node_info.node_id == current_node.id().substr(1)) {
+				// create div
+				var div = document.createElement('div');
+				pane.appendChild(div);
 
-					// sort mode
-					if(property.sort == 'auto') {
-						node_info.children.sort(_sort_callback);
-					}
+				// sort mode
+				if(node_info.children && property.sort == 'auto') {
+					node_info.children.sort(_sort_callback);
+				}
 
-					if(pane_disp_change && pane_disp_change_select.options[pane_disp_change_select.selectedIndex].value == 'detail') {
-						// detail mode
-						div.className = 'detail';
-						var ptable = document.createElement('table');
-						div.appendChild(ptable);
+				if(display_mode == 'detail') {
+					// detail mode
+					div.className = 'detail';
+					var ptable = document.createElement('table');
+					div.appendChild(ptable);
 
-						pane_tbody = document.createElement('tbody');
-						ptable.appendChild(pane_tbody);
+					pane_tbody = document.createElement('tbody');
+					ptable.appendChild(pane_tbody);
 
-						pane_tbody.id = 'tt' + node_info.node_id;
-						pane_tbody.name = 'nodes';
-						pane_tbody.className = 'pane';
+					pane_tbody.id = 'tt' + node_info.node_id;
+					pane_tbody.name = 'nodes';
+					pane_tbody.className = 'pane';
 
-						// title
-						createDetailTitle(pane_tbody, response.sort_key, response.sort_order);
+					// title
+					createDetailTitle(pane_tbody, response.sort_key, response.sort_order);
 
+					if(node_info.children) {
 						for(var i=0; i < node_info.children.length; i++) {
 							createDetailNodeObject(pane_tbody, node_info.children[i]);
 							setNewNode(node_info.children[i]);
 						}
 					}
-					else {
-						// thumb nail mode
-						div.className = 'thumbs';
-						pane_ul = document.createElement('ul');
-						pane_ul.id = 'uu' + node_info.node_id;
-						pane_ul.name = 'nodes';
-						div.appendChild(pane_ul);
+					bframe.removeClass('current', display_thumbnail);
+					bframe.appendClass('current', display_detail);
+				}
+				else {
+					// thumb nail mode
+					div.className = 'thumbs';
+					pane_ul = document.createElement('ul');
+					pane_ul.id = 'uu' + node_info.node_id;
+					pane_ul.name = 'nodes';
+					div.appendChild(pane_ul);
+
+					if(node_info.children) {
 						for(var i=0; i < node_info.children.length; i++) {
 							createNodeObject(pane_ul, node_info.children[i], 'pane', trash);
 							setNewNode(node_info.children[i]);
 						}
 					}
+					bframe.removeClass('current', display_detail);
+					bframe.appendClass('current', display_thumbnail);
 				}
 			}
 		}
@@ -1189,7 +1209,7 @@
 		}
 
 		function shortenText(text) {
-			if(pane_disp_change && pane_disp_change_select.options[pane_disp_change_select.selectedIndex].value == 'thumb') {
+			if(display_mode != 'detail') {
 				if(text.length > 30 && property.abbr) {
 					return text.substr(0, 22) + property.abbr + text.substr(-7);
 				}
@@ -1625,7 +1645,7 @@
 					div_overwrap.style.width = wsize.width + 'px';
 					div_overwrap.style.height = wsize.height + 'px';
 				}
-				if(bframe.searchParentById(event_obj, 'bframe_pane') && pane_disp_change_select.options[pane_disp_change_select.selectedIndex].value != 'detail') {
+				if(bframe.searchParentById(event_obj, 'bframe_pane') && display_mode != 'detail') {
 					pane_flag = true;
 					div_pane.appendChild(clone_node);
 					clone_node.className = 'clone_node_pane';
@@ -1712,7 +1732,7 @@
 
 				if(property.sort == 'manual') {
 					if(property.relation && property.relation.pane && bframe.searchParentById(node, property.relation.pane.id) &&
-						pane_disp_change_select.options[pane_disp_change_select.selectedIndex].value != 'detail') {
+						display_mode != 'detail') {
 						// destination is in pane and display mode is icon style
 						if(node.node_class == 'leaf') {
 							if(position.left < pageX) {
@@ -2063,12 +2083,14 @@
 					page = property.upload.page;
 					upload_button.onclick = selectFiles;
 					upload_file.onchange = uploadFiles;
+					pane.ondrop = uploadFiles;
+					pane.ondragover = dragover;
 				}
 			}
 			this.init = init;
 
-			function display() {
-
+			function dragover(event) {
+				event.preventDefault();
 			}
 
 			function selectFiles(event) {
@@ -2084,11 +2106,16 @@
 //				queueComplete(0);
 				mode = 'confirm';
 				extract_mode = 'confirm';
-				var files = event.target.files;
+				if(event.type == 'drop') {
+					var files = event.dataTransfer.files;
+				}
+				else {
+					var files = event.target.files;
+				}
 
 				var tree_id = 'tu' + current_node.id().substr(1);
 				var pane_id, disp_type;
-				if(pane_disp_change && pane_disp_change_select.options[pane_disp_change_select.selectedIndex].value == 'detail') {
+				if(display_mode == 'detail') {
 					pane_id = pane_tbody.id;
 					disp_type = 'detail';
 				}
@@ -2104,7 +2131,8 @@
 					upload_queue[i] = {'file' : files[i], 'progress' : progress};
 				}
 				confirm(0);
-				true;
+
+				event.preventDefault();
 			}
 
 			function confirm(index) {
@@ -2471,14 +2499,15 @@
 					}, 10000));
 				};
 				FileProgress.prototype.setCancelled = function() {
-					this.fileProgressElement.className = 'progressContainer';
+					this.fileProgressElement.className = 'progressContainer cancelled';
 					this.fileProgressElement.childNodes[1].className = 'progressBarError';
 					this.fileProgressElement.childNodes[1].style.width = '';
-
+/*
 					var oSelf = this;
 					this.setTimer(setTimeout(function() {
 						oSelf.disappear();
 					}, 10000));
+*/
 				};
 				FileProgress.prototype.setStatus = function(status) {
 					this.fileProgressElement.childNodes[0].innerHTML = status;
@@ -2569,7 +2598,7 @@
 
 					this.fileProgressFilename = document.createElement('span');
 					this.fileProgressFilename.className = 'node-name';
-					this.fileProgressFilename.appendChild(document.createTextNode(file.name));
+					this.fileProgressFilename.appendChild(document.createTextNode(shortenText(file.name)));
 
 					this.fileProgressElement = document.createElement('div');
 					this.fileProgressElement.className = 'progressContainer white';
@@ -2590,7 +2619,7 @@
 					this.fileProgressBorder.appendChild(this.fileProgressElement);
 
 					for(var li=pain.firstChild; li; li=li.nextSibling) {
-						if(file.name == bframe.searchNodeByName(li, 'path').value) {
+						if(file.name == bframe.searchNodeByName(li, 'node_name').value) {
 							var pos = bframe.getElementPosition(li);
 							this.fileProgressWrapper.style.position = 'absolute';
 							this.fileProgressWrapper.style.left = pos.left + 'px';
@@ -2652,7 +2681,7 @@
 					this.fileProgressWrapper.appendChild(this.fileProgressTd2);
 
 					for(var tr=pain.firstChild; tr; tr=tr.nextSibling) {
-						if(file.name == bframe.searchNodeByName(tr, 'path').value) {
+						if(file.name == bframe.searchNodeByName(tr, 'node_name').value) {
 							var pos = bframe.getElementPosition(tr);
 							this.fileProgressWrapper.style.position = 'absolute';
 							this.fileProgressWrapper.style.left = pos.left  + 'px';

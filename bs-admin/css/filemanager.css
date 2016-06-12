@@ -24,6 +24,12 @@ h2 span.accent {
 	border-right: 1px solid #444;
 	border-bottom: 1px solid #444;
 }
+h2 span {
+	font-size: 11px;
+	font-weight: normal;
+	margin-left: 10px;
+	line-height: 24px;
+}
 div.header {
 	clear: both;
 	margin: 0;
@@ -37,8 +43,24 @@ div.footer {
 	border-bottom: 1px solid #333;
 	height: 10px;
 }
-
-/* tree */
+iframe.tree {
+	display:block;
+	float:left;
+	margin: 0;
+}
+div.splitter {
+	float:left;
+	margin: 0;
+	width: 6px;
+	background: #3a3a3a url(../images/common/splitter.gif) no-repeat center;
+	border-right: #3a3a3a 2px solid;
+	visibility: hidden;
+}
+iframe.form {
+	display:block;
+	float:left;
+	margin: 0;
+}
 div.bframe_tree_container {
 	display:block;
 	float:left;
@@ -61,9 +83,14 @@ div#filemanager_pane {
 	overflow: hidden;
 	background-color: #3a3a3a;
 }
+div.upload_control {
+	margin: 0;
+}
+div.upload_control {
+	margin: 0;
+}
 div#bframe_pane {
 	overflow: auto;
-	overflow-x: hidden;
 	margin: 0;
 	padding: 30px 0 0 30px;
 	height: 100%;
@@ -74,35 +101,33 @@ div#bframe_pane ul {
 }
 
 /* upload_control */
-ul.upload_control {
+ul.resource_control {
 	margin: 0 8px 4px 0;
 	padding: 0 0 0 30px;
 	list-style-type: none;
 	background-color: #444;
 	overflow: visible;
 	height: 30px;
-	min-width: 400px;
+	min-width: 280px;
 }
-ul.upload_control li {
+ul.resource_control li {
 	float: left;
-	height: 26px;
+	height: 30px;
 	width: 170px;
-	margin: 2px 30px 0 0;
+	margin: 0 10px 0 0;
 	padding: 0;
 	overflow: hidden;
 }
-
-div.input_container {
-	width: 142px;
-	float: left;
+ul.resource_control li a {
+	text-decoration: none;
 }
-a.upload-button,
-a:visited.upload-button,
-a:link.upload-button,
-a:active.upload-button {
+span.upload-button,
+span:visited.upload-button,
+span:link.upload-button,
+span:active.upload-button {
 	display: block;
 	margin: 0;
-	line-height: 24px;
+	line-height: 28px;
 	width: 140px;
 	background-color: #666;
 	border-top: 1px solid #666;
@@ -111,10 +136,10 @@ a:active.upload-button {
 	border-bottom: 1px solid #666;
 	color: #eee;
 	text-align: center;
-	text-decoration: none;
 	text-shadow: -1px -1px #555;
+	cursor: pointer;
 }
-a:hover.upload-button {
+span:hover.upload-button {
 	background-color: #777;
 	border-top: 1px solid #777;
 	border-left: 1px solid #777;
@@ -123,32 +148,26 @@ a:hover.upload-button {
 	color: #fff;
 	text-shadow: 1px 1px #555;
 }
-a.upload-button img {
-	vertical-align: -4px;
+span.upload-button img {
+	vertical-align: -3px;
 	margin-right: 6px;
 }
-span#bframe_pane_disp_change {
-	color: #fff;
+ul.resource_control li.view {
+	float: right;
+	padding: 7px 0;
+	width: 50px;
+	text-align: center;
+	margin: 0;
+	box-sizing: border-box;
+	height: 30px;
+	cursor: pointer;
 }
-ul.upload_control li select {
-	padding: 3px 4px;
-	width: 110px;
-	height: 26px;
-	line-height: 20px;
-	vertical-align: 1px;
+ul.resource_control li.view:hover {
 	background-color: #555;
-	color: #f0f0f0;
-	border-top: 1px solid #555;
-	border-left: 1px solid #555;
-	border-right: 1px solid #555;
-	border-bottom: 1px solid #555;
 }
-ul.upload_control li option {
-	padding: 5px 12px;
-	border-top: 1px solid #555;
-	border-left: 1px solid #555;
-	border-right: 1px solid #555;
-	border-bottom: 1px solid #555;
+ul.resource_control li.current,
+ul.resource_control li.current:hover {
+	background-color: #666;
 }
 span.message {
 	color: #204030;
