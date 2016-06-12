@@ -61,20 +61,24 @@ $tree_config = array(
 			array(
 				'delete'	=> true,
 			),
-			'disp_change'	=>
+			'upload'		=>
 			array(
-				'options'	=>
+				'button'		=> 'upload_button',
+				'file'			=> 'upload_file',
+				'module'		=> $this->module,
+				'page'			=> 'upload',
+			),
+			'display_mode'	=>
+			array(
+				'thumbnail'	=> 
 				array(
-					array(
-						'title'		=> 'サムネイル',
-						'value'		=> 'thumb',
-					),
-					array(
-						'title'		=> '詳細',
-						'value'		=> 'detail',
-					),
+					'id'		=> 'display_thumbnail',
 				),
-				'selectedIndex'	=> $this->session['disp_mode'],
+				'detail'		=> 
+				array(
+					'id'		=> 'display_detail',
+				),
+				'default'		=> $this->session['display_mode'],
 			),
 			'detail'	=>
 			array(

@@ -63,6 +63,7 @@
 					}
 				}
 				else {
+$this->log->write('basename', $file['basename']);
 					if($this->request['mode'] == 'confirm' && $this->file_exists($file['basename'])) {
 						$response_mode = 'confirm';
 						$message = $file['basename'] . 'は既に存在します。<br />上書きしてもよろしいですか？';

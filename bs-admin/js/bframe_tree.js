@@ -2069,12 +2069,6 @@
 				if(property.upload) {
 					if(property.upload.button) {
 						upload_button = document.getElementById(property.upload.button);
-						if(property.editable == 'true' || property.sort == 'manual') {
-							upload_button_style_display = upload_button.style.display;
-						}
-						else {
-							upload_button.style.display = 'none';
-						}
 					}
 					if(property.upload.file) {
 						upload_file = document.getElementById(property.upload.file);
@@ -2154,6 +2148,7 @@
 				form_data.append('page', page);
 				form_data.append('method', 'confirm');
 				form_data.append('mode', mode);
+				form_data.append('session', module);
 				form_data.append('extract_mode', extract_mode);
 				form_data.append('filename', upload_queue[index].file['name']);
 				form_data.append('filesize', upload_queue[index].file['size']);
