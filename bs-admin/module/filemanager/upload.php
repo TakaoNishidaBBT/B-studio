@@ -114,18 +114,20 @@
 						$zip = new ZipArchive();
 						$zip->open($zip_file);
 						$zip->extractTo(B_RESOURCE_EXTRACT_DIR);
-						$node = new B_FileNode(B_RESOURCE_EXTRACT_DIR, '/', null, null, 'all');
-						$node->walk($this, regist_archive);
-
 						$zip->close();
 						unlink($zip_file);
+
+						$node = new B_FileNode(B_RESOURCE_EXTRACT_DIR, '/', null, null, 1);
+						$node->walk($this, regist_archive);
+						$node->remove();
 						$this->removeThumbnailCacheFile();
-						$root = new B_FileNode(B_UPLOAD_DIR, 'root', null, null, 'all');
+
+						$root = new B_FileNode(B_UPLOAD_DIR, '/', null, null, 'all');
 						$this->refleshThumnailCache($root);
 
 						foreach($this->registered_archive_node as $path) {
-							$node = new B_FileNode(B_UPLOAD_DIR, $path, null, null, 1);
-							$response['node_info'][] = $node->getNodeList('', '');
+							$node = new B_FileNode(B_UPLOAD_DIR, '/' . B_Util::getPath($this->path, $path), null, null, 0);
+							$response['node_info'][] = $node->getNodeList('', '', $this->path);
 						}
 					}
 				}
@@ -136,8 +138,8 @@
 						$this->removeThumbnail($this->path, $file['basename']);
 						$root = new B_FileNode(B_UPLOAD_DIR, 'root', null, null, 'all');
 						$this->refleshThumnailCache($root);
-						$node = new B_FileNode(B_UPLOAD_DIR, $this->path . $file['basename'], null, null, 1);
-						$response['node_info'][] = $node->getNodeList('', '');
+						$node = new B_FileNode(B_UPLOAD_DIR, B_Util::getPath($this->path, $file['basename']), null, null, 1);
+						$response['node_info'][] = $node->getNodeList('', '', $this->path);
 					}
 				}
 				if(!$status) {
@@ -206,11 +208,11 @@
 		}
 
 		function regist_archive($node) {
-			if(!$node->parent || $node->parent->path != '/') return;
+			if(!$node->parent ) return;
 
-			rename($node->fullpath, B_UPLOAD_DIR . $this->path . $node->filename);
+			rename($node->fullpath, B_UPLOAD_DIR . $this->path. $node->path);
 			if(!$node->parent->db_node_id) {
-				$this->registered_archive_node[] = $this->path . $node->filename;
+				$this->registered_archive_node[] = $node->path;
 			}
 		}
 

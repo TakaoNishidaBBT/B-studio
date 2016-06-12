@@ -577,12 +577,12 @@
 			li = createNodeObject(parent_node, node_info, 'tree', trash);
 			setNewNode(node_info);
 
-			if(node_info.children) {
-				var ul = document.createElement('ul');
-				ul.id = 'tu' + node_info.node_id;
-				ul.name = 'nodes';
-				li.appendChild(ul);
+			var ul = document.createElement('ul');
+			ul.id = 'tu' + node_info.node_id;
+			ul.name = 'nodes';
+			li.appendChild(ul);
 
+			if(node_info.children) {
 				for(var i=0; i < node_info.children.length; i++) {
 					if(pane && node_info.children[i].node_type == 'file') {
 						continue;
@@ -2363,7 +2363,6 @@
 				this.opacity = 100;
 				this.height = 0;
 				this.filename = file.name;
-
 				this.fileProgressWrapper = document.getElementById(this.fileProgressID);
 
 				FileProgress.prototype.setTimer = function(timer) {
