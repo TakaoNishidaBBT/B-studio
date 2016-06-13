@@ -158,7 +158,7 @@
 				// protected source
 				data = data.replace(/<!-----\?/g, '<?');
 				data = data.replace(/\?----->/g, '?>');
-				parent.updateHtml(data);
+				parent.bstudio.updateHtml(data);
 				editor.resetDirty();
 			}
 		}
