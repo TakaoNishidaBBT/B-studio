@@ -44,10 +44,6 @@ $tree_config = array(
 				array(
 					'id'		=> 'bframe_pane',
 				),
-				'disp_change'	=>
-				array(
-					'id'		=> 'bframe_pane_disp_change',
-				),
 				'insertFile'	=>
 				array(
 					'node_type'	=> 'file',
@@ -148,6 +144,7 @@ $tree_config = array(
 					'gif'		=> array('src' => './images/folders/file_icon.png'),
 					'png'		=> array('src' => './images/folders/file_icon.png'),
 					'misc'		=> array('src' => './images/folders/file_icon.png'),
+					'upload'	=> array('src' => './images/folders/file_upload_icon.png'),
 				),
 			),
 			'context_menu'		=>
@@ -205,6 +202,7 @@ $tree_config = array(
 			'context_menu_width'	=> '138',
 			'context_menu_frame'	=> 'top',
 			'session_timeout'		=> 'セッションが切れました。ログインしなおしてください。',
+			'abbr'					=> '…',
 		),
 	),
 );
