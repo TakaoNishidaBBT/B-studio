@@ -2486,17 +2486,17 @@
 					}
 					if(this.overwriteTr) {
 						for(var i=0; i<this.overwriteTr.cells.length; i++) {
-							this.overwriteTr.cells[i].firstChild.style.opacity = '1';
 							bframe.appendClass('fadein', this.overwriteTr.cells[i].firstChild);
 						}
 						this.overwriteTr = '';
 					}
 					if(this.fileProgressElement) {
 						this.fileProgressElement.className = 'progressContainer cancelled fadeout';
-						this.fileProgressElement.childNodes[1].display = 'none';
+						bframe.addEventListner(this.fileProgressElement, 'animationend', this.onAnimationEnd);
 					}
 					if(this.fileProgressTree) {
 						bframe.appendClass('fadeout', this.fileProgressTree);
+						bframe.addEventListner(this.fileProgressTree, 'animationend', this.onAnimationEnd);
 					}
 					if(this.fileProgressWrapper) {
 						bframe.appendClass('fadeout', this.fileProgressWrapper);
@@ -2506,8 +2506,8 @@
 
 				FileProgress.prototype.onAnimationEnd = function(event) {
 					var obj = bframe.getEventSrcElement(event);
-					if(obj && obj.parentNode == pain) {
-						pain.removeChild(obj);
+					if(obj && obj.parentNode) {
+						obj.parentNode.removeChild(obj);
 					}
 				};
 
