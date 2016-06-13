@@ -1,12 +1,5 @@
 @charset "UTF-8";
 
-html, 
-body {
-	margin: 0;
-	padding: 0;
-	width: 100%;
-	font: 12px/1.4em Helvetica, Arial, sans-serif;
-}
 div#upload_container_header {
 	height: 18px;
 	background-color: #444;
@@ -50,43 +43,58 @@ legend {
 	overflow: hidden;
 }
 .progressContainer {
-	margin: 5px;
 	padding: 4px;
-	border: solid 1px #E8E8E8;
-	background-color: #F7F7F7;
+	margin: 0 4px;
+	background-color: transparent;
 	overflow: hidden;
+}
+
+td .progressContainer {
+	position: absolute;
+	top: 8px;
+	left: 4px;
+	width: 90%;
+}
+td.progress-bar {
+	box-sizing: border-box;
+	padding-left: 0 !important;
 }
 
 /* error */
 .red {
-	border: solid 1px #B50000;
-	background-color: #FFEBEB;
+	color: #f00;
 }
 
 /* current */
 .green {
-	background-color: #eee;
-	border-top: solid 1px #f0f0f0;
-	border-bottom: solid 1px #ddd;
+	color: #fff;
 }
 
 /* complete */
 .blue {
-	background-color: #ccc;
-	border-top: solid 1px #ddd;
-	border-bottom: solid 1px #bbb;
+	color: #fff;
+}
+
+/* prepare */
+.white {
+	color: #fff;
+}
+
+.cancelled {
+	color: #ff8c00;
 }
 
 .progressName {
 	font-size: 8pt;
 	font-weight: 700;
 	color: #444;
-	width: 323px;
+	width: 100px;
 	height: 14px;
 	text-align: left;
 	white-space: nowrap;
 	overflow: hidden;
 }
+.progressBar,
 .progressBarInProgress,
 .progressBarComplete,
 .progressBarError {
@@ -97,6 +105,10 @@ legend {
 	border-bottom: #1298e6 1px solid;
 	margin-top: 2px;
 }
+.progressBar {
+	background-color: #ccc;
+}
+
 .progressBarComplete {
 	width: 100%;
 	background-color: green;
@@ -109,11 +121,9 @@ legend {
 }
 .progressBarStatus {
 	margin-top: 2px;
-	width: 337px;
 	font-size: 7pt;
 	font-family: Arial;
 	text-align: left;
-	white-space: nowrap;
 }
 a.progressCancel {
 	font-size: 0;
@@ -174,4 +184,46 @@ a.progressCancel:hover {
 #confirmDialog .message {
 	padding: 15px 25px 30px 120px;
 	line-height: 20px;
+}
+
+/* fade in */
+.pre-fadein {
+	opacity: 0;
+}
+.fadein {
+	opacity: 0;
+}
+.fadein {
+	animation-name: fadein;
+	animation-duration: 2s;
+	animation-fill-mode: forwards;
+	-webkit-animation-name: fadein;
+	-webkit-animation-duration: 2s;
+	-webkit-animation-fill-mode: forwards;
+}
+@keyframes fadein {
+	from	{opacity: 0}
+	to		{opacity: 1}
+}
+@-webkit-keyframes fadein {
+	from	{opacity: 0}
+	to		{opacity: 1}
+}
+
+/* fade out */
+.fadeout {
+	animation-name: fadeout;
+	animation-duration: 2s;
+	animation-fill-mode: forwards;
+	-webkit-animation-name: fadeout;
+	-webkit-animation-duration: 2s;
+	-webkit-animation-fill-mode: forwards;
+}
+@keyframes fadeout {
+	0%		{opacity: 1}
+	100%	{opacity: 0}
+}
+@-webkit-keyframes fadeout {
+	0%		{opacity: 1}
+	100%	{opacity: 0}
 }

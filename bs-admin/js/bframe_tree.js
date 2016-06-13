@@ -1010,6 +1010,7 @@
 		}
 
 		function selectObject(node_id) {
+			if(current_edit_node) return;
 			if(checkSelectFilter(node_id)) return;
 			selected_node.set(node_id);
 			selected_node.setColor('selected');
@@ -2365,13 +2366,6 @@
 				this.filename = file.name;
 				this.fileProgressWrapper = document.getElementById(this.fileProgressID);
 
-				FileProgress.prototype.setTimer = function(timer) {
-					this.fileProgressElement['FP_TIMER'] = timer;
-				};
-				FileProgress.prototype.getTimer = function(timer) {
-					return this.fileProgressElement['FP_TIMER'] || null;
-				};
-
 				FileProgress.prototype.reset = function() {
 					this.fileProgressElement.className = 'progressContainer';
 
@@ -2380,15 +2374,12 @@
 
 					this.fileProgressElement.childNodes[1].className = 'progressBarInProgress';
 					this.fileProgressElement.childNodes[1].style.width = '0%';
-					this.appear();
 				};
 
 				FileProgress.prototype.setProgress = function(percentage) {
 					this.fileProgressElement.className = 'progressContainer green';
 					this.fileProgressElement.childNodes[1].className = 'progressBarInProgress';
 					this.fileProgressElement.childNodes[1].style.width = percentage + '%';
-
-					this.appear();
 				};
 
 				FileProgress.prototype.setComplete = function(node_info) {
@@ -2486,102 +2477,45 @@
 					this.fileProgressElement.className = 'progressContainer red';
 					this.fileProgressElement.childNodes[1].className = 'progressBarError';
 					this.fileProgressElement.childNodes[1].style.width = '';
+				};
 
-					var oSelf = this;
-					this.setTimer(setTimeout(function () {
-						oSelf.disappear();
-					}, 10000));
-				};
 				FileProgress.prototype.setCancelled = function() {
-					this.fileProgressElement.className = 'progressContainer cancelled';
-					this.fileProgressElement.childNodes[1].className = 'progressBarError';
-					this.fileProgressElement.childNodes[1].style.width = '';
-/*
-					var oSelf = this;
-					this.setTimer(setTimeout(function() {
-						oSelf.disappear();
-					}, 10000));
-*/
+					if(this.overwriteList) {
+						bframe.appendClass('fadein', this.overwriteList);
+						this.overwriteList = '';
+					}
+					if(this.overwriteTr) {
+						for(var i=0; i<this.overwriteTr.cells.length; i++) {
+							this.overwriteTr.cells[i].firstChild.style.opacity = '1';
+							bframe.appendClass('fadein', this.overwriteTr.cells[i].firstChild);
+						}
+						this.overwriteTr = '';
+					}
+					if(this.fileProgressElement) {
+						this.fileProgressElement.className = 'progressContainer cancelled fadeout';
+						this.fileProgressElement.childNodes[1].display = 'none';
+					}
+					if(this.fileProgressTree) {
+						bframe.appendClass('fadeout', this.fileProgressTree);
+					}
+					if(this.fileProgressWrapper) {
+						bframe.appendClass('fadeout', this.fileProgressWrapper);
+						bframe.addEventListner(this.fileProgressWrapper, 'animationend', this.onAnimationEnd);
+					}
 				};
+
+				FileProgress.prototype.onAnimationEnd = function(event) {
+					var obj = bframe.getEventSrcElement(event);
+					if(obj && obj.parentNode == pain) {
+						pain.removeChild(obj);
+					}
+				};
+
 				FileProgress.prototype.setStatus = function(status) {
 					this.fileProgressElement.childNodes[0].innerHTML = status;
 				};
 
-				FileProgress.prototype.appear = function() {
-					if(this.getTimer() !== null) {
-						clearTimeout(this.getTimer());
-						this.setTimer(null);
-					}
-
-					if(this.fileProgressWrapper.filters) {
-						try {
-							this.fileProgressWrapper.filters.item('DXImageTransform.Microsoft.Alpha').opacity = 100;
-						} catch (e) {
-							// If it is not set initially, the browser will throw an error.  This will set it if it is not set yet.
-							this.fileProgressWrapper.style.filter = 'progid:DXImageTransform.Microsoft.Alpha(opacity=100)';
-						}
-					}
-					else {
-						this.fileProgressWrapper.style.opacity = 1;
-					}
-
-					this.fileProgressWrapper.style.height = '';
-
-					this.height = this.fileProgressWrapper.offsetHeight;
-					this.opacity = 100;
-					this.fileProgressWrapper.style.display = '';
-
-				};
-
-				// Fades out and clips away the FileProgress box.
-				FileProgress.prototype.disappear = function () {
-
-					var reduceOpacityBy = 15;
-					var reduceHeightBy = 4;
-					var rate = 30;	// 15 fps
-
-					if (this.opacity > 0) {
-						this.opacity -= reduceOpacityBy;
-						if (this.opacity < 0) {
-							this.opacity = 0;
-						}
-
-						if (this.fileProgressWrapper.filters) {
-							try {
-								this.fileProgressWrapper.filters.item('DXImageTransform.Microsoft.Alpha').opacity = this.opacity;
-							} catch (e) {
-								// If it is not set initially, the browser will throw an error.  This will set it if it is not set yet.
-								this.fileProgressWrapper.style.filter = 'progid:DXImageTransform.Microsoft.Alpha(opacity=' + this.opacity + ')';
-							}
-						} else {
-							this.fileProgressWrapper.style.opacity = this.opacity / 100;
-						}
-					}
-
-					if (this.height > 0) {
-						this.height -= reduceHeightBy;
-						if (this.height < 0) {
-							this.height = 0;
-						}
-
-						this.fileProgressWrapper.style.height = this.height + 'px';
-					}
-
-					if (this.height > 0 || this.opacity > 0) {
-						var oSelf = this;
-						this.setTimer(setTimeout(function () {
-							oSelf.disappear();
-						}, rate));
-					} else {
-						this.fileProgressWrapper.style.display = 'none';
-						this.setTimer(null);
-					}
-				};
-
 				if(disp_type == 'thumbnail') {
-					this.fileProgressWrapper = document.createElement('li');
-					this.fileProgressWrapper.className = 'tree-list';
-
 					this.fileProgressTree = document.createElement('div');
 					this.fileProgressTree.className = 'tree';
 
@@ -2604,111 +2538,139 @@
 					var progressBar = document.createElement('div');
 					progressBar.className = 'progressBarInProgress';
 
-					this.fileProgressElement.appendChild(progressStatus);
-					this.fileProgressElement.appendChild(progressBar);
-					this.fileProgressWrapper.appendChild(this.fileProgressTree);
 					this.fileProgressTree.appendChild(this.fileProgressLink);
 					this.fileProgressLink.appendChild(this.fileProgressBorder);
 					this.fileProgressLink.appendChild(this.fileProgressFilename);
 					this.fileProgressBorder.appendChild(this.fileProgressElement);
+					this.fileProgressElement.appendChild(progressStatus);
+					this.fileProgressElement.appendChild(progressBar);
 
 					for(var li=pain.firstChild; li; li=li.nextSibling) {
 						if(file.name == bframe.searchNodeByName(li, 'node_name').value) {
-							var pos = bframe.getElementPosition(li);
-							this.fileProgressWrapper.style.position = 'absolute';
-							this.fileProgressWrapper.style.left = pos.left + 'px';
-							this.fileProgressWrapper.style.top = pos.top + 'px';
-							this.fileProgressWrapper.style.margin = 0;
-							li.style.opacity = 0.2;
+							if(li.childNodes.length > 1) {
+								li.removeChild(li.childNodes[1]);
+							}
+							this.fileProgressTree.style.marginTop = '-' + li.firstChild.offsetHeight + 'px';
+							li.appendChild(this.fileProgressTree);
+							li.firstChild.style.opacity = 0.2;
+							this.overwriteList = li.firstChild;
+							bframe.removeClass('fadein', this.overwriteList);
 							break;
 						}
 					}
-					pain.appendChild(this.fileProgressWrapper);
+					if(!li) {
+						this.fileProgressWrapper = document.createElement('li');
+						this.fileProgressWrapper.className = 'tree-list';
+						this.fileProgressWrapper.appendChild(this.fileProgressTree);
+						pain.appendChild(this.fileProgressWrapper);
+					}
 				}
 				else {
-					this.fileProgressWrapper = document.createElement('tr');
-
-					this.fileProgressTd = document.createElement('td');
-					this.fileProgressTd.className = 'file-name';
-
-					this.fileProgressTree = document.createElement('div');
-					this.fileProgressTree.className = 'tree';
-
-					this.fileProgressLink = document.createElement('a');
-
-					this.fileProgressBorder = document.createElement('span');
-					this.fileProgressBorder.className = 'img-border';
-
-					this.fileProgressImg = document.createElement('img');
-					this.fileProgressImg.src = property.icon.detail.upload.src;
-
-					this.fileProgressFilename = document.createElement('span');
-					this.fileProgressFilename.className = 'node-name';
-					this.fileProgressFilename.appendChild(document.createTextNode(file.name));
-
-					this.fileProgressTd2 = document.createElement('td');
-					this.fileProgressTd2.className = 'progress-bar';
-					this.fileProgressTd2.colSpan = property.detail.header.length;
-
-					this.fileProgressElement = document.createElement('div');
-					this.fileProgressElement.className = 'progressContainer white';
-
-					var progressStatus = document.createElement('div');
-					progressStatus.className = 'progressBarStatus';
-					progressStatus.innerHTML = '&nbsp;';
-
-					var progressBar = document.createElement('div');
-					progressBar.className = 'progressBarInProgress';
-
-					this.fileProgressLink.appendChild(this.fileProgressBorder);
-					this.fileProgressLink.appendChild(this.fileProgressImg);
-					this.fileProgressLink.appendChild(this.fileProgressFilename);
-					this.fileProgressTree.appendChild(this.fileProgressLink);
-					this.fileProgressTd.appendChild(this.fileProgressTree);
-
-					this.fileProgressWrapper.appendChild(this.fileProgressTd);
-
-					this.fileProgressElement.appendChild(progressStatus);
-					this.fileProgressElement.appendChild(progressBar);
-					this.fileProgressTd2.appendChild(this.fileProgressElement);
-
-					this.fileProgressWrapper.appendChild(this.fileProgressTd2);
-
 					for(var tr=pain.firstChild; tr; tr=tr.nextSibling) {
 						if(file.name == bframe.searchNodeByName(tr, 'node_name').value) {
-							var pos = bframe.getElementPosition(tr);
-							this.fileProgressWrapper.style.position = 'absolute';
-							this.fileProgressWrapper.style.left = pos.left  + 'px';
-							this.fileProgressWrapper.style.top = pos.top + 'px';
-							this.fileProgressWrapper.style.margin = 0;
-
-							bframe.searchNodeByName(tr, 'path')
-							tr.style.opacity = 0;
-
-							this.fileProgressWrapper.style.width = tr.clientWidth + 'px';
-							this.fileProgressWrapper.style.height = tr.clientHeight + 'px';
-
-							var i, width1=0, width2=0;
-							for(var td=tr.firstChild, i=0; td; td=td.nextSibling, i++) {
-								if(i == 0) {
-									width1 = td.offsetWidth;
-								}
-								else {
-									width2 += td.offsetWidth;
-								}
+							if(tr.childNodes[0].childNodes.length > 1) {
+								tr.childNodes[0].removeChild(tr.childNodes[0].childNodes[1]);
 							}
-							this.fileProgressTd.style.width = width1 + 'px';
-							this.fileProgressTd2.style.width = width2 + 'px';
+							this.fileProgressTree = document.createElement('div');
+							this.fileProgressTree.className = 'tree upload-filename';
+
+							this.fileProgressLink = document.createElement('a');
+
+							this.fileProgressBorder = document.createElement('span');
+							this.fileProgressBorder.className = 'img-border';
+
+							this.fileProgressImg = document.createElement('img');
+							this.fileProgressImg.src = property.icon.detail.upload.src;
+
+							this.fileProgressFilename = document.createElement('span');
+							this.fileProgressFilename.className = 'node-name';
+							this.fileProgressFilename.appendChild(document.createTextNode(file.name));
+
+							tr.childNodes[0].appendChild(this.fileProgressTree);
+							this.fileProgressTree.appendChild(this.fileProgressLink);
+							this.fileProgressLink.appendChild(this.fileProgressBorder);
+							this.fileProgressLink.appendChild(this.fileProgressImg);
+							this.fileProgressLink.appendChild(this.fileProgressFilename);
+
+							this.fileProgressTree.style.marginTop = '-' + tr.childNodes[0].firstChild.offsetHeight + 'px';
+
+							if(tr.childNodes[1].childNodes.length > 1) {
+								tr.childNodes[1].removeChild(tr.childNodes[1].childNodes[1]);
+							}
+							this.fileProgressElement = document.createElement('div');
+							this.fileProgressElement.className = 'progressContainer white';
+
+							var progressStatus = document.createElement('div');
+							progressStatus.className = 'progressBarStatus';
+							progressStatus.innerHTML = '&nbsp;';
+
+							var progressBar = document.createElement('div');
+							progressBar.className = 'progressBarInProgress';
+
+							tr.childNodes[1].appendChild(this.fileProgressElement);
+							this.fileProgressElement.appendChild(progressStatus);
+							this.fileProgressElement.appendChild(progressBar);
+
+							for(var i=0; i<tr.cells.length; i++) {
+								tr.childNodes[i].firstChild.style.opacity = 0;
+								bframe.removeClass('fadein', tr.childNodes[i].firstChild);
+							}
+
+							this.overwriteTr = tr;
 
 							break;
 						}
 					}
+					if(!tr) {
+						this.fileProgressWrapper = document.createElement('tr');
 
-					pain.appendChild(this.fileProgressWrapper);
+						this.fileProgressTd = document.createElement('td');
+						this.fileProgressTd.className = 'file-name';
+
+						this.fileProgressTree = document.createElement('div');
+						this.fileProgressTree.className = 'tree';
+
+						this.fileProgressLink = document.createElement('a');
+
+						this.fileProgressBorder = document.createElement('span');
+						this.fileProgressBorder.className = 'img-border';
+
+						this.fileProgressImg = document.createElement('img');
+						this.fileProgressImg.src = property.icon.detail.upload.src;
+
+						this.fileProgressFilename = document.createElement('span');
+						this.fileProgressFilename.className = 'node-name';
+						this.fileProgressFilename.appendChild(document.createTextNode(file.name));
+
+						this.fileProgressTd2 = document.createElement('td');
+						this.fileProgressTd2.className = 'progress-bar';
+
+						this.fileProgressElement = document.createElement('div');
+						this.fileProgressElement.className = 'progressContainer white';
+
+						var progressStatus = document.createElement('div');
+						progressStatus.className = 'progressBarStatus';
+						progressStatus.innerHTML = '&nbsp;';
+
+						var progressBar = document.createElement('div');
+						progressBar.className = 'progressBarInProgress';
+
+						this.fileProgressWrapper.appendChild(this.fileProgressTd);
+
+						this.fileProgressTd.appendChild(this.fileProgressTree);
+						this.fileProgressTree.appendChild(this.fileProgressLink);
+						this.fileProgressLink.appendChild(this.fileProgressBorder);
+						this.fileProgressLink.appendChild(this.fileProgressImg);
+						this.fileProgressLink.appendChild(this.fileProgressFilename);
+
+						this.fileProgressWrapper.appendChild(this.fileProgressTd2);
+						this.fileProgressTd2.appendChild(this.fileProgressElement);
+						this.fileProgressElement.appendChild(progressStatus);
+						this.fileProgressElement.appendChild(progressBar);
+
+						pain.appendChild(this.fileProgressWrapper);
+					}
 				}
-
-				this.height = this.fileProgressWrapper.offsetHeight;
-				this.setTimer(null);
 			}
 		}
 
@@ -3137,7 +3099,7 @@
 			text = document.createTextNode(config.node_name);
 			span.appendChild(text);
 
-			for(var i=1 ; i<property.detail.header.length ; i++) {
+			for(var i=1; i<property.detail.header.length; i++) {
 				td = setColumn(property.detail.header[i], config[property.detail.header[i].name]);
 				tr.appendChild(td);
 			}

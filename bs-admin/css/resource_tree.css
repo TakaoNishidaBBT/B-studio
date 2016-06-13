@@ -97,18 +97,15 @@ div.thumbs li.tree-list span.edit input {
 	ime-mode: disabled;
 	text-align: center;
 	width: 102px;
-	margin: 1px auto;
-	padding: 5px 4px 3px 6px;
-	border-top: 1px solid #333;
-	border-right: 1px solid #444;
-	border-bottom: 1px solid #444;
-	border-left: 1px solid #333;
+	margin: 0 auto;
+	padding: 5px 4px 4px 6px;
+	border: none;
 	background-color: #fafafa;
 }
 div.thumbs li.tree-list span.node-name {
 	display: block;
-	margin: 2px auto;
-	padding: 4px 0 1px 0;
+	margin: 0 auto;
+	padding: 5px 0 2px 0;
 	font-size: 12px;
 }
 div.bframe_pane a:link {
@@ -210,6 +207,7 @@ div.detail table th.sortable:hover span {
 }
 div.detail table .file-name {
 	min-width: 240px;
+	min-width: 40px;
 }
 div.detail table .update-time {
 	min-width: 145px;
@@ -219,6 +217,7 @@ div.detail table .update-time span {
 }
 div.detail table .update-time span.update-time {
 	padding-top:7px;
+	display: block;
 }
 div.detail table .file-size {
 	min-width: 125px;
@@ -239,6 +238,7 @@ div.detail table td {
 	color: #fff;
 	padding-left: 4px;
 	vertical-align: bottom;
+	position: relative;
 }
 div.detail table td span.update-datetime {
 	padding-left: 4px;
