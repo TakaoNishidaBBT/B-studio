@@ -361,7 +361,7 @@
 				$this->end_html.= $this->templates[$i]['end_html'];
 			}
 
-			$this->innerHTML = '<div id="inline_editor" class="bframe_inlineeditor" bframe_inlineeditor_param="filebrowser:bs-admin/index.php?terminal_id=' . $this->post['terminal_id'] . '&amp;module=resource&amp;page=popup">' . $this->contents['html1'] . '</div>';
+			$this->innerHTML = '<div id="inline_editor" class="bframe_inlineeditor" bframe_inlineeditor_param="filebrowser:bs-admin/index.php?terminal_id=' . $this->post['terminal_id'] . '&amp;module=resource&amp;page=popup" style="outline:none">' . $this->contents['html1'] . '</div>';
 			$this->setTemplateExternalCss();
 			$this->setTemplateCssLink();
 			$this->setCss($this->contents['external_css']);
