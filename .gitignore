@@ -16,7 +16,7 @@
 # git update-index --skip-worktree bs-admin/.htpassword
 # git update-index --skip-worktree bs-admin/db/db_connect.php
 # git update-index --skip-worktree bs-admin/user/users.php
-# git update-index --skip-worktree files/.gikeep
+# git update-index --skip-worktree files/.gitkeep
 
 # git update-index --no-skip-worktree [file-name]
 # git ls-files -v
