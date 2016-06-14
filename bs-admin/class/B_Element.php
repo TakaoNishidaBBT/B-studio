@@ -750,7 +750,7 @@
 					break;
 
 				case 'text_datetime':
-					if($this->value) {
+					if(isset($this->value)) {
 						if(preg_match('/^(\d\d\d\d)\/(\d\d)\/(\d\d) (\d\d):(\d\d)$/', $this->value, $m)) {
 							if(@checkdate($m[2], $m[3], $m[1])) { // checkdate(month, date, year)
 								if($this->checkTime($m[4], $m[5])) {
@@ -780,7 +780,7 @@
 					break;
 
 				case 'text_date':
-					if(!$this->value) { // not require
+					if(!isset($this->value)) { // not require
 						break;
 					}
 					$date = explode('/', $this->value);
@@ -796,7 +796,7 @@
 					break;
 
 				case 'text_year_month':
-					if(!$this->value) { // not require
+					if(!isset($this->value)) { // not require
 						break;
 					}
 					$date = explode($config['delimiter'], $this->value);
