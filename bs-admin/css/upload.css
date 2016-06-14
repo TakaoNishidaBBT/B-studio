@@ -1,68 +1,39 @@
 @charset "UTF-8";
 
-div#upload_container_header {
-	height: 18px;
-	background-color: #444;
-}
-div#upload_content {
-	border: 1px solid #ccc;
-	padding: 16px;
-	overflow: auto;
-}
-#selectButton {
-	background: url(../images/common/file_select.png) no-repeat 26px center #444;
-	color: #fff;
-	padding: 8px 25px 8px 45px;
-	border: none;
-	cursor: pointer;
-}
-#selectButton:hover {
-	background-color: #666;
-}
-#cancelButton {
-	background-color: #eee;
-	padding: 4px 10px;
-	border: none;
-}
-p {
-	margin-top: .25em;
-	margin-bottom: .5em;
-}
-#divStatus {
-	margin: 14px 0 12px 4px;
-}
-fieldset {
-	padding: 15px 5px;
-	margin: 0 0 20px 0;
-}
-legend {
-	font: 700 14px Arial, Helvetica, sans-serif;
-	color: #444444;
-}
 .progressWrapper {
 	overflow: hidden;
 }
-.progressContainer {
-	padding: 4px;
+li .progressContainer {
+	padding: 14px 4px;
 	margin: 0 4px;
 	background-color: transparent;
 	overflow: hidden;
+	position: relative;
 }
-
 td .progressContainer {
+	padding: 0 16px 0 0;
 	position: absolute;
 	top: 8px;
 	left: 4px;
 	width: 90%;
 }
-td.progress-bar {
-	box-sizing: border-box;
-	padding-left: 0 !important;
+td .upload-filename {
+	position: absolute;
+	top: 7px;
+	left: 4px;
 }
 
 /* error */
-.red {
+li .red {
 	color: #f00;
+	background: url(../images/common/close.png) no-repeat right top;
+	cursor: pointer;
+}
+td .red {
+	color: #f00;
+	background: url(../images/common/close.png) no-repeat left 50%;
+	padding-left: 16px;
+	cursor: pointer;
 }
 
 /* current */
@@ -115,14 +86,10 @@ td.progress-bar {
 	visibility: hidden;
 }
 .progressBarError {
-	width: 100%;
-	background-color: red;
-	visibility: hidden;
+	display: none;
 }
 .progressBarStatus {
-	margin-top: 2px;
-	font-size: 7pt;
-	font-family: Arial;
+	font-size: 10px;
 	text-align: left;
 }
 a.progressCancel {

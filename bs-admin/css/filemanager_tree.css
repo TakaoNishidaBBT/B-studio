@@ -149,31 +149,20 @@ div.thumbs img.control {
 /* pane detail */
 div.detail table {
 	margin: 0 20px 20px 20px;
-	border-collapse: collapse;
-}
-div.detail table tr {
-	box-sizing: boreder-box;
-}
-div.detail table div.tree {
-	margin: 0;
-	padding: 7px 4px 1px 4px;
-	border-top: 1px solid #444;
-	width: 100%;
-}
-div.detail table div.selected {
-	border-top: 1px dotted #f00;
+	border-collapse: separate;
+	border-spacing: 16px 0;
 }
 div.detail table th {
-	box-sizing: boreder-box;
 	text-align: left;
 	font-weight: normal;
 	height: 30px;
+	padding-left: 4px;
 }
 div.detail table th span {
 	display: block;
 	line-height: 22px;
 	padding-left: 8px;
-	margin: 0 18px 6px 0;
+	margin: 0;
 	border-bottom: 1px solid #fff;
 	color: #fff;
 }
@@ -202,30 +191,34 @@ div.detail table .update-time {
 div.detail table .update-time span {
 	padding-left: 8px;
 }
-div.detail table .update-time span.update-time {
-	padding-top:7px;
-}
 div.detail table .file-size {
 	min-width: 125px;
 }
 div.detail table .file-size span {
-	padding-left: 4px;
+	padding-left: 8px;
 }
 div.detail table .image-size {
 	min-width: 125px;
 }
 div.detail table .image-size span {
-	padding-left: 4px;
+	padding-left: 8px;
 }
 div.detail table td {
 	box-sizing: border-box;
-	height: 20px;
+	height: 30px;
 	white-space: nowrap;
 	color: #fff;
 	padding-left: 4px;
-	vertical-align: bottom;
 	position: relative;
 }
+div.detail table div.tree {
+	margin: 0;
+	padding: 0 0 0 7px;
+}
+div.detail table div.selected {
+	border-top: 1px dotted #f00;
+}
+
 div.detail table td span.update-datetime {
 	padding-left: 4px;
 }
@@ -243,10 +236,15 @@ div.detail table td img {
 	vertical-align: -25%;
 	margin-right: 2px;
 }
+div.detail table td span.img-border {
+	display: inline-block;
+	padding: 2px 0;
+}
 div.detail table td span.node-name {
 	display: inline;
 	padding: 2px 4px 1px 4px;
 	font-size: 12px;
+	height: 14px;
 }
 div.detail table td span.selected {
 	background-color: #aaa;

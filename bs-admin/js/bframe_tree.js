@@ -847,11 +847,11 @@
 			var input = document.createElement('input');
 			input.name = 'node_input';
 
-			if(span.offsetWidth < 60) {
-				input.style.width = (span.offsetWidth + 10) + 'px';
+			if(display_mode != 'detail') {
+				input.style.width = (span.offsetWidth - 10) + 'px';
 			}
 			else {
-				input.style.width = (span.offsetWidth - 10) + 'px';
+				input.style.width = (span.offsetWidth + 10) + 'px';
 			}
 
 			var node_type = document.getElementById('nt' + current_edit_node.id);
@@ -2098,7 +2098,6 @@
 				index = 0;
 				upload_queue.length = 0;
 				upload_count = 0;
-//				queueComplete(0);
 				mode = 'confirm';
 				extract_mode = 'confirm';
 				if(event.type == 'drop') {
@@ -2121,7 +2120,7 @@
 
 				for(var i=0; i<files.length; i++){
 					files[i].id = i;
-					var progress = new FileProgress(files[i], tree_id, pane_id, disp_type);
+					var progress = new fileProgress(files[i], tree_id, pane_id, disp_type);
 //					progress.setStatus('Pending...');
 					upload_queue[i] = {'file' : files[i], 'progress' : progress};
 				}
@@ -2234,7 +2233,7 @@
 				if(responseObj.status == true) {
 					progress.setComplete(responseObj.node_info);
 					progress.setStatus('Complete.');
-					queueComplete(++upload_count);
+					upload_count++;
 				}
 				else {
 					progress.setError();
@@ -2284,10 +2283,6 @@
 				upload_queue[index].progress.setCancelled();
 				upload_queue[index].progress.setStatus('Cancelled.');
 
-			}
-
-			function queueComplete(numFilesUploaded) {
-//				upload_status.innerHTML = numFilesUploaded + ' file' + (numFilesUploaded < 2 ? '' : 's') + ' uploaded.';
 			}
 
 			function showZipConfirmDialog(msg, funcExtract, funcExtractAll, funcNoExtract, cancel) {
@@ -2355,34 +2350,38 @@
 			}
 
 			// -------------------------------------------------------------------------
-			// class FileProgress
+			// class progress
 			// -------------------------------------------------------------------------
-			function FileProgress(file, tree_id, pain_id, disp_type) {
+			function fileProgress(file, tree_id, pain_id, disp_type) {
 				var tree = document.getElementById(tree_id);
 				var pain = document.getElementById(pain_id);
-				this.fileProgressID = file.id;
-				this.opacity = 100;
-				this.height = 0;
-				this.filename = file.name;
-				this.fileProgressWrapper = document.getElementById(this.fileProgressID);
+				var id = file.id;
+				var filename = file.name;
+				var fileProgressWrapper;
+				var fileProgressElement;
+				var fileProgressTree;
 
-				FileProgress.prototype.reset = function() {
-					this.fileProgressElement.className = 'progressContainer';
+				var overwriteList, overwriteTr;
 
-					this.fileProgressElement.childNodes[0].innerHTML = '&nbsp;';
-					this.fileProgressElement.childNodes[0].className = 'progressBarStatus';
+				function reset() {
+					fileProgressElement.className = 'progressContainer';
 
-					this.fileProgressElement.childNodes[1].className = 'progressBarInProgress';
-					this.fileProgressElement.childNodes[1].style.width = '0%';
-				};
+					fileProgressElement.childNodes[0].innerHTML = '&nbsp;';
+					fileProgressElement.childNodes[0].className = 'progressBarStatus';
 
-				FileProgress.prototype.setProgress = function(percentage) {
-					this.fileProgressElement.className = 'progressContainer green';
-					this.fileProgressElement.childNodes[1].className = 'progressBarInProgress';
-					this.fileProgressElement.childNodes[1].style.width = percentage + '%';
-				};
+					fileProgressElement.childNodes[1].className = 'progressBarInProgress';
+					fileProgressElement.childNodes[1].style.width = '0%';
+				}
+				this.reset = reset;
 
-				FileProgress.prototype.setComplete = function(node_info) {
+				function setProgress(percentage) {
+					fileProgressElement.className = 'progressContainer green';
+					fileProgressElement.childNodes[1].className = 'progressBarInProgress';
+					fileProgressElement.childNodes[1].style.width = percentage + '%';
+				}
+				this.setProgress = setProgress;
+
+				function setComplete(node_info) {
 					var li;
 
 					if(disp_type == 'thumbnail') {
@@ -2410,17 +2409,17 @@
 									pain.replaceChild(li, n);
 									var nn = document.getElementById('nn'+li.id);
 									nn.value = node_number;
-									if(this.fileProgressWrapper) {
-										pain.removeChild(this.fileProgressWrapper);
-										this.fileProgressWrapper = '';
+									if(fileProgressWrapper) {
+										pain.removeChild(fileProgressWrapper);
+										fileProgressWrapper = '';
 									}
 									break;
 								}
 							}
 							if(!n) {
-								if(this.fileProgressWrapper) {
-									pain.replaceChild(li, this.fileProgressWrapper);
-									this.fileProgressWrapper = '';
+								if(fileProgressWrapper) {
+									pain.replaceChild(li, fileProgressWrapper);
+									fileProgressWrapper = '';
 								}
 								else {
 									pain.appendChild(li);
@@ -2453,17 +2452,17 @@
 									pain.replaceChild(tr, n);
 									var nn = document.getElementById('nn'+tr.id);
 									nn.value = node_number;
-									if(this.fileProgressWrapper) {
-										pain.removeChild(this.fileProgressWrapper);
-										this.fileProgressWrapper = '';
+									if(fileProgressWrapper) {
+										pain.removeChild(fileProgressWrapper);
+										fileProgressWrapper = '';
 									}
 									break;
 								}
 							}
 							if(!n) {
-								if(this.fileProgressWrapper) {
-									pain.replaceChild(tr, this.fileProgressWrapper);
-									this.fileProgressWrapper = '';
+								if(fileProgressWrapper) {
+									pain.replaceChild(tr, fileProgressWrapper);
+									fileProgressWrapper = '';
 								}
 								else {
 									pain.appendChild(tr);
@@ -2471,65 +2470,101 @@
 							}
 						}
 					}
-				};
+				}
+				this.setComplete = setComplete;
 
-				FileProgress.prototype.setError = function() {
-					this.fileProgressElement.className = 'progressContainer red';
-					this.fileProgressElement.childNodes[1].className = 'progressBarError';
-					this.fileProgressElement.childNodes[1].style.width = '';
-				};
+				function setError() {
+					fileProgressElement.className = 'progressContainer red';
+					fileProgressElement.childNodes[1].className = 'progressBarError';
+					fileProgressElement.childNodes[1].style.width = '';
+					bframe.addEventListner(fileProgressElement, 'click', clickErrorObject);
+				}
+				this.setError = setError;
 
-				FileProgress.prototype.setCancelled = function() {
-					if(this.overwriteList) {
-						bframe.appendClass('fadein', this.overwriteList);
-						this.overwriteList = '';
+				function clickErrorObject(event) {
+					if(overwriteList) {
+						bframe.appendClass('fadein', overwriteList);
+						overwriteList = '';
 					}
-					if(this.overwriteTr) {
-						for(var i=0; i<this.overwriteTr.cells.length; i++) {
-							bframe.appendClass('fadein', this.overwriteTr.cells[i].firstChild);
+					if(overwriteTr) {
+						for(var i=0; i<overwriteTr.cells.length; i++) {
+							bframe.appendClass('fadein', overwriteTr.cells[i].firstChild);
 						}
-						this.overwriteTr = '';
+						overwriteTr = '';
 					}
-					if(this.fileProgressElement) {
-						this.fileProgressElement.className = 'progressContainer cancelled fadeout';
-						bframe.addEventListner(this.fileProgressElement, 'animationend', this.onAnimationEnd);
+					if(fileProgressWrapper) {
+						bframe.appendClass('fadeout', fileProgressWrapper);
+						bframe.addEventListner(fileProgressWrapper, 'animationend', onAnimationEnd);
 					}
-					if(this.fileProgressTree) {
-						bframe.appendClass('fadeout', this.fileProgressTree);
-						bframe.addEventListner(this.fileProgressTree, 'animationend', this.onAnimationEnd);
+					else {
+						if(fileProgressElement) {
+							fileProgressElement.className = 'progressContainer red fadeout';
+							bframe.addEventListner(fileProgressElement, 'animationend', onAnimationEnd);
+						}
+						if(fileProgressTree) {
+							bframe.appendClass('fadeout', fileProgressTree);
+							bframe.addEventListner(fileProgressTree, 'animationend', onAnimationEnd);
+						}
 					}
-					if(this.fileProgressWrapper) {
-						bframe.appendClass('fadeout', this.fileProgressWrapper);
-						bframe.addEventListner(this.fileProgressWrapper, 'animationend', this.onAnimationEnd);
-					}
-				};
+				}
 
-				FileProgress.prototype.onAnimationEnd = function(event) {
+				function setCancelled() {
+					if(overwriteList) {
+						bframe.appendClass('fadein', overwriteList);
+						overwriteList = '';
+					}
+					if(overwriteTr) {
+						for(var i=0; i<overwriteTr.cells.length; i++) {
+							bframe.appendClass('fadein', overwriteTr.cells[i].firstChild);
+						}
+						overwriteTr = '';
+					}
+					if(fileProgressWrapper) {
+						bframe.appendClass('fadeout', fileProgressWrapper);
+						bframe.addEventListner(fileProgressWrapper, 'animationend', onAnimationEnd);
+					}
+					else {
+						if(fileProgressElement) {
+							fileProgressElement.className = 'progressContainer cancelled fadeout';
+							bframe.addEventListner(fileProgressElement, 'animationend', onAnimationEnd);
+						}
+						if(fileProgressTree) {
+							bframe.appendClass('fadeout', fileProgressTree);
+							bframe.addEventListner(fileProgressTree, 'animationend', onAnimationEnd);
+						}
+					}
+				}
+				this.setCancelled = setCancelled;
+
+				onAnimationEnd = function(event) {
 					var obj = bframe.getEventSrcElement(event);
 					if(obj && obj.parentNode) {
 						obj.parentNode.removeChild(obj);
 					}
-				};
+				}
 
-				FileProgress.prototype.setStatus = function(status) {
-					this.fileProgressElement.childNodes[0].innerHTML = status;
-				};
+				setStatus = function(status) {
+					fileProgressElement.childNodes[0].innerHTML = status;
+				}
+				this.setStatus = setStatus;
+
+				var link, border, filename, img;
 
 				if(disp_type == 'thumbnail') {
-					this.fileProgressTree = document.createElement('div');
-					this.fileProgressTree.className = 'tree';
+					fileProgressTree = document.createElement('div');
+					fileProgressTree.className = 'tree';
 
-					this.fileProgressLink = document.createElement('a');
+					link = document.createElement('a');
 
-					this.fileProgressBorder = document.createElement('div');
-					this.fileProgressBorder.className = 'img-border';
+					border = document.createElement('div');
+					border.className = 'img-border';
 
-					this.fileProgressFilename = document.createElement('span');
-					this.fileProgressFilename.className = 'node-name';
-					this.fileProgressFilename.appendChild(document.createTextNode(shortenText(file.name)));
+					filename = document.createElement('span');
+					filename.className = 'node-name';
+					filename.appendChild(document.createTextNode(shortenText(file.name)));
 
-					this.fileProgressElement = document.createElement('div');
-					this.fileProgressElement.className = 'progressContainer white';
+					fileProgressElement = document.createElement('div');
+					fileProgressElement.className = 'progressContainer white';
 
 					var progressStatus = document.createElement('div');
 					progressStatus.className = 'progressBarStatus';
@@ -2538,31 +2573,31 @@
 					var progressBar = document.createElement('div');
 					progressBar.className = 'progressBarInProgress';
 
-					this.fileProgressTree.appendChild(this.fileProgressLink);
-					this.fileProgressLink.appendChild(this.fileProgressBorder);
-					this.fileProgressLink.appendChild(this.fileProgressFilename);
-					this.fileProgressBorder.appendChild(this.fileProgressElement);
-					this.fileProgressElement.appendChild(progressStatus);
-					this.fileProgressElement.appendChild(progressBar);
+					fileProgressTree.appendChild(link);
+					link.appendChild(border);
+					link.appendChild(filename);
+					border.appendChild(fileProgressElement);
+					fileProgressElement.appendChild(progressStatus);
+					fileProgressElement.appendChild(progressBar);
 
 					for(var li=pain.firstChild; li; li=li.nextSibling) {
 						if(file.name == bframe.searchNodeByName(li, 'node_name').value) {
 							if(li.childNodes.length > 1) {
 								li.removeChild(li.childNodes[1]);
 							}
-							this.fileProgressTree.style.marginTop = '-' + li.firstChild.offsetHeight + 'px';
-							li.appendChild(this.fileProgressTree);
+							fileProgressTree.style.marginTop = '-' + li.firstChild.offsetHeight + 'px';
+							li.appendChild(fileProgressTree);
 							li.firstChild.style.opacity = 0.2;
-							this.overwriteList = li.firstChild;
-							bframe.removeClass('fadein', this.overwriteList);
+							overwriteList = li.firstChild;
+							bframe.removeClass('fadein', overwriteList);
 							break;
 						}
 					}
 					if(!li) {
-						this.fileProgressWrapper = document.createElement('li');
-						this.fileProgressWrapper.className = 'tree-list';
-						this.fileProgressWrapper.appendChild(this.fileProgressTree);
-						pain.appendChild(this.fileProgressWrapper);
+						fileProgressWrapper = document.createElement('li');
+						fileProgressWrapper.className = 'tree-list';
+						fileProgressWrapper.appendChild(fileProgressTree);
+						pain.appendChild(fileProgressWrapper);
 					}
 				}
 				else {
@@ -2571,34 +2606,34 @@
 							if(tr.childNodes[0].childNodes.length > 1) {
 								tr.childNodes[0].removeChild(tr.childNodes[0].childNodes[1]);
 							}
-							this.fileProgressTree = document.createElement('div');
-							this.fileProgressTree.className = 'tree upload-filename';
+							fileProgressTree = document.createElement('div');
+							fileProgressTree.className = 'tree upload-filename';
 
-							this.fileProgressLink = document.createElement('a');
+							link = document.createElement('a');
 
-							this.fileProgressBorder = document.createElement('span');
-							this.fileProgressBorder.className = 'img-border';
+							border = document.createElement('span');
+							border.className = 'img-border';
 
-							this.fileProgressImg = document.createElement('img');
-							this.fileProgressImg.src = property.icon.detail.upload.src;
+							img = document.createElement('img');
+							img.src = property.icon.detail.upload.src;
 
-							this.fileProgressFilename = document.createElement('span');
-							this.fileProgressFilename.className = 'node-name';
-							this.fileProgressFilename.appendChild(document.createTextNode(file.name));
+							filename = document.createElement('span');
+							filename.className = 'node-name';
+							filename.appendChild(document.createTextNode(file.name));
 
-							tr.childNodes[0].appendChild(this.fileProgressTree);
-							this.fileProgressTree.appendChild(this.fileProgressLink);
-							this.fileProgressLink.appendChild(this.fileProgressBorder);
-							this.fileProgressLink.appendChild(this.fileProgressImg);
-							this.fileProgressLink.appendChild(this.fileProgressFilename);
+							tr.childNodes[0].appendChild(fileProgressTree);
+							fileProgressTree.appendChild(link);
+							link.appendChild(border);
+							link.appendChild(img);
+							link.appendChild(filename);
 
-							this.fileProgressTree.style.marginTop = '-' + tr.childNodes[0].firstChild.offsetHeight + 'px';
+//							fileProgressTree.style.marginTop = '-' + tr.childNodes[0].firstChild.offsetHeight + 'px';
 
 							if(tr.childNodes[1].childNodes.length > 1) {
 								tr.childNodes[1].removeChild(tr.childNodes[1].childNodes[1]);
 							}
-							this.fileProgressElement = document.createElement('div');
-							this.fileProgressElement.className = 'progressContainer white';
+							fileProgressElement = document.createElement('div');
+							fileProgressElement.className = 'progressContainer white';
 
 							var progressStatus = document.createElement('div');
 							progressStatus.className = 'progressBarStatus';
@@ -2607,46 +2642,46 @@
 							var progressBar = document.createElement('div');
 							progressBar.className = 'progressBarInProgress';
 
-							tr.childNodes[1].appendChild(this.fileProgressElement);
-							this.fileProgressElement.appendChild(progressStatus);
-							this.fileProgressElement.appendChild(progressBar);
+							tr.childNodes[1].appendChild(fileProgressElement);
+							fileProgressElement.appendChild(progressStatus);
+							fileProgressElement.appendChild(progressBar);
 
 							for(var i=0; i<tr.cells.length; i++) {
 								tr.childNodes[i].firstChild.style.opacity = 0;
 								bframe.removeClass('fadein', tr.childNodes[i].firstChild);
 							}
 
-							this.overwriteTr = tr;
+							overwriteTr = tr;
 
 							break;
 						}
 					}
 					if(!tr) {
-						this.fileProgressWrapper = document.createElement('tr');
+						fileProgressWrapper = document.createElement('tr');
 
-						this.fileProgressTd = document.createElement('td');
-						this.fileProgressTd.className = 'file-name';
+						var td = document.createElement('td');
+						td.className = 'file-name';
 
-						this.fileProgressTree = document.createElement('div');
-						this.fileProgressTree.className = 'tree';
+						fileProgressTree = document.createElement('div');
+						fileProgressTree.className = 'tree';
 
-						this.fileProgressLink = document.createElement('a');
+						link = document.createElement('a');
 
-						this.fileProgressBorder = document.createElement('span');
-						this.fileProgressBorder.className = 'img-border';
+						border = document.createElement('span');
+						border.className = 'img-border';
 
-						this.fileProgressImg = document.createElement('img');
-						this.fileProgressImg.src = property.icon.detail.upload.src;
+						img = document.createElement('img');
+						img.src = property.icon.detail.upload.src;
 
-						this.fileProgressFilename = document.createElement('span');
-						this.fileProgressFilename.className = 'node-name';
-						this.fileProgressFilename.appendChild(document.createTextNode(file.name));
+						filename = document.createElement('span');
+						filename.className = 'node-name';
+						filename.appendChild(document.createTextNode(file.name));
 
-						this.fileProgressTd2 = document.createElement('td');
-						this.fileProgressTd2.className = 'progress-bar';
+						td2 = document.createElement('td');
+						td2.className = 'progress-bar';
 
-						this.fileProgressElement = document.createElement('div');
-						this.fileProgressElement.className = 'progressContainer white';
+						fileProgressElement = document.createElement('div');
+						fileProgressElement.className = 'progressContainer white';
 
 						var progressStatus = document.createElement('div');
 						progressStatus.className = 'progressBarStatus';
@@ -2655,20 +2690,20 @@
 						var progressBar = document.createElement('div');
 						progressBar.className = 'progressBarInProgress';
 
-						this.fileProgressWrapper.appendChild(this.fileProgressTd);
+						fileProgressWrapper.appendChild(td);
 
-						this.fileProgressTd.appendChild(this.fileProgressTree);
-						this.fileProgressTree.appendChild(this.fileProgressLink);
-						this.fileProgressLink.appendChild(this.fileProgressBorder);
-						this.fileProgressLink.appendChild(this.fileProgressImg);
-						this.fileProgressLink.appendChild(this.fileProgressFilename);
+						td.appendChild(fileProgressTree);
+						fileProgressTree.appendChild(link);
+						link.appendChild(border);
+						link.appendChild(img);
+						link.appendChild(filename);
 
-						this.fileProgressWrapper.appendChild(this.fileProgressTd2);
-						this.fileProgressTd2.appendChild(this.fileProgressElement);
-						this.fileProgressElement.appendChild(progressStatus);
-						this.fileProgressElement.appendChild(progressBar);
+						fileProgressWrapper.appendChild(td2);
+						td2.appendChild(fileProgressElement);
+						fileProgressElement.appendChild(progressStatus);
+						fileProgressElement.appendChild(progressBar);
 
-						pain.appendChild(this.fileProgressWrapper);
+						pain.appendChild(fileProgressWrapper);
 					}
 				}
 			}
