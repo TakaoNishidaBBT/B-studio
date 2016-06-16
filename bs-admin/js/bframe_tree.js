@@ -130,8 +130,7 @@
 				}
 			}
 		}
-		
-						
+
 		function setDispChange() {
 			display_thumbnail = document.getElementById(property.display_mode.thumbnail.id);
 			display_detail = document.getElementById(property.display_mode.detail.id);
@@ -938,7 +937,7 @@
 
 			param = 'terminal_id='+terminal_id;
 			param+= '&'+p+'&destination_node_id='+encodeURIComponent(selected_node.id().substr(1));
-			param+= '&node_id='+encodeURIComponent(current_node.id().substr(1));
+			if(current_node.id()) param+= '&node_id='+encodeURIComponent(current_node.id().substr(1));
 			httpObj = createXMLHttpRequest(showNode);
 			eventHandler(httpObj, property.module, property.file, property.method.createNode, 'POST', param);
 			response_wait = true;
