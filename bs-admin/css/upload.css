@@ -186,6 +186,14 @@ a.progressCancel:hover {
 	-webkit-animation-duration: 2s;
 	-webkit-animation-fill-mode: forwards;
 }
+.fadeout2 {
+	animation-name: fadeout;
+	animation-duration: 0.3s;
+	animation-fill-mode: forwards;
+	-webkit-animation-name: fadeout;
+	-webkit-animation-duration: 0.3s;
+	-webkit-animation-fill-mode: forwards;
+}
 @keyframes fadeout {
 	0%		{opacity: 1}
 	100%	{opacity: 0}
