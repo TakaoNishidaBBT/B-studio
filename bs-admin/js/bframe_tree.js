@@ -2493,16 +2493,16 @@
 						overwriteTr = '';
 					}
 					if(fileProgressWrapper) {
-						bframe.appendClass('fadeout', fileProgressWrapper);
+						bframe.appendClass('fadeout2', fileProgressWrapper);
 						bframe.addEventListner(fileProgressWrapper, 'animationend', onAnimationEnd);
 					}
 					else {
 						if(fileProgressElement) {
-							fileProgressElement.className = 'progressContainer red fadeout';
+							fileProgressElement.className = 'progressContainer red fadeout2';
 							bframe.addEventListner(fileProgressElement, 'animationend', onAnimationEnd);
 						}
 						if(fileProgressTree) {
-							bframe.appendClass('fadeout', fileProgressTree);
+							bframe.appendClass('fadeout2', fileProgressTree);
 							bframe.addEventListner(fileProgressTree, 'animationend', onAnimationEnd);
 						}
 					}
