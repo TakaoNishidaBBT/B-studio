@@ -750,7 +750,7 @@
 					break;
 
 				case 'text_datetime':
-					if(isset($this->value)) {
+					if(isset($this->value) && $this->value != '') { // not required
 						if(preg_match('/^(\d\d\d\d)\/(\d\d)\/(\d\d) (\d\d):(\d\d)$/', $this->value, $m)) {
 							if(@checkdate($m[2], $m[3], $m[1])) { // checkdate(month, date, year)
 								if($this->checkTime($m[4], $m[5])) {
@@ -780,35 +780,33 @@
 					break;
 
 				case 'text_date':
-					if(!isset($this->value)) { // not require
-						break;
-					}
-					$date = explode('/', $this->value);
-					if(is_array($date) && count($date) == 3) {
-						$ret = @checkdate($date[1], $date[2], $date[0]); // checkdate(month, date, year)
-						if($ret) {
-							break;
+					if(isset($this->value) && $this->value != '') { // not required
+						$date = explode('/', $this->value);
+						if(is_array($date) && count($date) == 3) {
+							$ret = @checkdate($date[1], $date[2], $date[0]); // checkdate(month, date, year)
+							if($ret) {
+								break;
+							}
 						}
+						$err_obj = $this->searchElementByName('error_message');
+						if($err_obj) $err_obj->value = $config['error_message'];
+						return false;
 					}
-					$err_obj = $this->searchElementByName('error_message');
-					if($err_obj) $err_obj->value = $config['error_message'];
-					return false;
 					break;
 
 				case 'text_year_month':
-					if(!isset($this->value)) { // not require
-						break;
-					}
-					$date = explode($config['delimiter'], $this->value);
-					if(is_array($date) && count($date) == 2) {
-						$ret = @checkdate($date[1], '01', $date[0]); // checkdate(month, date, year)
-						if($ret) {
-							break;
+					if(isset($this->value) && $this->value != '') { // not required
+						$date = explode($config['delimiter'], $this->value);
+						if(is_array($date) && count($date) == 2) {
+							$ret = @checkdate($date[1], '01', $date[0]); // checkdate(month, date, year)
+							if($ret) {
+								break;
+							}
 						}
+						$err_obj = $this->searchElementByName('error_message');
+						if($err_obj) $err_obj->value = $config['error_message'];
+						return false;
 					}
-					$err_obj = $this->searchElementByName('error_message');
-					if($err_obj) $err_obj->value = $config['error_message'];
-					return false;
 					break;
 
 				case 'exist':
