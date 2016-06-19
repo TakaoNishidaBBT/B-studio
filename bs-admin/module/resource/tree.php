@@ -53,8 +53,10 @@
 				}
 				$this->session['sort_key'] = $this->request['sort_key'];
 			}
-			if($this->request['node_id']) {
+			if($this->request['node_id'] && $this->request['mode'] != 'open') {
 				$this->session['current_node'] = $this->request['node_id'];
+			}
+			if($this->request['node_id']) {
 				$this->session['open_nodes'][$this->request['node_id']] = true;
 			}
 			if(!$this->session['current_node']) {
@@ -635,9 +637,7 @@
 
 			$list[] = $trash_node->getNodeList('', '', B_RESOURCE_DIR);
 
-			if(!$this->request['node_id']) {
-				$response['current_node'] = $this->session['current_node'];
-			}
+			$response['current_node'] = $this->session['current_node'];
 
 			if($this->selected_node) {
 				$response['selected_node'] = $this->selected_node;
