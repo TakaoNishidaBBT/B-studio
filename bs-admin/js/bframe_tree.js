@@ -477,7 +477,7 @@
 			trash_context_menu.hide();
 		}
 
-		function getNodeList(id, mode='') {
+		function getNodeList(id, mode) {
 			var param;
 
 			param = 'terminal_id='+terminal_id;
