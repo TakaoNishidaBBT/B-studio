@@ -589,6 +589,30 @@
 			exit;
 		}
 
+		function preview() {
+			if($this->request['node_id'] && $this->request['node_id'] != 'null') {
+				$node = new B_Node($this->db
+								, B_RESOURCE_NODE_TABLE
+								, B_WORKING_RESOURCE_NODE_VIEW
+								, $this->version['working_version_id']
+								, $this->version['revision_id']
+								, $this->request['node_id']
+								, null
+								, 0
+								, null);
+
+				if($node->node_type != 'file') exit;
+
+				$path = $node->getPath();
+
+				// index.phpへリダイレクト
+				$path = B_SITE_BASE . $path;
+				header("Location:$path");
+			}
+
+			exit;
+		}
+
 		function response($node_id, $category) {
 			$response['status'] = $this->status;
 			if($this->message) {

@@ -346,6 +346,16 @@
 			exit;
 		}
 
+		function preview() {
+			if($this->request['node_id'] && $this->request['node_id'] != 'null') {
+				// index.phpへリダイレクト
+				$path = B_Util::getPath(B_UPLOAD_URL, $this->request['node_id']);
+				header("Location:$path");
+			}
+
+			exit;
+		}
+
 		function response($node_id, $category) {
 			// if thumb-nail cache file not exists
 			if(!file_exists(B_FILE_INFO_THUMB)) {

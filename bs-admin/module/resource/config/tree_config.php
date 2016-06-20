@@ -64,6 +64,10 @@ $tree_config = array(
 				array(
 					'url'		=> DISPATCH_URL . '&module=' . $this->module . '&page=tree&method=download',
 				),
+				'preview'		=>
+				array(
+					'url'		=> DISPATCH_URL . '&module=' . $this->module . '&page=tree&method=preview',
+				),
 			),
 			'key'			=>
 			array(
@@ -216,6 +220,10 @@ $tree_config = array(
 				array(
 					'menu'		=> 'ダウンロード',
 					'func'		=> 'download',
+				),
+				array(
+					'menu'		=> 'プレビュー',
+					'func'		=> 'preview',
 				),
 			),
 			'trash_context_menu'	=>
