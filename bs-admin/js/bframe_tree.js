@@ -188,6 +188,42 @@
 			if(active_window_name && active_window_name != window.name) return;
 
 			switch(keycode) {
+			case 13:	// Enter
+				var node_count = selected_node.length();
+				if(!node_count) return;
+				var node = current_node.object();
+				if(bframe.searchParentById(node, 'ttrash')) return;
+
+				if(node_count == 1) {
+					var node_id = selected_node.id();
+					var node_type = document.getElementById('nt' + node_id);
+					if(node_type.value == 'folder') {
+						getNodeList(node_id);
+					}
+					else {
+						var node_name = selected_node.name();
+						var suffix = node_name.substring(node_name.lastIndexOf('.')+1, node_name.length);
+						switch(suffix.toLowerCase()) {
+						case 'jpg':
+						case 'jpeg':
+						case 'gif':
+						case 'png':
+						case 'bmp':
+						case 'svg':
+							preview();
+							break;
+
+						default:
+							download();
+							break;
+						}
+					}
+				}
+				else {
+					download();
+				}
+				break;
+
 			case 37:	// ->
 				move(event, 'left');
 				break;
@@ -432,11 +468,31 @@
 				context_menu.disableElement('createNode');
 			}
 
+			var node_name = selected_node.name();
+
 			if(node.node_type == 'page') {
 				context_menu.enableElement('preview');
 			}
 			else {
-				context_menu.disableElement('preview');
+				var suffix = node_name.substring(node_name.lastIndexOf('.')+1, node_name.length);
+				switch(suffix.toLowerCase()) {
+				case 'jpg':
+				case 'jpeg':
+				case 'gif':
+				case 'png':
+				case 'bmp':
+				case 'svg':
+					if(selected_node.length() == 1) {
+						context_menu.enableElement('preview');
+					}
+					else {
+						context_menu.disableElement('preview');
+					}
+					break;
+
+				default:
+					context_menu.disableElement('preview');
+				}
 			}
 
 			if(selected_node.place() == 'pane') {
@@ -459,8 +515,8 @@
 			else {
 				callback.setConfirmMessageKey('single');
 			}
+
 			var message = callback.getConfirmMessage();
-			var node_name = selected_node.name();
 			message = message.replace('%NODE_NAME%', node_name);
 			message = message.replace('%NODE_COUNT%', node_count);
 			callback.setTmpConfirmMessage(message);
@@ -752,10 +808,25 @@
 			if(!pane) return;
 			if(current_edit_node) return;
 
+			if(selected_node.length() == 0 || (selected_node.length() == 1 && selected_node.place() == 'tree')) {
+				if(display_mode != 'detail') {
+					if(pane_ul.childNodes.length > 0) {
+						selected_node.set(pane_ul.childNodes[0].id);
+					}
+				}
+				else {
+					if(pane_tbody.childNodes.length > 1) {
+						selected_node.set(pane_tbody.childNodes[1].id);
+					}
+				}
+				selected_node.setColor('selected');
+				current_node.setColor('current');
+				event.preventDefault();
+				return;
+			}
+
 			var top_id = selected_node.id(0);
-			if(!top_id) return;
 			var last_id = selected_node.last_id();
-			if(!last_id) return;
 
 			switch(dir) {
 			case 'left':
@@ -894,7 +965,7 @@
 						if(n) {
 							selected_node.set(n.id);
 						}
-					}		
+					}
 				}
 				break;
 
@@ -1017,7 +1088,7 @@
 			if(clipboard.target) delete clipboard.target;
 			clipboard.target = new Array();
 
-			for(var i=0 ; i<selected_node.length() ; i++) {
+			for(var i=0; i<selected_node.length(); i++) {
 				clipboard.target[i] = selected_node.id(i);
 			}
 			clipboard.mode = 'cut';
@@ -1029,7 +1100,7 @@
 			if(clipboard.target) delete clipboard.target;
 			clipboard.target = new Array();
 
-			for(var i=0 ; i<selected_node.length() ; i++) {
+			for(var i=0; i<selected_node.length(); i++) {
 				clipboard.target[i] = selected_node.id(i);
 			}
 			clipboard.mode = 'copy';
@@ -1042,7 +1113,7 @@
 				var param;
 
 				param = 'terminal_id='+terminal_id+'&mode='+clipboard.mode;
-				for(var i=0 ; i < clipboard.target.length ; i++) {
+				for(var i=0; i < clipboard.target.length; i++) {
 					param+= '&source_node_id[' + i + ']=' + encodeURIComponent(clipboard.target[i].substr(1));
 				}
 				param+= '&destination_node_id='+encodeURIComponent(selected_node.id().substr(1));
@@ -1058,7 +1129,7 @@
 				var param;
 
 				param = 'terminal_id='+terminal_id+'&mode=arias';
-				for(var i=0 ; i < clipboard.target.length ; i++) {
+				for(var i=0; i < clipboard.target.length; i++) {
 					param+= '&source_node_id='+encodeURIComponent(clipboard.target[i].substr(1));
 				}
 				param+= '&destination_node_id='+encodeURIComponent(selected_node.id().substr(1));
@@ -1079,7 +1150,7 @@
 				}
 			}
 			param = 'terminal_id='+terminal_id;
-			for(var i=0 ; i < selected_node.length() ; i++) {
+			for(var i=0; i < selected_node.length(); i++) {
 				if(!selected_node.id(i)) continue;
 				param+= '&delete_node_id[' + i + ']='+encodeURIComponent(selected_node.id(i).substr(1));
 				if(selected_node.exists(current_node.id())) {
@@ -1279,7 +1350,7 @@
 			if(!property.select || !property.select.filter) return;
 
 			// check filter
-			for(var i=0 ; i<property.select.filter.length ; i++) {
+			for(var i=0; i<property.select.filter.length; i++) {
 				if(property.select.filter[i] == node_type.value) return true;
 			}
 		}
@@ -1290,7 +1361,7 @@
 			if(!property.current || !property.current.filter) return;
 
 			// check filter
-			for(var i=0 ; i<property.current.filter.length ; i++) {
+			for(var i=0; i<property.current.filter.length; i++) {
 				if(property.current.filter[i] == node_type.value) return true;
 			}
 		}
@@ -1593,7 +1664,7 @@
 				var latest;
 
 				if(current_node.length) {
-					for(var i=0 ; i < current_node.length ; i++) {
+					for(var i=0; i < current_node.length; i++) {
 						if(n < current_node[i].serial_number) {
 							n = current_node[i].serial_number;
 							latest = i;
@@ -1623,7 +1694,7 @@
 				var range=[];
 
 				if(current_node.length) {
-					for(var i=0 ; i < current_node.length ; i++) {
+					for(var i=0; i < current_node.length; i++) {
 						if(current_node[i].type == 'point' && n < current_node[i].serial_number) {
 							n = current_node[i].serial_number;
 							start = i;
@@ -1652,7 +1723,7 @@
 			}
 
 			this.exists = function(node_id) {
-				for(var i=0 ; i < current_node.length ; i++) {
+				for(var i=0; i < current_node.length; i++) {
 					if(current_node[i].id.substr(1) == node_id.substr(1)) {
 						return true;
 					}
@@ -1662,7 +1733,7 @@
 			}
 
 			this.isChild = function(node_id) {
-				for(var i=0 ; i < current_node.length ; i++) {
+				for(var i=0; i < current_node.length; i++) {
 					var current_obj = document.getElementById('t'+current_node[i].id.substr(1));
 					if(bframe.searchNodeById(current_obj, 't'+node_id.substr(1))) {
 						return true;
@@ -1739,7 +1810,7 @@
 				var file_path = pt ? pt.value : '';
 				var nn = document.getElementById('nn' + node_id);
 				var n = nn ? nn.value : 0;
-				for(var i=0 ; i < current_node.length ; i++) {
+				for(var i=0; i < current_node.length; i++) {
 					if(current_node[i].id == node_id) {
 						current_node.splice(i, 1);
 						break;
@@ -1752,7 +1823,7 @@
 			}
 
 			this.del = function(node_id) {
-				for(var i=0 ; i < current_node.length ; i++) {
+				for(var i=0; i < current_node.length; i++) {
 					if(current_node[i].id == node_id) {
 						current_node.splice(i, 1);
 						break;
@@ -1761,7 +1832,7 @@
 			}
 
 			this.reload = function() {
-				for(var i=0 ; i < current_node.length ; i++) {
+				for(var i=0; i < current_node.length; i++) {
 					var node_id = current_node[i].id;
 					var sn = current_node[i].serial_number;
 					var tp = current_node[i].type;
@@ -1781,7 +1852,7 @@
 			this.setColor = function(mode) {
 				if(!current_node[0]) return;
 
-				for(var i=0 ; i < current_node.length ; i++) {
+				for(var i=0; i < current_node.length; i++) {
 					if(current_edit_node.id == current_node[i].id) continue;
 					var node = self.object(i);
 					if(node) {
@@ -2244,7 +2315,7 @@
 
 					param = 'terminal_id='+terminal_id+'&mode=cut';
 
-					for(var i=0 ; i < selected_node.length() ; i++) {
+					for(var i=0; i < selected_node.length(); i++) {
 						if(!selected_node.id(i)) continue;
 						param+= '&source_node_id[' + i + ']='+encodeURIComponent(selected_node.id(i).substr(1));
 					}
@@ -2266,7 +2337,7 @@
 
 						p='';
 						var i, j;
-						for(i=0, j=0 ; i< parent.childNodes.length; i++) {
+						for(i=0, j=0; i< parent.childNodes.length; i++) {
 							if(parent.childNodes[i].id == source_node_id) {
 								continue;
 							}
@@ -2287,9 +2358,9 @@
 						if(parent.tagName.toLowerCase() == 'tbody') {
 							i=1;
 						}
-						for(j=0 ; i< parent.childNodes.length; i++) {
+						for(j=0; i< parent.childNodes.length; i++) {
 							if(parent.childNodes[i].id == destination_node_id) {
-								for(k=0 ; k< selected_node.length() ; k++) {
+								for(k=0; k< selected_node.length(); k++) {
 									p+= '&node_list[' + j + ']=' + encodeURIComponent(selected_node.id(k).substr(1));
 									p+= '&update_datetime[' + j + ']=' + selected_node.object(k).utime;
 									j++;
@@ -2308,7 +2379,7 @@
 						}
 					}
 					param = 'terminal_id='+terminal_id+'&parent_node_id='+encodeURIComponent(parent.id.substr(2))+p;
-					for(var i=0 ; i < selected_node.length() ; i++) {
+					for(var i=0; i < selected_node.length(); i++) {
 						param+= '&source_node_id[' + i + ']='+encodeURIComponent(selected_node.id(i).substr(1));
 					}
 
@@ -3085,7 +3156,7 @@
 			div.className = 'tree';
 
 			li.appendChild(div);
- 
+
 			control = document.createElement('img');
 			control.id = 'c' + node_id;
 			control.name = 'node_control';
@@ -3154,7 +3225,7 @@
 				}
 				else {
 					a.ondblclick = selectResourceNode;
-					suffix = config.path.substring(config.path.lastIndexOf('.')+1,config.path.length);
+					var suffix = config.path.substring(config.path.lastIndexOf('.')+1, config.path.length);
 
 					switch(suffix.toLowerCase()) {
 					case 'js':
@@ -3314,7 +3385,7 @@
 			tr = document.createElement('tr');
 			parent.appendChild(tr);
 
-			for(var i=0 ; i<property.detail.header.length ; i++) {
+			for(var i=0; i<property.detail.header.length; i++) {
 				th = document.createElement('th');
 				text = document.createTextNode(property.detail.header[i].title);
 				th.className = property.detail.header[i].className;
