@@ -85,11 +85,17 @@
 				header('Content-type: text/javascript charset=' . B_CHARSET);
 				break;
 
+			case 'gif':
+				header('Content-Type: image/gif');
+				break;
+
+			case 'png':
+				header('Content-Type: image/png');
+				break;
+
 			case 'jpg':
 			case 'jpeg':
-			case 'gif':
-			case 'png':
-				header('Content-Type: image/' . strtolower($file['extension']));
+				header('Content-Type: image/jpeg');
 				break;
 
 			case 'svg':
