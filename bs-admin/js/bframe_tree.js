@@ -189,6 +189,7 @@
 
 			switch(keycode) {
 			case 13:	// Enter
+				if(!pane) return;
 				var node_count = selected_node.length();
 				if(!node_count) return;
 				var node = current_node.object();
