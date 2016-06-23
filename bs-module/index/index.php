@@ -59,7 +59,7 @@
 		}
 
 		function getHtml() {
-			$this->url = preg_replace('?/{2,}?', '/', $this->request['url']);	// remove slash in succession
+			$this->url = preg_replace('?/{2,}?', '/', $this->request['url']);	// remove slashes in succession
 			$this->url = preg_replace('?^/?', '', $this->url);					// remove first slash
 
 			$url_array = explode('/', $this->url);
