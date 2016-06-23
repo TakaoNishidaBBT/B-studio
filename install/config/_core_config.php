@@ -83,7 +83,7 @@
 	define('B_RESOURCE_WORK_DIR', B_ADMIN_FILES_DIR);
 	define('B_RESOURCE_EXTRACT_DIR', B_ADMIN_FILES_DIR . 'extract/');
 
-	// User File Directory for Articke
+	// User File Directory for Article
 	define('B_UPLOAD_FILES', 'files/');
 	define('B_UPLOAD_DIR', B_DOC_ROOT . B_CURRENT_ROOT . B_UPLOAD_FILES);
 	define('B_UPLOAD_THUMBDIR', B_ADMIN_FILES_DIR . 'thumbs/');

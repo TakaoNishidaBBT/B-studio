@@ -202,22 +202,7 @@
 						getNodeList(node_id);
 					}
 					else {
-						var node_name = selected_node.name();
-						var suffix = node_name.substring(node_name.lastIndexOf('.')+1, node_name.length);
-						switch(suffix.toLowerCase()) {
-						case 'jpg':
-						case 'jpeg':
-						case 'gif':
-						case 'png':
-						case 'bmp':
-						case 'svg':
-							preview();
-							break;
-
-						default:
-							download();
-							break;
-						}
+						selectResource(node_id);
 					}
 				}
 				else {
@@ -1492,6 +1477,10 @@
 								openEditor(node_id);
 								break;
 
+							case 'openPreview':
+								openPreview();
+								break;
+
 							default:
 								download();
 								break;
@@ -1524,6 +1513,10 @@
 
 			var editor = window.open(url+param, node_id, settings);
 			editor.focus();
+		}
+
+		function openPreview() {
+			preview();
 		}
 
 		function insertImageToCKEditor(node_id) {

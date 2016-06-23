@@ -304,7 +304,7 @@
 							$file_name = 'root.zip';
 						}
 						else {
-							$file_name = $node->file_name . '.zip';
+							$file_name = $nodes[0]->file_name . '.zip';
 						}
 					}
 					else {
