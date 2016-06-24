@@ -709,7 +709,6 @@
 			}
 			else if($this->parent && $this->node_type != 'folder') {
 				$info = pathinfo($mypath);
-//				$data[$mypath] = $this->contents_id . '.' . strtolower($info['extension']);
 				$data[$mypath] = $this->contents_id . '.' . $info['extension'];
 				$data[$this->node_id] = $mypath;
 			}
@@ -727,7 +726,6 @@
 			else if($this->parent) {
 				$info = pathinfo($mypath);
 				if($this->node_type != 'folder') {
-//					$data[$mypath] = $this->contents_id . '.' . strtolower($info['extension']);
 					$data[$mypath] = $this->contents_id . '.' . $info['extension'];
 				}
 				else {
