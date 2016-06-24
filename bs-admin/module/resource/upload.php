@@ -282,10 +282,10 @@
 
 			if($row) {
 				if($row['version_id'] == $this->version['working_version_id'] && $row['revision_id'] == $this->version['revision_id']) {
-					return $this->update($_FILES['Filedata']['tmp_name'], $row, $node_id, $contents_id);
+					return $this->update($_FILES['Filedata']['tmp_name'], $row, $file_name, $node_id, $contents_id);
 				}
 				else {
-					return $this->updateNode($_FILES['Filedata']['tmp_name'], $row, $node_id, $contents_id);
+					return $this->updateNode($_FILES['Filedata']['tmp_name'], $row, $file_name, $node_id, $contents_id);
 				}
 			}
 			else {
@@ -293,13 +293,14 @@
 			}
 		}
 
-		function update($filepath, $row, &$node_id, &$contents_id) {
+		function update($filepath, $row, $file_name, &$node_id, &$contents_id) {
 			// start transaction
 			$this->db->begin();
 
 			$node_id = $row['node_id'];
 			$contents_id = $row['node_id'] . '_' . $this->version['working_version_id'] . '_' . $this->version['revision_id'];
 			$param['node_id'] = $row['node_id'];
+			$param['node_name'] = $file_name;
 			$param['contents_id'] = $contents_id;
 			$param['version_id'] = $this->version['working_version_id'];
 			$param['revision_id'] = $this->version['revision_id'];
@@ -330,7 +331,7 @@
 			return $ret;
 		}
 
-		function updateNode($filepath, $row, &$node_id, &$contents_id) {
+		function updateNode($filepath, $row, $file_name, &$node_id, &$contents_id) {
 			$node_id = $row['node_id'];
 
 			$node = new B_Node($this->db
@@ -359,6 +360,7 @@
 				$param['image_size'] = $size[0] * $size[1];
 				$param['human_image_size'] = $size[0] . 'x' . $size[1];
 			}
+			$param['node_name'] = $file_name;
 
 			$ret &= $node->updateNode($param, $this->user_id);
 

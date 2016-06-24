@@ -188,7 +188,18 @@
 			if(active_window_name && active_window_name != window.name) return;
 
 			switch(keycode) {
+			case 9:  //tab
+				if(current_edit_node) {
+					_saveName(event);
+				}
+				break;
+
 			case 13:	// Enter
+				if(current_edit_node) {
+					_saveName(event);
+					return;
+				}
+
 				if(!pane) return;
 				var node_count = selected_node.length();
 				if(!node_count) return;
@@ -1214,26 +1225,8 @@
 			span.appendChild(input);
 			input.select();
 			input.focus();
-			bframe.addEventListner(input, 'keydown', enterName);
 		}
 		this.editName = editName;
-
-		function enterName(event) {
-			if(window.event) {
-				var keycode = window.event.keyCode;
-			}
-			else {
-				var keycode = event.keyCode;
-			}
-
-			switch(keycode) {
-			case 9:  //tab
-			case 13: //enter
-				_saveName(event);
-				break;
-			}
-		}
-		this.enterName = enterName;
 
 		function saveName(event) {
 			if(typeof bframe == 'undefined' || !bframe || response_wait) return;
@@ -1467,7 +1460,7 @@
 					}
 					else {							// open directly
 						if(property.method.selectFile) {
-							var  suffix = node_name.substring(node_name.lastIndexOf('.')+1,node_name.length);
+							var  suffix = node_name.substring(node_name.lastIndexOf('.')+1,node_name.length).toLowerCase();
 							func = property.method.selectFile[suffix];
 							if(!func) {
 								func = property.method.selectFile.default;
@@ -2795,7 +2788,7 @@
 							if(node_info[i].node_type == 'folder') {
 								li = _createNodeObject(node_info[i], 'tree', false);
 								for(var n=tree.firstChild; n; n=n.nextSibling) {
-									if(node_info[i].path == bframe.searchNodeByName(n, 'path').value) {
+									if(node_info[i].path.toLowerCase() == bframe.searchNodeByName(n, 'path').value.toLowerCase()) {
 										var node_number = document.getElementById('nn'+n.id).value;
 										tree.replaceChild(li, n);
 										var nn = document.getElementById('nn'+li.id);
@@ -2810,7 +2803,9 @@
 							li = _createNodeObject(node_info[i], 'pane', false);
 
 							for(var n=pain.firstChild; n; n=n.nextSibling) {
-								if(node_info[i].path == bframe.searchNodeByName(n, 'path').value) {
+								var path = bframe.searchNodeByName(n, 'path').value;
+								if(!path) continue;
+								if(node_info[i].path.toLowerCase() == path.toLowerCase()) {
 									var node_number = document.getElementById('nn'+n.id).value;
 									pain.replaceChild(li, n);
 									var nn = document.getElementById('nn'+li.id);
@@ -2838,7 +2833,7 @@
 							if(node_info[i].node_type == 'folder') {
 								li = _createNodeObject(node_info[i], 'tree', false);
 								for(var n=tree.firstChild; n; n=n.nextSibling) {
-									if(node_info[i].path == bframe.searchNodeByName(n, 'path').value) {
+									if(node_info[i].path.toLowerCase() == bframe.searchNodeByName(n, 'path').value.toLowerCase()) {
 										var node_number = document.getElementById('nn'+n.id).value;
 										tree.replaceChild(li, n);
 										var nn = document.getElementById('nn'+li.id);
@@ -2853,7 +2848,7 @@
 							tr = _createDetailNodeObject(node_info[i])
 
 							for(var n=pain.firstChild; n; n=n.nextSibling) {
-								if(node_info[i].path == bframe.searchNodeByName(n, 'path').value) {
+								if(node_info[i].path.toLowerCase() == bframe.searchNodeByName(n, 'path').value.toLowerCase()) {
 									var node_number = document.getElementById('nn'+n.id).value;
 									pain.replaceChild(tr, n);
 									var nn = document.getElementById('nn'+tr.id);
@@ -2955,6 +2950,7 @@
 				this.setStatus = setStatus;
 
 				var link, border, filename, img;
+				var upload_filename = file.name;
 
 				if(disp_type == 'thumbnail') {
 					fileProgressTree = document.createElement('div');
@@ -2967,7 +2963,6 @@
 
 					filename = document.createElement('span');
 					filename.className = 'node-name';
-					filename.appendChild(document.createTextNode(shortenText(file.name)));
 
 					fileProgressElement = document.createElement('div');
 					fileProgressElement.className = 'progressContainer white';
@@ -2987,7 +2982,10 @@
 					fileProgressElement.appendChild(progressBar);
 
 					for(var li=pain.firstChild; li; li=li.nextSibling) {
-						if(file.name == bframe.searchNodeByName(li, 'node_name').value) {
+						var path = bframe.searchNodeByName(li, 'node_name').value;
+						if(!path) continue;
+						if(file.name.toLowerCase() == path.toLowerCase()) {
+							upload_filename = bframe.searchNodeByName(li, 'node_name').value;
 							if(li.childNodes.length > 1) {
 								li.removeChild(li.childNodes[1]);
 							}
@@ -3005,10 +3003,13 @@
 						fileProgressWrapper.appendChild(fileProgressTree);
 						pain.appendChild(fileProgressWrapper);
 					}
+
+					filename.appendChild(document.createTextNode(shortenText(upload_filename)));
 				}
 				else {
 					for(var tr=pain.firstChild; tr; tr=tr.nextSibling) {
-						if(file.name == bframe.searchNodeByName(tr, 'node_name').value) {
+						if(file.name.toLowerCase() == bframe.searchNodeByName(tr, 'node_name').value.toLowerCase()) {
+							upload_filename = bframe.searchNodeByName(tr, 'node_name').value;
 							if(tr.childNodes[0].childNodes.length > 1) {
 								tr.childNodes[0].removeChild(tr.childNodes[0].childNodes[1]);
 							}
@@ -3025,7 +3026,7 @@
 
 							filename = document.createElement('span');
 							filename.className = 'node-name';
-							filename.appendChild(document.createTextNode(file.name));
+							filename.appendChild(document.createTextNode(upload_filename));
 
 							tr.childNodes[0].appendChild(fileProgressTree);
 							fileProgressTree.appendChild(link);
