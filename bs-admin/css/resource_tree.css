@@ -97,7 +97,6 @@ div.thumbs li.tree-list span.edit input {
 	ime-mode: disabled;
 	text-align: center;
 	width: 102px;
-	margin: 0 auto;
 	padding: 5px 4px 4px 6px;
 	border: none;
 	background-color: #fafafa;
@@ -105,7 +104,8 @@ div.thumbs li.tree-list span.edit input {
 div.thumbs li.tree-list span.node-name {
 	display: block;
 	margin: 0 auto;
-	padding: 5px 0 2px 0;
+/*	padding: 5px 0 2px 0;*/
+	line-height: 19px;
 	font-size: 12px;
 }
 div.bframe_pane a:link {
@@ -138,9 +138,14 @@ div.thumbs img {
 }
 div.thumbs input {
 	height: 12px;
-	_height: 18px;
-	padding: 1px 0;
 	font-size: 12px;
+	ime-mode: disabled;
+	text-align: center;
+	width: 102px;
+	padding: 4px 0;
+	border: none;
+	background-color: #fafafa;
+
 }
 span.current {
 	background-color: #22a8f6 !important;
