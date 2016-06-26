@@ -76,6 +76,13 @@ td .red {
 	border-bottom: #1298e6 1px solid;
 	margin-top: 2px;
 }
+.animate {
+	transition-property: width;
+	transition-duration: 0.2s;
+	transition-timing-function: linear;
+	transition-delay: 0;
+}
+
 .progressBar {
 	background-color: #ccc;
 }

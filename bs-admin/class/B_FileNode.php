@@ -622,6 +622,16 @@
 			}
 		}
 
+		function nodes_count() {
+			if(is_array($this->node)) {
+				$count = count($this->node);
+				foreach(array_keys($this->node) as $key) {
+					$count += $this->node[$key]->nodes_count();
+				}
+			}
+			return $count;
+		}
+
 		function getErrorNo() {
 			return $this->error_no;
 		}

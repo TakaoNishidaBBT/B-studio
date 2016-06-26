@@ -132,18 +132,36 @@
 
 					$zip_file = B_RESOURCE_WORK_DIR . $file['basename'];
 					if($status = $this->_move_uploaded_file($_FILES['Filedata']['tmp_name'], $zip_file)) {
+						// extract
 						$zip = new ZipArchive();
 						$zip->open($zip_file);
 						$zip->extractTo(B_RESOURCE_EXTRACT_DIR);
 						$zip->close();
 						unlink($zip_file);
 
+						// send progress
+						header('Content-Type: application/octet-stream');
+						header('Transfer-encoding: chunked');
+						flush();
+						ob_flush();
+
+						// controll extracted files
 						$node = new B_FileNode(B_RESOURCE_EXTRACT_DIR, '/', null, null, 'all');
+
+						// count extract files
+						$this->extracted_files = $node->nodes_count();
+						$this->registerd_files = 0;
+
+						// send start message
+						$response['progress'] = 0;
+						$this->sendChunk(json_encode($response));
+
+						// register extract files
 						$node->walk($this, regist_archive);
 						$node->remove();
 						$this->removeCacheFile();
 
-						
+						// create response node_info
 						foreach($this->registered_archive_node as $value) {
 							$node = new B_Node($this->db
 												, B_RESOURCE_NODE_TABLE
@@ -159,6 +177,12 @@
 							$response['node_info'][] = $node->getNodeList('', '', B_RESOURCE_DIR, $path);
 						}
 					}
+
+					$response['status'] = $status;
+					$response['progress'] = 100;
+					$this->sendChunk(',' . json_encode($response));
+					$this->sendChunk();	// terminate
+					exit;
 				}
 				else {
 					$node_id = $this->regist($file);
@@ -181,11 +205,11 @@
 				$message = $e->getMessage();
 			}
 
+			$response['progress'] = '100';
 			$response['status'] = $status;
 			$response['message'] = $message;
-
 			header('Content-Type: application/x-javascript charset=utf-8');
-			echo json_encode($response);
+			echo json_encode($delimiter, $response);
 			exit;
 		}
 
@@ -220,6 +244,23 @@
 			if(!$node->parent->db_node_id) {
 				$this->registered_archive_node[] = $node_id;
 			}
+
+			$this->registerd_files++;
+			$response['progress'] = round($this->registerd_files / $this->extracted_files * 100);
+			$this->sendChunk(',' . json_encode($response));
+		}
+
+		function sendChunk($response) {
+			if($response) {
+				$response = $response . str_repeat(' ', 8000);
+				echo sprintf("%x\r\n", strlen($response));
+				echo $response . "\r\n";
+			}
+			else {
+				echo "0\r\n\r\n";
+			}
+			flush();
+			ob_flush();
 		}
 
 		function _regist_archive($node, &$node_id, &$contents_id) {

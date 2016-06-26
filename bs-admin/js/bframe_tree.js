@@ -2551,7 +2551,8 @@
 			}
 
 			function confirmResult() {
-				if(httpObj.readyState == 4 && httpObj.status == 200){
+console.log('confirmResult', 'httpObj.readyState', httpObj.readyState, 'httpObj.status', httpObj.status, 'httpObj.responseText', httpObj.responseText);
+		if(httpObj.readyState == 4 && httpObj.status == 200){
 					try {
 						var response = eval('('+httpObj.responseText+')');
 					}
@@ -2586,7 +2587,12 @@
 				httpObj = new XMLHttpRequest();
 
 				if(httpObj.upload){
-					httpObj.onreadystatechange = setUploadResult;
+					if(extract_mode == 'extract') {
+						httpObj.onreadystatechange = extracting;
+					}
+					else {
+						httpObj.onreadystatechange = setUploadResult;
+					}
 					var progress = upload_queue[index].progress;
 					progress.setStatus('Uploading...');
 					scroll(progress.object());
@@ -2613,10 +2619,25 @@
 				httpObj.send(form_data);
 			}
 
+			function extracting() {
+console.log('httpObj.responseText', httpObj.responseText);
+				if((httpObj.readyState == 3) && httpObj.status == 200){
+					var response = eval('('+httpObj.responseText+')');
+					var animate = '';
+					if(response['progress']) var animate = ' animate';
+					progress.setProgress(response['progress'], animate);
+					progress.setStatus('Extracting...');
+				}
+				if((httpObj.readyState == 4) && httpObj.status == 200){
+					var response = eval('('+httpObj.responseText+')');
+					result(response);
+					confirm(++index);
+				}
+			}
+
 			function setUploadResult() {
 				if(httpObj.readyState == 4 && httpObj.status == 200){
 					var response = eval('('+httpObj.responseText+')');
-
 					result(response);
 					confirm(++index);
 				}
@@ -2773,9 +2794,11 @@
 				}
 				this.reset = reset;
 
-				function setProgress(percentage) {
+				function setProgress(percentage, animate) {
+console.log(percentage, animate);
+					if(!animate) animate = '';
 					fileProgressElement.className = 'progressContainer green';
-					fileProgressElement.childNodes[1].className = 'progressBarInProgress';
+					fileProgressElement.childNodes[1].className = 'progressBarInProgress' + animate;
 					fileProgressElement.childNodes[1].style.width = percentage + '%';
 				}
 				this.setProgress = setProgress;
