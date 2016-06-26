@@ -3228,9 +3228,7 @@ PHP.Parser.prototype.parseEscapeSequences = function( str, quote ) {
                 return chr(octdec(str));
             }
         }
-        );
-
-    return str;
+    );
 };
 
 PHP.Parser.prototype.TOKEN_NONE    = -1;
