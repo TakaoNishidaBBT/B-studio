@@ -186,7 +186,14 @@
 			var obj;
 
 			if(httpObj.readyState == 4 && httpObj.status == 200 && bframe.response_wait){
-				response = eval('('+httpObj.responseText+')');
+				try {
+					response = eval('('+httpObj.responseText+')');
+				}
+				catch(e) {
+					alert('session timeout');
+					return;
+				}
+
 				if(response.status && response.mode && response.mode == 'confirm') {
 					if(confirm(response.message)) {
 						submit(sfname, smodule, spage, smethod, '', snocheck);

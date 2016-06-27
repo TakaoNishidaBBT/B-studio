@@ -115,8 +115,10 @@
 		}
 
 		function setFileUpload() {
-			file_upload = new fileUpload();
-			file_upload.init();
+			if(property.upload) {
+				file_upload = new fileUpload();
+				file_upload.init();
+			}
 		}
 
 		function getPane() {
@@ -628,6 +630,18 @@
 				selected_node.setColor('selected');
 				current_node.reload();
 				current_node.setColor('current');
+
+				// hide upload button in trash
+				if(property.upload) {
+					var node = current_node.object();
+					if(bframe.searchParentById(node, 'ttrash')) {
+						file_upload.hide();
+					}
+					else {
+						file_upload.show();
+					}
+				}
+
 				target.style.cursor = 'default';
 				if(pane) pane.style.cursor = 'default';
 				response_wait = false;
@@ -2478,6 +2492,16 @@
 			}
 			this.init = init;
 
+			function show() {
+				upload_button.style.display = 'block';
+			}
+			this.show = show;
+
+			function hide() {
+				upload_button.style.display = 'none';
+			}
+			this.hide = hide;
+
 			function dragover(event) {
 				event.preventDefault();
 			}
@@ -2551,8 +2575,7 @@
 			}
 
 			function confirmResult() {
-console.log('confirmResult', 'httpObj.readyState', httpObj.readyState, 'httpObj.status', httpObj.status, 'httpObj.responseText', httpObj.responseText);
-		if(httpObj.readyState == 4 && httpObj.status == 200){
+				if(httpObj.readyState == 4 && httpObj.status == 200){
 					try {
 						var response = eval('('+httpObj.responseText+')');
 					}
@@ -2620,7 +2643,6 @@ console.log('confirmResult', 'httpObj.readyState', httpObj.readyState, 'httpObj.
 			}
 
 			function extracting() {
-console.log('httpObj.responseText', httpObj.responseText);
 				if((httpObj.readyState == 3) && httpObj.status == 200){
 					var response = eval('('+httpObj.responseText+')');
 					var animate = '';
@@ -2795,7 +2817,6 @@ console.log('httpObj.responseText', httpObj.responseText);
 				this.reset = reset;
 
 				function setProgress(percentage, animate) {
-console.log(percentage, animate);
 					if(!animate) animate = '';
 					fileProgressElement.className = 'progressContainer green';
 					fileProgressElement.childNodes[1].className = 'progressBarInProgress' + animate;
