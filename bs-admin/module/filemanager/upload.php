@@ -111,13 +111,30 @@
 					$status = move_uploaded_file($_FILES['Filedata']['tmp_name'], $zip_file);
 
 					if($status) {
+						// send progress
+						header('Content-Type: application/octet-stream');
+						header('Transfer-encoding: chunked');
+						flush();
+						ob_flush();
+
+						// send start message
+						$response['progress'] = 0;
+						$this->sendChunk(json_encode($response));
+
 						$zip = new ZipArchive();
 						$zip->open($zip_file);
 						$zip->extractTo(B_RESOURCE_EXTRACT_DIR);
 						$zip->close();
 						unlink($zip_file);
 
+						// controll extracted files
 						$node = new B_FileNode(B_RESOURCE_EXTRACT_DIR, '/', null, null, 1);
+
+						// count extract files
+						$this->extracted_files = $node->nodes_count();
+						$this->registerd_files = 0;
+
+						// register extract files
 						$node->walk($this, regist_archive);
 						$node->remove();
 						$this->removeThumbnailCacheFile();
@@ -129,6 +146,12 @@
 							$node = new B_FileNode(B_UPLOAD_DIR, '/' . B_Util::getPath($this->path, $path), null, null, 0);
 							$response['node_info'][] = $node->getNodeList('', '', $this->path);
 						}
+
+						$response['status'] = $status;
+						$response['progress'] = 100;
+						$this->sendChunk(',' . json_encode($response));
+						$this->sendChunk();	// terminate
+						exit;
 					}
 				}
 				else {
@@ -214,6 +237,23 @@
 			if(!$node->parent->db_node_id) {
 				$this->registered_archive_node[] = $node->path;
 			}
+
+			$this->registerd_files++;
+			$response['progress'] = round($this->registerd_files / $this->extracted_files * 100);
+			$this->sendChunk(',' . json_encode($response));
+		}
+
+		function sendChunk($response) {
+			if($response) {
+				$response = $response . str_repeat(' ', 8000);
+				echo sprintf("%x\r\n", strlen($response));
+				echo $response . "\r\n";
+			}
+			else {
+				echo "0\r\n\r\n";
+			}
+			flush();
+			ob_flush();
 		}
 
 		function removeThumbnail($path, $filename) {

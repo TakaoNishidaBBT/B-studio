@@ -132,6 +132,16 @@
 
 					$zip_file = B_RESOURCE_WORK_DIR . $file['basename'];
 					if($status = $this->_move_uploaded_file($_FILES['Filedata']['tmp_name'], $zip_file)) {
+						// send progress
+						header('Content-Type: application/octet-stream');
+						header('Transfer-encoding: chunked');
+						flush();
+						ob_flush();
+
+						// send start message
+						$response['progress'] = 0;
+						$this->sendChunk(json_encode($response));
+
 						// extract
 						$zip = new ZipArchive();
 						$zip->open($zip_file);
@@ -139,22 +149,12 @@
 						$zip->close();
 						unlink($zip_file);
 
-						// send progress
-						header('Content-Type: application/octet-stream');
-						header('Transfer-encoding: chunked');
-						flush();
-						ob_flush();
-
 						// controll extracted files
 						$node = new B_FileNode(B_RESOURCE_EXTRACT_DIR, '/', null, null, 'all');
 
 						// count extract files
 						$this->extracted_files = $node->nodes_count();
 						$this->registerd_files = 0;
-
-						// send start message
-						$response['progress'] = 0;
-						$this->sendChunk(json_encode($response));
 
 						// register extract files
 						$node->walk($this, regist_archive);
