@@ -205,11 +205,10 @@
 				$message = $e->getMessage();
 			}
 
-			$response['progress'] = '100';
 			$response['status'] = $status;
 			$response['message'] = $message;
 			header('Content-Type: application/x-javascript charset=utf-8');
-			echo json_encode($delimiter, $response);
+			echo json_encode($response);
 			exit;
 		}
 
@@ -250,7 +249,7 @@
 			$this->sendChunk(',' . json_encode($response));
 		}
 
-		function sendChunk($response) {
+		function sendChunk($response=null) {
 			if($response) {
 				$response = $response . str_repeat(' ', 8000);
 				echo sprintf("%x\r\n", strlen($response));
@@ -284,10 +283,10 @@
 
 			if($row) {
 				if($row['version_id'] == $this->version['working_version_id'] && $row['revision_id'] == $this->version['revision_id']) {
-					return $this->update($node->fullpath, $row, $node_id, $contents_id);
+					return $this->update($node->fullpath, $row, $node->file_name, $node_id, $contents_id);
 				}
 				else {
-					return $this->updateNode($node->fullpath, $row, $node_id, $contents_id);
+					return $this->updateNode($node->fullpath, $row, $node->file_name, $node_id, $contents_id);
 				}
 			}
 			else {

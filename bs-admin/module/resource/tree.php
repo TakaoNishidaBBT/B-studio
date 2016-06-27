@@ -300,7 +300,6 @@
 								, 'all'
 								, null);
 
-				// ブラウザを閉じても処理を継続
 				ignore_user_abort(true);
 
 				// set time limit to 10 minutes
@@ -308,13 +307,18 @@
 
 				// start transaction
 				$this->db->begin();
+
 				$ret = $node->delete();
+				if($ret) {
+					// delete useless files
+					$this->truncateFiles();
+
+					// clean up DB
+					$ret = $this->cleanUpDB();
+				}
 				if($ret) {
 					$this->status = true;
 					$this->db->commit();
-
-					// delete useless files
-					$this->truncateFiles();
 
 					// remove cache files
 					$this->removeCacheFile();
@@ -360,6 +364,23 @@
 					unlink($thumb_file_name);
 				}
 			}
+		}
+
+		function cleanUpDB() {
+			// delete useless record
+			$sql = "delete from " . B_DB_PREFIX . B_RESOURCE_NODE_TABLE . "
+					where concat(version_id, revision_id, contents_id) in
+					(
+						select id from (
+							select concat(version_id, revision_id, contents_id) id
+							from " . B_DB_PREFIX . B_RESOURCE_NODE_TABLE . "
+					        group by contents_id
+					        having count(*) = 1
+						) as tmp
+					)
+					and del_flag = '1'";
+
+			return $this->db->query($sql);
 		}
 
 		function saveName() {
