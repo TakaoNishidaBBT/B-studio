@@ -1461,10 +1461,14 @@
 		}
 
 		function selectResource(node_id) {
+			var node = current_node.object();
+			if(bframe.searchParentById(node, 'ttrash')) return;
+
 			var node_span = document.getElementById('s'+node_id);
 			var node_type = document.getElementById('nt'+node_id);
 			var node_name = node_span.innerHTML;
 			var func;
+
 
 			if(property.relation && property.relation.insertFile) {
 				var node_type =  document.getElementById('nt' + node_id).value;
@@ -2461,7 +2465,7 @@
 			var upload_button_style_display;
 			var upload_file;
 
-			var upload_queue= new Array();
+			var upload_queue = new Array();
 			var index;
 			var upload_count;
 			var mode;
@@ -2473,6 +2477,8 @@
 			var files;
 			var module;
 			var page;
+
+			var visibility = true;
 
 			function init() {
 				if(property.upload) {
@@ -2494,11 +2500,13 @@
 
 			function show() {
 				upload_button.style.display = 'block';
+				visibility = true;
 			}
 			this.show = show;
 
 			function hide() {
 				upload_button.style.display = 'none';
+				visibility = false;
 			}
 			this.hide = hide;
 
@@ -2513,36 +2521,37 @@
 			}
 
 			function uploadFiles(event) {
-				index = 0;
-				upload_queue.length = 0;
-				upload_count = 0;
-				mode = 'confirm';
-				extract_mode = 'confirm';
-				if(event.type == 'drop') {
-					var files = event.dataTransfer.files;
-				}
-				else {
-					var files = event.target.files;
-				}
+				if(visibility) {
+					index = 0;
+					upload_queue.length = 0;
+					upload_count = 0;
+					mode = 'confirm';
+					extract_mode = 'confirm';
+					if(event.type == 'drop') {
+						var files = event.dataTransfer.files;
+					}
+					else {
+						var files = event.target.files;
+					}
 
-				var tree_id = 'tu' + current_node.id().substr(1);
-				var pane_id, disp_type;
-				if(display_mode == 'detail') {
-					pane_id = pane_tbody.id;
-					disp_type = 'detail';
-				}
-				else {
-					pane_id = pane_ul.id;
-					disp_type = 'thumbnail';
-				}
+					var tree_id = 'tu' + current_node.id().substr(1);
+					var pane_id, disp_type;
+					if(display_mode == 'detail') {
+						pane_id = pane_tbody.id;
+						disp_type = 'detail';
+					}
+					else {
+						pane_id = pane_ul.id;
+						disp_type = 'thumbnail';
+					}
 
-				for(var i=0; i<files.length; i++){
-					files[i].id = i;
-					var progress = new fileProgress(files[i], tree_id, pane_id, disp_type);
-					upload_queue[i] = {'file' : files[i], 'progress' : progress};
+					for(var i=0; i<files.length; i++){
+						files[i].id = i;
+						var progress = new fileProgress(files[i], tree_id, pane_id, disp_type);
+						upload_queue[i] = {'file' : files[i], 'progress' : progress};
+					}
+					confirm(0);
 				}
-				confirm(0);
-
 				event.preventDefault();
 			}
 
@@ -2892,7 +2901,8 @@
 							tr = _createDetailNodeObject(node_info[i])
 
 							for(var n=pain.firstChild; n; n=n.nextSibling) {
-								if(node_info[i].path.toLowerCase() == bframe.searchNodeByName(n, 'path').value.toLowerCase()) {
+								var path = bframe.searchNodeByName(n, 'path');
+								if(path && path.value.toLowerCase() == node_info[i].path.toLowerCase()) {
 									var node_number = document.getElementById('nn'+n.id).value;
 									pain.replaceChild(tr, n);
 									var nn = document.getElementById('nn'+tr.id);
@@ -3052,7 +3062,8 @@
 				}
 				else {
 					for(var tr=pain.firstChild; tr; tr=tr.nextSibling) {
-						if(file.name.toLowerCase() == bframe.searchNodeByName(tr, 'node_name').value.toLowerCase()) {
+						var node_name = bframe.searchNodeByName(tr, 'node_name');
+						if(node_name && node_name.value.toLowerCase() == file.name.toLowerCase()) {
 							upload_filename = bframe.searchNodeByName(tr, 'node_name').value;
 							if(tr.childNodes[0].childNodes.length > 1) {
 								tr.childNodes[0].removeChild(tr.childNodes[0].childNodes[1]);
