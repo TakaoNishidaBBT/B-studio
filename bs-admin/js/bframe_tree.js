@@ -2631,7 +2631,8 @@
 
 					httpObj.upload.onprogress = function (e){
 						var percent = Math.ceil((e.loaded / e.total) * 100);
-						progress.setProgress(percent);
+						if(percent) var animate = ' animate';
+						progress.setProgress(percent, animate);
 						progress.setStatus('Uploading...');
 					};
 				}
