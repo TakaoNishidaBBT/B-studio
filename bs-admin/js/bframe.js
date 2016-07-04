@@ -298,7 +298,7 @@
 	}
 
 	bframe.appendClass = function(class_name, obj) {
-		bframe.removeClass(class_name, obj)
+		bframe.removeClass(class_name, obj);
 		if(obj.className) {
 			obj.className += ' ';
 		}
@@ -306,7 +306,7 @@
 	}
 
 	bframe.removeClass = function(class_name, obj) {
-		var space_and_class_name = ' ' + class_name
+		var space_and_class_name = ' ' + class_name;
 		obj.className = obj.className.replace(space_and_class_name, '');
 		obj.className = obj.className.replace(class_name, '');
 	}
