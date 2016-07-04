@@ -571,7 +571,7 @@
 			if(!$width) $width=1;
 			if(!$height) $height=1;
 
-			$new_image = ImageCreateTrueColor($width, $height);
+			$new_image = imagecreatetruecolor($width, $height);
 
 			switch(strtolower($file_extension)) {
 			case 'gif':
@@ -601,7 +601,7 @@
 				break;
 			}
 
-			ImageCopyResampled($new_image, $image, 0, 0, 0, 0, $width, $height, $image_size[0], $image_size[1]);
+			imagecopyresampled($new_image, $image, 0, 0, 0, 0, $width, $height, $image_size[0], $image_size[1]);
 
 			$thumbnail_file_path = $dir . $prefix . $file_name . '.' . $file_extension;
 
@@ -609,15 +609,15 @@
 			case 'jpg':
 			case 'jpeg':
 			case 'bmp':
-				ImageJPEG($new_image, $thumbnail_file_path, 100);
+				imagejpeg($new_image, $thumbnail_file_path, 100);
 				break;
 
 			case 'gif':
-				ImageGIF($new_image, $thumbnail_file_path);
+				imagegif($new_image, $thumbnail_file_path);
 				break;
 
 			case 'png':
-				ImagePNG($new_image, $thumbnail_file_path);
+				imagepng($new_image, $thumbnail_file_path);
 				break;
 
 			case 'avi':
@@ -628,7 +628,7 @@
 			case 'mpeg':
 			case 'wmv':
 				$thumbnail_file_path = $dir . $prefix . $file_name . '.jpg';
-				ImageJPEG($new_image, $thumbnail_file_path, 100);
+				imagejpeg($new_image, $thumbnail_file_path, 100);
 				unlink($source_file_path);
 				break;
 			}

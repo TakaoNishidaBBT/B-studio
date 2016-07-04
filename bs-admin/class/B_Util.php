@@ -287,4 +287,18 @@
 			}
 			return $str;
 		}
+
+		function getDevice() {
+			$ua = $_SERVER['HTTP_USER_AGENT'];
+			if(preg_match('/iPhone/', $ua) || preg_match('/iPod/', $ua) || preg_match('/Android/', $ua) &&
+				preg_match('/Mobile/', $ua)) {
+				return 'sp';
+			}
+			else if(preg_match('/iPad/', $ua) || preg_match('/Android/', $ua)) {
+				return 'tab';
+			}
+			else {
+				return 'pc';
+			}
+		}
 	}
