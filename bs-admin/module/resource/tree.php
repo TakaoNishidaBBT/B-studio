@@ -369,13 +369,13 @@
 		function cleanUpDB() {
 			// delete useless record
 			$sql = "delete from " . B_DB_PREFIX . B_RESOURCE_NODE_TABLE . "
-					where concat(version_id, revision_id, contents_id) in
+					where concat(version_id, revision_id, node_id) in
 					(
 						select id from (
-							select concat(version_id, revision_id, contents_id) id
+							select concat(version_id, revision_id, node_id) id
 							from " . B_DB_PREFIX . B_RESOURCE_NODE_TABLE . "
-					        group by contents_id
-					        having count(*) = 1
+							 group by node_id
+							 having count(*) = 1
 						) as tmp
 					)
 					and del_flag = '1'";
