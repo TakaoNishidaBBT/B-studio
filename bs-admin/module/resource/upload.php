@@ -302,7 +302,6 @@
 				$this->createthumbnail($this->dir, $contents_id, $file['extension'], B_THUMB_PREFIX, B_THUMB_MAX_SIZE);
 				$this->removeCacheFile();
 			}
-
 			return $node_id;
 		}
 
@@ -364,7 +363,7 @@
 			if($ret) {
 				$this->db->commit();
 			}
-			if(!$ret) {
+			else {
 				$this->db->rollback();
 			}
 
@@ -406,9 +405,8 @@
 
 			if($ret) {
 				$this->db->commit();
-				$node_id = $new_node_id;
 			}
-			if(!$ret) {
+			else {
 				$this->db->rollback();
 			}
 
@@ -458,7 +456,6 @@
 				}
 
 				$ret &= $new_node->updateNode($param, $this->user_id);
-
 				$this->db->commit();
 			}
 			else {
