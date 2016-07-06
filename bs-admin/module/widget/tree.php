@@ -181,6 +181,9 @@
 				$this->db->begin();
 				$ret = $node->delete();
 				if($ret) {
+					$ret = $this->cleanUpDB();
+				}
+				if($ret) {
 					$this->db->commit();
 					$this->status = true;
 				}
@@ -194,21 +197,47 @@
 			exit;
 		}
 
+		function cleanUpDB() {
+			// delete useless record from widget table
+			$sql = "delete from " . B_DB_PREFIX . B_WIDGET_TABLE . "
+					where concat(version_id, revision_id, contents_id) in
+					(
+						select id from (
+							select concat(version_id, revision_id, contents_id) id
+								   ,del_flag
+								   ,contents_id
+							from " . B_DB_PREFIX . B_WIDGET_NODE_TABLE . "
+							 group by node_id
+							 having count(*) = 1
+						) as tmp
+						where del_flag = '1'
+						and contents_id <> ''
+					)";
+
+			$ret = $this->db->query($sql);
+
+			// delete useless record from widget_node table
+			$sql = "delete from " . B_DB_PREFIX . B_WIDGET_NODE_TABLE . "
+					where concat(version_id, revision_id, node_id) in
+					(
+						select id from (
+							select concat(version_id, revision_id, node_id) id
+								   ,del_flag
+							from " . B_DB_PREFIX . B_WIDGET_NODE_TABLE . "
+							 group by node_id
+							 having count(*) = 1
+						) as tmp
+						where del_flag = '1'
+					)";
+
+			$ret &= $this->db->query($sql);
+
+			return $ret;
+		}
+
 		function saveName() {
 			if($this->request['node_id'] && $this->request['node_id'] != 'null') {
-				if(!strlen(trim($this->request['node_name']))) {
-					$this->status = false;
-					$this->message = '名前を入力してください。';
-				}
-				else if(strlen($this->request['node_name']) != mb_strlen($this->request['node_name'])) {
-					$this->status = false;
-					$this->message = '日本語は使用できません';
-				}
-				else if($this->tree->checkDuplicateByName($this->request['node_id'], $this->request['node_name'])) {
-					$this->message = '名前を変更できません。指定されたファイル名は既に存在します。別の名前を指定してください。';
-					$status = false;
-				}
-				else {
+				if($this->checkFileName($this->request['node_id'], $this->request['node_name'])) {
 					$node = new B_Node($this->db
 									, B_WIDGET_NODE_TABLE
 									, B_WORKING_WIDGET_NODE_VIEW
@@ -235,6 +264,24 @@
 			}
 			$this->response($this->request['node_id'], 'select');
 			exit;
+		}
+
+		function checkFileName($node_id, $file_name) {
+			$file_info = pathinfo($file_name);
+			if(!strlen(trim($file_name))) {
+				$this->message = '名前を入力してください。';
+				return false;
+			}
+			if(strlen($file_name) != mb_strlen($file_name)) {
+				$this->message = '日本語は使用できません';
+				return false;
+			}
+			if($this->tree->checkDuplicateByName($node_id, $file_name)) {
+				$this->message = '名前を変更できません。指定されたファイル名は既に存在します。別の名前を指定してください。';
+				return false;
+			}
+
+			return true;
 		}
 
 		function updateDispSeq() {

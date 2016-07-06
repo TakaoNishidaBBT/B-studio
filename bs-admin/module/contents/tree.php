@@ -188,6 +188,9 @@
 				$this->db->begin();
 				$ret = $node->delete();
 				if($ret) {
+					$ret = $this->cleanUpDB();
+				}
+				if($ret) {
 					$this->db->commit();
 					$this->status = true;
 				}
@@ -199,6 +202,44 @@
 			}
 			$this->response($this->request['node_id'], 'select');
 			exit;
+		}
+
+		function cleanUpDB() {
+			// delete useless record from contents table
+			$sql = "delete from " . B_DB_PREFIX . B_CONTENTS_TABLE . "
+					where concat(version_id, revision_id, contents_id) in
+					(
+						select id from (
+							select concat(version_id, revision_id, contents_id) id
+								   ,del_flag
+								   ,contents_id
+							from " . B_DB_PREFIX . B_CONTENTS_NODE_TABLE . "
+							 group by node_id
+							 having count(*) = 1
+						) as tmp
+						where del_flag = '1'
+						and contents_id <> ''
+					)";
+
+			$ret = $this->db->query($sql);
+
+			// delete useless record from contents_node table
+			$sql = "delete from " . B_DB_PREFIX . B_CONTENTS_NODE_TABLE . "
+					where concat(version_id, revision_id, node_id) in
+					(
+						select id from (
+							select concat(version_id, revision_id, node_id) id
+								   ,del_flag
+							from " . B_DB_PREFIX . B_CONTENTS_NODE_TABLE . "
+							 group by node_id
+							 having count(*) = 1
+						) as tmp
+						where del_flag = '1'
+					)";
+
+			$ret &= $this->db->query($sql);
+
+			return $ret;
 		}
 
 		function saveName() {
