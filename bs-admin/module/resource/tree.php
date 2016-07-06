@@ -373,12 +373,13 @@
 					(
 						select id from (
 							select concat(version_id, revision_id, node_id) id
+								   ,del_flag
 							from " . B_DB_PREFIX . B_RESOURCE_NODE_TABLE . "
 							 group by node_id
 							 having count(*) = 1
 						) as tmp
-					)
-					and del_flag = '1'";
+						where del_flag = '1'
+					)";
 
 			return $this->db->query($sql);
 		}
