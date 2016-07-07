@@ -9,31 +9,14 @@
 	function bframeAdjustWindowInit() {
 		var i, aw, ap;
 
-		var div = document.getElementsByTagName('div');
-		for(i=0; i<div.length; i++) {
-			if(bframe.checkClassName('bframe_adjustwindow', div[i])) {
-				aw = new bframe.adjustwindow(div[i]);
-			}
-			if(bframe.checkClassName('bframe_adjustparent', div[i])) {
-				aw = new bframe.adjustparent(div[i]);
-			}
+		var objects = document.getElementsByClassName('bframe_adjustwindow');
+		for(i=0; i<objects.length; i++) {
+			aw = new bframe.adjustwindow(objects[i]);
 		}
 
-		var iframe = document.getElementsByTagName('iframe');
-		for(i=0; i<iframe.length; i++) {
-			if(bframe.checkClassName('bframe_adjustwindow', iframe[i])) {
-				aw = new bframe.adjustwindow(iframe[i]);
-			}
-			if(bframe.checkClassName('bframe_adjustparent', iframe[i])) {
-				aw = new bframe.adjustparent(iframe[i]);
-			}
-		}
-
-		var textarea = document.getElementsByTagName('textarea');
-		for(i=0; i<textarea.length; i++) {
-			if(bframe.checkClassName('bframe_adjustparent', textarea[i])) {
-				ap = new bframe.adjustparent(textarea[i]);
-			}
+		var objects = document.getElementsByClassName('bframe_adjustparent');
+		for(i=0; i<objects.length; i++) {
+			ap = new bframe.adjustparent(objects[i]);
 		}
 	}
 
@@ -69,7 +52,12 @@
 				var pos = bframe.getElementPosition(self);
 				var height = h - pos.top - margin;
 				if(height > 0) {
-					self.style.height = height + 'px';
+					if(self.tagName.toLowerCase() == 'img') {
+						self.style.maxHeight = height + 'px';
+					}
+					else {
+						self.style.height = height + 'px';
+					}
 				}
 			}
 		}
@@ -131,6 +119,9 @@
 				else {
 					self.height = height + 'px';
 				}
+			}
+			else if(self.tagName.toLowerCase() == 'img') {
+				self.style.maxHeight = height + 'px';
 			}
 			else {
 				self.style.height = height + 'px';

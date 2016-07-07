@@ -1163,7 +1163,7 @@
 				'type="text" ' .
 				'name="' . $this->name_prefix . $this->name . '" ' .
 				'id="' . $this->_gethtmlid() . '" ' .
-				'value="' . $value . '" ' .
+				'value="' . $value . '"' .
 				' />';
 			return $html;
 		}
