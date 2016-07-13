@@ -88,9 +88,20 @@
 		}
 
 		function regist() {
+			// start transaction
+			$this->db->begin();
+
 			$ret = $this->updateNode($contents_id);
 			if($ret) {
-				$this->update($contents_id, $mode, $message);
+				$ret = $this->update($contents_id, $mode, $message);
+			}
+			if($ret) {
+				$this->db->commit();
+				$this->removeCacheFile();
+			}
+			if(!$ret) {
+				$this->db->rollback();
+				$message = '登録に失敗しました';
 			}
 
 			$response['status'] = true;
@@ -121,26 +132,17 @@
 								, 1
 								, null);
 
-				// start transaction
-				$this->db->begin();
-
 				$ret = $node->setContentsId($contents_id, $this->user_id);
-				if($ret) {
-					$this->db->commit();
-					$this->removeCacheFile();
-				}
-				if(!$ret) {
-					$this->db->rollback();
-					$message = '登録に失敗しました';
-				}
 			}
 
 			return $ret;
 		}
 
 		function update($contents_id, &$mode, &$message) {
-			$file_path = B_RESOURCE_DIR . $contents_id . '.' . $this->post['extension'];
-			if(file_exists($file_path) && $this->post['mode'] == 'confirm' && filemtime($file_path) > $this->post['update_datetime']) {
+			$ret = true;
+
+			$filepath = B_RESOURCE_DIR . $contents_id . '.' . $this->post['extension'];
+			if(file_exists($filepath) && $this->post['mode'] == 'confirm' && filemtime($filepath) > $this->post['update_datetime']) {
 				$mode = 'confirm';
 				$message = "他のユーザに更新されています。\n上書きしますか？";
 			}
@@ -151,7 +153,22 @@
 				else {
 					$contents = mb_convert_encoding($this->post['contents'], $this->post['encoding'], 'auto');
 				}
-				file_put_contents($file_path, $contents, LOCK_EX);
+
+				// ファイル更新
+				file_put_contents($filepath, $contents, LOCK_EX);
+				usleep(1000);
+
+				$param['node_id'] = $this->post['node_id'];
+				$param['version_id'] = $this->version['working_version_id'];
+				$param['revision_id'] = $this->version['revision_id'];
+				$param['update_datetime'] = time();
+
+				// set file size
+				$param['file_size'] = filesize($filepath);
+				$param['human_file_size'] = B_Util::human_filesize($param['file_size'], 'K');
+
+				$resource_node_table = new B_Table($this->db, B_RESOURCE_NODE_TABLE);
+				$ret = $resource_node_table->update($param);
 
 				// cache 更新
 				if(file_exists(B_FILE_INFO_W)) {
@@ -165,6 +182,8 @@
 
 				$message = '保存しました';
 			}
+
+			return $ret;
 		}
 
 		function view() {

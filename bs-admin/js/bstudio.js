@@ -190,6 +190,12 @@
 		}
 	}
 
+	bstudio.registEditor = function(fname, module, page, method, mode, nocheck) {
+		bframe.ajaxSubmit.removeCallBackFunctionAfter(window.opener.bstudio.reloadTree);
+		bframe.ajaxSubmit.registCallBackFunctionAfter(window.opener.bstudio.reloadTree);
+		bframe.ajaxSubmit.submit(fname, module, page, method, mode, nocheck);
+	}
+
 	bstudio.articleDetailInit = function(flag1, flag2) {
 		description_flag_1 = document.getElementById(flag1);
 		description_flag_2 = document.getElementById(flag2);
