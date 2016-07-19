@@ -155,8 +155,7 @@
 				}
 
 				// ファイル更新
-				file_put_contents($filepath, $contents, LOCK_EX);
-				usleep(1000);
+				$filesize = file_put_contents($filepath, $contents, LOCK_EX);
 
 				$param['node_id'] = $this->post['node_id'];
 				$param['version_id'] = $this->version['working_version_id'];
@@ -164,7 +163,7 @@
 				$param['update_datetime'] = time();
 
 				// set file size
-				$param['file_size'] = filesize($filepath);
+				$param['file_size'] = $filesize;
 				$param['human_file_size'] = B_Util::human_filesize($param['file_size'], 'K');
 
 				$resource_node_table = new B_Table($this->db, B_RESOURCE_NODE_TABLE);
