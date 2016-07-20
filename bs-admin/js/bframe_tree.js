@@ -1594,7 +1594,7 @@
 			var id;
 
 			if(id = selected_node.id()) {
-				woption = 'menubar=yes,toolbar=yes,directories=yes,status=yes,scrollbars=yes,resizable=yes';
+				var woption = 'menubar=yes,toolbar=yes,directories=yes,status=yes,scrollbars=yes,resizable=yes';
 				var w = window.open(property.relation.preview.url+'&node_id='+encodeURIComponent(id.substr(1)), 'preview', woption);
 				if(w) {
 					w.focus();
