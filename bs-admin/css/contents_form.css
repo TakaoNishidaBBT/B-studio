@@ -168,6 +168,9 @@ div#preview {
 	background-color: #232323;
 	text-align: center;
 }
+#preview_frame {
+	background-color: #ffffff;
+}
 div.text_editor {
 	margin: 0;
 	padding: 0;
