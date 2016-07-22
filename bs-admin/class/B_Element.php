@@ -1074,7 +1074,7 @@
 	class B_TextArea extends B_Element {
 		function getElementsHtml($mode=null) {
 			if($mode == 'confirm') {
-				return B_TextField::getElementsHtml($mode);
+				return '<pre>' . htmlspecialchars($this->value, ENT_QUOTES, B_CHARSET) . '</pre>';
 			}
 			else {
 				return 
