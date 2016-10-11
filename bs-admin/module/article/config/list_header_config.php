@@ -22,7 +22,7 @@ $list_header_config = array(
 					array(
 						'start_html'			=> '<label for="keyword">',
 						'end_html'				=> '</label>',
-						'value'					=> 'キーワード',
+						'value'					=> _('Keyword'),
 					),
 					array(
 						'name'					=> 'keyword',
@@ -30,7 +30,7 @@ $list_header_config = array(
 						'special_html'			=> 'class="textbox" maxlength="100" size="20"',
 					),
 					array(
-						// Enterキーによるサブミット対策
+						// for IE
 						'name'					=> 'dummy',
 						'class'					=> 'B_InputText',
 						'special_html'			=> 'style="position:absolute;visibility:hidden;"',
@@ -42,7 +42,7 @@ $list_header_config = array(
 					array(
 						'start_html'			=> '<label for="category_id">',
 						'end_html'				=> '</label>',
-						'value'					=> 'カテゴリ',
+						'value'					=> _('Category'),
 					),
 					array(
 						'name'					=> 'category_id',
@@ -56,7 +56,7 @@ $list_header_config = array(
 					array(
 						'start_html'			=> '<label for="row_per_page">',
 						'end_html'				=> '</label>',
-						'value'					=> '表示',
+						'value'					=> _('Display'),
 					),
 					array(
 						'name'					=> 'row_per_page',
@@ -70,14 +70,14 @@ $list_header_config = array(
 					'start_html'	=> '<li>',
 					'end_html'		=> '</li>',
 					'special_html'	=> 'class="search-button" onclick="bframe.submit(\'header_form\', \'' . $this->module . '\', \'list\', \'select\')"',
-					'value'			=> '検索',
+					'value'			=> _('Search'),
 				),
 				array(
 					'class'			=> 'B_Button',
 					'start_html'	=> '<li>',
 					'end_html'		=> '</li>',
 					'special_html'	=> 'class="button" onclick="bstudio.clearForm(\'header_form\')"',
-					'value'			=> 'クリア',
+					'value'			=> _('Clear'),
 				),
 				array(
 					'class'			=> 'B_Button',
@@ -85,7 +85,7 @@ $list_header_config = array(
 					'end_html'		=> '</li>',
 					'name'			=> 'insert',
 					'special_html'	=> 'class="insert-button" onclick="bframe.submit(\'header_form\', \'' . $this->module . '\', \'form\', \'select\', \'insert\')"',
-					'value'			=> '新規作成',
+					'value'			=> _('Create'),
 				),
 			),
 		),

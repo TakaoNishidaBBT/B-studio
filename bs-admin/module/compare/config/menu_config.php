@@ -21,7 +21,7 @@ $menu_config = array(
 			'start_html'    => '<li>',
 			'end_html'	    => '</li>',
 			'class'			=> 'B_Link',
-			'value'			=> '<img src="images/menu/contents.png" alt="contents"/>コンテンツ',
+			'value'			=> '<img src="images/menu/contents.png" alt="Contents"/>' . _('Contents'),
 			'specialchars'	=> 'none',
 			'link'			=> DISPATCH_URL . '&module=contents&page=compare&method=init',
 			'target'		=> 'main',
@@ -31,7 +31,7 @@ $menu_config = array(
 			'start_html'    => '<li>',
 			'end_html'	    => '</li>',
 			'class'			=> 'B_Link',
-			'value'			=> '<img src="images/menu/template.png" alt="テンプレート"/>テンプレート',
+			'value'			=> '<img src="images/menu/template.png" alt="Templates"/>' . _('Templates'),
 			'specialchars'	=> 'none',
 			'link'			=> DISPATCH_URL . '&module=template&page=compare&method=init',
 			'target'		=> 'main',
@@ -44,7 +44,7 @@ $menu_config = array(
 				'class'			=> 'B_Link',
 				'special_html'	=> 'class="bframe_menu"',
 				'id'			=> 'resource',
-				'value'			=> '<img src="images/menu/resource.png" alt="リソース"/>リソース',
+				'value'			=> '<img src="images/menu/resource.png" alt="Resources"/>' . _('Resources'),
 				'specialchars'	=> 'none',
 				'script'		=>
 				array(

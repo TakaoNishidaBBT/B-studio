@@ -60,39 +60,39 @@ $tree_config = array(
 			'context_menu'		=>
 			array(
 				array(
-					'menu'		=> '切り取り',
+					'menu'		=> _('Cut'),
 					'func'		=> 'cutNode',
 				),
 				array(
-					'menu'		=> 'コピー',
+					'menu'		=> _('Copy'),
 					'func'		=> 'copyNode',
 				),
 				array(
-					'menu'		=> '貼り付け',
+					'menu'		=> _('Paste'),
 					'func'		=> 'pasteNode',
 				),
 				array(
-					'menu'		=> '削除',
+					'menu'		=> _('Remove'),
 					'func'		=> 'deleteNode',
 					'confirm'	=>
 					array(
-						'single'	=> '%NODE_NAME%をゴミ箱に移動します。よろしいですか？',
-						'plural'	=> 'これら%NODE_COUNT%個の項目をゴミ箱に移動します。よろしいですか？',
+						'single'	=> _('Are you sure you want %NODE_NAME% to move to the trash?'),
+						'plural'	=> _('Are you sure you want these %NODE_COUNT% objects to move to the trash?'),
 					),
 				),
 				array(
-					'menu'		=> '新規',
+					'menu'		=> _('New'),
 					'func'		=> 'createNode',
 					'submenu'	=>
 					array(
 						array(
-							'menu'		=> 'フォルダ',
+							'menu'		=> _('Foler'),
 							'func'		=> 'createNode',
 							'icon'		=> './images/folders/folder.png',
 							'param'		=> 'node_type=folder&node_class=folder',
 						),
 						array(
-							'menu'		=> 'ウィジェット',
+							'menu'		=> _('Widget'),
 							'func'		=> 'createNode',
 							'icon'		=> './images/folders/widget.png',
 							'param'		=> 'node_type=widget&node_class=leaf',
@@ -101,21 +101,21 @@ $tree_config = array(
 					'submenu_width'	=> '120',
 				),
 				array(
-					'menu'		=> '名前の変更',
+					'menu'		=> _('Edit name'),
 					'func'		=> 'editName',
 				),
 			),
-			'trash_context_menu'		=>
+			'trash_context_menu'	=>
 			array(
 				array(
-					'menu'		=> 'ごみ箱を空にする',
+					'menu'		=> _('Empty the trash'),
 					'func'		=> 'truncateNode',
-					'confirm'	=> '完全に削除します。よろしいですか？',
+					'confirm'	=> _('Are you sure you completely remove files in the trah?'),
 				),
 			),
 			'context_menu_width'	=> '138',
 			'context_menu_frame'	=> 'top.main',
-			'session_timeout'		=> 'セッションが切れました。ログインしなおしてください。',
+			'session_timeout'		=> _('Your session has timed out, Please log in again'),
 		),
 	),
 );

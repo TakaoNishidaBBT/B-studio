@@ -190,7 +190,11 @@
 					response = eval('('+httpObj.responseText+')');
 				}
 				catch(e) {
-					alert('session timeout');
+					var message = 'session timeout';
+					if(top.bframe.message) {
+						message = top.bframe.message.getProperty('session_time_out');
+					}
+					alert(message);
 					return;
 				}
 

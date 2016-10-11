@@ -9,67 +9,105 @@
 		function __construct() {
 			parent::__construct(__FILE__);
 
+			$this->mode = $this->request['mode'];
+
 			require_once('./config/form_config.php');
 			$this->form = new B_Element($form_config);
 			$this->result = new B_Element($result_config);
 			$this->result_control = new B_Element($result_control_config);
 
-			$this->main_table = new B_Table($this->db, 'version');
+			$this->table = new B_Table($this->db, 'version');
 
 			$this->input_control_config = $input_control_config;
 			$this->confirm_control_config = $confirm_control_config;
 			$this->delete_control_config = $delete_control_config;
+
+			// Set mode to HTML
+			$obj = $this->form->getElementByName('mode');
+			$obj->setValue($this->request);
 		}
 
 		function select() {
-			$this->session['mode'] = $this->request['mode'];
-
-			switch($this->request['mode']) {
-			case 'delete':
-				$this->control = new B_Element($this->delete_control_config);
-				$row = $this->main_table->selectByPk($this->request);
-				$this->form->setValue($row);
-				$this->display_mode = 'confirm';
+			switch($this->mode) {
+			case 'insert':
+				$this->control = new B_Element($this->input_control_config);
 				break;
 
-			default:
+			case 'update':
+				$param['version_id'] = $this->request['version_id'];
+				$row = $this->table->selectByPk($param);
+				$this->form->setValue($row);
+				$this->session['init_value'] = $row;
+
 				$this->control = new B_Element($this->input_control_config);
-				if($this->request['version_id']) {
-					$row = $this->main_table->selectByPk($this->request);
-					$this->form->setValue($row);
-				}
+				break;
+
+			case 'delete':
+				$this->control = new B_Element($this->delete_control_config);
+				$row = $this->table->selectByPk($this->request);
+				$this->form->setValue($row);
+				$this->display_mode = 'confirm';
 				break;
 			}
 		}
 
 		function confirm() {
-			$this->form->setValue($this->request);
+			$this->form->setValue($this->post);
 
-			$this->status = $this->form->validate();
+			if(!$this->checkAlt($this->post)) {
+				$this->control = new B_Element($this->input_control_config, $this->user_auth);
+				return;
+			}
 
-			if($this->status) {
-				// 表示モードを確認モードに設定
-				$this->display_mode = "confirm";
-				$this->form->getValue($param);
-				$this->session['request'] = $param;
-				$this->control = new B_Element($this->confirm_control_config);
+			if(!$this->form->validate()) {
+				$this->control = new B_Element($this->input_control_config, $this->user_auth);
+				return;
 			}
-			else {
-				$this->control = new B_Element($this->input_control_config);
-			}
+
+			$this->form->getValue($param);
+			$this->session['post'] = $param;
+			$this->control = new B_Element($this->confirm_control_config);
+
+			// Set display mode
+			$this->display_mode = 'confirm';
 		}
 
-		function regist() {
-			$param = $this->session['request'];
-			$param['del_flag'] = "0";
+		function checkAlt($value) {
+			if($this->mode == 'update') {
+				$row = $this->table->selectByPk($value);
+				if($this->session['init_value']['update_datetime'] < $row['update_datetime']) {
+					$error_message = _('Other user updated this record');
+					$this->action_message = $error_message;
+
+					$this->form->setValue($this->session['init_value']);
+					$this->form->checkAlt($row, $error_message);
+					$this->form->setValue($value);
+					$this->control = new B_Element($this->input_control_config, $this->user_auth);
+
+					return false;
+				}
+			}
+
+			return true;
+		}
+
+		function register() {
+			if(!$this->checkAlt($this->session['post'])) {
+				$message = _('Other user updated this record');
+				return false;
+			}
+
+			$param = $this->session['post'];
+			$param['del_flag'] = '0';
 			$param["update_datetime"] = time();
 			$param["update_user"] = $this->user_id;
-			// UNIXタイムに変換
+
+			// Change text date and time to UNIX date
 			$param['publication_datetime_u'] = strtotime($param['publication_datetime_t']);
 
 			$this->db->begin();
-			if($this->session['mode'] == 'insert' && $this->session['request']['version_id'] == '') {
-				// 現在の最新バージョンのprivate_revision_idをインクリメント
+			if($this->mode == 'insert' && $this->session['post']['version_id'] == '') {
+				// Update private_revision_id of latest version
 				$sql = "select *
 						from " . B_DB_PREFIX . "version
 						where version_id =
@@ -84,16 +122,16 @@
 				$update_param["update_datetime"] = time();
 				$update_param["update_user"] = $this->user_id;
 
-				$ret = $this->main_table->update($update_param);
+				$ret = $this->table->update($update_param);
 
 				$param['private_revision_id'] = '00';
 				$param['create_user'] = $this->user_id;
 				$param["create_datetime"] = time();
-				$ret = $this->main_table->selectInsert($param);
-				$param['action_message'] = "を登録しました。";
+				$ret = $this->table->selectInsert($param);
+				$param['action_message'] = _('was saved.');
 			}
 			else {
-				$ret = $this->main_table->update($param);
+				$ret = $this->table->update($param);
 				if($ret) {
 					$sql = "select * from " . B_DB_PREFIX . "v_current_version";
 					$rs = $this->db->query($sql);
@@ -105,7 +143,7 @@
 						}
 					}
 				}
-				$param['action_message'] = "を更新しました。";
+				$param['action_message'] = _('was updated.');
 			}
 
 			if($ret) {
@@ -119,12 +157,12 @@
 			}
 			else {
 				$this->db->rollback();
-				$param['action_message'] = "の登録に失敗しました。";
+				$param['action_message'] = _('was faild to register.');
 			}
-			$param['title'] = $this->session['request']['title'];
+			$param['title'] = $this->session['post']['title'];
 			$this->result->setValue($param);
 
-			$this->setView('regist_view');
+			$this->setView('result_view');
 
 			unset($this->session['folder_id']);
 		}
@@ -134,22 +172,22 @@
 			$param['del_flag'] = "1";
 
 			$this->db->begin();
-			$row = $this->main_table->selectByPk($this->post);
+			$row = $this->table->selectByPk($this->post);
 
-			// 最新バージョンかどうかの最終チェック
-			$max_version_id = $this->main_table->selectMaxValue('version_id');
+			// Check version condition before delete
+			$max_version_id = $this->table->selectMaxValue('version_id');
 			if($row['version_id'] != $max_version_id) {
-				$this->message = '最新バージョンではありませんので削除できません。';
+				$this->message = _('This version can not be deleted. Because it\'s not ths latest version.');
 				$this->setView('error_view');
 				return;
 			}
 			if($this->version['working_version_id'] == $row['version_id']) {
-				$this->message = '作業中バージョンなので削除できません。';
+				$this->message = _('Working version can not be deleted.');
 				$this->setView('error_view');
 				return;
 			}
 			if($this->version['current_version_id'] == $row['version_id']) {
-				$this->message = '公開バージョンなので削除できません。';
+				$this->message = _('Published version can not be deleted.');
 				$this->setView('error_view');
 				return;
 			}
@@ -175,59 +213,88 @@
 
 			if($ret) {
 				$this->db->commit();
-				$param['action_message'] = 'を削除しました。';
+				$param['action_message'] = _('was deleted.');
 			}
 			else {
 				$this->db->rollback();
-				$param['action_message'] = 'の削除に失敗しました。';
+				$param['action_message'] = _('was faild to delete.');
 			}
 			$this->result->setValue($param);
 
-			$this->setView('regist_view');
+			$this->setView('result_view');
 		}
 
 		function back() {
-			$this->form->setValue($this->session['request']);
+			$this->form->setValue($this->session['post']);
 			$this->control = new B_Element($this->input_control_config);
 		}
 
 		function view() {
-			if($this->session['mode'] == 'insert') {
+			if($this->mode == 'insert') {
 				$obj = $this->form->getElementByName('version_id_row');
 				$obj->display = 'none';
 			}
 
-			// HTTPヘッダー出力
+			// Start buffering
+			ob_start();
+
+			require_once('./view/view_form.php');
+
+			// Get buffer
+			$contents = ob_get_clean();
+
+			// Send HTTP header
 			$this->sendHttpHeader();
 
 			$this->html_header->appendProperty('css', '<link href="css/version.css" type="text/css" rel="stylesheet" media="all" />');
 			$this->html_header->appendProperty('script', '<script src="js/bframe_edit_check.js" type="text/javascript"></script>');
 
-			// HTMLヘッダー出力
+			// Show HTML header
 			$this->showHtmlHeader();
 
-			require_once('./view/view_form.php');
+			// Show HTML body
+			echo $contents;
 		}
 
-		function regist_view() {
-			// HTTPヘッダー出力
-			$this->sendHttpHeader();
-
-			// HTML ヘッダー出力
-			$this->html_header->appendProperty('css', '<link href="css/version.css" type="text/css" rel="stylesheet" media="all" />');
-			$this->showHtmlHeader();
+		function result_view() {
+			// Start buffering
+			ob_start();
 
 			require_once('./view/view_result.php');
+
+			// Get buffer
+			$contents = ob_get_clean();
+
+			// Send HTTP header
+			$this->sendHttpHeader();
+
+			$this->html_header->appendProperty('css', '<link href="css/version.css" type="text/css" rel="stylesheet" media="all" />');
+
+			// Show HTML header
+			$this->showHtmlHeader();
+
+			// Show HTML body
+			echo $contents;
 		}
 
 		function error_view() {
-			// HTTPヘッダー出力
-			$this->sendHttpHeader();
-
-			// HTML ヘッダー出力
-			$this->html_header->appendProperty('css', '<link href="css/version.css" type="text/css" rel="stylesheet" media="all" />');
-			$this->showHtmlHeader();
+			// Start buffering
+			ob_start();
 
 			require_once('./view/view_error.php');
+
+			// Get buffer
+			$contents = ob_get_clean();
+
+			// Send HTTP header
+			$this->sendHttpHeader();
+
+			$this->html_header->appendProperty('css', '<link href="css/version.css" type="text/css" rel="stylesheet" media="all" />');
+
+			// Show HTML header
+			$this->showHtmlHeader();
+
+			// Show HTML body
+			echo $contents;
 		}
 	}

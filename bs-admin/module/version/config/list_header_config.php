@@ -11,7 +11,7 @@ $list_header_config = array(
 		'name'			=> 'title',
 		'start_html'    => '<h2 class="version">',
 		'end_html'	    => '</h2>',
-		'value'			=> 'バージョン管理',
+		'value'			=> _('Versions'),
 		array(
 			'name'			=> 'version_info',
 			'start_html'    => '<span>',
@@ -35,7 +35,7 @@ $list_header_config = array(
 						'class'					=> 'B_Text',
 						'start_html'			=> '<label for="keyword">',
 						'end_html'				=> '</label>',
-						'value'					=> 'キーワード',
+						'value'					=> _('Keyword'),
 					),
 					array(
 						'class'					=> 'B_InputText',
@@ -43,7 +43,7 @@ $list_header_config = array(
 						'special_html'			=> 'class="textbox" maxlength="100" size="20"',
 					),
 					array(
-						// Enterキーによるサブミット対策
+						// For IE
 						'class'					=> 'B_InputText',
 						'name'					=> 'dummy',
 						'special_html'			=> 'style="position:absolute;visibility:hidden;"',
@@ -56,7 +56,7 @@ $list_header_config = array(
 						'class'					=> 'B_Text',
 						'start_html'			=> '<label for="row_per_page">',
 						'end_html'				=> '</label>',
-						'value'					=> '表示',
+						'value'					=> _('Display'),
 					),
 					array(
 						'class'					=> 'B_SelectBox',
@@ -70,14 +70,14 @@ $list_header_config = array(
 					'start_html'	=> '<li>',
 					'end_html'		=> '</li>',
 					'special_html'	=> 'class="search-button" onclick="bframe.submit(\'header_form\', \'' . $this->module . '\', \'list\', \'select\')"',
-					'value'			=> '検索',
+					'value'			=> _('Search'),
 				),
 				array(
 					'class'			=> 'B_Button',
 					'start_html'	=> '<li>',
 					'end_html'		=> '</li>',
 					'special_html'	=> 'class="button" onclick="bstudio.clearForm(\'header_form\')"',
-					'value'			=> 'クリア',
+					'value'			=> _('Clear'),
 				),
 				array(
 					'class'			=> 'B_Button',
@@ -85,7 +85,7 @@ $list_header_config = array(
 					'end_html'		=> '</li>',
 					'name'			=> 'insert',
 					'special_html'	=> 'class="insert-button" onclick="bframe.submit(\'header_form\', \'' . $this->module . '\', \'form\', \'select\', \'insert\')"',
-					'value'			=> '新規作成',
+					'value'			=> _('Create'),
 				),
 			),
 		),

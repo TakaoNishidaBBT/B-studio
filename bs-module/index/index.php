@@ -59,8 +59,8 @@
 		}
 
 		function getHtml() {
-			$this->url = preg_replace('?/{2,}?', '/', $this->request['url']);	// remove slashes in succession
-			$this->url = preg_replace('?^/?', '', $this->url);					// remove first slash
+			$this->url = preg_replace('?/{2,}?', '/', $this->request['url']);	// Remove slashes in succession
+			$this->url = preg_replace('?^/?', '', $this->url);					// Remove first slash
 
 			$url_array = explode('/', $this->url);
 			$this->contents_node = $this->getContentsNode($url_array);
@@ -111,12 +111,12 @@
 
 		function getContentsNode($url, $node='', $level=0) {
 
-			// create bread crumbs
+			// Create bread crumbs
 			$this->createBreadCrumbs($node, $level);
 
 			if(count($url)) {
 				if($node && $node['node_type'] == 'page') {
-					// parmalink
+					// Parmalink
 					$param = implode('/', $url);
 					$param_array = explode('?', $param);
 					$_REQUEST['id'] = $param_array[0];
@@ -125,11 +125,11 @@
 			}
 			else {
 				if($node['node_type'] != 'folder') {
-					// page found
+					// The page found
 					return $node;
 				}
 				else {
-					// directory and index.html is not exists
+					// Directory and index.html is not exists
 					$path = B_CURRENT_ROOT . $this->url . '/';
 					header("Location:$path");
 					exit;
@@ -209,11 +209,11 @@
 		}
 
 		function createHTML() {
-			//  get contents from DB
+			// Get contents from DB
 			$this->contents = $this->getContents($this->contents_node['contents_id'], $this->contents_view);
 			$this->innerHTML = $this->contents['html1'];
 
-			// get templates array
+			// Get templates array
 			$this->getTemplates($this->contents['template_id']);
 
 			for($i=0 ; $i<count($this->templates) ; $i++) {
@@ -342,7 +342,7 @@
 		}
 
 		function inline() {
-			global $admin_mode;
+			global $admin_mode, $admin_language;
 			if(!$admin_mode) return;
 
 			$this->contents = $this->post;
@@ -360,7 +360,7 @@
 				$this->end_html.= $this->templates[$i]['end_html'];
 			}
 
-			$this->innerHTML = '<div id="inline_editor" class="bframe_inlineeditor" bframe_inlineeditor_param="filebrowser:bs-admin/index.php?terminal_id=' . $this->post['terminal_id'] . '&amp;module=resource&amp;page=popup" style="outline:none">' . $this->contents['html1'] . '</div>';
+			$this->innerHTML = '<div id="inline_editor" class="bframe_inlineeditor" bframe_inlineeditor_param="filebrowser:bs-admin/index.php?terminal_id=' . $this->post['terminal_id'] . '&amp;module=resource&amp;page=popup,language:' . $admin_language . '" style="outline:none">' . $this->contents['html1'] . '</div>';
 			$this->setTemplateExternalCss();
 			$this->setTemplateCssLink();
 			$this->setCss($this->contents['external_css']);
@@ -551,7 +551,7 @@
 		function view() {
 			global $admin_mode;
 
-			// start buffering
+			// Start buffering
 			ob_start();
 
 			view($this->view_mode
@@ -565,10 +565,10 @@
 				,$this->url
 				,$this->html_header);
 
-			// get buffer
+			// Get buffer
 			$contents = ob_get_clean();
 
-			// send HTTP header
+			// Send HTTP header
 			$this->sendHttpHeader();
 			if($this->http_status == '404') {
 				header("HTTP/1.1 404 Not Found");
@@ -577,10 +577,10 @@
 				header("X-XSS-Protection: 0");
 			}
 
-			// send HTML header
+			// Show HTML header
 			$this->showHtmlHeader();
 
-			// send HTML body
+			// Show HTML body
 			echo $contents;
 		}
 

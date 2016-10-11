@@ -14,19 +14,11 @@
 <script src="../bs-admin/js/bframe_context_menu.js" type="text/javascript"></script>
 <script src="../bs-admin/js/bframe_popup.js" type="text/javascript"></script>
 <script src="../bs-admin/js/bframe_selectbox.js" type="text/javascript"></script>
-<title>Install B-studio</title>
+<title>B-studioのインストール</title>
 </head>
 <body>
 
-
-	<h1>Install B-studio</h1>
-
-	<form method="post" action="index.php">
-		<div id="select-language">
-			<?php echo $select_language->getHtml(); ?>
-			<input name="action" value="select-language" type="hidden" />
-		</div>
-	</form>
+	<h1>B-studioのインストール</h1>
 
 	<?php
 		if($error_message) {
@@ -35,48 +27,56 @@
 	?>
 
 	<form method="post" action="index.php">
-		<p>Setting up MySQL DataBase and Site admin configurations.</p>
+		<div id="select-language">
+			<?php echo $select_language->getHtml(); ?>
+			<input name="action" value="select-language" type="hidden" />
+		</div>
+	</form>
 
-		<h2>MySQL</h2>
+	<form method="post" action="index.php">
 
-		<p>Please enter the following field to set up connecting to MySQL DataBase.</p>
+		<p>MySQLテーブルのセットアップと、サイト管理者の情報を設定します。</p>
+
+		<h2>MySQLのログイン情報</h2>
+
+		<p>データベースのログイン情報を入力してください。</p>
 		<fieldset>
-			<legend>Configuration DataBase</legend>
+			<legend>データベース設定</legend>
 			<?php echo $db_install_form->getHtml(); ?>
 		</fieldset>
 
-		<h2>Basic authentication of admin page</h2>
+		<h2>管理画面ベーシック認証</h2>
 
-		<p>Setting the basic authentication to the admin page. This is neccessary for preventing from unauthorized access.</p>
+		<p>管理画面ディレクトリにベーシック認証を設定します。不正なアクセスからサイトを守るために必要です。</p>
 		<fieldset>
-			<legend>Basic authentication of admin page</legend>
+			<legend>管理画面ベーシック認証</legend>
 			<?php echo $admin_basic_auth_form->getHtml(); ?>
 		</fieldset>
 
-		<h2>Site admin</h2>
+		<h2>サイト管理ユーザ</h2>
 
-		<p>Please enter the following field to set up configuration of the site admin</p>
+		<p>サイト管理ユーザを作成するための情報を入力してください。</p>
 		<fieldset>
-			<legend>Site admin</legend>
+			<legend>サイト管理ユーザ</legend>
 			<?php echo $admin_user_form->getHtml(); ?>
 		</fieldset>
 
 		<h2>htaccess</h2>
 
-		<p>The htaccess file will be set at B-stuio's root directory.</p>
+		<p>Bstudioのルートディレクトリに作成されるhtaccessファイル</p>
 		<fieldset>
 			<legend>htaccess</legend>
 			<?php echo $root_htaccess->getHtml(); ?>
 		</fieldset>
 
-		<h2>Cofirmation of permission</h2>
+		<h2>ディレクトリパーミッションの確認</h2>
 			<?php echo $perm_message; ?>
 
-		<h2>Confirm the contents</h2>
+		<h2>設定内容の確認</h2>
 
 		<div class="confirm">
 			<input name="action" value="confirm" type="hidden" />
-			<input type="submit" class="button" value="Confirm" />
+			<input type="submit" class="button" value="　確　認　" />
 		</div>
 
 	</form>

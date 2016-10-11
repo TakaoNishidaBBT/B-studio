@@ -9,20 +9,20 @@
 		function __construct() {
 			parent::__construct(__FILE__);
 
-			// ヘッダー 作成
+			// Create list header
 			require_once('./config/list_header_config.php');
 			$this->header = new B_Element($list_header_config, $this->user_auth);
 			$obj = $this->header->getElementByName('version_info');
 			$obj->value = $this->version_info;
 
-			// DataGrid 作成,
+			// Create DataGrid
 			require_once('./config/list_config.php');
 			$this->dg = new B_DataGrid($this->db, $list_config);
 			$this->version_control = new B_Element($version_control_config, $this->user_auth);
 			$this->version_control_confirm = new B_Element($version_control_confirm_config, $this->user_auth);
 			$this->version_control_result = new B_Element($version_control_result_config, $this->user_auth);
 
-			// コールバック設定
+			// Set call back
 			$this->dg->setCallBack($this, '_list_callback');
 		}
 
@@ -73,7 +73,6 @@
 		}
 
 		function setProperty() {
-			// 表示件数
 			$this->default_row_per_page = 20;
 
 			$this->_setProperty('keyword', '');
@@ -82,12 +81,10 @@
 		}
 
 		function setHeader() {
-			// ヘッダー情報設定
 			if($this->session) {
 				$this->header->setValue($this->session);
 			}
 
-			// 表示件数（デフォルト）
 			$obj = $this->header->getElementByName('row_per_page');
 			$obj->special_html.= ' data-default="' . $this->default_row_per_page . '"';
 		}
@@ -96,14 +93,11 @@
 			$this->dg->setSqlWhere($this->sql_where);
 			$this->dg->setRowPerPage($this->row_per_page);
 			$this->dg->setSqlOrderBy(" order by version_id desc ");
-
-			// データバインド
 			$this->dg->setPage($this->page_no);
 			$this->dg->bind();
 		}
 
 		function setSqlWhere() {
-			// 検索条件設定
 			if($this->keyword) {
 				$keyword = $this->db->real_escape_string_for_like($this->keyword);
 
@@ -130,11 +124,11 @@
 					$sql_where.= " and 0=1 ";
 				}
 
-				$select_message.= 'キーワード： <em>' . htmlspecialchars($this->keyword, ENT_QUOTES) . '</em>　';
+				$select_message.= _('Keyword: ') . ' <em>' . htmlspecialchars($this->keyword, ENT_QUOTES) . '</em>　';
 			}
 
 			if($select_message) {
-				$select_message = '<p class="condition"><strong>検索条件&nbsp;</strong>' . $select_message . '</p>';
+				$select_message = '<p class="condition"><strong>' . _('Search condition') . '&nbsp;</strong>' . $select_message . '</p>';
 			}
 
 			$this->sql_where = $sql_where . $sql_where_invalid;
@@ -144,7 +138,7 @@
 
 		function confirm() {
 			if(!$this->post['reserved_version'] || !$this->post['working_version']) {
-				$this->error_message.= '<strong>バージョンを選択してください</strong>';
+				$this->error_message.= '<span class="bold">' . _('Please set versions.') . '</span>';
 				$this->back();
 			}
 			else {
@@ -159,14 +153,15 @@
 					$rs = $this->db->query($sql);
 					$current_version = $this->db->fetch_assoc($rs);
 					if($current_version['current_version_id'] != $this->reserved_version_id) {
-						$this->reserve_datetime = $row['publication_datetime_t'] . '予約登録';
+						$this->reserve_datetime = $row['publication_datetime_t'] . '<span class="condition">' . _('Scheduled to be published') . '</span>';
 					}
 					else {
-						$this->reserve_datetime = '即時反映（このバージョンを予約登録するにはそれまでに公開されるバージョンを設定してから再度、予約登録する必要があります）';
+						$this->reserve_datetime = '<span class="condition">' . _('published immediately') . '</span>';
+						$this->reserve_datetime.= '<span class="guidance">' . _('If you set scheduled to be published this version, you must set current published version') . '</span>';
 					}
 				}
 				else {
-					$this->reserve_datetime = '即時反映';
+					$this->reserve_datetime = '<span class="condition">' . _('published immediately') . '</span>';
 				}
 
 				$row = $this->version_table->selectByPk(array('version_id' => $this->working_version_id));
@@ -183,7 +178,7 @@
 			}
 		}
 
-		function regist() {
+		function register() {
 			$this->db->begin();
 
 			$sql = "select * from " . B_DB_PREFIX . "v_current_version";
@@ -220,22 +215,25 @@
 			}
 			if($ret) {
 				$this->db->commit();
-				$message = '設定しました。';
+				$this->action_message = _('was set.');
 			}
 			else {
 				$this->db->rollback();
-				$message.= '更新に<strong><em>失敗</em></strong>しました。';
+				$this->action_message = _('was failed to set.');
 			}
 
 			$sql = "select * from " . B_DB_PREFIX . "v_current_version";
 			$rs = $this->db->query($sql);
 			$row = $this->db->fetch_assoc($rs);
 
-			// ファイル情報シリアライズ
+			// Create cache files
 			$this->createCacheFile(B_FILE_INFO_W, B_FILE_INFO_SEMAPHORE_W, B_WORKING_RESOURCE_NODE_VIEW);
 			$this->createCacheFile(B_FILE_INFO_C, B_FILE_INFO_SEMAPHORE_C, B_CURRENT_RESOURCE_NODE_VIEW);
 
 			$this->createLimitFile(B_LIMIT_FILE_INFO, $row['publication_datetime_u']);
+
+			// update version info
+			$this->getVersionInfo();
 
 			$this->setView('view_result');
 		}
@@ -273,40 +271,67 @@
 		}
 
 		function view() {
-			// HTTPヘッダー出力
+			// Start buffering
+			ob_start();
+
+			require_once('./view/view_list.php');
+
+			// Get buffer
+			$contents = ob_get_clean();
+
+			// Send HTTP header
 			$this->sendHttpHeader();
 
 			$this->html_header->appendProperty('css', '<link href="css/version.css" type="text/css" rel="stylesheet" media="all" />');
 			$this->html_header->appendProperty('css', '<link href="css/selectbox_white.css" type="text/css" rel="stylesheet" media="all" />');
 			$this->html_header->appendProperty('script', '<script src="js/bframe_selectbox.js" type="text/javascript"></script>');
 
-			// HTML ヘッダー出力
+			// Show HTML header
 			$this->showHtmlHeader();
 
-			require_once('./view/view_list.php');
+			// Show HTML body
+			echo $contents;
 		}
 
 		function view_confirm() {
-			// HTTPヘッダー出力
+			// Start buffering
+			ob_start();
+
+			require_once('./view/view_list_confirm.php');
+
+			// Get buffer
+			$contents = ob_get_clean();
+
+			// Send HTTP header
 			$this->sendHttpHeader();
 
 			$this->html_header->appendProperty('css', '<link href="css/version.css" type="text/css" rel="stylesheet" media="all" />');
 
-			// HTMLヘッダー出力
+			// Show HTML header
 			$this->showHtmlHeader();
 
-			require_once('./view/view_list_confirm.php');
+			// Show HTML body
+			echo $contents;
 		}
 
 		function view_result() {
-			// HTTPヘッダー出力
+			// Start buffering
+			ob_start();
+
+			require_once('./view/view_list_result.php');
+
+			// Get buffer
+			$contents = ob_get_clean();
+
+			// Send HTTP header
 			$this->sendHttpHeader();
 
 			$this->html_header->appendProperty('css', '<link href="css/version.css" type="text/css" rel="stylesheet" media="all" />');
 
-			// HTMLヘッダー出力
+			// Show HTML header
 			$this->showHtmlHeader();
 
-			require_once('./view/view_list_result.php');
+			// Show HTML body
+			echo $contents;
 		}
 	}

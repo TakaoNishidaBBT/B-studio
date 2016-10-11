@@ -5,28 +5,13 @@
  *
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
-	if(!function_exists('mb_internal_encoding')) {
-		echo 'mbstringモジュールを有効にしてください。';
-		exit;
-	}
 	error_reporting(E_ALL & ~E_DEPRECATED & ~E_NOTICE & ~E_STRICT);
 	define('B_CHARSET', 'UTF-8');
 	mb_internal_encoding(B_CHARSET);
 	ini_set('display_errors', 'On');
 	set_error_handler('exception_error_handler');
 
-	// check timezone
-	date('Ymd');
-
-	require_once('config/_form_config.php');
-	require_once('../bs-admin/class/B_Element.php');
-	require_once('../bs-admin/class/B_Session.php');
-	$db_install_form = new B_Element($db_install_form_config);
-	$admin_basic_auth_form = new B_Element($admin_basic_auth_config);
-	$admin_user_form = new B_Element($admin_user_form_config);
-	$root_htaccess = new B_Element($root_htaccess_config);
-
-	// start session
+	// Start session
 	$info = pathinfo($_SERVER['SCRIPT_NAME']);
 	$root_dir = dirname($info['dirname']);
 	if(substr($root_dir, -1) == '/') {
@@ -39,9 +24,48 @@
 	define('SESSION_DIR', $info['dirname']);
 	define('ROOT_DIR', $root_dir . '/');
 	define('DOC_ROOT', $doc_root);
+	define('LANG', 'en');
+
+	require_once('../bs-admin/class/B_Session.php');
 
 	$ses = new B_Session;
 	$ses->start('nocache', 'bs-install', SESSION_DIR);
+
+	if(!$_SESSION['language']) $_SESSION['language'] = LANG;
+
+	if($_POST['action'] == 'select-language') {
+		$_SESSION['language'] = $_POST['language'];
+		$_SESSION['install_confirm'] = false;
+	}
+
+	// Document root directory
+	if(substr($_SERVER['DOCUMENT_ROOT'], -1) == '/') {
+		define('B_DOC_ROOT', substr($_SERVER['DOCUMENT_ROOT'], 0, -1));
+	}
+	else {
+		define('B_DOC_ROOT', $_SERVER['DOCUMENT_ROOT']);
+	}
+
+	// Directory for admin page
+	define('B_ADMIN_ROOT', ROOT_DIR . 'bs-admin/');
+
+	require_once('../bs-admin/config/language.php');
+
+	if($_SESSION['language'] != 'en' and !function_exists('mb_internal_encoding')) {
+		echo _('Please enable mbstring module');
+		exit;
+	}
+
+	// confirm timezone
+	date('Ymd');
+
+	require_once('config/_form_config.php');
+	require_once('../bs-admin/class/B_Element.php');
+	$select_language = new B_Element($select_language_config);
+	$db_install_form = new B_Element($db_install_form_config);
+	$admin_basic_auth_form = new B_Element($admin_basic_auth_config);
+	$admin_user_form = new B_Element($admin_user_form_config);
+	$root_htaccess = new B_Element($root_htaccess_config);
 
 	if($_POST['action'] == 'confirm') {
 		$_SESSION['install_confirm'] = true;
@@ -63,27 +87,41 @@
 		setHtaccess($root_htaccess);
 		confirmPermission($perm_message);
 	}
+	// set language
+	$select_language->setValue(array('language' => $_SESSION['language']));
+
 	if(!session_save_path()) {
-		$error_message = 'session.save_pathを設定してください。';
+		$error_message = _('Please set session.save_path');
 	}
 	if(!class_exists('mysqli') && !function_exists('mysql_connect')) {
-		$error_message = 'MySQLライブラリを有効にしてください。';
+		$error_message = _('Please enable MySQL library');
 	}
 	if(!function_exists('gd_info')) {
-		$error_message = 'GDライブラリを有効にしてください。';
+		$error_message = _('Please enable GD library');
 	}
 	if(!class_exists('ZipArchive')) {
-		$error_message = 'ZipArchiveクラスが必要です。';
+		$error_message = _('ZipArchive is necessary');
 	}
 
-	// HTTPヘッダー出力
+	// send HTTP header
 	header('Cache-Control: no-cache, must-revalidate'); 
 	header('Content-Language: ja');
 	header('Content-Type: text/html; charset=UTF-8');
 
-	// HTML 出力
-	include('./view/view_index.php');
+	// show HTML
+	$view_folder = getViewFolder();
+	include('./view/' . $view_folder . 'view_index.php');
 	exit;
+
+	function getViewFolder() {
+		switch($_SESSION['language']) {
+		case 'jp':
+			return 'jp/';
+
+		default:
+			return;
+		}
+	}
 
 	function setHtaccess($root_htaccess) {
 		// setup htaccess
@@ -114,27 +152,27 @@
 
 	function checkPermission($path, &$message) {
 		if(!file_exists($path)) {
-			$message.= '<span class="status_ok">' . $path  . ' の書き込み権限はOKです。(file not exist)</span><br />';
+			$message.= '<span class="status_ok">' . $path  . _(' write permission is OK. ') .  '(file not exist)</span><br />';
 			return true;
 		}
 		else {
 			$perms = fileperms($path);
 			if(is_writable($path)) {
-				$message.= '<span class="status_ok">' . $path  . ' の書き込み権限はOKです。(permission:' . substr(sprintf('%o',$perms), -3) . ')</span><br />';
+				$message.= '<span class="status_ok">' . $path  . _(' : write permission is OK. ') . '(permission:' . substr(sprintf('%o',$perms), -3) . ')</span><br />';
 				return true;
 			}
 			else {
-				$message.= '<span class="status_ng">' . $path  . ' に書き込み権限がありません。(permission:' . substr(sprintf('%o',$perms), -3) . ')</span><br />';
+				$message.= '<span class="status_ng">' . $path  . _(' : write permission is not set. ') . '(permission:' . substr(sprintf('%o',$perms), -3) . ')</span><br />';
 				return false;
 			}
 		}
 	}
 
 	function confirm($db_install_form, $admin_basic_auth_form, $admin_user_form, $root_htaccess, &$perm_message, &$error_message) {
-		// ディレクトリパーミッションの確認
+		// Confirm directory permission
 		$status = confirmPermission($perm_message);
 
-		// POSTされた値を設定
+		// Set value from $_POST
 		$db_install_form->setValue($_POST);
 		$admin_basic_auth_form->setValue($_POST);
 		$admin_user_form->setValue($_POST);
@@ -145,7 +183,7 @@
 		$status&= $root_htaccess->validate();
 
 		if($status) {
-			// DB接続テスト
+			// Test of connecting to DB 
 			if(class_exists('mysqli')) {
 				$db = @mysqli_connect($_POST['db_srv'], $_POST['db_usr'], $_POST['db_pwd'], $_POST['db_nme']);
 			}
@@ -157,12 +195,12 @@
 						$obj = $db_install_form->getElementByName('db_nme');
 						$obj->status = false;
 						$status = $db_install_form->validate();
-						$error_message = 'DBへ接続はできましたがスキーマの選択に失敗しました。';
+						$error_message = _('Connecting to the DB is OK. But failed to select the schema');
 					}
 				}
 			}
 			if(!$db || $db->connect_error) {
-				// DB接続エラー
+				// Connecting DB error
 				$obj = $db_install_form->getElementByName('db_srv');
 				$obj->status = false;
 				$obj = $db_install_form->getElementByName('db_usr');
@@ -172,15 +210,15 @@
 				$obj = $db_install_form->getElementByName('db_nme');
 				$obj->status = false;
 				$status = $db_install_form->validate();
-				$error_message = 'DBへの接続に失敗しました。';
+				$error_message = _('Faild to connect DB.');
 				if($db->connect_error) {
 					$error_message.= '<br />(' . $db->connect_error . ')';
 				}
 			}
 		}
 		else {
-			// 入力確認エラー
-			$error_message = '入力内容に誤りがあります。<br />各欄のエラーメッセージをご覧の上、入力し直してください。';
+			// confirm message
+			$error_message = _('This is an error in your entry<br />Please check any error message and re-enter the necessary information');
 		}
 
 		return $status;
@@ -195,10 +233,10 @@
 	}
 
 	function exception_error_handler($errno, $errstr, $errfile, $errline ) {
-	    if(!(error_reporting() & $errno)) {
-	        // error_reporting 設定に含まれていないエラーコードです
-	        return;
-	    }
+		if(!(error_reporting() & $errno)) {
+			// error_reporting, unexpected error has occurred
+			return;
+		}
 
-	    throw new ErrorException($errstr, 0, $errno, $errfile, $errline);
+		throw new ErrorException($errstr, 0, $errno, $errfile, $errline);
 	}

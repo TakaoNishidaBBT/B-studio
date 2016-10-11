@@ -52,7 +52,7 @@
 			$table = new B_Table($this->db, $table_name);
 			$status = $table->create();
 			if(!$status) {
-				throw new Exception('テーブルの作成に失敗しました。');
+				throw new Exception(_('Faild to create a table.');
 			}
 		}
 
@@ -99,7 +99,7 @@
 			$sql = str_replace('%DB_PREFIX%', B_DB_PREFIX, $sql);
 			$status = $this->db->query($sql);
 			if(!$status) {
-				throw new Exception('ビューの作成に失敗しました。');
+				throw new Exception(_('Faild to create a view.'));
 			}
 		}
 
@@ -118,7 +118,7 @@
 
 			$status = $version->insert($param);
 			if(!$status) {
-				throw new Exception('バージョンレコードの作成に失敗しました。');
+				throw new Exception(_('Faild to insert a version record.'));
 			}
 		}
 
@@ -134,7 +134,7 @@
 
 			$status = $current_version->insert($param);
 			if(!$status) {
-				throw new Exception('カレントバージョンレコードの作成に失敗しました。');
+				throw new Exception(_('Faild to insert current version record.'));
 			}
 		}
 
@@ -146,7 +146,7 @@
 
 			$status = $settings->insert($param);
 			if(!$status) {
-				throw new Exception('基本設定レコードの作成に失敗しました。');
+				throw new Exception(_('Faild to insert a configuration record.'));
 			}
 		}
 

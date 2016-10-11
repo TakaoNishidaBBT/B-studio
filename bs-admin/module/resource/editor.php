@@ -154,7 +154,7 @@
 					$contents = mb_convert_encoding($this->post['contents'], $this->post['encoding'], 'auto');
 				}
 
-				// ファイル更新
+				// Get file size
 				$filesize = file_put_contents($filepath, $contents, LOCK_EX);
 
 				$param['node_id'] = $this->post['node_id'];
@@ -162,31 +162,30 @@
 				$param['revision_id'] = $this->version['revision_id'];
 				$param['update_datetime'] = time();
 
-				// set file size
+				// Set file size
 				$param['file_size'] = $filesize;
 				$param['human_file_size'] = B_Util::human_filesize($param['file_size'], 'K');
 
 				$resource_node_table = new B_Table($this->db, B_RESOURCE_NODE_TABLE);
 				$ret = $resource_node_table->update($param);
 
-				// cache 更新
+				// Avoid 304 Not Modified for working version
 				if(file_exists(B_FILE_INFO_W)) {
 					touch(B_FILE_INFO_W);
 				}
 
-				// 同一バージョン
+				// If the working version same as the current version, touch published cache file for avoid 304 Not Modified 
 				if($this->version['current_version'] == $this->version['working_version'] && file_exists(B_FILE_INFO_C)) {
 					touch(B_FILE_INFO_C);
 				}
 
-				$message = '保存しました';
+				$message = _('Saved');
 			}
 
 			return $ret;
 		}
 
 		function view() {
-			// HTTPヘッダー出力
 			$this->sendHttpHeader();
 
 			$this->html_header->appendProperty('css', '<link href="css/editor.css" type="text/css" rel="stylesheet" media="all" />');
@@ -203,7 +202,6 @@
 			$this->html_header->appendProperty('script', '<script src="js/ace/mode-css.js" type="text/javascript"></script>');
 			$this->html_header->appendProperty('script', '<script src="js/ace/mode-php.js" type="text/javascript"></script>');
 
-			// HTMLヘッダー出力
 			$this->showHtmlHeader();
 
 			require_once('./view/view_editor.php');

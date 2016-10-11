@@ -17,7 +17,7 @@ $tree_config = array(
 			'file'			=> 'tree',
 			'editable'		=> 'true',
 			'sort'			=> 'manual',
-			'root_name'		=> 'カテゴリ',
+			'root_name'		=> _('Category'),
 			'method'		=>
 			array(
 				'getNodeList'	=> 'getNodeList',
@@ -41,7 +41,7 @@ $tree_config = array(
 				array(
 					'url'		=> DISPATCH_URL . '&module=' . $this->module . '&page=property&method=select',
 					'params'	=> 'width:360,height:330',
-					'title'		=> 'プロパティー',
+					'title'		=> _('Property'),
 					'func'		=> 'reloadTree',
 				),
 			),
@@ -55,35 +55,35 @@ $tree_config = array(
 				'trash'			=> array('src' => './images/folders/trash.png', 'new' => ''),
 				'forbidden'		=> array('src' => './images/folders/forbidden.png'),
 				'line'			=> array('src' => './images/folders/line.gif', 'new' => ''),
-				'folder'		=> array('src' => './images/folders/folder.png', 'new' => 'newfolder'),
-				'category'		=> array('src' => './images/folders/category.png', 'new' => '新しいカテゴリ', 'ime' => 'true'),
+				'folder'		=> array('src' => './images/folders/folder.png', 'new' => _('newFolder')),
+				'category'		=> array('src' => './images/folders/category.png', 'new' => _('newCategory'), 'ime' => 'true'),
 			),
 			'context_menu'		=>
 			array(
 				array(
-					'menu'		=> '切り取り',
+					'menu'		=> _('Cut'),
 					'func'		=> 'cutNode',
 				),
 				array(
-					'menu'		=> 'コピー',
+					'menu'		=> _('Copy'),
 					'func'		=> 'copyNode',
 				),
 				array(
-					'menu'		=> '貼り付け',
+					'menu'		=> _('Paste'),
 					'func'		=> 'pasteNode',
 				),
 				array(
-					'menu'		=> '削除',
+					'menu'		=> _('Delete'),
 					'func'		=> 'deleteNode',
-					'confirm'	=> '削除します。よろしいですか？',
+					'confirm'	=> _('Are you sure to delete?'),
 				),
 				array(
-					'menu'		=> '新規',
+					'menu'		=> _('New'),
 					'func'		=> 'createNode',
 					'submenu'	=>
 					array(
 						array(
-							'menu'		=> 'カテゴリ',
+							'menu'		=> _('Category'),
 							'func'		=> 'createNode',
 							'icon'		=> 'images/folders/category.png',
 							'param'		=> 'node_type=category&node_class=category',
@@ -92,17 +92,17 @@ $tree_config = array(
 					'submenu_width'	=> '120',
 				),
 				array(
-					'menu'		=> '名前の変更',
+					'menu'		=> _('Edit name'),
 					'func'		=> 'editName',
 				),
 				array(
-					'menu'		=> 'プロパティー',
+					'menu'		=> _('Property'),
 					'func'		=> 'open_property',
 				),
 			),
 			'context_menu_width'	=> '138',
 			'context_menu_frame'	=> 'top',
-			'session_timeout'		=> 'セッションが切れました。ログインしなおしてください。',
+			'session_timeout'		=> _('Your session has timed out, Please log in again'),
 		),
 	),
 );

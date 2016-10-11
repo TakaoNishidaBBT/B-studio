@@ -15,7 +15,7 @@ $menu_config = array(
 			'start_html'    => '<li class="title">',
 			'end_html'	    => '</li>',
 			array(
-				'start_html'    => '<a href="' . B_SITE_ROOT . '" title="公開画面を開きます" onclick="window.open(this.href); return false;">',
+				'start_html'    => '<a href="' . B_SITE_ROOT . '" title="' . _('Open publish page') . '" onclick="window.open(this.href); return false;">',
 				'end_html'	    => '</a>',
 				array(
 					'start_html'	=> '<span class="title">',
@@ -29,7 +29,7 @@ $menu_config = array(
 			'start_html'    => '<li>',
 			'end_html'	    => '</li>',
 			'class'			=> 'B_Link',
-			'value'			=> '<img src="images/menu/contents.png" alt="contents"/>コンテンツ',
+			'value'			=> '<img src="images/menu/contents.png" alt="contents"/>' . _('Contents'),
 			'specialchars'	=> 'none',
 			'link'			=> DISPATCH_URL . '&amp;module=contents&amp;page=index&amp;method=init',
 			'target'		=> 'main',
@@ -39,7 +39,7 @@ $menu_config = array(
 			'start_html'    => '<li>',
 			'end_html'	    => '</li>',
 			'class'			=> 'B_Link',
-			'value'			=> '<img src="images/menu/template.png" alt="テンプレート"/>テンプレート',
+			'value'			=> '<img src="images/menu/template.png" alt="templates"/>' . _('Templates'),
 			'specialchars'	=> 'none',
 			'link'			=> DISPATCH_URL . '&amp;module=template&amp;page=index&amp;method=init',
 			'target'		=> 'main',
@@ -52,7 +52,7 @@ $menu_config = array(
 				'class'			=> 'B_Link',
 				'special_html'	=> 'class="bframe_menu"',
 				'id'			=> 'resource',
-				'value'			=> '<img src="images/menu/resource.png" alt="リソース"/>リソース',
+				'value'			=> '<img src="images/menu/resource.png" alt="resources"/>' . _('Resources'),
 				'specialchars'	=> 'none',
 				'script'		=>
 				array(
@@ -61,12 +61,12 @@ $menu_config = array(
 						'context_menu'		=>
 						array(
 							array(
-								'menu'		=> 'リソース管理',
+								'menu'		=> _('Resource Manager'),
 								'param'		=> DISPATCH_URL . '&module=resource&page=tree,main',
 								'func'		=> 'openUrl',
 							),
 							array(
-								'menu'		=> 'ウィジェット',
+								'menu'		=> _('Widget'),
 								'param'		=> DISPATCH_URL . '&module=widget&page=index&method=init,main',
 								'func'		=> 'openUrl',
 							),
@@ -86,7 +86,7 @@ $menu_config = array(
 				'class'			=> 'B_Link',
 				'special_html'	=> 'class="bframe_menu"',
 				'id'			=> 'post_menu',
-				'value'			=> '<img src="images/menu/article.png" alt="投稿"/>投稿',
+				'value'			=> '<img src="images/menu/article.png" alt="posts"/>' . _('Posts'),
 				'specialchars'	=> 'none',
 				'script'		=>
 				array(
@@ -95,22 +95,22 @@ $menu_config = array(
 						'context_menu'		=>
 						array(
 							array(
-								'menu'		=> '記事',
+								'menu'		=> _('Article'),
 								'param'		=> DISPATCH_URL . '&module=article&page=list&method=init,main',
 								'func'		=> 'openUrl',
 							),
 							array(
-								'menu'		=> '記事2',
+								'menu'		=> _('Article2'),
 								'param'		=> DISPATCH_URL . '&module=article2&page=list&method=init,main',
 								'func'		=> 'openUrl',
 							),
 							array(
-								'menu'		=> '記事3',
+								'menu'		=> _('Article3'),
 								'param'		=> DISPATCH_URL . '&module=article3&page=list&method=init,main',
 								'func'		=> 'openUrl',
 							),
 							array(
-								'menu'		=> 'ファイル管理',
+								'menu'		=> _('File manager'),
 								'param'		=> DISPATCH_URL . '&module=filemanager&page=tree,main',
 								'func'		=> 'openUrl',
 							),
@@ -130,7 +130,7 @@ $menu_config = array(
 				'class'			=> 'B_Link',
 				'special_html'	=> 'class="bframe_menu"',
 				'id'			=> 'setting_menu',
-				'value'			=> '<img src="images/menu/settings.png" alt="各種設定"/>各種設定',
+				'value'			=> '<img src="images/menu/settings.png" alt="settings"/>' . _('Settings'),
 				'specialchars'	=> 'none',
 				'script'		=>
 				array(
@@ -139,22 +139,22 @@ $menu_config = array(
 						'context_menu'		=>
 						array(
 							array(
-								'menu'		=> '基本設定',
+								'menu'		=> _('Configuration'),
 								'param'		=> DISPATCH_URL . '&module=settings&page=form&method=select,main',
 								'func'		=> 'openUrl',
 							),
 							array(
-								'menu'		=> 'バージョン管理',
+								'menu'		=> _('Versions'),
 								'param'		=> DISPATCH_URL . '&module=version&page=list&method=init,main',
 								'func'		=> 'openUrl',
 							),
 							array(
-								'menu'		=> 'ユーザ設定',
+								'menu'		=> _('Users'),
 								'param'		=> DISPATCH_URL . '&module=user&page=list&method=init,main',
 								'func'		=> 'openUrl',
 							),
 							array(
-								'menu'		=> 'サイト管理者設定',
+								'menu'		=> _('Site admin'),
 								'param'		=> DISPATCH_URL . '&module=siteadmin&page=form&method=select,main',
 								'func'		=> 'openUrl',
 							),
@@ -174,7 +174,8 @@ $menu_config = array(
 				'class'			=> 'B_Link',
 				'special_html'	=> 'class="bframe_menu"',
 				'id'			=> 'setting_menu',
-				'value'			=> '各種設定',
+				'value'			=> '<img src="images/menu/settings.png" alt="settings"/>' . _('Settings'),
+				'specialchars'	=> 'none',
 				'script'		=>
 				array(
 					'bframe_menu'			=>
@@ -182,17 +183,17 @@ $menu_config = array(
 						'context_menu'		=>
 						array(
 							array(
-								'menu'		=> '基本設定',
+								'menu'		=> _('Configuration'),
 								'param'		=> DISPATCH_URL . '&module=settings&page=form&method=select,main',
 								'func'		=> 'openUrl',
 							),
 							array(
-								'menu'		=> 'バージョン管理',
+								'menu'		=> _('Versions'),
 								'param'		=> DISPATCH_URL . '&module=version&page=list&method=init,main',
 								'func'		=> 'openUrl',
 							),
 							array(
-								'menu'		=> 'ユーザ設定',
+								'menu'		=> _('Users'),
 								'param'		=> DISPATCH_URL . '&module=user&page=list&method=init,main',
 								'func'		=> 'openUrl',
 							),
@@ -212,7 +213,7 @@ $menu_config = array(
 				'class'			=> 'B_Link',
 				'special_html'	=> 'class="bframe_menu"',
 				'id'			=> 'setting_menu',
-				'value'			=> '各種設定',
+				'value'			=> '<img src="images/menu/settings.png" alt="settings"/>' . _('Settings'),
 				'script'		=>
 				array(
 					'bframe_menu'			=>
@@ -220,7 +221,7 @@ $menu_config = array(
 						'context_menu'		=>
 						array(
 							array(
-								'menu'		=> '基本設定',
+								'menu'		=> _('Configuration'),
 								'param'		=> DISPATCH_URL . '&module=settings&page=form&method=select,main',
 								'func'		=> 'openUrl',
 							),
@@ -235,7 +236,7 @@ $menu_config = array(
 			'start_html'    => '<li class="new_tab">',
 			'end_html'	    => '</li>',
 			array(
-				'start_html'    => '<a href="" title="管理画面をもう一枚開きます" onclick="window.open(this.href); return false;">',
+				'start_html'    => '<a href="" title="' . _('Open another admin page') . '" onclick="window.open(this.href); return false;">',
 				'end_html'	    => '</a>',
 				array(
 					'start_html'	=> '<span class="add">',

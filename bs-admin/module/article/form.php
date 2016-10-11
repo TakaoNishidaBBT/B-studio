@@ -69,38 +69,38 @@
 				$obj->status = false;
 			}
 
-			$this->status = $this->form->validate();
+			if(!$this->form->validate()) {
+				$this->control = new B_Element($this->input_control_config);
+				return;
+			}
 
-			if($this->status) {
-				// 表示モードを確認モードに設定
-				$this->filter = 'confirm';
-				$this->display_mode = 'confirm';
-				$this->form->getValue($param);
-				$this->session['request'] = $param;
 
-				if($this->post['description_flag'] == '1') {
-					$obj = $this->form->getElementByName('external_link_row');
-					$obj->display = 'none';
-				}
-				else {
-					$obj = $this->form->getElementByName('contents_row');
-					$obj->display = 'none';
-
-					if(!$this->post['external_link']) {
-						$obj = $this->form->getElementByName('external_link_none');
-						$obj->display = '';
-						$obj = $this->form->getElementByName('url');
-						$obj->display = 'none';
-						$obj = $this->form->getElementByName('external_window');
-						$obj->display = 'none';
-					}
-				}
-
-				$this->control = new B_Element($this->confirm_control_config);
+			if($this->post['description_flag'] == '1') {
+				$obj = $this->form->getElementByName('external_link_row');
+				$obj->display = 'none';
 			}
 			else {
-				$this->control = new B_Element($this->input_control_config);
+				$obj = $this->form->getElementByName('contents_row');
+				$obj->display = 'none';
+
+				if(!$this->post['external_link']) {
+					$obj = $this->form->getElementByName('external_link_none');
+					$obj->display = '';
+					$obj = $this->form->getElementByName('url');
+					$obj->display = 'none';
+					$obj = $this->form->getElementByName('external_window');
+					$obj->display = 'none';
+				}
 			}
+
+			$this->form->getValue($param);
+			$this->session['request'] = $param;
+
+			$this->control = new B_Element($this->confirm_control_config);
+
+			// Set display mode
+			$this->display_mode = 'confirm';
+			$this->filter = 'confirm';
 		}
 
 		function setThumnail($img_path) {
@@ -114,7 +114,7 @@
 			$obj->value = $html;
 		}
 
-		function regist() {
+		function register() {
 			$param = $this->session['request'];
 			$param['del_flag'] = '0';
 			$param['article_date_u'] = strtotime($param['article_date_t']);
@@ -127,13 +127,13 @@
 				$param['update_datetime'] = time();
 				$ret = $this->main_table->selectInsert($param);
 				$param['article_id'] = $this->main_table->selectMaxValue('article_id');
-				$param['action_message'] = 'を登録しました。';
+				$param['action_message'] = _('was saved.');
 			}
 			else {
 				$param['update_user'] = $this->user_id;
 				$param['update_datetime'] = time();
 				$ret = $this->main_table->update($param);
-				$param['action_message'] = 'を更新しました。';
+				$param['action_message'] = _('was saved.');
 			}
 
 			if($ret) {
@@ -141,11 +141,11 @@
 			}
 			else {
 				$this->db->rollback();
-				$param['action_message'] = 'の登録に失敗しました';
+				$param['action_message'] = _('was faild to saved.');
 			}
 			$this->result->setValue($param);
 
-			$this->setView('regist_view');
+			$this->setView('result_view');
 		}
 
 		function delete() {
@@ -169,7 +169,7 @@
 			}
 			$this->result->setValue($param);
 
-			$this->setView('regist_view');
+			$this->setView('result_view');
 		}
 
 		function back() {
@@ -184,13 +184,19 @@
 				$obj = $this->form->getElementByName('article_id_row');
 				$obj->display = 'none';
 			}
-
 			$this->form->setFilterValue($this->filter);
 
-			// HTTPヘッダー出力
+			// Start buffering
+			ob_start();
+
+			require_once('./view/view_form.php');
+
+			// Get buffer
+			$contents = ob_get_clean();
+
+			// Send HTTP header
 			$this->sendHttpHeader();
 
-			// HTML ヘッダー出力
 			$this->html_header->appendProperty('css', '<link href="css/article.css" type="text/css" rel="stylesheet" media="all" />');
 			$this->html_header->appendProperty('css', '<link href="css/calendar.css" type="text/css" rel="stylesheet" media="all" />');
 			$this->html_header->appendProperty('script', '<script src="js/bframe_edit_check.js" type="text/javascript"></script>');
@@ -198,19 +204,31 @@
 			$this->html_header->appendProperty('script', '<script src="js/bframe_visualeditor.js" type="text/javascript"></script>');
 			$this->html_header->appendProperty('script', '<script src="js/bframe_calendar.js" type="text/javascript"></script>');
 
+			// Show HTML header
 			$this->showHtmlHeader();
 
-			require_once('./view/view_form.php');
+			// Show HTML body
+			echo $contents;
 		}
 
-		function regist_view() {
-			// HTTPヘッダー出力
-			$this->sendHttpHeader();
-
-			// HTML ヘッダー出力
-			$this->html_header->appendProperty('css','<link href="css/article.css" type="text/css" rel="stylesheet" media="all">');
-			$this->showHtmlHeader();
+		function result_view() {
+			// Start buffering
+			ob_start();
 
 			require_once('./view/view_result.php');
+
+			// Get buffer
+			$contents = ob_get_clean();
+
+			// Send HTTP header
+			$this->sendHttpHeader();
+
+			$this->html_header->appendProperty('css','<link href="css/article.css" type="text/css" rel="stylesheet" media="all">');
+
+			// Show HTML header
+			$this->showHtmlHeader();
+
+			// Show HTML body
+			echo $contents;
 		}
 	}

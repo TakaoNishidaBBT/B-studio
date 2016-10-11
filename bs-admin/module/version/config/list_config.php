@@ -13,7 +13,7 @@ array(
 	'select_sql'	=> "select 	 a.version_id
 								,a.publication_datetime_t
 								,a.version
-								,a.memo
+								,a.notes
 								,e.reserved_version_id reserved_version
 								,e.working_version_id working_version
 							    ,if(b.current_version_id = version_id, 1, if(c.reserved_version_id = version_id, 2, 0)) publication_status
@@ -29,7 +29,7 @@ array(
 						on 1=1
 						where del_flag='0' ",
 
-	'empty_message'	=> '<strong>　該当レコードはありません</strong>',
+	'empty_message'	=> '<strong>　' . _('No record was found') . '</strong>',
 
 	'header'	=>
 	array(
@@ -40,31 +40,31 @@ array(
 			'name'			=> 'reserved_version',
 			'start_html'	=> '<th class="center" style="width:35px" >',
 			'end_html'		=> '</th>',
-			'value'			=> '公開',
+			'value'			=> _('Publish'),
 		),
 		array(
 			'name'			=> 'working_version',
 			'start_html'	=> '<th class="center" style="width:35px" >',
 			'end_html'		=> '</th>',
-			'value'			=> '作業中',
+			'value'			=> _('Working'),
 		),
 		array(
 			'name'			=> 'version_id',
 			'start_html'	=> '<th class="center">',
 			'end_html'		=> '</th>',
-			'value'			=> 'ID',
+			'value'			=> _('ID'),
 		),
 		array(
 			'name'			=> 'publication_date',
 			'start_html'	=> '<th class="center">',
 			'end_html'		=> '</th>',
-			'value'			=> '公開日時',
+			'value'			=> _('Publish date time'),
 		),
 		array(
 			'name'			=> 'version',
 			'start_html'	=> '<th class="center">',
 			'end_html'		=> '</th>',
-			'value'			=> 'バージョン',
+			'value'			=> _('Version'),
 		),
 		array(
 			'name'			=> 'publication_status',
@@ -73,29 +73,29 @@ array(
 			'class'			=> 'B_Link',
 			'link'			=> '',
 			'special_html'	=> 'onclick="return false"',
-			'title'			=> '状態　■：公開　★：公開予約',
-			'value'			=> '状態',
+			'title'			=> _('Status ■:Published  ★:Scheduled to be published'),
+			'value'			=> _('Status'),
 		),
 		array(
 			'name'			=> 'memo',
 			'start_html'	=> '<th class="center">',
 			'end_html'		=> '</th>',
-			'value'			=> 'メモ',
+			'value'			=> _('Notes'),
 		),
 		array(
 			'start_html'	=> '<th class="center" style="width:40px" nowrap>',
 			'end_html'		=> '</th>',
-			'value'			=> '編集',
+			'value'			=> _('Edit'),
 		),
 		array(
 			'start_html'	=> '<th class="center" style="width:40px" nowrap>',
 			'end_html'		=> '</th>',
-			'value'			=> '比較',
+			'value'			=> _('Diff'),
 		),
 		array(
 			'start_html'	=> '<th class="center" style="width:40px" nowrap>',
 			'end_html'		=> '</th>',
-			'value'			=> '削除',
+			'value'			=> _('Delete'),
 		),
 	),
 
@@ -158,13 +158,14 @@ array(
 				'class'			=> 'B_Link',
 				'link'			=> 'index.php',
 				'special_html'	=> 'class="edit-button"',
-				'value'			=> '編集',
+				'value'			=> _('Edit'),
 				'fixedparam'	=>
 				array(
 					'terminal_id'	=> TERMINAL_ID,
 					'module'		=> $this->module, 
 					'page'			=> 'form', 
 					'method'		=> 'select',
+					'mode'			=> 'update',
 				),
 				'param'		=>
 				array(
@@ -182,7 +183,7 @@ array(
 				'class'			=> 'B_Link',
 				'link'			=> 'index.php',
 				'special_html'	=> 'class="compare-button" onclick="window.open(this.href); return false;"',
-				'value'			=> '比較',
+				'value'			=> _('Diff'),
 				'fixedparam'	=>
 				array(
 					'terminal_id'	=> $this->util->getRandomText(12),
@@ -200,7 +201,7 @@ array(
 				'id'			=> 'compare_disable',
 				'class'			=> 'B_Link',
 				'special_html'	=> 'class="compare-button-disable" onclick="return false;"',
-				'value'			=> '比較',
+				'value'			=> _('Diff'),
 				'display'		=> 'none',
 			),
 		),
@@ -214,7 +215,7 @@ array(
 				'class'			=> 'B_Link',
 				'link'			=> 'index.php',
 				'special_html'	=> 'class="delete-button"',
-				'value'			=> '削除',
+				'value'			=> _('Delete'),
 				'fixedparam'	=>
 				array(
 					'terminal_id'	=> TERMINAL_ID,
@@ -233,7 +234,7 @@ array(
 				'id'			=> 'del_disable',
 				'class'			=> 'B_Link',
 				'special_html'	=> 'class="delete-button-disable" onclick="return false;"',
-				'value'			=> '削除',
+				'value'			=> _('Delete'),
 				'display'		=> 'none',
 			),
 		),
@@ -250,7 +251,7 @@ $version_control_config = array(
 		'name'			=> 'confirm',
 		'start_html'    => '<span class="version-button" onclick="bframe.submit(\'F1\', \'' . $this->module . '\', \'list\', \'confirm\', \'\', true)">',
 		'end_html'	    => '</span>',
-		'value'			=> '<img src="images/common/version.png" alt="バージョン変更" />バージョン変更',
+		'value'			=> '<img src="images/common/version.png" alt="Change versions" />' . _('Change versions'),
 	),
 );
 
@@ -266,15 +267,15 @@ $version_control_confirm_config = array(
 			'class'			=> 'B_Button',
 			'name'			=> 'back',
 			'special_html'	=> 'class="back-button" onclick="bframe.submit(\'F1\', \'' . $this->module . '\', \'list\', \'back\', \'\', true)"',
-			'value'			=> '戻る',
+			'value'			=> _('Back'),
 		),
 		array(
 			'start_html'    => '<li>',
 			'end_html'	    => '</li>',
 			'class'			=> 'B_Button',
 			'name'			=> 'attendance',
-			'special_html'	=> 'class="regist-button" onclick="bframe.submit(\'F1\', \'' . $this->module . '\', \'list\', \'regist\', \'\', true)"',
-			'value'			=> '設定',
+			'special_html'	=> 'class="register-button" onclick="bframe.submit(\'F1\', \'' . $this->module . '\', \'list\', \'register\', \'\', true)"',
+			'value'			=> _('Register'),
 		),
 	),
 );
@@ -291,7 +292,7 @@ $version_control_result_config = array(
 			'class'			=> 'B_Button',
 			'name'			=> 'backToList',
 			'special_html'	=> 'class="back-button" onclick="bframe.submit(\'F1\', \'' . $this->module . '\', \'list\', \'back\', \'\')" ',
-			'value'			=> '一覧に戻る',
+			'value'			=> 'Back to list',
 		),
 	),
 );

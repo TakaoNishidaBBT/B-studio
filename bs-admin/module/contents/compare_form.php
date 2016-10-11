@@ -284,7 +284,6 @@
 		}
 
 		function view() {
-			// HTTPヘッダー出力
 			$this->sendHttpHeader();
 
 			$this->html_header->appendProperty('css', '<link href="css/contents_compare_form.css" type="text/css" rel="stylesheet" media="all" />');
@@ -302,19 +301,16 @@
 			$this->html_header->appendProperty('script', '<script src="js/diff2html/diff2html.js" type="text/javascript"></script>');
 			$this->html_header->appendProperty('script', '<script src="js/diff2html/diff2html-ui.js" type="text/javascript"></script>');
 
-			// HTMLヘッダー出力
 			$this->showHtmlHeader();
 
 			require_once('./view/view_compare_form.php');
 		}
 
 		function view_folder() {
-			// HTTPヘッダー出力
 			$this->sendHttpHeader();
 
 			$this->html_header->appendProperty('css', '<link href="css/contents_form.css" type="text/css" rel="stylesheet" media="all" />');
 
-			// HTMLヘッダー出力
 			$this->showHtmlHeader();
 
 			echo '<body></body>';

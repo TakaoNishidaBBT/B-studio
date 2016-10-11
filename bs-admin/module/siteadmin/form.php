@@ -31,6 +31,7 @@
 
 			$param['admin_user_name'] = $g_auth_users[0]['user_name'];
 			$param['admin_user_id'] = $g_auth_users[0]['user_id'];
+			$param['language'] = $g_auth_users[0]['language'];
 
 			$this->form->setValue($param);
 			$this->control = new B_Element($this->input_control_config);
@@ -41,21 +42,22 @@
 
 			$this->status = $this->form->validate();
 
-			if($this->status) {
-				// 表示モードを確認モードに設定
-				$this->display_mode = 'confirm';
-				$this->form->getValue($param);
-				$this->session['request'] = $param;
+			if(!$this->form->validate()) {
+				$this->control = new B_Element($this->input_control_config, $this->user_auth);
+				return;
+			}
 
-				$this->control = new B_Element($this->confirm_control_config);
-			}
-			else {
-				$this->control = new B_Element($this->input_control_config);
-			}
+			$this->form->getValue($param);
+			$this->session['request'] = $param;
+
+			$this->control = new B_Element($this->confirm_control_config);
+
+			// Set display mode
+			$this->display_mode = 'confirm';
 		}
 
 		function _validate_callback($param) {
-			// 発送先IDの二重登録確認
+			// Check user id already exists
 			$sql = "select count(*) cnt from " . B_DB_PREFIX . "user where user_id='" . $param['value'] . "'";
 			$rs = $this->db->query($sql);
 			$row = $this->db->fetch_assoc($rs);
@@ -65,15 +67,16 @@
 			return false;
 		}
 
-		function regist() {
+		function register() {
 			global $g_auth_users;
 
 			$param = $this->session['request'];
 
-			// setup admin user file
+			// Set up admin user file
 			$contents = file_get_contents(B_DOC_ROOT . B_ADMIN_ROOT . 'user/config/users.php_');
 			$contents = str_replace('%USER_NAME%',  $param['admin_user_name'], $contents);
 			$contents = str_replace('%USER_ID%',  $param['admin_user_id'], $contents);
+			$contents = str_replace('%LANGUAGE%',  $param['language'], $contents);
 			if($param['admin_user_pwd']) {
 				$contents = str_replace('%PASSWORD%', md5($param['admin_user_pwd']), $contents);
 			}
@@ -83,14 +86,14 @@
 
 			file_put_contents(B_DOC_ROOT . B_ADMIN_ROOT . 'user/users.php', $contents);
 
-			$param['action_message'] = '<p><strong>サイト管理者の情報を更新しました</strong></p>';
+			$param['action_message'] = '<p><span class="bold">' . _('Configuration of site admin was updated') . '</span></p>';
 
 			$this->result = new B_Element($this->result_config);
 			$this->result_control = new B_Element($this->result_control_config);
 
 			$this->result->setValue($param);
 
-			$this->setView('view_result');
+			$this->setView('result_view');
 		}
 
 		function back() {
@@ -99,27 +102,47 @@
 		}
 
 		function view() {
-			// HTTPヘッダー出力
-			$this->sendHttpHeader();
-
-			$this->html_header->appendProperty('css', '<link href="css/siteadmin.css" type="text/css" rel="stylesheet" media="all" />');
-			$this->html_header->appendProperty('script', '<script src="js/bframe_edit_check.js" type="text/javascript"></script>');
-
-			// HTMLヘッダー出力
-			$this->showHtmlHeader();
+			// Start buffering
+			ob_start();
 
 			require_once('./view/view_form.php');
+
+			// Get buffer
+			$contents = ob_get_clean();
+
+			// Send HTTP header
+			$this->sendHttpHeader();
+
+			$this->html_header->appendProperty('css', '<link href="css/siteadmin.css" type="text/css" rel="stylesheet" media="all" />');
+			$this->html_header->appendProperty('css', '<link href="css/selectbox_white.css" type="text/css" rel="stylesheet" media="all" />');
+			$this->html_header->appendProperty('script', '<script src="js/bframe_selectbox.js" type="text/javascript"></script>');
+			$this->html_header->appendProperty('script', '<script src="js/bframe_edit_check.js" type="text/javascript"></script>');
+
+			// Show HTML header
+			$this->showHtmlHeader();
+
+			// Show HTML body
+			echo $contents;
 		}
 
-		function view_result() {
-			// HTTPヘッダー出力
+		function result_view() {
+			// Start buffering
+			ob_start();
+
+			require_once('./view/view_result.php');
+
+			// Get buffer
+			$contents = ob_get_clean();
+
+			// Send HTTP header
 			$this->sendHttpHeader();
 
 			$this->html_header->appendProperty('css', '<link href="css/siteadmin.css" type="text/css" rel="stylesheet" media="all" />');
 
-			// HTMLヘッダー出力
+			// Show HTML header
 			$this->showHtmlHeader();
 
-			require_once('./view/view_result.php');
+			// Show HTML body
+			echo $contents;
 		}
 	}

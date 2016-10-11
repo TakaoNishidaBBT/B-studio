@@ -369,14 +369,12 @@
 		}
 
 		function view() {
-			// HTTPヘッダー出力
 			$this->sendHttpHeader();
 
 			$this->html_header->appendProperty('css', '<link href="css/resource_compare.css" type="text/css" rel="stylesheet" media="all" />');
 			$this->html_header->appendProperty('css', '<link href="css/resource_compare_tree.css" type="text/css" rel="stylesheet" media="all" />');
 			$this->html_header->appendProperty('script', '<script src="js/bframe_compare_pane.js" type="text/javascript"></script>');
 
-			// HTMLヘッダー出力
 			$this->showHtmlHeader();
 
 			require_once($this->view_file);

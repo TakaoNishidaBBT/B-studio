@@ -21,3 +21,6 @@ div.list-header {
 	margin: 0;
 	height: 52px;
 }
+span.user-id {
+	margin-right: 4px;
+}

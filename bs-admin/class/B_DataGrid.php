@@ -109,7 +109,7 @@
 				// get record data
 				$rs = $this->db->query($sql);
 
-				for($record_cnt=0 ; $value = $this->db->fetch_assoc($rs) ; $record_cnt++) {
+				for($record_cnt=0; $value = $this->db->fetch_assoc($rs); $record_cnt++) {
 					$this->bind_data[] = $value;
 					// create row instance
 					$row = new B_Element($this->config['row'], $this->auth_filter, $this->config_filter);
@@ -283,7 +283,7 @@
 			$i=0;
 
 			// tr call back
-			for($i=0 ; $i < $this->callback_index ; $i++) {
+			for($i=0; $i < $this->callback_index; $i++) {
 				for($j=0 ; $j < count($this->row) ; $j++) {
 					$param = array('row' => &$this->row[$j], 'cnt' => $j);
 
@@ -411,7 +411,7 @@
 		function validate() {
 			$ret = true;
 
-			for($i=0 ; $i < count($this->row) ; $i++) {
+			for($i=0; $i < count($this->row); $i++) {
 				for($j=0 ; $j < $this->validate_callback_index ; $j++) {
 					$param = array('row' => &$this->row[$i], 'cnt' => $i);
 					if($this->validate_callback[$j]['param']) {
@@ -494,7 +494,7 @@
 			global $g_data_set, ${$g_data_set};
 			unset($csv);
 			// csv call back
-			for($i=0 ; $i < $this->csv_callback_index ; $i++) {
+			for($i=0; $i < $this->csv_callback_index; $i++) {
 				$param = array('row' => &$row, 'cnt' => $record_cnt);
 
 				if($this->csv_callback[$i]['param']) {
@@ -702,8 +702,8 @@
 			$refrow = $this->excel_config['detail_start_row'];
 			$refcol = $this->excel_config['detail_start_col'];
 
-			for($i=0 ; $i < $this->excel_callback_index ; $i++) {
-				$param = array( 'row' => &$row);
+			for($i=0; $i < $this->excel_callback_index; $i++) {
+				$param = array('row' => &$row);
 
 				$obj = $this->excel_callback[$i]['obj'];
 				$method = $this->excel_callback[$i]['method'];
@@ -847,7 +847,7 @@
 					$start_page = 1;
 				}
 			}
-			for($i=0 ; $i < $limit ; $i++) {
+			for($i=0; $i < $limit; $i++) {
 				if($i+$start_page == $this->page_no) {
 					$html.= $disp_image['current_page']['start_html'] . $this->page_no . $disp_image['current_page']['end_html'];
 				}
@@ -881,17 +881,10 @@
 			}
 
 			if($disp_image['information']) {
-				$html.= $disp_image['information']['start_html'];
-				$html.= $disp_image['information']['record_cnt']['start_html'];
-				$html.= $this->record_cnt;
-				$html.= $disp_image['information']['record_cnt']['end_html'];
-				$html.= $disp_image['information']['record_from']['start_html'];
-				$html.= $record_from;
-				$html.= $disp_image['information']['record_from']['end_html'];
-				$html.= $disp_image['information']['record_to']['start_html'];
-				$html.= $record_to;
-				$html.= $disp_image['information']['record_to']['end_html'];
-				$html.= $disp_image['information']['end_html'];
+				$information = str_replace('%TOTAL%', $this->record_cnt, $disp_image['information']);
+				$information = str_replace('%RECORD_FROM%', $record_from, $information);
+				$information = str_replace('%RECORD_TO%', $record_to, $information);
+				$html.= $information;
 			}
 
 			$html.= $this->pager['end_html'] . "\n";

@@ -56,7 +56,7 @@
 				$row = $this->db->fetch_assoc($rs);
 			}
 
-			// DBから値を設定
+			// Set value from DB
 			$row['node_id'] = $node_info['node_id'];
 			$this->form->setValue($row);
 		}
@@ -67,6 +67,9 @@
 
 		function regist() {
 			$this->form->setValue($this->post);
+
+			// Start transaction
+			$this->db->begin();
 
 			if($this->post['contents_id']) {
 				$contents_id = $this->post['contents_id'];
@@ -86,18 +89,30 @@
 					if($this->post['mode'] == 'confirm' && $row['update_datetime'] > $this->post['update_datetime']) {
 						$this->status = true;
 						$this->mode = 'confirm';
-						$this->message = "他のユーザに更新されています。\n上書きしますか？";
+						$this->message = _("Other user updated this record\nAre you sure to overwrite?");
 					}
 					else {
-						$this->update($this->user_id, $contents_id);
+						$ret = $this->update($this->user_id, $contents_id);
 					}
 				}
 				else {
-					$this->insert($this->user_id, $contents_id);
+					$ret = $this->insert($this->user_id, $contents_id);
 				}
 			}
 			else {
-				$this->selectInsert($this->user_id, $contents_id);
+				$ret = $this->selectInsert($this->user_id, $contents_id);
+			}
+
+			// End transaction
+			if($ret) {
+				$this->db->commit();
+				$this->status = true;
+				$this->message = _('Saved');
+			}
+			else {
+				$this->db->rollback();
+				$this->status = false;
+				$this->message =  _('It failed to save');
 			}
 
 			$response['status'] = $this->status;
@@ -114,9 +129,6 @@
 		}
 
 		function update($user_id, $contents_id) {
-			// start transaction
-			$this->db->begin();
-
 			$this->form->getValue($contents_data);
 
 			$contents_data['contents_id'] = $contents_id;
@@ -125,24 +137,10 @@
 			$contents_data['version_id'] = $this->version['working_version_id'];
 			$contents_data['revision_id'] = $this->version['revision_id'];
 
-			$ret = $this->contents_table->update($contents_data);
-
-			if($ret) {
-				$this->db->commit();
-				$this->status = true;
-				$this->message = "保存しました";
-			}
-			else {
-				$this->db->rollback();
-				$this->status = false;
-				$this->message = "保存に失敗しました";
-			}
+			return $this->contents_table->update($contents_data);
 		}
 
 		function insert($user_id, $contents_id) {
-			// start transaction
-			$this->db->begin();
-
 			$this->form->getValue($contents_data);
 
 			$contents_data['create_user'] = $user_id;
@@ -154,23 +152,10 @@
 			$contents_data['revision_id'] = $this->version['revision_id'];
 			$contents_data['contents_id'] = $contents_id;
 
-			$ret = $this->contents_table->insert($contents_data);
-			if($ret) {
-				$this->db->commit();
-				$this->status = true;
-				$this->message = "保存しました";
-			}
-			else {
-				$this->db->rollback();
-				$this->status = false;
-				$this->message = "保存に失敗しました";
-			}
+			return $this->contents_table->insert($contents_data);
 		}
 
 		function selectInsert($user_id, &$contents_id) {
-			// start transaction
-			$this->db->begin();
-
 			$this->form->getValue($contents_data);
 
 			$contents_data['create_user'] = $user_id;
@@ -198,21 +183,19 @@
 				$ret = $this->node->setContentsId($contents_id, $user_id);
 			}
 
-			if($ret) {
-				$this->db->commit();
-				$this->status = true;
-				$this->message = "保存しました";
-			}
-			else {
-				$this->db->rollback();
-				$this->status = false;
-				$this->message = "保存に失敗しました";
-			}
+			return $ret;
 		}
 
 		function view() {
+			// Start buffering
+			ob_start();
 
-			// HTTPヘッダー出力
+			require_once('./view/view_form.php');
+
+			// Get buffer
+			$contents = ob_get_clean();
+
+			// Send HTTP header
 			$this->sendHttpHeader();
 
 			$this->html_header->appendProperty('css', '<link href="css/template_form.css" type="text/css" rel="stylesheet" media="all" />');
@@ -230,19 +213,18 @@
 			$this->html_header->appendProperty('script', '<script src="js/ace/mode-css.js" type="text/javascript"></script>');
 			$this->html_header->appendProperty('script', '<script src="js/ace/mode-php.js" type="text/javascript"></script>');
 
-			// HTMLヘッダー出力
+			// Show HTML header
 			$this->showHtmlHeader();
 
-			require_once('./view/view_form.php');
+			// Show HTML body
+			echo $contents;
 		}
 
 		function view_folder() {
-			// HTTPヘッダー出力
 			$this->sendHttpHeader();
 
 			$this->html_header->appendProperty('css', '<link href="css/template_form.css" type="text/css" rel="stylesheet" media="all" />');
 
-			// HTMLヘッダー出力
 			$this->showHtmlHeader();
 
 			echo '<body></body>';

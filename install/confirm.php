@@ -6,22 +6,14 @@
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
 	error_reporting(E_ALL & ~E_DEPRECATED & ~E_NOTICE & ~E_STRICT);
-	ini_set('display_errors','Off');
+	ini_set('display_errors','On');
 	set_error_handler('exception_error_handler');
 
 	// CHARSET
 	define('B_CHARSET', 'UTF-8');
 	mb_internal_encoding(B_CHARSET);
 
-	require_once('config/_form_config.php');
-	require_once('../bs-admin/class/B_Element.php');
-	require_once('../bs-admin/class/B_Session.php');
-	$db_install_form = new B_Element($db_install_form_config);
-	$admin_basic_auth_form = new B_Element($admin_basic_auth_config);
-	$admin_user_form = new B_Element($admin_user_form_config);
-	$root_htaccess = new B_Element($root_htaccess_config);
-
-	// start session
+	// Start session
 	$info = pathinfo($_SERVER['SCRIPT_NAME']);
 	$root_dir = dirname($info['dirname']);
 	if(substr($root_dir, -1) == '/') {
@@ -34,9 +26,33 @@
 	define('SESSION_DIR', $info['dirname']);
 	define('ROOT_DIR', $root_dir . '/');
 	define('DOC_ROOT', $doc_root);
+	define('LANG', 'en');
+
+	require_once('../bs-admin/class/B_Session.php');
 
 	$ses = new B_Session;
 	$ses->start('nocache', 'bs-install', SESSION_DIR);
+
+	// Document root directory
+	if(substr($_SERVER['DOCUMENT_ROOT'], -1) == '/') {
+		define('B_DOC_ROOT', substr($_SERVER['DOCUMENT_ROOT'], 0, -1));
+	}
+	else {
+		define('B_DOC_ROOT', $_SERVER['DOCUMENT_ROOT']);
+	}
+
+	// Directory for admin page
+	define('B_ADMIN_ROOT', ROOT_DIR . 'bs-admin/');
+
+	require_once('../bs-admin/config/language.php');
+
+	require_once('config/_form_config.php');
+	require_once('../bs-admin/class/B_Element.php');
+	require_once('../bs-admin/class/B_Session.php');
+	$db_install_form = new B_Element($db_install_form_config);
+	$admin_basic_auth_form = new B_Element($admin_basic_auth_config);
+	$admin_user_form = new B_Element($admin_user_form_config);
+	$root_htaccess = new B_Element($root_htaccess_config);
 
 	$db_install_form->setValue($_SESSION['param']);
 	$admin_basic_auth_form->setValue($_SESSION['param']);
@@ -59,14 +75,25 @@
 		}
 	}
 
-	// HTTPヘッダー出力
+	// Send HTTP header
 	header('Cache-Control: no-cache, must-revalidate'); 
 	header('Content-Language: ja');
 	header('Content-Type: text/html; charset=UTF-8');
 
-	// HTML 出力
-	include('./view/view_confirm.php');
+	// Show HTML
+	$view_folder = getViewFolder();
+	include('./view/' . $view_folder . 'view_confirm.php');
 	exit;
+
+	function getViewFolder() {
+		switch($_SESSION['language']) {
+		case 'jp':
+			return 'jp/';
+
+		default:
+			return;
+		}
+	}
 
 	function install($db_install_form, $admin_basic_auth_form, $admin_user_form, $root_htaccess, &$error_message) {
 		$db_install_form->getValue($param);
@@ -88,15 +115,17 @@
 			$password = $param['basic_auth_id'] . ':' . htpasswd($param['basic_auth_pwd']);
 			file_put_contents('../bs-admin/.htpassword', $password);
 
-			// setup admin user file
+			// setup built-in admin user file
 			$contents = file_get_contents('./config/_users.php');
 			$contents = str_replace('%USER_NAME%',  $param['admin_user_name'], $contents);
 			$contents = str_replace('%USER_ID%',  $param['admin_user_id'], $contents);
 			$contents = str_replace('%PASSWORD%', md5($param['admin_user_pwd']), $contents);
+			$contents = str_replace('%LANGUAGE%', $_SESSION['language'], $contents);
 			file_put_contents('../bs-admin/user/users.php', $contents);
 
 			// setup core_config(current_root)
 			$contents = file_get_contents('./config/_core_config.php');
+			$contents = str_replace('%LANGUAGE%', $_SESSION['language'], $contents);
 			$contents = str_replace('%CURRENT_ROOT%', ROOT_DIR, $contents);
 			$contents = str_replace('%DB_PREFIX%', $param['db_prefix'], $contents);
 			file_put_contents('../bs-admin/config/core_config.php', $contents);
@@ -182,10 +211,10 @@
 	}
 
 	function exception_error_handler($errno, $errstr, $errfile, $errline) {
-	    if(!(error_reporting() & $errno)) {
-	        // error_reporting 設定に含まれていないエラーコードです
-	        return;
-	    }
+		if(!(error_reporting() & $errno)) {
+			// error_reporting, unexpected error has occurred
+			return;
+		}
 
-	    throw new ErrorException($errstr, 0, $errno, $errfile, $errline);
+		throw new ErrorException($errstr, 0, $errno, $errfile, $errline);
 	}

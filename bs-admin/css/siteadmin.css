@@ -41,3 +41,6 @@ input.regist-button:hover, input.regist-buttonHover {
 	width: auto;
 	overflow: visible;
 }
+span.notice {
+	margin-left: 10px;
+}

@@ -22,19 +22,19 @@
 	$ses->start('nocache', 'bs-install', SESSION_DIR);
 	$ses->end();
 
-	// HTTPヘッダー出力
+	// Send HTTP header
 	header('Cache-Control: no-cache, must-revalidate'); 
 	header('Content-Language: ja');
 	header('Content-Type: text/html; charset=UTF-8');
 
-	// HTML 出力
+	// show HTML
 	include('./view/view_complete.php');
 
 	function exception_error_handler($errno, $errstr, $errfile, $errline) {
-	    if(!(error_reporting() & $errno)) {
-	        // error_reporting 設定に含まれていないエラーコードです
-	        return;
-	    }
+		if(!(error_reporting() & $errno)) {
+			// error_reporting, unexpected error has occurred
+			return;
+		}
 
-	    throw new ErrorException($errstr, 0, $errno, $errfile, $errline);
+		throw new ErrorException($errstr, 0, $errno, $errfile, $errline);
 	}

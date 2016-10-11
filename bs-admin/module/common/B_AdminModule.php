@@ -16,16 +16,21 @@
 			require_once(B_DOC_ROOT . B_ADMIN_ROOT . 'module/common/config/html_header_config.php');
 			$this->createHtmlHeader($html_header_config);
 
+			// Version info
+			$this->getVersionInfo();
+
+			require_once(B_DOC_ROOT . B_ADMIN_ROOT . 'module/common/config/pager_config.php');
+			$this->pager_config = $pager_config;
+		}
+
+		function getVersionInfo() {
 			$sql = "select * from " . B_DB_PREFIX . "v_current_version";
 			$rs = $this->db->query($sql);
 			$this->version = $this->db->fetch_assoc($rs);
 
-			// version info
-			$this->version_info = '　公開バージョン：' . $this->version['current_version'] . '　';
-			$this->version_info.= '　作業中バージョン：' . $this->version['working_version'];
-
-			require_once(B_DOC_ROOT . B_ADMIN_ROOT . 'module/common/config/pager_config.php');
-			$this->pager_config = $pager_config;
+			// Set version info
+			$this->version_info = _('Publish version') . ':' . $this->version['current_version'] . '　';
+			$this->version_info.= _('Working version') . ':' . $this->version['working_version'];
 		}
 
 		function removeCacheFile() {

@@ -29,6 +29,7 @@
 
 		if(param) {
 			var filebrowser = bframe.getParam('filebrowser', param);
+			var language = bframe.getParam('language', param);
 		}
 
 		setUpCKEditor();
@@ -50,7 +51,8 @@
 			,['Templates']
 			];
 
-			CKEDITOR.config.language = 'ja';
+			// language
+			CKEDITOR.config.language = language;
 			CKEDITOR.config.autoParagraph = false;
 
 			CKEDITOR.config.coreStyles_bold = {element : 'span', attributes : {'style' : 'font-weight:bold' }};

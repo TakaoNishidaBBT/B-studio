@@ -7,6 +7,7 @@
 */
 $form_config = array(
 	array('class' => 'B_Hidden', 'name' => 'baseHref', 'value' => B_SITE_BASE),
+	array('class' => 'B_Hidden', 'name' => 'visual_editor_language', 'value' => $_SESSION['language']),
 	array('class' => 'B_Hidden', 'name' => 'node_id'),
 	array('class' => 'B_Hidden', 'name' => 'contents_id'),
 	array('class' => 'B_Hidden', 'name' => 'update_datetime'),
@@ -26,8 +27,8 @@ $form_config = array(
 				'id'				=> 'open_widgetmanager',
 				'class'				=> 'B_Link',
 				'link'				=> 'index.php',
-				'value'				=> 'ウィジェット',
-				'special_html'		=> 'title="ウィジェット" style="display:none"',
+				'value'				=> _('Widget'),
+				'special_html'		=> 'title="' . _('Widget') . '" style="display:none"',
 				'fixedparam'		=>
 				array(
 					'terminal_id'	=> TERMINAL_ID,
@@ -93,7 +94,7 @@ $form_config = array(
 	),
 );
 
-//tab control
+//Tab control
 $tab_control_config = array(
 	'start_html'	=> '<ul class="tabcontrol">',
 	'end_html'		=> '</ul>',
@@ -104,7 +105,7 @@ $tab_control_config = array(
 		'end_html'			=> '</li>',
 		'link'				=> 'html',
 		'special_html'		=> 'class="bframe_tab" onclick="bframe.inline.blur()"',
-		'value'				=> 'HTML',
+		'value'				=> _('HTML'),
 	),
 	array(
 		'name'				=> 'visual_editor_index',
@@ -113,7 +114,7 @@ $tab_control_config = array(
 		'end_html'			=> '</li>',
 		'link'				=> 'visual',
 		'special_html'		=> 'class="bframe_tab" onclick="bframe.inline.submit(\'F1\', \'' . B_SITE_BASE . 'index.php' . '\', \'inline\', \'inline_frame\'); return false;"',
-		'value'				=> 'ビジュアル',
+		'value'				=> _('WYSWYG'),
 	),
 	array(
 		'name'				=> 'css_editor_index',
@@ -121,7 +122,7 @@ $tab_control_config = array(
 		'start_html'		=> '<li>',
 		'end_html'			=> '</li>',
 		'link'				=> 'css',
-		'value'				=> 'CSS',
+		'value'				=> _('CSS'),
 		'special_html'		=> 'class="bframe_tab"',
 	),
 	array(
@@ -130,7 +131,7 @@ $tab_control_config = array(
 		'start_html'		=> '<li>',
 		'end_html'			=> '</li>',
 		'link'				=> 'php',
-		'value'				=> 'PHP',
+		'value'				=> _('PHP'),
 		'special_html'		=> 'class="bframe_tab"',
 	),
 	array(
@@ -139,7 +140,7 @@ $tab_control_config = array(
 		'start_html'		=> '<li>',
 		'end_html'			=> '</li>',
 		'link'				=> 'config',
-		'value'				=> '設定',
+		'value'				=> _('Settings'),
 		'special_html'		=> 'class="bframe_tab"',
 	),
 	array(
@@ -148,7 +149,7 @@ $tab_control_config = array(
 		'start_html'		=> '<li>',
 		'end_html'			=> '</li>',
 		'link'				=> 'preview',
-		'value'				=> 'プレビュー',
+		'value'				=> _('Preview'),
 		'special_html'		=> 'class="bframe_tab" onclick="bframe.preview.submit(\'F1\', \'' . B_SITE_BASE . 'index.php' . '\', \'preview\', \'preview_frame\'); return false;"',
 	),
 	array(
@@ -162,7 +163,7 @@ $tab_control_config = array(
 				'name'			=> 'regist',
 				'start_html'	=> '<span id="regist" class="regist-button" onclick="bframe.ajaxSubmit.submit(\'F1\', \'' . $this->module . '\', \'form\', \'regist\', \'confirm\', true)">',
 				'end_html'		=> '</span>',
-				'value'			=> '<img src="images/common/save.png" alt="保存" />保存',
+				'value'			=> '<img src="images/common/save.png" alt="' . _('Save') . '" />' . _('Save'),
 			),
 		),
 		array(
@@ -178,11 +179,11 @@ $tab_control_config = array(
 
 $config_form_config = array(
 	array(
-		// テーブル
+		// Table
 		'start_html'	=> '<table class="form" border="0" cellspacing="0" cellpadding="0"><tbody>',
 		'end_html'		=> '</tbody></table>',
 
-		// タイトル
+		// Title
 		array(
 			'start_html'    => '<tr>',
 			'end_html'	    => '</tr>',
@@ -190,7 +191,7 @@ $config_form_config = array(
 				'start_html'			=> '<th>',
 				'end_html'				=> '</th>',
 				array(
-					'value'				=> 'タイトル',
+					'value'				=> _('Title'),
 					'no_linefeed'		=> true,
 				),
 			),
@@ -205,14 +206,14 @@ $config_form_config = array(
 				),
 			),
 		),
-		// テンプレート
+		// Template
 		array(
 			'start_html'    => '<tr>',
 			'end_html'	    => '</tr>',
 			array(
 				'start_html'		=> '<th>',
 				'end_html'			=> '</th>',
-				'value'				=> 'テンプレート　　',
+				'value'				=> _('Template'),
 			),
 			array(
 				'start_html'		=> '<td>',
@@ -230,7 +231,7 @@ $config_form_config = array(
 					'name'				=> 'open_template',
 					'class'				=> 'B_Link',
 					'link'				=> 'index.php',
-					'special_html'		=> 'title="テンプレート設定" class="settings-button" onclick="top.bframe.modalWindow.activate(this, window, \'template_id\'); return false;" params="width:350,height:400"',
+					'special_html'		=> 'title="' . _('Template') . '" class="settings-button" onclick="top.bframe.modalWindow.activate(this, window, \'template_id\'); return false;" params="width:350,height:400"',
 					'fixedparam'		=>
 					array(
 						'terminal_id'		=> TERMINAL_ID,
@@ -238,18 +239,18 @@ $config_form_config = array(
 						'page'				=> 'select_tree',
 					),
 					'specialchars'		=> 'none',
-					'value'				=> '<img alt="テンプレート" src="images/common/gear_gray.png" />',
+					'value'				=> '<img alt="' . _('Template') . '" src="images/common/gear_gray.png" />',
 				),
 				array(
 					'class'				=> 'B_Link',
 					'link'				=> '#',
-					'special_html'		=> 'title="クリア" class="clear-button" onclick="bstudio.clearText(\'template_name\', \'template_id\'); return false;" ',
+					'special_html'		=> 'title="' . _('Clear') . '" class="clear-button" onclick="bstudio.clearText(\'template_name\', \'template_id\'); return false;" ',
 					'specialchars'		=> 'none',
-					'value'				=> '<img alt="クリア" src="images/common/clear_gray.png" />',
+					'value'				=> '<img alt="' . _('Clear') . '" src="images/common/clear_gray.png" />',
 				),
 			),
 		),
-		// breadcrumbs
+		// Breadcrumbs
 		array(
 			'start_html'    => '<tr>',
 			'end_html'	    => '</tr>',
@@ -257,7 +258,7 @@ $config_form_config = array(
 				'start_html'			=> '<th>',
 				'end_html'				=> '</th>',
 				array(
-					'value'				=> 'breadcrumbs',
+					'value'				=> _('Breadcrumbs'),
 					'no_linefeed'		=> true,
 				),
 			),
@@ -272,14 +273,14 @@ $config_form_config = array(
 				),
 			),
 		),
-		// keywords
+		// Keywords
 		array(
 			'start_html'    => '<tr>',
 			'end_html'	    => '</tr>',
 			array(
 				'start_html'			=> '<th>',
 				'end_html'				=> '</th>',
-				'value'					=> 'keywords',
+				'value'					=> _('Keywords'),
 			),
 			array(
 				'start_html'			=> '<td>',
@@ -291,14 +292,14 @@ $config_form_config = array(
 				),
 			),
 		),
-		// description
+		// Description
 		array(
 			'start_html'    => '<tr>',
 			'end_html'	    => '</tr>',
 			array(
 				'start_html'			=> '<th>',
 				'end_html'				=> '</th>',
-				'value'					=> 'description',
+				'value'					=> _('Description'),
 			),
 			array(
 				'start_html'			=> '<td>',
@@ -310,14 +311,14 @@ $config_form_config = array(
 				),
 			),
 		),
-		// 外部css
+		// External CSS
 		array(
 			'start_html'    => '<tr>',
 			'end_html'	    => '</tr>',
 			array(
 				'start_html'			=> '<th>',
 				'end_html'				=> '</th>',
-				'value'					=> '外部css',
+				'value'					=> _('External CSS'),
 			),
 			array(
 				'start_html'			=> '<td>',
@@ -329,14 +330,14 @@ $config_form_config = array(
 				),
 			),
 		),
-		// 外部javascript
+		// External javascript
 		array(
 			'start_html'    => '<tr>',
 			'end_html'	    => '</tr>',
 			array(
 				'start_html'			=> '<th>',
 				'end_html'				=> '</th>',
-				'value'					=> '外部javascript',
+				'value'					=> _('External javascript'),
 			),
 			array(
 				'start_html'			=> '<td>',
@@ -348,14 +349,14 @@ $config_form_config = array(
 				),
 			),
 		),
-		// ヘッダー要素
+		// Header elements
 		array(
 			'start_html'    => '<tr>',
 			'end_html'	    => '</tr>',
 			array(
 				'start_html'			=> '<th>',
 				'end_html'				=> '</th>',
-				'value'					=> 'ヘッダー要素',
+				'value'					=> _('Header elements'),
 			),
 			array(
 				'start_html'			=> '<td>',

@@ -43,14 +43,12 @@
 		}
 
 		function view() {
-			// HTTPヘッダー出力
 			$this->sendHttpHeader();
 
 			$this->html_header->appendProperty('css', '<link href="css/template_tree.css" type="text/css" rel="stylesheet" media="all" />');
 			$this->html_header->appendProperty('script', '<script src="js/bframe_tree.js" type="text/javascript"></script>');
 			$this->showHtmlHeader();
 
-			// HTMLヘッダー出力
 			require_once('./view/view_select_tree.php');
 		}
 

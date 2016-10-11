@@ -1,5 +1,5 @@
 <body>
-	<div id="header"><h2 class="user">ユーザ設定</h2></div>
+	<div id="header"><h2 class="user"><?php echo _('Users'); ?></h2></div>
 
 	<form name="F1" method="post" action="index.php">
 		<div id="control">
@@ -11,7 +11,6 @@
 					echo '<p class="error-message">' . $this->action_message . '</p>' . "\n";
 				}
 			?>
-			<p><span class="require">※</span>：必須項目</p>
 			<?php echo $this->form->getHtml($this->display_mode); ?>
 		</div>
 		<?php echo $this->form->getHiddenHtml(); ?>

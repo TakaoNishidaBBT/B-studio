@@ -1,5 +1,5 @@
 <body>
-	<div id="header"><h2 class="settings">サイト管理者設定<span></span></h2></div>
+	<div id="header"><h2 class="settings"><?php echo _('Site admin'); ?><span></span></h2></div>
 	<?php
 		if($this->action_message) {
 			echo '<span class="error-message">' . $this->action_message . '</span>' . "\n";

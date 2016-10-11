@@ -17,10 +17,11 @@
 					$_SESSION['user_id'] = $value['user_id'];
 					$_SESSION['user_name'] = $value['user_name'];
 					$_SESSION['user_auth'] = $value['user_auth'];
+					$_SESSION['language'] = $value['language'];
 					return true;
 				}
 			}
-			$sql = " select user_id, concat(f_name, g_name) user_name, pwd, user_auth from " . B_DB_PREFIX . "user";
+			$sql = " select user_id, name user_name, pwd, user_auth, language from " . B_DB_PREFIX . "user";
 			$sql.= " where user_status = '1' and user_id = binary '%USER_ID%' and pwd = binary '%PWD%'";
 
 			$sql = str_replace('%USER_ID%', $db->real_escape_string($user_id), $sql);
@@ -32,6 +33,7 @@
 				$_SESSION['user_id'] = $row['user_id'];
 				$_SESSION['user_name'] = $row['user_name'];
 				$_SESSION['user_auth'] = $row['user_auth'];
+				$_SESSION['language'] = $row['language'];
 				return true;
 			}
 			return false;

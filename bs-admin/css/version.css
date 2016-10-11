@@ -39,7 +39,16 @@ div.list-header {
 }
 div.contents {
 	margin: 40px auto 60px;
-	width: 600px;
+	width: 680px;
+}
+span.condition {
+	margin-left: 16px;
+	background-color: #f00;
+	color: #fff;
+	padding: 8px 12px;
+}
+span.guidance {
+	display: block;
 }
 div.info {
 	padding-left:23%;
@@ -72,7 +81,7 @@ span.version-button img {
 	vertical-align: -8px;
 	margin-right: 8px;
 }
-input.regist-button {
+input.register-button {
 	padding: 10px 0;
 	line-height: 17px;
 	background: url(../images/common/right_arrow_white.png) 95% center no-repeat #205380;
@@ -83,7 +92,7 @@ input.regist-button {
 	cursor: pointer;
 	border: none;
 }
-input.regist-button:hover {
+input.register-button:hover {
 	background-color: #306390;
 }
 
@@ -100,4 +109,12 @@ input.back-button {
 }
 input.back-button:hover {
 	background-color: #306390;
+}
+
+/* result message */
+span.version {
+	margin-right: 10px;
+}
+span.date-time {
+	margin-right: 10px;
 }

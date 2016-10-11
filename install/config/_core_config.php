@@ -5,8 +5,8 @@
  *
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
-	// mb_language
-	mb_language('Japanese');
+	// System Name
+	define('LANG', '%LANGUAGE%');
 
 	// System Name
 	define('B_SYSTEM_NAME', 'B-studio');
@@ -121,20 +121,6 @@
 	// Charset for xml header
 	define('B_CHARSET_XML_HEADER', 'UTF-8');
 
-	// Test Server Settings
-	if(preg_match('/www.test-server.com/', B_HTTP_HOST)) {
-		define('B_TITLE_PREFIX', '【テスト】');
-		define('B_ARCHIVE_LOG_MODE', 'DEBUG');
-	}
-	else if(preg_match('/localhost/', B_HTTP_HOST)) {
-		define('B_TITLE_PREFIX', '【テスト】');
-		define('B_ARCHIVE_LOG_MODE', 'DEBUG');
-	}
-	else {
-		define('B_TITLE_PREFIX', '');
-		define('B_ARCHIVE_LOG_MODE', '');
-	}
-
 	// ffmpeg
 	if(substr(PHP_OS, 0, 3) === 'WIN') {
 		define(FFMPEG, B_DOC_ROOT . B_ADMIN_ROOT . 'class/ffmpeg/ffmpeg_for_windows.exe');
@@ -193,10 +179,6 @@
 	define('B_COMPARE_RESOURCE_NODE_VIEW', 'v_compare_resource_node');
 	define('B_COMPARE_TEMPLATE_NODE_VIEW', 'v_compare_template_node');
 	define('B_COMPARE_WIDGET_NODE_VIEW', 'v_compare_widget_node');
-
-	// Globa Data File
-	$g_data_set = 'b_global_data';
-	require_once(B_DOC_ROOT . B_ADMIN_ROOT . 'global/' . $g_data_set . '.php');
 
 	// PHP Display Errors
 	ini_set('display_errors','Off');
