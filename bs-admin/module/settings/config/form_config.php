@@ -5,21 +5,35 @@
  *
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
+/*
+	function _($param) {
+		$lang = 'jp';
+
+		$data = array(
+			'test'	=> array(
+				'en'	=> 	'test',
+				'jp'	=> 	'テスト',
+			),
+		);
+		return $data[$param][$lang];
+
+	}
+*/
 $form_config = array(
 	array(
-		// テーブル
+		// Table
 		'start_html'	=> '<table class="form" border="0" cellspacing="0" cellpadding="0"><tbody>',
 		'end_html'		=> '</tbody></table>',
 		'db_table'		=> 'contents',
 
-		// 管理画面タイトル
+		// Admin page title
 		array(
 			'start_html'    => '<tr>',
 			'end_html'	    => '</tr>',
 			array(
 				'start_html'		=> '<th>',
 				'end_html'			=> '</th>',
-				'value'				=> '管理画面タイトル',
+				'value'				=> _('Admin page title'),
 			),
 			array(
 				'class'				=> 'B_InputText',
@@ -30,14 +44,14 @@ $form_config = array(
 			),
 	    ),
 
-		// DBバックアップ
+		// DB backup
 		array(
 			'start_html'    => '<tr>',
 			'end_html'	    => '</tr>',
 			array(
 				'start_html'		=> '<th>',
 				'end_html'			=> '</th>',
-				'value'				=> 'DBバックアップ',
+				'value'				=> _('DB backup'),
 			),
 			array(
 				'start_html'		=> '<td>',
@@ -46,12 +60,12 @@ $form_config = array(
 					'name'				=> 'backup',
 					'start_html'		=> '<span class="download-button" onclick="bframe.submit(\'F1\', \'' . $this->module . '\', \'form\', \'backupDB\', \'\', true)" >',
 					'end_html'			=> '</span>',
-					'value'				=> '<img src="images/common/download.png" alt="ダウンロード" />ダウンロード',
+					'value'				=> '<img src="images/common/download.png" alt="' . _('Download') . '" />' . _('Download'),
 				),
 			),
 	    ),
 
-		// FULLバックアップ
+		// FULL backup
 		array(
 			'name'			=> 'full_backup',
 			'display'		=> 'none',
@@ -60,7 +74,7 @@ $form_config = array(
 			array(
 				'start_html'		=> '<th>',
 				'end_html'			=> '</th>',
-				'value'				=> 'FULLバックアップ',
+				'value'				=> _('Full backup'),
 			),
 			array(
 				'start_html'		=> '<td>',
@@ -69,12 +83,12 @@ $form_config = array(
 					'name'				=> 'backup',
 					'start_html'		=> '<span class="download-button" onclick="bframe.submit(\'F1\', \'' . $this->module . '\', \'form\', \'backupAll\', \'\', true)" >',
 					'end_html'			=> '</span>',
-					'value'				=> '<img src="images/common/download.png" alt="ダウンロード" />ダウンロード',
+					'value'				=> '<img src="images/common/download.png" alt="' . _('Download') . '" />' . _('Download'),
 				),
 			),
 	    ),
 
-		// 再インストール用バックアップ
+		// Full backup for re-install
 		array(
 			'name'			=> 'full_backup2',
 			'display'		=> 'none',
@@ -83,7 +97,7 @@ $form_config = array(
 			array(
 				'start_html'		=> '<th>',
 				'end_html'			=> '</th>',
-				'value'				=> '再インストール用バックアップ',
+				'value'				=> _('Re-install backup'),
 			),
 			array(
 				'start_html'		=> '<td>',
@@ -92,7 +106,7 @@ $form_config = array(
 					'name'				=> 'backup',
 					'start_html'		=> '<span class="download-button" onclick="bframe.submit(\'F1\', \'' . $this->module . '\', \'form\', \'backupAll\', \'install\', true)" >',
 					'end_html'			=> '</span>',
-					'value'				=> '<img src="images/common/download.png" alt="ダウンロード" />ダウンロード',
+					'value'				=> '<img src="images/common/download.png" alt="' . _('Download') . '" />' . _('Download'),
 				),
 			),
 	    ),
@@ -121,7 +135,7 @@ $input_control_config = array(
 		array(
 			'start_html'	=> '<span class="right-button" onclick="bframe.submit(\'F1\', \'' . $this->module . '\', \'form\', \'confirm\', \'\', true)">',
 			'end_html'		=> '</span>',
-			'value'			=> '確認',
+			'value'			=> _('Confirm'),
 		),
 	),
 );
@@ -137,17 +151,17 @@ $confirm_control_config = array(
 		array(
 			'start_html'	=> '<span class="left-button" onclick="bframe.submit(\'F1\', \'' . $this->module . '\', \'form\', \'back\', \'\')">',
 			'end_html'		=> '</span>',
-			'value'			=> '戻る',
+			'value'			=> _('Back'),
 		),
 	),
 	array(
-		'name'			=> 'regist',
+		'name'			=> 'register',
 		'start_html'	=> '<li>',
 		'end_html'		=> '</li>',
 		array(
-			'start_html'	=> '<span class="right-button" onclick="bframe.submit(\'F1\', \'' . $this->module . '\', \'form\', \'regist\', \'\')">',
+			'start_html'	=> '<span class="right-button" onclick="bframe.submit(\'F1\', \'' . $this->module . '\', \'form\', \'register\', \'\')">',
 			'end_html'		=> '</span>',
-			'value'			=> '登録',
+			'value'			=> _('Save'),
 		),
 	),
 
@@ -164,7 +178,7 @@ $result_control_config = array(
 		array(
 			'start_html'	=> '<span class="left-button" style="width:180px" onclick="bframe.submit(\'F1\', \'' . $this->module . '\', \'form\', \'\', \'\')">',
 			'end_html'		=> '</span>',
-			'value'			=> '設定画面に戻る',
+			'value'			=> _('Back to configuration form'),
 		),
 	),
 );

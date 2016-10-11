@@ -1,5 +1,5 @@
 <body spellcheck="false" onload="bframe.effect.fadeIn(document.body, 100, 0, 100, 50);" style="opacity:0">
-	<h2><span class="accent"></span>ファイル管理</h2>
+	<h2><span class="accent"></span><?php echo _('File manager'); ?></h2>
 	<div class="header"></div>
 	<div id="bframe_tree_container" class="bframe_tree_container bframe_splitter_pane bframe_adjustwindow" param="margin:10">
 		<div id="tree_box" class="bframe_adjustparent" param="margin:1">
@@ -13,7 +13,7 @@
 				<form id="form1" method="post" enctype="multipart/form-data">
 					<div>
 						<input id="upload_file" type="file" multiple="multiple" name="Filedata[]" class="bframe_uploader" style="display:none;" />
-						<a href="#" title="click here or drop images to this pane"><span id="upload_button" class="upload-button"><img src="images/common/upload.png" alt="アップロード" />アップロード</span></a>
+						<a href="#" title="click here or drop images to this pane"><span id="upload_button" class="upload-button"><img src="images/common/upload.png" alt="Upload" /><?php echo _('Upload'); ?></span></a>
 					</div>
 				</form>
 			</li>

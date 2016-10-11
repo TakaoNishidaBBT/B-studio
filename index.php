@@ -12,17 +12,18 @@
 	require_once(B_DOC_ROOT . B_ADMIN_ROOT . 'class/B_Session.php');
 	$ses = new B_Session;
 
-	// to get real url
+	// To get real url
 	$url = $_SERVER['REQUEST_URI'];
 	$url = preg_replace('"^' . B_CURRENT_ROOT . '"', '', $url);
 	$url = preg_replace('/\?.*/', '', $url);
 	$url = urldecode($url);
 	$_REQUEST['url'] = $url;
 
-	// not start session. just read the session valiable for check admin mode or not.
+	// Not start session. Just read the session valiable for check admin mode or not.
 	$session = $ses->read(B_ADMIN_SESSION_NAME);
 	if($session['terminal_id'] && $session['user_id']) {
 		$admin_mode = true;
+		$admin_language = $session['language'];
 		$file_info = B_FILE_INFO_W;
 		$semaphore = B_FILE_INFO_SEMAPHORE_W;
 		$node_view = B_WORKING_RESOURCE_NODE_VIEW;
@@ -54,7 +55,7 @@
 		}
 	}
 
-	// if cache file not exists
+	// If cache file not exists
 	if(!file_exists($file_info) || !filesize($file_info)) {
 		createCacheFile($file_info, $semaphore, $node_view);
 	}
@@ -63,7 +64,7 @@
 		$serializedString = file_get_contents($file_info);
 		$info = unserialize($serializedString);
 
-		// if requested file exists in resource cache file
+		// If requested file exists in resource cache file
 		if($info[$url]) {
 			if(isset($_SERVER['HTTP_IF_MODIFIED_SINCE'])) {
 				if(strtotime($_SERVER['HTTP_IF_MODIFIED_SINCE']) >= filemtime($file_info)) {

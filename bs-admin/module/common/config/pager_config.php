@@ -9,7 +9,7 @@ $pager_config =
 array(
 	'row_per_page'	=> '10',
 	'page_link_max'	=> '5',
-	'start_html'	=> '<ul class="page-locator"><li class="title">ページ ：</li>',
+	'start_html'	=> '<ul class="page-locator"><li class="title">' . _('Page:') . '</li>',
 	'end_html'		=> '</ul>',
 	'location'		=>
 	array(
@@ -60,24 +60,6 @@ array(
 			'end_html'		=> '</li>',
 			'value'			=> '<img src="images/pagenation/last.png" alt="next" />',
 		),
-		'information'	=>
-		array(
-			'start_html'	=> '<li class="page_info">',
-			'end_html'		=> '</li>',
-			'record_cnt'	=>
-			array(
-				'start_html'	=> ' 全',
-				'end_html'		=> '件中',
-			),
-			'record_from'	=>
-			array(
-				'start_html'	=> '&nbsp;&nbsp;',
-				'end_html'		=> '～',
-			),
-			'record_to'	=>
-			array(
-				'end_html'		=> '件目',
-			),
-		),
+		'information'	=> '<li class="page_info">' . _('Displaying %RECORD_FROM% to %RECORD_TO% of %TOTAL% items') . '</li>'
 	),
 );

@@ -6,7 +6,7 @@
 		eval('?>' . $__start_html);
 	}
 	if($__innerHTML) {
-		// protect php tag
+		// To protect php tag
 		$__innerHTML = str_replace('<?', '<!-----?', $__innerHTML);
 		$__innerHTML = str_replace('?>', '?----->', $__innerHTML);
 		echo $__innerHTML;

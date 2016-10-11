@@ -534,8 +534,6 @@
 			else {
 				p_top = clientY - parseInt(element.offsetHeight) + 2;
 			}
-			p_left += document.body.scrollLeft;
-			p_top += document.body.scrollTop;
 			return {left:Math.round(p_left), top:Math.round(p_top)};
 		}
 

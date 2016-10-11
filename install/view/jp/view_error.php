@@ -9,14 +9,20 @@
 <meta http-equiv="Content-Script-Type" content="text/javascript">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="css/install.css" type="text/css" media="all" />
-<title>Install B-studio</title>
+<title>B-studioのインストール</title>
 </head>
 <body>
-	<h1>Install B-studio</h1>
+	<h1>B-studioのインストール</h1>
 
-	<p>Complete.</p>
+	<p class="error"><?php echo $this->error_message; ?></p>
+	<fieldset>
+		<legend>Error Message</legend>
+		<?php echo $this->db_error_message; ?>
+	</fieldset>
 
-	<p><a href="../bs-admin/" title="管理画面">To admin page</a></p>
+	<ul class="control">
+		<li><input type="button" class="button" name="button" value="戻る" onclick="history.back();"  /></li>
+	</ul>
 
 </body>
 </html>

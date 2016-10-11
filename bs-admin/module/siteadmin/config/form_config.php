@@ -7,19 +7,43 @@
 */
 $form_config = array(
 	array(
-		// テーブル
+		// Required message
+		array(
+			'class'			=> 'B_Guidance',
+			'start_html'	=> '<p>',
+			'end_html'		=> '</p>',
+			array(
+				'class'			=> 'B_Guidance',
+				'start_html'	=> '<span class="require">',
+				'end_html'		=> '</span>',
+				'value'			=> _('*'),
+			),
+			array(
+				'class'			=> 'B_Guidance',
+				'value'			=> _(' is required field'),
+			),
+		),
+
+		// Table
 		'start_html'	=> '<table class="form" border="0" cellspacing="0" cellpadding="0"><tbody>',
 		'end_html'		=> '</tbody></table>',
 
-		// ユーザ名
+		// User name
 		array(
-			'start_html'    => '<tr>',
-			'end_html'	    => '</tr>',
+			'error_group'	=> true,
+			'start_html'	=> '<tr>',
+			'end_html'		=> '</tr>',
 			array(
 				'start_html'			=> '<th>',
-				'invalid_start_html'	=> '<th class="error">',
 				'end_html'				=> '</th>',
-				'value'					=> 'ユーザ名<span class="require">※</span>',
+				'invalid_start_html'	=> '<th class="error">',
+				array(
+					'value'				=> _('User name'),
+				),
+				array(
+					'class'				=> 'B_Guidance',
+					'value'				=> '<span class="require">' . _('*') . '</span>',
+				),				
 			),
 			array(
 				'start_html'    => '<td>',
@@ -32,7 +56,7 @@ $form_config = array(
 					array(
 						array(
 							'type' 			=> 'required',
-							'error_message'	=> 'ユーザ名を入力してください',
+							'error_message'	=> _('Please enter user name'),
 						),
 					),
 				),
@@ -45,19 +69,26 @@ $form_config = array(
 			),
 		),
 
-		// ログインID
+		// Login ID
 		array(
-			'start_html'    => '<tr>',
-			'end_html'	    => '</tr>',
+			'error_group'	=> true,
+			'start_html'	=> '<tr>',
+			'end_html'		=> '</tr>',
 			array(
 				'start_html'			=> '<th>',
-				'invalid_start_html'	=> '<th class="error">',
 				'end_html'				=> '</th>',
-				'value'					=> 'ログインID<span class="require">※</span>',
+				'invalid_start_html'	=> '<th class="error">',
+				array(
+					'value'					=> _('Login ID'),
+				),
+				array(
+					'class'				=> 'B_Guidance',
+					'value'				=> '<span class="require">' . _('*') . '</span>',
+				),				
 			),
 			array(
-				'start_html'    => '<td>',
-				'end_html'	    => '</td>',
+				'start_html'	=> '<td>',
+				'end_html'		=> '</td>',
 				array(
 					'name'					=> 'admin_user_id',
 					'class'					=> 'B_InputText',
@@ -66,18 +97,18 @@ $form_config = array(
 					array(
 						array(
 							'type' 			=> 'required',
-							'error_message'	=> 'ログインIDを入力してください',
+							'error_message'	=> _('Please enter login ID'),
 						),
 						array(
 							'type' 			=> 'pattern',
 							'pattern'		=> '^[a-zA-Z0-9\_\-]+$',
-							'error_message'	=> 'ログインIDは英数とハイフン(-)アンダーバー(_)で入力してください',
+							'error_message'	=> _('Please enter login ID using alphanumeric, hyphen(-) and underbar(_)'),
 						),
 						array(
 							'type'			=> 'callback',
 							'obj'			=> $this,
 							'method'		=> '_validate_callback',
-							'error_message'	=> '既に登録されています',
+							'error_message'	=> _('This ID is already exists'),
 						),
 					),
 				),
@@ -90,30 +121,51 @@ $form_config = array(
 			),
 		),
 
-		// パスワード
+		// Language
 		array(
-			'start_html'    => '<tr>',
-			'end_html'	    => '</tr>',
+			'start_html'	=> '<tr>',
+			'end_html'		=> '</tr>',
 			array(
-				'start_html'			=> '<th>',
-				'invalid_start_html'	=> '<th class="error">',
-				'end_html'				=> '</th>',
-				'value'					=> 'パスワード',
+				'start_html'		=> '<th>',
+				'end_html'			=> '</th>',
+				'value'				=> _('Language'),
 			),
 			array(
-				'start_html'    => '<td>',
-				'end_html'	    => '</td>',
+				'class'				=> 'B_SelectBox',
+				'name'				=> 'language',
+				'data_set'			=> 'language',
+				'start_html'		=> '<td>',
+				'end_html'			=> '</td>',
+				'value'				=> LANG,
+				'special_html'		=> 'class="bframe_selectbox"',
+			),
+	    ),
+
+		// Password
+		array(
+			'error_group'	=> true,
+			'start_html'	=> '<tr>',
+			'end_html'		=> '</tr>',
+			array(
+				'start_html'			=> '<th>',
+				'end_html'				=> '</th>',
+				'invalid_start_html'	=> '<th class="error">',
+				'value'					=> _('Password'),
+			),
+			array(
+				'start_html'	=> '<td>',
+				'end_html'		=> '</td>',
 				array(
 					'name'					=> 'admin_user_pwd',
 					'class'					=> 'B_Password',
 					'special_html'			=> 'class="textbox ime-off" size="40" maxlength="100" autocomplete="off" ',
-					'confirm_message'		=> '（設定されたパスワード）',
+					'confirm_message'		=> _('Password you set'),
 					'validate'				=>
 					array(
 						array(
 							'type' 			=> 'pattern',
 							'pattern'		=> '^[a-zA-Z0-9\_\-]+$',
-							'error_message'	=> 'パスワードは英数とハイフン(-)アンダーバー(_)で入力してください',
+							'error_message'	=> _('Please enter User ID using alphanumeric, hyphen(-) and underbar(_)'),
 						),
 					),
 				),
@@ -121,7 +173,7 @@ $form_config = array(
 					'start_html'			=> '<span class="notice">',
 					'end_html'				=> '</span>',
 					'class'					=> 'B_Guidance',
-					'value'					=> '　パスワードを変更する場合は新しいパスワードを入力し、変更しない場合は空のままにしておいてください',
+					'value'					=> _('If you change password, please enter password. If you don\'t, keep this field empty'),
 				),
 				array(
 					'name'					=> 'error_message',
@@ -132,20 +184,21 @@ $form_config = array(
 			),
 		),
 
-		// パスワード（再入力）
+		// Password (Re-entry)
 		array(
-			'start_html'    => '<tr>',
-			'end_html'	    => '</tr>',
+			'error_group'	=> true,
+			'start_html'	=> '<tr>',
+			'end_html'		=> '</tr>',
 			'confirm_mode'	=> 'none',
 			array(
 				'start_html'			=> '<th>',
-				'invalid_start_html'	=> '<th class="error">',
 				'end_html'				=> '</th>',
-				'value'					=> 'パスワード（再入力）',
+				'invalid_start_html'	=> '<th class="error">',
+				'value'					=> _('Password (Re-entry)'),
 			),
 			array(
-				'start_html'    => '<td>',
-				'end_html'	    => '</td>',
+				'start_html'	=> '<td>',
+				'end_html'		=> '</td>',
 				array(
 					'name'					=> 'admin_user_pwd2',
 					'class'					=> 'B_Password',
@@ -155,7 +208,7 @@ $form_config = array(
 						array(
 							'type' 			=> 'match',
 							'target'		=> 'admin_user_pwd',
-							'error_message'	=> 'パスワードが一致していません',
+							'error_message'	=> _('Password is not matched'),
 						),
 					),
 				),
@@ -163,7 +216,7 @@ $form_config = array(
 					'start_html'			=> '<span class="notice">',
 					'end_html'				=> '</span>',
 					'class'					=> 'B_Guidance',
-					'value'					=> '　確認のため、パスワードを再入力してください',
+					'value'					=> _('For confirmation, please re-enter password'),
 				),
 				array(
 					'name'					=> 'error_message',
@@ -198,7 +251,7 @@ $input_control_config = array(
 		array(
 			'start_html'	=> '<span class="right-button" onclick="bframe.submit(\'F1\', \'' . $this->module . '\', \'form\', \'confirm\', \'\', true)">',
 			'end_html'		=> '</span>',
-			'value'			=> '確認',
+			'value'			=> _('Confirm'),
 		),
 	),
 );
@@ -214,7 +267,7 @@ $confirm_control_config = array(
 		array(
 			'start_html'	=> '<span class="left-button" onclick="bframe.submit(\'F1\', \'' . $this->module . '\', \'form\', \'back\', \'\')">',
 			'end_html'		=> '</span>',
-			'value'			=> '戻る',
+			'value'			=> _('Back'),
 		),
 	),
 	array(
@@ -222,9 +275,9 @@ $confirm_control_config = array(
 		'start_html'	=> '<li>',
 		'end_html'		=> '</li>',
 		array(
-			'start_html'	=> '<span class="right-button" onclick="bframe.submit(\'F1\', \'' . $this->module . '\', \'form\', \'regist\', \'\')">',
+			'start_html'	=> '<span class="right-button" onclick="bframe.submit(\'F1\', \'' . $this->module . '\', \'form\', \'register\', \'\')">',
 			'end_html'		=> '</span>',
-			'value'			=> '登録',
+			'value'			=> _('Save'),
 		),
 	),
 );
@@ -240,7 +293,7 @@ $result_control_config = array(
 		array(
 			'start_html'	=> '<span class="left-button" style="width:190px" onclick="bframe.submit(\'F1\', \'' . $this->module . '\', \'form\', \'\', \'\')">',
 			'end_html'		=> '</span>',
-			'value'			=> '設定画面に戻る',
+			'value'			=> _('Back to site admin form'),
 		),
 	),
 );

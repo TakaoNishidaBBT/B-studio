@@ -11,6 +11,7 @@
 <link href="css/modal_window.css" type="text/css" rel="stylesheet" media="all" />
 <script src="js/bframe.js" type="text/javascript"></script>
 <script src="js/bframe_ajax.js" type="text/javascript"></script>
+<script src="js/bframe_message.js" type="text/javascript"></script>
 <script src="js/bframe_popup.js" type="text/javascript"></script>
 <script src="js/bframe_context_menu.js" type="text/javascript"></script>
 <script src="js/bframe_menu.js" type="text/javascript"></script>
@@ -26,11 +27,11 @@
 			<ul>
 				<li>
 					<dl class="login-user">
-						<dt>ユーザー：</dt>
+						<dt><?php echo _('User'); ?>：</dt>
 						<dd><strong><?php echo $this->user_name ?></strong></dd>
 					</dl>
 				</li>
-				<li><a href="<?php echo DISPATCH_URL ?>&amp;module=index&amp;page=logout" target="_top" >ログアウト</a></li>
+				<li><a href="<?php echo DISPATCH_URL ?>&amp;module=index&amp;page=logout" target="_top" ><?php echo _('Log out'); ?></a></li>
 			</ul>
 		</div>
 	</div>

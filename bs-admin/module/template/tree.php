@@ -26,18 +26,27 @@
 		}
 
 		function view() {
-			// HTTPヘッダー出力
+			// Start buffering
+			ob_start();
+
+			require_once('./view/view_tree.php');
+
+			// Get buffer
+			$contents = ob_get_clean();
+
+			// Send HTTP header
 			$this->sendHttpHeader();
 
-			// HTML ヘッダー出力
 			$this->html_header->appendProperty('css'
 					, '<link href="css/template_tree.css" type="text/css" rel="stylesheet" media="all">');
 			$this->html_header->appendProperty('script'
 					, '<script src="js/bframe_tree.js" type="text/javascript"></script>');
 
+			// Show HTML header
 			$this->showHtmlHeader();
 
-			require_once('./view/view_tree.php');
+			// Show HTML body
+			echo $contents;
 		}
 
 		function getNodeList() {
@@ -122,9 +131,10 @@
 
 			$node->setConfig($this->tree_config);
 
-			// start transaction
+			// Start transaction
 			$this->db->begin();
 			$ret = $node->insert($this->request['node_type'], $this->request['node_class'], $this->user_id, $new_node_id, $new_node_name);
+
 			if($ret) {
 				$this->db->commit();
 				$this->status = true;
@@ -150,7 +160,7 @@
 										, 1
 										, $this->session['open_nodes']);
 
-				// start transaction
+				// Start transaction
 				$this->db->begin();
 				$ret = $source_node->move('trash', $this->user_id);
 				if($ret) {

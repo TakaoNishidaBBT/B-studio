@@ -9,13 +9,13 @@
 <meta http-equiv="Content-Script-Type" content="text/javascript">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="css/install.css" type="text/css" media="all" />
-<title>Install B-studio</title>
+<title>B-studioのインストール</title>
 </head>
 <body>
 
 	<form method="post" action="">
 
-		<h1>Install B-studio</h1>
+		<h1>B-studioのインストール</h1>
 
 		<?php if($error_message) { ?>
 			<div class="error">
@@ -26,24 +26,24 @@
 			</div>
 		<?php } ?>
 
-		<h2>MySQL</h2>
+		<h2>MySQLのログイン情報</h2>
 
 		<fieldset>
-			<legend>Configuration DataBase</legend>
+			<legend>データベース設定</legend>
 			<?php echo $db_install_form->getHtml('confirm'); ?>
 		</fieldset>
 
-		<h2>Basic authentication of admin page</h2>
+		<h2>管理画面ベーシック認証</h2>
 
 		<fieldset>
-			<legend>Basic authentication of admin page</legend>
+			<legend>管理画面ベーシック認証</legend>
 			<?php echo $admin_basic_auth_form->getHtml('confirm'); ?>
 		</fieldset>
 
-		<h2>Site admin</h2>
+		<h2>サイト管理ユーザ</h2>
 
 		<fieldset>
-			<legend>Site admin</legend>
+			<legend>サイトの管理者</legend>
 			<?php echo $admin_user_form->getHtml('confirm'); ?>
 		</fieldset>
 
@@ -54,26 +54,26 @@
 			<?php echo $root_htaccess->getHtml('confirm'); ?>
 		</fieldset>
 
-		<h2>Install</h2>
+		<h2>インストール</h2>
 
 
 		<fieldset>
-			<legend>The following files will be created after install.</legend>
+			<legend>インストールによって作成されるファイル</legend>
 			<ul>
-				<li>(install-directory)/.htaccess</li>
-				<li>(install-directory)/bs-admin/user/users.php</li>
-				<li>(install-directory)/bs-admin/config/core_config.php</li>
-				<li>(install-directory)/bs-admin/db/db_connect.php</li>
+				<li>インストールディレクトリ/.htaccess</li>
+				<li>インストールディレクトリ/bs-admin/user/users.php</li>
+				<li>インストールディレクトリ/bs-admin/config/core_config.php</li>
+				<li>インストールディレクトリ/bs-admin/db/db_connect.php</li>
 			</ul>
-			<p><span class="caution">※</span>The files will be overwriten when files are already exist.</p>
+			<p><span class="caution">※</span>ファイルが存在する場合は上書きされます。</p>
 		</fieldset>
 
-		<p>Click "Install" button to start install in the contents above.</p>
+		<p>「インストール」ボタンをクリックすると、この内容でインストールを開始します。</p>
 
 		<div class="confirm">
 			<input name="action" value="install" type="hidden" />
-			<input type="button" class="button" value="Back" onclick="location.href='index.php'"/>
-			<input type="submit" class="button" value="Install" />
+			<input type="button" class="button" value="　戻　る　" onclick="location.href='index.php'"/>
+			<input type="submit" class="button" value="インストール" />
 		</div>
 
 	</form>

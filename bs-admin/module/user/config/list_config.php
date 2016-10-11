@@ -10,15 +10,17 @@ array(
 	'start_html'	=> '<table class="list" id="entry_list">',
 	'end_html'		=> '</table>',
 
-	'select_sql'	=> "select  id
-							  , user_id
-							  , concat(f_name, ' ', g_name) name
-							  , user_auth
-							  , user_status
+	'select_sql'	=> "select   id
+								,user_id
+								,name
+								,user_auth
+								,user_status
+								,notes
 						from " . B_DB_PREFIX . "user
 						where 1=1 ",
 
-	'empty_message'	=> '該当レコードはありません',
+	'empty_message'	=> '<span class="bold">　' . _('No record was found') . '</span>',
+
 	'header'	=>
 	array(
 		'start_html'	=> '<tr>',
@@ -28,7 +30,7 @@ array(
 			'name'			=> 'user_id',
 			'start_html'	=> '<th class="sortable" style="width:80px">',
 			'end_html'		=> '</th>',
-			'value'			=> 'ユーザID',
+			'value'			=> _('User ID'),
 			'class'			=> 'B_Link',
 			'link'			=> DISPATCH_URL,
 			'cond_html'		=> 'class="current-key"',
@@ -39,7 +41,7 @@ array(
 			'name'			=> 'name',
 			'start_html'	=> '<th class="sortable" style="width:80px">',
 			'end_html'		=> '</th>',
-			'value'			=> '氏名',
+			'value'			=> _('Name'),
 			'class'			=> 'B_Link',
 			'link'			=> DISPATCH_URL,
 			'cond_html'		=> 'class="current-key"',
@@ -50,7 +52,7 @@ array(
 			'name'			=> 'user_auth',
 			'start_html'	=> '<th class="sortable" style="width:60px">',
 			'end_html'		=> '</th>',
-			'value'			=> '権限',
+			'value'			=> _('Authority'),
 			'class'			=> 'B_Link',
 			'link'			=> DISPATCH_URL,
 			'cond_html'		=> 'class="current-key"',
@@ -61,7 +63,7 @@ array(
 			'name'			=> 'user_status',
 			'start_html'	=> '<th class="sortable" style="width:60px">',
 			'end_html'		=> '</th>',
-			'value'			=> '状態',
+			'value'			=> _('Status'),
 			'class'			=> 'B_Link',
 			'link'			=> DISPATCH_URL,
 			'cond_html'		=> 'class="current-key"',
@@ -69,14 +71,20 @@ array(
 			'param'			=> '&amp;module=' . $this->module . '&amp;page=list&amp;method=sort&amp;sort_key=user_status',
 		),
 		array(
-			'start_html'	=> '<th class="center" style="width:40px" nowrap>',
+			'name'			=> 'notes',
+			'start_html'	=> '<th class="center">',
 			'end_html'		=> '</th>',
-			'value'			=> '詳細',
+			'value'			=> _('Notes'),
 		),
 		array(
 			'start_html'	=> '<th class="center" style="width:40px" nowrap>',
 			'end_html'		=> '</th>',
-			'value'			=> '削除',
+			'value'			=> _('Edit'),
+		),
+		array(
+			'start_html'	=> '<th class="center" style="width:40px" nowrap>',
+			'end_html'		=> '</th>',
+			'value'			=> _('Delete'),
 		),
 	),
 
@@ -111,6 +119,13 @@ array(
 			'class'			=> 'B_SelectedText',
 			'data_set'		=> 'user_status',
 			'name'			=> 'user_status',
+		),
+		array(
+			'name'			=> 'memo',
+			'class'			=> 'B_Text',
+			'start_html'	=> '<td class="left">',
+			'end_html'		=> '</td>',
+			'shorten_text'	=> '50',
 		),
 		array(
 			'start_html'	=> '<td>',

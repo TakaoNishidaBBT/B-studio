@@ -10,19 +10,44 @@ $form_config = array(
 	array('class' => 'B_Hidden', 'name' => 'id'),
 	array('class' => 'B_Hidden', 'name' => 'user_id'),
 	array(
-		// テーブル
+
+		// Required message
+		array(
+			'class'			=> 'B_Guidance',
+			'start_html'	=> '<p>',
+			'end_html'		=> '</p>',
+			array(
+				'class'			=> 'B_Guidance',
+				'start_html'	=> '<span class="require">',
+				'end_html'		=> '</span>',
+				'value'			=> _('*'),
+			),
+			array(
+				'class'			=> 'B_Guidance',
+				'value'			=> _(' is required field'),
+			),
+		),
+
+		// Table
 		'start_html'	=> '<table class="form" border="0" cellspacing="0" cellpadding="0"><tbody>',
 		'end_html'		=> '</tbody></table>',
-		// ユーザID
+
+		// User ID
 		array(
 			'error_group'	=> true,
-			'start_html'    => '<tr>',
-			'end_html'	    => '</tr>',
+			'start_html'	=> '<tr>',
+			'end_html'		=> '</tr>',
 			array(
 				'start_html'			=> '<th>',
 				'end_html'				=> '</th>',
 				'invalid_start_html'	=> '<th class="error">',
-				'value'					=> 'ユーザID<span class="require">※</span>',
+				array(
+					'value'					=> _('User ID'),
+				),
+				array(
+					'class'				=> 'B_Guidance',
+					'value'				=> '<span class="require">' . _('*') . '</span>',
+				),				
 			),
 			array(
 				'start_html'			=> '<td>',
@@ -36,24 +61,24 @@ $form_config = array(
 					array(
 						array(
 							'type' 			=> 'required',
-							'error_message'	=> 'ユーザIDを入力してください',
+							'error_message'	=> _('Please enter User ID'),
 						),
 						array(
 							'type' 			=> 'pattern',
 							'pattern'		=> '^[a-zA-Z0-9\_\-]+$',
-							'error_message'	=> 'ユーザIDは英数とハイフン(-)アンダーバー(_)で入力してください',
+							'error_message'	=> _('Please enter User ID using alphanumeric, hyphen(-) and underbar(_)'),
 						),
 						array(
 							'type'			=> 'callback',
 							'obj'			=> $this,
 							'method'		=> '_validate_callback',
-							'error_message'	=> '既に登録されています',
+							'error_message'	=> _('This ID is already exists'),
 						),
 						array(
 							'type'			=> 'callback',
 							'obj'			=> $this,
 							'method'		=> '_validate_callback2',
-							'error_message'	=> 'そのIDは登録できません',
+							'error_message'	=> _('This ID can not be used'),
 						),
 					),
 				),
@@ -71,16 +96,22 @@ $form_config = array(
 			),
 		),
 
-		// パスワード
+		// Password
 		array(
 			'error_group'	=> true,
-			'start_html'    => '<tr>',
-			'end_html'	    => '</tr>',
+			'start_html'	=> '<tr>',
+			'end_html'		=> '</tr>',
 			array(
 				'start_html'			=> '<th>',
 				'invalid_start_html'	=> '<th class="error">',
 				'end_html'				=> '</th>',
-				'value'					=> 'パスワード<span class="require">※</span>',
+				array(
+					'value'					=> _('Password'),
+				),
+				array(
+					'class'				=> 'B_Guidance',
+					'value'				=> '<span class="require">' . _('*') . '</span>',
+				),				
 			),
 			array(
 				'start_html'			=> '<td>',
@@ -93,7 +124,7 @@ $form_config = array(
 					array(
 						array(
 							'type' 			=> 'required',
-							'error_message'	=> 'パスワードを入力してください。',
+							'error_message'	=> _('Please enter password'),
 						),
 					),
 				),
@@ -106,16 +137,22 @@ $form_config = array(
 			),
 	    ),
 
-		// 状態
+		// Status
 		array(
 			'error_group'	=> true,
-			'start_html'    => '<tr>',
-			'end_html'	    => '</tr>',
+			'start_html'	=> '<tr>',
+			'end_html'		=> '</tr>',
 			array(
 				'start_html'			=> '<th>',
 				'invalid_start_html'	=> '<th class="error">',
 				'end_html'				=> '</th>',
-				'value'					=> '状態<span class="require">※</span>',
+				array(
+					'value'					=> _('Status'),
+				),
+				array(
+					'class'				=> 'B_Guidance',
+					'value'				=> '<span class="require">' . _('*') . '</span>',
+				),				
 			),
 			array(
 				'name'					=> 'user_status',
@@ -123,19 +160,26 @@ $form_config = array(
 				'start_html'			=> '<td>',
 				'end_html'				=> '</td>',
 				'data_set'				=> 'user_status',
+				'special_html'			=> 'class="bframe_selectbox"',
 			),
 	    ),
 
-		// ユーザ権限
+		// Authority
 		array(
 			'error_group'	=> true,
-			'start_html'    => '<tr>',
-			'end_html'	    => '</tr>',
+			'start_html'	=> '<tr>',
+			'end_html'		=> '</tr>',
 			array(
 				'start_html'			=> '<th>',
 				'invalid_start_html'	=> '<th class="error">',
 				'end_html'				=> '</th>',
-				'value'					=> 'ユーザ権限<span class="require">※</span>',
+				array(
+					'value'					=> _('Authority'),
+				),
+				array(
+					'class'				=> 'B_Guidance',
+					'value'				=> '<span class="require">' . _('*') . '</span>',
+				),				
 			),
 			array(
 				'name'					=> 'user_auth',
@@ -143,11 +187,12 @@ $form_config = array(
 				'start_html'			=> '<td>',
 				'end_html'				=> '</td>',
 				'data_set'				=> 'user_auth',
+				'special_html'			=> 'class="bframe_selectbox"',
 				'validate'				=>
 				array(
 					array(
 						'type' 			=> 'required',
-						'error_message'	=> 'ユーザ権限を設定してください。',
+						'error_message'	=> 'Please set user privilege',
 					),
 				),
 				array(
@@ -159,56 +204,55 @@ $form_config = array(
 			),
 	    ),
 
-		// 氏名
+		// Language
+		array(
+			'start_html'	=> '<tr>',
+			'end_html'		=> '</tr>',
+			array(
+				'start_html'		=> '<th>',
+				'end_html'			=> '</th>',
+				'value'				=> _('Language'),
+			),
+			array(
+				'class'				=> 'B_SelectBox',
+				'name'				=> 'language',
+				'data_set'			=> 'language',
+				'start_html'		=> '<td>',
+				'end_html'			=> '</td>',
+				'value'				=> LANG,
+				'special_html'		=> 'class="bframe_selectbox"',
+			),
+	    ),
+
+		// Name
 		array(
 			'error_group'	=> true,
-			'start_html'    => '<tr>',
-			'end_html'	    => '</tr>',
+			'start_html'	=> '<tr>',
+			'end_html'		=> '</tr>',
 			array(
 				'start_html'			=> '<th>',
 				'invalid_start_html'	=> '<th class="error">',
 				'end_html'				=> '</th>',
 				array(
-					'value'				=> '氏名',
-					'no_linefeed'		=> true,
+					'value'				=> _('Name'),
 				),
 				array(
 					'class'				=> 'B_Guidance',
-					'value'				=> '<span class="require">※</span>',
-				),
+					'value'				=> '<span class="require">' . _('*') . '</span>',
+				),				
 			),
 			array(
-				'start_html'    => '<td>',
-				'end_html'	    => '</td>',
+				'start_html'	=> '<td>',
+				'end_html'		=> '</td>',
 				array(
-					'class'				=> 'B_Guidance',
-					'value'				=> '姓',
-				),
-				array(
-					'name'					=> 'f_name',
+					'name'					=> 'name',
 					'class'					=> 'B_InputText',
 					'special_html'			=> 'class="textbox ime-on" size="20" maxlength="100" ',
 					'validate'				=>
 					array(
 						array(
 							'type' 			=> 'required',
-							'error_message'	=> '氏名を入力してください',
-						),
-					),
-				),
-				array(
-					'class'				=> 'B_Guidance',
-					'value'				=> '名',
-				),
-				array(
-					'name'					=> 'g_name',
-					'class'					=> 'B_InputText',
-					'special_html'			=> 'class="textbox ime-on" size="20" maxlength="100" ',
-					'validate'				=>
-					array(
-						array(
-							'type' 			=> 'required',
-							'error_message'	=> '氏名を入力してください',
+							'error_message'	=> 'Please enter a name',
 						),
 					),
 				),
@@ -221,22 +265,22 @@ $form_config = array(
 			),
 	    ),
 
-		// 備考
+		// Notes
 		array(
 			'error_group'	=> true,
-			'start_html'    => '<tr>',
-			'end_html'	    => '</tr>',
+			'start_html'	=> '<tr>',
+			'end_html'		=> '</tr>',
 			array(
 				'start_html'			=> '<th>',
 				'invalid_start_html'	=> '<th class="error">',
 				'end_html'				=> '</th>',
-				'value'					=> '備考',
+				'value'					=> _('Notes'),
 			),
 			array(
-				'start_html'    => '<td>',
-				'end_html'	    => '</td>',
+				'start_html'	=> '<td>',
+				'end_html'		=> '</td>',
 				array(
-					'name'				=> 'memo',
+					'name'				=> 'notes',
 					'class'				=> 'B_TextArea',
 					'special_html'		=> 'class="textarea" cols="78" rows="5"',
 				),
@@ -256,7 +300,7 @@ $input_control_config = array(
 		array(
 			'start_html'	=> '<span class="left-button" onclick="bframe.submit(\'F1\', \'' . $this->module . '\', \'list\', \'back\', \'\')">',
 			'end_html'		=> '</span>',
-			'value'			=> '戻る',
+			'value'			=> _('Back'),
 		),
 	),
 	array(
@@ -266,7 +310,7 @@ $input_control_config = array(
 		array(
 			'start_html'	=> '<span class="right-button" onclick="bframe.submit(\'F1\', \'' . $this->module . '\', \'form\', \'confirm\', \'\', true)">',
 			'end_html'		=> '</span>',
-			'value'			=> '確認',
+			'value'			=> _('Confirm'),
 		),
 	),
 );
@@ -282,17 +326,17 @@ $confirm_control_config = array(
 		array(
 			'start_html'	=> '<span class="left-button" onclick="bframe.submit(\'F1\', \'' . $this->module . '\', \'form\', \'back\', \'\')">',
 			'end_html'		=> '</span>',
-			'value'			=> '戻る',
+			'value'			=> _('Back'),
 		),
 	),
 	array(
-		'name'			=> 'regist',
+		'name'			=> 'register',
 		'start_html'	=> '<li>',
 		'end_html'		=> '</li>',
 		array(
-			'start_html'	=> '<span class="right-button" onclick="bframe.submit(\'F1\', \'' . $this->module . '\', \'form\', \'regist\', \'\')">',
+			'start_html'	=> '<span class="right-button" onclick="bframe.submit(\'F1\', \'' . $this->module . '\', \'form\', \'register\', \'\')">',
 			'end_html'		=> '</span>',
-			'value'			=> '登録',
+			'value'			=> _('Save'),
 		),
 	),
 );
@@ -308,17 +352,17 @@ $delete_control_config = array(
 		array(
 			'start_html'	=> '<span class="left-button" onclick="bframe.submit(\'F1\', \'' . $this->module . '\', \'list\', \'back\', \'\')">',
 			'end_html'		=> '</span>',
-			'value'			=> '戻る',
+			'value'			=> _('Back'),
 		),
 	),
 	array(
-		'name'			=> 'regist',
+		'name'			=> 'register',
 		'start_html'	=> '<li>',
 		'end_html'		=> '</li>',
 		array(
-			'start_html'	=> '<span class="right-button" onclick="return bframe.confirmSubmit(\'このレコードを削除します。\n\nよろしいですか？\', \'F1\', \'' . $this->module . '\', \'form\', \'regist\', \'delete\')">',
+			'start_html'	=> '<span class="right-button" onclick="return bframe.confirmSubmit(\'このレコードを削除します。\n\nよろしいですか？\', \'F1\', \'' . $this->module . '\', \'form\', \'register\', \'delete\')">',
 			'end_html'		=> '</span>',
-			'value'			=> '削除',
+			'value'			=> _('Delete'),
 		),
 	),
 );
@@ -334,38 +378,36 @@ $result_control_config = array(
 		array(
 			'start_html'	=> '<span class="left-button" style="width:150px" onclick="bframe.submit(\'F1\', \'' . $this->module . '\', \'list\', \'back\', \'\')">',
 			'end_html'		=> '</span>',
-			'value'			=> '一覧に戻る',
+			'value'			=> _('Back to list'),
 		),
 	),
 );
 
-//config
+//result
 $result_config = array(
 	array(
 		'start_html'	=> '<form name="F1" method="post" action="index.php">',
 		'end_html'		=> '</form>',
 		array(
-			'start_html'    => '<p>',
-			'end_html'	    => '</p>',
+			'start_html'	=> '<p>',
+			'end_html'		=> '</p>',
 			array(
-				'start_html'			=> '<strong>',
-				'end_html'				=> '</strong>',
-				'no_linefeed'			=> true,
 				array(
-					'class'					=> 'B_Text',
-					'no_linefeed'			=> true,
-					'value'					=> 'ユーザID：',
+					'start_html'	=> '<span class="user-id">',
+					'end_html'		=> '</span>',
+					array(
+						'value'			=> _('User ID: '),
+					),
+					array(
+						'name'			=> 'user_id',
+						'class'			=> 'B_Text',
+						'start_html'	=> '<span class="bold">',
+						'end_html'		=> '</span>',
+					),
 				),
 				array(
-					'name'					=> 'user_id',
-					'class'					=> 'B_Text',
-					'no_linefeed'			=> true,
+					'name'		=> 'action_message',
 				),
-			),
-			array(
-				'class'				=> 'B_Text',
-				'no_linefeed'		=> true,
-				'name'				=> 'action_message',
 			),
 		),
 	),

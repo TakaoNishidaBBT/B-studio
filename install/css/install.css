@@ -58,10 +58,14 @@ h3 {
 	color:#555;
 	letter-spacing:1px;
 }
-/******************************
- * form
- *
- ******************************/
+
+/* select language */
+#select-language {
+	position: absolute;
+	top: 45px;
+	right: 11%;
+}
+/* form */
 table.form {
 	width: 100%;
 	border-left: none;
@@ -88,10 +92,6 @@ table.form tr:first-child th {
 }
 table.form tr:first-child td {
 	border-top: 1px solid #ccc;
-}
-
-table.form th.error{
-	background: #fee;
 }
 table.form td {
 	padding: 5px;

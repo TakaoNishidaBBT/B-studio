@@ -9,7 +9,7 @@
 		function __construct() {
 			if(B_ADMIN_SSL == 'ON' && !preg_match('/localhost/', B_HTTP_HOST)) {
 				if(empty($_SERVER['HTTPS']) === true || $_SERVER['HTTPS'] !== 'on') {
-					// httpsへリダイレクト
+					// Redirect to https
 					$path = B_SITE_ROOT_SSL . 'bs-admin/';
 					header("Location:$path");
 					exit;
@@ -22,13 +22,13 @@
 			$this->site_title = htmlspecialchars($this->site_settings['admin_site_title'], ENT_QUOTES, B_CHARSET);
 			$this->title = B_TITLE_PREFIX . $this->site_title;
 
-			// ブラウザチェック
+			// Check browser
 			if(!$this->checkBrowser()) {
 				$this->view_file = './view/view_support_browsers.php';
 				return;
 			}
 
-			// ログインチェック
+			// Check logedin
 			$auth = new B_AdminAuth;
 			$ret = $auth->getUserInfo($user_id, $this->user_name, $this->user_auth);
 			if($ret) {
@@ -41,23 +41,28 @@
 
 		function admin() {
 			if(!defined('TERMINAL_ID')) {
-				// TERMINAL_ID設定
+				// Set TERMINAL_ID
 				$util = new B_Util();
 				define('TERMINAL_ID', $util->getRandomText(12));
 				$_SESSION['terminal_id'] = TERMINAL_ID;
 
-				// TERMINAL_ID毎のセッション領域を作成
+				// Set session for each TERMINAL_ID
 				$_SESSION[TERMINAL_ID] = array();
 			}
 			define('DISPATCH_URL', 'index.php?terminal_id=' . TERMINAL_ID);
 
-			// MENU
+			// bframe_message
+			require_once('./config/bframe_message_config.php');
+			$this->bframe_message = new B_Element($bframe_message_config, $this->user_auth);
+
+			// Menu
 			require_once('./config/menu_config.php');
 			$this->menu = new B_Element($menu_config, $this->user_auth);
 			$this->user_name = htmlspecialchars($this->user_name, ENT_QUOTES, B_CHARSET);
 
 			switch($this->user_auth) {
 			case 'super_admin':
+			case 'admin':
 				$this->initial_page = DISPATCH_URL . '&amp;module=contents&amp;page=index&amp;method=init';
 				break;
 
@@ -71,13 +76,14 @@
 
 		function login() {
 			if($_POST['login']) {
-				// ログインチェック
+				// Check login
 				$auth = new B_AdminAuth;
 				$ret = $auth->login($this->db, $_POST['user_id'], $_POST['password']);
 				if($ret) {
-					// セッションIDを再設定
+					// Generate session id
 					session_regenerate_id(true);
 
+					// Redirect
 					$path = B_SITE_BASE . 'bs-admin/';
 					header("Location:$path");
 					exit;
@@ -103,9 +109,18 @@
 		}
 
 		function view() {
-			// HTTPヘッダー出力
-			$this->sendHttpHeader();
+			// Start buffering
+			ob_start();
 
 			require_once($this->view_file);
+
+			// Get buffer
+			$contents = ob_get_clean();
+
+			// Send HTTP header
+			$this->sendHttpHeader();
+
+			// Show HTML
+			echo $contents;
 		}
 	}

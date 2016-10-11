@@ -166,8 +166,8 @@
 			if(bframe.isObject(property)) {
 				menu_container.closeAll();
 				var position = bframe.getElementPosition(target);
-				position.left += context_menu_frame_offset.left;
-				position.top += context_menu_frame_offset.top+1;
+				position.left += (context_menu_frame_offset.left + document.body.scrollLeft);
+				position.top += (context_menu_frame_offset.top + document.body.scrollTop) + 1;
 				context_menu.positionAbsolute(position);
 
 				context_menu.show();

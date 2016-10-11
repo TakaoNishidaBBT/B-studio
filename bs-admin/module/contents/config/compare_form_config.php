@@ -90,7 +90,7 @@ $form_config = array(
 	),
 );
 
-//tab control
+//Tab control
 $tab_control_config = array(
 	'start_html'	=> '<ul class="tabcontrol">',
 	'end_html'		=> '</ul>',
@@ -101,7 +101,7 @@ $tab_control_config = array(
 		'end_html'			=> '</li>',
 		'link'				=> 'html',
 		'special_html'		=> 'class="bframe_tab"',
-		'value'				=> 'HTML',
+		'value'				=> _('HTML'),
 	),
 	array(
 		'name'				=> 'css_editor_index',
@@ -109,7 +109,7 @@ $tab_control_config = array(
 		'start_html'		=> '<li>',
 		'end_html'			=> '</li>',
 		'link'				=> 'css',
-		'value'				=> 'CSS',
+		'value'				=> _('CSS'),
 		'special_html'		=> 'class="bframe_tab"',
 	),
 	array(
@@ -118,7 +118,7 @@ $tab_control_config = array(
 		'start_html'		=> '<li>',
 		'end_html'			=> '</li>',
 		'link'				=> 'php',
-		'value'				=> 'PHP',
+		'value'				=> _('PHP'),
 		'special_html'		=> 'class="bframe_tab"',
 	),
 	array(
@@ -127,7 +127,7 @@ $tab_control_config = array(
 		'start_html'		=> '<li>',
 		'end_html'			=> '</li>',
 		'link'				=> 'config',
-		'value'				=> '設定',
+		'value'				=> _('Settings'),
 		'special_html'		=> 'class="bframe_tab"',
 	),
 	array(
@@ -159,11 +159,11 @@ $tab_control_config = array(
 
 $config_form_config = array(
 	array(
-		// テーブル
+		// Table
 		'start_html'	=> '<table class="form" border="0" cellspacing="0" cellpadding="0"><tbody>',
 		'end_html'		=> '</tbody></table>',
 
-		// タイトル
+		// Titlte
 		array(
 			'start_html'    => '<tr>',
 			'end_html'	    => '</tr>',
@@ -173,7 +173,7 @@ $config_form_config = array(
 				'invalid_start_html'	=> '<th class="diff">',
 				'end_html'				=> '</th>',
 				array(
-					'value'				=> 'タイトル',
+					'value'				=> _('Title'),
 					'no_linefeed'		=> true,
 				),
 			),
@@ -203,7 +203,7 @@ $config_form_config = array(
 				),
 			),
 		),
-		// bread crumb 表示名
+		// Breadcrumbs
 		array(
 			'start_html'    => '<tr>',
 			'end_html'	    => '</tr>',
@@ -213,7 +213,7 @@ $config_form_config = array(
 				'invalid_start_html'	=> '<th class="diff">',
 				'end_html'				=> '</th>',
 				array(
-					'value'				=> 'bread crumb 表示名',
+					'value'				=> _('Breadcrumbs'),	
 					'no_linefeed'		=> true,
 				),
 			),
@@ -243,7 +243,7 @@ $config_form_config = array(
 				),
 			),
 		),
-		// テンプレート
+		// Template
 		array(
 			'start_html'    => '<tr>',
 			'end_html'	    => '</tr>',
@@ -252,7 +252,7 @@ $config_form_config = array(
 				'start_html'			=> '<th>',
 				'invalid_start_html'	=> '<th class="diff">',
 				'end_html'				=> '</th>',
-				'value'					=> 'テンプレート',
+				'value'					=> _('Template'),
 			),
 			array(
 				'start_html'		=> '<td>',
@@ -280,7 +280,7 @@ $config_form_config = array(
 				),
 			),
 		),
-		// keywords
+		// Keywords
 		array(
 			'start_html'    => '<tr>',
 			'end_html'	    => '</tr>',
@@ -289,7 +289,7 @@ $config_form_config = array(
 				'start_html'			=> '<th>',
 				'invalid_start_html'	=> '<th class="diff">',
 				'end_html'				=> '</th>',
-				'value'					=> 'keywords',
+				'value'					=> _('Keywords'),
 			),
 			array(
 				'start_html'			=> '<td>',
@@ -317,7 +317,7 @@ $config_form_config = array(
 				),
 			),
 		),
-		// description
+		// Description
 		array(
 			'start_html'    => '<tr>',
 			'end_html'	    => '</tr>',
@@ -326,7 +326,7 @@ $config_form_config = array(
 				'start_html'			=> '<th>',
 				'invalid_start_html'	=> '<th class="diff">',
 				'end_html'				=> '</th>',
-				'value'					=> 'description',
+				'value'					=> _('Description'),
 			),
 			array(
 				'start_html'			=> '<td>',
@@ -354,7 +354,7 @@ $config_form_config = array(
 				),
 			),
 		),
-		// 外部css
+		// External CSS
 		array(
 			'start_html'    => '<tr>',
 			'end_html'	    => '</tr>',
@@ -363,7 +363,7 @@ $config_form_config = array(
 				'start_html'			=> '<th>',
 				'invalid_start_html'	=> '<th class="diff">',
 				'end_html'				=> '</th>',
-				'value'					=> '外部css',
+				'value'					=> _('External CSS'),
 			),
 			array(
 				'start_html'			=> '<td>',
@@ -391,7 +391,7 @@ $config_form_config = array(
 				),
 			),
 		),
-		// 外部javascript
+		// External javascript
 		array(
 			'start_html'    => '<tr>',
 			'end_html'	    => '</tr>',
@@ -400,7 +400,7 @@ $config_form_config = array(
 				'start_html'			=> '<th>',
 				'invalid_start_html'	=> '<th class="diff">',
 				'end_html'				=> '</th>',
-				'value'					=> '外部javascript',
+				'value'					=> 'External javascript',
 			),
 			array(
 				'start_html'			=> '<td>',
@@ -428,7 +428,7 @@ $config_form_config = array(
 				),
 			),
 		),
-		// ヘッダー要素
+		// Header elements
 		array(
 			'start_html'    => '<tr>',
 			'end_html'	    => '</tr>',
@@ -437,7 +437,7 @@ $config_form_config = array(
 				'start_html'			=> '<th>',
 				'invalid_start_html'	=> '<th class="diff">',
 				'end_html'				=> '</th>',
-				'value'					=> 'ヘッダー要素',
+				'value'					=> 'Header elements',
 			),
 			array(
 				'start_html'			=> '<td>',

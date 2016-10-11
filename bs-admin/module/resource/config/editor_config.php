@@ -26,7 +26,7 @@ $editor_config = array(
 	),
 );
 
-//tab control
+//Tab control
 $tab_control_config = array(
 	'start_html'	=> '<ul class="tabcontrol">',
 	'end_html'		=> '</ul>',
@@ -54,7 +54,7 @@ $tab_control_config = array(
 				'name'			=> 'regist',
 				'start_html'	=> '<span id="regist" class="regist-button" onclick="bstudio.registEditor(\'F1\', \'' . $this->module . '\', \'editor\', \'regist\', \'confirm\', true)">',
 				'end_html'		=> '</span>',
-				'value'			=> '<img src="images/common/save.png" alt="保存" />保存',
+				'value'			=> '<img src="images/common/save.png" alt="Save" />' . _('Save'),
 			),
 		),
 		array(

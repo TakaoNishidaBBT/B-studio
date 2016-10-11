@@ -28,8 +28,8 @@ $form_config = array(
 					'id'				=> 'open_widgetmanager',
 					'class'				=> 'B_Link',
 					'link'				=> 'index.php',
-					'value'				=> 'ウィジェット管理',
-					'special_html'		=> 'title="ウィジェット設定" style="display:none"',
+					'value'				=> _('Widget'),
+					'special_html'		=> 'title="' . _('Widget') . '" style="display:none"',
 					'fixedparam'		=>
 					array(
 						'terminal_id'	=> TERMINAL_ID,
@@ -52,8 +52,8 @@ $form_config = array(
 					'id'				=> 'open_widgetmanager',
 					'class'				=> 'B_Link',
 					'link'				=> 'index.php',
-					'value'				=> 'ウィジェット管理',
-					'special_html'		=> 'title="ウィジェット設定" style="display:none"',
+					'value'				=> _('Widget'),
+					'special_html'		=> 'title="' . _('Widget') . '" style="display:none"',
 					'fixedparam'		=>
 					array(
 						'terminal_id'	=> TERMINAL_ID,
@@ -106,18 +106,18 @@ $form_config = array(
 
 $config_form_config = array(
 	array(
-		// テーブル
+		// Table
 		'start_html'	=> '<table class="form" border="0" cellspacing="0" cellpadding="0"><tbody>',
 		'end_html'		=> '</tbody></table>',
 
-		// 外部CSS
+		// External CSS
 		array(
 			'start_html'    => '<tr>',
 			'end_html'	    => '</tr>',
 			array(
 				'start_html'			=> '<th>',
 				'end_html'				=> '</th>',
-				'value'					=> '外部CSS',
+				'value'					=> _('External css'),
 			),
 			array(
 				'start_html'			=> '<td>',
@@ -130,14 +130,14 @@ $config_form_config = array(
 			),
 		),
 
-		// 外部javascript
+		// External javascript
 		array(
 			'start_html'    => '<tr>',
 			'end_html'	    => '</tr>',
 			array(
 				'start_html'			=> '<th>',
 				'end_html'				=> '</th>',
-				'value'					=> '外部javascript',
+				'value'					=> _('External javascript'),
 			),
 			array(
 				'start_html'			=> '<td>',
@@ -150,14 +150,14 @@ $config_form_config = array(
 			),
 		),
 
-		// ヘッダー要素
+		// Header Elements
 		array(
 			'start_html'    => '<tr>',
 			'end_html'	    => '</tr>',
 			array(
 				'start_html'			=> '<th>',
 				'end_html'				=> '</th>',
-				'value'					=> 'ヘッダー要素',
+				'value'					=> _('Header elements'),
 			),
 			array(
 				'start_html'			=> '<td>',
@@ -182,8 +182,8 @@ $tab_control_config = array(
 		'start_html'		=> '<li>',
 		'end_html'			=> '</li>',
 		'link'				=> 'html',
+		'value'				=> _('HTML'),
 		'special_html'		=> 'class="bframe_tab"',
-		'value'				=> 'HTML',
 	),
 	array(
 		'name'				=> 'css_editor_index',
@@ -191,7 +191,7 @@ $tab_control_config = array(
 		'start_html'		=> '<li>',
 		'end_html'			=> '</li>',
 		'link'				=> 'css',
-		'value'				=> 'CSS',
+		'value'				=> _('CSS'),
 		'special_html'		=> 'class="bframe_tab"',
 	),
 	array(
@@ -200,7 +200,7 @@ $tab_control_config = array(
 		'start_html'		=> '<li>',
 		'end_html'			=> '</li>',
 		'link'				=> 'php',
-		'value'				=> 'PHP',
+		'value'				=> _('PHP'),
 		'special_html'		=> 'class="bframe_tab"',
 	),
 	array(
@@ -209,7 +209,7 @@ $tab_control_config = array(
 		'start_html'		=> '<li>',
 		'end_html'			=> '</li>',
 		'link'				=> 'config',
-		'value'				=> '設定',
+		'value'				=> _('Settings'),
 		'special_html'		=> 'class="bframe_tab"',
 	),
 	array(
@@ -218,7 +218,7 @@ $tab_control_config = array(
 		'start_html'		=> '<li>',
 		'end_html'			=> '</li>',
 		'link'				=> 'preview',
-		'value'				=> 'プレビュー',
+		'value'				=> _('Preview'),
 		'special_html'		=> 'class="bframe_tab" onclick="bframe.preview.submit(\'F1\', \'' . B_SITE_BASE . 'index.php' . '\', \'template_preview\', \'preview_frame\'); return false;"',
 	),
 	array(
@@ -232,7 +232,7 @@ $tab_control_config = array(
 				'name'			=> 'regist',
 				'start_html'	=> '<span id="regist" class="regist-button" onclick="bframe.ajaxSubmit.submit(\'F1\', \'' . $this->module . '\', \'form\', \'regist\', \'confirm\', true)">',
 				'end_html'		=> '</span>',
-				'value'			=> '<img src="images/common/save.png" alt="保存" />保存',
+				'value'			=> '<img src="images/common/save.png" alt="Save" />' . _('Save'),
 			),
 		),
 		array(

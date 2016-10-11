@@ -48,7 +48,9 @@
 			,['Source','Preview','Maximize','Templates']
 			];
 
-			CKEDITOR.config.language = 'ja';
+			// language
+			var visual_editor_language = document.getElementById('visual_editor_language');
+			CKEDITOR.config.language = visual_editor_language.value;
 			CKEDITOR.config.autoParagraph = false;
 
 			// for HTML5 tags(cancel Automatic ACF Mode)

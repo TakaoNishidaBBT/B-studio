@@ -1,5 +1,5 @@
 <body>
-	<h2><span class="accent"></span>リソース管理<span><?php echo $this->version_info; ?></span></h2>
+	<h2><span class="accent"></span><?php echo _('Resource manager'); ?><span><?php echo $this->version_info; ?></span></h2>
 	<div class="header"></div>
 	<iframe id="resource_tree" name="resource_tree" class="tree bframe_splitter_pane bframe_adjustwindow" param="margin:10" frameborder="0"
 		src="<?php echo DISPATCH_URL ?>&module=resource&page=compare_tree" align="top" scrolling="no" width="24%" height="100%"></iframe>

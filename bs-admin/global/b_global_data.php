@@ -5,108 +5,89 @@
  *
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
+	${$g_data_set}['language'] =
+		array(
+				'en'	=> _('English'),
+				'jp'	=> _('Japanese'),
+		);
+
 	${$g_data_set}['row_per_page'] =
 		array(
-				'1' => '1件',
-				'10' => '10件',
-				'20' => '20件',
-				'50' => '50件',
-				'100' => '100件',
+				'1'		=> _('1 line'),
+				'10'	=> _('10 lines'),
+				'20'	=> _('20 lines'),
+				'50'	=> _('50 lines'),
+				'100'	=> _('100 lines'),
 		);
 
 	${$g_data_set}['user_auth'] =
 		array(
-				'admin'		=> '管理者',
-				'editor'	=> '投稿者',
+				'admin'		=> _('Admin'),
+				'editor'	=> _('Posts'),
 		);
 
 	${$g_data_set}['user_status'] =
 		array(
-				'1'	=> '有効',
-				'9'	=> '無効',
-		);
-
-	${$g_data_set}['del_flag'] =
-		array(
-				''	=> '',
-				'0'	=> '',
-				'1'	=> '論理削除',
-		);
-
-	${$g_data_set}['disp_mode'] =
-		array(
-				'thumbs'	=> 'サムネイル',
-				'detail'	=> '詳細',
+				'1'		=> _('Enabled'),
+				'9'		=> _('Disabled'),
 		);
 
 	${$g_data_set}['record_status_list'] =
 		array(
-				''	=> '',
-				'0'	=> '',
-				'1'	=> '■',
+				''		=> '',
+				'0'		=> '',
+				'1'		=> '■',
 		);
 
 	${$g_data_set}['publication_status'] =
 		array(
-				''	=> '',
-				'0'	=> '',
-				'1'	=> '■',
-				'2'	=> '★',
+				''		=> '',
+				'0'		=> '',
+				'1'		=> '■',
+				'2'		=> '★',
 		);
 
 	${$g_data_set}['publication'] =
 		array(
-				'1'	=> '公開',
-				'2'	=> 'プレビュー',
-				'3'	=> '非公開',
+				'1'		=> _('Published'),
+				'2'		=> _('Preview'),
+				'3'		=> _('Closed'),
 		);
 
 	${$g_data_set}['description_flag'] =
 		array(
-				'1'		=> 'あり',
-				'2'		=> 'なし',
+				'1'		=> _('On'),
+				'2'		=> _('Off'),
 		);
 
 	${$g_data_set}['external_link'] =
 		array(
-				''		=> 'なし',
-				'1'		=> 'あり',
+				''		=> _('Off'),
+				'1'		=> _('On'),
 		);
 
 	${$g_data_set}['datetime_error_message'] =
 		array(
-				'1' => '(範囲外)',
-				'2' => '(時刻が不正)',
-				'3' => '(日付が不正)',
-				'4' => '(フォーマットが不正)'
-		);
-
-	${$g_data_set}['article_publication'] =
-		array(
-				'1'	=> '公開',
-				'2'	=> '非公開',
-		);
-
-	${$g_data_set}['external_window'] =
-		array(
-				''		=> '',
-				'1'		=> '別ウィンドウ',
+				'1'		=> _(' (out of range)'),
+				'2'		=> _(' (invalid time)'),
+				'3'		=> _(' (invalid date)'),
+				'4'		=> _(' (format error)'),
 		);
 
 	${$g_data_set}['node_error'] =
 		array(
-				'0'		=> 'DBエラー',
-				'1'		=> '受け側のフォルダは送り側のフォルダのサブフォルダです',
-				'2'		=> 'ノードの数が違っています(右側のフォルダペインでソートしてください)',
-				'3'		=> '他のユーザによって更新されています',
+				'0'		=> _('DB error'),
+				'1'		=> _('The folder you copy or move to is the subfloder'),
+				'2'		=> _('The number of nodes are differnt. Please sort in right pane.'),
+				'3'		=> _('Other user updated this record'),
 		);
 
 	${$g_data_set}['template_node_error'] =
 		array(
-				'0'		=> 'DBエラー',
-				'1'		=> '受け側のテンプレートは送り側のサブテンプレートです',
-				'2'		=> 'ノードの数が違っています',
-				'3'		=> '他のユーザによって更新されています',
+				'0'		=> _('DB error'),
+				'1'		=> _('The template you copy to or move to is subtemplate'),
+				'2'		=> _('The number of nodes are different'),
+				'3'		=> _('Other user updated this record'),
 		);
 
 	${$g_data_set}['encoding'] =
@@ -117,7 +98,7 @@
 		);
 
 	${$g_data_set}['table']['contents_node'] =
-		array(								// データ型			桁数	PK		AUTO-INCREMENT
+		array(							// Data Types			Length	PK		Auto-Increment
 			'version_id'				=> array('char', 		'5', 	'1', 	''),
 			'revision_id'				=> array('char', 		'2', 	'1', 	''),
 			'node_id'					=> array('char', 		'10', 	'1', 	'1'),
@@ -135,7 +116,7 @@
 		);
 
 	${$g_data_set}['table']['contents'] =
-		array(								// データ型			桁数	PK		AUTO-INCREMENT
+		array(							// Data Types			Length	PK		Auto-Increment
 			'version_id'				=> array('char', 		'5', 	'1', 	''),
 			'revision_id'				=> array('char', 		'2', 	'1', 	''),
 			'contents_id'				=> array('char', 		'10', 	'1', 	'1'),
@@ -165,7 +146,7 @@
 		);
 
 	${$g_data_set}['table']['template_node'] =
-		array(								// データ型			桁数	PK		AUTO-INCREMENT
+		array(							// Data Types			Length	PK		Auto-Increment
 			'version_id'				=> array('char', 		'5', 	'1', 	''),
 			'revision_id'				=> array('char', 		'2', 	'1', 	''),
 			'node_id'					=> array('char', 		'10', 	'1', 	'1'),
@@ -183,7 +164,7 @@
 		);
 
 	${$g_data_set}['table']['template'] =
-		array(								// データ型			桁数	PK		AUTO-INCREMENT
+		array(							// Data Types			Length	PK		Auto-Increment
 			'version_id'				=> array('char',		'5', 	'1', 	''),
 			'revision_id'				=> array('char', 		'2', 	'1', 	''),
 			'contents_id'				=> array('char', 		'10', 	'1', 	'1'),
@@ -207,7 +188,7 @@
 		);
 
 	${$g_data_set}['table']['widget_node'] =
-		array(								// データ型			桁数	PK		AUTO-INCREMENT
+		array(							// Data Types			Length	PK		Auto-Increment
 			'version_id'				=> array('char',	 	'5', 	'1', 	''),
 			'revision_id'				=> array('char', 		'2', 	'1', 	''),
 			'node_id'					=> array('char', 		'10', 	'1', 	'1'),
@@ -225,7 +206,7 @@
 		);
 
 	${$g_data_set}['table']['widget'] =
-		array(								// データ型			桁数	PK		AUTO-INCREMENT
+		array(							// Data Types			Length	PK		Auto-Increment
 			'version_id'				=> array('char', 		'5', 	'1', 	''),
 			'revision_id'				=> array('char', 		'2', 	'1', 	''),
 			'contents_id'				=> array('char', 		'10', 	'1', 	'1'),
@@ -245,7 +226,7 @@
 		);
 
 	${$g_data_set}['table']['resource_node'] =
-		array(								// データ型			桁数	PK		AUTO-INCREMENT
+		array(							// Data Types			Length	PK		Auto-Increment
 			'version_id'				=> array('char',	 	'5', 	'1', 	''),
 			'revision_id'				=> array('char', 		'2', 	'1', 	''),
 			'node_id'					=> array('char', 		'10', 	'1', 	'1'),
@@ -267,11 +248,12 @@
 		);
 
 	${$g_data_set}['table']['settings'] =
-		array(								// データ型			桁数	PK		AUTO-INCREMENT
+		array(							// Data Types			Length	PK		Auto-Increment
 			'id'						=> array('char',	 	'5', 	'1', 	'1'),
 			'site_title'				=> array('text', 		'', 	'', 	''),
 			'admin_site_title'			=> array('text', 		'', 	'', 	''),
-			'memo'						=> array('text', 		'', 	'', 	''),
+			'language'					=> array('text', 		'', 	'', 	''),
+			'notes'						=> array('text', 		'', 	'', 	''),
 			'reserve1'					=> array('text', 		'', 	'', 	''),
 			'reserve2'					=> array('text', 		'', 	'', 	''),
 			'reserve3'					=> array('text', 		'', 	'', 	''),
@@ -282,14 +264,14 @@
 		);
 
 	${$g_data_set}['table']['version'] =
-		array(								// データ型			桁数	PK		AUTO-INCREMENT
+		array(							// Data Types			Length	PK		Auto-Increment
 			'version_id'				=> array('char', 		'5', 	'1', 	'1'),
 			'private_revision_id'		=> array('char', 		'2', 	'', 	''),
 			'publication_datetime_t'	=> array('text', 		'', 	'', 	''),
 			'publication_datetime_u'	=> array('text', 		'', 	'', 	''),
 			'publication_status'		=> array('char', 		'1', 	'', 	''),
 			'version'					=> array('text', 		'', 	'', 	''),
-			'memo'						=> array('text', 		'', 	'', 	''),
+			'notes'						=> array('text', 		'', 	'', 	''),
 			'del_flag'					=> array('char', 		'1', 	'', 	''),
 			'reserve1'					=> array('text', 		'', 	'', 	''),
 			'reserve2'					=> array('text', 		'', 	'', 	''),
@@ -301,7 +283,7 @@
 		);
 
 	${$g_data_set}['table']['current_version'] =
-		array(								// データ型			桁数	PK		AUTO-INCREMENT
+		array(							// Data Types			Length	PK		Auto-Increment
 			'id'						=> array('char', 		'10', 	'1', 	'1'),
 			'current_version_id'		=> array('char', 		'5', 	'', 	''),
 			'reserved_version_id'		=> array('char', 		'5', 	'', 	''),
@@ -313,12 +295,12 @@
 		);
 
 	${$g_data_set}['table']['compare_version'] =
-		array(								// データ型			桁数	PK		AUTO-INCREMENT
+		array(							// Data Types			Length	PK		Auto-Increment
 			'compare_version_id'		=> array('char', 		'5', 	'1', 	''),
 		);
 
 	${$g_data_set}['table']['article'] =
-		array(								// データ型			桁数	PK		AUTO-INCREMENT
+		array(							// Data Types			Length	PK		Auto-Increment
 			'article_id'				=> array('char', 		'10', 	'1', 	'1'),
 			'article_date_t'			=> array('text', 		'', 	'', 	''),
 			'article_date_u'			=> array('text', 		'', 	'', 	''),
@@ -345,7 +327,7 @@
 		);
 
 	${$g_data_set}['table']['category'] =
-		array(								// データ型			桁数	PK		AUTO-INCREMENT
+		array(							// Data Types			Length	PK		Auto-Increment
 			'node_id'					=> array('char', 		'10', 	'1', 	'1'),
 			'parent_node'				=> array('char', 		'10', 	'', 	''),
 			'node_type'					=> array('char', 		'10', 	'', 	''),
@@ -363,7 +345,7 @@
 		);
 
 	${$g_data_set}['table']['article2'] =
-		array(								// データ型			桁数	PK		AUTO-INCREMENT
+		array(							// Data Types			Length	PK		Auto-Increment
 			'article_id'				=> array('char', 		'10', 	'1', 	'1'),
 			'article_date_t'			=> array('text', 		'', 	'', 	''),
 			'article_date_u'			=> array('text', 		'', 	'', 	''),
@@ -390,7 +372,7 @@
 		);
 
 	${$g_data_set}['table']['category2'] =
-		array(								// データ型			桁数	PK		AUTO-INCREMENT
+		array(							// Data Types			Length	PK		Auto-Increment
 			'node_id'					=> array('char',	 	'10', 	'1', 	'1'),
 			'parent_node'				=> array('char', 		'10', 	'', 	''),
 			'node_type'					=> array('char', 		'10', 	'', 	''),
@@ -408,7 +390,7 @@
 		);
 
 	${$g_data_set}['table']['article3'] =
-		array(								// データ型			桁数	PK		AUTO-INCREMENT
+		array(							// Data Types			Length	PK		Auto-Increment
 			'article_id'				=> array('char', 		'10', 	'1', 	'1'),
 			'article_date_t'			=> array('text', 		'', 	'', 	''),
 			'article_date_u'			=> array('text', 		'', 	'', 	''),
@@ -435,7 +417,7 @@
 		);
 
 	${$g_data_set}['table']['category3'] =
-		array(								// データ型			桁数	PK		AUTO-INCREMENT
+		array(							// Data Types			Length	PK		Auto-Increment
 			'node_id'					=> array('char',	 	'10', 	'1', 	'1'),
 			'parent_node'				=> array('char', 		'10', 	'', 	''),
 			'node_type'					=> array('char', 		'10', 	'', 	''),
@@ -453,16 +435,16 @@
 		);
 
 	${$g_data_set}['table']['user'] =
-		array(								// データ型			桁数	PK		AUTO-INCREMENT
+		array(							// Data Types			Length	PK		Auto-Increment
 			'id'						=> array('char', 		'10', 	'1', 	'1'),
 			'user_id'					=> array('char', 		'10', 	'', 	''),
 			'pwd'						=> array('char', 		'20', 	'', 	''),
 			'user_status'				=> array('text', 		'', 	'', 	''),
 			'user_auth'					=> array('text', 		'', 	'', 	''),
-			'f_name'					=> array('text', 		'', 	'', 	''),
-			'g_name'					=> array('text', 		'', 	'', 	''),
+			'language'					=> array('text', 		'', 	'', 	''),
+			'name'						=> array('text', 		'', 	'', 	''),
 			'email'						=> array('text', 		'', 	'', 	''),
-			'memo'						=> array('text', 		'', 	'', 	''),
+			'notes'						=> array('text', 		'', 	'', 	''),
 			'del_flag'					=> array('char', 		'1', 	'', 	''),
 			'reserve1'					=> array('text', 		'', 	'', 	''),
 			'reserve2'					=> array('text', 		'', 	'', 	''),

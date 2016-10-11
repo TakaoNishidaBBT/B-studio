@@ -5,21 +5,44 @@
  *
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
+$language = array(
+	'en'	=> _('English'),
+	'jp'	=> _('Japanese'),
+);
+
+$select_language_config = array(
+	array('class' => 'B_Hidden', 'name' => 'select_language', 'value' => 1),
+	array(
+		'start_html'	=> '<label for="language">',
+		'end_html'		=> '</label>',
+		'value'			=> _('Select language: '),
+	),
+	array(
+		'name'			=> 'language',
+		'class'			=> 'B_Selectbox',
+		'data_set'		=> $language,
+		'local'			=> true,
+		'value'			=> 'en',
+		'special_html'	=> 'class="bframe_selectbox" onchange=submit()',
+	),
+);
+
 $db_install_form_config = array(
 	array(
-		// テーブル
+		// Table
 		'start_html'	=> '<table class="form"><tbody>',
 		'end_html'		=> '</tbody></table>',
 
-		// ホスト名
+		// Host name
 		array(
+			'error_group'	=> 'true',
 			'start_html'    => '<tr>',
 			'end_html'	    => '</tr>',
 			array(
 				'start_html'			=> '<th>',
 				'invalid_start_html'	=> '<th class="error">',
 				'end_html'				=> '</th>',
-				'value'					=> 'ホスト名:',
+				'value'					=> _('Host name'),
 			),
 			array(
 				'start_html'    => '<td>',
@@ -33,11 +56,11 @@ $db_install_form_config = array(
 					array(
 						array(
 							'type' 			=> 'required',
-							'error_message'	=> 'ホスト名を入力してください',
+							'error_message'	=> _('Please enter host name'),
 						),
 						array(
 							'type' 			=> 'status',
-							'error_message'	=> '入力内容を確認してください',
+							'error_message'	=> _('Please confirm the input content'),
 						),
 					),
 				),
@@ -50,15 +73,16 @@ $db_install_form_config = array(
 			),
 		),
 
-		// ユーザー名
+		// User name
 		array(
+			'error_group'	=> 'true',
 			'start_html'    => '<tr>',
 			'end_html'	    => '</tr>',
 			array(
 				'start_html'			=> '<th>',
 				'invalid_start_html'	=> '<th class="error">',
 				'end_html'				=> '</th>',
-				'value'					=> 'ユーザー名:',
+				'value'					=> _('User name'),
 			),
 			array(
 				'start_html'    => '<td>',
@@ -72,11 +96,11 @@ $db_install_form_config = array(
 					array(
 						array(
 							'type' 			=> 'required',
-							'error_message'	=> 'ユーザー名を入力してください',
+							'error_message'	=> _('Please enter user name'),
 						),
 						array(
 							'type' 			=> 'status',
-							'error_message'	=> '入力内容を確認してください',
+							'error_message'	=> _('Please confirm the input content'),
 						),
 					),
 				),
@@ -89,15 +113,16 @@ $db_install_form_config = array(
 			),
 		),
 
-		// パスワード
+		// Password
 		array(
+			'error_group'	=> 'true',
 			'start_html'    => '<tr>',
 			'end_html'	    => '</tr>',
 			array(
 				'start_html'			=> '<th>',
 				'invalid_start_html'	=> '<th class="error">',
 				'end_html'				=> '</th>',
-				'value'					=> 'パスワード:',
+				'value'					=> _('Password'),
 			),
 			array(
 				'start_html'    => '<td>',
@@ -111,11 +136,11 @@ $db_install_form_config = array(
 					array(
 						array(
 							'type' 			=> 'required',
-							'error_message'	=> 'パスワードを入力してください',
+							'error_message'	=> _('Please enter password'),
 						),
 						array(
 							'type' 			=> 'status',
-							'error_message'	=> '入力内容を確認してください',
+							'error_message'	=> _('Please confirm the input content'),
 						),
 					),
 				),
@@ -128,15 +153,16 @@ $db_install_form_config = array(
 			),
 		),
 
-		// データベース名
+		// Schema name
 		array(
+			'error_group'	=> 'true',
 			'start_html'    => '<tr>',
 			'end_html'	    => '</tr>',
 			array(
 				'start_html'			=> '<th>',
 				'invalid_start_html'	=> '<th class="error">',
 				'end_html'				=> '</th>',
-				'value'					=> 'データベース名:',
+				'value'					=> _('Schema name'),
 			),
 			array(
 				'start_html'    => '<td>',
@@ -150,11 +176,11 @@ $db_install_form_config = array(
 					array(
 						array(
 							'type' 			=> 'required',
-							'error_message'	=> 'データベース名を入力してください',
+							'error_message'	=> _('Please enter schema name'),
 						),
 						array(
 							'type' 			=> 'status',
-							'error_message'	=> '入力内容を確認してください',
+							'error_message'	=> _('Please confirm the input content'),
 						),
 					),
 				),
@@ -167,15 +193,16 @@ $db_install_form_config = array(
 			),
 		),
 
-		// テーブル・プリフィックス
+		// Table prefix
 		array(
+			'error_group'	=> 'true',
 			'start_html'    => '<tr>',
 			'end_html'	    => '</tr>',
 			array(
 				'start_html'			=> '<th class="prefix">',
 				'invalid_start_html'	=> '<th class="prefix error">',
 				'end_html'				=> '</th>',
-				'value'					=> 'テーブル・プリフィックス:',
+				'value'					=> _('Table prefix'),
 			),
 			array(
 				'start_html'    => '<td>',
@@ -189,7 +216,7 @@ $db_install_form_config = array(
 					array(
 						array(
 							'type' 			=> 'required',
-							'error_message'	=> 'テーブル・プリフィックスを入力してください',
+							'error_message'	=> _('Please enter table prefix'),
 						),
 					),
 				),
@@ -197,7 +224,7 @@ $db_install_form_config = array(
 					'start_html'			=> '<span class="notice">',
 					'end_html'				=> '</span>',
 					'class'					=> 'B_Guidance',
-					'value'					=> '※通常この項目を変更する必要はありません。ひとつのDBにB-studioを複数インストールする場合は変更してください。',
+					'value'					=> _('Usually changing this field is unnecessary. This field could be changed when B-studio will be installed in one schema.'),
 				),
 				array(
 					'name'					=> 'error_message',
@@ -211,19 +238,20 @@ $db_install_form_config = array(
 );
 $admin_basic_auth_config = array(
 	array(
-		// テーブル
+		// Table
 		'start_html'	=> '<table class="form"><tbody>',
 		'end_html'		=> '</tbody></table>',
 
-		// ログインID
+		// User name
 		array(
+			'error_group'	=> 'true',
 			'start_html'    => '<tr>',
 			'end_html'	    => '</tr>',
 			array(
 				'start_html'			=> '<th>',
 				'invalid_start_html'	=> '<th class="error">',
 				'end_html'				=> '</th>',
-				'value'					=> 'ログインID:',
+				'value'					=> _('User name'),
 			),
 			array(
 				'start_html'    => '<td>',
@@ -236,12 +264,12 @@ $admin_basic_auth_config = array(
 					array(
 						array(
 							'type' 			=> 'required',
-							'error_message'	=> 'ログインIDを入力してください',
+							'error_message'	=> _('Please enter user name'),
 						),
 						array(
 							'type' 			=> 'pattern',
 							'pattern'		=> '^[a-zA-Z0-9\_\-]+$',
-							'error_message'	=> 'ログインIDは英数とハイフン(-)アンダーバー(_)で入力してください',
+							'error_message'	=> _('Please enter user name using alphanumeric, hyphen(-) and underbar(_)'),
 						),
 					),
 				),
@@ -254,15 +282,16 @@ $admin_basic_auth_config = array(
 			),
 		),
 
-		// パスワード
+		// Password
 		array(
+			'error_group'	=> 'true',
 			'start_html'    => '<tr>',
 			'end_html'	    => '</tr>',
 			array(
 				'start_html'			=> '<th>',
 				'invalid_start_html'	=> '<th class="error">',
 				'end_html'				=> '</th>',
-				'value'					=> 'パスワード:',
+				'value'					=> _('Password'),
 			),
 			array(
 				'start_html'    => '<td>',
@@ -271,17 +300,17 @@ $admin_basic_auth_config = array(
 					'name'					=> 'basic_auth_pwd',
 					'class'					=> 'B_Password',
 					'special_html'			=> 'class="textbox ime-off" size="40" maxlength="100" ',
-					'confirm_message'		=> '（設定されたパスワード）',
+					'confirm_message'		=> _('（Entered password）'),
 					'validate'				=>
 					array(
 						array(
 							'type' 			=> 'required',
-							'error_message'	=> 'パスワードを入力してください',
+							'error_message'	=> _('Please enter password'),
 						),
 						array(
 							'type' 			=> 'pattern',
 							'pattern'		=> '^[a-zA-Z0-9\_\-]+$',
-							'error_message'	=> 'パスワードは英数とハイフン(-)アンダーバー(_)で入力してください',
+							'error_message'	=> _('Please enter password using alphanumeric, hyphen(-) and underbar(_)'),
 						),
 					),
 				),
@@ -294,8 +323,9 @@ $admin_basic_auth_config = array(
 			),
 		),
 
-		// パスワード（再入力）
+		// Password (Re-entry)
 		array(
+			'error_group'	=> 'true',
 			'start_html'    => '<tr>',
 			'end_html'	    => '</tr>',
 			'confirm_mode'	=> 'none',
@@ -303,7 +333,7 @@ $admin_basic_auth_config = array(
 				'start_html'			=> '<th>',
 				'invalid_start_html'	=> '<th class="error">',
 				'end_html'				=> '</th>',
-				'value'					=> 'パスワード（再入力）:',
+				'value'					=> _('Password (Re-entry)'),
 			),
 			array(
 				'start_html'    => '<td>',
@@ -316,12 +346,12 @@ $admin_basic_auth_config = array(
 					array(
 						array(
 							'type' 			=> 'required',
-							'error_message'	=> 'パスワード（再入力）を入力してください',
+							'error_message'	=> _('Please re-enter password'),
 						),
 						array(
 							'type' 			=> 'match',
 							'target'		=> 'basic_auth_pwd',
-							'error_message'	=> 'パスワードが一致していません',
+							'error_message'	=> _('Password is not matched'),
 						),
 					),
 				),
@@ -338,19 +368,20 @@ $admin_basic_auth_config = array(
 
 $admin_user_form_config = array(
 	array(
-		// テーブル
+		// Table
 		'start_html'	=> '<table class="form"><tbody>',
 		'end_html'		=> '</tbody></table>',
 
-		// ユーザ名
+		// User name
 		array(
+			'error_group'	=> 'true',
 			'start_html'    => '<tr>',
 			'end_html'	    => '</tr>',
 			array(
 				'start_html'			=> '<th>',
 				'invalid_start_html'	=> '<th class="error">',
 				'end_html'				=> '</th>',
-				'value'					=> 'ユーザ名:',
+				'value'					=> _('User name'),
 			),
 			array(
 				'start_html'    => '<td>',
@@ -363,7 +394,7 @@ $admin_user_form_config = array(
 					array(
 						array(
 							'type' 			=> 'required',
-							'error_message'	=> 'ユーザ名を入力してください',
+							'error_message'	=> _('Please enter user name'),
 						),
 					),
 				),
@@ -376,15 +407,16 @@ $admin_user_form_config = array(
 			),
 		),
 
-		// ログインID
+		// Login IS
 		array(
+			'error_group'	=> 'true',
 			'start_html'    => '<tr>',
 			'end_html'	    => '</tr>',
 			array(
 				'start_html'			=> '<th>',
 				'invalid_start_html'	=> '<th class="error">',
 				'end_html'				=> '</th>',
-				'value'					=> 'ログインID:',
+				'value'					=> _('Login ID'),
 			),
 			array(
 				'start_html'    => '<td>',
@@ -397,12 +429,12 @@ $admin_user_form_config = array(
 					array(
 						array(
 							'type' 			=> 'required',
-							'error_message'	=> 'ログインIDを入力してください',
+							'error_message'	=> _('Please enter login ID'),
 						),
 						array(
 							'type' 			=> 'pattern',
 							'pattern'		=> '^[a-zA-Z0-9\_\-]+$',
-							'error_message'	=> 'ログインIDは英数とハイフン(-)アンダーバー(_)で入力してください',
+							'error_message'	=> _('Please enter login ID using alphanumeric, hyphen(-) and underbar(_)'),
 						),
 					),
 				),
@@ -415,15 +447,16 @@ $admin_user_form_config = array(
 			),
 		),
 
-		// パスワード
+		// Password
 		array(
+			'error_group'	=> 'true',
 			'start_html'    => '<tr>',
 			'end_html'	    => '</tr>',
 			array(
 				'start_html'			=> '<th>',
 				'invalid_start_html'	=> '<th class="error">',
 				'end_html'				=> '</th>',
-				'value'					=> 'パスワード:',
+				'value'					=> _('Password'),
 			),
 			array(
 				'start_html'    => '<td>',
@@ -432,17 +465,17 @@ $admin_user_form_config = array(
 					'name'					=> 'admin_user_pwd',
 					'class'					=> 'B_Password',
 					'special_html'			=> 'class="textbox ime-off" size="40" maxlength="100" ',
-					'confirm_message'		=> '（設定されたパスワード）',
+					'confirm_message'		=> _('(Entered password)'),
 					'validate'				=>
 					array(
 						array(
 							'type' 			=> 'required',
-							'error_message'	=> 'パスワードを入力してください',
+							'error_message'	=> _('Please enter password'),
 						),
 						array(
 							'type' 			=> 'pattern',
 							'pattern'		=> '^[a-zA-Z0-9\_\-]+$',
-							'error_message'	=> 'パスワードは英数とハイフン(-)アンダーバー(_)で入力してください',
+							'error_message'	=> _('Please enter password using alphanumeric, hyphen(-) and underbar(_)'),
 						),
 					),
 				),
@@ -455,8 +488,9 @@ $admin_user_form_config = array(
 			),
 		),
 
-		// パスワード（再入力）
+		// Password (Re-entry)
 		array(
+			'error_group'	=> 'true',
 			'start_html'    => '<tr>',
 			'end_html'	    => '</tr>',
 			'confirm_mode'	=> 'none',
@@ -464,7 +498,7 @@ $admin_user_form_config = array(
 				'start_html'			=> '<th>',
 				'invalid_start_html'	=> '<th class="error">',
 				'end_html'				=> '</th>',
-				'value'					=> 'パスワード（再入力）:',
+				'value'					=> _('Password (Re-entry)'),
 			),
 			array(
 				'start_html'    => '<td>',
@@ -477,12 +511,12 @@ $admin_user_form_config = array(
 					array(
 						array(
 							'type' 			=> 'required',
-							'error_message'	=> 'パスワード（再入力）を入力してください',
+							'error_message'	=> _('Please re-enter password'),
 						),
 						array(
 							'type' 			=> 'match',
 							'target'		=> 'admin_user_pwd',
-							'error_message'	=> 'パスワードが一致していません',
+							'error_message'	=> _('Password is not matched'),
 						),
 					),
 				),
@@ -496,6 +530,7 @@ $admin_user_form_config = array(
 		),
 	),
 );
+
 $root_htaccess_config = array(
 	array(
 		'name'			=> 'htaccess',

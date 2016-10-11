@@ -58,7 +58,7 @@
 			}
 		}
 
-		function regist() {
+		function register() {
 			$param = $this->session['request'];
 			$param['id'] = '00001';
 			$param['del_flag'] = '0';
@@ -74,11 +74,11 @@
 
 			if($ret) {
 				$this->db->commit();
-				$param['action_message'] = '<p><strong>基本設定：登録しました</strong></p>';
+				$param['action_message'] = '<p><strong>' . _('Settings: Saved') . '</strong></p>';
 			}
 			else {
 				$this->db->rollback();
-				$param['action_message'] = '<p><strong>基本設定：登録に失敗しました</strong></p>';
+				$param['action_message'] = '<p><strong>' . _('Settings: Failed') . '</strong></p>';
 			}
 			$this->result = new B_Element($this->result_config);
 			$this->result_control = new B_Element($this->result_control_config);
@@ -96,7 +96,7 @@
 		function backupAll() {
 			if(!class_exists('ZipArchive')) exit;
 
-			// set time limit to 3 minutes
+			// Set time limit to 3 minutes
 			set_time_limit(180);
 
 			$zip = new ZipArchive();
@@ -107,7 +107,7 @@
 				exit;
 			}
 
-			// continue whether a client disconnect or not
+			// Continue whether a client disconnect or not
 			ignore_user_abort(true);
 
 			$node = new B_FileNode(B_ADMIN_FILES_DIR, 'root', null, null, 'all');
@@ -168,7 +168,7 @@
 		}
 
 		function backupDB() {
-			// continue whether a client disconnect or not
+			// Continue whether a client disconnect or not
 			ignore_user_abort(true);
 
 			$dump_file_name = 'bstudio_' . date('YmdHis') . '.sql';
@@ -195,27 +195,47 @@
 		}
 
 		function view() {
-			// HTTPヘッダー出力
+			// Start buffering
+			ob_start();
+
+			require_once('./view/view_form.php');
+
+			// Get buffer
+			$contents = ob_get_clean();
+
+			// Send HTTP header
 			$this->sendHttpHeader();
 
 			$this->html_header->appendProperty('css', '<link href="css/settings.css" type="text/css" rel="stylesheet" media="all" />');
+			$this->html_header->appendProperty('css', '<link href="css/selectbox_white.css" type="text/css" rel="stylesheet" media="all" />');
 			$this->html_header->appendProperty('script', '<script src="js/bframe_edit_check.js" type="text/javascript"></script>');
+			$this->html_header->appendProperty('script', '<script src="js/bframe_selectbox.js" type="text/javascript"></script>');
 
-			// HTMLヘッダー出力
+			// Show HTML header
 			$this->showHtmlHeader();
 
-			require_once('./view/view_form.php');
+			// Show HTML body
+			echo $contents;
 		}
 
 		function view_result() {
-			// HTTPヘッダー出力
+			// Start buffering
+			ob_start();
+
+			require_once('./view/view_result.php');
+
+			// Get buffer
+			$contents = ob_get_clean();
+
+			// Send HTTP header
 			$this->sendHttpHeader();
 
 			$this->html_header->appendProperty('css', '<link href="css/settings.css" type="text/css" rel="stylesheet" media="all" />');
 
-			// HTMLヘッダー出力
+			// Show HTML header
 			$this->showHtmlHeader();
 
-			require_once('./view/view_result.php');
+			// Show HTML body
+			echo $contents;
 		}
 	}

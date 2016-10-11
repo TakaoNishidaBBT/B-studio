@@ -9,14 +9,14 @@
 <meta http-equiv="Content-Script-Type" content="text/javascript">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="css/install.css" type="text/css" media="all" />
-<title>Install B-studio</title>
+<title>B-studioのインストール</title>
 </head>
 <body>
-	<h1>Install B-studio</h1>
+	<h1>B-studioのインストール</h1>
 
-	<p>Complete.</p>
+	<p> 完了しました</p>
 
-	<p><a href="../bs-admin/" title="管理画面">To admin page</a></p>
+	<p><a href="../bs-admin/" title="管理画面">管理画面へ</a></p>
 
 </body>
 </html>

@@ -5,12 +5,13 @@
  *
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
-	$g_auth_users = array(
+$bframe_message_config = array(
+	'id'			=> 'bframe_message',
+	'script'		=>
+	array(
+		'bframe_message'	=>
 		array(
-			'user_name'	=> '%USER_NAME%',
-			'user_id'	=> '%USER_ID%',
-			'pwd'		=> '%PASSWORD%',
-			'language'	=> '%LANGUAGE%',
-			'user_auth'	=> 'super_admin',
-		)
-	);
+			'session_time_out'	=> _('Your session has timed out, Please log in again'),
+		),
+	),
+);

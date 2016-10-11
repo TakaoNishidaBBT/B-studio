@@ -8,9 +8,11 @@
 	require_once('./config/config.php');
 	require_once('./module/common/B_AdminModule.php');
 
-	// セッションスタート
+	// Start session
 	$ses = new B_Session;
 	$ses->start('nocache', B_ADMIN_SESSION_NAME, B_CURRENT_ROOT);
+
+	require_once('./config/language.php');
 
 	$controller = new B_Controller;
 	$auth = new B_AdminAuth;
@@ -20,11 +22,10 @@
 			throw new Exception();
 		}
 
-		// TERMINAL_ID設定
+		// Set TERMINAL_ID
 		define('TERMINAL_ID', $_REQUEST['terminal_id']);
 		define("DISPATCH_URL", 'index.php?terminal_id=' . TERMINAL_ID);
 
-		// 起動モジュール設定
 		$module_dir = 'module/';
 		$page = $_REQUEST['page'] . '.php';
 		$dir = $module_dir . $_REQUEST['module'];
@@ -46,4 +47,5 @@
 		$class = 'index_index';
 	}
 
+	// Dispatch
 	$controller->dispatch($dir, $page, $class, $method);

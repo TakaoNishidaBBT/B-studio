@@ -22,7 +22,7 @@
 			$this->table_name = 'user';
 			$this->table = new B_Table($this->db, $this->table_name);
 
-			// mode(hidden)を設定
+			// Set mode to HTML
 			$obj = $this->form->getElementByName('mode');
 			$obj->setValue($this->request);
 		}
@@ -52,19 +52,18 @@
 				$this->control = new B_Element($this->delete_control_config, $this->user_auth);
 				break;
 			}
+			$this->form->setFilterValue('form');
 		}
 
 		function confirm() {
 			$this->form->setValue($this->post);
 
-			if(!$this->form->validate()) {
+			if(!$this->checkAlt($this->post)) {
 				$this->control = new B_Element($this->input_control_config, $this->user_auth);
 				return;
 			}
 
-			if(!$this->checkAlt($this->post)) {
-				// 排他エラー
-				$this->action_message = '他のユーザに更新されています';
+			if(!$this->form->validate()) {
 				$this->control = new B_Element($this->input_control_config, $this->user_auth);
 				return;
 			}
@@ -73,12 +72,12 @@
 			$this->session['post'] = $post_value;
 			$this->control = new B_Element($this->confirm_control_config, $this->user_auth);
 
-			// 表示モードを確認モードに設定
+			// Set display mode
 			$this->display_mode = 'confirm';
 		}
 
 		function _validate_callback($param) {
-			// IDの二重登録確認
+			// Check user id already exists
 			$sql = "select count(*) cnt from " . B_DB_PREFIX . $this->table_name . " where user_id = binary '" . $param['value'] . "'";
 			$rs = $this->db->query($sql);
 			$row = $this->db->fetch_assoc($rs);
@@ -89,7 +88,7 @@
 		}
 
 		function _validate_callback2($param) {
-			// スーパユーザのID確認
+			// Check the user id in built-in user
 			global $g_auth_users;
 			foreach($g_auth_users as $value) {
 				if($value['user_id'] == $param['value']) {
@@ -100,27 +99,22 @@
 		}
 
 		function checkAlt($value) {
-			$status = true;
-
 			if($this->request['mode'] == 'update') {
 				$row = $this->table->selectByPk($value);
 				if($this->session['init_value']['update_datetime'] < $row['update_datetime']) {
-					$status = false;
-
-					// 排他エラー
-					$error_message = '他のユーザによって更新されています';
+					$error_message = _('Other user updated this record');
 					$this->action_message = $error_message;
 
 					$this->form->setValue($this->session['init_value']);
-
 					$this->form->checkAlt($row, $error_message);
-
+					$this->form->setValue($value);
 					$this->control = new B_Element($this->input_control_config, $this->user_auth);
+
+					return false;
 				}
 			}
-			$this->form->setValue($value);
 
-			return $status;
+			return true;
 		}
 
 		function back() {
@@ -128,11 +122,11 @@
 			$this->control = new B_Element($this->input_control_config, $this->user_auth, $this->mode);
 		}
 
-		function regist() {
+		function register() {
 			// start transaction
 			$this->db->begin();
 
-			$ret = $this->_regist($message);
+			$ret = $this->_register($message);
 
 			if($ret) {
 				$this->db->commit();
@@ -149,18 +143,12 @@
 			$param['action_message'] = $message;
 			$this->result->setValue($param);
 
-			$this->setView('regist_view');
+			$this->setView('result_view');
 		}
 
-		function _regist(&$message) {
+		function _register(&$message) {
 			if(!$this->checkAlt($this->session['post'])) {
-				// 排他エラー
-				$message = '他のユーザに更新されています';
-				return false;
-			}
-
-			if(!$this->form->validate()) {
-				$message = '入力内容にエラーがあります';
+				$message = _('Other user updated this record');
 				return false;
 			}
 
@@ -168,12 +156,12 @@
 
 			switch($this->mode) {
 			case 'insert':
-				$ret = $this->insert($this->new_id);
+				$ret = $this->insert();
 				if($ret) {
-					$message = 'のレコードを登録しました。';
+					$message = _('was saved.');
 				}
 				else {
-					$message = 'のレコードの登録に失敗しました。';
+					$message = _('was faild to register.');
 				}
 				break;
 
@@ -182,20 +170,20 @@
 				$param['update_datetime'] = time();
 				$ret = $this->table->update($param);
 				if($ret) {
-					$message = 'のレコードを更新しました。';
+					$message = _('was updated.');
 				}
 				else {
-					$message = 'のレコードの更新に失敗しました。';
+					$message = _('was faild to update.');
 				}
 				break;
 
 			case 'delete':
 				$ret = $this->table->deleteByPk($param);
 				if($ret) {
-					$message= 'のレコードを削除しました。';
+					$message = _('was deleted.');
 				}
 				else {
-					$message = 'のレコードの削除に失敗しました。';
+					$message = _('was faild to delete.');
 				}
 				break;
 			}
@@ -203,44 +191,61 @@
 			return $ret;
 		}
 
-		function insert(&$new_id) {
-			// 初期値
+		function insert() {
 			$param = $this->session['post'];
 
 			$param['id'] = '';
+			$param['del_flag'] = '0';
 			$param['create_user'] = $this->user_id;
 			$param['create_datetime'] = time();
 			$param['update_user'] = $this->user_id;
 			$param['update_datetime'] = time();
 
-			$ret = $this->table->selectInsert($param);
-			$new_id = $this->table->selectMaxValue('id');
-			
-			return $ret;
+			return $this->table->selectInsert($param);
 		}
 
 		function view() {
-			// HTTPヘッダー出力
-			$this->sendHttpHeader();
-
-			$this->html_header->appendProperty('css', '<link href="css/user.css" type="text/css" rel="stylesheet" media="all" />');
-			$this->html_header->appendProperty('script', '<script src="js/bframe_edit_check.js" type="text/javascript"></script>');
-
-			// HTMLヘッダー出力
-			$this->showHtmlHeader();
+			// Start buffering
+			ob_start();
 
 			require_once('./view/view_form.php');
+
+			// Get buffer
+			$contents = ob_get_clean();
+
+			// Send HTTP header
+			$this->sendHttpHeader();
+
+			$this->html_header->appendProperty('css', '<link href="css/user.css" type="text/css" rel="stylesheet" media="all" />');
+			$this->html_header->appendProperty('css', '<link href="css/selectbox_white.css" type="text/css" rel="stylesheet" media="all" />');
+			$this->html_header->appendProperty('script', '<script src="js/bframe_selectbox.js" type="text/javascript"></script>');
+			$this->html_header->appendProperty('script', '<script src="js/bframe_edit_check.js" type="text/javascript"></script>');
+
+			// Show HTML header
+			$this->showHtmlHeader();
+
+			// Show HTML body
+			echo $contents;
 		}
 
-		function regist_view() {
-			// HTTPヘッダー出力
+		function result_view() {
+			// Start buffering
+			ob_start();
+
+			require_once('./view/view_result.php');
+
+			// Get buffer
+			$contents = ob_get_clean();
+
+			// Send HTTP header
 			$this->sendHttpHeader();
 
 			$this->html_header->appendProperty('css', '<link href="css/user.css" type="text/css" rel="stylesheet" media="all" />');
 
-			// HTMLヘッダー出力
+			// Show HTML header
 			$this->showHtmlHeader();
 
-			require_once('./view/view_result.php');
+			// Show HTML body
+			echo $contents;
 		}
 	}
