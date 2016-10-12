@@ -13,22 +13,33 @@
 	define('B_CHARSET', 'UTF-8');
 	mb_internal_encoding(B_CHARSET);
 
-	// start session
+	// Start session
 	require_once('../bs-admin/class/B_Session.php');
 	$info = pathinfo($_SERVER['SCRIPT_NAME']);
 	define('SESSION_DIR', $info['dirname']);
 
 	$ses = new B_Session;
 	$ses->start('nocache', 'bs-install', SESSION_DIR);
-	$ses->end();
 
 	// Send HTTP header
 	header('Cache-Control: no-cache, must-revalidate'); 
-	header('Content-Language: ja');
+	header('Content-Language: ' . $_SESSION['language']);
 	header('Content-Type: text/html; charset=UTF-8');
 
-	// show HTML
-	include('./view/view_complete.php');
+	// Show HTML
+	$view_folder = getViewFolder();
+	include('./view/' . $view_folder . 'view_complete.php');
+	$ses->end();
+
+	function getViewFolder() {
+		switch($_SESSION['language']) {
+		case 'ja':
+			return 'ja/';
+
+		default:
+			return;
+		}
+	}
 
 	function exception_error_handler($errno, $errstr, $errfile, $errline) {
 		if(!(error_reporting() & $errno)) {

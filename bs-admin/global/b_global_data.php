@@ -8,7 +8,7 @@
 	${$g_data_set}['language'] =
 		array(
 				'en'	=> _('English'),
-				'jp'	=> _('Japanese'),
+				'ja'	=> _('Japanese'),
 		);
 
 	${$g_data_set}['row_per_page'] =

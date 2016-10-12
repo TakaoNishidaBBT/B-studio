@@ -5,8 +5,8 @@
  *
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
-	// System Name
-	define('LANG', '%LANGUAGE%');
+	// Language config
+	require_once('lang_config.php');
 
 	// System Name
 	define('B_SYSTEM_NAME', 'B-studio');
@@ -67,6 +67,9 @@
 
 	// Log File
 	define('B_LOG_FILE', B_DOC_ROOT . B_ADMIN_ROOT . 'log/log.txt');
+
+	// Language files Directory
+	define('B_LNGUAGE_DIR', B_DOC_ROOT . B_ADMIN_ROOT . 'language/');
 
 	// DataBase Connect File
 	define('B_DB_CONNECT_INFO', B_DOC_ROOT . B_ADMIN_ROOT . 'db/db_connect.php');

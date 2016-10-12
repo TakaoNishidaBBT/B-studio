@@ -6,7 +6,7 @@
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
 	error_reporting(E_ALL & ~E_DEPRECATED & ~E_NOTICE & ~E_STRICT);
-	ini_set('display_errors','On');
+	ini_set('display_errors', 'On');
 	set_error_handler('exception_error_handler');
 
 	// CHARSET
@@ -14,7 +14,14 @@
 	mb_internal_encoding(B_CHARSET);
 
 	// Start session
+	require_once('../bs-admin/class/B_Session.php');
 	$info = pathinfo($_SERVER['SCRIPT_NAME']);
+	define('SESSION_DIR', $info['dirname']);
+
+	$ses = new B_Session;
+	$ses->start('nocache', 'bs-install', SESSION_DIR);
+
+	// Define directories
 	$root_dir = dirname($info['dirname']);
 	if(substr($root_dir, -1) == '/') {
 		$root_dir = substr($root_dir, 0, -1);
@@ -26,29 +33,15 @@
 	define('SESSION_DIR', $info['dirname']);
 	define('ROOT_DIR', $root_dir . '/');
 	define('DOC_ROOT', $doc_root);
-	define('LANG', 'en');
-
-	require_once('../bs-admin/class/B_Session.php');
-
-	$ses = new B_Session;
-	$ses->start('nocache', 'bs-install', SESSION_DIR);
-
-	// Document root directory
-	if(substr($_SERVER['DOCUMENT_ROOT'], -1) == '/') {
-		define('B_DOC_ROOT', substr($_SERVER['DOCUMENT_ROOT'], 0, -1));
-	}
-	else {
-		define('B_DOC_ROOT', $_SERVER['DOCUMENT_ROOT']);
-	}
-
-	// Directory for admin page
+	define('B_DOC_ROOT', $doc_root);
 	define('B_ADMIN_ROOT', ROOT_DIR . 'bs-admin/');
+	define('B_LNGUAGE_DIR', B_DOC_ROOT . B_ADMIN_ROOT . 'language/');
 
-	require_once('../bs-admin/config/language.php');
+	// Language file
+	require_once('../bs-admin/language/language.php');
 
 	require_once('config/_form_config.php');
 	require_once('../bs-admin/class/B_Element.php');
-	require_once('../bs-admin/class/B_Session.php');
 	$db_install_form = new B_Element($db_install_form_config);
 	$admin_basic_auth_form = new B_Element($admin_basic_auth_config);
 	$admin_user_form = new B_Element($admin_user_form_config);
@@ -77,7 +70,7 @@
 
 	// Send HTTP header
 	header('Cache-Control: no-cache, must-revalidate'); 
-	header('Content-Language: ja');
+	header('Content-Language: ' . $_SESSION['language']);
 	header('Content-Type: text/html; charset=UTF-8');
 
 	// Show HTML
@@ -87,8 +80,8 @@
 
 	function getViewFolder() {
 		switch($_SESSION['language']) {
-		case 'jp':
-			return 'jp/';
+		case 'ja':
+			return 'ja/';
 
 		default:
 			return;
@@ -101,21 +94,21 @@
 		$admin_user_form->getValue($param);
 
 		try {
-			// setup htaccess
+			// Set up htaccess
 			$obj = $root_htaccess->getElementByName('htaccess');
 			file_put_contents('../.htaccess', $obj->value);
 
-			// setup bs-admin htaccess basic authentication
+			// Set up bs-admin htaccess basic authentication
 			$contents = file_get_contents('./config/_admin_htaccess.txt');
 			$contents = str_replace('%AUTH_USER_FILE%', DOC_ROOT . ROOT_DIR . 'bs-admin/.htpassword', $contents);
 			file_put_contents('../bs-admin/.htaccess', $contents);
 			file_put_contents('../bs-admin-files/.htaccess', $contents);
 
-			// setup bs-admin password
+			// Set up bs-admin password
 			$password = $param['basic_auth_id'] . ':' . htpasswd($param['basic_auth_pwd']);
 			file_put_contents('../bs-admin/.htpassword', $password);
 
-			// setup built-in admin user file
+			// Set up built-in admin user file
 			$contents = file_get_contents('./config/_users.php');
 			$contents = str_replace('%USER_NAME%',  $param['admin_user_name'], $contents);
 			$contents = str_replace('%USER_ID%',  $param['admin_user_id'], $contents);
@@ -123,14 +116,18 @@
 			$contents = str_replace('%LANGUAGE%', $_SESSION['language'], $contents);
 			file_put_contents('../bs-admin/user/users.php', $contents);
 
-			// setup core_config(current_root)
-			$contents = file_get_contents('./config/_core_config.php');
+			// Set up lang_config
+			$contents = file_get_contents('./config/_lang_config.php');
 			$contents = str_replace('%LANGUAGE%', $_SESSION['language'], $contents);
+			file_put_contents('../bs-admin/config/lang_config.php', $contents);
+
+			// Set up core_config(current_root)
+			$contents = file_get_contents('./config/_core_config.php');
 			$contents = str_replace('%CURRENT_ROOT%', ROOT_DIR, $contents);
 			$contents = str_replace('%DB_PREFIX%', $param['db_prefix'], $contents);
 			file_put_contents('../bs-admin/config/core_config.php', $contents);
 
-			// setup db_connect(current_root)
+			// Set up db_connect(current_root)
 			$contents = file_get_contents('./config/_db_connect.php');
 			$contents = str_replace('%B_DB_NME%', $param['db_nme'], $contents);
 			$contents = str_replace('%B_DB_USR%', $param['db_usr'], $contents);
