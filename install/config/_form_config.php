@@ -7,7 +7,7 @@
 */
 $language = array(
 	'en'	=> _('English'),
-	'jp'	=> _('Japanese'),
+	'ja'	=> _('Japanese'),
 );
 
 $select_language_config = array(

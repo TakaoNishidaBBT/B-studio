@@ -17,11 +17,11 @@
 				<table>
 					<tbody>
 						<tr>
-							<th class="user">Login ID</th>
+							<th class="user"><?php echo _('Login ID'); ?></th>
 							<td><input id="user_id" name="user_id" type="text" class="textbox ime_off" size="30" maxlength="20" /></td>
 						</tr>
 						<tr>
-							<th class="key">Password</th>
+							<th class="key"><?php echo _('Password'); ?></th>
 							<td><input id="password" name="password" type="password" class="textbox" size="30" maxlength="20" /></td>
 						</tr>
 					</tbody>

@@ -6,13 +6,22 @@
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
 	error_reporting(E_ALL & ~E_DEPRECATED & ~E_NOTICE & ~E_STRICT);
-	define('B_CHARSET', 'UTF-8');
-	mb_internal_encoding(B_CHARSET);
 	ini_set('display_errors', 'On');
 	set_error_handler('exception_error_handler');
 
+	// CHARSET
+	define('B_CHARSET', 'UTF-8');
+	mb_internal_encoding(B_CHARSET);
+
 	// Start session
+	require_once('../bs-admin/class/B_Session.php');
 	$info = pathinfo($_SERVER['SCRIPT_NAME']);
+	define('SESSION_DIR', $info['dirname']);
+
+	$ses = new B_Session;
+	$ses->start('nocache', 'bs-install', SESSION_DIR);
+
+	// Define directories
 	$root_dir = dirname($info['dirname']);
 	if(substr($root_dir, -1) == '/') {
 		$root_dir = substr($root_dir, 0, -1);
@@ -24,13 +33,12 @@
 	define('SESSION_DIR', $info['dirname']);
 	define('ROOT_DIR', $root_dir . '/');
 	define('DOC_ROOT', $doc_root);
+	define('B_DOC_ROOT', $doc_root);
+	define('B_ADMIN_ROOT', ROOT_DIR . 'bs-admin/');
+	define('B_LNGUAGE_DIR', B_DOC_ROOT . B_ADMIN_ROOT . 'language/');
+
+	// Set $_SESSION['language']
 	define('LANG', 'en');
-
-	require_once('../bs-admin/class/B_Session.php');
-
-	$ses = new B_Session;
-	$ses->start('nocache', 'bs-install', SESSION_DIR);
-
 	if(!$_SESSION['language']) $_SESSION['language'] = LANG;
 
 	if($_POST['action'] == 'select-language') {
@@ -38,18 +46,8 @@
 		$_SESSION['install_confirm'] = false;
 	}
 
-	// Document root directory
-	if(substr($_SERVER['DOCUMENT_ROOT'], -1) == '/') {
-		define('B_DOC_ROOT', substr($_SERVER['DOCUMENT_ROOT'], 0, -1));
-	}
-	else {
-		define('B_DOC_ROOT', $_SERVER['DOCUMENT_ROOT']);
-	}
-
-	// Directory for admin page
-	define('B_ADMIN_ROOT', ROOT_DIR . 'bs-admin/');
-
-	require_once('../bs-admin/config/language.php');
+	// Language file
+	require_once('../bs-admin/language/language.php');
 
 	if($_SESSION['language'] != 'en' and !function_exists('mb_internal_encoding')) {
 		echo _('Please enable mbstring module');
@@ -87,7 +85,8 @@
 		setHtaccess($root_htaccess);
 		confirmPermission($perm_message);
 	}
-	// set language
+
+	// Set value to language selectbox
 	$select_language->setValue(array('language' => $_SESSION['language']));
 
 	if(!session_save_path()) {
@@ -103,20 +102,20 @@
 		$error_message = _('ZipArchive is necessary');
 	}
 
-	// send HTTP header
+	// Send HTTP header
 	header('Cache-Control: no-cache, must-revalidate'); 
-	header('Content-Language: ja');
+	header('Content-Language: ' . $_SESSION['language']);
 	header('Content-Type: text/html; charset=UTF-8');
 
-	// show HTML
+	// Show HTML
 	$view_folder = getViewFolder();
 	include('./view/' . $view_folder . 'view_index.php');
 	exit;
 
 	function getViewFolder() {
 		switch($_SESSION['language']) {
-		case 'jp':
-			return 'jp/';
+		case 'ja':
+			return 'ja/';
 
 		default:
 			return;
@@ -124,7 +123,7 @@
 	}
 
 	function setHtaccess($root_htaccess) {
-		// setup htaccess
+		// Set up htaccess
 		$contents = file_get_contents('./config/_htaccess.txt');
 		$contents = str_replace('%REWRITE_BASE%', ROOT_DIR, $contents);
 		$param['htaccess'].= $contents;
@@ -217,7 +216,7 @@
 			}
 		}
 		else {
-			// confirm message
+			// Confirm message
 			$error_message = _('This is an error in your entry<br />Please check any error message and re-enter the necessary information');
 		}
 
@@ -234,7 +233,7 @@
 
 	function exception_error_handler($errno, $errstr, $errfile, $errline ) {
 		if(!(error_reporting() & $errno)) {
-			// error_reporting, unexpected error has occurred
+			// Error_reporting, unexpected error has occurred
 			return;
 		}
 
