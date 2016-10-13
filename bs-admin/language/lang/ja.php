@@ -168,7 +168,7 @@
 		'External link'					=> '外部リンク',
 		'If you choose external link on, please enter URL'
 										=> '「外部リンクあり」を選択した場合は、URLを入力してください',
-		'Another window'				=> '別ウインドウ',
+		'Open link in new window'		=> '別ウインドウ',
 		'Detail'						=> '詳細',
 		'Are you sure to delete?'		=> '削除します。\n\nよろしいですか',
 		'Property'						=> 'プロパティー',
