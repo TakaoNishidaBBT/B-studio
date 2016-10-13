@@ -13,6 +13,7 @@
 		function __construct($db, $config) {
 			$this->db = $db;
 			$this->config = $config;
+			$this->months = array('1' => 'Jan', '2' => 'Feb', '3' => 'Mar', '4' => 'Apr', '5' => 'May', '6' => 'Jun', '7' => 'Jly', '8' => 'Aug', '9' => 'Sep', '10' => 'Oct', '11' => 'Nov', '12' => 'Dec');
 
 			$this->cal = new B_DataGrid($this->db, $this->config['grid']);
 			$this->caption = new B_Element($this->config['caption']);
@@ -26,9 +27,11 @@
 
 			$this->data = $this->setWeekArray();
 
-			$param['year'] = $year;
-			$param['month'] = $month;
+			$param['YEAR'] = $year;
+			$param['MONTH'] = _($this->months[$month]);
 			$this->caption->setValue($param);
+			$obj = $this->caption->getElementByName('year_month');
+			$obj->value = $this->caption->replaceText($obj->value, $param);
 		}
 
 		function setWeekArray() {
@@ -36,7 +39,7 @@
 			$week_index = date('w', strtotime($date));
 
 			for($i=0, $d=1, $w=$week_index; checkdate($this->month, $d, $this->year) ; $i++) {
-				for($j=0; $j<7 ;$j++) {
+				for($j=0; $j<7; $j++) {
 					if($j == $w && checkdate($this->month, $d, $this->year)) {
 						$week_array[$i][$j+1] = $d++;
 						$w++;
@@ -58,10 +61,10 @@
 		function getHtml() {
 			// callback parameters
 			$this->callback_param = array(
-				'holiday' 		=> $this->holiday,
-				'year'			=> $this->year,
-				'month'			=> $this->month,
-				'day'			=> $this->day,
+				'holiday' 	=> $this->holiday,
+				'year'		=> $this->year,
+				'month'		=> $this->month,
+				'day'		=> $this->day,
 			);
 			$this->cal->setCallBack($this,'_holiday_callback', array('param' => $this->callback_param));
 
