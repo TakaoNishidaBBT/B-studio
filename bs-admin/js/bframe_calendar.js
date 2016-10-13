@@ -6,7 +6,7 @@
 */
 	bframe.addEventListner(window, 'load' , bframeCalendarInit);
 
-	function bframeCalendarInit(){
+	function bframeCalendarInit() {
 		var cc = new bframe.calendar_container();
 	    var a = document.getElementsByTagName('a');
 		var c = new Array();
@@ -43,7 +43,7 @@
 		}
 
 		this.closeAll = function() {
-			for(var i=0 ; i<calendars.length; i++) {
+			for(var i=0; i<calendars.length; i++) {
 				if(calendars[i].hide) {
 					calendars[i].hide();
 				}
@@ -92,7 +92,7 @@
 			response_wait = true;
 		}
 
-		function initResponse(){
+		function initResponse() {
 			if(httpObj.readyState == 4 && httpObj.status == 200 && response_wait){
 				property = eval('('+httpObj.responseText+')');
 				size = {width:property.width, height:property.height};
@@ -149,7 +149,7 @@
 			return false;
 		}
 
-		function showResponse(){
+		function showResponse() {
 			if(httpObj.readyState == 4 && httpObj.status == 200 && response_wait){
 				xmlData = httpObj.responseXML;
 				year = xmlData.getElementsByTagName('year')[0].firstChild.nodeValue;
