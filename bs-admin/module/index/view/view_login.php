@@ -10,7 +10,6 @@
 <body onload="bstudio.focusLoginId()">
 	<script type="text/javascript">if(window != top) top.location.href='.';</script>
 	<div id="title-header"><h1><?php echo $this->site_title; ?></h1></div>
-
 	<div class="login">
 		<form method="post" action="." autocomplete="off">
 			<div class="account">

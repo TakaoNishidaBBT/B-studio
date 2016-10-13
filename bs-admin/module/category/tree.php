@@ -86,7 +86,7 @@
 				if($this->request['mode'] == 'cut' && $this->request['destination_node_id'] != 'trash' &&
 					$this->tree->checkDuplicateById($this->request['destination_node_id'], $this->request['source_node_id'])) {
 
-					$this->message = '既に存在しています';
+					$this->message = _('Already exists');
 					$status = false;
 				}
 				else {
@@ -194,10 +194,10 @@
 			if($this->request['node_id'] && $this->request['node_id'] != 'null') {
 				if(!strlen(trim($this->request['node_name']))) {
 					$this->status = false;
-					$this->message = '名前を入力してください。';
+					$this->message = _('Please enter name');
 				}
 				else if($this->tree->checkDuplicateByName($this->request['node_id'], $this->request['node_name'])) {
-					$this->message = '名前を変更できません。指定されたカテゴリ名は既に存在します。別の名前を指定してください。';
+					$this->message = _('This name can not be used. Because this category already exists. Please enter the other name.');
 					$status = false;
 				}
 				else {
@@ -232,7 +232,7 @@
 		function updateDispSeq() {
 			if($this->request['parent_node_id'] && $this->request['parent_node_id'] != 'null') {
 				if($this->tree->checkDuplicateById($this->request['parent_node_id'], $this->request['source_node_id'])) {
-					$this->message = '既に存在しています';
+					$this->message = _('Already exists');
 					$status = false;
 				}
 				else {
@@ -246,7 +246,7 @@
 									, 0
 									, null);
 
-					// start transaction
+					// Start transaction
 					$this->db->begin();
 					$ret = $node->updateDispSeq($this->request, $this->user_id);
 					if($ret) {

@@ -252,7 +252,6 @@
 			'id'						=> array('char',	 	'5', 	'1', 	'1'),
 			'site_title'				=> array('text', 		'', 	'', 	''),
 			'admin_site_title'			=> array('text', 		'', 	'', 	''),
-			'language'					=> array('text', 		'', 	'', 	''),
 			'notes'						=> array('text', 		'', 	'', 	''),
 			'reserve1'					=> array('text', 		'', 	'', 	''),
 			'reserve2'					=> array('text', 		'', 	'', 	''),

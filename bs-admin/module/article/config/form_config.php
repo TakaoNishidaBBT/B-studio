@@ -52,7 +52,7 @@ $form_config = array(
 			),
 		),
 
-		// 掲載日
+		// Publication date
 		array(
 			'error_group'	=> true,
 			'start_html'    => '<tr>',
@@ -93,8 +93,8 @@ $form_config = array(
 					array(
 						'bframe_calendar'	=>
 						array(
-							'width'			=> '170',
-							'height'		=> '195',
+							'width'			=> '200',
+							'height'		=> '230',
 							'offsetLeft'	=> '174',
 							'drop_shadow'	=> 'true',
 							'target'		=> 'article_date_t',
@@ -108,14 +108,14 @@ $form_config = array(
 					),
 					'element'	=>
 					array(
-						'value'		=> '<img alt="カレンダー" src="images/common/calendar.png" />',
+						'value'		=> '<img alt="Calendar" src="images/common/calendar.png" />',
 					),
 				),
 				array(
 					'name'			=> 'error_message',
 					'class'			=> 'B_ErrMsg',
 					'start_html'	=> '<span class="error-message">',
-					'end_html'		=> '</spab>',
+					'end_html'		=> '</span>',
 				),
 			),
 		),
@@ -311,7 +311,7 @@ $form_config = array(
 								'name'			=> 'open_filelist',
 								'class'			=> 'B_Link',
 								'link'			=> 'index.php',
-								'special_html'	=> 'title="画像選択" class="settings-button" onclick="bstudio.activateModalWindow(this, 850, 500); return false;"',
+								'special_html'	=> 'title="' . _('Image selection') . '" class="settings-button" onclick="bstudio.activateModalWindow(this, 850, 500); return false;"',
 								'fixedparam'	=>
 								array(
 									'terminal_id'	=> TERMINAL_ID,
@@ -396,7 +396,7 @@ $form_config = array(
 				array(
 					'display'		=> 'none',
 					'name'			=> 'external_link_none',
-					'value'			=> 'なし',
+					'value'			=> _('None'),
 				),
 				array(
 					'name'			=> 'url',
@@ -433,7 +433,7 @@ $form_config = array(
 					'id'			=> 'filebrowser',
 					'class'			=> 'B_Link',
 					'link'			=> 'index.php',
-					'value'			=> 'ファイル管理',
+					'value'			=> _('File manager'),
 					'special_html'	=> 'style="display:none"',
 					'fixedparam'	=>
 					array(

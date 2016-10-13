@@ -16,10 +16,23 @@ array(
 			'specialchars'	=> 'none',
 		),
 		array(
-			'name'			=> 'year_month',
 			'start_html'	=> '<span>',
 			'end_html'		=> '</span>',
-			'value'			=> _('%MONTH% %YEAR%'),
+			array(
+				'name'			=> 'year',
+				'no_linefeed'	=> true,
+			),
+			array(
+				'value'			=> '年',
+				'no_linefeed'	=> true,
+			),
+			array(
+				'name'			=> 'month',
+				'no_linefeed'	=> true,
+			),
+			array(
+				'value'			=> '月',
+			),
 		),
 		array(
 			'class'			=> 'B_Link',
@@ -42,43 +55,43 @@ array(
 				'name'			=> 'sun',
 				'start_html'	=> '<th class="sun">',
 				'end_html'		=> '</th>',
-				'value'			=> _('Sun'),
+				'value'			=> '日',
 			),
 			array(
 				'name'			=> 'mon',
 				'start_html'	=> '<th>',
 				'end_html'		=> '</th>',
-				'value'			=> _('Mon'),
+				'value'			=> '月',
 			),
 			array(
 				'name'			=> 'tue',
 				'start_html'	=> '<th>',
 				'end_html'		=> '</th>',
-				'value'			=> _('Tue'),
+				'value'			=> '火',
 			),
 			array(
 				'name'			=> 'wed',
 				'start_html'	=> '<th>',
 				'end_html'		=> '</th>',
-				'value'			=> _('Wed'),
+				'value'			=> '水',
 			),
 			array(
 				'name'			=> 'thu',
 				'start_html'	=> '<th>',
 				'end_html'		=> '</th>',
-				'value'			=> _('Thu'),
+				'value'			=> '木',
 			),
 			array(
 				'name'			=> 'fri',
 				'start_html'	=> '<th>',
 				'end_html'		=> '</th>',
-				'value'			=> _('Fri'),
+				'value'			=> '金',
 			),
 			array(
 				'name'			=> 'sat',
 				'start_html'	=> '<th class="sat">',
 				'end_html'		=> '</th>',
-				'value'			=> _('Sat'),
+				'value'			=> '土',
 			),
 		),
 

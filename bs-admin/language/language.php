@@ -47,6 +47,5 @@
 
 		global $texts;
 
-		return $texts[$text];
+		return $texts[$text] ? $texts[$text]: $text;
 	}
-

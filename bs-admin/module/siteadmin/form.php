@@ -73,7 +73,7 @@
 			$param = $this->session['request'];
 
 			// Set up admin user file
-			$contents = file_get_contents(B_DOC_ROOT . B_ADMIN_ROOT . 'user/config/users.php_');
+			$contents = file_get_contents(B_DOC_ROOT . B_ADMIN_ROOT . 'user/config/_users.php');
 			$contents = str_replace('%USER_NAME%',  $param['admin_user_name'], $contents);
 			$contents = str_replace('%USER_ID%',  $param['admin_user_id'], $contents);
 			$contents = str_replace('%LANGUAGE%',  $param['language'], $contents);

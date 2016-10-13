@@ -94,6 +94,9 @@
 		$admin_user_form->getValue($param);
 
 		try {
+			// Set time limit to 3 minutes
+			set_time_limit(180);
+
 			// Set up htaccess
 			$obj = $root_htaccess->getElementByName('htaccess');
 			file_put_contents('../.htaccess', $obj->value);

@@ -9,7 +9,7 @@
 					?>
 					<div class="control" style="text-align: right">
 						<input type="button" class="cancel-button" value="Cancel" onclick="window.frameElement.deactivate();" />
-						<input type="button" class="regist-button" value="OK" onclick="setProperty('category')" />
+						<input type="button" class="regist-button" value="OK" onclick="bstudio.setProperty('category')" />
 					</div>
 				</form>
 			</div>
