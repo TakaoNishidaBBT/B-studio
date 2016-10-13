@@ -418,7 +418,7 @@ $form_config = array(
 				array(
 					'name'			=> 'external_window',
 					'class'			=> 'B_CheckBox',
-					'label'			=> _('Another window'),
+					'label'			=> _('Open link in new window'),
 					'value'			=> '1',
 					'fixed'			=> true,
 					'special_html'	=> ' class="checkbox"',
