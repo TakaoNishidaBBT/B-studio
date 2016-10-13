@@ -91,11 +91,11 @@ $tree_config = array(
 			),
 			'display_mode'	=>
 			array(
-				'thumbnail'	=> 
+				'thumbnail'	=>
 				array(
 					'id'		=> 'display_thumbnail',
 				),
-				'detail'		=> 
+				'detail'		=>
 				array(
 					'id'		=> 'display_detail',
 				),
@@ -201,7 +201,7 @@ $tree_config = array(
 					'submenu'	=>
 					array(
 						array(
-							'menu'		=> _('Foler'),
+							'menu'		=> _('Folder'),
 							'func'		=> 'createNode',
 							'icon'		=> './images/folders/folder.png',
 							'param'		=> 'node_type=folder&node_class=folder',
@@ -220,7 +220,7 @@ $tree_config = array(
 					'func'		=> 'editName',
 				),
 				array(
-					'menu'		=> _('Doenload'),
+					'menu'		=> _('Download'),
 					'func'		=> 'download',
 				),
 				array(

@@ -39,9 +39,10 @@
 		'Edit name'						=> '名前の変更',
 		'Empty the trash'				=> 'ゴミ箱を空にする',
 		'Folder'						=> 'フォルダ',
+		'File'							=> 'ファイル',
 		'Page'							=> 'ページ',
 
-		'Are you sure you want %NODE_NAME% to move to the trash?'	
+		'Are you sure you want %NODE_NAME% to move to the trash?'
 										=> '%NODE_NAME%をゴミ箱に移動します。よろしいですか？',
 		'Are you sure you want these %NODE_COUNT% objects to move to the trash?'
 										=> 'これら%NODE_COUNT%をゴミ箱に移動します。よろしいですか？',
@@ -66,13 +67,13 @@
 										=> 'ファイル名／フォルダ名に次の文字は使えません \ / : * ? " < > | スペース',
 		'Displaying %RECORD_FROM% to %RECORD_TO% of %TOTAL% items'
 										=> ' 全%TOTAL%件中　%RECORD_FROM%～%RECORD_TO%件目',
-		// Error message for date and time 
+		// Error message for date and time
 		' (out of range)'				=> '（範囲外）',
 		' (invalid time)'				=> '（時刻が不正）',
 		' (invalid date)'				=> '（日付が不正）',
 		' (format error)'				=> '（フォーマットが不正）',
 
-		// Error message for Node 
+		// Error message for Node
 		'DB error'						=> 'DBエラー',
 		'The folder you copy to or move to is subfloder'
 										=> '受け側のフォルダは送り側のフォルダのサブフォルダです',
@@ -104,7 +105,7 @@
 		'Contents'						=> 'コンテンツ',
 		'Templates'						=> 'テンプレート',
 		'Resources'						=> 'リソース',
-		'Resource Manager'				=> 'リソース管理',
+		'Resource manager'				=> 'リソース管理',
 		'Widget'						=> 'ウィジェット',
 		'Posts'							=> '投稿',
 		'Article'						=> '記事',
@@ -251,7 +252,7 @@
 		'ex) 2020/01/01 12:00'			=> '例）2020/01/01 12:00',
 		'Version name'					=> 'バージョン（名称）',
 		'Please enter version name'		=> 'バージョン（名称）を入力してください',
-		'All the contents you made on this version will be completely deleted.\nThis operation can not be undone.\n\nAre your sure to delete?'		
+		'All the contents you made on this version will be completely deleted.\nThis operation can not be undone.\n\nAre your sure to delete?'
 										=> 'このバージョンで作成したコンテンツすべてを削除します。\nこの作業は元に戻せません\n\nよろしいですか？',
 		'Version: '						=> 'バージョン：',
 		'Publish date and time: '		=> '　公開日時：',
@@ -299,7 +300,7 @@
 		'Login ID'						=> 'ログインID',
 		'Password (Re-entry)'			=> 'パスワード（再入力）',
 		'(Password you set)'			=> '（設定されたパスワード）',
-		'If you change password, please enter password. If you don\'t, keep this field empty'			
+		'If you change password, please enter password. If you don\'t, keep this field empty'
 										=> 'パスワードを変更する場合は新しいパスワードを入力し、変更しない場合は空のままにしておいてください',
 		'For confirmation, please re-enter password'
 										=> '確認のため、パスワードを再入力してください',
@@ -341,7 +342,7 @@
 		'Please enter schema name'		=> 'データベース名を入力してください',
 		'Table prefix'					=> 'テーブル・プリフィックス',
 		'Please enter table prefix'		=> 'テーブル・プリフィックスを入力してください',
-		'Usually changing this field is unnecessary. This field could be changed when B-studio will be installed in one schema.' 		
+		'Usually changing this field is unnecessary. This field could be changed when B-studio will be installed in one schema.'
 										=> '※通常この項目を変更する必要はありません。ひとつのDBにB-studioを複数インストールする場合は変更してください。',
 		'Please re-enter password'		=> 'パスワードを再入力してください',
 		'Password is not matched'		=> 'パスワードが一致していません',

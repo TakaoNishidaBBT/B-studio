@@ -182,7 +182,7 @@ $result_control_config = array(
 		'start_html'	=> '<li>',
 		'end_html'		=> '</li>',
 		array(
-			'start_html'	=> '<span class="left-button" style="width:180px" onclick="bframe.submit(\'F1\', \'' . $this->module . '\', \'form\', \'\', \'\')">',
+			'start_html'	=> '<span class="left-button settings-confirm" onclick="bframe.submit(\'F1\', \'' . $this->module . '\', \'form\', \'\', \'\')">',
 			'end_html'		=> '</span>',
 			'value'			=> _('Back to configuration form'),
 		),
