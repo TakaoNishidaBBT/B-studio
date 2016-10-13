@@ -8,6 +8,8 @@
 
 	$texts = array(
 		// Common
+		'en.css'						=> 'ja.css',
+		'None'							=> 'なし',
 		'(Test)'						=> '【テスト】',
 
 		'1 line'						=> '1件',
@@ -174,6 +176,41 @@
 		'Property'						=> 'プロパティー',
 		'Are you sure to delete?'		=> '削除します。よろしいですか？',
 
+		// Category
+		'Will be set when you double-clidk'
+										=> 'カテゴリ名をダブルクリックすると設定されます',
+		'Text color'					=> '文字色',
+		'Backgroud-color'				=> '背景色',
+		'Icon'							=> 'アイコン',
+		'Image selection'				=> '画像選択',
+		'Icon'							=> 'アイコン',
+		'Already exists'				=> '既に存在しています',
+		'This name can not be used. Because this category already exists. Please enter the other name.'
+										=> '名前を変更できません。指定されたカテゴリ名は既に存在します。別の名前を指定してください。',
+
+		// Carendar
+		'%MONTH% %YEAR%'				=> '%YEAR%年 %MONTH%',
+		'Jan'							=> '1月',
+		'Feb'							=> '2月',
+		'Mar'							=> '3月',
+		'Apr'							=> '4月',
+		'May'							=> '5月',
+		'Jun'							=> '6月',
+		'Jly'							=> '7月',
+		'Aug'							=> '8月',
+		'Sep'							=> '9月',
+		'Oct'							=> '10月',
+		'Nov'							=> '11月',
+		'Dec'							=> '12月',
+
+		'Sun'							=> '日',
+		'Mon'							=> '月',
+		'Tue'							=> '火',
+		'Wed'							=> '水',
+		'Thu'							=> '木',
+		'Fri'							=> '金',
+		'Sat'							=> '土',
+
 		// file manager
 		'Are you sure you want %NODE_NAME% to delete?'
 										=> '%NODE_NAME%を削除します。よろしいですか？',
@@ -273,7 +310,7 @@
 		'Password is not matched'		=> 'パスワードが一致していません',
 		'Back to site admin form'		=> '設定画面に戻る',
 		'Configuration of site admin was updated'
-									=> 'サイト管理者の情報を更新しました',
+										=> 'サイト管理者の情報を更新しました',
 
 		// Configuration
 		'Admin page title'				=> '管理画面タイトル',
@@ -328,7 +365,7 @@
 										=> '入力内容に誤りがあります。<br />各欄のエラーメッセージをご覧の上、入力し直してください。',
 
 		'Faild to create a table.'		=> 'テーブルの作成に失敗しました。',
-		'Faild to create a view.'			=> 'ビューの作成に失敗しました。',
+		'Faild to create a view.'		=> 'ビューの作成に失敗しました。',
 		'Faild to insert a version record.'
 										=> 'バージョンレコードの作成に失敗しました。',
 		'Faild to insert current version record.'

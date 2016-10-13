@@ -14,6 +14,7 @@ a.bframe-calendar:hover {
 	text-decoration: none;
 }
 div.wrapper {
+	box-sizing: border-box;
 	height: 100%;
 	text-align: center;
 	overflow: hidden;
@@ -42,7 +43,7 @@ table.calendar caption a:visited,
 table.calendar caption a:active {
 	text-decoration: none;
 	line-height: 23px;
-	height:23px;
+	height: 23px;
 	display: inline-block;
 	overflow: hidden;
 }
@@ -56,16 +57,16 @@ table.calendar th {
 	margin: 0;
 	padding: 0;
 	text-align: center;
-	font-size: 13px;
-	width: 20px;
-	height: 20px;
+	font-size: 12px;
+	width: 24px;
+	height: 24px;
 }
 table.calendar td.day {
 	margin: 0;
 	padding: 0;
 	font-size: 14px;
-	width: 20px;
-	height: 20px;
+	width: 24px;
+	height: 24px;
 	background: url(../images/common/popup_menu_back.png) repeat-x;
 }
 table.calendar th.sun {

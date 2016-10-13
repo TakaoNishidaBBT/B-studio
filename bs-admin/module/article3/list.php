@@ -9,15 +9,15 @@
 		function __construct() {
 			parent::__construct(__FILE__);
 
-			// ヘッダー 作成
+			// List header
 			require_once('./config/list_header_config.php');
 			$this->header = new B_Element($list_header_config, $this->user_auth);
 
-			// DataGrid 作成,
+			// DataGrid
 			require_once('./config/list_config.php');
 			$this->dg = new B_DataGrid($this->db, $list_config);
 
-			// カテゴリリスト
+			// Category list
 			$this->category_list = $this->getCategoryList();
 			$obj = $this->header->getElementByName('category_id');
 			if($obj) {
@@ -26,7 +26,7 @@
 		}
 
 		function getCategoryList() {
-			// category_idリストを作成
+			// Create category_id list
 			$root_node = new B_Node($this->db
 									, B_CATEGORY3_TABLE
 									, B_CATEGORY3_VIEW
@@ -112,7 +112,6 @@
 		}
 
 		function setProperty() {
-			// 表示件数
 			$this->default_row_per_page = 20;
 
 			$this->_setProperty('keyword', '');
@@ -125,36 +124,31 @@
 		}
 
 		function setHeader() {
-			// ヘッダー情報設定
+			// Set header
 			if($this->session) {
 				$this->header->setValue($this->session);
 			}
 
-			// 表示件数（デフォルト）
 			$obj = $this->header->getElementByName('row_per_page');
 			$obj->special_html.= ' data-default="' . $this->default_row_per_page . '"';
 		}
 
 		function setData() {
-			// where句　登録
 			$this->dg->setSqlWhere($this->sql_where);
 
-			// ソート
 			if($this->sort_key) {
-				$sql_order_by = ' order by '.$this->sort_key;
+				$sql_order_by = ' order by ' . $this->sort_key;
 				$sql_order_by.= $this->order;
 				$this->dg->setSortKey($this->sort_key);
 				$this->dg->setSqlOrderBy($sql_order_by);
 			}
 			$this->dg->setRowPerPage($this->row_per_page);
 
-			// データバインド
 			$this->dg->setPage($this->page_no);
 			$this->dg->bind();
 		}
 
 		function setSqlWhere() {
-			// 検索条件設定
 			if($this->keyword) {
 				$keyword = $this->db->real_escape_string_for_like($this->keyword);
 
@@ -182,32 +176,55 @@
 					$sql_where.= " and 0=1 ";
 				}
 
-				$select_message.= 'キーワード： <em>' . htmlspecialchars($this->keyword, ENT_QUOTES) . '</em>　';
+				$select_message.= _('Keyword: ') . ' <em>' . htmlspecialchars($this->keyword, ENT_QUOTES) . '</em>　';
 			}
 			if($this->category_id) {
 				$sql_where.= " and category_id = '%CATEGORY_ID%' ";
 				$sql_where = str_replace('%CATEGORY_ID%', $this->category_id, $sql_where);
-				$select_message.= 'カテゴリ：<em>' . htmlspecialchars(str_replace('&emsp;', '', $this->category_list[$this->category_id]), ENT_QUOTES, B_CHARSET) . '</em>&nbsp;&nbsp;';
+				$select_message.= _('Category: ') . '<em>' . htmlspecialchars(str_replace('&emsp;', '', $this->category_list[$this->category_id]), ENT_QUOTES, B_CHARSET) . '</em>&nbsp;&nbsp;';
 			}
 
 			if($select_message) {
-				$select_message = '<p class="condition"><strong>検索条件&nbsp;</strong>' . $select_message . '</p>';
+				$select_message = '<p class="condition"><span class="bold">' . _('Search condition') . '&nbsp;</span>' . $select_message . '</p>';
 			}
 
 			$this->sql_where = $sql_where . $sql_where_invalid;
 			$this->select_message = $select_message;
 		}
 
+		function rss() {
+			require_once('./config/rss_config.php');
+			$this->dg = new B_DataGrid($this->db, $rss_config);
+			$this->dg->setPage('all');
+			$this->dg->bind();
+			$xml = $this->dg->getHtml();
+			$fp = fopen('rss.xml', 'w');
+	        fwrite($fp, $xml);
+			fclose($fp);
+			exit;
+		}
+
 		function view() {
-			// HTTPヘッダー出力
+			// Start buffering
+			ob_start();
+
+			require_once('./view/view_list.php');
+
+			// Get buffer
+			$contents = ob_get_clean();
+
+			// Send HTTP header
 			$this->sendHttpHeader();
 
 			// HTML ヘッダー出力
 			$this->html_header->appendProperty('css', '<link href="css/article.css" type="text/css" rel="stylesheet" media="all" />');
 			$this->html_header->appendProperty('css', '<link href="css/selectbox_white.css" type="text/css" rel="stylesheet" media="all" />');
 			$this->html_header->appendProperty('script', '<script src="js/bframe_selectbox.js" type="text/javascript"></script>');
+
+			// Show HTML header
 			$this->showHtmlHeader();
 
-			require_once('./view/view_list.php');
+			// Show HTML body
+			echo $contents;
 		}
 	}

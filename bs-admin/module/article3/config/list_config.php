@@ -5,14 +5,13 @@
  *
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
-$list_config = 
-array(
+$list_config = array(
 	'start_html'	=> '<table class="list">',
 	'end_html'		=> '</table>',
 
 	'select_sql'	=> "select * from " . B_DB_PREFIX . "v_admin_article3 where 1=1 ",
 
-	'empty_message'	=> '<strong>　該当レコードはありません</strong>',
+	'empty_message'	=> '<span class="bold">　' . _('No record was found') . '</span>',
 
 	'header'	=>
 	array(
@@ -35,7 +34,7 @@ array(
 			'class'			=> 'B_Link',
 			'start_html'	=> '<th class="sortable">',
 			'end_html'		=> '</th>',
-			'value'			=> '日付',
+			'value'			=> _('Date'),
 			'link'			=> DISPATCH_URL,
 			'cond_html'		=> 'class="current-key"',
 			'sort_key'		=> 'article_date',
@@ -46,7 +45,7 @@ array(
 			'class'			=> 'B_Link',
 			'start_html'	=> '<th class="sortable" style="width:100px">',
 			'end_html'		=> '</th>',
-			'value'			=> 'カテゴリ',
+			'value'			=> _('Category'),
 			'link'			=> DISPATCH_URL,
 			'cond_html'		=> 'class="current-key"',
 			'sort_key'		=> 'category',
@@ -57,7 +56,7 @@ array(
 			'class'			=> 'B_Link',
 			'start_html'	=> '<th class="sortable" style="width:260px">',
 			'end_html'		=> '</th>',
-			'value'			=> 'タイトル',
+			'value'			=> _('Title'),
 			'link'			=> DISPATCH_URL,
 			'cond_html'		=> 'class="current-key"',
 			'sort_key'		=> 'title',
@@ -68,8 +67,8 @@ array(
 			'class'			=> 'B_Link',
 			'start_html'	=> '<th class="sortable" style="width:55px">',
 			'end_html'		=> '</th>',
-			'value'			=> '状態',
-			'title'			=> '公開／プレビュー／非公開',
+			'value'			=> _('Status'),
+			'title'			=> _('Published/Preview/Closed'),
 			'link'			=> DISPATCH_URL,
 			'cond_html'		=> 'class="current-key"',
 			'sort_key'		=> 'publication',
@@ -78,12 +77,12 @@ array(
 		array(
 			'start_html'	=> '<th class="center" style="width:40px" nowrap>',
 			'end_html'		=> '</th>',
-			'value'			=> '編集',
+			'value'			=> _('Edit'),
 		),
 		array(
 			'start_html'	=> '<th class="center" style="width:40px" nowrap>',
 			'end_html'		=> '</th>',
-			'value'			=> '削除',
+			'value'			=> _('Delete'),
 		),
 	),
 
@@ -125,7 +124,7 @@ array(
 			'data_set'		=> 'publication',
 		),
 		array(
-			'start_html'	=> '<td>',
+			'start_html'	=> '<td class="button">',
 			'end_html'		=> '</td>',
 			'element'		=>
 			array(
@@ -148,7 +147,7 @@ array(
 			),
 		),
 		array(
-			'start_html'	=> '<td>',
+			'start_html'	=> '<td class="button">',
 			'end_html'		=> '</td>',
 			'element'		=>
 			array(

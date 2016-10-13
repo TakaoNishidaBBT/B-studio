@@ -86,3 +86,7 @@ span.selected {
 	background-color: #ece9d8 !important;
 	color: #333 !important;
 }
+span.caution {
+	color: #f00;
+	padding: 0 2px;
+}

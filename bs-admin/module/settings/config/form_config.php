@@ -5,20 +5,6 @@
  *
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
-/*
-	function _($param) {
-		$lang = 'jp';
-
-		$data = array(
-			'test'	=> array(
-				'en'	=> 	'test',
-				'jp'	=> 	'テスト',
-			),
-		);
-		return $data[$param][$lang];
-
-	}
-*/
 $form_config = array(
 	array(
 		// Table
@@ -41,6 +27,26 @@ $form_config = array(
 				'start_html'		=> '<td>',
 				'end_html'			=> '</td>',
 				'special_html'		=> 'class="textbox ime_on" size="100" maxlength="100" ',
+			),
+	    ),
+
+		// Language
+		array(
+			'start_html'	=> '<tr>',
+			'end_html'		=> '</tr>',
+			array(
+				'start_html'		=> '<th>',
+				'end_html'			=> '</th>',
+				'value'				=> _('Language'),
+			),
+			array(
+				'class'				=> 'B_SelectBox',
+				'name'				=> 'language',
+				'data_set'			=> 'language',
+				'start_html'		=> '<td>',
+				'end_html'			=> '</td>',
+				'value'				=> LANG,
+				'special_html'		=> 'class="bframe_selectbox"',
 			),
 	    ),
 

@@ -300,7 +300,7 @@ $admin_basic_auth_config = array(
 					'name'					=> 'basic_auth_pwd',
 					'class'					=> 'B_Password',
 					'special_html'			=> 'class="textbox ime-off" size="40" maxlength="100" ',
-					'confirm_message'		=> _('（Entered password）'),
+					'confirm_message'		=> _('(Entered password)'),
 					'validate'				=>
 					array(
 						array(
@@ -407,7 +407,7 @@ $admin_user_form_config = array(
 			),
 		),
 
-		// Login IS
+		// Login ID
 		array(
 			'error_group'	=> 'true',
 			'start_html'    => '<tr>',

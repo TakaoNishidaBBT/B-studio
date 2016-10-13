@@ -75,6 +75,8 @@
 		}
 
 		function login() {
+			$_SESSION['language'] = LANG;
+
 			if($_POST['login']) {
 				// Check login
 				$auth = new B_AdminAuth;

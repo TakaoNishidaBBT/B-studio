@@ -72,6 +72,11 @@
 				$ret = $this->main_table->insert($param);
 			}
 
+			// Set up lang_config
+			$contents = file_get_contents(B_LNGUAGE_DIR . 'config/_lang_config.php');
+			$contents = str_replace('%LANGUAGE%',  $param['language'], $contents);
+			file_put_contents(B_DOC_ROOT . B_ADMIN_ROOT . 'config/lang_config.php', $contents);
+
 			if($ret) {
 				$this->db->commit();
 				$param['action_message'] = '<p><strong>' . _('Settings: Saved') . '</strong></p>';

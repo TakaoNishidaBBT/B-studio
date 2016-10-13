@@ -137,6 +137,47 @@ $form_config = array(
 			),
 	    ),
 
+		// Name
+		array(
+			'error_group'	=> true,
+			'start_html'	=> '<tr>',
+			'end_html'		=> '</tr>',
+			array(
+				'start_html'			=> '<th>',
+				'invalid_start_html'	=> '<th class="error">',
+				'end_html'				=> '</th>',
+				array(
+					'value'				=> _('Name'),
+				),
+				array(
+					'class'				=> 'B_Guidance',
+					'value'				=> '<span class="require">' . _('*') . '</span>',
+				),				
+			),
+			array(
+				'start_html'	=> '<td>',
+				'end_html'		=> '</td>',
+				array(
+					'name'					=> 'name',
+					'class'					=> 'B_InputText',
+					'special_html'			=> 'class="textbox ime-on" size="20" maxlength="100" ',
+					'validate'				=>
+					array(
+						array(
+							'type' 			=> 'required',
+							'error_message'	=> 'Please enter a name',
+						),
+					),
+				),
+				array(
+					'name'					=> 'error_message',
+					'class'					=> 'B_ErrMsg',
+					'start_html'			=> '<span class="error-message">',
+					'end_html'				=> '</span>',
+				),
+			),
+	    ),
+
 		// Status
 		array(
 			'error_group'	=> true,
@@ -221,47 +262,6 @@ $form_config = array(
 				'end_html'			=> '</td>',
 				'value'				=> LANG,
 				'special_html'		=> 'class="bframe_selectbox"',
-			),
-	    ),
-
-		// Name
-		array(
-			'error_group'	=> true,
-			'start_html'	=> '<tr>',
-			'end_html'		=> '</tr>',
-			array(
-				'start_html'			=> '<th>',
-				'invalid_start_html'	=> '<th class="error">',
-				'end_html'				=> '</th>',
-				array(
-					'value'				=> _('Name'),
-				),
-				array(
-					'class'				=> 'B_Guidance',
-					'value'				=> '<span class="require">' . _('*') . '</span>',
-				),				
-			),
-			array(
-				'start_html'	=> '<td>',
-				'end_html'		=> '</td>',
-				array(
-					'name'					=> 'name',
-					'class'					=> 'B_InputText',
-					'special_html'			=> 'class="textbox ime-on" size="20" maxlength="100" ',
-					'validate'				=>
-					array(
-						array(
-							'type' 			=> 'required',
-							'error_message'	=> 'Please enter a name',
-						),
-					),
-				),
-				array(
-					'name'					=> 'error_message',
-					'class'					=> 'B_ErrMsg',
-					'start_html'			=> '<span class="error-message">',
-					'end_html'				=> '</span>',
-				),
 			),
 	    ),
 

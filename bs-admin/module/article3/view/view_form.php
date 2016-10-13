@@ -1,5 +1,5 @@
 <body onload="bstudio.articleDetailInit('description_flag_1', 'description_flag_2')">
-	<div id="header"><h2 class="article">記事3詳細</h2></div>
+	<div id="header"><h2 class="article"><?php echo _('Article3'); ?></h2></div>
 
 	<form name="F1" method="post" action="index.php">
 		<div id="control">
@@ -11,7 +11,6 @@
 			}
 		?>
 		<div id="main" class="bframe_adjustparent" param="margin:108">
-			<p><span class="require">※</span>：必須項目</p>
 			<?php echo $this->form->getHtml($this->display_mode); ?>
 		</div>
 		<?php echo $this->form->getHiddenHtml(); ?>

@@ -32,20 +32,9 @@ $tab_control_config = array(
 		'start_html'		=> '<li>',
 		'end_html'			=> '</li>',
 		'link'				=> 'property1',
-		'value'				=> '設定',
+		'value'				=> _('Settings'),
 		'special_html'		=> 'class="bframe_tab"',
 	),
-/*
-	array(
-		'name'				=> 'config_index',
-		'class'				=> 'B_Link',
-		'start_html'		=> '<li>',
-		'end_html'			=> '</li>',
-		'link'				=> 'property2',
-		'value'				=> '設定2',
-		'special_html'		=> 'class="bframe_tab"',
-	),
-*/
 );
 $config_form_config = array(
 	'start_html'	=> '<div class="property">',
@@ -60,14 +49,14 @@ $config_form_config = array(
 			array(
 				'start_html'	=> '<legend>',
 				'end_html'		=> '</legend>',
-				'value'			=> '表示',
+				'value'			=> _('Display'),
 			),
 			array(
-				// テーブル
+				// Table
 				'start_html'	=> '<table class="form file-title" border="0" cellspacing="0" cellpadding="0"><tbody>',
 				'end_html'		=> '</tbody></table>',
 
-				// 文字色
+				// Text color
 				array(
 					'start_html'    => '<tr>',
 					'end_html'	    => '</tr>',
@@ -75,7 +64,7 @@ $config_form_config = array(
 						'start_html'		=> '<th>',
 						'end_html'			=> '</th>',
 						array(
-							'value'				=> '文字色',
+							'value'				=> _('Text color'),
 						),
 					),
 					array(
@@ -89,7 +78,7 @@ $config_form_config = array(
 					),
 				),
 
-				// 背景色
+				// Backgroud-color
 				array(
 					'start_html'    => '<tr>',
 					'end_html'	    => '</tr>',
@@ -97,7 +86,7 @@ $config_form_config = array(
 						'start_html'		=> '<th>',
 						'end_html'			=> '</th>',
 						array(
-							'value'				=> '背景色',
+							'value'				=> _('Backgroud-color'),
 						),
 					),
 					array(
@@ -111,14 +100,14 @@ $config_form_config = array(
 					),
 				),
 
-				// アイコン
+				// Icon
 				array(
 					'start_html'    => '<tr>',
 					'end_html'	    => '</tr>',
 					array(
 						'start_html'		=> '<th>',
 						'end_html'			=> '</th>',
-						'value'				=> 'アイコン',
+						'value'				=> _('Icon'),
 					),
 					array(
 						'start_html'    => '<td>',
@@ -141,7 +130,7 @@ $config_form_config = array(
 										'name'			=> 'open_filelist',
 										'class'			=> 'B_Link',
 										'link'			=> 'index.php',
-										'special_html'	=> 'title="画像選択" class="settings-button" onclick="bstudio.activateModalWindow(this, 850, 500); return false;"',
+										'special_html'	=> 'title="' . _('Image selection') . '" class="settings-button" onclick="bstudio.activateModalWindow(this, 850, 500); return false;"',
 										'fixedparam'	=>
 										array(
 											'terminal_id'	=> TERMINAL_ID,
@@ -154,14 +143,14 @@ $config_form_config = array(
 											'height'		=> '80',
 										),
 										'specialchars'	=> 'none',
-										'value'			=> '<img alt="画像選択" src="images/common/gear.png" />',
+										'value'			=> '<img alt="Image selection" src="images/common/gear.png" />',
 									),
 									array(
 										'class'				=> 'B_Link',
 										'link'				=> '#',
-										'special_html'		=> 'title="クリア" class="clear-button" onclick="clearIMG(\'icon\', \'icon_file\'); return false;"',
+										'special_html'		=> 'title="' . _('Clear') . '" class="clear-button" onclick="bstudio.clearIMG(\'icon\', \'icon_file\'); return false;"',
 										'specialchars'		=> 'none',
-										'value'				=> '<img alt="クリア" src="images/common/clear.png" />',
+										'value'				=> '<img alt="Clear" src="images/common/clear.png" />',
 									),
 								),
 								array(

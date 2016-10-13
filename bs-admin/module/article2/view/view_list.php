@@ -1,6 +1,6 @@
 <body>
 	<div id="header">
-		<h2 class="article">記事2一覧</h2>
+		<h2 class="article"><?php echo _('Article2'); ?></h2>
 		<?php echo $this->header->gethtml(); ?>
 	</div>
 
