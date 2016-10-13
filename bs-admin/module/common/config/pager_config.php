@@ -9,7 +9,7 @@ $pager_config =
 array(
 	'row_per_page'	=> '10',
 	'page_link_max'	=> '5',
-	'start_html'	=> '<ul class="page-locator"><li class="title">' . _('Page:') . '</li>',
+	'start_html'	=> '<ul class="page-locator"><li class="title">' . _('Pages:') . '</li>',
 	'end_html'		=> '</ul>',
 	'location'		=>
 	array(

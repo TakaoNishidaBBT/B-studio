@@ -93,7 +93,7 @@ $tree_config = array(
 					'submenu'	=>
 					array(
 						array(
-							'menu'		=> _('Foler'),
+							'menu'		=> _('Folder'),
 							'func'		=> 'createNode',
 							'icon'		=> './images/folders/folder.png',
 							'param'		=> 'node_type=folder&node_class=folder',
