@@ -7,9 +7,9 @@
 	bframe.addEventListner(window, 'load' , bframeTextEditorInit);
 
 	function bframeTextEditorInit(){
-	    var ta = document.getElementsByTagName('textarea');
+		var ta = document.getElementsByTagName('textarea');
 
-	    for(var i=0; i<ta.length; i++) {
+		for(var i=0; i<ta.length; i++) {
 			if(window.getSelection && bframe.checkClassName('bframe_texteditor', ta[i])) {
 				var s = new bframe.texteditor(ta[i]);
 			}
@@ -125,13 +125,13 @@
 			Split = require('ace/split').Split;
 			split = new Split(editor, theme, 1);
 			ace_editor = split.getEditor(0);
-		    ace_editor.getSession().setValue(target.value);
-		    mode = require('ace/mode/' + syntax).Mode;
-		    ace_editor.getSession().setMode(new mode());
+			ace_editor.getSession().setValue(target.value);
+			mode = require('ace/mode/' + syntax).Mode;
+			ace_editor.getSession().setMode(new mode());
 
 			UndoManager = require('ace/undomanager').UndoManager;
-            var session = split.getEditor(0).session;
-		    session.setUndoManager(new UndoManager());
+			var session = split.getEditor(0).session;
+			session.setUndoManager(new UndoManager());
 
 			ace_editor.renderer.setHScrollBarAlwaysVisible(false);
 			ace_editor.renderer.setShowPrintMargin(false);
@@ -175,7 +175,7 @@
 		}
 
 		function undo(event) {
-            var session = split.getEditor(0).session;
+			var session = split.getEditor(0).session;
 			var undoManager = session.getUndoManager();
 			undoManager.undo();
 		}
@@ -195,11 +195,11 @@
 
 		function splith(event) {
 			if(split.getSplits() == 1 || split.getOrientation() != split.BELOW) {
-		        split.setOrientation(split.BELOW);
-	    	    split.setSplits(2);
-	            var session = split.getEditor(0).session;
-	            var newSession = split.setSession(session, 1);
-	            newSession.name = session.name;
+				split.setOrientation(split.BELOW);
+				split.setSplits(2);
+				var session = split.getEditor(0).session;
+				var newSession = split.setSession(session, 1);
+				newSession.name = session.name;
 
 				var newEditor = split.getEditor(1);
 				newEditor.renderer.setHScrollBarAlwaysVisible(ace_editor.renderer.getHScrollBarAlwaysVisible());
@@ -216,11 +216,11 @@
 
 		function splitv(event) {
 			if(split.getSplits() == 1 || split.getOrientation() != split.BESIDE) {
-		        split.setOrientation(split.BESIDE);
-	    	    split.setSplits(2);
-	            var session = split.getEditor(0).session;
-	            var newSession = split.setSession(session, 1);
-	            newSession.name = session.name;
+				split.setOrientation(split.BESIDE);
+				split.setSplits(2);
+				var session = split.getEditor(0).session;
+				var newSession = split.setSession(session, 1);
+				newSession.name = session.name;
 
 				var newEditor = split.getEditor(1);
 				newEditor.renderer.setHScrollBarAlwaysVisible(ace_editor.renderer.getHScrollBarAlwaysVisible());
@@ -231,7 +231,7 @@
 			}
 			else {
 				split.setSplits(1);
-	        }
+			}
 		}
 
 		function indentGuide(event) {
@@ -273,7 +273,7 @@
 			ace_editor.selectAll();
 			var range = ace_editor.getSelectionRange();
 			ace_editor.clearSelection();
-		    ace_editor.getSession().replace(range, target.value);
+			ace_editor.getSession().replace(range, target.value);
 			ace_editor.renderer.alignCursor(0);
 		}
 

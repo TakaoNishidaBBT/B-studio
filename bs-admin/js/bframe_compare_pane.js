@@ -8,10 +8,10 @@
 
 	function bframeComparePaneInit(){
 		var pc = new bframe.compare_pane_container();
-	    var div = document.getElementsByTagName('div');
+		var div = document.getElementsByTagName('div');
 		var p = new Array();
 
-	    for(var i=0, j=0; i<div.length; i++) {
+		for(var i=0, j=0; i<div.length; i++) {
 			if(bframe.checkClassName('bframe_compare_pane', div[i])) {
 				p[j++] = new bframe.compare_pane(pc, div[i], j);
 			}

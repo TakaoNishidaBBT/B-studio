@@ -7,9 +7,9 @@
 	bframe.addEventListner(window, 'load' ,bframeFormInit);
 
 	function bframeFormInit(){
-	    var table = document.getElementsByTagName('table');
+		var table = document.getElementsByTagName('table');
 
-	    for(var i=0; i<table.length; i++) {
+		for(var i=0; i<table.length; i++) {
 			if(bframe.checkClassName('bframe_form', table[i])) {
 				var s = new bframe.form(table[i]);
 			}
@@ -556,7 +556,7 @@
 			return ret;
 		}
 
-	    function cancelEvent(e) {
-	        e.preventDefault? e.preventDefault() : e.returnValue = false;
-	    }
+		function cancelEvent(e) {
+			e.preventDefault? e.preventDefault() : e.returnValue = false;
+		}
 	}

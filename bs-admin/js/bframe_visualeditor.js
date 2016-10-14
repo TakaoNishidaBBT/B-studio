@@ -7,9 +7,9 @@
 	bframe.addEventListner(window, 'load' , bframeVisualEditorInit);
 
 	function bframeVisualEditorInit(){
-	    var textarea = document.getElementsByTagName('textarea');
+		var textarea = document.getElementsByTagName('textarea');
 
-	    for(var i=0; i<textarea.length; i++) {
+		for(var i=0; i<textarea.length; i++) {
 			if(bframe.checkClassName('bframe_visualeditor', textarea[i])) {
 				var s = new bframe.visualeditor(textarea[i]);
 			}
@@ -121,8 +121,8 @@
 			if(parent) {
 				editor = CKEDITOR.appendTo(parent.id, {
 					height: h,
-			        on : {
-			            instanceReady : function( ev ) {
+					on : {
+						instanceReady : function( ev ) {
 							var tag_group1 = new Array('h1', 'h2', 'h3', 'h4', 'h5', 'div', 'p', 'ul', 'ol', 'dl', 'dt', 'dd', 'li'
 													, 'section', 'nav', 'article', 'aside', 'header', 'footer', 'figure', 'figcaption'
 													, 'embed', 'video', 'canvas', 'audio', 'source');
@@ -136,7 +136,7 @@
 									breakAfterOpen : true,
 									breakBeforeClose : true,
 									breakAfterClose : true
-							    });
+								});
 							}
 							for(var i=0; i<tag_group2.length; i++) {
 								this.dataProcessor.writer.setRules( tag_group2[i], {
@@ -156,10 +156,10 @@
 									breakAfterClose : false
 								});
 							}
-			                this.dataProcessor.writer.setRules( 'comment', {
+							this.dataProcessor.writer.setRules( 'comment', {
 								indent : true,
 								breakAfterClose : true
-		                    });
+							});
 
 							// for sychronization
 							bframe.addEventListner(target, 'change' ,applyValueToEditor);
@@ -174,15 +174,15 @@
 								bframe.editCheck_handler.registerCallBackFunction(editCheckCallback);
 								bframe.editCheck_handler.registerResetCallBackFunction(resetDirtyCallback);
 							}
-			            },
-			        }
-			    });
+						},
+					}
+				});
 			}
 			else {
 				editor = CKEDITOR.replace(target.id, {
 					height: h,
-			        on : {
-			            instanceReady : function( ev ) {
+					on : {
+						instanceReady : function( ev ) {
 							var tag_group1 = new Array('h1', 'h2', 'h3', 'h4', 'h5', 'div', 'p', 'ul', 'ol', 'dl', 'dt', 'dd', 'li'
 													, 'section', 'nav', 'article', 'aside', 'header', 'footer', 'figure', 'figcaption'
 													, 'embed', 'video', 'canvas', 'audio', 'source');
@@ -196,7 +196,7 @@
 									breakAfterOpen : true,
 									breakBeforeClose : true,
 									breakAfterClose : true
-							    });
+								});
 							}
 							for(var i=0; i<tag_group2.length; i++) {
 								this.dataProcessor.writer.setRules( tag_group2[i], {
@@ -216,10 +216,10 @@
 									breakAfterClose : false
 								});
 							}
-			                this.dataProcessor.writer.setRules( 'comment', {
+							this.dataProcessor.writer.setRules( 'comment', {
 								indent : true,
 								breakAfterClose : true
-		                    });
+							});
 
 							// for sychronization
 							bframe.addEventListner(target, 'change' ,applyValueToEditor);
@@ -234,9 +234,9 @@
 								bframe.editCheck_handler.registerCallBackFunction(editCheckCallback);
 								bframe.editCheck_handler.registerResetCallBackFunction(resetDirtyCallback);
 							}
-			            },
-			        }
-			    });
+						},
+					}
+				});
 			}
 
 			bframe.addEventListner(window, 'unload', cleanUp);

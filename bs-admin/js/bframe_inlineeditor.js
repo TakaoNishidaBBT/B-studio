@@ -9,9 +9,9 @@
 	CKEDITOR.disableAutoInline = true;
 
 	function bframeInlineEditorInit(){
-	    var div = document.getElementsByTagName('div');
+		var div = document.getElementsByTagName('div');
 
-	    for(var i=0; i<div.length; i++) {
+		for(var i=0; i<div.length; i++) {
 			if(bframe.checkClassName('bframe_inlineeditor', div[i])) {
 				var s = new bframe.inlineeditor(div[i]);
 			}
@@ -80,7 +80,7 @@
 			self.contentEditable = true;
 
 			editor = CKEDITOR.inline(target, {
-		        on : {
+				on : {
 					instanceReady : function( ev ) {
 						var tag_group1 = new Array('h1', 'h2', 'h3', 'h4', 'h5', 'div', 'p', 'ul', 'ol', 'dl', 'dt', 'dd', 'li'
 													, 'section', 'nav', 'article', 'aside', 'header', 'footer', 'figure', 'figcaption'
@@ -95,7 +95,7 @@
 								breakAfterOpen : true,
 								breakBeforeClose : true,
 								breakAfterClose : true
-						    });
+							});
 						}
 						for(var i=0; i<tag_group2.length; i++) {
 							this.dataProcessor.writer.setRules( tag_group2[i], {

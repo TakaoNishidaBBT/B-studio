@@ -7,9 +7,9 @@
 	bframe.addEventListner(window, 'load' , bframeSuggestInit);
 
 	function bframeSuggestInit(){
-	    var input = document.getElementsByTagName('input');
+		var input = document.getElementsByTagName('input');
 
-	    for(var i=0; i<input.length; i++) {
+		for(var i=0; i<input.length; i++) {
 			var s = new bframe.suggest(input[i]);
 		}
 	}
@@ -186,7 +186,7 @@
 					response_wait = true;
 				}
 				clear();
-		    }
+			}
 		}
 
 		function show(){
