@@ -52,6 +52,10 @@ $tree_config = array(
 				array(
 					'url'		=> DISPATCH_URL . '&module=' . $this->module . '&page=tree&method=download',
 				),
+				'preview'		=>
+				array(
+					'url'		=> DISPATCH_URL . '&module=' . $this->module . '&page=tree&method=preview',
+				),
 			),
 			'key'			=>
 			array(
@@ -66,11 +70,11 @@ $tree_config = array(
 			),
 			'display_mode'	=>
 			array(
-				'thumbnail'	=> 
+				'thumbnail'	=>
 				array(
 					'id'		=> 'display_thumbnail',
 				),
-				'detail'		=> 
+				'detail'		=>
 				array(
 					'id'		=> 'display_detail',
 				),
@@ -82,25 +86,25 @@ $tree_config = array(
 				array(
 					array(
 						'name'			=> 'file_name',
-						'title'			=> '名前',
+						'title'			=> _('File Name'),
 						'className'		=> 'file-name',
-						'sort_key'		=> 'file_name',
+						'sort_key'		=> 'node_name',
 					),
 					array(
 						'name'			=> 'update_datetime_t',
-						'title'			=> '更新日時',
+						'title'			=> _('Modified'),
 						'className'		=> 'update-time',
-						'sort_key'		=> 'update_datetime_u',
+						'sort_key'		=> 'update_datetime',
 					),
 					array(
 						'name'			=> 'human_file_size',
-						'title'			=> 'ファイルサイズ',
+						'title'			=> _('File size'),
 						'className'		=> 'file-size',
 						'sort_key'		=> 'file_size',
 					),
 					array(
 						'name'			=> 'human_image_size',
-						'title'			=> 'イメージサイズ',
+						'title'			=> _('Resolution'),
 						'className'		=> 'image-size',
 						'sort_key'		=> 'image_size',
 					),
@@ -150,39 +154,39 @@ $tree_config = array(
 			'context_menu'		=>
 			array(
 				array(
-					'menu'		=> '切り取り',
+					'menu'		=> _('Cut'),
 					'func'		=> 'cutNode',
 				),
 				array(
-					'menu'		=> 'コピー',
+					'menu'		=> _('Copy'),
 					'func'		=> 'copyNode',
 				),
 				array(
-					'menu'		=> '貼り付け',
+					'menu'		=> _('Paste'),
 					'func'		=> 'pasteNode',
 				),
 				array(
-					'menu'		=> '削除',
+					'menu'		=> _('Delete'),
 					'func'		=> 'deleteNode',
 					'confirm'	=>
 					array(
-						'single'	=> '%NODE_NAME%を削除します。よろしいですか？',
-						'plural'	=> 'これら%NODE_COUNT%個の項目を削除します。よろしいですか？',
+						'single'	=> _('Are you sure you want %NODE_NAME% to delete?'),
+						'plural'	=> _('Are you sure you want these %NODE_COUNT% objects to delete?'),
 					),
 				),
 				array(
-					'menu'		=> '新規',
+					'menu'		=> _('New'),
 					'func'		=> 'createNode',
 					'submenu'	=>
 					array(
 						array(
-							'menu'		=> 'フォルダ',
+							'menu'		=> _('Folder'),
 							'func'		=> 'createNode',
 							'icon'		=> './images/folders/folder.png',
 							'param'		=> 'node_type=folder&node_class=folder',
 						),
 						array(
-							'menu'		=> 'ファイル',
+							'menu'		=> _('File'),
 							'func'		=> 'createNode',
 							'icon'		=> './images/folders/file_icon.png',
 							'param'		=> 'node_type=file&node_class=leaf',
@@ -191,17 +195,21 @@ $tree_config = array(
 					'submenu_width'	=> '120',
 				),
 				array(
-					'menu'		=> '名前の変更',
+					'menu'		=> _('Edit name'),
 					'func'		=> 'editName',
 				),
 				array(
-					'menu'		=> 'ダウンロード',
+					'menu'		=> _('Download'),
 					'func'		=> 'download',
+				),
+				array(
+					'menu'		=> _('Preview'),
+					'func'		=> 'preview',
 				),
 			),
 			'context_menu_width'	=> '138',
 			'context_menu_frame'	=> 'top',
-			'session_timeout'		=> 'セッションが切れました。ログインしなおしてください。',
+			'session_timeout'		=> _('Your session has timed out, Please log in again'),
 			'abbr'					=> '…',
 		),
 	),

@@ -191,7 +191,7 @@ $tree_config = array(
 					'func'		=> 'deleteNode',
 					'confirm'	=>
 					array(
-						'single'	=> _('Are you sure you relete %NODE_NAME%?'),
+						'single'	=> _('Are you sure you want %NODE_NAME% to delete?'),
 						'plural'	=> _('Are you sure you want these %NODE_COUNT% objects to delete?'),
 					),
 				),

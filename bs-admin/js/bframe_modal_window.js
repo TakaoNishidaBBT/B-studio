@@ -272,9 +272,9 @@
 			return window_status;
 		}
 
-		this.registCallBackFunction = function(func) {
+		this.registerCallBackFunction = function(func) {
 			if(child && child.getWindowStatus()) {
-				child.registCallBackFunction(func);
+				child.registerCallBackFunction(func);
 				return;
 			}
 			if(func) callBackFunction = func;
@@ -290,7 +290,7 @@
 			return containerBody.name;
 		}
 
-		bframe.resize_handler.registCallBackFunction(resizeOverlay);
+		bframe.resize_handler.registerCallBackFunction(resizeOverlay);
 
 		// -------------------------------------------------------------------------
 		// class dragControl

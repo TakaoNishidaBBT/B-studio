@@ -57,7 +57,7 @@
 			}
 		}
 
-		function regist() {
+		function register() {
 			if(file_exists($this->post['file_path']) && $this->post['mode'] == 'confirm' && filemtime($file_path) > $this->post['update_datetime']) {
 				$mode = 'confirm';
 				$message = "他のユーザに更新されています。\n上書きしますか？";

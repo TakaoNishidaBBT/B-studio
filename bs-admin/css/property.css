@@ -81,7 +81,7 @@ div.control p.message {
 }
 /* button */
 .cancel-button,
-.regist-button {
+.register-button {
 	padding: 5px 20px;
 	line-height: 17px;
 	border: none;
@@ -91,7 +91,7 @@ div.control p.message {
 	cursor: pointer;
 }
 .cancel-button:hover,
-.regist-button:hover {
+.register-button:hover {
 	background-color: #ccc;
 }
 .cancel-button {

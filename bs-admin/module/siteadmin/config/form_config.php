@@ -271,7 +271,7 @@ $confirm_control_config = array(
 		),
 	),
 	array(
-		'name'			=> 'regist',
+		'name'			=> 'register',
 		'start_html'	=> '<li>',
 		'end_html'		=> '</li>',
 		array(

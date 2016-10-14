@@ -65,7 +65,7 @@
 			$this->setView('view_folder');
 		}
 
-		function regist() {
+		function register() {
 			$this->form->setValue($this->post);
 
 			// Start transaction

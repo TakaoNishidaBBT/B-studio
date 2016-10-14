@@ -40,7 +40,7 @@
 			form.target = save_target;
 		}
 
-		this.registCallBackFunction = function(func) {
+		this.registerCallBackFunction = function(func) {
 			cb.push(func);
 		}
 
@@ -59,7 +59,7 @@
 			}
 		}
 
-		this.registBlurCallBackFunction = function(func) {
+		this.registerBlurCallBackFunction = function(func) {
 			bcb.push(func);
 		}
 

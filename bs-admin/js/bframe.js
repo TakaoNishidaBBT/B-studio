@@ -24,7 +24,7 @@
 
 	bframe.submit_cb = [];
 
-	bframe.registSubmitCallBackFunction = function(func) {
+	bframe.registerSubmitCallBackFunction = function(func) {
 		bframe.submit_cb.push(func);
 	}
 
@@ -161,7 +161,7 @@
 
 		this.submit = submit;
 
-		this.registCallBackFunction = function(func) {
+		this.registerCallBackFunction = function(func) {
 			cb.push(func);
 		}
 
@@ -232,7 +232,7 @@
 			}
 		}
 
-		this.registCallBackFunctionAfter = function(func) {
+		this.registerCallBackFunctionAfter = function(func) {
 			cba.push(func);
 		}
 

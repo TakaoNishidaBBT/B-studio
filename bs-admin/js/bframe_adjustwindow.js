@@ -39,7 +39,7 @@
 		}
 
 		bframe.addEventListner(target, 'load' , adjustWindow);
-		bframe.resize_handler.registCallBackFunction(adjustWindow);
+		bframe.resize_handler.registerCallBackFunction(adjustWindow);
 		bframe.resize_handler.onResize();
 
 		function adjustWindow() {
@@ -81,7 +81,7 @@
 			if(ph) param_height = ph.replace(/%/, '');
 		}
 
-		bframe.resize_handler.registCallBackFunction(adjustParent);
+		bframe.resize_handler.registerCallBackFunction(adjustParent);
 		bframe.resize_handler.onResize();
 
 		function adjustParent() {
@@ -172,7 +172,7 @@
 			}
 		}
 
-		this.registCallBackFunction = function(func) {
+		this.registerCallBackFunction = function(func) {
 			cb.push(func);
 		}
 

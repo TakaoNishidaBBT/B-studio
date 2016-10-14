@@ -160,6 +160,7 @@ div.thumbs img.control {
 }
 
 /* pane detail */
+/*
 table.file-list {
 	margin: 0 10px 10px 10px;
 }
@@ -218,11 +219,12 @@ table.file-list td span.update-datetime {
 table.file-list td.file-size {
 	text-align: right;
 }
-table.file-list td span.file-size {
+table.file-list td.file-size {
 	padding-right: 25px;
 }
-table.file-list td span.image-size {
+table.file-list td.image-size {
 	padding-left: 8px;
+	text-align: center;
 }
 table.file-list td img {
 	vertical-align: -30%;
@@ -234,6 +236,126 @@ table.file-list td span.node-name {
 	font-size: 12px;
 }
 table.file-list td span.selected {
+	background-color: #aaa;
+	color: #fff;
+}
+div.detail a:link {
+	text-decoration: none;
+}
+div.detail a:visited {
+	color: #fff;
+	text-decoration: none;
+}
+div.detail a:active {
+	color: #fff;
+	text-decoration: none;
+}
+div.detail a:hover {
+	color: #fff;
+	text-decoration: none;
+}
+*/
+/* pane detail */
+div.detail table {
+	margin: 0 20px 20px 20px;
+	border-collapse: separate;
+	border-spacing: 16px 0;
+}
+div.detail table th {
+	text-align: left;
+	font-weight: normal;
+	height: 30px;
+	padding-left: 4px;
+}
+div.detail table th span {
+	display: block;
+	line-height: 22px;
+	padding-left: 8px;
+	margin: 0;
+	border-bottom: 1px solid #fff;
+	color: #fff;
+}
+div.detail table th.sortable {
+	cursor: pointer;
+}
+div.detail table th.sortable span {
+	background: url(../images/common/sort.png) no-repeat 100% center transparent;
+	padding-right: 16px;
+}
+div.detail table th.asc span {
+	background: url(../images/common/sort_asc.png) no-repeat 100% center transparent;
+}
+div.detail table th.desc span {
+	background: url(../images/common/sort_desc.png) no-repeat 100% center transparent;
+}
+div.detail table th.sortable:hover span {
+	color: #ccc;
+}
+div.detail table .file-name {
+	min-width: 240px;
+}
+div.detail table .update-time {
+	min-width: 100px;
+}
+div.detail table .update-time span {
+	padding-left: 8px;
+}
+div.detail table .file-size {
+	min-width: 100px;
+}
+div.detail table .file-size span {
+	padding-left: 8px;
+}
+div.detail table .image-size {
+	min-width: 100px;
+}
+div.detail table .image-size span {
+	padding-left: 8px;
+}
+div.detail table td {
+	box-sizing: border-box;
+	height: 30px;
+	white-space: nowrap;
+	color: #fff;
+	padding-left: 4px;
+	position: relative;
+}
+div.detail table div.tree {
+	margin: 0;
+	padding: 0 0 0 7px;
+}
+div.detail table div.selected {
+	border-top: 1px dotted #f00;
+}
+
+div.detail table td span.update-datetime {
+	padding-left: 4px;
+}
+div.detail table td.file-size {
+	text-align: right;
+}
+div.detail table td span.file-size {
+	padding-right: 25px;
+}
+div.detail table td.image-size {
+	text-align: center;
+	padding-right: 18px;
+}
+div.detail table td img {
+	vertical-align: -25%;
+	margin-right: 2px;
+}
+div.detail table td span.img-border {
+	display: inline-block;
+	padding: 2px 0;
+}
+div.detail table td span.node-name {
+	display: inline;
+	padding: 2px 4px 1px 4px;
+	font-size: 12px;
+	height: 14px;
+}
+div.detail table td span.selected {
 	background-color: #aaa;
 	color: #fff;
 }

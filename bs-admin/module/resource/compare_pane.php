@@ -11,6 +11,13 @@
 
 			$this->version_left = $this->global_session['version_left'];
 			$this->version_right = $this->global_session['version_right'];
+
+			require_once('./config/compare_pane_config.php');
+			$this->compare_pane_config = $compare_pane_config;
+			$this->compare_pane_detail_config = $compare_pane_detail_config;
+			$this->display_mode_config = $display_mode_config;
+
+			$this->display_mode = new B_Element($this->display_mode_config);
 		}
 
 		function init() {
@@ -18,8 +25,8 @@
 		}
 
 		function select() {
-			if(isset($this->request['disp_mode'])) {
-				$this->session['disp_mode'] = $this->request['disp_mode'];
+			if(isset($this->request['display_mode'])) {
+				$this->session['display_mode'] = $this->request['display_mode'];
 			}
 			if($this->request['node_id']) {
 				if($this->request['target_id'] == 'left_tree') {
@@ -191,24 +198,23 @@
 			$this->left_tree_config = $left_tree_config['script']['bframe_tree'];
 			$this->right_tree_config = $left_right_config['script']['bframe_tree'];
 
-			require_once('./config/compare_pane_config.php');
-			if($this->session['disp_mode'] == 'detail') {
-				$this->left = new B_DataGrid($this->db, $compare_pane_detail_config);
+			if($this->session['display_mode'] == 'detail') {
+				$this->left = new B_DataGrid($this->db, $this->compare_pane_detail_config);
 				$param['pos'] = 'left';
 				$this->left->setCallBack($this, '_detail_callback', $param);
 
-				$this->right = new B_DataGrid($this->db, $compare_pane_detail_config);
+				$this->right = new B_DataGrid($this->db, $this->compare_pane_detail_config);
 				$param['pos'] = 'right';
 				$this->right->setCallBack($this, '_detail_callback', $param);
 
 				$this->view_file = './view/view_compare_pane_detail.php';
 			}
 			else {
-				$this->left = new B_DataGrid($this->db, $compare_pane_config);
+				$this->left = new B_DataGrid($this->db, $this->compare_pane_config);
 				$param['pos'] = 'left';
 				$this->left->setCallBack($this, '_thumb_callback', $param);
 
-				$this->right = new B_DataGrid($this->db, $compare_pane_config);
+				$this->right = new B_DataGrid($this->db, $this->compare_pane_config);
 				$param['pos'] = 'right';
 				$this->right->setCallBack($this, '_thumb_callback', $param);
 
@@ -220,9 +226,6 @@
 			if(is_array($this->right_list[0]['children'])) {
 				$this->right->bind($this->right_list[0]['children']);
 			}
-
-			$this->disp_change = new B_Element($compare_pane_disp_change_config);
-			$this->disp_change->setValue($this->session);
 		}
 
 		function compare(&$left, &$right) {

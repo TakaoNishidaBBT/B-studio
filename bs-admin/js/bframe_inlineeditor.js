@@ -122,23 +122,23 @@
 
 						// for submit
 						if(parent.bframe.ajaxSubmit) {
-							parent.bframe.ajaxSubmit.registCallBackFunction(onblurEditor);
+							parent.bframe.ajaxSubmit.registerCallBackFunction(onblurEditor);
 						}
 
 						// for change tab
 						if(parent.bframe.inline) {
-							parent.bframe.inline.registBlurCallBackFunction(onblurEditor);
+							parent.bframe.inline.registerBlurCallBackFunction(onblurEditor);
 						}
 
 						// for preview
 						if(parent.bframe.preview) {
-							parent.bframe.preview.registCallBackFunction(onblurEditor);
+							parent.bframe.preview.registerCallBackFunction(onblurEditor);
 						}
 
 						// for edit check
 						if(parent.bframe.editCheck_handler) {
-							parent.bframe.editCheck_handler.registCallBackFunction(editCheckCallback);
-							parent.bframe.editCheck_handler.registResetCallBackFunction(resetDirtyCallback);
+							parent.bframe.editCheck_handler.registerCallBackFunction(editCheckCallback);
+							parent.bframe.editCheck_handler.registerResetCallBackFunction(resetDirtyCallback);
 						}
 					},
 				}

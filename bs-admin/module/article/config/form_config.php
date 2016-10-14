@@ -311,7 +311,7 @@ $form_config = array(
 								'name'			=> 'open_filelist',
 								'class'			=> 'B_Link',
 								'link'			=> 'index.php',
-								'special_html'	=> 'title="' . _('Image selection') . '" class="settings-button" onclick="bstudio.activateModalWindow(this, 850, 500); return false;"',
+								'special_html'	=> 'title="' . _('Image selection') . '" class="settings-button" onclick="bstudio.activateModalWindow(this, 1000, 500); return false;"',
 								'fixedparam'	=>
 								array(
 									'terminal_id'	=> TERMINAL_ID,
@@ -510,7 +510,7 @@ $confirm_control_config = array(
 		),
 	),
 	array(
-		'name'			=> 'regist',
+		'name'			=> 'register',
 		'start_html'	=> '<li>',
 		'end_html'		=> '</li>',
 		array(
@@ -536,7 +536,7 @@ $delete_control_config = array(
 		),
 	),
 	array(
-		'name'			=> 'regist',
+		'name'			=> 'register',
 		'start_html'	=> '<li>',
 		'end_html'		=> '</li>',
 		array(

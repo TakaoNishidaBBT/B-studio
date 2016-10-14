@@ -58,7 +58,7 @@
 				form.target = save_target;
 			},
 
-			registCallBackFunction: function(func) {
+			registerCallBackFunction: function(func) {
 				cb.push(func);
 			},
 

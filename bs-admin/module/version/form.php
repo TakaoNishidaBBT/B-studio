@@ -200,7 +200,7 @@
 			$this->widget_node_table = new B_Table($this->db, 'widget_node');
 			$this->resource_node_table = new B_Table($this->db, 'resource_node');
 
-			$ret = $this->main_table->deleteByPk($param);
+			$ret = $this->table->deleteByPk($param);
 			$ret&= $this->contents_table->deleteByPk($param);
 			$ret&= $this->contents_node_table->deleteByPk($param);
 			$ret&= $this->template_table->deleteByPk($param);

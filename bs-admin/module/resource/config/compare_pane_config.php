@@ -71,7 +71,7 @@ $compare_pane_detail_config = array(
 
 	'select_sql'	=> "select * from " . B_DB_PREFIX . "v_article where 1=1 ",
 
-	'empty_message'	=> '<strong>　該当レコードはありません</strong>',
+	'empty_message'	=> '<span class="bold">　' . _('No record was found') . '</span>',
 
 	'header'	=>
 	array(
@@ -84,7 +84,7 @@ $compare_pane_detail_config = array(
 			array(
 				'start_html'	=> '<span>',
 				'end_html'		=> '</span>',
-				'value'			=> '名前',
+				'value'			=> _('File Name'),
 			),
 		),
 		array(
@@ -93,7 +93,7 @@ $compare_pane_detail_config = array(
 			array(
 				'start_html'	=> '<span>',
 				'end_html'		=> '</span>',
-				'value'			=> '更新日時',
+				'value'			=> _('Modified'),
 			),
 		),
 		array(
@@ -102,7 +102,7 @@ $compare_pane_detail_config = array(
 			array(
 				'start_html'	=> '<span>',
 				'end_html'		=> '</span>',
-				'value'			=> 'ファイルサイズ',
+				'value'			=> _('File size'),
 			),
 		),
 		array(
@@ -111,7 +111,7 @@ $compare_pane_detail_config = array(
 			array(
 				'start_html'	=> '<span>',
 				'end_html'		=> '</span>',
-				'value'			=> 'イメージサイズ',
+				'value'			=> _('Resolution'),
 			),
 		),
 	),
@@ -161,7 +161,7 @@ $compare_pane_detail_config = array(
 			'start_html'	=> '<td class="update-datetime">',
 			'end_html'		=> '</td>',
 			array(
-				'name'			=> 'create_datetime',
+				'name'			=> 'update_datetime_t',
 				'start_html'	=> '<span class="update-datetime">',
 				'end_html'		=> '</span>',
 			),
@@ -170,7 +170,7 @@ $compare_pane_detail_config = array(
 			'start_html'	=> '<td class="file-size">',
 			'end_html'		=> '</td>',
 			array(
-				'name'			=> 'file_size',
+				'name'			=> 'human_file_size',
 				'start_html'	=> '<span class="file-size">',
 				'end_html'		=> '</span>',
 			),
@@ -179,7 +179,7 @@ $compare_pane_detail_config = array(
 			'start_html'	=> '<td class="image-size">',
 			'end_html'		=> '</td>',
 			array(
-				'name'			=> 'image_size',
+				'name'			=> 'human_image_size',
 				'start_html'	=> '<span class="image-size">',
 				'end_html'		=> '</span>',
 			),
@@ -187,17 +187,24 @@ $compare_pane_detail_config = array(
 	),
 );
 
-$compare_pane_disp_change_config = array(
-	'start_html'	=> '<li class="select">',
-	'end_html'		=> '</li>',
+$display_mode_config = array(
+	'id'		=> 'display_mode',
+	'script'	=>
 	array(
-		'start_html'	=> '<span id="bframe_pane_disp_change">',
-		'end_html'		=> '</span>',
-		'value'			=> '表示 ： ',
+		'compare_pane_container'	=>
 		array(
-			'class'			=> 'B_SelectBox',
-			'name'			=> 'disp_mode',
-			'data_set'		=> 'disp_mode',
+			'display_mode'	=>
+			array(
+				'thumbnail'	=>
+				array(
+					'id'		=> 'display_thumbnail',
+				),
+				'detail'		=>
+				array(
+					'id'		=> 'display_detail',
+				),
+				'default'		=> $this->session['display_mode'],
+			),
 		),
 	),
 );

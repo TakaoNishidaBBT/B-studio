@@ -97,15 +97,15 @@ $tab_control_config = array(
 		'special_html'		=> 'class="bframe_tab" onclick="bframe.preview.submit(\'F1\', \'' . B_SITE_BASE . 'index.php' . '\', \'widget_preview\', \'preview_frame\'); return false;"',
 	),
 	array(
-		'name'				=> 'regist_button',
-		'start_html'		=> '<li class="regist">',
+		'name'				=> 'register_button',
+		'start_html'		=> '<li class="register">',
 		'end_html'			=> '</li>',
 		array(
 			'start_html'	=> '<div class="input_container">',
 			'end_html'		=> '</div>',
 			array(
-				'name'			=> 'regist',
-				'start_html'	=> '<span id="regist" class="regist-button" onclick="bframe.ajaxSubmit.submit(\'F1\', \'' . $this->module . '\', \'form\', \'regist\', \'confirm\', true)">',
+				'name'			=> 'register',
+				'start_html'	=> '<span id="register" class="register-button" onclick="bframe.ajaxSubmit.submit(\'F1\', \'' . $this->module . '\', \'form\', \'register\', \'confirm\', true)">',
 				'end_html'		=> '</span>',
 				'value'			=> '<img src="images/common/save.png" alt="保存" />保存',
 			),

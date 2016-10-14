@@ -95,7 +95,7 @@ ul.tabcontrol li.selected a {
 	color: #fff;
 	text-shadow: -1px -1px #333;
 }
-ul.tabcontrol li.regist {
+ul.tabcontrol li.register {
 	border: none;
 	height: 26px;
 	margin-left: 50px;
@@ -111,7 +111,7 @@ div.input_container {
 	width: 140px;
 	float: left;
 }
-span.regist-button {
+span.register-button {
 	display: inline-block;
 	text-align: center;
 	margin: 0;
@@ -124,13 +124,13 @@ span.regist-button {
 
 	cursor: pointer;
 }
-span.regist-button:hover {
+span.register-button:hover {
 	background-color: #777;
 	border: 1px solid #777;
 	color: #fff;
 	text-shadow: 1px 1px #555;
 }
-span.regist-button img {
+span.register-button img {
 	vertical-align: -3px;
 	margin-right: 8px;
 }
@@ -144,7 +144,7 @@ span#message {
 	height: 26px;
 	color: #fff;
 }
-div.regist {
+div.register {
 	background-color: #555;
 	margin-right: 8px;
 	padding: 8px 8px;

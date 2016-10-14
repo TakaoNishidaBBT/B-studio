@@ -61,7 +61,7 @@ $menu_config = array(
 						'context_menu'		=>
 						array(
 							array(
-								'menu'		=> _('Resource Manager'),
+								'menu'		=> _('Resource manager'),
 								'param'		=> DISPATCH_URL . '&module=resource&page=tree,main',
 								'func'		=> 'openUrl',
 							),
