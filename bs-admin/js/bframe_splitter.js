@@ -49,7 +49,7 @@
 		pane.position(ep);
 
 		var size = {width: target.offsetWidth, height: target.offsetHeight};
-		bframe.resize_handler.registCallBackFunction(_adjustWindow);
+		bframe.resize_handler.registerCallBackFunction(_adjustWindow);
 
 		var drag_overlay = document.createElement('div');
 

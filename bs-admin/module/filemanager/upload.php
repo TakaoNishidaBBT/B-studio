@@ -135,7 +135,7 @@
 						$this->registerd_files = 0;
 
 						// register extract files
-						$node->walk($this, regist_archive);
+						$node->walk($this, register_archive);
 						$node->remove();
 						$this->removeThumbnailCacheFile();
 
@@ -230,7 +230,7 @@
 			}
 		}
 
-		function regist_archive($node) {
+		function register_archive($node) {
 			if(!$node->parent ) return;
 
 			rename($node->fullpath, B_UPLOAD_DIR . $this->path. $node->path);

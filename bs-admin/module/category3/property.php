@@ -52,7 +52,7 @@
 			$obj->value = $html;
 		}
 
-		function regist() {
+		function register() {
 			$this->form->setValue($this->post);
 			$this->form->getValue($param);
 			$this->update($param);

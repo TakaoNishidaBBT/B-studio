@@ -18,7 +18,7 @@ h2.settings span {
 input#backToList {
 	width: 140px;
 }
-input.regist-button {
+input.register-button {
 	padding: 2px 4px;
 	border-top: 1px solid #80a090;
 	border-right: 1px solid #206030;
@@ -29,7 +29,7 @@ input.regist-button {
 	width: auto;
 	overflow: visible;
 }
-input.regist-button:hover, input.regist-buttonHover {
+input.register-button:hover, input.register-buttonHover {
 	padding: 2px 4px;
 	border-top: 1px solid #80a090;
 	border-right: 1px solid #306040;

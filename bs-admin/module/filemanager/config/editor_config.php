@@ -42,14 +42,14 @@ $tab_control_config = array(
 		'special_html'		=> 'class="bframe_selectbox"',
 	),
 	array(
-		'start_html'		=> '<li class="regist">',
+		'start_html'		=> '<li class="register">',
 		'end_html'			=> '</li>',
 		array(
 			'start_html'	=> '<div class="input_container">',
 			'end_html'		=> '</div>',
 			array(
-				'name'			=> 'regist',
-				'start_html'	=> '<span id="regist" class="regist-button" onclick="bframe.ajaxSubmit.submit(\'F1\', \'' . $this->module . '\', \'editor\', \'regist\', \'confirm\', true)">',
+				'name'			=> 'register',
+				'start_html'	=> '<span id="register" class="register-button" onclick="bframe.ajaxSubmit.submit(\'F1\', \'' . $this->module . '\', \'editor\', \'register\', \'confirm\', true)">',
 				'end_html'		=> '</span>',
 				'value'			=> '<img src="images/common/save.png" alt="保存" />保存',
 			),

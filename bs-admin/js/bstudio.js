@@ -22,7 +22,7 @@
 		a.setAttribute('params', p);
 
 		top.bframe.modalWindow.activate(a, window);
-		if(func) top.bframe.modalWindow.registCallBackFunction(func);
+		if(func) top.bframe.modalWindow.registerCallBackFunction(func);
 	}
 
 	bstudio.insertIMG = function(dir, file_path, img_size, img_obj_id, hidden_obj_id, width, height) {
@@ -190,9 +190,9 @@
 		}
 	}
 
-	bstudio.registEditor = function(fname, module, page, method, mode, nocheck) {
+	bstudio.registerEditor = function(fname, module, page, method, mode, nocheck) {
 		bframe.ajaxSubmit.removeCallBackFunctionAfter(window.opener.bstudio.reloadTree);
-		bframe.ajaxSubmit.registCallBackFunctionAfter(window.opener.bstudio.reloadTree);
+		bframe.ajaxSubmit.registerCallBackFunctionAfter(window.opener.bstudio.reloadTree);
 		bframe.ajaxSubmit.submit(fname, module, page, method, mode, nocheck);
 	}
 
@@ -238,7 +238,7 @@
 	}
 
 	bstudio.setProperty = function(module) {
-		bframe.ajaxSubmit.registCallBackFunctionAfter(window.frameElement.deactivate);
-		bframe.ajaxSubmit.submit('F1', module, 'property', 'regist', '', true);
+		bframe.ajaxSubmit.registerCallBackFunctionAfter(window.frameElement.deactivate);
+		bframe.ajaxSubmit.submit('F1', module, 'property', 'register', '', true);
 	}
 

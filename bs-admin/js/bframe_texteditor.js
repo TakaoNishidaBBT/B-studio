@@ -24,7 +24,7 @@
 		var self = this;
 		var container, editor;
 		var syntax = target.getAttribute('syntax');
-		var regist_button;
+		var register_button;
 		var widget;
 		var ace_editor, theme, Split, split, UndoManager;
 		var edit_flag = false;
@@ -93,8 +93,8 @@
 		}
 
 		function init() {
-			// regist button
-			regist_button = document.getElementById('regist');
+			// register button
+			register_button = document.getElementById('register');
 
 			// create control
 			createControl();
@@ -150,27 +150,27 @@
 			bframe.addEventListner(parent.parentNode,	'focus',	onFocus);
 			bframe.addEventListner(target,				'change',	updateEditor);
 
-			bframe.resize_handler.registCallBackFunction(onFocus);
+			bframe.resize_handler.registerCallBackFunction(onFocus);
 
 			// for submit
 			if(bframe.ajaxSubmit) {
-				bframe.ajaxSubmit.registCallBackFunction(updateTarget);
+				bframe.ajaxSubmit.registerCallBackFunction(updateTarget);
 			}
 
 			// for inline editor
 			if(bframe.inline) {
-				bframe.inline.registCallBackFunction(updateTarget);
+				bframe.inline.registerCallBackFunction(updateTarget);
 			}
 
 			// for preview
 			if(bframe.preview) {
-				bframe.preview.registCallBackFunction(updateTarget);
+				bframe.preview.registerCallBackFunction(updateTarget);
 			}
 
 			// for edit check
 			if(bframe.editCheck_handler) {
-				bframe.editCheck_handler.registCallBackFunction(editCheckCallback);
-				bframe.editCheck_handler.registResetCallBackFunction(resetDirtyCallback);
+				bframe.editCheck_handler.registerCallBackFunction(editCheckCallback);
+				bframe.editCheck_handler.registerResetCallBackFunction(resetDirtyCallback);
 			}
 		}
 
@@ -296,6 +296,6 @@
 		}
 
 		function save() {
-			bframe.fireEvent(regist_button, 'click');
+			bframe.fireEvent(register_button, 'click');
 		}
 	}

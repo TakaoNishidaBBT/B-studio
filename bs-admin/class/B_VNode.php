@@ -27,14 +27,10 @@
 			}
 
 			if($row) {
-				$this->node_type = $row['node_type'];
-				$this->node_class = $row['node_class'];
-				$this->node_name = $row['node_name'];
-				$this->disp_seq = $row['disp_seq'];
-				$this->contents_id = $row['contents_id'];
-				$this->update_datetime = $row['update_datetime'];
-				$this->create_datetime = $row['create_datetime'];
-
+				$this->property = $row;
+				foreach($this->property as $key => $value) {
+					$this->$key = $value;
+				}
 			}
 			else {
 				$this->node_type = $node_id;
@@ -191,12 +187,19 @@
 			$list['node_status'] = $this->node_status;
 			$list['node_count'] = $this->node_count;
 			$list['folder_count'] = $this->folder_count;
-			$list['update_datetime'] = $this->update_datetime;
-			$list['create_datetime'] = date('Y/m/d H:i', $this->create_datetime);
-			if($dir) {
-				$list['file_size'] = B_Util::human_filesize($this->getFileSize($dir), 1);
-				$list['image_size'] = $this->getImageSize($dir);
+			$list['create_datetime_u'] = $this->create_datetime;
+			$list['create_datetime_t'] = date('Y/m/d H:i', $this->create_datetime);
+			$list['update_datetime_u'] = $this->update_datetime;
+			$list['update_datetime_t'] = date('Y/m/d H:i', $this->update_datetime);
+			if($this->node_type != 'folder') {
+				$list['file_size'] = $this->file_size;
+				$list['human_file_size'] = B_Util::human_filesize($this->file_size, 'K');
 			}
+			if($this->image_size) {
+				$list['image_size'] = $this->image_size;
+				$list['human_image_size'] = $this->human_image_size;
+			}
+
 			$list['level'] = $this->level;
 			if($this->node_id == $node_id) {
 				$list[$category] = true;

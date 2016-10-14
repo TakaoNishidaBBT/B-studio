@@ -24,7 +24,7 @@
 		'from'							=> '',
 		'to'							=> '〜',
 
-		'User'							=> 'ユーザー',
+		'User:'							=> 'ユーザー：',
 		'Log out'						=> 'ログアウト',
 
 		'Publish version'				=> '公開バージョン',
@@ -241,7 +241,7 @@
 		'Edit'							=> '編集',
 		'Diff'							=> '比較',
 		'Delete'						=> '削除',
-		'Register'						=> '設定',
+		'Submit'						=> '設定',
 		'Back to list'					=> '一覧に戻る',
 		'Publish date and time'			=> '公開日時',
 		'Please enter correct date and time'
@@ -266,12 +266,19 @@
 		'Please set versions.'			=> 'バージョンを選択してください',
 		'If you set scheduled to be published this version, you must set current published version'
 										=> '（このバージョンを予約登録するにはそれまでに公開されるバージョンを設定してから再度、予約登録する必要があります）',
-		'Publish version: '				=> '公開バージョン：',
-		'Working version: '				=> '作業中バージョン：',
+//		'Publish version: '				=> '公開バージョン：',
+//		'Working version: '				=> '作業中バージョン：',
+		'Publish version:%PUBLISH_VERSION% &nbsp;Working version:%WROKING_VERSION%'
+										=> '公開バージョン：%PUBLISH_VERSION% &nbsp;作業中バージョン：%WROKING_VERSION%',
+
 		'will be registerd.'			=> 'に設定します。',
 		'published immediately'			=> '即時反映',
 		'Scheduled to be published'		=> '予約登録',
 		'will be registerd.'			=> 'に設定します。',
+
+		// Diff
+		'Diff Versions Left: %LEFT_VERSION% &nbsp;Right: %RIGHT_VERSION%'
+										=> 'バージョン比較 Left: %LEFT_VERSION% Right: %RIGHT_VERSION%',
 
 		// Users
 		'Name'							=> '名前',

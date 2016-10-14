@@ -23,8 +23,8 @@
 	bframe.shortcut = function(target) {
 		var self = target;
 
-		// regist button
-		var regist_button = document.getElementById('regist');
+		// register button
+		var register_button = document.getElementById('register');
 
 		bframe.addEventListner(target, 'keydown', keydown);
 
@@ -42,7 +42,7 @@
 				if(e.ctrlKey || e.metaKey) {
 					var obj = bframe.getEventSrcElement(event);
 					bframe.fireEvent(obj, 'focus');
-					bframe.fireEvent(regist_button, 'click');
+					bframe.fireEvent(register_button, 'click');
 					event.preventDefault();
 				}
 				break;

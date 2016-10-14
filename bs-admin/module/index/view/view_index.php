@@ -27,7 +27,7 @@
 			<ul>
 				<li>
 					<dl class="login-user">
-						<dt><?php echo _('User'); ?>：</dt>
+						<dt><?php echo _('User:'); ?></dt>
 						<dd><strong><?php echo $this->user_name ?></strong></dd>
 					</dl>
 				</li>

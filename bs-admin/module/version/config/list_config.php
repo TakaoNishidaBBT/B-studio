@@ -275,7 +275,7 @@ $version_control_confirm_config = array(
 			'class'			=> 'B_Button',
 			'name'			=> 'attendance',
 			'special_html'	=> 'class="register-button" onclick="bframe.submit(\'F1\', \'' . $this->module . '\', \'list\', \'register\', \'\', true)"',
-			'value'			=> _('Register'),
+			'value'			=> _('Submit'),
 		),
 	),
 );

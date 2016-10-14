@@ -156,7 +156,7 @@
 			form_data.append('module', module);
 			form_data.append('page', page);
 			form_data.append('method', 'upload');
-			form_data.append('mode', 'regist');
+			form_data.append('mode', 'register');
 
 			form_data.append('extract_mode', extract_mode);
 			form_data.append('Filedata', upload_queue[index].file);

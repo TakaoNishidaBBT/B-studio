@@ -15,6 +15,7 @@ array(
 								,name
 								,user_auth
 								,user_status
+								,language
 								,notes
 						from " . B_DB_PREFIX . "user
 						where 1=1 ",
@@ -71,6 +72,17 @@ array(
 			'param'			=> '&amp;module=' . $this->module . '&amp;page=list&amp;method=sort&amp;sort_key=user_status',
 		),
 		array(
+			'name'			=> 'language',
+			'start_html'	=> '<th class="sortable" style="width:60px">',
+			'end_html'		=> '</th>',
+			'value'			=> _('Language'),
+			'class'			=> 'B_Link',
+			'link'			=> DISPATCH_URL,
+			'cond_html'		=> 'class="current-key"',
+			'sort_key'		=> 'language',
+			'param'			=> '&amp;module=' . $this->module . '&amp;page=list&amp;method=sort&amp;sort_key=language',
+		),
+		array(
 			'name'			=> 'notes',
 			'start_html'	=> '<th class="center">',
 			'end_html'		=> '</th>',
@@ -121,7 +133,14 @@ array(
 			'name'			=> 'user_status',
 		),
 		array(
-			'name'			=> 'memo',
+			'start_html'	=> '<td class="left">',
+			'end_html'		=> '</td>',
+			'class'			=> 'B_SelectedText',
+			'data_set'		=> 'language',
+			'name'			=> 'language',
+		),
+		array(
+			'name'			=> 'notes',
 			'class'			=> 'B_Text',
 			'start_html'	=> '<td class="left">',
 			'end_html'		=> '</td>',

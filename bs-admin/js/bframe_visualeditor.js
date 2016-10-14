@@ -166,13 +166,13 @@
 
 							// for submit
 							if(bframe.ajaxSubmit) {
-								bframe.ajaxSubmit.registCallBackFunction(onblurEditor);
+								bframe.ajaxSubmit.registerCallBackFunction(onblurEditor);
 							}
 
 							// for edit check
 							if(bframe.editCheck_handler) {
-								bframe.editCheck_handler.registCallBackFunction(editCheckCallback);
-								bframe.editCheck_handler.registResetCallBackFunction(resetDirtyCallback);
+								bframe.editCheck_handler.registerCallBackFunction(editCheckCallback);
+								bframe.editCheck_handler.registerResetCallBackFunction(resetDirtyCallback);
 							}
 			            },
 			        }
@@ -226,13 +226,13 @@
 
 							// for submit
 							if(bframe.ajaxSubmit) {
-								bframe.ajaxSubmit.registCallBackFunction(onblurEditor);
+								bframe.ajaxSubmit.registerCallBackFunction(onblurEditor);
 							}
 
 							// for edit check
 							if(bframe.editCheck_handler) {
-								bframe.editCheck_handler.registCallBackFunction(editCheckCallback);
-								bframe.editCheck_handler.registResetCallBackFunction(resetDirtyCallback);
+								bframe.editCheck_handler.registerCallBackFunction(editCheckCallback);
+								bframe.editCheck_handler.registerResetCallBackFunction(resetDirtyCallback);
 							}
 			            },
 			        }

@@ -78,7 +78,7 @@
 			}
 		}
 
-		this.registCallBackFunction = function(func) {
+		this.registerCallBackFunction = function(func) {
 			cb.push(func);
 		}
 
@@ -99,7 +99,7 @@
 
 		this.executeCallBack = editCheckExecuteCallBack;
 
-		this.registResetCallBackFunction = function(func) {
+		this.registerResetCallBackFunction = function(func) {
 			rcb.push(func);
 		}
 

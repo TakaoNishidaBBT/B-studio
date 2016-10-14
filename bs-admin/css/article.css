@@ -15,7 +15,7 @@ div.list-header {
 }
 
 /* buttons */
-input.regist-button {
+input.register-button {
 	padding: 2px 4px;
 	border-top: 1px solid #bbf;
 	border-right: 1px solid #204060;
@@ -25,7 +25,7 @@ input.regist-button {
 	color: #fff;
 	cursor: pointer;
 }
-input.regist-button:hover {
+input.register-button:hover {
 	padding: 2px 4px;
 	border-top: 1px solid #bbf;
 	border-right: 1px solid #204060;

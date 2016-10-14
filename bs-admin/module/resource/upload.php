@@ -157,7 +157,7 @@
 						$this->registerd_files = 0;
 
 						// register extract files
-						$node->walk($this, regist_archive);
+						$node->walk($this, register_archive);
 						$node->remove();
 						$this->removeCacheFile();
 
@@ -185,7 +185,7 @@
 					exit;
 				}
 				else {
-					$node_id = $this->regist($file);
+					$node_id = $this->register($file);
 					$node = new B_Node($this->db
 										, B_RESOURCE_NODE_TABLE
 										, B_WORKING_RESOURCE_NODE_VIEW
@@ -225,10 +225,10 @@
 			}
 		}
 
-		function regist_archive($node) {
+		function register_archive($node) {
 			if(!$node->parent) return;
 
-			$ret = $this->_regist_archive($node, $node_id, $contents_id);
+			$ret = $this->_register_archive($node, $node_id, $contents_id);
 			if($ret) {
 				$node->db_node_id = $node_id;
 			}
@@ -262,7 +262,7 @@
 			ob_flush();
 		}
 
-		function _regist_archive($node, &$node_id, &$contents_id) {
+		function _register_archive($node, &$node_id, &$contents_id) {
 			$this->resource_node_table = new B_Table($this->db, B_RESOURCE_NODE_TABLE);
 
 			if($node->parent->db_node_id) {
@@ -294,8 +294,8 @@
 			}
 		}
 
-		function regist($file) {
-			$this->_regist($file['basename'], $node_id, $contents_id);
+		function register($file) {
+			$this->_register($file['basename'], $node_id, $contents_id);
 
 			if($this->_move_uploaded_file($_FILES['Filedata']['tmp_name'], $this->dir . $contents_id . '.' . $file['extension'])) {
 				chmod($this->dir . $contents_id . '.' . $file['extension'], 0777);
@@ -305,7 +305,7 @@
 			return $node_id;
 		}
 
-		function _regist($file_name, &$node_id, &$contents_id) {
+		function _register($file_name, &$node_id, &$contents_id) {
 			$parent_node = $this->current_folder;
 			$this->resource_node_table = new B_Table($this->db, B_RESOURCE_NODE_TABLE);
 

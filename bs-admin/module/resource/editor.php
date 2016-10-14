@@ -87,7 +87,7 @@
 			return $path;
 		}
 
-		function regist() {
+		function register() {
 			// start transaction
 			$this->db->begin();
 

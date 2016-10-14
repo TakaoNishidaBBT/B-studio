@@ -53,12 +53,12 @@ $menu_config = array(
 						'context_menu'		=>
 						array(
 							array(
-								'menu'		=> 'リソース管理',
+								'menu'		=> _('Resource manager'),
 								'param'		=> DISPATCH_URL . '&module=resource&page=compare,main',
 								'func'		=> 'openUrl',
 							),
 							array(
-								'menu'		=> 'ウィジェット',
+								'menu'		=> _('Widget'),
 								'param'		=> DISPATCH_URL . '&module=widget&page=compare&method=init,main',
 								'func'		=> 'openUrl',
 							),

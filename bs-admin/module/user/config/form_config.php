@@ -47,7 +47,7 @@ $form_config = array(
 				array(
 					'class'				=> 'B_Guidance',
 					'value'				=> '<span class="require">' . _('*') . '</span>',
-				),				
+				),
 			),
 			array(
 				'start_html'			=> '<td>',
@@ -111,7 +111,7 @@ $form_config = array(
 				array(
 					'class'				=> 'B_Guidance',
 					'value'				=> '<span class="require">' . _('*') . '</span>',
-				),				
+				),
 			),
 			array(
 				'start_html'			=> '<td>',
@@ -152,7 +152,7 @@ $form_config = array(
 				array(
 					'class'				=> 'B_Guidance',
 					'value'				=> '<span class="require">' . _('*') . '</span>',
-				),				
+				),
 			),
 			array(
 				'start_html'	=> '<td>',
@@ -167,6 +167,46 @@ $form_config = array(
 							'type' 			=> 'required',
 							'error_message'	=> 'Please enter a name',
 						),
+					),
+				),
+				array(
+					'name'					=> 'error_message',
+					'class'					=> 'B_ErrMsg',
+					'start_html'			=> '<span class="error-message">',
+					'end_html'				=> '</span>',
+				),
+			),
+	    ),
+
+		// Authority
+		array(
+			'error_group'	=> true,
+			'start_html'	=> '<tr>',
+			'end_html'		=> '</tr>',
+			array(
+				'start_html'			=> '<th>',
+				'invalid_start_html'	=> '<th class="error">',
+				'end_html'				=> '</th>',
+				array(
+					'value'					=> _('Authority'),
+				),
+				array(
+					'class'				=> 'B_Guidance',
+					'value'				=> '<span class="require">' . _('*') . '</span>',
+				),
+			),
+			array(
+				'name'					=> 'user_auth',
+				'class'					=> 'B_SelectBox',
+				'start_html'			=> '<td>',
+				'end_html'				=> '</td>',
+				'data_set'				=> 'user_auth',
+				'special_html'			=> 'class="bframe_selectbox"',
+				'validate'				=>
+				array(
+					array(
+						'type' 			=> 'required',
+						'error_message'	=> 'Please set user privilege',
 					),
 				),
 				array(
@@ -193,7 +233,7 @@ $form_config = array(
 				array(
 					'class'				=> 'B_Guidance',
 					'value'				=> '<span class="require">' . _('*') . '</span>',
-				),				
+				),
 			),
 			array(
 				'name'					=> 'user_status',
@@ -202,46 +242,6 @@ $form_config = array(
 				'end_html'				=> '</td>',
 				'data_set'				=> 'user_status',
 				'special_html'			=> 'class="bframe_selectbox"',
-			),
-	    ),
-
-		// Authority
-		array(
-			'error_group'	=> true,
-			'start_html'	=> '<tr>',
-			'end_html'		=> '</tr>',
-			array(
-				'start_html'			=> '<th>',
-				'invalid_start_html'	=> '<th class="error">',
-				'end_html'				=> '</th>',
-				array(
-					'value'					=> _('Authority'),
-				),
-				array(
-					'class'				=> 'B_Guidance',
-					'value'				=> '<span class="require">' . _('*') . '</span>',
-				),				
-			),
-			array(
-				'name'					=> 'user_auth',
-				'class'					=> 'B_SelectBox',
-				'start_html'			=> '<td>',
-				'end_html'				=> '</td>',
-				'data_set'				=> 'user_auth',
-				'special_html'			=> 'class="bframe_selectbox"',
-				'validate'				=>
-				array(
-					array(
-						'type' 			=> 'required',
-						'error_message'	=> 'Please set user privilege',
-					),
-				),
-				array(
-					'name'					=> 'error_message',
-					'class'					=> 'B_ErrMsg',
-					'start_html'			=> '<span class="error-message">',
-					'end_html'				=> '</span>',
-				),
 			),
 	    ),
 
