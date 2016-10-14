@@ -6,20 +6,20 @@
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
 $menu_config = array(
-	'start_html'    => '<div class="pull_down_menu">',
-	'end_html'	    => '</div>',
+	'start_html'	=> '<div class="pull_down_menu">',
+	'end_html'		=> '</div>',
 	array(
-		'start_html'    => '<ul>',
-		'end_html'	    => '</ul>',
+		'start_html'	=> '<ul>',
+		'end_html'		=> '</ul>',
 		array(
-			'start_html'    => '<li class="title">',
-			'end_html'	    => '</li>',
+			'start_html'	=> '<li class="title">',
+			'end_html'		=> '</li>',
 			'value'			=> 'B-studio',
 		),
 		array(
 			'auth_filter'	=> 'super_admin/admin',
-			'start_html'    => '<li>',
-			'end_html'	    => '</li>',
+			'start_html'	=> '<li>',
+			'end_html'		=> '</li>',
 			'class'			=> 'B_Link',
 			'value'			=> '<img src="images/menu/contents.png" alt="Contents"/>' . _('Contents'),
 			'specialchars'	=> 'none',
@@ -28,8 +28,8 @@ $menu_config = array(
 		),
 		array(
 			'auth_filter'	=> 'super_admin/admin',
-			'start_html'    => '<li>',
-			'end_html'	    => '</li>',
+			'start_html'	=> '<li>',
+			'end_html'		=> '</li>',
 			'class'			=> 'B_Link',
 			'value'			=> '<img src="images/menu/template.png" alt="Templates"/>' . _('Templates'),
 			'specialchars'	=> 'none',
@@ -38,8 +38,8 @@ $menu_config = array(
 		),
 		array(
 			'auth_filter'	=> 'super_admin/admin',
-			'start_html'    => '<li>',
-			'end_html'	    => '</li>',
+			'start_html'	=> '<li>',
+			'end_html'		=> '</li>',
 			array(
 				'class'			=> 'B_Link',
 				'special_html'	=> 'class="bframe_menu"',

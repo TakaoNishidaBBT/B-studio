@@ -135,7 +135,7 @@ $form_config = array(
 					'end_html'				=> '</span>',
 				),
 			),
-	    ),
+		),
 
 		// Name
 		array(
@@ -176,7 +176,7 @@ $form_config = array(
 					'end_html'				=> '</span>',
 				),
 			),
-	    ),
+		),
 
 		// Authority
 		array(
@@ -216,7 +216,7 @@ $form_config = array(
 					'end_html'				=> '</span>',
 				),
 			),
-	    ),
+		),
 
 		// Status
 		array(
@@ -243,7 +243,7 @@ $form_config = array(
 				'data_set'				=> 'user_status',
 				'special_html'			=> 'class="bframe_selectbox"',
 			),
-	    ),
+		),
 
 		// Language
 		array(
@@ -263,7 +263,7 @@ $form_config = array(
 				'value'				=> LANG,
 				'special_html'		=> 'class="bframe_selectbox"',
 			),
-	    ),
+		),
 
 		// Notes
 		array(

@@ -72,8 +72,8 @@ $form_config = array(
 				),				
 			),
 			array(
-				'start_html'    => '<td>',
-				'end_html'	    => '</td>',
+				'start_html'	=> '<td>',
+				'end_html'		=> '</td>',
 				array(
 					'name'				=> 'publication_datetime_t',
 					'class'				=> 'B_InputText',
@@ -170,7 +170,7 @@ $form_config = array(
 				'end_html'		=> '</td>',
 				'special_html'	=> 'class="textarea" rows="5"',
 			),
-	    ),
+		),
 	),
 );
 

@@ -9,21 +9,21 @@ $list_header_config = array(
 	array('class' => 'B_Hidden', 'name' => 'default_row_per_page'),
 	array(
 		'name'			=> 'title',
-		'start_html'    => '<h2 class="version">',
-		'end_html'	    => '</h2>',
+		'start_html'	=> '<h2 class="version">',
+		'end_html'		=> '</h2>',
 		'value'			=> _('Versions'),
 		array(
 			'name'			=> 'version_info',
-			'start_html'    => '<span>',
-			'end_html'	    => '</span>',
+			'start_html'	=> '<span>',
+			'end_html'		=> '</span>',
 		),
 	),
 	array(
-		'start_html'    => '<div class="list-header">',
-		'end_html'	    => '</div>',
+		'start_html'	=> '<div class="list-header">',
+		'end_html'		=> '</div>',
 		array(
-			'start_html'    => '<form name="header_form" id="header_form" method="post" action="index.php" target="main">',
-			'end_html'	    => '</form>',
+			'start_html'	=> '<form name="header_form" id="header_form" method="post" action="index.php" target="main">',
+			'end_html'		=> '</form>',
 			array(
 				'class'					=> 'B_Text',
 				'start_html'			=> '<ul class="search">',

@@ -58,8 +58,8 @@ $config_form_config = array(
 
 				// Text color
 				array(
-					'start_html'    => '<tr>',
-					'end_html'	    => '</tr>',
+					'start_html'	=> '<tr>',
+					'end_html'		=> '</tr>',
 					array(
 						'start_html'		=> '<th>',
 						'end_html'			=> '</th>',
@@ -80,8 +80,8 @@ $config_form_config = array(
 
 				// Backgroud-color
 				array(
-					'start_html'    => '<tr>',
-					'end_html'	    => '</tr>',
+					'start_html'	=> '<tr>',
+					'end_html'		=> '</tr>',
 					array(
 						'start_html'		=> '<th>',
 						'end_html'			=> '</th>',
@@ -102,30 +102,30 @@ $config_form_config = array(
 
 				// Icon
 				array(
-					'start_html'    => '<tr>',
-					'end_html'	    => '</tr>',
+					'start_html'	=> '<tr>',
+					'end_html'		=> '</tr>',
 					array(
 						'start_html'		=> '<th>',
 						'end_html'			=> '</th>',
 						'value'				=> _('Icon'),
 					),
 					array(
-						'start_html'    => '<td>',
-						'end_html'	    => '</td>',
+						'start_html'	=> '<td>',
+						'end_html'		=> '</td>',
 						array(
-							'start_html'    => '<table class="img-item">',
-							'end_html'	    => '</table>',
+							'start_html'	=> '<table class="img-item">',
+							'end_html'		=> '</table>',
 							array(
-								'start_html'    => '<tr>',
-								'end_html'	    => '</tr>',
+								'start_html'	=> '<tr>',
+								'end_html'		=> '</tr>',
 								array(
 									'name'			=> 'icon',
 									'start_html'	=> '<td id="icon">',
 									'end_html'		=> '</td>',
 								),
 								array(
-									'start_html'    => '<td>',
-									'end_html'	    => '</td>',
+									'start_html'	=> '<td>',
+									'end_html'		=> '</td>',
 									array(
 										'name'			=> 'open_filelist',
 										'class'			=> 'B_Link',

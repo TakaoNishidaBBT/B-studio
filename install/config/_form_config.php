@@ -36,8 +36,8 @@ $db_install_form_config = array(
 		// Host name
 		array(
 			'error_group'	=> 'true',
-			'start_html'    => '<tr>',
-			'end_html'	    => '</tr>',
+			'start_html'	=> '<tr>',
+			'end_html'		=> '</tr>',
 			array(
 				'start_html'			=> '<th>',
 				'invalid_start_html'	=> '<th class="error">',
@@ -45,8 +45,8 @@ $db_install_form_config = array(
 				'value'					=> _('Host name'),
 			),
 			array(
-				'start_html'    => '<td>',
-				'end_html'	    => '</td>',
+				'start_html'	=> '<td>',
+				'end_html'		=> '</td>',
 				array(
 					'name'					=> 'db_srv',
 					'class'					=> 'B_InputText',
@@ -76,8 +76,8 @@ $db_install_form_config = array(
 		// User name
 		array(
 			'error_group'	=> 'true',
-			'start_html'    => '<tr>',
-			'end_html'	    => '</tr>',
+			'start_html'	=> '<tr>',
+			'end_html'		=> '</tr>',
 			array(
 				'start_html'			=> '<th>',
 				'invalid_start_html'	=> '<th class="error">',
@@ -85,8 +85,8 @@ $db_install_form_config = array(
 				'value'					=> _('User name'),
 			),
 			array(
-				'start_html'    => '<td>',
-				'end_html'	    => '</td>',
+				'start_html'	=> '<td>',
+				'end_html'		=> '</td>',
 				array(
 					'name'					=> 'db_usr',
 					'class'					=> 'B_InputText',
@@ -116,8 +116,8 @@ $db_install_form_config = array(
 		// Password
 		array(
 			'error_group'	=> 'true',
-			'start_html'    => '<tr>',
-			'end_html'	    => '</tr>',
+			'start_html'	=> '<tr>',
+			'end_html'		=> '</tr>',
 			array(
 				'start_html'			=> '<th>',
 				'invalid_start_html'	=> '<th class="error">',
@@ -125,8 +125,8 @@ $db_install_form_config = array(
 				'value'					=> _('Password'),
 			),
 			array(
-				'start_html'    => '<td>',
-				'end_html'	    => '</td>',
+				'start_html'	=> '<td>',
+				'end_html'		=> '</td>',
 				array(
 					'name'					=> 'db_pwd',
 					'class'					=> 'B_InputText',
@@ -156,8 +156,8 @@ $db_install_form_config = array(
 		// Schema name
 		array(
 			'error_group'	=> 'true',
-			'start_html'    => '<tr>',
-			'end_html'	    => '</tr>',
+			'start_html'	=> '<tr>',
+			'end_html'		=> '</tr>',
 			array(
 				'start_html'			=> '<th>',
 				'invalid_start_html'	=> '<th class="error">',
@@ -165,8 +165,8 @@ $db_install_form_config = array(
 				'value'					=> _('Schema name'),
 			),
 			array(
-				'start_html'    => '<td>',
-				'end_html'	    => '</td>',
+				'start_html'	=> '<td>',
+				'end_html'		=> '</td>',
 				array(
 					'name'					=> 'db_nme',
 					'class'					=> 'B_InputText',
@@ -196,8 +196,8 @@ $db_install_form_config = array(
 		// Table prefix
 		array(
 			'error_group'	=> 'true',
-			'start_html'    => '<tr>',
-			'end_html'	    => '</tr>',
+			'start_html'	=> '<tr>',
+			'end_html'		=> '</tr>',
 			array(
 				'start_html'			=> '<th class="prefix">',
 				'invalid_start_html'	=> '<th class="prefix error">',
@@ -205,8 +205,8 @@ $db_install_form_config = array(
 				'value'					=> _('Table prefix'),
 			),
 			array(
-				'start_html'    => '<td>',
-				'end_html'	    => '</td>',
+				'start_html'	=> '<td>',
+				'end_html'		=> '</td>',
 				array(
 					'name'					=> 'db_prefix',
 					'class'					=> 'B_InputText',
@@ -245,8 +245,8 @@ $admin_basic_auth_config = array(
 		// User name
 		array(
 			'error_group'	=> 'true',
-			'start_html'    => '<tr>',
-			'end_html'	    => '</tr>',
+			'start_html'	=> '<tr>',
+			'end_html'		=> '</tr>',
 			array(
 				'start_html'			=> '<th>',
 				'invalid_start_html'	=> '<th class="error">',
@@ -254,8 +254,8 @@ $admin_basic_auth_config = array(
 				'value'					=> _('User name'),
 			),
 			array(
-				'start_html'    => '<td>',
-				'end_html'	    => '</td>',
+				'start_html'	=> '<td>',
+				'end_html'		=> '</td>',
 				array(
 					'name'					=> 'basic_auth_id',
 					'class'					=> 'B_InputText',
@@ -285,8 +285,8 @@ $admin_basic_auth_config = array(
 		// Password
 		array(
 			'error_group'	=> 'true',
-			'start_html'    => '<tr>',
-			'end_html'	    => '</tr>',
+			'start_html'	=> '<tr>',
+			'end_html'		=> '</tr>',
 			array(
 				'start_html'			=> '<th>',
 				'invalid_start_html'	=> '<th class="error">',
@@ -294,8 +294,8 @@ $admin_basic_auth_config = array(
 				'value'					=> _('Password'),
 			),
 			array(
-				'start_html'    => '<td>',
-				'end_html'	    => '</td>',
+				'start_html'	=> '<td>',
+				'end_html'		=> '</td>',
 				array(
 					'name'					=> 'basic_auth_pwd',
 					'class'					=> 'B_Password',
@@ -326,8 +326,8 @@ $admin_basic_auth_config = array(
 		// Password (Re-entry)
 		array(
 			'error_group'	=> 'true',
-			'start_html'    => '<tr>',
-			'end_html'	    => '</tr>',
+			'start_html'	=> '<tr>',
+			'end_html'		=> '</tr>',
 			'confirm_mode'	=> 'none',
 			array(
 				'start_html'			=> '<th>',
@@ -336,8 +336,8 @@ $admin_basic_auth_config = array(
 				'value'					=> _('Password (Re-entry)'),
 			),
 			array(
-				'start_html'    => '<td>',
-				'end_html'	    => '</td>',
+				'start_html'	=> '<td>',
+				'end_html'		=> '</td>',
 				array(
 					'name'					=> 'basic_auth_pwd2',
 					'class'					=> 'B_Password',
@@ -375,8 +375,8 @@ $admin_user_form_config = array(
 		// User name
 		array(
 			'error_group'	=> 'true',
-			'start_html'    => '<tr>',
-			'end_html'	    => '</tr>',
+			'start_html'	=> '<tr>',
+			'end_html'		=> '</tr>',
 			array(
 				'start_html'			=> '<th>',
 				'invalid_start_html'	=> '<th class="error">',
@@ -384,8 +384,8 @@ $admin_user_form_config = array(
 				'value'					=> _('User name'),
 			),
 			array(
-				'start_html'    => '<td>',
-				'end_html'	    => '</td>',
+				'start_html'	=> '<td>',
+				'end_html'		=> '</td>',
 				array(
 					'name'					=> 'admin_user_name',
 					'class'					=> 'B_InputText',
@@ -410,8 +410,8 @@ $admin_user_form_config = array(
 		// Login ID
 		array(
 			'error_group'	=> 'true',
-			'start_html'    => '<tr>',
-			'end_html'	    => '</tr>',
+			'start_html'	=> '<tr>',
+			'end_html'		=> '</tr>',
 			array(
 				'start_html'			=> '<th>',
 				'invalid_start_html'	=> '<th class="error">',
@@ -419,8 +419,8 @@ $admin_user_form_config = array(
 				'value'					=> _('Login ID'),
 			),
 			array(
-				'start_html'    => '<td>',
-				'end_html'	    => '</td>',
+				'start_html'	=> '<td>',
+				'end_html'		=> '</td>',
 				array(
 					'name'					=> 'admin_user_id',
 					'class'					=> 'B_InputText',
@@ -450,8 +450,8 @@ $admin_user_form_config = array(
 		// Password
 		array(
 			'error_group'	=> 'true',
-			'start_html'    => '<tr>',
-			'end_html'	    => '</tr>',
+			'start_html'	=> '<tr>',
+			'end_html'		=> '</tr>',
 			array(
 				'start_html'			=> '<th>',
 				'invalid_start_html'	=> '<th class="error">',
@@ -459,8 +459,8 @@ $admin_user_form_config = array(
 				'value'					=> _('Password'),
 			),
 			array(
-				'start_html'    => '<td>',
-				'end_html'	    => '</td>',
+				'start_html'	=> '<td>',
+				'end_html'		=> '</td>',
 				array(
 					'name'					=> 'admin_user_pwd',
 					'class'					=> 'B_Password',
@@ -491,8 +491,8 @@ $admin_user_form_config = array(
 		// Password (Re-entry)
 		array(
 			'error_group'	=> 'true',
-			'start_html'    => '<tr>',
-			'end_html'	    => '</tr>',
+			'start_html'	=> '<tr>',
+			'end_html'		=> '</tr>',
 			'confirm_mode'	=> 'none',
 			array(
 				'start_html'			=> '<th>',
@@ -501,8 +501,8 @@ $admin_user_form_config = array(
 				'value'					=> _('Password (Re-entry)'),
 			),
 			array(
-				'start_html'    => '<td>',
-				'end_html'	    => '</td>',
+				'start_html'	=> '<td>',
+				'end_html'		=> '</td>',
 				array(
 					'name'					=> 'admin_user_pwd2',
 					'class'					=> 'B_Password',

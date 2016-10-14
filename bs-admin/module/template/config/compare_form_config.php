@@ -180,8 +180,8 @@ $config_form_config = array(
 
 		// タイトル
 		array(
-			'start_html'    => '<tr>',
-			'end_html'	    => '</tr>',
+			'start_html'	=> '<tr>',
+			'end_html'		=> '</tr>',
 			'error_group'	=> true,
 			array(
 				'start_html'			=> '<th>',
@@ -220,8 +220,8 @@ $config_form_config = array(
 		),
 		// bread crumb 表示名
 		array(
-			'start_html'    => '<tr>',
-			'end_html'	    => '</tr>',
+			'start_html'	=> '<tr>',
+			'end_html'		=> '</tr>',
 			'error_group'	=> true,
 			array(
 				'start_html'			=> '<th>',
@@ -260,8 +260,8 @@ $config_form_config = array(
 		),
 		// テンプレート
 		array(
-			'start_html'    => '<tr>',
-			'end_html'	    => '</tr>',
+			'start_html'	=> '<tr>',
+			'end_html'		=> '</tr>',
 			'error_group'	=> true,
 			array(
 				'start_html'			=> '<th>',
@@ -297,8 +297,8 @@ $config_form_config = array(
 		),
 		// keyword
 		array(
-			'start_html'    => '<tr>',
-			'end_html'	    => '</tr>',
+			'start_html'	=> '<tr>',
+			'end_html'		=> '</tr>',
 			'error_group'	=> true,
 			array(
 				'start_html'			=> '<th>',
@@ -334,8 +334,8 @@ $config_form_config = array(
 		),
 		// description
 		array(
-			'start_html'    => '<tr>',
-			'end_html'	    => '</tr>',
+			'start_html'	=> '<tr>',
+			'end_html'		=> '</tr>',
 			'error_group'	=> true,
 			array(
 				'start_html'			=> '<th>',
@@ -371,8 +371,8 @@ $config_form_config = array(
 		),
 		// 外部css
 		array(
-			'start_html'    => '<tr>',
-			'end_html'	    => '</tr>',
+			'start_html'	=> '<tr>',
+			'end_html'		=> '</tr>',
 			'error_group'	=> true,
 			array(
 				'start_html'			=> '<th>',
@@ -408,8 +408,8 @@ $config_form_config = array(
 		),
 		// 外部javascript
 		array(
-			'start_html'    => '<tr>',
-			'end_html'	    => '</tr>',
+			'start_html'	=> '<tr>',
+			'end_html'		=> '</tr>',
 			'error_group'	=> true,
 			array(
 				'start_html'			=> '<th>',
@@ -445,8 +445,8 @@ $config_form_config = array(
 		),
 		// ヘッダー要素
 		array(
-			'start_html'    => '<tr>',
-			'end_html'	    => '</tr>',
+			'start_html'	=> '<tr>',
+			'end_html'		=> '</tr>',
 			'error_group'	=> true,
 			array(
 				'start_html'			=> '<th>',

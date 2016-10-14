@@ -260,7 +260,7 @@
 			$thumb = B_CURRENT_ROOT . B_UPLOAD_FILES . $path . B_THUMB_PREFIX . $filename;
 			if(file_exists(B_FILE_INFO_THUMB)) {
 				$serializedString = file_get_contents(B_FILE_INFO_THUMB);
-			    $thumb_info = unserialize($serializedString);
+				$thumb_info = unserialize($serializedString);
 				$thumb_file = $thumb_info[$thumb];
 				if($thumb_file && file_exists(B_UPLOAD_THUMBDIR . $thumb_file)) {
 					unlink(B_UPLOAD_THUMBDIR . $thumb_file);
@@ -272,7 +272,7 @@
 			$max = $root->getMaxThumbnailNo();
 			$root->createthumbnail($data, $max);
 			$fp = fopen(B_FILE_INFO_THUMB, 'w+');
-	        fwrite($fp, serialize($data));
+			fwrite($fp, serialize($data));
 			fclose($fp);
 		}
 

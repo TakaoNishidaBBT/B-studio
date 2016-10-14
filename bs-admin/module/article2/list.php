@@ -199,7 +199,7 @@
 			$this->dg->bind();
 			$xml = $this->dg->getHtml();
 			$fp = fopen('rss.xml', 'w');
-	        fwrite($fp, $xml);
+			fwrite($fp, $xml);
 			fclose($fp);
 			exit;
 		}

@@ -16,7 +16,7 @@ array(
 								,a.notes
 								,e.reserved_version_id reserved_version
 								,e.working_version_id working_version
-							    ,if(b.current_version_id = version_id, 1, if(c.reserved_version_id = version_id, 2, 0)) publication_status
+								,if(b.current_version_id = version_id, 1, if(c.reserved_version_id = version_id, 2, 0)) publication_status
 								,if(d.working_version_id = version_id, 1, 0) working_status
 						from " . B_DB_PREFIX . "version a
 						left join " . B_DB_PREFIX . "v_current_version b
@@ -246,32 +246,32 @@ array(
 
 $version_control_config = array(
 	'start_html'	=> '<div id="version-control">',
-	'end_html'	    => '</div>',
+	'end_html'		=> '</div>',
 	array(
 		'name'			=> 'confirm',
-		'start_html'    => '<span class="version-button" onclick="bframe.submit(\'F1\', \'' . $this->module . '\', \'list\', \'confirm\', \'\', true)">',
-		'end_html'	    => '</span>',
+		'start_html'	=> '<span class="version-button" onclick="bframe.submit(\'F1\', \'' . $this->module . '\', \'list\', \'confirm\', \'\', true)">',
+		'end_html'		=> '</span>',
 		'value'			=> '<img src="images/common/version.png" alt="Change versions" />' . _('Change versions'),
 	),
 );
 
 $version_control_confirm_config = array(
 	'start_html'	=> '<div id="version-control">',
-	'end_html'	    => '</div>',
+	'end_html'		=> '</div>',
 	array(
-		'start_html'    => '<ul>',
-		'end_html'	    => '</ul>',
+		'start_html'	=> '<ul>',
+		'end_html'		=> '</ul>',
 		array(
-			'start_html'    => '<li>',
-			'end_html'	    => '</li>',
+			'start_html'	=> '<li>',
+			'end_html'		=> '</li>',
 			'class'			=> 'B_Button',
 			'name'			=> 'back',
 			'special_html'	=> 'class="back-button" onclick="bframe.submit(\'F1\', \'' . $this->module . '\', \'list\', \'back\', \'\', true)"',
 			'value'			=> _('Back'),
 		),
 		array(
-			'start_html'    => '<li>',
-			'end_html'	    => '</li>',
+			'start_html'	=> '<li>',
+			'end_html'		=> '</li>',
 			'class'			=> 'B_Button',
 			'name'			=> 'attendance',
 			'special_html'	=> 'class="register-button" onclick="bframe.submit(\'F1\', \'' . $this->module . '\', \'list\', \'register\', \'\', true)"',
@@ -282,13 +282,13 @@ $version_control_confirm_config = array(
 //control
 $version_control_result_config = array(
 	'start_html'	=> '<div id="version-control">',
-	'end_html'	    => '</div>',
+	'end_html'		=> '</div>',
 	array(
-		'start_html'    => '<ul>',
-		'end_html'	    => '</ul>',
+		'start_html'	=> '<ul>',
+		'end_html'		=> '</ul>',
 		array(
-			'start_html'    => '<li>',
-			'end_html'	    => '</li>',
+			'start_html'	=> '<li>',
+			'end_html'		=> '</li>',
 			'class'			=> 'B_Button',
 			'name'			=> 'backToList',
 			'special_html'	=> 'class="back-button" onclick="bframe.submit(\'F1\', \'' . $this->module . '\', \'list\', \'back\', \'\')" ',

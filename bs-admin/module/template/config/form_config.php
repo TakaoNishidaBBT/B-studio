@@ -112,8 +112,8 @@ $config_form_config = array(
 
 		// External CSS
 		array(
-			'start_html'    => '<tr>',
-			'end_html'	    => '</tr>',
+			'start_html'	=> '<tr>',
+			'end_html'		=> '</tr>',
 			array(
 				'start_html'			=> '<th>',
 				'end_html'				=> '</th>',
@@ -132,8 +132,8 @@ $config_form_config = array(
 
 		// External javascript
 		array(
-			'start_html'    => '<tr>',
-			'end_html'	    => '</tr>',
+			'start_html'	=> '<tr>',
+			'end_html'		=> '</tr>',
 			array(
 				'start_html'			=> '<th>',
 				'end_html'				=> '</th>',
@@ -152,8 +152,8 @@ $config_form_config = array(
 
 		// Header Elements
 		array(
-			'start_html'    => '<tr>',
-			'end_html'	    => '</tr>',
+			'start_html'	=> '<tr>',
+			'end_html'		=> '</tr>',
 			array(
 				'start_html'			=> '<th>',
 				'end_html'				=> '</th>',

@@ -37,8 +37,8 @@ $form_config = array(
 		// ID
 		array(
 			'name'			=> 'article_id_row',
-			'start_html'    => '<tr>',
-			'end_html'	    => '</tr>',
+			'start_html'	=> '<tr>',
+			'end_html'		=> '</tr>',
 			array(
 				'start_html'	=> '<th>',
 				'end_html'		=> '</th>',
@@ -55,8 +55,8 @@ $form_config = array(
 		// Publication date
 		array(
 			'error_group'	=> true,
-			'start_html'    => '<tr>',
-			'end_html'	    => '</tr>',
+			'start_html'	=> '<tr>',
+			'end_html'		=> '</tr>',
 			array(
 				'start_html'			=> '<th>',
 				'end_html'				=> '</th>',
@@ -123,8 +123,8 @@ $form_config = array(
 		// Category
 		array(
 			'error_group'	=> true,
-			'start_html'    => '<tr>',
-			'end_html'	    => '</tr>',
+			'start_html'	=> '<tr>',
+			'end_html'		=> '</tr>',
 			array(
 				'start_html'	=> '<th>',
 				'end_html'		=> '</th>',
@@ -168,21 +168,21 @@ $form_config = array(
 				),
 
 			),
-	    ),
+		),
 
 		// keywords
 		array(
 			'error_group'	=> true,
-			'start_html'    => '<tr>',
-			'end_html'	    => '</tr>',
+			'start_html'	=> '<tr>',
+			'end_html'		=> '</tr>',
 			array(
 				'start_html'	=> '<th>',
 				'end_html'		=> '</th>',
 				'value'			=> 'Keywords',
 			),
 			array(
-				'start_html'    => '<td>',
-				'end_html'	    => '</td>',
+				'start_html'	=> '<td>',
+				'end_html'		=> '</td>',
 				array(
 					'name'				=> 'keywords',
 					'class'				=> 'B_InputText',
@@ -194,16 +194,16 @@ $form_config = array(
 		// description
 		array(
 			'error_group'	=> true,
-			'start_html'    => '<tr>',
-			'end_html'	    => '</tr>',
+			'start_html'	=> '<tr>',
+			'end_html'		=> '</tr>',
 			array(
 				'start_html'	=> '<th>',
 				'end_html'		=> '</th>',
 				'value'			=> 'Description',
 			),
 			array(
-				'start_html'    => '<td>',
-				'end_html'	    => '</td>',
+				'start_html'	=> '<td>',
+				'end_html'		=> '</td>',
 				array(
 					'name'				=> 'description',
 					'class'				=> 'B_TextArea',
@@ -215,16 +215,16 @@ $form_config = array(
 		// Status
 		array(
 			'error_group'	=> true,
-			'start_html'    => '<tr>',
-			'end_html'	    => '</tr>',
+			'start_html'	=> '<tr>',
+			'end_html'		=> '</tr>',
 			array(
 				'start_html'	=> '<th>',
 				'end_html'		=> '</th>',
 				'value'			=> _('Status'),
 			),
 			array(
-				'start_html'    => '<td>',
-				'end_html'	    => '</td>',
+				'start_html'	=> '<td>',
+				'end_html'		=> '</td>',
 				array(
 					'name'			=> 'publication',
 					'class'			=> 'B_RadioContainer',
@@ -236,13 +236,13 @@ $form_config = array(
 					),
 				),
 			),
-	    ),
+		),
 
 		// Title
 		array(
 			'error_group'	=> true,
-			'start_html'    => '<tr>',
-			'end_html'	    => '</tr>',
+			'start_html'	=> '<tr>',
+			'end_html'		=> '</tr>',
 			array(
 				'start_html'			=> '<th>',
 				'end_html'				=> '</th>',
@@ -256,8 +256,8 @@ $form_config = array(
 				),				
 			),
 			array(
-				'start_html'    => '<td>',
-				'end_html'	    => '</td>',
+				'start_html'	=> '<td>',
+				'end_html'		=> '</td>',
 				array(
 					'name'					=> 'title',
 					'class'					=> 'B_TextArea',
@@ -282,22 +282,22 @@ $form_config = array(
 		// Title image
 		array(
 			'error_group'	=> true,
-			'start_html'    => '<tr>',
-			'end_html'	    => '</tr>',
+			'start_html'	=> '<tr>',
+			'end_html'		=> '</tr>',
 			array(
 				'start_html'			=> '<th>',
 				'end_html'				=> '</th>',
 				'value'					=> _('Title image'),
 			),
 			array(
-				'start_html'    => '<td>',
-				'end_html'	    => '</td>',
+				'start_html'	=> '<td>',
+				'end_html'		=> '</td>',
 				array(
-					'start_html'    => '<table class="img-item">',
-					'end_html'	    => '</table>',
+					'start_html'	=> '<table class="img-item">',
+					'end_html'		=> '</table>',
 					array(
-						'start_html'    => '<tr>',
-						'end_html'	    => '</tr>',
+						'start_html'	=> '<tr>',
+						'end_html'		=> '</tr>',
 						array(
 							'name'			=> 'title_img',
 							'start_html'	=> '<td id="title_img">',
@@ -305,8 +305,8 @@ $form_config = array(
 						),
 						array(
 							'filter'		=> 'select',
-							'start_html'    => '<td>',
-							'end_html'	    => '</td>',
+							'start_html'	=> '<td>',
+							'end_html'		=> '</td>',
 							array(
 								'name'			=> 'open_filelist',
 								'class'			=> 'B_Link',
@@ -347,16 +347,16 @@ $form_config = array(
 		// Display detail
 		array(
 			'error_group'	=> true,
-			'start_html'    => '<tr>',
-			'end_html'	    => '</tr>',
+			'start_html'	=> '<tr>',
+			'end_html'		=> '</tr>',
 			array(
 				'start_html'	=> '<th>',
 				'end_html'		=> '</th>',
 				'value'			=> _('Display detail'),
 			),
 			array(
-				'start_html'    => '<td>',
-				'end_html'	    => '</td>',
+				'start_html'	=> '<td>',
+				'end_html'		=> '</td>',
 				array(
 					'name'			=> 'description_flag',
 					'class'			=> 'B_RadioContainer',
@@ -368,14 +368,14 @@ $form_config = array(
 					),
 				),
 			),
-	    ),
+		),
 
 		// External link
 		array(
 			'error_group'	=> true,
 			'name'			=> 'external_link_row',
-			'start_html'    => '<tr>',
-			'end_html'	    => '</tr>',
+			'start_html'	=> '<tr>',
+			'end_html'		=> '</tr>',
 			array(
 				'start_html'			=> '<th>',
 				'invalid_start_html'	=> '<th class="error">',
@@ -383,8 +383,8 @@ $form_config = array(
 				'value'					=> _('External link'),
 			),
 			array(
-				'start_html'    => '<td>',
-				'end_html'	    => '</td>',
+				'start_html'	=> '<td>',
+				'end_html'		=> '</td>',
 				array(
 					'name'			=> 'external_link',
 					'class'			=> 'B_CheckBox',
@@ -401,7 +401,7 @@ $form_config = array(
 				array(
 					'name'			=> 'url',
 					'class'			=> 'B_InputText',
-					'start_html'    => '　URL： ',
+					'start_html'	=> '　URL： ',
 					'special_html'	=> 'class="textbox ime_off" style="width:500px" maxlength="100"',
 					'status'		=> true,
 					'validate'		=>
@@ -443,29 +443,29 @@ $form_config = array(
 					),
 				),
 			),
-	    ),
+		),
 
 		// Detail
 		array(
 			'error_group'	=> true,
 			'name'			=> 'contents_row',
-			'start_html'    => '<tr>',
-			'end_html'	    => '</tr>',
+			'start_html'	=> '<tr>',
+			'end_html'		=> '</tr>',
 			array(
 				'start_html'	=> '<th>',
 				'end_html'		=> '</th>',
 				'value'			=> _('Detail'),
 			),
 			array(
-				'start_html'    => '<td>',
-				'end_html'	    => '</td>',
+				'start_html'	=> '<td>',
+				'end_html'		=> '</td>',
 				array(
 					'name'			=> 'contents',
 					'class'			=> 'B_TextArea',
 					'special_html'	=> 'class="textarea bframe_visualeditor" style="height:400px"',
 				),
 			),
-	    ),
+		),
 	),
 );
 
@@ -632,8 +632,8 @@ $result_config = array(
 		'start_html'	=> '<form name="F1" method="post" action="index.php">',
 		'end_html'		=> '</form>',
 		array(
-			'start_html'    => '<p>',
-			'end_html'	    => '</p>',
+			'start_html'	=> '<p>',
+			'end_html'		=> '</p>',
 			array(
 				array(
 					'value'					=> _('Date: '),
