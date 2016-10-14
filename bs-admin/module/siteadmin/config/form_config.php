@@ -251,7 +251,16 @@ $input_control_config = array(
 		array(
 			'start_html'	=> '<span class="right-button" onclick="bframe.submit(\'F1\', \'' . $this->module . '\', \'form\', \'confirm\', \'\', true)">',
 			'end_html'		=> '</span>',
-			'value'			=> _('Confirm'),
+			array(
+				'start_html'	=> '<span class="text">',
+				'end_html'		=> '</span>',
+				'value'			=> _('Confirm'),
+			),
+			array(
+				'start_html'	=> '<span class="img-cover">',
+				'end_html'		=> '</span>',
+				'value'			=> '<img src="images/common/right_arrow.png" alt="right arow" />',
+			),
 		),
 	),
 );
@@ -267,7 +276,16 @@ $confirm_control_config = array(
 		array(
 			'start_html'	=> '<span class="left-button" onclick="bframe.submit(\'F1\', \'' . $this->module . '\', \'form\', \'back\', \'\')">',
 			'end_html'		=> '</span>',
-			'value'			=> _('Back'),
+			array(
+				'start_html'	=> '<span class="img-cover">',
+				'end_html'		=> '</span>',
+				'value'			=> '<img src="images/common/left_arrow.png" alt="left arow" />',
+			),
+			array(
+				'start_html'	=> '<span class="text">',
+				'end_html'		=> '</span>',
+				'value'			=> _('Back'),
+			),
 		),
 	),
 	array(
@@ -277,7 +295,16 @@ $confirm_control_config = array(
 		array(
 			'start_html'	=> '<span class="right-button" onclick="bframe.submit(\'F1\', \'' . $this->module . '\', \'form\', \'register\', \'\')">',
 			'end_html'		=> '</span>',
-			'value'			=> _('Save'),
+			array(
+				'start_html'	=> '<span class="text">',
+				'end_html'		=> '</span>',
+				'value'			=> _('Save'),
+			),
+			array(
+				'start_html'	=> '<span class="img-cover">',
+				'end_html'		=> '</span>',
+				'value'			=> '<img src="images/common/right_arrow.png" alt="right arow" />',
+			),
 		),
 	),
 );
@@ -291,9 +318,18 @@ $result_control_config = array(
 		'start_html'	=> '<li>',
 		'end_html'		=> '</li>',
 		array(
-			'start_html'	=> '<span class="left-button" style="width:190px" onclick="bframe.submit(\'F1\', \'' . $this->module . '\', \'form\', \'\', \'\')">',
+			'start_html'	=> '<span class="left-button" onclick="bframe.submit(\'F1\', \'' . $this->module . '\', \'form\', \'\', \'\')">',
 			'end_html'		=> '</span>',
-			'value'			=> _('Back to site admin form'),
+			array(
+				'start_html'	=> '<span class="img-cover">',
+				'end_html'		=> '</span>',
+				'value'			=> '<img src="images/common/left_arrow.png" alt="left arow" />',
+			),
+			array(
+				'start_html'	=> '<span class="text">',
+				'end_html'		=> '</span>',
+				'value'			=> _('Back to site admin form'),
+			),
 		),
 	),
 );
