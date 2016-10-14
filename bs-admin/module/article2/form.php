@@ -161,11 +161,11 @@
 
 			if($ret) {
 				$this->db->commit();
-				$param['action_message'] = 'を削除しました。';
+				$param['action_message'] = _('was deleted.');
 			}
 			else {
 				$this->db->rollback();
-				$param['action_message'] = 'の削除に失敗しました。';
+				$param['action_message'] = _('was faild to delete.');
 			}
 			$this->result->setValue($param);
 

@@ -54,7 +54,7 @@
 		exit;
 	}
 
-	// confirm timezone
+	// Confirm timezone
 	date('Ymd');
 
 	require_once('config/_form_config.php');

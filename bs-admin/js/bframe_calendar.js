@@ -8,19 +8,19 @@
 
 	function bframeCalendarInit() {
 		var cc = new bframe.calendar_container();
-	    var a = document.getElementsByTagName('a');
+		var a = document.getElementsByTagName('a');
 		var c = new Array();
 		var cnt=0;
 
-	    for(var i=0; i<a.length; i++) {
+		for(var i=0; i<a.length; i++) {
 			if(bframe.checkClassName('bframe_calendar', a[i])) {
 				c[cnt++] = new bframe.calendar(a[i], cc);
 			}
 		}
 
-	    var input = document.getElementsByTagName('input');
+		var input = document.getElementsByTagName('input');
 
-	    for(i=0; i<input.length; i++) {
+		for(i=0; i<input.length; i++) {
 			if(bframe.checkClassName('bframe_calendar', input[i])) {
 				c[cnt++] = new bframe.calendar(input[i], cc);
 			}

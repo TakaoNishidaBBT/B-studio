@@ -8,10 +8,10 @@
 
 	function bframeCompareTreeInit(){
 		var tc = new bframe.compare_tree_container();
-	    var div = document.getElementsByTagName('div');
+		var div = document.getElementsByTagName('div');
 		var t = new Array();
 
-	    for(var i=0, j=0; i<div.length; i++) {
+		for(var i=0, j=0; i<div.length; i++) {
 			if(bframe.checkClassName('bframe_compare_tree', div[i])) {
 				t[j++] = new bframe.compare_tree(tc, div[i], j);
 			}
@@ -120,7 +120,7 @@
 
 		function getPane() {
 			if(property.relation && property.relation.pane) {
-			    pane = true;
+				pane = true;
 			}
 		}
 

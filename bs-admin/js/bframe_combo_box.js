@@ -7,9 +7,9 @@
 	bframe.addEventListner(window, 'load' ,bframeComboBoxInit);
 
 	function bframeComboBoxInit(){
-	    var input = document.getElementsByTagName('img');
+		var input = document.getElementsByTagName('img');
 
-	    for(var i=0; i<input.length; i++) {
+		for(var i=0; i<input.length; i++) {
 			var s = new bframe.comboBox(input[i]);
 		}
 	}
@@ -117,7 +117,7 @@
 			if(obj.className) {
 				var arr = obj.className.split(' ');
 				for(var j=0; j<arr.length; j++) {
-			        if(arr[j] == 'bframe_combo_box') {
+					if(arr[j] == 'bframe_combo_box') {
 						return true;
 					}
 				}
@@ -143,7 +143,7 @@
 					bframe.context_menu.setCursor('wait');
 				}
 				response_wait = true;
-		    }
+			}
 			return false;
 		}
 

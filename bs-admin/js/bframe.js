@@ -350,11 +350,11 @@
 		if(link.split('?').length < 2) return;
 		var hash = [];
 		var param = link.split('?')[1];
-        var parray = param.split('&');
-        for(var i=0;i<parray.length;i++){
-            var n = parray[i].split('=');
-            hash[n[0]] = n[1];
-        }
+		var parray = param.split('&');
+		for(var i=0;i<parray.length;i++){
+			var n = parray[i].split('=');
+			hash[n[0]] = n[1];
+		}
 		return hash;
 	}
 
@@ -479,9 +479,9 @@
 		}
 	}
 
-    bframe.cancelEvent = function(e) {
-        e.preventDefault ? e.preventDefault() : window.event.returnValue = false;
-    }
+	bframe.cancelEvent = function(e) {
+		e.preventDefault ? e.preventDefault() : window.event.returnValue = false;
+	}
 
 	bframe.addEventListner = function(obj, event, func) {
 		if(obj.addEventListener) {
@@ -596,7 +596,7 @@
 		}
 	}
 
-    bframe.getButton = function(event) {
+	bframe.getButton = function(event) {
 		var status;
 		if(_isIE) {
 			var e = window.event;
@@ -636,8 +636,8 @@
 	}
 
 	bframe.getFileName = function(url) {
-    	file_name = url.substring(url.lastIndexOf('/')+1, url.length);
-	    return file_name;
+		file_name = url.substring(url.lastIndexOf('/')+1, url.length);
+		return file_name;
 	}
 
 	bframe.getRelationObject = function(node, id) {
@@ -876,10 +876,10 @@
 	}
 
 	bframe.setOpac = function(opacity, object) { 
-	    object.style.opacity = (opacity / 100); 
-	    object.style.MozOpacity = (opacity / 100); 
-	    object.style.KhtmlOpacity = (opacity / 100); 
-	    object.style.filter = 'alpha(opacity=' + opacity + ')'; 
+		object.style.opacity = (opacity / 100); 
+		object.style.MozOpacity = (opacity / 100); 
+		object.style.KhtmlOpacity = (opacity / 100); 
+		object.style.filter = 'alpha(opacity=' + opacity + ')'; 
 	}
 
 	bframe.printProperties = function(obj) {

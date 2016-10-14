@@ -7,9 +7,9 @@
 	bframe.addEventListner(window, 'load' , bframeProgressBarInit);
 
 	function bframeProgressBarInit(){
-	    var div = document.getElementsByTagName('span');
+		var div = document.getElementsByTagName('span');
 
-	    for(var i=0; i<div.length; i++) {
+		for(var i=0; i<div.length; i++) {
 			if(bframe.checkClassName('bframe_progress_bar', div[i])) {
 				var s = new bframe.progressBar(div[i]);
 			}

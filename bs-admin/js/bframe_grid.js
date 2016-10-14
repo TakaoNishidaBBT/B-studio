@@ -7,9 +7,9 @@
 	bframe.addEventListner(window, 'load' ,bframeGridInit);
 
 	function bframeGridInit(){
-	    var table = document.getElementsByTagName('table');
+		var table = document.getElementsByTagName('table');
 
-	    for(var i=0; i<table.length; i++) {
+		for(var i=0; i<table.length; i++) {
 			if(bframe.checkClassName('bframe_grid', table[i])) {
 				var s = new bframe.grid(table[i]);
 			}
@@ -404,9 +404,9 @@
 			return ret;
 		}
 
-	    function cancelEvent(e) {
-	        e.preventDefault? e.preventDefault() : e.returnValue = false;
-	    }
+		function cancelEvent(e) {
+			e.preventDefault? e.preventDefault() : e.returnValue = false;
+		}
 
 		function itemListonkeydown(event) {
 			if(window.event) {
