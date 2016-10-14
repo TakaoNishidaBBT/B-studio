@@ -112,7 +112,6 @@
 		'Article2'						=> '記事2',
 		'Article3'						=> '記事3',
 		'File manager'					=> 'ファイル管理',
-		'Settings'						=> '各種設定',
 		'Configuration'					=> '基本設定',
 		'Versions'						=> 'バージョン管理',
 		'Users'							=> 'ユーザ管理',
@@ -326,8 +325,8 @@
 		'Re-install backup'				=> '再インストール用バックアップ',
 		'Download'						=> 'ダウンロード',
 		'Back to configuration form'	=> '基本設定に戻る',
-		'Settings: Saved'				=> '基本設定：保存しました。',
-		'Settings: Failed'				=> '基本設定：保存に失敗しました。',
+		'Configuration: Saved'			=> '基本設定：保存しました。',
+		'Configuration: Failed'			=> '基本設定：保存に失敗しました。',
 
 		// install
 		'Select language: '				=> '言語を選択してください：',

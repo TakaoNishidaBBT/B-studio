@@ -300,7 +300,16 @@ $input_control_config = array(
 		array(
 			'start_html'	=> '<span class="left-button" onclick="bframe.submit(\'F1\', \'' . $this->module . '\', \'list\', \'back\', \'\')">',
 			'end_html'		=> '</span>',
-			'value'			=> _('Back'),
+			array(
+				'start_html'	=> '<span class="img-cover">',
+				'end_html'		=> '</span>',
+				'value'			=> '<img src="images/common/left_arrow.png" alt="left arow" />',
+			),
+			array(
+				'start_html'	=> '<span class="text">',
+				'end_html'		=> '</span>',
+				'value'			=> _('Back'),
+			),
 		),
 	),
 	array(
@@ -310,7 +319,16 @@ $input_control_config = array(
 		array(
 			'start_html'	=> '<span class="right-button" onclick="bframe.submit(\'F1\', \'' . $this->module . '\', \'form\', \'confirm\', \'\', true)">',
 			'end_html'		=> '</span>',
-			'value'			=> _('Confirm'),
+			array(
+				'start_html'	=> '<span class="text">',
+				'end_html'		=> '</span>',
+				'value'			=> _('Confirm'),
+			),
+			array(
+				'start_html'	=> '<span class="img-cover">',
+				'end_html'		=> '</span>',
+				'value'			=> '<img src="images/common/right_arrow.png" alt="right arow" />',
+			),
 		),
 	),
 );
@@ -326,7 +344,16 @@ $confirm_control_config = array(
 		array(
 			'start_html'	=> '<span class="left-button" onclick="bframe.submit(\'F1\', \'' . $this->module . '\', \'form\', \'back\', \'\')">',
 			'end_html'		=> '</span>',
-			'value'			=> _('Back'),
+			array(
+				'start_html'	=> '<span class="img-cover">',
+				'end_html'		=> '</span>',
+				'value'			=> '<img src="images/common/left_arrow.png" alt="left arow" />',
+			),
+			array(
+				'start_html'	=> '<span class="text">',
+				'end_html'		=> '</span>',
+				'value'			=> _('Back'),
+			),
 		),
 	),
 	array(
@@ -336,7 +363,16 @@ $confirm_control_config = array(
 		array(
 			'start_html'	=> '<span class="right-button" onclick="bframe.submit(\'F1\', \'' . $this->module . '\', \'form\', \'register\', \'\')">',
 			'end_html'		=> '</span>',
-			'value'			=> _('Save'),
+			array(
+				'start_html'	=> '<span class="text">',
+				'end_html'		=> '</span>',
+				'value'			=> _('Save'),
+			),
+			array(
+				'start_html'	=> '<span class="img-cover">',
+				'end_html'		=> '</span>',
+				'value'			=> '<img src="images/common/right_arrow.png" alt="right arow" />',
+			),
 		),
 	),
 );
@@ -352,7 +388,16 @@ $delete_control_config = array(
 		array(
 			'start_html'	=> '<span class="left-button" onclick="bframe.submit(\'F1\', \'' . $this->module . '\', \'list\', \'back\', \'\')">',
 			'end_html'		=> '</span>',
-			'value'			=> _('Back'),
+			array(
+				'start_html'	=> '<span class="img-cover">',
+				'end_html'		=> '</span>',
+				'value'			=> '<img src="images/common/left_arrow.png" alt="left arow" />',
+			),
+			array(
+				'start_html'	=> '<span class="text">',
+				'end_html'		=> '</span>',
+				'value'			=> _('Back'),
+			),
 		),
 	),
 	array(
@@ -362,7 +407,16 @@ $delete_control_config = array(
 		array(
 			'start_html'	=> '<span class="right-button" onclick="return bframe.confirmSubmit(\'このレコードを削除します。\n\nよろしいですか？\', \'F1\', \'' . $this->module . '\', \'form\', \'register\', \'delete\')">',
 			'end_html'		=> '</span>',
-			'value'			=> _('Delete'),
+			array(
+				'start_html'	=> '<span class="text">',
+				'end_html'		=> '</span>',
+				'value'			=> _('Delete'),
+			),
+			array(
+				'start_html'	=> '<span class="img-cover">',
+				'end_html'		=> '</span>',
+				'value'			=> '<img src="images/common/right_arrow.png" alt="right arow" />',
+			),
 		),
 	),
 );
@@ -378,7 +432,16 @@ $result_control_config = array(
 		array(
 			'start_html'	=> '<span class="left-button" style="width:150px" onclick="bframe.submit(\'F1\', \'' . $this->module . '\', \'list\', \'back\', \'\')">',
 			'end_html'		=> '</span>',
-			'value'			=> _('Back to list'),
+			array(
+				'start_html'	=> '<span class="img-cover">',
+				'end_html'		=> '</span>',
+				'value'			=> '<img src="images/common/left_arrow.png" alt="left arow" />',
+			),
+			array(
+				'start_html'	=> '<span class="text">',
+				'end_html'		=> '</span>',
+				'value'			=> _('Back to list'),
+			),
 		),
 	),
 );

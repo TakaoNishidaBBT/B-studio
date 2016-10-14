@@ -159,32 +159,61 @@ input.button:hover {
 	border-right: 1px solid #d9d9d9;
 	border-bottom: 1px solid #d9d9d9;
 }
+
+/* left-button, right-button */
+span.img-cover {
+	display: inline-block;
+	width: 16px;
+	height: 16px;
+	overflow: hidden;
+	vertical-align: -4px;
+}
+span.img-cover img {
+	vertical-align: top;
+}
 span.right-button {
+	box-sizing: border-box;
 	display: inline-block;
 	text-align: center;
 	vertical-align: middle;
 	line-height: 35px;
-	width: 100px;
+	min-width: 100px;
+	padding: 0 30px;
 	cursor: pointer;
-	background: url(../images/common/right_arrow.png) no-repeat 71px 50%;
 }
 span.right-button:hover {
 	color: #fff;
-	background: url(../images/common/right_arrow_white.png) no-repeat 71px 50% #0689de;
+	background-color: #0689de;
 }
 span.left-button {
+	box-sizing: border-box;
 	display: inline-block;
 	text-align: center;
 	vertical-align: middle;
 	line-height: 35px;
-	width: 100px;
+	min-width: 100px;
+	padding: 0 30px;
 	cursor: pointer;
-	background: url(../images/common/left_arrow.png) no-repeat 15px 50%;
+}
+span.left-button span.text {
+	vertical-align: top;
+	padding-right: 6px;
+}
+span.right-button span.text {
+	vertical-align: top;
+	padding-left: 6px;
 }
 span.left-button:hover {
 	color: #fff;
-	background: url(../images/common/left_arrow_white.png) no-repeat 15px 50% #0689de;
+	background-color: #0689de;
 }
+span.left-button:hover img {
+	margin-left: -16px;
+}
+span.right-button:hover img {
+	margin-left: -16px;
+}
+
 input.disable-button {
 	padding: 1px 0 0 0;
 	border-top: 1px solid #fff;
