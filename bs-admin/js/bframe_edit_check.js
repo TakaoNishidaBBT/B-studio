@@ -44,7 +44,7 @@
 
 			if(edit_flag == true) {
 				bframe.fireEvent(document, 'mouseup');
-				return '編集内容はDBに登録されていません。\n（編集内容は失われます）';
+				return true;
 			}
 		};
 

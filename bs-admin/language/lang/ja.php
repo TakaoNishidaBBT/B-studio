@@ -48,8 +48,6 @@
 										=> 'これら%NODE_COUNT%をゴミ箱に移動します。よろしいですか？',
 		'Are you sure you completely remove files in the trah?'
 										=> '完全に削除します。よろしいですか？',
-		'Your session has timed out, Please log in again'
-										=> 'セッションが切れました。ログインしなおしてください。',
 		"Other user updated this record\nAre you sure to overwrite?"
 										=> "他のユーザに更新されています。\n上書きしますか？",
 		'Saved'							=> '保存しました',
@@ -67,6 +65,11 @@
 										=> 'ファイル名／フォルダ名に次の文字は使えません \ / : * ? " < > | スペース',
 		'Displaying %RECORD_FROM% to %RECORD_TO% of %TOTAL% items'
 										=> ' 全%TOTAL%件中　%RECORD_FROM%～%RECORD_TO%件目',
+
+		// Message
+		'Your session has timed out, Please log in again'
+										=> 'セッションが切れました。ログインしなおしてください。',
+
 		// Error message for date and time
 		' (out of range)'				=> '（範囲外）',
 		' (invalid time)'				=> '（時刻が不正）',
@@ -211,7 +214,7 @@
 		'Fri'							=> '金',
 		'Sat'							=> '土',
 
-		// file manager
+		// File manager
 		'Are you sure you want %NODE_NAME% to delete?'
 										=> '%NODE_NAME%を削除します。よろしいですか？',
 		'Are you sure you want these %NODE_COUNT% objects to delete?'
@@ -328,7 +331,7 @@
 		'Configuration: Saved'			=> '基本設定：保存しました。',
 		'Configuration: Failed'			=> '基本設定：保存に失敗しました。',
 
-		// install
+		// Install
 		'Select language: '				=> '言語を選択してください：',
 		'Host name'						=> 'ホスト名',
 		'Please enter host name'		=> 'ホスト名を入力してください',
