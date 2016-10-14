@@ -14,8 +14,8 @@ $form_config = array(
 
 		// Admin page title
 		array(
-			'start_html'    => '<tr>',
-			'end_html'	    => '</tr>',
+			'start_html'	=> '<tr>',
+			'end_html'		=> '</tr>',
 			array(
 				'start_html'		=> '<th>',
 				'end_html'			=> '</th>',
@@ -28,7 +28,7 @@ $form_config = array(
 				'end_html'			=> '</td>',
 				'special_html'		=> 'class="textbox ime_on" size="100" maxlength="100" ',
 			),
-	    ),
+		),
 
 		// Language
 		array(
@@ -48,12 +48,12 @@ $form_config = array(
 				'value'				=> LANG,
 				'special_html'		=> 'class="bframe_selectbox"',
 			),
-	    ),
+		),
 
 		// DB backup
 		array(
-			'start_html'    => '<tr>',
-			'end_html'	    => '</tr>',
+			'start_html'	=> '<tr>',
+			'end_html'		=> '</tr>',
 			array(
 				'start_html'		=> '<th>',
 				'end_html'			=> '</th>',
@@ -69,14 +69,14 @@ $form_config = array(
 					'value'				=> '<img src="images/common/download.png" alt="' . _('Download') . '" />' . _('Download'),
 				),
 			),
-	    ),
+		),
 
 		// FULL backup
 		array(
 			'name'			=> 'full_backup',
 			'display'		=> 'none',
-			'start_html'    => '<tr>',
-			'end_html'	    => '</tr>',
+			'start_html'	=> '<tr>',
+			'end_html'		=> '</tr>',
 			array(
 				'start_html'		=> '<th>',
 				'end_html'			=> '</th>',
@@ -92,14 +92,14 @@ $form_config = array(
 					'value'				=> '<img src="images/common/download.png" alt="' . _('Download') . '" />' . _('Download'),
 				),
 			),
-	    ),
+		),
 
 		// Full backup for re-install
 		array(
 			'name'			=> 'full_backup2',
 			'display'		=> 'none',
-			'start_html'    => '<tr>',
-			'end_html'	    => '</tr>',
+			'start_html'	=> '<tr>',
+			'end_html'		=> '</tr>',
 			array(
 				'start_html'		=> '<th>',
 				'end_html'			=> '</th>',
@@ -115,7 +115,7 @@ $form_config = array(
 					'value'				=> '<img src="images/common/download.png" alt="' . _('Download') . '" />' . _('Download'),
 				),
 			),
-	    ),
+		),
 	),
 );
 

@@ -591,10 +591,10 @@
 					imagecolortransparent($new_image, $trnprt_indx);
 
 				} 
-		        imagealphablending($new_image, false);
-		        $color = imagecolorallocatealpha($new_image, 0, 0, 0, 127);
-		        imagefill($new_image, 0, 0, $color);
-		        imagesavealpha($new_image, true);
+				imagealphablending($new_image, false);
+				$color = imagecolorallocatealpha($new_image, 0, 0, 0, 127);
+				imagefill($new_image, 0, 0, $color);
+				imagesavealpha($new_image, true);
 				break;
 			}
 
@@ -641,7 +641,7 @@
 				$p = popen($cmdline, 'r');
 				if($p) {
 					$this->log->write(fread($p, 2096));
-		            pclose($p);
+					pclose($p);
 				}
 				else {
 					$this->log->write('error');

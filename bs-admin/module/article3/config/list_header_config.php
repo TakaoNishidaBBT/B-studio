@@ -8,11 +8,11 @@
 $list_header_config = array(
 	array('class' => 'B_Hidden', 'name' => 'default_row_per_page'),
 	array(
-		'start_html'    => '<div class="list-header">',
-		'end_html'	    => '</div>',
+		'start_html'	=> '<div class="list-header">',
+		'end_html'		=> '</div>',
 		array(
-			'start_html'    => '<form name="header_form" id="header_form" method="post" action="index.php" target="main">',
-			'end_html'	    => '</form>',
+			'start_html'	=> '<form name="header_form" id="header_form" method="post" action="index.php" target="main">',
+			'end_html'		=> '</form>',
 			array(
 				'start_html'			=> '<ul class="search">',
 				'end_html'				=> '</ul>',

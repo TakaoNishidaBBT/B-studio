@@ -56,7 +56,7 @@
 
 			// write serialized data into cache file
 			$fp = fopen($file_info, 'w');
-	        fwrite($fp, serialize($data));
+			fwrite($fp, serialize($data));
 			fclose($fp);
 
 			// close and unlink semaphore
@@ -105,7 +105,7 @@
 		function createLimitFile($file_info, $limit) {	
 			if($limit) {
 				$fp = fopen($file_info, 'w');
-		        fwrite($fp, $limit);
+				fwrite($fp, $limit);
 				fclose($fp);
 			}
 			else {

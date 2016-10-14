@@ -6,17 +6,17 @@
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
 $menu_config = array(
-	'start_html'    => '<div class="pull_down_menu">',
-	'end_html'	    => '</div>',
+	'start_html'	=> '<div class="pull_down_menu">',
+	'end_html'		=> '</div>',
 	array(
-		'start_html'    => '<ul>',
-		'end_html'	    => '</ul>',
+		'start_html'	=> '<ul>',
+		'end_html'		=> '</ul>',
 		array(
-			'start_html'    => '<li class="title">',
-			'end_html'	    => '</li>',
+			'start_html'	=> '<li class="title">',
+			'end_html'		=> '</li>',
 			array(
-				'start_html'    => '<a href="' . B_SITE_ROOT . '" title="' . _('Open publish page') . '" onclick="window.open(this.href); return false;">',
-				'end_html'	    => '</a>',
+				'start_html'	=> '<a href="' . B_SITE_ROOT . '" title="' . _('Open publish page') . '" onclick="window.open(this.href); return false;">',
+				'end_html'		=> '</a>',
 				array(
 					'start_html'	=> '<span class="title">',
 					'end_html'		=> '</span>',
@@ -26,8 +26,8 @@ $menu_config = array(
 		),
 		array(
 			'auth_filter'	=> 'super_admin/admin',
-			'start_html'    => '<li>',
-			'end_html'	    => '</li>',
+			'start_html'	=> '<li>',
+			'end_html'		=> '</li>',
 			'class'			=> 'B_Link',
 			'value'			=> '<img src="images/menu/contents.png" alt="contents"/>' . _('Contents'),
 			'specialchars'	=> 'none',
@@ -36,8 +36,8 @@ $menu_config = array(
 		),
 		array(
 			'auth_filter'	=> 'super_admin/admin',
-			'start_html'    => '<li>',
-			'end_html'	    => '</li>',
+			'start_html'	=> '<li>',
+			'end_html'		=> '</li>',
 			'class'			=> 'B_Link',
 			'value'			=> '<img src="images/menu/template.png" alt="templates"/>' . _('Templates'),
 			'specialchars'	=> 'none',
@@ -46,8 +46,8 @@ $menu_config = array(
 		),
 		array(
 			'auth_filter'	=> 'super_admin/admin',
-			'start_html'    => '<li>',
-			'end_html'	    => '</li>',
+			'start_html'	=> '<li>',
+			'end_html'		=> '</li>',
 			array(
 				'class'			=> 'B_Link',
 				'special_html'	=> 'class="bframe_menu"',
@@ -80,8 +80,8 @@ $menu_config = array(
 		),
 		array(
 			'auth_filter'	=> 'super_admin/admin/editor',
-			'start_html'    => '<li>',
-			'end_html'	    => '</li>',
+			'start_html'	=> '<li>',
+			'end_html'		=> '</li>',
 			array(
 				'class'			=> 'B_Link',
 				'special_html'	=> 'class="bframe_menu"',
@@ -124,8 +124,8 @@ $menu_config = array(
 		),
 		array(
 			'auth_filter'	=> 'super_admin',
-			'start_html'    => '<li>',
-			'end_html'	    => '</li>',
+			'start_html'	=> '<li>',
+			'end_html'		=> '</li>',
 			array(
 				'class'			=> 'B_Link',
 				'special_html'	=> 'class="bframe_menu"',
@@ -168,8 +168,8 @@ $menu_config = array(
 		),
 		array(
 			'auth_filter'	=> 'admin',
-			'start_html'    => '<li>',
-			'end_html'	    => '</li>',
+			'start_html'	=> '<li>',
+			'end_html'		=> '</li>',
 			array(
 				'class'			=> 'B_Link',
 				'special_html'	=> 'class="bframe_menu"',
@@ -207,8 +207,8 @@ $menu_config = array(
 		),
 		array(
 			'auth_filter'	=> 'editor',
-			'start_html'    => '<li>',
-			'end_html'	    => '</li>',
+			'start_html'	=> '<li>',
+			'end_html'		=> '</li>',
 			array(
 				'class'			=> 'B_Link',
 				'special_html'	=> 'class="bframe_menu"',
@@ -233,11 +233,11 @@ $menu_config = array(
 			),
 		),
 		array(
-			'start_html'    => '<li class="new_tab">',
-			'end_html'	    => '</li>',
+			'start_html'	=> '<li class="new_tab">',
+			'end_html'		=> '</li>',
 			array(
-				'start_html'    => '<a href="" title="' . _('Open another admin page') . '" onclick="window.open(this.href); return false;">',
-				'end_html'	    => '</a>',
+				'start_html'	=> '<a href="" title="' . _('Open another admin page') . '" onclick="window.open(this.href); return false;">',
+				'end_html'		=> '</a>',
 				array(
 					'start_html'	=> '<span class="add">',
 					'end_html'		=> '</span>',

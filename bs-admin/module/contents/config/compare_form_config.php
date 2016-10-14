@@ -165,8 +165,8 @@ $config_form_config = array(
 
 		// Titlte
 		array(
-			'start_html'    => '<tr>',
-			'end_html'	    => '</tr>',
+			'start_html'	=> '<tr>',
+			'end_html'		=> '</tr>',
 			'error_group'	=> true,
 			array(
 				'start_html'			=> '<th>',
@@ -205,8 +205,8 @@ $config_form_config = array(
 		),
 		// Breadcrumbs
 		array(
-			'start_html'    => '<tr>',
-			'end_html'	    => '</tr>',
+			'start_html'	=> '<tr>',
+			'end_html'		=> '</tr>',
 			'error_group'	=> true,
 			array(
 				'start_html'			=> '<th>',
@@ -245,8 +245,8 @@ $config_form_config = array(
 		),
 		// Template
 		array(
-			'start_html'    => '<tr>',
-			'end_html'	    => '</tr>',
+			'start_html'	=> '<tr>',
+			'end_html'		=> '</tr>',
 			'error_group'	=> true,
 			array(
 				'start_html'			=> '<th>',
@@ -282,8 +282,8 @@ $config_form_config = array(
 		),
 		// Keywords
 		array(
-			'start_html'    => '<tr>',
-			'end_html'	    => '</tr>',
+			'start_html'	=> '<tr>',
+			'end_html'		=> '</tr>',
 			'error_group'	=> true,
 			array(
 				'start_html'			=> '<th>',
@@ -319,8 +319,8 @@ $config_form_config = array(
 		),
 		// Description
 		array(
-			'start_html'    => '<tr>',
-			'end_html'	    => '</tr>',
+			'start_html'	=> '<tr>',
+			'end_html'		=> '</tr>',
 			'error_group'	=> true,
 			array(
 				'start_html'			=> '<th>',
@@ -356,8 +356,8 @@ $config_form_config = array(
 		),
 		// External CSS
 		array(
-			'start_html'    => '<tr>',
-			'end_html'	    => '</tr>',
+			'start_html'	=> '<tr>',
+			'end_html'		=> '</tr>',
 			'error_group'	=> true,
 			array(
 				'start_html'			=> '<th>',
@@ -393,8 +393,8 @@ $config_form_config = array(
 		),
 		// External javascript
 		array(
-			'start_html'    => '<tr>',
-			'end_html'	    => '</tr>',
+			'start_html'	=> '<tr>',
+			'end_html'		=> '</tr>',
 			'error_group'	=> true,
 			array(
 				'start_html'			=> '<th>',
@@ -430,8 +430,8 @@ $config_form_config = array(
 		),
 		// Header elements
 		array(
-			'start_html'    => '<tr>',
-			'end_html'	    => '</tr>',
+			'start_html'	=> '<tr>',
+			'end_html'		=> '</tr>',
 			'error_group'	=> true,
 			array(
 				'start_html'			=> '<th>',

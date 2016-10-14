@@ -258,7 +258,7 @@
 			$max = $root->getMaxThumbnailNo();
 			$root->createthumbnail($data, $max);
 			$fp = fopen(B_FILE_INFO_THUMB, 'w+');
-	        fwrite($fp, serialize($data));
+			fwrite($fp, serialize($data));
 			fclose($fp);
 		}
 
