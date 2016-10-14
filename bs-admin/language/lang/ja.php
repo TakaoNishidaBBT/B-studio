@@ -266,8 +266,6 @@
 		'Please set versions.'			=> 'バージョンを選択してください',
 		'If you set scheduled to be published this version, you must set current published version'
 										=> '（このバージョンを予約登録するにはそれまでに公開されるバージョンを設定してから再度、予約登録する必要があります）',
-//		'Publish version: '				=> '公開バージョン：',
-//		'Working version: '				=> '作業中バージョン：',
 		'Publish version:%PUBLISH_VERSION% &nbsp;Working version:%WROKING_VERSION%'
 										=> '公開バージョン：%PUBLISH_VERSION% &nbsp;作業中バージョン：%WROKING_VERSION%',
 
