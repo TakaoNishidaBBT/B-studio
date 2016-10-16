@@ -18,10 +18,10 @@
 
 			try {
 				if(!$this->current_folder) {
-					throw new Exception('フォルダが選択されていません');
+					throw new Exception(_('Folder is not selected'));
 				}
 
-	 			// file size check
+	 			// Check file size
 				$filesize = $_POST['filesize'];
 				$post_max_size = $this->util->decode_human_filesize(ini_get('post_max_size'));
 				$upload_max_filesize = $this->util->decode_human_filesize(ini_get('upload_max_filesize'));
@@ -32,32 +32,36 @@
 					else {
 						$limit = ini_get('upload_max_filesize');
 					}
-					throw new Exception('ファイルサイズが大きすぎます。アップロードできるのは' . $limit . 'までです');
+					$message = _('File size is too large. Maximun upload file size is %LIMIT%');
+					$message = str_replace('%LIMIT%', $limit, $message);
+					throw new Exception($message);
 				}
-				// get file info
+				// Get file info
 				$file = pathinfo($_POST['filename']);
 
-				// unify extension to lowercase for windows system
+				// Unify extension to lowercase for windows system
 				$file['extension'] = strtolower($file['extension']);
 
 				if(strlen($file['basename']) != mb_strlen($file['basename'])) {
-					throw new Exception('日本語ファイル名は使用できません。');
+					throw new Exception(_('Multi byte character can not be used'));
 				}
 				if(preg_match('/[\\\\:\/\*\?<>\|\s]/', $file['basename'])) {
-					throw new Exception('ファイル名／フォルダ名に次の文字は使えません \ / : * ? " < > | スペース');
+					throw new Exception(_('Followed charcters can not be used for file name and folder name (\ / : * ? " < > | space)'));
 				}
 
 				if($file['extension'] == 'zip') {
 					switch($this->request['extract_mode']) {
 					case 'confirm':
 						$response_mode = 'zipConfirm';
-						$message = $file['basename'] . 'を展開しますか？';
+						$message = _('Extract %FILE_NAME% ?');
+						$message = str_replace('%FILE_NAME%', $file['basename'], $message);
 						break;
 
 					case 'noextract':
 						if($this->file_exists($file['basename']) && $this->request['mode'] == 'confirm') {
 							$response_mode = 'confirm';
-							$message = $file['basename'] . 'は既に存在します。<br />上書きしてもよろしいですか？';
+							$message = _('%FILE_NAME% already exists. Are you sure to overwrite?');
+							$message = str_replace('%FILE_NAME%', $file['basename'], $message);
 						}
 						break;
 					}
@@ -65,7 +69,8 @@
 				else {
 					if($this->request['mode'] == 'confirm' && $this->file_exists($file['basename'])) {
 						$response_mode = 'confirm';
-						$message = $file['basename'] . 'は既に存在します。<br />上書きしてもよろしいですか？';
+						$message = _('%FILE_NAME% already exists. Are you sure to overwrite?');
+						$message = str_replace('%FILE_NAME%', $file['basename'], $message);
 					}
 				}
 			}
@@ -108,7 +113,7 @@
 			$status = true;
 
 			try {
-				// get file info
+				// Get file info
 				$file = pathinfo($_FILES['Filedata']['name']);
 
 				if(!is_dir($this->dir)) {
@@ -116,18 +121,18 @@
 						chmod($this->dir, 0777);
 					}
 					else {
-						throw new Exception('ディレクトリの作成に失敗しました');
+						throw new Exception(_('Faild to create directory'));
 					}
 				}
 
 				if(strtolower($file['extension']) == 'zip' && class_exists('ZipArchive') && $this->request['extract_mode'] == 'extract') {
-					// set time limit to 10 minutes
+					// Set time limit to 10 minutes
 					set_time_limit(600);
 
-					// continue whether a client disconnect or not
+					// Continue whether a client disconnect or not
 					ignore_user_abort(true);
 
-					// check zip file inside
+					// Check zip file inside
 					$this->checkZipFile($_FILES['Filedata']['tmp_name']);
 
 					$zip_file = B_RESOURCE_WORK_DIR . $file['basename'];
@@ -138,30 +143,30 @@
 						flush();
 						ob_flush();
 
-						// send start message
+						// Send start message
 						$response['progress'] = 0;
 						$this->sendChunk(json_encode($response));
 
-						// extract
+						// Extract
 						$zip = new ZipArchive();
 						$zip->open($zip_file);
 						$zip->extractTo(B_RESOURCE_EXTRACT_DIR);
 						$zip->close();
 						unlink($zip_file);
 
-						// controll extracted files
+						// Controll extracted files
 						$node = new B_FileNode(B_RESOURCE_EXTRACT_DIR, '/', null, null, 'all');
 
-						// count extract files
+						// Count extract files
 						$this->extracted_files = $node->nodes_count();
 						$this->registerd_files = 0;
 
-						// register extract files
+						// Register extract files
 						$node->walk($this, register_archive);
 						$node->remove();
 						$this->removeCacheFile();
 
-						// create response node_info
+						// Create response node_info
 						foreach($this->registered_archive_node as $value) {
 							$node = new B_Node($this->db
 												, B_RESOURCE_NODE_TABLE
@@ -220,7 +225,7 @@
 				$stat = $zip->statIndex($i);
 				$file_name = mb_convert_encoding($stat['name'], 'UTF-8', 'auto');
 				if(strlen($file_name) != mb_strlen($file_name)) {
-					throw new Exception('日本語ファイル名は使用できません。（zipファイル中）');
+					throw new Exception(_('Multi byte character can not be used. (the contents of the zip file'));
 				}
 			}
 		}
@@ -468,31 +473,31 @@
 			if(!move_uploaded_file($source, $destination)) {
 				switch($_FILES['Filedata']['error']) {
 				case 1:
-					$this->error_message = 'アップロードされたファイルは、php.ini の upload_max_filesize ディレクティブの値を超えています。';
+					$this->error_message = _('The uploaded file exceeds the upload_max_filesize directive in php.ini.');
 					break;
 
 				case 2:
-					$this->error_message = 'アップロードされたファイルは、HTML フォームで指定された MAX_FILE_SIZE を超えています。';
+					$this->error_message = _('The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the HTML form.');
 					break;
 
 				case 3:
-					$this->error_message = 'アップロードされたファイルは一部のみしかアップロードされていません。';
+					$this->error_message = _('The uploaded file was only partially uploaded.');
 					break;
 
 				case 4:
-					$this->error_message = 'ファイルはアップロードされませんでした。';
+					$this->error_message = _('No file was uploaded.');
 					break;
 
 				case 6:
-					$this->error_message = 'テンポラリフォルダがありません。PHP 4.3.10 と PHP 5.0.3 で導入されました。';
+					$this->error_message = _('Missing a temporary folder. Introduced in PHP 5.0.3.');
 					break;
 
 				case 7:
-					$this->error_message = 'ディスクへの書き込みに失敗しました。PHP 5.1.0 で導入されました。';
+					$this->error_message = _('Failed to write file to disk. Introduced in PHP 5.1.0.');
 					break;
 
 				case 8:
-					$this->error_message = 'ファイルのアップロードが拡張モジュールによって停止されました.';
+					$this->error_message = _('A PHP extension stopped the file upload.');
 					break;
 
 				default:

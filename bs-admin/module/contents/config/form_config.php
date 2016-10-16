@@ -163,7 +163,7 @@ $tab_control_config = array(
 				'name'			=> 'register',
 				'start_html'	=> '<span id="register" class="register-button" onclick="bframe.ajaxSubmit.submit(\'F1\', \'' . $this->module . '\', \'form\', \'register\', \'confirm\', true)">',
 				'end_html'		=> '</span>',
-				'value'			=> '<img src="images/common/save.png" alt="' . _('Save') . '" />' . _('Save'),
+				'value'			=> '<img src="images/common/save.png" alt="Save" />' . _('Save'),
 			),
 		),
 		array(

@@ -36,15 +36,15 @@
 		array(
 				''		=> '',
 				'0'		=> '',
-				'1'		=> '■',
+				'1'		=> '<img src="images/common/square.png" alt="publicationed" />',
 		);
 
 	${$g_data_set}['publication_status'] =
 		array(
 				''		=> '',
 				'0'		=> '',
-				'1'		=> '■',
-				'2'		=> '★',
+				'1'		=> '<img src="images/common/square.png" alt="publicationed" />',
+				'2'		=> '<img src="images/common/star.png" alt="reserved" />',
 		);
 
 	${$g_data_set}['publication'] =

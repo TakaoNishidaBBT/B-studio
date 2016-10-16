@@ -87,7 +87,7 @@ hr.clear {
 	margin: 0;
 }
 .ime_on, .ime-on {
-	ime-mode: active;
+	ime-mode: disabled;
 }
 .ime_off, .ime-off {
 	ime-mode: disabled;
@@ -485,6 +485,10 @@ table.list td {
 	white-space: nowrap;
 	line-height: 22px;
 	overflow: hidden;
+	vertical-align: middle;
+}
+table.list td img {
+	vertical-align: middle;
 }
 table.list td a {
 	text-decoration: none;

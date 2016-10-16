@@ -14,8 +14,8 @@ array(
 								,a.publication_datetime_t
 								,a.version
 								,a.notes
-								,e.reserved_version_id reserved_version
-								,e.working_version_id working_version
+								,e.reserved_version_id
+								,e.working_version_id
 								,if(b.current_version_id = version_id, 1, if(c.reserved_version_id = version_id, 2, 0)) publication_status
 								,if(d.working_version_id = version_id, 1, 0) working_status
 						from " . B_DB_PREFIX . "version a
@@ -37,13 +37,13 @@ array(
 		'end_html'		=> '</tr>',
 		'class'			=> 'B_Row',
 		array(
-			'name'			=> 'reserved_version',
+			'name'			=> 'reserved_version_id',
 			'start_html'	=> '<th class="center" style="width:35px" >',
 			'end_html'		=> '</th>',
 			'value'			=> _('Publish'),
 		),
 		array(
-			'name'			=> 'working_version',
+			'name'			=> 'working_version_id',
 			'start_html'	=> '<th class="center" style="width:35px" >',
 			'end_html'		=> '</th>',
 			'value'			=> _('Working'),
@@ -77,7 +77,7 @@ array(
 			'value'			=> _('Status'),
 		),
 		array(
-			'name'			=> 'memo',
+			'name'			=> 'notes',
 			'start_html'	=> '<th class="center">',
 			'end_html'		=> '</th>',
 			'value'			=> _('Notes'),
@@ -101,14 +101,14 @@ array(
 
 	'row'		=>
 	array(
-		'start_html'			=> '<tr>',
-		'end_html'				=> '</tr>',
-		'class'					=> 'B_Row',
+		'start_html'	=> '<tr>',
+		'end_html'		=> '</tr>',
+		'class'			=> 'B_Row',
 		array(
 			'start_html'	=> '<td class="center">',
 			'end_html'		=> '</td>',
 			'class'			=> 'B_Radio',
-			'name'			=> 'reserved_version',
+			'name'			=> 'reserved_version_id',
 			'special_html'	=> 'class="radio"',
 			'value_index'	=> 'version_id',
 		),
@@ -116,7 +116,7 @@ array(
 			'start_html'	=> '<td class="center">',
 			'end_html'		=> '</td>',
 			'class'			=> 'B_Radio',
-			'name'			=> 'working_version',
+			'name'			=> 'working_version_id',
 			'special_html'	=> 'class="radio"',
 			'value_index'	=> 'version_id',
 		),
@@ -143,7 +143,7 @@ array(
 			'data_set'		=> 'publication_status',
 		),
 		array(
-			'name'			=> 'memo',
+			'name'			=> 'notes',
 			'class'			=> 'B_Text',
 			'start_html'	=> '<td class="left">',
 			'end_html'		=> '</td>',
@@ -244,6 +244,7 @@ array(
 	'pager'		=> $this->pager_config,
 );
 
+// Control
 $version_control_config = array(
 	'start_html'	=> '<div id="version-control">',
 	'end_html'		=> '</div>',
@@ -254,7 +255,6 @@ $version_control_config = array(
 		'value'			=> '<img src="images/common/version.png" alt="Change versions" />' . _('Change versions'),
 	),
 );
-
 $version_control_confirm_config = array(
 	'start_html'	=> '<div id="version-control">',
 	'end_html'		=> '</div>',
@@ -279,7 +279,6 @@ $version_control_confirm_config = array(
 		),
 	),
 );
-//control
 $version_control_result_config = array(
 	'start_html'	=> '<div id="version-control">',
 	'end_html'		=> '</div>',
@@ -292,7 +291,65 @@ $version_control_result_config = array(
 			'class'			=> 'B_Button',
 			'name'			=> 'backToList',
 			'special_html'	=> 'class="back-button" onclick="bframe.submit(\'F1\', \'' . $this->module . '\', \'list\', \'back\', \'\')" ',
-			'value'			=> 'Back to list',
+			'value'			=> _('Back to list'),
+		),
+	),
+);
+
+// Version information
+$version_info_config = array(
+	array(
+		'start_html'	=> '<div class="publish">',
+		'end_html'		=> '</div>',
+		array(
+			'start_html'	=> '<p class="title">',
+			'end_html'		=> '</p>',
+			array(
+				'start_html'	=> '<span>',
+				'end_html'		=> '</span>',
+				'value'			=> _('Publish version'),
+			),
+		),
+		array(
+			'name'			=> 'reserved_version_name',
+			'start_html'	=> '<p class="version-name">',
+			'end_html'		=> '</p>',
+		),
+		array(
+			'name'			=> 'reserved_datetime',
+			'start_html'	=> '<p class="date-time">',
+			'end_html'		=> '</p>',
+			'empty'			=> 'none',
+		),
+		array(
+			'name'			=> 'publish_caution',
+			'start_html'	=> '<p class="caution">',
+			'end_html'		=> '</p>',
+			'empty'			=> 'none',
+		),
+		array(
+			'name'			=> 'publish_message',
+			'start_html'	=> '<p class="message">',
+			'end_html'		=> '</p>',
+			'empty'			=> 'none',
+		),
+	),
+	array(
+		'start_html'	=> '<div class="working">',
+		'end_html'		=> '</div>',
+		array(
+			'start_html'	=> '<p class="title">',
+			'end_html'		=> '</p>',
+			array(
+				'start_html'	=> '<span>',
+				'end_html'		=> '</span>',
+				'value'			=> _('Working version'),
+			),
+		),
+		array(
+			'name'			=> 'working_version_name',
+			'start_html'	=> '<p class="version-name">',
+			'end_html'		=> '</p>',
 		),
 	),
 );

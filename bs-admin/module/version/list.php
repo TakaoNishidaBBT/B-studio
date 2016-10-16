@@ -18,9 +18,14 @@
 			// Create DataGrid
 			require_once('./config/list_config.php');
 			$this->dg = new B_DataGrid($this->db, $list_config);
+
+			// Create control elements
 			$this->version_control = new B_Element($version_control_config, $this->user_auth);
 			$this->version_control_confirm = new B_Element($version_control_confirm_config, $this->user_auth);
 			$this->version_control_result = new B_Element($version_control_result_config, $this->user_auth);
+
+			// Create version info
+			$this->version_information = new B_Element($version_info_config, $this->user_auth);
 
 			// Set call back
 			$this->dg->setCallBack($this, '_list_callback');
@@ -137,42 +142,42 @@
 		}
 
 		function confirm() {
-			if(!$this->post['reserved_version'] || !$this->post['working_version']) {
+			if(!$this->post['reserved_version_id'] || !$this->post['working_version_id']) {
 				$this->error_message.= '<span class="bold">' . _('Please set versions.') . '</span>';
 				$this->back();
 			}
 			else {
-				$this->version_table = new B_Table($this->db, 'version');
-				$this->reserved_version_id = $this->post['reserved_version'];
-				$this->working_version_id = $this->post['working_version'];
+				$version_table = new B_Table($this->db, 'version');
+				$this->_setRequest('reserved_version_id');
+				$this->_setRequest('working_version_id');
 
-				$row = $this->version_table->selectByPk(array('version_id' => $this->reserved_version_id));
-				$this->reserved_version = $row['version'];
+				unset($this->session['reserved_datetime']);
+				unset($this->session['publish_caution']);
+				unset($this->session['publish_message']); 
+
+				$row = $version_table->selectByPk(array('version_id' => $this->session['reserved_version_id']));
+				$this->session['reserved_version_name'] = $row['version'];
 				if($row['publication_datetime_u'] && $row['publication_datetime_u'] > time()) {
 					$sql = "select * from " . B_DB_PREFIX . "v_current_version";
 					$rs = $this->db->query($sql);
 					$current_version = $this->db->fetch_assoc($rs);
-					if($current_version['current_version_id'] != $this->reserved_version_id) {
-						$this->reserve_datetime = $row['publication_datetime_t'] . '<span class="condition">' . _('Scheduled to be published') . '</span>';
+					if($current_version['current_version_id'] != $this->session['reserved_version_id']) {
+						$this->session['reserved_datetime'] = $row['publication_datetime_t'];
+						$this->session['publish_caution'] = _('Scheduled to be published');
 					}
 					else {
-						$this->reserve_datetime = '<span class="condition">' . _('published immediately') . '</span>';
-						$this->reserve_datetime.= '<span class="guidance">' . _('If you set scheduled to be published this version, you must set current published version') . '</span>';
+						$this->session['publish_caution'] = _('published immediately');
+						$this->session['publish_message'] = _('<img src="images/common/caution3.png" alt="#" />If you set scheduled to be published this version, you must set current published version');
 					}
 				}
 				else {
-					$this->reserve_datetime = '<span class="condition">' . _('published immediately') . '</span>';
+					$this->session['publish_caution'] = _('published immediately');
 				}
 
-				$row = $this->version_table->selectByPk(array('version_id' => $this->working_version_id));
-				$this->working_version = $row['version'];
+				$row = $version_table->selectByPk(array('version_id' => $this->session['working_version_id']));
+				$this->session['working_version_name'] = $row['version'];
 
-				$this->_setRequest('reserved_version');
-				$this->_setRequest('working_version');
-				$this->session['reserve_datetime'] = $this->reserve_datetime;
-
-				$this->session['reserved_version_name'] = $this->reserved_version;
-				$this->session['working_version_name'] = $this->working_version;
+				$this->version_information->setValue($this->session);
 
 				$this->setView('view_confirm');
 			}
@@ -189,9 +194,9 @@
 				$current_version_table = new B_Table($this->db, 'current_version');
 
 				$param['id'] = '0000000001';
-				$param['current_version_id'] = $this->session['reserved_version'];
-				$param['reserved_version_id'] = $this->session['reserved_version'];
-				$param['working_version_id'] = $this->session['working_version'];
+				$param['current_version_id'] = $this->session['reserved_version_id'];
+				$param['reserved_version_id'] = $this->session['reserved_version_id'];
+				$param['working_version_id'] = $this->session['working_version_id'];
 				$param['create_datetime'] = time();
 				$param['create_user'] = $this->user_id;
 
@@ -203,10 +208,10 @@
 					$param['current_version_id'] = $row['current_version_id'];
 				}
 				else {
-					$param['current_version_id'] = $this->session['reserved_version'];
+					$param['current_version_id'] = $this->session['reserved_version_id'];
 				}
-				$param['reserved_version_id'] = $this->session['reserved_version'];
-				$param['working_version_id'] = $this->session['working_version'];
+				$param['reserved_version_id'] = $this->session['reserved_version_id'];
+				$param['working_version_id'] = $this->session['working_version_id'];
 				$param['update_datetime'] = time();
 				$param['update_user'] = $this->user_id;
 
@@ -215,11 +220,11 @@
 			}
 			if($ret) {
 				$this->db->commit();
-				$this->action_message = _('was set.');
+				$this->action_message = _('were set.');
 			}
 			else {
 				$this->db->rollback();
-				$this->action_message = _('was failed to set.');
+				$this->action_message = _('were failed to set.');
 			}
 
 			$sql = "select * from " . B_DB_PREFIX . "v_current_version";
@@ -234,6 +239,8 @@
 
 			// update version info
 			$this->getVersionInfo();
+
+			$this->version_information->setValue($this->session);
 
 			$this->setView('view_result');
 		}

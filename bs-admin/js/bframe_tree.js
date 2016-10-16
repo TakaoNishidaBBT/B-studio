@@ -2739,22 +2739,22 @@
 					'message': msg,
 					'buttons': [
 						{
-							'name': 'はい',
+							'name': top.bframe.message.getProperty('uplado_zip_confirm_dialog1'),
 							'className': 'button',
 							'action': funcExtract
 						},
 						{
-							'name': 'すべて展開',
+							'name': top.bframe.message.getProperty('uplado_zip_confirm_dialog2'),
 							'className': 'button',
 							'action': funcExtractAll
 						},
 						{
-							'name': 'いいえ',
+							'name': top.bframe.message.getProperty('uplado_zip_confirm_dialog3'),
 							'className': 'button',
 							'action': funcNoExtract
 						},
 						{
-							'name': 'キャンセル',
+							'name': top.bframe.message.getProperty('uplado_zip_confirm_dialog4'),
 							'className': 'button',
 							'action': cancel
 						}
@@ -2771,22 +2771,22 @@
 					'message': msg,
 					'buttons': [
 						{
-							'name': 'はい',
+							'name': top.bframe.message.getProperty('uplado_confirm_dialog1'),
 							'className': 'button',
 							'action': funcYes
 						},
 						{
-							'name': 'すべて上書き',
+							'name': top.bframe.message.getProperty('uplado_confirm_dialog2'),
 							'className': 'button',
 							'action': funcYesToAll
 						},
 						{
-							'name': 'いいえ',
+							'name': top.bframe.message.getProperty('uplado_confirm_dialog3'),
 							'className': 'button',
 							'action': funcNo
 						},
 						{
-							'name': 'キャンセル',
+							'name': top.bframe.message.getProperty('uplado_confirm_dialog4'),
 							'className': 'button',
 							'action': funcNoToAll
 						}

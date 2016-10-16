@@ -58,9 +58,9 @@
 		}
 
 		function register() {
-			if(file_exists($this->post['file_path']) && $this->post['mode'] == 'confirm' && filemtime($file_path) > $this->post['update_datetime']) {
+			if(file_exists($this->post['file_path']) && $this->post['mode'] == 'confirm' && filemtime($this->post['file_path']) > $this->post['update_datetime']) {
 				$mode = 'confirm';
-				$message = "他のユーザに更新されています。\n上書きしますか？";
+				$message = _("Other user updated this file\nAre you sure to overwrite?");
 			}
 			else {
 				if($this->post['encoding'] == 'ASCII' || $this->post['encoding'] == 'UTF-8') {
@@ -71,7 +71,7 @@
 				}
 				file_put_contents($this->post['file_path'], $contents, LOCK_EX);
 
-				$message = "登録しました";
+				$message = _('Saved');
 			}
 
 			$response['status'] = true;
@@ -88,7 +88,15 @@
 		}
 
 		function view() {
-			// HTTPヘッダー出力
+			// Start buffering
+			ob_start();
+
+			require_once('./view/view_editor.php');
+
+			// Get buffer
+			$contents = ob_get_clean();
+
+			// Send HTTP header
 			$this->sendHttpHeader();
 
 			$this->html_header->appendProperty('css', '<link href="css/editor.css" type="text/css" rel="stylesheet" media="all" />');
@@ -105,9 +113,10 @@
 			$this->html_header->appendProperty('script', '<script src="js/ace/mode-css.js" type="text/javascript"></script>');
 			$this->html_header->appendProperty('script', '<script src="js/ace/mode-php.js" type="text/javascript"></script>');
 
-			// HTMLヘッダー出力
+			// Show HTML header
 			$this->showHtmlHeader();
 
-			require_once('./view/view_editor.php');
+			// Show HTML body
+			echo $contents;
 		}
 	}
