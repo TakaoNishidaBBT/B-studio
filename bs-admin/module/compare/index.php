@@ -47,7 +47,7 @@
 		}
 
 		function view() {
-			// HTTPヘッダー出力
+			// Send HTTP header
 			$this->sendHttpHeader();
 
 			require_once($this->view_file);

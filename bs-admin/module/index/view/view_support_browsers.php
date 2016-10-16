@@ -15,12 +15,12 @@
 
 	<div class="support">
 		<p>
-			お使いのブラウザはサポートされていません<br />
-			以下のブラウザをご使用ください
+			<?php echo _('Your browser is not supported. <br />Please use following browsers.'); ?>
 		</p>
 		<table class="browsers">
 			<tr>
 				<td class="icon"><img src="images/browsers/safari.png" alt="Safari" /></td>
+				<td class="icon"><img src="images/browsers/edge.png" alt="Microsoft Edge" /></td>
 				<td class="icon"><img src="images/browsers/ie.png" alt="Internet Explorer" /></td>
 				<td class="icon"><img src="images/browsers/firefox.png" alt="Firefox" /></td>
 				<td class="icon"><img src="images/browsers/chrome.png" alt="Chrome" /></td>
@@ -28,6 +28,7 @@
 			</tr>
 			<tr>
 				<td class="name">Safari</td>
+				<td class="name">Microsoft Edge</td>
 				<td class="name">Internet Explorer<br />10,11</td>
 				<td class="name">Firefox</td>
 				<td class="name">Chrome</td>

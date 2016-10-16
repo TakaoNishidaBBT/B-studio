@@ -8,9 +8,13 @@
 
 	$texts = array(
 		// Common
-		'en.css'						=> 'ja.css',
 		'None'							=> 'なし',
 		'(Test)'						=> '【テスト】',
+		'Yes'							=> 'はい',
+		'Extract all'					=> 'すべて展開',
+		'Overwrite all'					=> 'すべて上書き',
+		'No'							=> 'いいえ',
+		'Cancel'						=> 'キャンセル',
 
 		'1 line'						=> '1件',
 		'10 lines'						=> '10件',
@@ -70,6 +74,14 @@
 		'Your session has timed out, Please log in again'
 										=> 'セッションが切れました。ログインしなおしてください。',
 
+		// Browser check
+		'Your browser is not supported. <br />Please use following browsers.'
+										=> 'お使いのブラウザはサポートされていません<br />以下のブラウザをご使用ください',
+		// Login Error
+		'Error'							=> 'エラー',
+		'Please enter your login ID and password correctly.'
+										=> 'ログインIDとパスワードを正しく入力してください',
+
 		// Error message for date and time
 		' (out of range)'				=> '（範囲外）',
 		' (invalid time)'				=> '（時刻が不正）',
@@ -98,6 +110,8 @@
 		'was failed to update.'			=> 'の更新に失敗しました。',
 		'was set.'						=> 'を設定しました。',
 		'was faild to set.'				=> 'の設定に失敗しました。',
+		'were set.'						=> 'を設定しました。',
+		'were faild to set.'			=> 'の設定に失敗しました。',
 		'was deleted.'					=> 'を削除しました。',
 		'was faild to delete.'			=> 'の削除に失敗しました。',
 
@@ -148,7 +162,32 @@
 		'Modified'						=> '更新日時',
 		'File size'						=> 'ファイルサイズ',
 		'Resolution'					=> 'イメージサイズ',
+		'Folder is not selected'		=> 'フォルダが選択されていません',
+		'File size is too large. Maximun upload file size is {$limit}'
+										=> 'ファイルサイズが大きすぎます。アップロードできるのは{$limit}までです',
+		'Extract %FILE_NAME% ?'			=> '%FILE_NAME%を展開しますか？',
+		'%FILE_NAME% already exists. Are you sure to overwrite?'
+										=> '%FILE_NAME%は既に存在します。<br />上書きしてもよろしいですか？',
+		'Faild to create directory'		=> 'ディレクトリの作成に失敗しました',
+		'Multi byte character can not be used. (the contents of the zip file)'
+										=> '日本語ファイル名は使用できません。（zipファイル中）',
+		'The uploaded file exceeds the upload_max_filesize directive in php.ini.'
+										=> 'アップロードされたファイルは、php.ini の upload_max_filesize ディレクティブの値を超えています。',
+		'The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the HTML form.'
+										=> 'アップロードされたファイルは、HTML フォームで指定された MAX_FILE_SIZE を超えています。',
+		'The uploaded file was only partially uploaded.'
+										=> 'アップロードされたファイルは一部のみしかアップロードされていません。',
+		'No file was uploaded.'			=> 'ファイルはアップロードされませんでした。',
+		'Missing a temporary folder. Introduced in PHP 5.0.3.'
+										=> 'テンポラリフォルダがありません。PHP 5.0.3 で導入されました。',
+		'Failed to write file to disk. Introduced in PHP 5.1.0.'
+										=> 'ディスクへの書き込みに失敗しました。PHP 5.1.0 で導入されました。',
+		'A PHP extension stopped the file upload.'
+										=> 'ファイルのアップロードが拡張モジュールによって停止されました。',
 
+		// Resource editor
+		"Other user updated this file\nAre you sure to overwrite?"
+										=> "他のユーザに更新されています。\n上書きしますか？",
 		// Article
 		'Category: '					=> 'カテゴリ：',
 		'Category'						=> 'カテゴリ',
@@ -266,8 +305,8 @@
 		'Published version can not be deleted.'
 										=> '公開バージョンなので削除できません',
 		'Please set versions.'			=> 'バージョンを選択してください',
-		'If you set scheduled to be published this version, you must set current published version'
-										=> '（このバージョンを予約登録するにはそれまでに公開されるバージョンを設定してから再度、予約登録する必要があります）',
+		'<img src="images/common/caution3.png" alt="#" />If you set scheduled to be published this version, you must set current published version'
+										=> '<img src="images/common/caution3.png" alt="#" />このバージョンを予約登録するには、それまでに公開されるバージョンを設定してから再度、予約登録する必要があります',
 		'Publish version:%PUBLISH_VERSION% &nbsp;Working version:%WROKING_VERSION%'
 										=> '公開バージョン：%PUBLISH_VERSION% &nbsp;作業中バージョン：%WROKING_VERSION%',
 

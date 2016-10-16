@@ -1,9 +1,0 @@
-@charset "UTF-8";
-
-table.calendar th {
-	font-size: 14px !important;
-}
-
-span.settings-confirm {
-	width: 180px;
-}

@@ -284,6 +284,15 @@
 		}
 
 		function view() {
+			// Start buffering
+			ob_start();
+
+			require_once('./view/view_compare_form.php');
+
+			// Get buffer
+			$contents = ob_get_clean();
+
+			// Send HTTP header
 			$this->sendHttpHeader();
 
 			$this->html_header->appendProperty('css', '<link href="css/contents_compare_form.css" type="text/css" rel="stylesheet" media="all" />');
@@ -301,9 +310,11 @@
 			$this->html_header->appendProperty('script', '<script src="js/diff2html/diff2html.js" type="text/javascript"></script>');
 			$this->html_header->appendProperty('script', '<script src="js/diff2html/diff2html-ui.js" type="text/javascript"></script>');
 
+			// Show HTML header
 			$this->showHtmlHeader();
 
-			require_once('./view/view_compare_form.php');
+			// Show HTML body
+			echo $contents;
 		}
 
 		function view_folder() {

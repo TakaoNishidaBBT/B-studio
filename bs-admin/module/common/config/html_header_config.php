@@ -24,7 +24,6 @@ $html_header_config = array(
 	array(
 		'<link href="css/common.css" type="text/css" rel="stylesheet" media="all" />',
 		'<link href="css/context_menu.css" type="text/css" rel="stylesheet" media="all" />',
-		'<link href="css/lang/' . _('en.css') . '" type="text/css" rel="stylesheet" media="all" />',
 	),
 	'title'		=> B_SYSTEM_NAME,
 );

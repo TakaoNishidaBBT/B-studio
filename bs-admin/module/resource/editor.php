@@ -101,7 +101,7 @@
 			}
 			if(!$ret) {
 				$this->db->rollback();
-				$message = '登録に失敗しました';
+				$message = _('It failed to save');
 			}
 
 			$response['status'] = true;
@@ -144,7 +144,7 @@
 			$filepath = B_RESOURCE_DIR . $contents_id . '.' . $this->post['extension'];
 			if(file_exists($filepath) && $this->post['mode'] == 'confirm' && filemtime($filepath) > $this->post['update_datetime']) {
 				$mode = 'confirm';
-				$message = "他のユーザに更新されています。\n上書きしますか？";
+				$message = _("Other user updated this file\nAre you sure to overwrite?");
 			}
 			else {
 				if($this->post['encoding'] == 'ASCII' || $this->post['encoding'] == 'UTF-8') {
