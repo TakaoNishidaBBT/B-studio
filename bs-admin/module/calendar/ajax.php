@@ -14,9 +14,9 @@
 		}
 
 		function getCalendar() {
-			// check request date
-			$this->request['day'] = $this->request['day'] ? $this->request['day'] : '01';
-			$request_date = $this->request['year'] . '/' . $this->request['month'] . '/' . $this->request['day'];
+			// Check request date
+			$day = $this->request['day'] ? $this->request['day'] : '01';
+			$request_date = $this->request['year'] . '/' . $this->request['month'] . '/' . $day;
 			$ret = B_Util::checkdate($request_date);
 
 			if($ret && $this->request['year'] && $this->request['month']) {
@@ -43,7 +43,6 @@
 				$this->month = $date['month'];
 				break;
 			}
-
 			$this->cal->setProperty($this->year, (int)$this->month, (int)$this->day);
 
 			$this->response();

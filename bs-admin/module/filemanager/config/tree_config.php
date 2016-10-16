@@ -107,7 +107,7 @@ $tree_config = array(
 				array(
 					array(
 						'name'			=> 'file_name',
-						'title'			=> _('File Name'),
+						'title'			=> _('File name'),
 						'className'		=> 'file-name',
 						'sort_key'		=> 'node_name',
 					),
@@ -125,7 +125,7 @@ $tree_config = array(
 					),
 					array(
 						'name'			=> 'human_image_size',
-						'title'			=> _('Resolution'),
+						'title'			=> _('Image size'),
 						'className'		=> 'image-size',
 						'sort_key'		=> 'image_size',
 					),
