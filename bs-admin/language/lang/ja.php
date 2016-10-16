@@ -269,7 +269,7 @@
 		'Display'						=> '表示',
 		'Search'						=> '検索',
 		'Clear'							=> 'クリア',
-		'Create'						=> '新規作成',
+		'New '							=> '新規作成',
 		'lines display'					=> '件目',
 		'Publish'						=> '公開',
 		'Working'						=> '作業中',
