@@ -251,10 +251,11 @@
 			if(!$this->disabe_delete) {
 				$this->disabe_delete = true;
 
-				$reserved_version = $row->getElementByName('reserved_version');
-				$working_version = $row->getElementByName('working_version');
+				$reserved_version_id = $row->getElementByName('reserved_version_id');
+				$working_version_id = $row->getElementByName('working_version_id');
+				$publication_status = $row->getElementByName('publication_status');
 
-				if($reserved_version->checked || $working_version->checked) {
+				if($reserved_version_id->checked || $working_versionid->checked || $publication_status->value != '0') {
 					$obj = $row->getElementById('del_enable');
 					$obj->display = 'none';
 					$obj = $row->getElementById('del_disable');

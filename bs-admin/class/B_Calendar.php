@@ -95,7 +95,7 @@
 				}
 			}
 
-			// today
+			// Today
 			for($i=0; $i<7; $i++) {
 				$obj = $row->getElementByName($i+1);
 				if($obj->value == $day) {

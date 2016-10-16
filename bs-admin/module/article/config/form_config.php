@@ -88,7 +88,7 @@ $form_config = array(
 					'filter'			=> 'select',
 					'id'				=> 'schedule_calendar1',
 					'class'				=> 'B_Link',
-					'special_html'		=> 'class="bframe_calendar settings-button" title="カレンダー"',
+					'special_html'		=> 'class="bframe_calendar settings-button" title="' . _('Calendar') . '"',
 					'script'			=>
 					array(
 						'bframe_calendar'	=>
@@ -408,7 +408,7 @@ $form_config = array(
 					array(
 						array(
 							'type' 			=> 'status',
-							'error_message'	=> _('If you choose external link on, please enter URL'),
+							'error_message'	=> _('When you choose external link on, please enter URL'),
 						),
 					),
 				),
@@ -469,7 +469,7 @@ $form_config = array(
 	),
 );
 
-//control
+// Control
 $input_control_config = array(
 	'start_html'	=> '<ul>',
 	'end_html'		=> '</ul>',
@@ -513,7 +513,7 @@ $input_control_config = array(
 	),
 );
 
-//confirm control
+// Confirm control
 $confirm_control_config = array(
 	'start_html'	=> '<ul>',
 	'end_html'		=> '</ul>',
@@ -557,7 +557,7 @@ $confirm_control_config = array(
 	),
 );
 
-//delete control
+// Delete control
 $delete_control_config = array(
 	'start_html'	=> '<ul>',
 	'end_html'		=> '</ul>',
@@ -601,7 +601,7 @@ $delete_control_config = array(
 	),
 );
 
-//control
+// Result control
 $result_control_config = array(
 	'start_html'	=> '<ul>',
 	'end_html'		=> '</ul>',
@@ -626,7 +626,7 @@ $result_control_config = array(
 	),
 );
 
-//result
+// Result
 $result_config = array(
 	array(
 		'start_html'	=> '<form name="F1" method="post" action="index.php">',

@@ -161,7 +161,7 @@
 		'File name'						=> 'ファイル名',
 		'Modified'						=> '更新日時',
 		'File size'						=> 'ファイルサイズ',
-		'Resolution'					=> 'イメージサイズ',
+		'Image size'					=> 'イメージサイズ',
 		'Folder is not selected'		=> 'フォルダが選択されていません',
 		'File size is too large. Maximun upload file size is {$limit}'
 										=> 'ファイルサイズが大きすぎます。アップロードできるのは{$limit}までです',
@@ -207,7 +207,7 @@
 		'On'							=> 'あり',
 		'Off'							=> 'なし',
 		'External link'					=> '外部リンク',
-		'If you choose external link on, please enter URL'
+		'When you choose external link on, please enter URL'
 										=> '「外部リンクあり」を選択した場合は、URLを入力してください',
 		'Open link in new window'		=> '別ウインドウ',
 		'Detail'						=> '詳細',
@@ -231,6 +231,7 @@
 										=> '名前を変更できません。指定されたカテゴリ名は既に存在します。別の名前を指定してください。',
 
 		// Carendar
+		'Calendar'						=> 'カレンダー',					
 		'%MONTH% %YEAR%'				=> '%YEAR%年 %MONTH%',
 		'Jan'							=> '1月',
 		'Feb'							=> '2月',
@@ -306,7 +307,7 @@
 										=> '公開バージョンなので削除できません',
 		'Please set versions.'			=> 'バージョンを選択してください',
 		'<img src="images/common/caution.png" alt="#" />If you set scheduled to be published this version, you must set current published version'
-										=> '<img src="images/common/caution.png" alt="#" />このバージョンを予約登録するには、それまでに公開されるバージョンを設定してから再度、予約登録する必要があります',
+										=> '<img src="images/common/caution.png" alt="#" />このバージョンを予約登録するには、それまでに公開されるバージョンを設定してから再度、予約登録する必要があります。',
 		'Publish version:%PUBLISH_VERSION% &nbsp;Working version:%WROKING_VERSION%'
 										=> '公開バージョン：%PUBLISH_VERSION% &nbsp;作業中バージョン：%WROKING_VERSION%',
 
@@ -328,7 +329,7 @@
 		'Enabled'						=> '有効',
 		'Disabled'						=> '無効',
 		'Admin'							=> '管理者',
-		'Posts'							=> '投稿者',
+		'Editor'						=> '投稿者',
 		'Please enter User ID'			=> 'ユーザIDを入力してください',
 		'Please enter User ID using alphanumeric, hyphen(-) and underbar(_)'
 										=> 'ユーザIDは英数とハイフン(-)アンダーバー(_)で入力してください',

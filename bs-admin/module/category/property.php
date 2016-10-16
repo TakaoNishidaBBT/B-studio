@@ -92,16 +92,24 @@
 		}
 
 		function view() {
+			// Start buffering
+			ob_start();
 
-			// HTTPヘッダー出力
+			require_once('./view/view_property.php');
+
+			// Get buffer
+			$contents = ob_get_clean();
+
+			// Send HTTP header
 			$this->sendHttpHeader();
 
 			$this->html_header->appendProperty('css', '<link href="css/property.css" type="text/css" rel="stylesheet" media="all" />');
 			$this->html_header->appendProperty('script', '<script src="js/bframe_tab.js" type="text/javascript"></script>');
 
-			// HTMLヘッダー出力
+			// Show HTML header
 			$this->showHtmlHeader();
 
-			require_once('./view/view_property.php');
+			// Show HTML body
+			echo $contents;
 		}
 	}

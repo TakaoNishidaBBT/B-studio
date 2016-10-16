@@ -472,6 +472,7 @@ table.list th {
 }
 table.list th.sortable {
 	background: url(../images/common/sort.png) no-repeat 97% center #3c3c3c;
+	padding-right: 20px;
 }
 table.list th.center {
 	text-align: center;
