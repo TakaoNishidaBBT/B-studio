@@ -305,8 +305,8 @@
 		'Published version can not be deleted.'
 										=> '公開バージョンなので削除できません',
 		'Please set versions.'			=> 'バージョンを選択してください',
-		'<img src="images/common/caution3.png" alt="#" />If you set scheduled to be published this version, you must set current published version'
-										=> '<img src="images/common/caution3.png" alt="#" />このバージョンを予約登録するには、それまでに公開されるバージョンを設定してから再度、予約登録する必要があります',
+		'<img src="images/common/caution.png" alt="#" />If you set scheduled to be published this version, you must set current published version'
+										=> '<img src="images/common/caution.png" alt="#" />このバージョンを予約登録するには、それまでに公開されるバージョンを設定してから再度、予約登録する必要があります',
 		'Publish version:%PUBLISH_VERSION% &nbsp;Working version:%WROKING_VERSION%'
 										=> '公開バージョン：%PUBLISH_VERSION% &nbsp;作業中バージョン：%WROKING_VERSION%',
 

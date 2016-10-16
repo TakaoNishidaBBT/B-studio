@@ -167,7 +167,7 @@
 					}
 					else {
 						$this->session['publish_caution'] = _('published immediately');
-						$this->session['publish_message'] = _('<img src="images/common/caution3.png" alt="#" />If you set scheduled to be published this version, you must set current published version');
+						$this->session['publish_message'] = _('<img src="images/common/caution.png" alt="#" />If you set scheduled to be published this version, you must set current published version');
 					}
 				}
 				else {
