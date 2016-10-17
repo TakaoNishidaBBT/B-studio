@@ -18,11 +18,11 @@ $form_config = array(
 				'class'			=> 'B_Guidance',
 				'start_html'	=> '<span class="require">',
 				'end_html'		=> '</span>',
-				'value'			=> _('*'),
+				'value'			=> __('*'),
 			),
 			array(
 				'class'			=> 'B_Guidance',
-				'value'			=> _(' is required field'),
+				'value'			=> __(' is required field'),
 			),
 		),
 
@@ -39,11 +39,11 @@ $form_config = array(
 				'start_html'	=> '<th class="top">',
 				'end_html'		=> '</th>',
 				array(
-					'value'			=> _('ID'),
+					'value'			=> __('ID'),
 				),
 				array(
 					'class'			=> 'B_Guidance',
-					'value'			=> '<span class="require">' . _('*') . '</span>',
+					'value'			=> '<span class="require">' . __('*') . '</span>',
 				),				
 			),
 			array(
@@ -64,11 +64,11 @@ $form_config = array(
 				'end_html'				=> '</th>',
 				'invalid_start_html'	=> '<th class="error">',
 				array(
-					'value'				=> _('Publish date and time'),
+					'value'				=> __('Publish date and time'),
 				),
 				array(
 					'class'				=> 'B_Guidance',
-					'value'				=> '<span class="require">' . _('*') . '</span>',
+					'value'				=> '<span class="require">' . __('*') . '</span>',
 				),				
 			),
 			array(
@@ -84,23 +84,23 @@ $form_config = array(
 					array(
 						array(
 							'type' 			=> 'text_datetime',
-							'error_message'	=> _('Please enter correct date and time'),
+							'error_message'	=> __('Please enter correct date and time'),
 						),
 						array(
 							'type' 			=> 'required',
 							'delimiter'		=> '/',
-							'error_message'	=> _('Please enter publish date and time'),
+							'error_message'	=> __('Please enter publish date and time'),
 						),
 					),
 				),
 				array(
 					'class'		=> 'B_Guidance',
-					'value'		=> _('Format: YYYY/MM/DD hh:mm'),
+					'value'		=> __('Format: YYYY/MM/DD hh:mm'),
 					array(
 						'class'			=> 'B_Guidance',
 						'start_html'	=> '<span class="example">',
 						'end_html'		=> '</span>',
-						'value'			=> _('ex) 2020/01/01 12:00'),
+						'value'			=> __('ex) 2020/01/01 12:00'),
 					),
 				),
 				array(
@@ -122,11 +122,11 @@ $form_config = array(
 				'end_html'				=> '</th>',
 				'invalid_start_html'	=> '<th class="error">',
 				array(
-					'value'				=> _('Version name'),
+					'value'				=> __('Version name'),
 				),
 				array(
 					'class'				=> 'B_Guidance',
-					'value'				=> '<span class="require">' . _('*') . '</span>',
+					'value'				=> '<span class="require">' . __('*') . '</span>',
 				),				
 			),
 			array(
@@ -140,7 +140,7 @@ $form_config = array(
 					array(
 						array(
 							'type' 			=> 'required',
-							'error_message'	=> _('Please enter version name'),
+							'error_message'	=> __('Please enter version name'),
 						),
 					),
 				),
@@ -161,7 +161,7 @@ $form_config = array(
 			array(
 				'start_html'	=> '<th>',
 				'end_html'		=> '</th>',
-				'value'			=> _('Notes'),
+				'value'			=> __('Notes'),
 			),
 			array(
 				'name'			=> 'notes',
@@ -193,7 +193,7 @@ $input_control_config = array(
 			array(
 				'start_html'	=> '<span class="text">',
 				'end_html'		=> '</span>',
-				'value'			=> _('Back'),
+				'value'			=> __('Back'),
 			),
 		),
 	),
@@ -207,7 +207,7 @@ $input_control_config = array(
 			array(
 				'start_html'	=> '<span class="text">',
 				'end_html'		=> '</span>',
-				'value'			=> _('Confirm'),
+				'value'			=> __('Confirm'),
 			),
 			array(
 				'start_html'	=> '<span class="img-cover">',
@@ -237,7 +237,7 @@ $confirm_control_config = array(
 			array(
 				'start_html'	=> '<span class="text">',
 				'end_html'		=> '</span>',
-				'value'			=> _('Back'),
+				'value'			=> __('Back'),
 			),
 		),
 	),
@@ -251,7 +251,7 @@ $confirm_control_config = array(
 			array(
 				'start_html'	=> '<span class="text">',
 				'end_html'		=> '</span>',
-				'value'			=> _('Save'),
+				'value'			=> __('Save'),
 			),
 			array(
 				'start_html'	=> '<span class="img-cover">',
@@ -281,7 +281,7 @@ $delete_control_config = array(
 			array(
 				'start_html'	=> '<span class="text">',
 				'end_html'		=> '</span>',
-				'value'			=> _('Back'),
+				'value'			=> __('Back'),
 			),
 		),
 	),
@@ -290,12 +290,12 @@ $delete_control_config = array(
 		'start_html'	=> '<li>',
 		'end_html'		=> '</li>',
 		array(
-			'start_html'	=> '<span class="right-button" onclick="bframe.confirmSubmit(\'' . _('All the contents you made on this version will be completely deleted.\nThis operation can not be undone.\n\nAre your sure to delete?') . '\', \'F1\', \'' . $this->module . '\', \'form\', \'delete\', \'\');">',
+			'start_html'	=> '<span class="right-button" onclick="bframe.confirmSubmit(\'' . __('All the contents you made on this version will be completely deleted.\nThis operation can not be undone.\n\nAre your sure to delete?') . '\', \'F1\', \'' . $this->module . '\', \'form\', \'delete\', \'\');">',
 			'end_html'		=> '</span>',
 			array(
 				'start_html'	=> '<span class="text">',
 				'end_html'		=> '</span>',
-				'value'			=> _('Delete'),
+				'value'			=> __('Delete'),
 			),
 			array(
 				'start_html'	=> '<span class="img-cover">',
@@ -325,7 +325,7 @@ $result_control_config = array(
 			array(
 				'start_html'	=> '<span class="text">',
 				'end_html'		=> '</span>',
-				'value'			=> _('Back to list'),
+				'value'			=> __('Back to list'),
 			),
 		),
 	),
@@ -344,7 +344,7 @@ $result_config = array(
 					'start_html'	=> '<span class="version">',
 					'end_html'		=> '</span>',
 					array(
-						'value'			=> _('Version: '),
+						'value'			=> __('Version: '),
 					),
 					array(
 						'name'			=> 'version',
@@ -357,7 +357,7 @@ $result_config = array(
 					'start_html'	=> '<span class="date-time">',
 					'end_html'		=> '</span>',
 					array(
-						'value'			=> _('Publish date and time: '),
+						'value'			=> __('Publish date and time: '),
 					),
 					array(
 						'name'			=> 'publication_datetime_t',

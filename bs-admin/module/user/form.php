@@ -102,7 +102,7 @@
 			if($this->request['mode'] == 'update') {
 				$row = $this->table->selectByPk($value);
 				if($this->session['init_value']['update_datetime'] < $row['update_datetime']) {
-					$error_message = _('Other user updated this record');
+					$error_message = __('Other user updated this record');
 					$this->action_message = $error_message;
 
 					$this->form->setValue($this->session['init_value']);
@@ -148,7 +148,7 @@
 
 		function _register(&$message) {
 			if(!$this->checkAlt($this->session['post'])) {
-				$message = _('Other user updated this record');
+				$message = __('Other user updated this record');
 				return false;
 			}
 
@@ -158,10 +158,10 @@
 			case 'insert':
 				$ret = $this->insert();
 				if($ret) {
-					$message = _('was saved.');
+					$message = __('was saved.');
 				}
 				else {
-					$message = _('was faild to register.');
+					$message = __('was faild to register.');
 				}
 				break;
 
@@ -170,20 +170,20 @@
 				$param['update_datetime'] = time();
 				$ret = $this->table->update($param);
 				if($ret) {
-					$message = _('was updated.');
+					$message = __('was updated.');
 				}
 				else {
-					$message = _('was faild to update.');
+					$message = __('was faild to update.');
 				}
 				break;
 
 			case 'delete':
 				$ret = $this->table->deleteByPk($param);
 				if($ret) {
-					$message = _('was deleted.');
+					$message = __('was deleted.');
 				}
 				else {
-					$message = _('was faild to delete.');
+					$message = __('was faild to delete.');
 				}
 				break;
 			}

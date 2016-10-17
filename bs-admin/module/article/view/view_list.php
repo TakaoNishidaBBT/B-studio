@@ -1,6 +1,6 @@
 <body>
 	<div id="header">
-		<h2 class="article"><?php echo _('Article'); ?></h2>
+		<h2 class="article"><?php echo __('Article'); ?></h2>
 		<?php echo $this->header->gethtml(); ?>
 	</div>
 

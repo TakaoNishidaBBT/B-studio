@@ -17,7 +17,7 @@ $tree_config = array(
 			'file'			=> 'tree',
 			'editable'		=> 'true',
 			'sort'			=> 'manual',
-			'root_name'		=> _('Category'),
+			'root_name'		=> __('Category'),
 			'method'		=>
 			array(
 				'getNodeList'	=> 'getNodeList',
@@ -41,7 +41,7 @@ $tree_config = array(
 				array(
 					'url'		=> DISPATCH_URL . '&module=' . $this->module . '&page=property&method=select',
 					'params'	=> 'width:360,height:330',
-					'title'		=> _('Property'),
+					'title'		=> __('Property'),
 					'func'		=> 'reloadTree',
 				),
 			),
@@ -55,35 +55,35 @@ $tree_config = array(
 				'trash'			=> array('src' => './images/folders/trash.png', 'new' => ''),
 				'forbidden'		=> array('src' => './images/folders/forbidden.png'),
 				'line'			=> array('src' => './images/folders/line.gif', 'new' => ''),
-				'folder'		=> array('src' => './images/folders/folder.png', 'new' => _('newFolder')),
-				'category'		=> array('src' => './images/folders/category.png', 'new' => _('newCategory'), 'ime' => 'true'),
+				'folder'		=> array('src' => './images/folders/folder.png', 'new' => __('newFolder')),
+				'category'		=> array('src' => './images/folders/category.png', 'new' => __('newCategory'), 'ime' => 'true'),
 			),
 			'context_menu'		=>
 			array(
 				array(
-					'menu'		=> _('Cut'),
+					'menu'		=> __('Cut'),
 					'func'		=> 'cutNode',
 				),
 				array(
-					'menu'		=> _('Copy'),
+					'menu'		=> __('Copy'),
 					'func'		=> 'copyNode',
 				),
 				array(
-					'menu'		=> _('Paste'),
+					'menu'		=> __('Paste'),
 					'func'		=> 'pasteNode',
 				),
 				array(
-					'menu'		=> _('Delete'),
+					'menu'		=> __('Delete'),
 					'func'		=> 'deleteNode',
-					'confirm'	=> _('Are you sure to delete?'),
+					'confirm'	=> __('Are you sure to delete?'),
 				),
 				array(
-					'menu'		=> _('New'),
+					'menu'		=> __('New'),
 					'func'		=> 'createNode',
 					'submenu'	=>
 					array(
 						array(
-							'menu'		=> _('Category'),
+							'menu'		=> __('Category'),
 							'func'		=> 'createNode',
 							'icon'		=> 'images/folders/category.png',
 							'param'		=> 'node_type=category&node_class=category',
@@ -92,17 +92,17 @@ $tree_config = array(
 					'submenu_width'	=> '120',
 				),
 				array(
-					'menu'		=> _('Edit name'),
+					'menu'		=> __('Edit name'),
 					'func'		=> 'editName',
 				),
 				array(
-					'menu'		=> _('Property'),
+					'menu'		=> __('Property'),
 					'func'		=> 'open_property',
 				),
 			),
 			'context_menu_width'	=> '138',
 			'context_menu_frame'	=> 'top',
-			'session_timeout'		=> _('Your session has timed out, Please log in again'),
+			'session_timeout'		=> __('Your session has timed out, Please log in again'),
 		),
 	),
 );

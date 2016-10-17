@@ -30,11 +30,11 @@
 
 	// Test Server Settings
 	if(preg_match('/www.test-server.com/', B_HTTP_HOST)) {
-		define('B_TITLE_PREFIX', _('(Test)'));
+		define('B_TITLE_PREFIX', __('(Test)'));
 		define('B_ARCHIVE_LOG_MODE', 'DEBUG');
 	}
 	else if(preg_match('/localhost/', B_HTTP_HOST)) {
-		define('B_TITLE_PREFIX', _('(Test)'));
+		define('B_TITLE_PREFIX', __('(Test)'));
 		define('B_ARCHIVE_LOG_MODE', 'DEBUG');
 	}
 	else {
@@ -42,7 +42,7 @@
 		define('B_ARCHIVE_LOG_MODE', '');
 	}
 
-	function _($text) {
+	function __($text) {
 		if($_SESSION['language'] == 'en') return $text;
 
 		global $texts;

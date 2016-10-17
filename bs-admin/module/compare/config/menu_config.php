@@ -21,7 +21,7 @@ $menu_config = array(
 			'start_html'	=> '<li>',
 			'end_html'		=> '</li>',
 			'class'			=> 'B_Link',
-			'value'			=> '<img src="images/menu/contents.png" alt="Contents"/>' . _('Contents'),
+			'value'			=> '<img src="images/menu/contents.png" alt="Contents"/>' . __('Contents'),
 			'specialchars'	=> 'none',
 			'link'			=> DISPATCH_URL . '&module=contents&page=compare&method=init',
 			'target'		=> 'main',
@@ -31,7 +31,7 @@ $menu_config = array(
 			'start_html'	=> '<li>',
 			'end_html'		=> '</li>',
 			'class'			=> 'B_Link',
-			'value'			=> '<img src="images/menu/template.png" alt="Templates"/>' . _('Templates'),
+			'value'			=> '<img src="images/menu/template.png" alt="Templates"/>' . __('Templates'),
 			'specialchars'	=> 'none',
 			'link'			=> DISPATCH_URL . '&module=template&page=compare&method=init',
 			'target'		=> 'main',
@@ -44,7 +44,7 @@ $menu_config = array(
 				'class'			=> 'B_Link',
 				'special_html'	=> 'class="bframe_menu"',
 				'id'			=> 'resource',
-				'value'			=> '<img src="images/menu/resource.png" alt="Resources"/>' . _('Resources'),
+				'value'			=> '<img src="images/menu/resource.png" alt="Resources"/>' . __('Resources'),
 				'specialchars'	=> 'none',
 				'script'		=>
 				array(
@@ -53,12 +53,12 @@ $menu_config = array(
 						'context_menu'		=>
 						array(
 							array(
-								'menu'		=> _('Resource manager'),
+								'menu'		=> __('Resource manager'),
 								'param'		=> DISPATCH_URL . '&module=resource&page=compare,main',
 								'func'		=> 'openUrl',
 							),
 							array(
-								'menu'		=> _('Widget'),
+								'menu'		=> __('Widget'),
 								'param'		=> DISPATCH_URL . '&module=widget&page=compare&method=init,main',
 								'func'		=> 'openUrl',
 							),

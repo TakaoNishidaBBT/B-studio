@@ -67,39 +67,39 @@ $tree_config = array(
 			'context_menu'		=>
 			array(
 				array(
-					'menu'		=> _('Cut'),
+					'menu'		=> __('Cut'),
 					'func'		=> 'cutNode',
 				),
 				array(
-					'menu'		=> _('Copy'),
+					'menu'		=> __('Copy'),
 					'func'		=> 'copyNode',
 				),
 				array(
-					'menu'		=> _('Paste'),
+					'menu'		=> __('Paste'),
 					'func'		=> 'pasteNode',
 				),
 				array(
-					'menu'		=> _('Remove'),
+					'menu'		=> __('Remove'),
 					'func'		=> 'deleteNode',
 					'confirm'	=>
 					array(
-						'single'	=> _('Are you sure you want %NODE_NAME% to move to the trash?'),
-						'plural'	=> _('Are you sure you want these %NODE_COUNT% objects to move to the trash?'),
+						'single'	=> __('Are you sure you want %NODE_NAME% to move to the trash?'),
+						'plural'	=> __('Are you sure you want these %NODE_COUNT% objects to move to the trash?'),
 					),
 				),
 				array(
-					'menu'		=> _('New'),
+					'menu'		=> __('New'),
 					'func'		=> 'createNode',
 					'submenu'	=>
 					array(
 						array(
-							'menu'		=> _('Folder'),
+							'menu'		=> __('Folder'),
 							'func'		=> 'createNode',
 							'icon'		=> './images/folders/folder.png',
 							'param'		=> 'node_type=folder&node_class=folder',
 						),
 						array(
-							'menu'		=> _('Page'),
+							'menu'		=> __('Page'),
 							'func'		=> 'createNode',
 							'icon'		=> './images/folders/file_icon.png',
 							'param'		=> 'node_type=page&node_class=leaf',
@@ -108,25 +108,25 @@ $tree_config = array(
 					'submenu_width'	=> '130',
 				),
 				array(
-					'menu'		=> _('Edit name'),
+					'menu'		=> __('Edit name'),
 					'func'		=> 'editName',
 				),
 				array(
-					'menu'		=> _('Preview'),
+					'menu'		=> __('Preview'),
 					'func'		=> 'preview',
 				),
 			),
 			'trash_context_menu'	=>
 			array(
 				array(
-					'menu'		=> _('Empty the trash'),
+					'menu'		=> __('Empty the trash'),
 					'func'		=> 'truncateNode',
-					'confirm'	=> _('Are you sure you completely remove files in the trah?'),
+					'confirm'	=> __('Are you sure you completely remove files in the trah?'),
 				),
 			),
 			'context_menu_width'	=> '138',
 			'context_menu_frame'	=> 'top',
-			'session_timeout'		=> _('Your session has timed out, Please log in again'),
+			'session_timeout'		=> __('Your session has timed out, Please log in again'),
 		),
 	),
 );

@@ -32,7 +32,7 @@ $tab_control_config = array(
 		'start_html'		=> '<li>',
 		'end_html'			=> '</li>',
 		'link'				=> 'property1',
-		'value'				=> _('Settings'),
+		'value'				=> __('Settings'),
 		'special_html'		=> 'class="bframe_tab"',
 	),
 );
@@ -49,7 +49,7 @@ $config_form_config = array(
 			array(
 				'start_html'	=> '<legend>',
 				'end_html'		=> '</legend>',
-				'value'			=> _('Display'),
+				'value'			=> __('Display'),
 			),
 			array(
 				// Table
@@ -64,7 +64,7 @@ $config_form_config = array(
 						'start_html'		=> '<th>',
 						'end_html'			=> '</th>',
 						array(
-							'value'				=> _('Text color'),
+							'value'				=> __('Text color'),
 						),
 					),
 					array(
@@ -86,7 +86,7 @@ $config_form_config = array(
 						'start_html'		=> '<th>',
 						'end_html'			=> '</th>',
 						array(
-							'value'				=> _('Backgroud-color'),
+							'value'				=> __('Backgroud-color'),
 						),
 					),
 					array(
@@ -107,7 +107,7 @@ $config_form_config = array(
 					array(
 						'start_html'		=> '<th>',
 						'end_html'			=> '</th>',
-						'value'				=> _('Icon'),
+						'value'				=> __('Icon'),
 					),
 					array(
 						'start_html'	=> '<td>',
@@ -130,7 +130,7 @@ $config_form_config = array(
 										'name'			=> 'open_filelist',
 										'class'			=> 'B_Link',
 										'link'			=> 'index.php',
-										'special_html'	=> 'title="' . _('Image selection') . '" class="settings-button" onclick="bstudio.activateModalWindow(this, 850, 500); return false;"',
+										'special_html'	=> 'title="' . __('Image selection') . '" class="settings-button" onclick="bstudio.activateModalWindow(this, 850, 500); return false;"',
 										'fixedparam'	=>
 										array(
 											'terminal_id'	=> TERMINAL_ID,
@@ -148,7 +148,7 @@ $config_form_config = array(
 									array(
 										'class'				=> 'B_Link',
 										'link'				=> '#',
-										'special_html'		=> 'title="' . _('Clear') . '" class="clear-button" onclick="bstudio.clearIMG(\'icon\', \'icon_file\'); return false;"',
+										'special_html'		=> 'title="' . __('Clear') . '" class="clear-button" onclick="bstudio.clearIMG(\'icon\', \'icon_file\'); return false;"',
 										'specialchars'		=> 'none',
 										'value'				=> '<img alt="Clear" src="images/common/clear.png" />',
 									),

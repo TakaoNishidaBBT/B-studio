@@ -15,7 +15,7 @@ $menu_config = array(
 			'start_html'	=> '<li class="title">',
 			'end_html'		=> '</li>',
 			array(
-				'start_html'	=> '<a href="' . B_SITE_ROOT . '" title="' . _('Open publish page') . '" onclick="window.open(this.href); return false;">',
+				'start_html'	=> '<a href="' . B_SITE_ROOT . '" title="' . __('Open publish page') . '" onclick="window.open(this.href); return false;">',
 				'end_html'		=> '</a>',
 				array(
 					'start_html'	=> '<span class="title">',
@@ -29,7 +29,7 @@ $menu_config = array(
 			'start_html'	=> '<li>',
 			'end_html'		=> '</li>',
 			'class'			=> 'B_Link',
-			'value'			=> '<img src="images/menu/contents.png" alt="contents"/>' . _('Contents'),
+			'value'			=> '<img src="images/menu/contents.png" alt="contents"/>' . __('Contents'),
 			'specialchars'	=> 'none',
 			'link'			=> DISPATCH_URL . '&amp;module=contents&amp;page=index&amp;method=init',
 			'target'		=> 'main',
@@ -39,7 +39,7 @@ $menu_config = array(
 			'start_html'	=> '<li>',
 			'end_html'		=> '</li>',
 			'class'			=> 'B_Link',
-			'value'			=> '<img src="images/menu/template.png" alt="templates"/>' . _('Templates'),
+			'value'			=> '<img src="images/menu/template.png" alt="templates"/>' . __('Templates'),
 			'specialchars'	=> 'none',
 			'link'			=> DISPATCH_URL . '&amp;module=template&amp;page=index&amp;method=init',
 			'target'		=> 'main',
@@ -52,7 +52,7 @@ $menu_config = array(
 				'class'			=> 'B_Link',
 				'special_html'	=> 'class="bframe_menu"',
 				'id'			=> 'resource',
-				'value'			=> '<img src="images/menu/resource.png" alt="resources"/>' . _('Resources'),
+				'value'			=> '<img src="images/menu/resource.png" alt="resources"/>' . __('Resources'),
 				'specialchars'	=> 'none',
 				'script'		=>
 				array(
@@ -61,12 +61,12 @@ $menu_config = array(
 						'context_menu'		=>
 						array(
 							array(
-								'menu'		=> _('Resource manager'),
+								'menu'		=> __('Resource manager'),
 								'param'		=> DISPATCH_URL . '&module=resource&page=tree,main',
 								'func'		=> 'openUrl',
 							),
 							array(
-								'menu'		=> _('Widget'),
+								'menu'		=> __('Widget'),
 								'param'		=> DISPATCH_URL . '&module=widget&page=index&method=init,main',
 								'func'		=> 'openUrl',
 							),
@@ -86,7 +86,7 @@ $menu_config = array(
 				'class'			=> 'B_Link',
 				'special_html'	=> 'class="bframe_menu"',
 				'id'			=> 'post_menu',
-				'value'			=> '<img src="images/menu/article.png" alt="posts"/>' . _('Posts'),
+				'value'			=> '<img src="images/menu/article.png" alt="posts"/>' . __('Posts'),
 				'specialchars'	=> 'none',
 				'script'		=>
 				array(
@@ -95,22 +95,22 @@ $menu_config = array(
 						'context_menu'		=>
 						array(
 							array(
-								'menu'		=> _('Article'),
+								'menu'		=> __('Article'),
 								'param'		=> DISPATCH_URL . '&module=article&page=list&method=init,main',
 								'func'		=> 'openUrl',
 							),
 							array(
-								'menu'		=> _('Article2'),
+								'menu'		=> __('Article2'),
 								'param'		=> DISPATCH_URL . '&module=article2&page=list&method=init,main',
 								'func'		=> 'openUrl',
 							),
 							array(
-								'menu'		=> _('Article3'),
+								'menu'		=> __('Article3'),
 								'param'		=> DISPATCH_URL . '&module=article3&page=list&method=init,main',
 								'func'		=> 'openUrl',
 							),
 							array(
-								'menu'		=> _('File manager'),
+								'menu'		=> __('File manager'),
 								'param'		=> DISPATCH_URL . '&module=filemanager&page=tree,main',
 								'func'		=> 'openUrl',
 							),
@@ -130,7 +130,7 @@ $menu_config = array(
 				'class'			=> 'B_Link',
 				'special_html'	=> 'class="bframe_menu"',
 				'id'			=> 'setting_menu',
-				'value'			=> '<img src="images/menu/settings.png" alt="settings"/>' . _('Settings'),
+				'value'			=> '<img src="images/menu/settings.png" alt="settings"/>' . __('Settings'),
 				'specialchars'	=> 'none',
 				'script'		=>
 				array(
@@ -139,22 +139,22 @@ $menu_config = array(
 						'context_menu'		=>
 						array(
 							array(
-								'menu'		=> _('Configuration'),
+								'menu'		=> __('Configuration'),
 								'param'		=> DISPATCH_URL . '&module=settings&page=form&method=select,main',
 								'func'		=> 'openUrl',
 							),
 							array(
-								'menu'		=> _('Versions'),
+								'menu'		=> __('Versions'),
 								'param'		=> DISPATCH_URL . '&module=version&page=list&method=init,main',
 								'func'		=> 'openUrl',
 							),
 							array(
-								'menu'		=> _('Users'),
+								'menu'		=> __('Users'),
 								'param'		=> DISPATCH_URL . '&module=user&page=list&method=init,main',
 								'func'		=> 'openUrl',
 							),
 							array(
-								'menu'		=> _('Site admin'),
+								'menu'		=> __('Site admin'),
 								'param'		=> DISPATCH_URL . '&module=siteadmin&page=form&method=select,main',
 								'func'		=> 'openUrl',
 							),
@@ -174,7 +174,7 @@ $menu_config = array(
 				'class'			=> 'B_Link',
 				'special_html'	=> 'class="bframe_menu"',
 				'id'			=> 'setting_menu',
-				'value'			=> '<img src="images/menu/settings.png" alt="settings"/>' . _('Settings'),
+				'value'			=> '<img src="images/menu/settings.png" alt="settings"/>' . __('Settings'),
 				'specialchars'	=> 'none',
 				'script'		=>
 				array(
@@ -183,17 +183,17 @@ $menu_config = array(
 						'context_menu'		=>
 						array(
 							array(
-								'menu'		=> _('Configuration'),
+								'menu'		=> __('Configuration'),
 								'param'		=> DISPATCH_URL . '&module=settings&page=form&method=select,main',
 								'func'		=> 'openUrl',
 							),
 							array(
-								'menu'		=> _('Versions'),
+								'menu'		=> __('Versions'),
 								'param'		=> DISPATCH_URL . '&module=version&page=list&method=init,main',
 								'func'		=> 'openUrl',
 							),
 							array(
-								'menu'		=> _('Users'),
+								'menu'		=> __('Users'),
 								'param'		=> DISPATCH_URL . '&module=user&page=list&method=init,main',
 								'func'		=> 'openUrl',
 							),
@@ -213,7 +213,7 @@ $menu_config = array(
 				'class'			=> 'B_Link',
 				'special_html'	=> 'class="bframe_menu"',
 				'id'			=> 'setting_menu',
-				'value'			=> '<img src="images/menu/settings.png" alt="settings"/>' . _('Settings'),
+				'value'			=> '<img src="images/menu/settings.png" alt="settings"/>' . __('Settings'),
 				'script'		=>
 				array(
 					'bframe_menu'			=>
@@ -221,7 +221,7 @@ $menu_config = array(
 						'context_menu'		=>
 						array(
 							array(
-								'menu'		=> _('Configuration'),
+								'menu'		=> __('Configuration'),
 								'param'		=> DISPATCH_URL . '&module=settings&page=form&method=select,main',
 								'func'		=> 'openUrl',
 							),
@@ -236,7 +236,7 @@ $menu_config = array(
 			'start_html'	=> '<li class="new_tab">',
 			'end_html'		=> '</li>',
 			array(
-				'start_html'	=> '<a href="" title="' . _('Open another admin page') . '" onclick="window.open(this.href); return false;">',
+				'start_html'	=> '<a href="" title="' . __('Open another admin page') . '" onclick="window.open(this.href); return false;">',
 				'end_html'		=> '</a>',
 				array(
 					'start_html'	=> '<span class="add">',

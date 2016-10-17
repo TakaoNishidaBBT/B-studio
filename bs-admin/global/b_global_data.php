@@ -7,29 +7,29 @@
 */
 	${$g_data_set}['language'] =
 		array(
-				'en'	=> _('English'),
-				'ja'	=> _('Japanese'),
+				'en'	=> __('English'),
+				'ja'	=> __('Japanese'),
 		);
 
 	${$g_data_set}['row_per_page'] =
 		array(
-				'1'		=> _('1 line'),
-				'10'	=> _('10 lines'),
-				'20'	=> _('20 lines'),
-				'50'	=> _('50 lines'),
-				'100'	=> _('100 lines'),
+				'1'		=> __('1 line'),
+				'10'	=> __('10 lines'),
+				'20'	=> __('20 lines'),
+				'50'	=> __('50 lines'),
+				'100'	=> __('100 lines'),
 		);
 
 	${$g_data_set}['user_auth'] =
 		array(
-				'admin'		=> _('Admin'),
-				'editor'	=> _('Editor'),
+				'admin'		=> __('Admin'),
+				'editor'	=> __('Editor'),
 		);
 
 	${$g_data_set}['user_status'] =
 		array(
-				'1'		=> _('Enabled'),
-				'9'		=> _('Disabled'),
+				'1'		=> __('Enabled'),
+				'9'		=> __('Disabled'),
 		);
 
 	${$g_data_set}['record_status_list'] =
@@ -49,45 +49,45 @@
 
 	${$g_data_set}['publication'] =
 		array(
-				'1'		=> _('Published'),
-				'2'		=> _('Preview'),
-				'3'		=> _('Closed'),
+				'1'		=> __('Published'),
+				'2'		=> __('Preview'),
+				'3'		=> __('Closed'),
 		);
 
 	${$g_data_set}['description_flag'] =
 		array(
-				'1'		=> _('On'),
-				'2'		=> _('Off'),
+				'1'		=> __('On'),
+				'2'		=> __('Off'),
 		);
 
 	${$g_data_set}['external_link'] =
 		array(
-				''		=> _('Off'),
-				'1'		=> _('On'),
+				''		=> __('Off'),
+				'1'		=> __('On'),
 		);
 
 	${$g_data_set}['datetime_error_message'] =
 		array(
-				'1'		=> _(' (out of range)'),
-				'2'		=> _(' (invalid time)'),
-				'3'		=> _(' (invalid date)'),
-				'4'		=> _(' (format error)'),
+				'1'		=> __(' (out of range)'),
+				'2'		=> __(' (invalid time)'),
+				'3'		=> __(' (invalid date)'),
+				'4'		=> __(' (format error)'),
 		);
 
 	${$g_data_set}['node_error'] =
 		array(
-				'0'		=> _('DB error'),
-				'1'		=> _('The folder you copy or move to is the subfloder'),
-				'2'		=> _('The number of nodes are differnt. Please sort in right pane.'),
-				'3'		=> _('Other user updated this record'),
+				'0'		=> __('DB error'),
+				'1'		=> __('The folder you copy or move to is the subfloder'),
+				'2'		=> __('The number of nodes are differnt. Please sort in right pane.'),
+				'3'		=> __('Other user updated this record'),
 		);
 
 	${$g_data_set}['template_node_error'] =
 		array(
-				'0'		=> _('DB error'),
-				'1'		=> _('The template you copy to or move to is subtemplate'),
-				'2'		=> _('The number of nodes are different'),
-				'3'		=> _('Other user updated this record'),
+				'0'		=> __('DB error'),
+				'1'		=> __('The template you copy to or move to is subtemplate'),
+				'2'		=> __('The number of nodes are different'),
+				'3'		=> __('Other user updated this record'),
 		);
 
 	${$g_data_set}['encoding'] =

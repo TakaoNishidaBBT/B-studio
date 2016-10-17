@@ -6,8 +6,8 @@
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
 $language = array(
-	'en'	=> _('English'),
-	'ja'	=> _('Japanese'),
+	'en'	=> __('English'),
+	'ja'	=> __('Japanese'),
 );
 
 $select_language_config = array(
@@ -15,7 +15,7 @@ $select_language_config = array(
 	array(
 		'start_html'	=> '<label for="language">',
 		'end_html'		=> '</label>',
-		'value'			=> _('Select language: '),
+		'value'			=> __('Select language: '),
 	),
 	array(
 		'name'			=> 'language',
@@ -42,7 +42,7 @@ $db_install_form_config = array(
 				'start_html'			=> '<th>',
 				'invalid_start_html'	=> '<th class="error">',
 				'end_html'				=> '</th>',
-				'value'					=> _('Host name'),
+				'value'					=> __('Host name'),
 			),
 			array(
 				'start_html'	=> '<td>',
@@ -56,11 +56,11 @@ $db_install_form_config = array(
 					array(
 						array(
 							'type' 			=> 'required',
-							'error_message'	=> _('Please enter host name'),
+							'error_message'	=> __('Please enter host name'),
 						),
 						array(
 							'type' 			=> 'status',
-							'error_message'	=> _('Please confirm the input content'),
+							'error_message'	=> __('Please confirm the input content'),
 						),
 					),
 				),
@@ -82,7 +82,7 @@ $db_install_form_config = array(
 				'start_html'			=> '<th>',
 				'invalid_start_html'	=> '<th class="error">',
 				'end_html'				=> '</th>',
-				'value'					=> _('User name'),
+				'value'					=> __('User name'),
 			),
 			array(
 				'start_html'	=> '<td>',
@@ -96,11 +96,11 @@ $db_install_form_config = array(
 					array(
 						array(
 							'type' 			=> 'required',
-							'error_message'	=> _('Please enter user name'),
+							'error_message'	=> __('Please enter user name'),
 						),
 						array(
 							'type' 			=> 'status',
-							'error_message'	=> _('Please confirm the input content'),
+							'error_message'	=> __('Please confirm the input content'),
 						),
 					),
 				),
@@ -122,7 +122,7 @@ $db_install_form_config = array(
 				'start_html'			=> '<th>',
 				'invalid_start_html'	=> '<th class="error">',
 				'end_html'				=> '</th>',
-				'value'					=> _('Password'),
+				'value'					=> __('Password'),
 			),
 			array(
 				'start_html'	=> '<td>',
@@ -136,11 +136,11 @@ $db_install_form_config = array(
 					array(
 						array(
 							'type' 			=> 'required',
-							'error_message'	=> _('Please enter password'),
+							'error_message'	=> __('Please enter password'),
 						),
 						array(
 							'type' 			=> 'status',
-							'error_message'	=> _('Please confirm the input content'),
+							'error_message'	=> __('Please confirm the input content'),
 						),
 					),
 				),
@@ -162,7 +162,7 @@ $db_install_form_config = array(
 				'start_html'			=> '<th>',
 				'invalid_start_html'	=> '<th class="error">',
 				'end_html'				=> '</th>',
-				'value'					=> _('Schema name'),
+				'value'					=> __('Schema name'),
 			),
 			array(
 				'start_html'	=> '<td>',
@@ -176,11 +176,11 @@ $db_install_form_config = array(
 					array(
 						array(
 							'type' 			=> 'required',
-							'error_message'	=> _('Please enter schema name'),
+							'error_message'	=> __('Please enter schema name'),
 						),
 						array(
 							'type' 			=> 'status',
-							'error_message'	=> _('Please confirm the input content'),
+							'error_message'	=> __('Please confirm the input content'),
 						),
 					),
 				),
@@ -202,7 +202,7 @@ $db_install_form_config = array(
 				'start_html'			=> '<th class="prefix">',
 				'invalid_start_html'	=> '<th class="prefix error">',
 				'end_html'				=> '</th>',
-				'value'					=> _('Table prefix'),
+				'value'					=> __('Table prefix'),
 			),
 			array(
 				'start_html'	=> '<td>',
@@ -216,7 +216,7 @@ $db_install_form_config = array(
 					array(
 						array(
 							'type' 			=> 'required',
-							'error_message'	=> _('Please enter table prefix'),
+							'error_message'	=> __('Please enter table prefix'),
 						),
 					),
 				),
@@ -224,7 +224,7 @@ $db_install_form_config = array(
 					'start_html'			=> '<span class="notice">',
 					'end_html'				=> '</span>',
 					'class'					=> 'B_Guidance',
-					'value'					=> _('Usually changing this field is unnecessary. This field could be changed when B-studio will be installed in one schema.'),
+					'value'					=> __('Usually changing this field is unnecessary. This field could be changed when B-studio will be installed in one schema.'),
 				),
 				array(
 					'name'					=> 'error_message',
@@ -251,7 +251,7 @@ $admin_basic_auth_config = array(
 				'start_html'			=> '<th>',
 				'invalid_start_html'	=> '<th class="error">',
 				'end_html'				=> '</th>',
-				'value'					=> _('User name'),
+				'value'					=> __('User name'),
 			),
 			array(
 				'start_html'	=> '<td>',
@@ -264,12 +264,12 @@ $admin_basic_auth_config = array(
 					array(
 						array(
 							'type' 			=> 'required',
-							'error_message'	=> _('Please enter user name'),
+							'error_message'	=> __('Please enter user name'),
 						),
 						array(
 							'type' 			=> 'pattern',
 							'pattern'		=> '^[a-zA-Z0-9\_\-]+$',
-							'error_message'	=> _('Please enter user name using alphanumeric, hyphen(-) and underbar(_)'),
+							'error_message'	=> __('Please enter user name using alphanumeric, hyphen(-) and underbar(_)'),
 						),
 					),
 				),
@@ -291,7 +291,7 @@ $admin_basic_auth_config = array(
 				'start_html'			=> '<th>',
 				'invalid_start_html'	=> '<th class="error">',
 				'end_html'				=> '</th>',
-				'value'					=> _('Password'),
+				'value'					=> __('Password'),
 			),
 			array(
 				'start_html'	=> '<td>',
@@ -300,17 +300,17 @@ $admin_basic_auth_config = array(
 					'name'					=> 'basic_auth_pwd',
 					'class'					=> 'B_Password',
 					'special_html'			=> 'class="textbox ime-off" size="40" maxlength="100" ',
-					'confirm_message'		=> _('(Entered password)'),
+					'confirm_message'		=> __('(Entered password)'),
 					'validate'				=>
 					array(
 						array(
 							'type' 			=> 'required',
-							'error_message'	=> _('Please enter password'),
+							'error_message'	=> __('Please enter password'),
 						),
 						array(
 							'type' 			=> 'pattern',
 							'pattern'		=> '^[a-zA-Z0-9\_\-]+$',
-							'error_message'	=> _('Please enter password using alphanumeric, hyphen(-) and underbar(_)'),
+							'error_message'	=> __('Please enter password using alphanumeric, hyphen(-) and underbar(_)'),
 						),
 					),
 				),
@@ -333,7 +333,7 @@ $admin_basic_auth_config = array(
 				'start_html'			=> '<th>',
 				'invalid_start_html'	=> '<th class="error">',
 				'end_html'				=> '</th>',
-				'value'					=> _('Password (Re-entry)'),
+				'value'					=> __('Password (Re-entry)'),
 			),
 			array(
 				'start_html'	=> '<td>',
@@ -346,12 +346,12 @@ $admin_basic_auth_config = array(
 					array(
 						array(
 							'type' 			=> 'required',
-							'error_message'	=> _('Please re-enter password'),
+							'error_message'	=> __('Please re-enter password'),
 						),
 						array(
 							'type' 			=> 'match',
 							'target'		=> 'basic_auth_pwd',
-							'error_message'	=> _('Password is not matched'),
+							'error_message'	=> __('Password is not matched'),
 						),
 					),
 				),
@@ -381,7 +381,7 @@ $admin_user_form_config = array(
 				'start_html'			=> '<th>',
 				'invalid_start_html'	=> '<th class="error">',
 				'end_html'				=> '</th>',
-				'value'					=> _('User name'),
+				'value'					=> __('User name'),
 			),
 			array(
 				'start_html'	=> '<td>',
@@ -394,7 +394,7 @@ $admin_user_form_config = array(
 					array(
 						array(
 							'type' 			=> 'required',
-							'error_message'	=> _('Please enter user name'),
+							'error_message'	=> __('Please enter user name'),
 						),
 					),
 				),
@@ -416,7 +416,7 @@ $admin_user_form_config = array(
 				'start_html'			=> '<th>',
 				'invalid_start_html'	=> '<th class="error">',
 				'end_html'				=> '</th>',
-				'value'					=> _('Login ID'),
+				'value'					=> __('Login ID'),
 			),
 			array(
 				'start_html'	=> '<td>',
@@ -429,12 +429,12 @@ $admin_user_form_config = array(
 					array(
 						array(
 							'type' 			=> 'required',
-							'error_message'	=> _('Please enter login ID'),
+							'error_message'	=> __('Please enter login ID'),
 						),
 						array(
 							'type' 			=> 'pattern',
 							'pattern'		=> '^[a-zA-Z0-9\_\-]+$',
-							'error_message'	=> _('Please enter login ID using alphanumeric, hyphen(-) and underbar(_)'),
+							'error_message'	=> __('Please enter login ID using alphanumeric, hyphen(-) and underbar(_)'),
 						),
 					),
 				),
@@ -456,7 +456,7 @@ $admin_user_form_config = array(
 				'start_html'			=> '<th>',
 				'invalid_start_html'	=> '<th class="error">',
 				'end_html'				=> '</th>',
-				'value'					=> _('Password'),
+				'value'					=> __('Password'),
 			),
 			array(
 				'start_html'	=> '<td>',
@@ -465,17 +465,17 @@ $admin_user_form_config = array(
 					'name'					=> 'admin_user_pwd',
 					'class'					=> 'B_Password',
 					'special_html'			=> 'class="textbox ime-off" size="40" maxlength="100" ',
-					'confirm_message'		=> _('(Entered password)'),
+					'confirm_message'		=> __('(Entered password)'),
 					'validate'				=>
 					array(
 						array(
 							'type' 			=> 'required',
-							'error_message'	=> _('Please enter password'),
+							'error_message'	=> __('Please enter password'),
 						),
 						array(
 							'type' 			=> 'pattern',
 							'pattern'		=> '^[a-zA-Z0-9\_\-]+$',
-							'error_message'	=> _('Please enter password using alphanumeric, hyphen(-) and underbar(_)'),
+							'error_message'	=> __('Please enter password using alphanumeric, hyphen(-) and underbar(_)'),
 						),
 					),
 				),
@@ -498,7 +498,7 @@ $admin_user_form_config = array(
 				'start_html'			=> '<th>',
 				'invalid_start_html'	=> '<th class="error">',
 				'end_html'				=> '</th>',
-				'value'					=> _('Password (Re-entry)'),
+				'value'					=> __('Password (Re-entry)'),
 			),
 			array(
 				'start_html'	=> '<td>',
@@ -511,12 +511,12 @@ $admin_user_form_config = array(
 					array(
 						array(
 							'type' 			=> 'required',
-							'error_message'	=> _('Please re-enter password'),
+							'error_message'	=> __('Please re-enter password'),
 						),
 						array(
 							'type' 			=> 'match',
 							'target'		=> 'admin_user_pwd',
-							'error_message'	=> _('Password is not matched'),
+							'error_message'	=> __('Password is not matched'),
 						),
 					),
 				),

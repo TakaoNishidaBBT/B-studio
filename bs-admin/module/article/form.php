@@ -127,13 +127,13 @@
 				$param['update_datetime'] = time();
 				$ret = $this->main_table->selectInsert($param);
 				$param['article_id'] = $this->main_table->selectMaxValue('article_id');
-				$param['action_message'] = _('was saved.');
+				$param['action_message'] = __('was saved.');
 			}
 			else {
 				$param['update_user'] = $this->user_id;
 				$param['update_datetime'] = time();
 				$ret = $this->main_table->update($param);
-				$param['action_message'] = _('was saved.');
+				$param['action_message'] = __('was saved.');
 			}
 
 			if($ret) {
@@ -141,7 +141,7 @@
 			}
 			else {
 				$this->db->rollback();
-				$param['action_message'] = _('was faild to saved.');
+				$param['action_message'] = __('was faild to saved.');
 			}
 			$this->result->setValue($param);
 
@@ -161,11 +161,11 @@
 
 			if($ret) {
 				$this->db->commit();
-				$param['action_message'] = _('was deleted.');
+				$param['action_message'] = __('was deleted.');
 			}
 			else {
 				$this->db->rollback();
-				$param['action_message'] = _('was faild to delete.');
+				$param['action_message'] = __('was faild to delete.');
 			}
 			$this->result->setValue($param);
 

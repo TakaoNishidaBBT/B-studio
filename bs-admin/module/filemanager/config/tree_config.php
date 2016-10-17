@@ -107,25 +107,25 @@ $tree_config = array(
 				array(
 					array(
 						'name'			=> 'file_name',
-						'title'			=> _('File name'),
+						'title'			=> __('File name'),
 						'className'		=> 'file-name',
 						'sort_key'		=> 'node_name',
 					),
 					array(
 						'name'			=> 'update_datetime_t',
-						'title'			=> _('Modified'),
+						'title'			=> __('Modified'),
 						'className'		=> 'update-time',
 						'sort_key'		=> 'update_datetime',
 					),
 					array(
 						'name'			=> 'human_file_size',
-						'title'			=> _('File size'),
+						'title'			=> __('File size'),
 						'className'		=> 'file-size',
 						'sort_key'		=> 'file_size',
 					),
 					array(
 						'name'			=> 'human_image_size',
-						'title'			=> _('Image size'),
+						'title'			=> __('Image size'),
 						'className'		=> 'image-size',
 						'sort_key'		=> 'image_size',
 					),
@@ -175,39 +175,39 @@ $tree_config = array(
 			'context_menu'		=>
 			array(
 				array(
-					'menu'		=> _('Cut'),
+					'menu'		=> __('Cut'),
 					'func'		=> 'cutNode',
 				),
 				array(
-					'menu'		=> _('Copy'),
+					'menu'		=> __('Copy'),
 					'func'		=> 'copyNode',
 				),
 				array(
-					'menu'		=> _('Paste'),
+					'menu'		=> __('Paste'),
 					'func'		=> 'pasteNode',
 				),
 				array(
-					'menu'		=> _('Delete'),
+					'menu'		=> __('Delete'),
 					'func'		=> 'deleteNode',
 					'confirm'	=>
 					array(
-						'single'	=> _('Are you sure you want %NODE_NAME% to delete?'),
-						'plural'	=> _('Are you sure you want these %NODE_COUNT% objects to delete?'),
+						'single'	=> __('Are you sure you want %NODE_NAME% to delete?'),
+						'plural'	=> __('Are you sure you want these %NODE_COUNT% objects to delete?'),
 					),
 				),
 				array(
-					'menu'		=> _('New'),
+					'menu'		=> __('New'),
 					'func'		=> 'createNode',
 					'submenu'	=>
 					array(
 						array(
-							'menu'		=> _('Folder'),
+							'menu'		=> __('Folder'),
 							'func'		=> 'createNode',
 							'icon'		=> './images/folders/folder.png',
 							'param'		=> 'node_type=folder&node_class=folder',
 						),
 						array(
-							'menu'		=> _('File'),
+							'menu'		=> __('File'),
 							'func'		=> 'createNode',
 							'icon'		=> './images/folders/file_icon.png',
 							'param'		=> 'node_type=file&node_class=leaf',
@@ -216,21 +216,21 @@ $tree_config = array(
 					'submenu_width'	=> '120',
 				),
 				array(
-					'menu'		=> _('Edit name'),
+					'menu'		=> __('Edit name'),
 					'func'		=> 'editName',
 				),
 				array(
-					'menu'		=> _('Download'),
+					'menu'		=> __('Download'),
 					'func'		=> 'download',
 				),
 				array(
-					'menu'		=> _('Preview'),
+					'menu'		=> __('Preview'),
 					'func'		=> 'preview',
 				),
 			),
 			'context_menu_width'	=> '138',
 			'context_menu_frame'	=> 'top',
-			'session_timeout'		=> _('Your session has timed out, Please log in again'),
+			'session_timeout'		=> __('Your session has timed out, Please log in again'),
 			'abbr'					=> '…',
 		),
 	),

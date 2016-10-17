@@ -21,7 +21,7 @@
 			if(is_array($_FILES['upload'])) {
 				$response['CKEditorFuncNum'] = $this->request['CKEditorFuncNum'];
 				$response['url'] = '';
-				$response['message'] = _('Please use server browser');
+				$response['message'] = __('Please use server browser');
 
 				// Start buffering
 				ob_start();

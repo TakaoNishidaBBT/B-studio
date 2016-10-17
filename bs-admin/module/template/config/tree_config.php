@@ -58,33 +58,33 @@ $tree_config = array(
 			'context_menu'		=>
 			array(
 				array(
-					'menu'		=> _('Cut'),
+					'menu'		=> __('Cut'),
 					'func'		=> 'cutNode',
 				),
 				array(
-					'menu'		=> _('Copy'),
+					'menu'		=> __('Copy'),
 					'func'		=> 'copyNode',
 				),
 				array(
-					'menu'		=> _('Paste'),
+					'menu'		=> __('Paste'),
 					'func'		=> 'pasteNode',
 				),
 				array(
-					'menu'		=> _('Remove'),
+					'menu'		=> __('Remove'),
 					'func'		=> 'deleteNode',
 					'confirm'	=>
 					array(
-						'single'	=> _('Are you sure you want %NODE_NAME% to move to the trash?'),
-						'plural'	=> _('Are you sure you want these %NODE_COUNT% objects to move to the trash?'),
+						'single'	=> __('Are you sure you want %NODE_NAME% to move to the trash?'),
+						'plural'	=> __('Are you sure you want these %NODE_COUNT% objects to move to the trash?'),
 					),
 				),
 				array(
-					'menu'		=> _('New'),
+					'menu'		=> __('New'),
 					'func'		=> 'createNode',
 					'submenu'	=>
 					array(
 						array(
-							'menu'		=> _('Template'),
+							'menu'		=> __('Template'),
 							'func'		=> 'createNode',
 							'icon'		=> './images/folders/template.png',
 							'param'		=> 'node_type=template&node_class=template',
@@ -93,21 +93,21 @@ $tree_config = array(
 					'submenu_width'	=> '120',
 				),
 				array(
-					'menu'		=> _('Edit name'),
+					'menu'		=> __('Edit name'),
 					'func'		=> 'editName',
 				),
 			),
 			'trash_context_menu'		=>
 			array(
 				array(
-					'menu'		=> _('Empty the trash'),
+					'menu'		=> __('Empty the trash'),
 					'func'		=> 'truncateNode',
-					'confirm'	=> _('Are you sure you completely remove files in the trah?'),
+					'confirm'	=> __('Are you sure you completely remove files in the trah?'),
 				),
 			),
 			'context_menu_width'	=> '138',
 			'context_menu_frame'	=> 'top',
-			'session_timeout'		=> _('Your session has timed out, Please log in again'),
+			'session_timeout'		=> __('Your session has timed out, Please log in again'),
 		),
 	),
 );

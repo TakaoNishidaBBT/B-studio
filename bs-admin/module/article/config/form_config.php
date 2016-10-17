@@ -22,11 +22,11 @@ $form_config = array(
 				'class'			=> 'B_Guidance',
 				'start_html'	=> '<span class="require">',
 				'end_html'		=> '</span>',
-				'value'			=> _('*'),
+				'value'			=> __('*'),
 			),
 			array(
 				'class'			=> 'B_Guidance',
-				'value'			=> _(' is required field'),
+				'value'			=> __(' is required field'),
 			),
 		),
 
@@ -62,11 +62,11 @@ $form_config = array(
 				'end_html'				=> '</th>',
 				'invalid_start_html'	=> '<th class="error">',
 				array(
-					'value'					=> _('Publication date'),
+					'value'					=> __('Publication date'),
 				),
 				array(
 					'class'				=> 'B_Guidance',
-					'value'				=> '<span class="require">' . _('*') . '</span>',
+					'value'				=> '<span class="require">' . __('*') . '</span>',
 				),				
 			),
 			array(
@@ -80,7 +80,7 @@ $form_config = array(
 					array(
 						array(
 							'type' 			=> 'required',
-							'error_message'	=> _('Please enter publication date'),
+							'error_message'	=> __('Please enter publication date'),
 						),
 					),
 				),
@@ -88,7 +88,7 @@ $form_config = array(
 					'filter'			=> 'select',
 					'id'				=> 'schedule_calendar1',
 					'class'				=> 'B_Link',
-					'special_html'		=> 'class="bframe_calendar settings-button" title="' . _('Calendar') . '"',
+					'special_html'		=> 'class="bframe_calendar settings-button" title="' . __('Calendar') . '"',
 					'script'			=>
 					array(
 						'bframe_calendar'	=>
@@ -128,7 +128,7 @@ $form_config = array(
 			array(
 				'start_html'	=> '<th>',
 				'end_html'		=> '</th>',
-				'value'			=> _('Category'),
+				'value'			=> __('Category'),
 			),
 			array(
 				'start_html'		=> '<td>',
@@ -147,7 +147,7 @@ $form_config = array(
 					'name'				=> 'open_category',
 					'class'				=> 'B_Link',
 					'link'				=> 'index.php',
-					'special_html'		=> 'title="' . _('Category') . '" class="settings-button" onclick="top.bframe.modalWindow.activate(this, window, \'category_id\'); return false;" params="width:350,height:400"',
+					'special_html'		=> 'title="' . __('Category') . '" class="settings-button" onclick="top.bframe.modalWindow.activate(this, window, \'category_id\'); return false;" params="width:350,height:400"',
 					'fixedparam'		=>
 					array(
 						'terminal_id'		=> TERMINAL_ID,
@@ -162,7 +162,7 @@ $form_config = array(
 					'filter'			=> 'select',
 					'class'				=> 'B_Link',
 					'link'				=> '#',
-					'special_html'		=> 'title="' . _('Clear') . '" class="clear-button" onclick="bstudio.clearText(\'category_id\', \'category_name\'); return false;"',
+					'special_html'		=> 'title="' . __('Clear') . '" class="clear-button" onclick="bstudio.clearText(\'category_id\', \'category_name\'); return false;"',
 					'specialchars'		=> 'none',
 					'value'				=> '<img alt="Clear" src="images/common/clear.png" />',
 				),
@@ -220,7 +220,7 @@ $form_config = array(
 			array(
 				'start_html'	=> '<th>',
 				'end_html'		=> '</th>',
-				'value'			=> _('Status'),
+				'value'			=> __('Status'),
 			),
 			array(
 				'start_html'	=> '<td>',
@@ -248,11 +248,11 @@ $form_config = array(
 				'end_html'				=> '</th>',
 				'invalid_start_html'	=> '<th class="error">',
 				array(
-					'value'					=> _('Title'),
+					'value'					=> __('Title'),
 				),
 				array(
 					'class'				=> 'B_Guidance',
-					'value'				=> '<span class="require">' . _('*') . '</span>',
+					'value'				=> '<span class="require">' . __('*') . '</span>',
 				),				
 			),
 			array(
@@ -266,7 +266,7 @@ $form_config = array(
 					array(
 						array(
 							'type' 			=> 'required',
-							'error_message'	=> _('Please enter title'),
+							'error_message'	=> __('Please enter title'),
 						),
 					),
 				),
@@ -287,7 +287,7 @@ $form_config = array(
 			array(
 				'start_html'			=> '<th>',
 				'end_html'				=> '</th>',
-				'value'					=> _('Title image'),
+				'value'					=> __('Title image'),
 			),
 			array(
 				'start_html'	=> '<td>',
@@ -311,7 +311,7 @@ $form_config = array(
 								'name'			=> 'open_filelist',
 								'class'			=> 'B_Link',
 								'link'			=> 'index.php',
-								'special_html'	=> 'title="' . _('Image selection') . '" class="settings-button" onclick="bstudio.activateModalWindow(this, 1000, 500); return false;"',
+								'special_html'	=> 'title="' . __('Image selection') . '" class="settings-button" onclick="bstudio.activateModalWindow(this, 1000, 500); return false;"',
 								'fixedparam'	=>
 								array(
 									'terminal_id'	=> TERMINAL_ID,
@@ -328,7 +328,7 @@ $form_config = array(
 								'filter'			=> 'select',
 								'class'				=> 'B_Link',
 								'link'				=> '#',
-								'special_html'		=> 'title="' . _('Clear') . '" class="clear-button" onclick="bstudio.clearIMG(\'title_img\', \'title_img_file\'); return false;"',
+								'special_html'		=> 'title="' . __('Clear') . '" class="clear-button" onclick="bstudio.clearIMG(\'title_img\', \'title_img_file\'); return false;"',
 								'specialchars'		=> 'none',
 								'value'				=> '<img alt="Clear" src="images/common/clear.png" />',
 							),
@@ -352,7 +352,7 @@ $form_config = array(
 			array(
 				'start_html'	=> '<th>',
 				'end_html'		=> '</th>',
-				'value'			=> _('Display detail'),
+				'value'			=> __('Display detail'),
 			),
 			array(
 				'start_html'	=> '<td>',
@@ -380,7 +380,7 @@ $form_config = array(
 				'start_html'			=> '<th>',
 				'invalid_start_html'	=> '<th class="error">',
 				'end_html'				=> '</th>',
-				'value'					=> _('External link'),
+				'value'					=> __('External link'),
 			),
 			array(
 				'start_html'	=> '<td>',
@@ -388,7 +388,7 @@ $form_config = array(
 				array(
 					'name'			=> 'external_link',
 					'class'			=> 'B_CheckBox',
-					'label'			=> _('On'),
+					'label'			=> __('On'),
 					'value'			=> '1',
 					'fixed'			=> true,
 					'special_html'	=> ' class="checkbox"',
@@ -396,7 +396,7 @@ $form_config = array(
 				array(
 					'display'		=> 'none',
 					'name'			=> 'external_link_none',
-					'value'			=> _('None'),
+					'value'			=> __('None'),
 				),
 				array(
 					'name'			=> 'url',
@@ -408,7 +408,7 @@ $form_config = array(
 					array(
 						array(
 							'type' 			=> 'status',
-							'error_message'	=> _('When you choose external link on, please enter URL'),
+							'error_message'	=> __('When you choose external link on, please enter URL'),
 						),
 					),
 				),
@@ -418,7 +418,7 @@ $form_config = array(
 				array(
 					'name'			=> 'external_window',
 					'class'			=> 'B_CheckBox',
-					'label'			=> _('Open link in new window'),
+					'label'			=> __('Open link in new window'),
 					'value'			=> '1',
 					'fixed'			=> true,
 					'special_html'	=> ' class="checkbox"',
@@ -433,7 +433,7 @@ $form_config = array(
 					'id'			=> 'filebrowser',
 					'class'			=> 'B_Link',
 					'link'			=> 'index.php',
-					'value'			=> _('File manager'),
+					'value'			=> __('File manager'),
 					'special_html'	=> 'style="display:none"',
 					'fixedparam'	=>
 					array(
@@ -454,7 +454,7 @@ $form_config = array(
 			array(
 				'start_html'	=> '<th>',
 				'end_html'		=> '</th>',
-				'value'			=> _('Detail'),
+				'value'			=> __('Detail'),
 			),
 			array(
 				'start_html'	=> '<td>',
@@ -488,7 +488,7 @@ $input_control_config = array(
 			array(
 				'start_html'	=> '<span class="text">',
 				'end_html'		=> '</span>',
-				'value'			=> _('Back'),
+				'value'			=> __('Back'),
 			),
 		),
 	),
@@ -502,7 +502,7 @@ $input_control_config = array(
 			array(
 				'start_html'	=> '<span class="text">',
 				'end_html'		=> '</span>',
-				'value'			=> _('Confirm'),
+				'value'			=> __('Confirm'),
 			),
 			array(
 				'start_html'	=> '<span class="img-cover">',
@@ -532,7 +532,7 @@ $confirm_control_config = array(
 			array(
 				'start_html'	=> '<span class="text">',
 				'end_html'		=> '</span>',
-				'value'			=> _('Back'),
+				'value'			=> __('Back'),
 			),
 		),
 	),
@@ -546,7 +546,7 @@ $confirm_control_config = array(
 			array(
 				'start_html'	=> '<span class="text">',
 				'end_html'		=> '</span>',
-				'value'			=> _('Save'),
+				'value'			=> __('Save'),
 			),
 			array(
 				'start_html'	=> '<span class="img-cover">',
@@ -576,7 +576,7 @@ $delete_control_config = array(
 			array(
 				'start_html'	=> '<span class="text">',
 				'end_html'		=> '</span>',
-				'value'			=> _('Back'),
+				'value'			=> __('Back'),
 			),
 		),
 	),
@@ -585,12 +585,12 @@ $delete_control_config = array(
 		'start_html'	=> '<li>',
 		'end_html'		=> '</li>',
 		array(
-			'start_html'	=> '<span class="right-button" onclick="bframe.confirmSubmit(\'' . _('Are you sure to delete?') . '\', \'F1\', \'' . $this->module . '\', \'form\', \'delete\', \'\');">',
+			'start_html'	=> '<span class="right-button" onclick="bframe.confirmSubmit(\'' . __('Are you sure to delete?') . '\', \'F1\', \'' . $this->module . '\', \'form\', \'delete\', \'\');">',
 			'end_html'		=> '</span>',
 			array(
 				'start_html'	=> '<span class="text">',
 				'end_html'		=> '</span>',
-				'value'			=> _('Delete'),
+				'value'			=> __('Delete'),
 			),
 			array(
 				'start_html'	=> '<span class="img-cover">',
@@ -620,7 +620,7 @@ $result_control_config = array(
 			array(
 				'start_html'	=> '<span class="text">',
 				'end_html'		=> '</span>',
-				'value'			=> _('Back to list'),
+				'value'			=> __('Back to list'),
 			),
 		),
 	),
@@ -636,7 +636,7 @@ $result_config = array(
 			'end_html'		=> '</p>',
 			array(
 				array(
-					'value'					=> _('Date: '),
+					'value'					=> __('Date: '),
 				),
 				array(
 					'name'					=> 'article_date_t',
@@ -645,7 +645,7 @@ $result_config = array(
 					'end_html'				=> '</span>',
 				),
 				array(
-					'value'					=> _('Title: '),
+					'value'					=> __('Title: '),
 				),
 				array(
 					'name'					=> 'title',
