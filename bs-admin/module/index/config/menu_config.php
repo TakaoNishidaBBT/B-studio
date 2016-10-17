@@ -214,6 +214,7 @@ $menu_config = array(
 				'special_html'	=> 'class="bframe_menu"',
 				'id'			=> 'setting_menu',
 				'value'			=> '<img src="images/menu/settings.png" alt="settings"/>' . __('Settings'),
+				'specialchars'	=> 'none',
 				'script'		=>
 				array(
 					'bframe_menu'			=>
