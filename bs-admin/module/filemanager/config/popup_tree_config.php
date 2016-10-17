@@ -104,7 +104,7 @@ $tree_config = array(
 					),
 					array(
 						'name'			=> 'human_image_size',
-						'title'			=> __('Resolution'),
+						'title'			=> __('Image size'),
 						'className'		=> 'image-size',
 						'sort_key'		=> 'image_size',
 					),
