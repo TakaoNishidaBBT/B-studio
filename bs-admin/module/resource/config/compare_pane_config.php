@@ -111,7 +111,7 @@ $compare_pane_detail_config = array(
 			array(
 				'start_html'	=> '<span>',
 				'end_html'		=> '</span>',
-				'value'			=> __('Resolution'),
+				'value'			=> __('Image size'),
 			),
 		),
 	),
