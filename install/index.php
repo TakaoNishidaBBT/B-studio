@@ -137,6 +137,7 @@
 		$status &= checkPermission(DOC_ROOT . ROOT_DIR . 'bs-admin/archive', $message);
 		$status &= checkPermission(DOC_ROOT . ROOT_DIR . 'bs-admin/cache', $message);
 		$status &= checkPermission(DOC_ROOT . ROOT_DIR . 'bs-admin/config/core_config.php', $message);
+		$status &= checkPermission(DOC_ROOT . ROOT_DIR . 'bs-admin/config/lang_config.php', $message);
 		$status &= checkPermission(DOC_ROOT . ROOT_DIR . 'bs-admin/db/db_connect.php', $message);
 		$status &= checkPermission(DOC_ROOT . ROOT_DIR . 'bs-admin/download', $message);
 		$status &= checkPermission(DOC_ROOT . ROOT_DIR . 'bs-admin/log', $message);
