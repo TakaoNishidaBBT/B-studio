@@ -11,7 +11,7 @@ $list_header_config = array(
 		'name'			=> 'title',
 		'start_html'	=> '<h2 class="version">',
 		'end_html'		=> '</h2>',
-		'value'			=> _('Versions'),
+		'value'			=> __('Versions'),
 		array(
 			'name'			=> 'version_info',
 			'start_html'	=> '<span>',
@@ -35,7 +35,7 @@ $list_header_config = array(
 						'class'					=> 'B_Text',
 						'start_html'			=> '<label for="keyword">',
 						'end_html'				=> '</label>',
-						'value'					=> _('Keyword'),
+						'value'					=> __('Keyword'),
 					),
 					array(
 						'class'					=> 'B_InputText',
@@ -56,7 +56,7 @@ $list_header_config = array(
 						'class'					=> 'B_Text',
 						'start_html'			=> '<label for="row_per_page">',
 						'end_html'				=> '</label>',
-						'value'					=> _('Display'),
+						'value'					=> __('Display'),
 					),
 					array(
 						'class'					=> 'B_SelectBox',
@@ -70,14 +70,14 @@ $list_header_config = array(
 					'start_html'	=> '<li>',
 					'end_html'		=> '</li>',
 					'special_html'	=> 'class="search-button" onclick="bframe.submit(\'header_form\', \'' . $this->module . '\', \'list\', \'select\')"',
-					'value'			=> _('Search'),
+					'value'			=> __('Search'),
 				),
 				array(
 					'class'			=> 'B_Button',
 					'start_html'	=> '<li>',
 					'end_html'		=> '</li>',
 					'special_html'	=> 'class="button" onclick="bstudio.clearForm(\'header_form\')"',
-					'value'			=> _('Clear'),
+					'value'			=> __('Clear'),
 				),
 				array(
 					'class'			=> 'B_Button',
@@ -85,7 +85,7 @@ $list_header_config = array(
 					'end_html'		=> '</li>',
 					'name'			=> 'insert',
 					'special_html'	=> 'class="insert-button" onclick="bframe.submit(\'header_form\', \'' . $this->module . '\', \'form\', \'select\', \'insert\')"',
-					'value'			=> _('New '),
+					'value'			=> __('New '),
 				),
 			),
 		),

@@ -76,7 +76,7 @@
 			if($this->mode == 'update') {
 				$row = $this->table->selectByPk($value);
 				if($this->session['init_value']['update_datetime'] < $row['update_datetime']) {
-					$error_message = _('Other user updated this record');
+					$error_message = __('Other user updated this record');
 					$this->action_message = $error_message;
 
 					$this->form->setValue($this->session['init_value']);
@@ -93,7 +93,7 @@
 
 		function register() {
 			if(!$this->checkAlt($this->session['post'])) {
-				$message = _('Other user updated this record');
+				$message = __('Other user updated this record');
 				return false;
 			}
 
@@ -128,7 +128,7 @@
 				$param['create_user'] = $this->user_id;
 				$param["create_datetime"] = time();
 				$ret = $this->table->selectInsert($param);
-				$param['action_message'] = _('was saved.');
+				$param['action_message'] = __('was saved.');
 			}
 			else {
 				$ret = $this->table->update($param);
@@ -143,7 +143,7 @@
 						}
 					}
 				}
-				$param['action_message'] = _('was updated.');
+				$param['action_message'] = __('was updated.');
 			}
 
 			if($ret) {
@@ -157,7 +157,7 @@
 			}
 			else {
 				$this->db->rollback();
-				$param['action_message'] = _('was faild to register.');
+				$param['action_message'] = __('was faild to register.');
 			}
 			$param['title'] = $this->session['post']['title'];
 			$this->result->setValue($param);
@@ -177,17 +177,17 @@
 			// Check version condition before delete
 			$max_version_id = $this->table->selectMaxValue('version_id');
 			if($row['version_id'] != $max_version_id) {
-				$this->message = _('This version can not be deleted. Because it\'s not ths latest version.');
+				$this->message = __('This version can not be deleted. Because it\'s not ths latest version.');
 				$this->setView('error_view');
 				return;
 			}
 			if($this->version['working_version_id'] == $row['version_id']) {
-				$this->message = _('Working version can not be deleted.');
+				$this->message = __('Working version can not be deleted.');
 				$this->setView('error_view');
 				return;
 			}
 			if($this->version['current_version_id'] == $row['version_id']) {
-				$this->message = _('Published version can not be deleted.');
+				$this->message = __('Published version can not be deleted.');
 				$this->setView('error_view');
 				return;
 			}
@@ -213,11 +213,11 @@
 
 			if($ret) {
 				$this->db->commit();
-				$param['action_message'] = _('was deleted.');
+				$param['action_message'] = __('was deleted.');
 			}
 			else {
 				$this->db->rollback();
-				$param['action_message'] = _('was faild to delete.');
+				$param['action_message'] = __('was faild to delete.');
 			}
 			$this->result->setValue($param);
 

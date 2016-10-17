@@ -29,7 +29,7 @@ array(
 						on 1=1
 						where del_flag='0' ",
 
-	'empty_message'	=> '<strong>　' . _('No record was found') . '</strong>',
+	'empty_message'	=> '<strong>　' . __('No record was found') . '</strong>',
 
 	'header'	=>
 	array(
@@ -40,31 +40,31 @@ array(
 			'name'			=> 'reserved_version_id',
 			'start_html'	=> '<th class="center" style="width:35px" >',
 			'end_html'		=> '</th>',
-			'value'			=> _('Publish'),
+			'value'			=> __('Publish'),
 		),
 		array(
 			'name'			=> 'working_version_id',
 			'start_html'	=> '<th class="center" style="width:35px" >',
 			'end_html'		=> '</th>',
-			'value'			=> _('Working'),
+			'value'			=> __('Working'),
 		),
 		array(
 			'name'			=> 'version_id',
 			'start_html'	=> '<th class="center">',
 			'end_html'		=> '</th>',
-			'value'			=> _('ID'),
+			'value'			=> __('ID'),
 		),
 		array(
 			'name'			=> 'publication_date',
 			'start_html'	=> '<th class="center">',
 			'end_html'		=> '</th>',
-			'value'			=> _('Publish date time'),
+			'value'			=> __('Publish date time'),
 		),
 		array(
 			'name'			=> 'version',
 			'start_html'	=> '<th class="center">',
 			'end_html'		=> '</th>',
-			'value'			=> _('Version'),
+			'value'			=> __('Version'),
 		),
 		array(
 			'name'			=> 'publication_status',
@@ -73,29 +73,29 @@ array(
 			'class'			=> 'B_Link',
 			'link'			=> '',
 			'special_html'	=> 'onclick="return false"',
-			'title'			=> _('Status ■:Published  ★:Scheduled to be published'),
-			'value'			=> _('Status'),
+			'title'			=> __('Status ■:Published  ★:Scheduled to be published'),
+			'value'			=> __('Status'),
 		),
 		array(
 			'name'			=> 'notes',
 			'start_html'	=> '<th class="center">',
 			'end_html'		=> '</th>',
-			'value'			=> _('Notes'),
+			'value'			=> __('Notes'),
 		),
 		array(
 			'start_html'	=> '<th class="center" style="width:40px" nowrap>',
 			'end_html'		=> '</th>',
-			'value'			=> _('Edit'),
+			'value'			=> __('Edit'),
 		),
 		array(
 			'start_html'	=> '<th class="center" style="width:40px" nowrap>',
 			'end_html'		=> '</th>',
-			'value'			=> _('Diff'),
+			'value'			=> __('Diff'),
 		),
 		array(
 			'start_html'	=> '<th class="center" style="width:40px" nowrap>',
 			'end_html'		=> '</th>',
-			'value'			=> _('Delete'),
+			'value'			=> __('Delete'),
 		),
 	),
 
@@ -158,7 +158,7 @@ array(
 				'class'			=> 'B_Link',
 				'link'			=> 'index.php',
 				'special_html'	=> 'class="edit-button"',
-				'value'			=> _('Edit'),
+				'value'			=> __('Edit'),
 				'fixedparam'	=>
 				array(
 					'terminal_id'	=> TERMINAL_ID,
@@ -183,7 +183,7 @@ array(
 				'class'			=> 'B_Link',
 				'link'			=> 'index.php',
 				'special_html'	=> 'class="compare-button" onclick="window.open(this.href); return false;"',
-				'value'			=> _('Diff'),
+				'value'			=> __('Diff'),
 				'fixedparam'	=>
 				array(
 					'terminal_id'	=> $this->util->getRandomText(12),
@@ -201,7 +201,7 @@ array(
 				'id'			=> 'compare_disable',
 				'class'			=> 'B_Link',
 				'special_html'	=> 'class="compare-button-disable" onclick="return false;"',
-				'value'			=> _('Diff'),
+				'value'			=> __('Diff'),
 				'display'		=> 'none',
 			),
 		),
@@ -215,7 +215,7 @@ array(
 				'class'			=> 'B_Link',
 				'link'			=> 'index.php',
 				'special_html'	=> 'class="delete-button"',
-				'value'			=> _('Delete'),
+				'value'			=> __('Delete'),
 				'fixedparam'	=>
 				array(
 					'terminal_id'	=> TERMINAL_ID,
@@ -234,7 +234,7 @@ array(
 				'id'			=> 'del_disable',
 				'class'			=> 'B_Link',
 				'special_html'	=> 'class="delete-button-disable" onclick="return false;"',
-				'value'			=> _('Delete'),
+				'value'			=> __('Delete'),
 				'display'		=> 'none',
 			),
 		),
@@ -252,7 +252,7 @@ $version_control_config = array(
 		'name'			=> 'confirm',
 		'start_html'	=> '<span class="version-button" onclick="bframe.submit(\'F1\', \'' . $this->module . '\', \'list\', \'confirm\', \'\', true)">',
 		'end_html'		=> '</span>',
-		'value'			=> '<img src="images/common/version.png" alt="Change versions" />' . _('Change versions'),
+		'value'			=> '<img src="images/common/version.png" alt="Change versions" />' . __('Change versions'),
 	),
 );
 $version_control_confirm_config = array(
@@ -267,7 +267,7 @@ $version_control_confirm_config = array(
 			'class'			=> 'B_Button',
 			'name'			=> 'back',
 			'special_html'	=> 'class="back-button" onclick="bframe.submit(\'F1\', \'' . $this->module . '\', \'list\', \'back\', \'\', true)"',
-			'value'			=> _('Back'),
+			'value'			=> __('Back'),
 		),
 		array(
 			'start_html'	=> '<li>',
@@ -275,7 +275,7 @@ $version_control_confirm_config = array(
 			'class'			=> 'B_Button',
 			'name'			=> 'attendance',
 			'special_html'	=> 'class="register-button" onclick="bframe.submit(\'F1\', \'' . $this->module . '\', \'list\', \'register\', \'\', true)"',
-			'value'			=> _('Submit'),
+			'value'			=> __('Submit'),
 		),
 	),
 );
@@ -291,7 +291,7 @@ $version_control_result_config = array(
 			'class'			=> 'B_Button',
 			'name'			=> 'backToList',
 			'special_html'	=> 'class="back-button" onclick="bframe.submit(\'F1\', \'' . $this->module . '\', \'list\', \'back\', \'\')" ',
-			'value'			=> _('Back to list'),
+			'value'			=> __('Back to list'),
 		),
 	),
 );
@@ -307,7 +307,7 @@ $version_info_config = array(
 			array(
 				'start_html'	=> '<span>',
 				'end_html'		=> '</span>',
-				'value'			=> _('Publish version'),
+				'value'			=> __('Publish version'),
 			),
 		),
 		array(
@@ -343,7 +343,7 @@ $version_info_config = array(
 			array(
 				'start_html'	=> '<span>',
 				'end_html'		=> '</span>',
-				'value'			=> _('Working version'),
+				'value'			=> __('Working version'),
 			),
 		),
 		array(

@@ -20,11 +20,11 @@ $form_config = array(
 				'class'			=> 'B_Guidance',
 				'start_html'	=> '<span class="require">',
 				'end_html'		=> '</span>',
-				'value'			=> _('*'),
+				'value'			=> __('*'),
 			),
 			array(
 				'class'			=> 'B_Guidance',
-				'value'			=> _(' is required field'),
+				'value'			=> __(' is required field'),
 			),
 		),
 
@@ -42,11 +42,11 @@ $form_config = array(
 				'end_html'				=> '</th>',
 				'invalid_start_html'	=> '<th class="error">',
 				array(
-					'value'					=> _('User ID'),
+					'value'					=> __('User ID'),
 				),
 				array(
 					'class'				=> 'B_Guidance',
-					'value'				=> '<span class="require">' . _('*') . '</span>',
+					'value'				=> '<span class="require">' . __('*') . '</span>',
 				),
 			),
 			array(
@@ -61,24 +61,24 @@ $form_config = array(
 					array(
 						array(
 							'type' 			=> 'required',
-							'error_message'	=> _('Please enter User ID'),
+							'error_message'	=> __('Please enter User ID'),
 						),
 						array(
 							'type' 			=> 'pattern',
 							'pattern'		=> '^[a-zA-Z0-9\_\-]+$',
-							'error_message'	=> _('Please enter User ID using alphanumeric, hyphen(-) and underbar(_)'),
+							'error_message'	=> __('Please enter User ID using alphanumeric, hyphen(-) and underbar(_)'),
 						),
 						array(
 							'type'			=> 'callback',
 							'obj'			=> $this,
 							'method'		=> '_validate_callback',
-							'error_message'	=> _('This ID is already exists'),
+							'error_message'	=> __('This ID is already exists'),
 						),
 						array(
 							'type'			=> 'callback',
 							'obj'			=> $this,
 							'method'		=> '_validate_callback2',
-							'error_message'	=> _('This ID can not be used'),
+							'error_message'	=> __('This ID can not be used'),
 						),
 					),
 				),
@@ -106,11 +106,11 @@ $form_config = array(
 				'invalid_start_html'	=> '<th class="error">',
 				'end_html'				=> '</th>',
 				array(
-					'value'					=> _('Password'),
+					'value'					=> __('Password'),
 				),
 				array(
 					'class'				=> 'B_Guidance',
-					'value'				=> '<span class="require">' . _('*') . '</span>',
+					'value'				=> '<span class="require">' . __('*') . '</span>',
 				),
 			),
 			array(
@@ -124,7 +124,7 @@ $form_config = array(
 					array(
 						array(
 							'type' 			=> 'required',
-							'error_message'	=> _('Please enter password'),
+							'error_message'	=> __('Please enter password'),
 						),
 					),
 				),
@@ -147,11 +147,11 @@ $form_config = array(
 				'invalid_start_html'	=> '<th class="error">',
 				'end_html'				=> '</th>',
 				array(
-					'value'				=> _('Name'),
+					'value'				=> __('Name'),
 				),
 				array(
 					'class'				=> 'B_Guidance',
-					'value'				=> '<span class="require">' . _('*') . '</span>',
+					'value'				=> '<span class="require">' . __('*') . '</span>',
 				),
 			),
 			array(
@@ -188,11 +188,11 @@ $form_config = array(
 				'invalid_start_html'	=> '<th class="error">',
 				'end_html'				=> '</th>',
 				array(
-					'value'					=> _('Authority'),
+					'value'					=> __('Authority'),
 				),
 				array(
 					'class'				=> 'B_Guidance',
-					'value'				=> '<span class="require">' . _('*') . '</span>',
+					'value'				=> '<span class="require">' . __('*') . '</span>',
 				),
 			),
 			array(
@@ -228,11 +228,11 @@ $form_config = array(
 				'invalid_start_html'	=> '<th class="error">',
 				'end_html'				=> '</th>',
 				array(
-					'value'					=> _('Status'),
+					'value'					=> __('Status'),
 				),
 				array(
 					'class'				=> 'B_Guidance',
-					'value'				=> '<span class="require">' . _('*') . '</span>',
+					'value'				=> '<span class="require">' . __('*') . '</span>',
 				),
 			),
 			array(
@@ -252,7 +252,7 @@ $form_config = array(
 			array(
 				'start_html'		=> '<th>',
 				'end_html'			=> '</th>',
-				'value'				=> _('Language'),
+				'value'				=> __('Language'),
 			),
 			array(
 				'class'				=> 'B_SelectBox',
@@ -274,7 +274,7 @@ $form_config = array(
 				'start_html'			=> '<th>',
 				'invalid_start_html'	=> '<th class="error">',
 				'end_html'				=> '</th>',
-				'value'					=> _('Notes'),
+				'value'					=> __('Notes'),
 			),
 			array(
 				'start_html'	=> '<td>',
@@ -308,7 +308,7 @@ $input_control_config = array(
 			array(
 				'start_html'	=> '<span class="text">',
 				'end_html'		=> '</span>',
-				'value'			=> _('Back'),
+				'value'			=> __('Back'),
 			),
 		),
 	),
@@ -322,7 +322,7 @@ $input_control_config = array(
 			array(
 				'start_html'	=> '<span class="text">',
 				'end_html'		=> '</span>',
-				'value'			=> _('Confirm'),
+				'value'			=> __('Confirm'),
 			),
 			array(
 				'start_html'	=> '<span class="img-cover">',
@@ -352,7 +352,7 @@ $confirm_control_config = array(
 			array(
 				'start_html'	=> '<span class="text">',
 				'end_html'		=> '</span>',
-				'value'			=> _('Back'),
+				'value'			=> __('Back'),
 			),
 		),
 	),
@@ -366,7 +366,7 @@ $confirm_control_config = array(
 			array(
 				'start_html'	=> '<span class="text">',
 				'end_html'		=> '</span>',
-				'value'			=> _('Save'),
+				'value'			=> __('Save'),
 			),
 			array(
 				'start_html'	=> '<span class="img-cover">',
@@ -396,7 +396,7 @@ $delete_control_config = array(
 			array(
 				'start_html'	=> '<span class="text">',
 				'end_html'		=> '</span>',
-				'value'			=> _('Back'),
+				'value'			=> __('Back'),
 			),
 		),
 	),
@@ -410,7 +410,7 @@ $delete_control_config = array(
 			array(
 				'start_html'	=> '<span class="text">',
 				'end_html'		=> '</span>',
-				'value'			=> _('Delete'),
+				'value'			=> __('Delete'),
 			),
 			array(
 				'start_html'	=> '<span class="img-cover">',
@@ -440,7 +440,7 @@ $result_control_config = array(
 			array(
 				'start_html'	=> '<span class="text">',
 				'end_html'		=> '</span>',
-				'value'			=> _('Back to list'),
+				'value'			=> __('Back to list'),
 			),
 		),
 	),
@@ -459,7 +459,7 @@ $result_config = array(
 					'start_html'	=> '<span class="user-id">',
 					'end_html'		=> '</span>',
 					array(
-						'value'			=> _('User ID: '),
+						'value'			=> __('User ID: '),
 					),
 					array(
 						'name'			=> 'user_id',

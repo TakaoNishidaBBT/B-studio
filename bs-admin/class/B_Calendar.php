@@ -28,7 +28,7 @@
 			$this->data = $this->setWeekArray();
 
 			$param['YEAR'] = $year;
-			$param['MONTH'] = _($this->months[$month]);
+			$param['MONTH'] = __($this->months[$month]);
 			$this->caption->setValue($param);
 			$obj = $this->caption->getElementByName('year_month');
 			$obj->value = $this->caption->replaceText($obj->value, $param);

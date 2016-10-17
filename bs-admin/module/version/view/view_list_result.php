@@ -1,5 +1,5 @@
 <body>
-	<h2 class="version"><?php echo _('Versions'); ?><span><?php echo $this->version_info; ?></span></h2>
+	<h2 class="version"><?php echo __('Versions'); ?><span><?php echo $this->version_info; ?></span></h2>
 	<div class="contents">
 		<form name="F1" id="F1" method="post" action="index.php" target="main">
 			<div class="version-info">

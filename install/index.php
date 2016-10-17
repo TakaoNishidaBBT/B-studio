@@ -50,7 +50,7 @@
 	require_once('../bs-admin/language/language.php');
 
 	if($_SESSION['language'] != 'en' and !function_exists('mb_internal_encoding')) {
-		echo _('Please enable mbstring module');
+		echo __('Please enable mbstring module');
 		exit;
 	}
 
@@ -90,16 +90,16 @@
 	$select_language->setValue(array('language' => $_SESSION['language']));
 
 	if(!session_save_path()) {
-		$error_message = _('Please set session.save_path');
+		$error_message = __('Please set session.save_path');
 	}
 	if(!class_exists('mysqli') && !function_exists('mysql_connect')) {
-		$error_message = _('Please enable MySQL library');
+		$error_message = __('Please enable MySQL library');
 	}
 	if(!function_exists('gd_info')) {
-		$error_message = _('Please enable GD library');
+		$error_message = __('Please enable GD library');
 	}
 	if(!class_exists('ZipArchive')) {
-		$error_message = _('ZipArchive is necessary');
+		$error_message = __('ZipArchive is necessary');
 	}
 
 	// Send HTTP header
@@ -151,17 +151,17 @@
 
 	function checkPermission($path, &$message) {
 		if(!file_exists($path)) {
-			$message.= '<span class="status_ok">' . $path  . _(' write permission is OK. ') .  '(file not exist)</span><br />';
+			$message.= '<span class="status_ok">' . $path  . __(' write permission is OK. ') .  '(file not exist)</span><br />';
 			return true;
 		}
 		else {
 			$perms = fileperms($path);
 			if(is_writable($path)) {
-				$message.= '<span class="status_ok">' . $path  . _(' : write permission is OK. ') . '(permission:' . substr(sprintf('%o',$perms), -3) . ')</span><br />';
+				$message.= '<span class="status_ok">' . $path  . __(' : write permission is OK. ') . '(permission:' . substr(sprintf('%o',$perms), -3) . ')</span><br />';
 				return true;
 			}
 			else {
-				$message.= '<span class="status_ng">' . $path  . _(' : write permission is not set. ') . '(permission:' . substr(sprintf('%o',$perms), -3) . ')</span><br />';
+				$message.= '<span class="status_ng">' . $path  . __(' : write permission is not set. ') . '(permission:' . substr(sprintf('%o',$perms), -3) . ')</span><br />';
 				return false;
 			}
 		}
@@ -194,7 +194,7 @@
 						$obj = $db_install_form->getElementByName('db_nme');
 						$obj->status = false;
 						$status = $db_install_form->validate();
-						$error_message = _('Connecting to the DB is OK. But failed to select the schema');
+						$error_message = __('Connecting to the DB is OK. But failed to select the schema');
 					}
 				}
 			}
@@ -209,7 +209,7 @@
 				$obj = $db_install_form->getElementByName('db_nme');
 				$obj->status = false;
 				$status = $db_install_form->validate();
-				$error_message = _('Faild to connect DB.');
+				$error_message = __('Faild to connect DB.');
 				if($db->connect_error) {
 					$error_message.= '<br />(' . $db->connect_error . ')';
 				}
@@ -217,7 +217,7 @@
 		}
 		else {
 			// Confirm message
-			$error_message = _('This is an error in your entry<br />Please check any error message and re-enter the necessary information');
+			$error_message = __('This is an error in your entry<br />Please check any error message and re-enter the necessary information');
 		}
 
 		return $status;

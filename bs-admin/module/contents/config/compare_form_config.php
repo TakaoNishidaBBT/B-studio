@@ -101,7 +101,7 @@ $tab_control_config = array(
 		'end_html'			=> '</li>',
 		'link'				=> 'html',
 		'special_html'		=> 'class="bframe_tab"',
-		'value'				=> _('HTML'),
+		'value'				=> __('HTML'),
 	),
 	array(
 		'name'				=> 'css_editor_index',
@@ -109,7 +109,7 @@ $tab_control_config = array(
 		'start_html'		=> '<li>',
 		'end_html'			=> '</li>',
 		'link'				=> 'css',
-		'value'				=> _('CSS'),
+		'value'				=> __('CSS'),
 		'special_html'		=> 'class="bframe_tab"',
 	),
 	array(
@@ -118,7 +118,7 @@ $tab_control_config = array(
 		'start_html'		=> '<li>',
 		'end_html'			=> '</li>',
 		'link'				=> 'php',
-		'value'				=> _('PHP'),
+		'value'				=> __('PHP'),
 		'special_html'		=> 'class="bframe_tab"',
 	),
 	array(
@@ -127,7 +127,7 @@ $tab_control_config = array(
 		'start_html'		=> '<li>',
 		'end_html'			=> '</li>',
 		'link'				=> 'config',
-		'value'				=> _('Settings'),
+		'value'				=> __('Settings'),
 		'special_html'		=> 'class="bframe_tab"',
 	),
 	array(
@@ -173,7 +173,7 @@ $config_form_config = array(
 				'invalid_start_html'	=> '<th class="diff">',
 				'end_html'				=> '</th>',
 				array(
-					'value'				=> _('Title'),
+					'value'				=> __('Title'),
 					'no_linefeed'		=> true,
 				),
 			),
@@ -213,7 +213,7 @@ $config_form_config = array(
 				'invalid_start_html'	=> '<th class="diff">',
 				'end_html'				=> '</th>',
 				array(
-					'value'				=> _('Breadcrumbs'),	
+					'value'				=> __('Breadcrumbs'),	
 					'no_linefeed'		=> true,
 				),
 			),
@@ -252,7 +252,7 @@ $config_form_config = array(
 				'start_html'			=> '<th>',
 				'invalid_start_html'	=> '<th class="diff">',
 				'end_html'				=> '</th>',
-				'value'					=> _('Template'),
+				'value'					=> __('Template'),
 			),
 			array(
 				'start_html'		=> '<td>',
@@ -289,7 +289,7 @@ $config_form_config = array(
 				'start_html'			=> '<th>',
 				'invalid_start_html'	=> '<th class="diff">',
 				'end_html'				=> '</th>',
-				'value'					=> _('Keywords'),
+				'value'					=> __('Keywords'),
 			),
 			array(
 				'start_html'			=> '<td>',
@@ -326,7 +326,7 @@ $config_form_config = array(
 				'start_html'			=> '<th>',
 				'invalid_start_html'	=> '<th class="diff">',
 				'end_html'				=> '</th>',
-				'value'					=> _('Description'),
+				'value'					=> __('Description'),
 			),
 			array(
 				'start_html'			=> '<td>',
@@ -363,7 +363,7 @@ $config_form_config = array(
 				'start_html'			=> '<th>',
 				'invalid_start_html'	=> '<th class="diff">',
 				'end_html'				=> '</th>',
-				'value'					=> _('External CSS'),
+				'value'					=> __('External CSS'),
 			),
 			array(
 				'start_html'			=> '<td>',

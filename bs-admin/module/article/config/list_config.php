@@ -11,7 +11,7 @@ $list_config = array(
 
 	'select_sql'	=> "select * from " . B_DB_PREFIX . "v_admin_article where 1=1 ",
 
-	'empty_message'	=> '<span class="bold">　' . _('No record was found') . '</span>',
+	'empty_message'	=> '<span class="bold">　' . __('No record was found') . '</span>',
 
 	'header'	=>
 	array(
@@ -34,7 +34,7 @@ $list_config = array(
 			'class'			=> 'B_Link',
 			'start_html'	=> '<th class="sortable">',
 			'end_html'		=> '</th>',
-			'value'			=> _('Date'),
+			'value'			=> __('Date'),
 			'link'			=> DISPATCH_URL,
 			'cond_html'		=> 'class="current-key"',
 			'sort_key'		=> 'article_date',
@@ -45,7 +45,7 @@ $list_config = array(
 			'class'			=> 'B_Link',
 			'start_html'	=> '<th class="sortable" style="width:100px">',
 			'end_html'		=> '</th>',
-			'value'			=> _('Category'),
+			'value'			=> __('Category'),
 			'link'			=> DISPATCH_URL,
 			'cond_html'		=> 'class="current-key"',
 			'sort_key'		=> 'category',
@@ -56,7 +56,7 @@ $list_config = array(
 			'class'			=> 'B_Link',
 			'start_html'	=> '<th class="sortable" style="width:260px">',
 			'end_html'		=> '</th>',
-			'value'			=> _('Title'),
+			'value'			=> __('Title'),
 			'link'			=> DISPATCH_URL,
 			'cond_html'		=> 'class="current-key"',
 			'sort_key'		=> 'title',
@@ -67,8 +67,8 @@ $list_config = array(
 			'class'			=> 'B_Link',
 			'start_html'	=> '<th class="sortable" style="width:55px">',
 			'end_html'		=> '</th>',
-			'value'			=> _('Status'),
-			'title'			=> _('Published/Preview/Closed'),
+			'value'			=> __('Status'),
+			'title'			=> __('Published/Preview/Closed'),
 			'link'			=> DISPATCH_URL,
 			'cond_html'		=> 'class="current-key"',
 			'sort_key'		=> 'publication',
@@ -77,12 +77,12 @@ $list_config = array(
 		array(
 			'start_html'	=> '<th class="center" style="width:40px" nowrap>',
 			'end_html'		=> '</th>',
-			'value'			=> _('Edit'),
+			'value'			=> __('Edit'),
 		),
 		array(
 			'start_html'	=> '<th class="center" style="width:40px" nowrap>',
 			'end_html'		=> '</th>',
-			'value'			=> _('Delete'),
+			'value'			=> __('Delete'),
 		),
 	),
 

@@ -60,7 +60,7 @@
 		function register() {
 			if(file_exists($this->post['file_path']) && $this->post['mode'] == 'confirm' && filemtime($this->post['file_path']) > $this->post['update_datetime']) {
 				$mode = 'confirm';
-				$message = _("Other user updated this file\nAre you sure to overwrite?");
+				$message = __("Other user updated this file\nAre you sure to overwrite?");
 			}
 			else {
 				if($this->post['encoding'] == 'ASCII' || $this->post['encoding'] == 'UTF-8') {
@@ -71,7 +71,7 @@
 				}
 				file_put_contents($this->post['file_path'], $contents, LOCK_EX);
 
-				$message = _('Saved');
+				$message = __('Saved');
 			}
 
 			$response['status'] = true;

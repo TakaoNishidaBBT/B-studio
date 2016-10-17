@@ -101,7 +101,7 @@
 			}
 			if(!$ret) {
 				$this->db->rollback();
-				$message = _('It failed to save');
+				$message = __('It failed to save');
 			}
 
 			$response['status'] = true;
@@ -144,7 +144,7 @@
 			$filepath = B_RESOURCE_DIR . $contents_id . '.' . $this->post['extension'];
 			if(file_exists($filepath) && $this->post['mode'] == 'confirm' && filemtime($filepath) > $this->post['update_datetime']) {
 				$mode = 'confirm';
-				$message = _("Other user updated this file\nAre you sure to overwrite?");
+				$message = __("Other user updated this file\nAre you sure to overwrite?");
 			}
 			else {
 				if($this->post['encoding'] == 'ASCII' || $this->post['encoding'] == 'UTF-8') {
@@ -179,7 +179,7 @@
 					touch(B_FILE_INFO_C);
 				}
 
-				$message = _('Saved');
+				$message = __('Saved');
 			}
 
 			return $ret;

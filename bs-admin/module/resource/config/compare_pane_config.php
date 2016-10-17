@@ -71,7 +71,7 @@ $compare_pane_detail_config = array(
 
 	'select_sql'	=> "select * from " . B_DB_PREFIX . "v_article where 1=1 ",
 
-	'empty_message'	=> '<span class="bold">　' . _('No record was found') . '</span>',
+	'empty_message'	=> '<span class="bold">　' . __('No record was found') . '</span>',
 
 	'header'	=>
 	array(
@@ -84,7 +84,7 @@ $compare_pane_detail_config = array(
 			array(
 				'start_html'	=> '<span>',
 				'end_html'		=> '</span>',
-				'value'			=> _('File Name'),
+				'value'			=> __('File Name'),
 			),
 		),
 		array(
@@ -93,7 +93,7 @@ $compare_pane_detail_config = array(
 			array(
 				'start_html'	=> '<span>',
 				'end_html'		=> '</span>',
-				'value'			=> _('Modified'),
+				'value'			=> __('Modified'),
 			),
 		),
 		array(
@@ -102,7 +102,7 @@ $compare_pane_detail_config = array(
 			array(
 				'start_html'	=> '<span>',
 				'end_html'		=> '</span>',
-				'value'			=> _('File size'),
+				'value'			=> __('File size'),
 			),
 		),
 		array(
@@ -111,7 +111,7 @@ $compare_pane_detail_config = array(
 			array(
 				'start_html'	=> '<span>',
 				'end_html'		=> '</span>',
-				'value'			=> _('Resolution'),
+				'value'			=> __('Resolution'),
 			),
 		),
 	),

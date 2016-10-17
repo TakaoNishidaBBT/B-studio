@@ -89,7 +89,7 @@
 					if($this->post['mode'] == 'confirm' && $row['update_datetime'] > $this->post['update_datetime']) {
 						$this->status = true;
 						$this->mode = 'confirm';
-						$this->message = _("Other user updated this record\nAre you sure to overwrite?");
+						$this->message = __("Other user updated this record\nAre you sure to overwrite?");
 					}
 					else {
 						$ret = $this->update($this->user_id, $contents_id);
@@ -107,12 +107,12 @@
 			if($ret) {
 				$this->db->commit();
 				$this->status = true;
-				$this->message = _('Saved');
+				$this->message = __('Saved');
 			}
 			else {
 				$this->db->rollback();
 				$this->status = false;
-				$this->message =  _('It failed to save');
+				$this->message =  __('It failed to save');
 			}
 
 			$response['status'] = $this->status;

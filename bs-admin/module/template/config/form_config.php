@@ -28,8 +28,8 @@ $form_config = array(
 					'id'				=> 'open_widgetmanager',
 					'class'				=> 'B_Link',
 					'link'				=> 'index.php',
-					'value'				=> _('Widget'),
-					'special_html'		=> 'title="' . _('Widget') . '" style="display:none"',
+					'value'				=> __('Widget'),
+					'special_html'		=> 'title="' . __('Widget') . '" style="display:none"',
 					'fixedparam'		=>
 					array(
 						'terminal_id'	=> TERMINAL_ID,
@@ -52,8 +52,8 @@ $form_config = array(
 					'id'				=> 'open_widgetmanager',
 					'class'				=> 'B_Link',
 					'link'				=> 'index.php',
-					'value'				=> _('Widget'),
-					'special_html'		=> 'title="' . _('Widget') . '" style="display:none"',
+					'value'				=> __('Widget'),
+					'special_html'		=> 'title="' . __('Widget') . '" style="display:none"',
 					'fixedparam'		=>
 					array(
 						'terminal_id'	=> TERMINAL_ID,
@@ -117,7 +117,7 @@ $config_form_config = array(
 			array(
 				'start_html'			=> '<th>',
 				'end_html'				=> '</th>',
-				'value'					=> _('External css'),
+				'value'					=> __('External css'),
 			),
 			array(
 				'start_html'			=> '<td>',
@@ -137,7 +137,7 @@ $config_form_config = array(
 			array(
 				'start_html'			=> '<th>',
 				'end_html'				=> '</th>',
-				'value'					=> _('External javascript'),
+				'value'					=> __('External javascript'),
 			),
 			array(
 				'start_html'			=> '<td>',
@@ -157,7 +157,7 @@ $config_form_config = array(
 			array(
 				'start_html'			=> '<th>',
 				'end_html'				=> '</th>',
-				'value'					=> _('Header elements'),
+				'value'					=> __('Header elements'),
 			),
 			array(
 				'start_html'			=> '<td>',
@@ -182,7 +182,7 @@ $tab_control_config = array(
 		'start_html'		=> '<li>',
 		'end_html'			=> '</li>',
 		'link'				=> 'html',
-		'value'				=> _('HTML'),
+		'value'				=> __('HTML'),
 		'special_html'		=> 'class="bframe_tab"',
 	),
 	array(
@@ -191,7 +191,7 @@ $tab_control_config = array(
 		'start_html'		=> '<li>',
 		'end_html'			=> '</li>',
 		'link'				=> 'css',
-		'value'				=> _('CSS'),
+		'value'				=> __('CSS'),
 		'special_html'		=> 'class="bframe_tab"',
 	),
 	array(
@@ -200,7 +200,7 @@ $tab_control_config = array(
 		'start_html'		=> '<li>',
 		'end_html'			=> '</li>',
 		'link'				=> 'php',
-		'value'				=> _('PHP'),
+		'value'				=> __('PHP'),
 		'special_html'		=> 'class="bframe_tab"',
 	),
 	array(
@@ -209,7 +209,7 @@ $tab_control_config = array(
 		'start_html'		=> '<li>',
 		'end_html'			=> '</li>',
 		'link'				=> 'config',
-		'value'				=> _('Settings'),
+		'value'				=> __('Settings'),
 		'special_html'		=> 'class="bframe_tab"',
 	),
 	array(
@@ -218,7 +218,7 @@ $tab_control_config = array(
 		'start_html'		=> '<li>',
 		'end_html'			=> '</li>',
 		'link'				=> 'preview',
-		'value'				=> _('Preview'),
+		'value'				=> __('Preview'),
 		'special_html'		=> 'class="bframe_tab" onclick="bframe.preview.submit(\'F1\', \'' . B_SITE_BASE . 'index.php' . '\', \'template_preview\', \'preview_frame\'); return false;"',
 	),
 	array(
@@ -232,7 +232,7 @@ $tab_control_config = array(
 				'name'			=> 'register',
 				'start_html'	=> '<span id="register" class="register-button" onclick="bframe.ajaxSubmit.submit(\'F1\', \'' . $this->module . '\', \'form\', \'register\', \'confirm\', true)">',
 				'end_html'		=> '</span>',
-				'value'			=> '<img src="images/common/save.png" alt="Save" />' . _('Save'),
+				'value'			=> '<img src="images/common/save.png" alt="Save" />' . __('Save'),
 			),
 		),
 		array(

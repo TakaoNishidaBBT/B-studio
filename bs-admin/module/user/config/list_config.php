@@ -20,7 +20,7 @@ array(
 						from " . B_DB_PREFIX . "user
 						where 1=1 ",
 
-	'empty_message'	=> '<span class="bold">　' . _('No record was found') . '</span>',
+	'empty_message'	=> '<span class="bold">　' . __('No record was found') . '</span>',
 
 	'header'	=>
 	array(
@@ -31,7 +31,7 @@ array(
 			'name'			=> 'user_id',
 			'start_html'	=> '<th class="sortable" style="width:80px">',
 			'end_html'		=> '</th>',
-			'value'			=> _('User ID'),
+			'value'			=> __('User ID'),
 			'class'			=> 'B_Link',
 			'link'			=> DISPATCH_URL,
 			'cond_html'		=> 'class="current-key"',
@@ -42,7 +42,7 @@ array(
 			'name'			=> 'name',
 			'start_html'	=> '<th class="sortable" style="width:80px">',
 			'end_html'		=> '</th>',
-			'value'			=> _('Name'),
+			'value'			=> __('Name'),
 			'class'			=> 'B_Link',
 			'link'			=> DISPATCH_URL,
 			'cond_html'		=> 'class="current-key"',
@@ -53,7 +53,7 @@ array(
 			'name'			=> 'user_auth',
 			'start_html'	=> '<th class="sortable" style="width:60px">',
 			'end_html'		=> '</th>',
-			'value'			=> _('Authority'),
+			'value'			=> __('Authority'),
 			'class'			=> 'B_Link',
 			'link'			=> DISPATCH_URL,
 			'cond_html'		=> 'class="current-key"',
@@ -64,7 +64,7 @@ array(
 			'name'			=> 'user_status',
 			'start_html'	=> '<th class="sortable" style="width:60px">',
 			'end_html'		=> '</th>',
-			'value'			=> _('Status'),
+			'value'			=> __('Status'),
 			'class'			=> 'B_Link',
 			'link'			=> DISPATCH_URL,
 			'cond_html'		=> 'class="current-key"',
@@ -75,7 +75,7 @@ array(
 			'name'			=> 'language',
 			'start_html'	=> '<th class="sortable" style="width:60px">',
 			'end_html'		=> '</th>',
-			'value'			=> _('Language'),
+			'value'			=> __('Language'),
 			'class'			=> 'B_Link',
 			'link'			=> DISPATCH_URL,
 			'cond_html'		=> 'class="current-key"',
@@ -86,17 +86,17 @@ array(
 			'name'			=> 'notes',
 			'start_html'	=> '<th class="center">',
 			'end_html'		=> '</th>',
-			'value'			=> _('Notes'),
+			'value'			=> __('Notes'),
 		),
 		array(
 			'start_html'	=> '<th class="center" style="width:40px" nowrap>',
 			'end_html'		=> '</th>',
-			'value'			=> _('Edit'),
+			'value'			=> __('Edit'),
 		),
 		array(
 			'start_html'	=> '<th class="center" style="width:40px" nowrap>',
 			'end_html'		=> '</th>',
-			'value'			=> _('Delete'),
+			'value'			=> __('Delete'),
 		),
 	),
 

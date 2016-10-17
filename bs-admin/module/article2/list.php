@@ -176,16 +176,16 @@
 					$sql_where.= " and 0=1 ";
 				}
 
-				$select_message.= _('Keyword: ') . ' <em>' . htmlspecialchars($this->keyword, ENT_QUOTES) . '</em>　';
+				$select_message.= __('Keyword: ') . ' <em>' . htmlspecialchars($this->keyword, ENT_QUOTES) . '</em>　';
 			}
 			if($this->category_id) {
 				$sql_where.= " and category_id = '%CATEGORY_ID%' ";
 				$sql_where = str_replace('%CATEGORY_ID%', $this->category_id, $sql_where);
-				$select_message.= _('Category: ') . '<em>' . htmlspecialchars(str_replace('&emsp;', '', $this->category_list[$this->category_id]), ENT_QUOTES, B_CHARSET) . '</em>&nbsp;&nbsp;';
+				$select_message.= __('Category: ') . '<em>' . htmlspecialchars(str_replace('&emsp;', '', $this->category_list[$this->category_id]), ENT_QUOTES, B_CHARSET) . '</em>&nbsp;&nbsp;';
 			}
 
 			if($select_message) {
-				$select_message = '<p class="condition"><span class="bold">' . _('Search condition') . '&nbsp;</span>' . $select_message . '</p>';
+				$select_message = '<p class="condition"><span class="bold">' . __('Search condition') . '&nbsp;</span>' . $select_message . '</p>';
 			}
 
 			$this->sql_where = $sql_where . $sql_where_invalid;

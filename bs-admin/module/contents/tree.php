@@ -74,7 +74,7 @@
 				if($this->request['mode'] == 'cut' && $this->request['destination_node_id'] != 'trash' &&
 					$this->tree->checkDuplicateById($this->request['destination_node_id'], $this->request['source_node_id'])) {
 
-					$this->message = _('Already exists');
+					$this->message = __('Already exists');
 					$status = false;
 				}
 				else {
@@ -285,19 +285,19 @@
 		function checkFileName($node_id, $file_name) {
 			$file_info = pathinfo($file_name);
 			if(!strlen(trim($file_name))) {
-				$this->message = _('Please enter file name');
+				$this->message = __('Please enter file name');
 				return false;
 			}
 			if(strlen($file_name) != mb_strlen($file_name)) {
-				$this->message = _('Multi byte character can not be used');
+				$this->message = __('Multi byte character can not be used');
 				return false;
 			}
 			if($this->tree->checkDuplicateByName($node_id, $file_name)) {
-				$this->message = _('This name can not be used. Because this name already exists. Please enter the other name.');
+				$this->message = __('This name can not be used. Because this name already exists. Please enter the other name.');
 				return false;
 			}
 			if(substr($file_name, -1) == '.') {
-				$this->message = _('Extension is necessary');
+				$this->message = __('Extension is necessary');
 				return false;
 			}
 			switch($file_info['extension']) {
@@ -307,11 +307,11 @@
 			case 'jpeg':
 			case 'gif':
 			case 'png':
-				$this->message = _('Followed extensions can not be used (css swf jpg jpeg gif png)');
+				$this->message = __('Followed extensions can not be used (css swf jpg jpeg gif png)');
 				return false;
 			}
 			if(preg_match('/[\\\\:\/\*\?<>\|\s]/', $file_name)) {
-				$this->message = _('Followed charcters can not be used for file name and folder name (\ / : * ? " < > | space)');
+				$this->message = __('Followed charcters can not be used for file name and folder name (\ / : * ? " < > | space)');
 				return false;
 			}
 
@@ -321,7 +321,7 @@
 		function updateDispSeq() {
 			if($this->request['parent_node_id'] && $this->request['parent_node_id'] != 'null') {
 				if($this->tree->checkDuplicateById($this->request['parent_node_id'], $this->request['source_node_id'])) {
-					$this->message = _('Already exists');
+					$this->message = __('Already exists');
 					$this->status = false;
 				}
 				else {

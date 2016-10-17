@@ -19,7 +19,7 @@ $form_config = array(
 			array(
 				'start_html'		=> '<th>',
 				'end_html'			=> '</th>',
-				'value'				=> _('Admin page title'),
+				'value'				=> __('Admin page title'),
 			),
 			array(
 				'class'				=> 'B_InputText',
@@ -37,7 +37,7 @@ $form_config = array(
 			array(
 				'start_html'		=> '<th>',
 				'end_html'			=> '</th>',
-				'value'				=> _('Language'),
+				'value'				=> __('Language'),
 			),
 			array(
 				'class'				=> 'B_SelectBox',
@@ -57,7 +57,7 @@ $form_config = array(
 			array(
 				'start_html'		=> '<th>',
 				'end_html'			=> '</th>',
-				'value'				=> _('DB backup'),
+				'value'				=> __('DB backup'),
 			),
 			array(
 				'start_html'		=> '<td>',
@@ -66,7 +66,7 @@ $form_config = array(
 					'name'				=> 'backup',
 					'start_html'		=> '<span class="download-button" onclick="bframe.submit(\'F1\', \'' . $this->module . '\', \'form\', \'backupDB\', \'\', true)" >',
 					'end_html'			=> '</span>',
-					'value'				=> '<img src="images/common/download.png" alt="' . _('Download') . '" />' . _('Download'),
+					'value'				=> '<img src="images/common/download.png" alt="' . __('Download') . '" />' . __('Download'),
 				),
 			),
 		),
@@ -80,7 +80,7 @@ $form_config = array(
 			array(
 				'start_html'		=> '<th>',
 				'end_html'			=> '</th>',
-				'value'				=> _('Full backup'),
+				'value'				=> __('Full backup'),
 			),
 			array(
 				'start_html'		=> '<td>',
@@ -89,7 +89,7 @@ $form_config = array(
 					'name'				=> 'backup',
 					'start_html'		=> '<span class="download-button" onclick="bframe.submit(\'F1\', \'' . $this->module . '\', \'form\', \'backupAll\', \'\', true)" >',
 					'end_html'			=> '</span>',
-					'value'				=> '<img src="images/common/download.png" alt="' . _('Download') . '" />' . _('Download'),
+					'value'				=> '<img src="images/common/download.png" alt="' . __('Download') . '" />' . __('Download'),
 				),
 			),
 		),
@@ -103,7 +103,7 @@ $form_config = array(
 			array(
 				'start_html'		=> '<th>',
 				'end_html'			=> '</th>',
-				'value'				=> _('Re-install backup'),
+				'value'				=> __('Re-install backup'),
 			),
 			array(
 				'start_html'		=> '<td>',
@@ -112,7 +112,7 @@ $form_config = array(
 					'name'				=> 'backup',
 					'start_html'		=> '<span class="download-button" onclick="bframe.submit(\'F1\', \'' . $this->module . '\', \'form\', \'backupAll\', \'install\', true)" >',
 					'end_html'			=> '</span>',
-					'value'				=> '<img src="images/common/download.png" alt="' . _('Download') . '" />' . _('Download'),
+					'value'				=> '<img src="images/common/download.png" alt="' . __('Download') . '" />' . __('Download'),
 				),
 			),
 		),
@@ -144,7 +144,7 @@ $input_control_config = array(
 			array(
 				'start_html'	=> '<span class="text">',
 				'end_html'		=> '</span>',
-				'value'			=> _('Confirm'),
+				'value'			=> __('Confirm'),
 			),
 			array(
 				'start_html'	=> '<span class="img-cover">',
@@ -174,7 +174,7 @@ $confirm_control_config = array(
 			array(
 				'start_html'	=> '<span class="text">',
 				'end_html'		=> '</span>',
-				'value'			=> _('Back'),
+				'value'			=> __('Back'),
 			),
 		),
 	),
@@ -188,7 +188,7 @@ $confirm_control_config = array(
 			array(
 				'start_html'	=> '<span class="text">',
 				'end_html'		=> '</span>',
-				'value'			=> _('Save'),
+				'value'			=> __('Save'),
 			),
 			array(
 				'start_html'	=> '<span class="img-cover">',
@@ -218,7 +218,7 @@ $result_control_config = array(
 			array(
 				'start_html'	=> '<span class="text">',
 				'end_html'		=> '</span>',
-				'value'			=> _('Back to configuration form'),
+				'value'			=> __('Back to configuration form'),
 			),
 		),
 	),

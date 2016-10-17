@@ -9,7 +9,7 @@ $pager_config =
 array(
 	'row_per_page'	=> '10',
 	'page_link_max'	=> '5',
-	'start_html'	=> '<ul class="page-locator"><li class="title">' . _('Pages:') . '</li>',
+	'start_html'	=> '<ul class="page-locator"><li class="title">' . __('Pages:') . '</li>',
 	'end_html'		=> '</ul>',
 	'location'		=>
 	array(
@@ -60,6 +60,6 @@ array(
 			'end_html'		=> '</li>',
 			'value'			=> '<img src="images/pagenation/last.png" alt="next" />',
 		),
-		'information'	=> '<li class="page_info">' . _('Displaying %RECORD_FROM% to %RECORD_TO% of %TOTAL% items') . '</li>'
+		'information'	=> '<li class="page_info">' . __('Displaying %RECORD_FROM% to %RECORD_TO% of %TOTAL% items') . '</li>'
 	),
 );

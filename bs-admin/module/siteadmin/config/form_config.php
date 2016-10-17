@@ -16,11 +16,11 @@ $form_config = array(
 				'class'			=> 'B_Guidance',
 				'start_html'	=> '<span class="require">',
 				'end_html'		=> '</span>',
-				'value'			=> _('*'),
+				'value'			=> __('*'),
 			),
 			array(
 				'class'			=> 'B_Guidance',
-				'value'			=> _(' is required field'),
+				'value'			=> __(' is required field'),
 			),
 		),
 
@@ -38,11 +38,11 @@ $form_config = array(
 				'end_html'				=> '</th>',
 				'invalid_start_html'	=> '<th class="error">',
 				array(
-					'value'				=> _('User name'),
+					'value'				=> __('User name'),
 				),
 				array(
 					'class'				=> 'B_Guidance',
-					'value'				=> '<span class="require">' . _('*') . '</span>',
+					'value'				=> '<span class="require">' . __('*') . '</span>',
 				),				
 			),
 			array(
@@ -56,7 +56,7 @@ $form_config = array(
 					array(
 						array(
 							'type' 			=> 'required',
-							'error_message'	=> _('Please enter user name'),
+							'error_message'	=> __('Please enter user name'),
 						),
 					),
 				),
@@ -79,11 +79,11 @@ $form_config = array(
 				'end_html'				=> '</th>',
 				'invalid_start_html'	=> '<th class="error">',
 				array(
-					'value'					=> _('Login ID'),
+					'value'					=> __('Login ID'),
 				),
 				array(
 					'class'				=> 'B_Guidance',
-					'value'				=> '<span class="require">' . _('*') . '</span>',
+					'value'				=> '<span class="require">' . __('*') . '</span>',
 				),				
 			),
 			array(
@@ -97,18 +97,18 @@ $form_config = array(
 					array(
 						array(
 							'type' 			=> 'required',
-							'error_message'	=> _('Please enter login ID'),
+							'error_message'	=> __('Please enter login ID'),
 						),
 						array(
 							'type' 			=> 'pattern',
 							'pattern'		=> '^[a-zA-Z0-9\_\-]+$',
-							'error_message'	=> _('Please enter login ID using alphanumeric, hyphen(-) and underbar(_)'),
+							'error_message'	=> __('Please enter login ID using alphanumeric, hyphen(-) and underbar(_)'),
 						),
 						array(
 							'type'			=> 'callback',
 							'obj'			=> $this,
 							'method'		=> '_validate_callback',
-							'error_message'	=> _('This ID is already exists'),
+							'error_message'	=> __('This ID is already exists'),
 						),
 					),
 				),
@@ -128,7 +128,7 @@ $form_config = array(
 			array(
 				'start_html'		=> '<th>',
 				'end_html'			=> '</th>',
-				'value'				=> _('Language'),
+				'value'				=> __('Language'),
 			),
 			array(
 				'class'				=> 'B_SelectBox',
@@ -150,7 +150,7 @@ $form_config = array(
 				'start_html'			=> '<th>',
 				'end_html'				=> '</th>',
 				'invalid_start_html'	=> '<th class="error">',
-				'value'					=> _('Password'),
+				'value'					=> __('Password'),
 			),
 			array(
 				'start_html'	=> '<td>',
@@ -159,13 +159,13 @@ $form_config = array(
 					'name'					=> 'admin_user_pwd',
 					'class'					=> 'B_Password',
 					'special_html'			=> 'class="textbox ime-off" size="40" maxlength="100" autocomplete="off" ',
-					'confirm_message'		=> _('Password you set'),
+					'confirm_message'		=> __('Password you set'),
 					'validate'				=>
 					array(
 						array(
 							'type' 			=> 'pattern',
 							'pattern'		=> '^[a-zA-Z0-9\_\-]+$',
-							'error_message'	=> _('Please enter User ID using alphanumeric, hyphen(-) and underbar(_)'),
+							'error_message'	=> __('Please enter User ID using alphanumeric, hyphen(-) and underbar(_)'),
 						),
 					),
 				),
@@ -173,7 +173,7 @@ $form_config = array(
 					'start_html'			=> '<span class="notice">',
 					'end_html'				=> '</span>',
 					'class'					=> 'B_Guidance',
-					'value'					=> _('If you change password, please enter password. If you don\'t, keep this field empty'),
+					'value'					=> __('If you change password, please enter password. If you don\'t, keep this field empty'),
 				),
 				array(
 					'name'					=> 'error_message',
@@ -194,7 +194,7 @@ $form_config = array(
 				'start_html'			=> '<th>',
 				'end_html'				=> '</th>',
 				'invalid_start_html'	=> '<th class="error">',
-				'value'					=> _('Password (Re-entry)'),
+				'value'					=> __('Password (Re-entry)'),
 			),
 			array(
 				'start_html'	=> '<td>',
@@ -208,7 +208,7 @@ $form_config = array(
 						array(
 							'type' 			=> 'match',
 							'target'		=> 'admin_user_pwd',
-							'error_message'	=> _('Password is not matched'),
+							'error_message'	=> __('Password is not matched'),
 						),
 					),
 				),
@@ -216,7 +216,7 @@ $form_config = array(
 					'start_html'			=> '<span class="notice">',
 					'end_html'				=> '</span>',
 					'class'					=> 'B_Guidance',
-					'value'					=> _('For confirmation, please re-enter password'),
+					'value'					=> __('For confirmation, please re-enter password'),
 				),
 				array(
 					'name'					=> 'error_message',
@@ -254,7 +254,7 @@ $input_control_config = array(
 			array(
 				'start_html'	=> '<span class="text">',
 				'end_html'		=> '</span>',
-				'value'			=> _('Confirm'),
+				'value'			=> __('Confirm'),
 			),
 			array(
 				'start_html'	=> '<span class="img-cover">',
@@ -284,7 +284,7 @@ $confirm_control_config = array(
 			array(
 				'start_html'	=> '<span class="text">',
 				'end_html'		=> '</span>',
-				'value'			=> _('Back'),
+				'value'			=> __('Back'),
 			),
 		),
 	),
@@ -298,7 +298,7 @@ $confirm_control_config = array(
 			array(
 				'start_html'	=> '<span class="text">',
 				'end_html'		=> '</span>',
-				'value'			=> _('Save'),
+				'value'			=> __('Save'),
 			),
 			array(
 				'start_html'	=> '<span class="img-cover">',
@@ -328,7 +328,7 @@ $result_control_config = array(
 			array(
 				'start_html'	=> '<span class="text">',
 				'end_html'		=> '</span>',
-				'value'			=> _('Back to site admin form'),
+				'value'			=> __('Back to site admin form'),
 			),
 		),
 	),

@@ -9,8 +9,8 @@
 	<div id="title-header"><h1><?php echo $this->site_title ?></h1></div>
 	<div class="message">
 		<dl class="error">
-			<dt><img src="images/login/warning.png" alt="Error" /><?php echo _('Error'); ?></dt>
-			<dd><p class="error-message"><strong><?php echo _('Please enter your login ID and password correctly.'); ?></strong></p></dd>
+			<dt><img src="images/login/warning.png" alt="Error" /><?php echo __('Error'); ?></dt>
+			<dd><p class="error-message"><strong><?php echo __('Please enter your login ID and password correctly.'); ?></strong></p></dd>
 		</dl>
 
 		<div class="icon">

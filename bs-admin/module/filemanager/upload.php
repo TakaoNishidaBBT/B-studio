@@ -28,7 +28,7 @@
 					else {
 						$limit = ini_get('upload_max_filesize');
 					}
-					$message = _('File size is too large. Maximun upload file size is %LIMIT%');
+					$message = __('File size is too large. Maximun upload file size is %LIMIT%');
 					$message = str_replace('%LIMIT%', $limit, $message);
 					throw new Exception($message);
 				}
@@ -36,10 +36,10 @@
 	 			// Check file name
 				$file = pathinfo($_POST['filename']);
 				if(strlen($file['basename']) != mb_strlen($file['basename'])) {
-					throw new Exception(_('Multi byte character can not be used'));
+					throw new Exception(__('Multi byte character can not be used'));
 				}
 				if(preg_match('/[\\\\:\/\*\?<>\|\s]/', $file['basename'])) {
-					throw new Exception(_('Followed charcters can not be used for file name and folder name (\ / : * ? " < > | space)'));
+					throw new Exception(__('Followed charcters can not be used for file name and folder name (\ / : * ? " < > | space)'));
 				}
 				if($this->global_session[$this->session['relation']]['current_node'] != 'root') {
 					$path = $this->global_session[$this->session['relation']]['current_node'] . '/';
@@ -52,14 +52,14 @@
 					switch($this->request['extract_mode']) {
 					case 'confirm':
 						$response_mode = 'zipConfirm';
-						$message = _('Extract %FILE_NAME% ?');
+						$message = __('Extract %FILE_NAME% ?');
 						$message = str_replace('%FILE_NAME%', $file['basename'], $message);
 						break;
 
 					case 'noextract':
 						if(file_exists(B_UPLOAD_DIR . $path . $file['basename']) && $this->request['mode'] == 'confirm') {
 							$response_mode = 'confirm';
-							$message = _('%FILE_NAME% already exists. Are you sure to overwrite?');
+							$message = __('%FILE_NAME% already exists. Are you sure to overwrite?');
 							$message = str_replace('%FILE_NAME%', $file['basename'], $message);
 						}
 						break;
@@ -68,7 +68,7 @@
 				else {
 					if($this->request['mode'] == 'confirm' && file_exists(B_UPLOAD_DIR . $path . $file['basename'])) {
 						$response_mode = 'confirm';
-						$message = _('%FILE_NAME% already exists. Are you sure to overwrite?');
+						$message = __('%FILE_NAME% already exists. Are you sure to overwrite?');
 						$message = str_replace('%FILE_NAME%', $file['basename'], $message);
 					}
 				}
@@ -173,31 +173,31 @@
 				if(!$status) {
 					switch($_FILES['Filedata']['error']) {
 					case 1:
-						$this->error_message = _('The uploaded file exceeds the upload_max_filesize directive in php.ini.');
+						$this->error_message = __('The uploaded file exceeds the upload_max_filesize directive in php.ini.');
 						break;
 
 					case 2:
-						$this->error_message = _('The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the HTML form.');
+						$this->error_message = __('The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the HTML form.');
 						break;
 
 					case 3:
-						$this->error_message = _('The uploaded file was only partially uploaded.');
+						$this->error_message = __('The uploaded file was only partially uploaded.');
 						break;
 
 					case 4:
-						$this->error_message = _('No file was uploaded.');
+						$this->error_message = __('No file was uploaded.');
 						break;
 
 					case 6:
-						$this->error_message = _('Missing a temporary folder. Introduced in PHP 5.0.3.');
+						$this->error_message = __('Missing a temporary folder. Introduced in PHP 5.0.3.');
 						break;
 
 					case 7:
-						$this->error_message = _('Failed to write file to disk. Introduced in PHP 5.1.0.');
+						$this->error_message = __('Failed to write file to disk. Introduced in PHP 5.1.0.');
 						break;
 
 					case 8:
-						$this->error_message = _('A PHP extension stopped the file upload.');
+						$this->error_message = __('A PHP extension stopped the file upload.');
 						break;
 
 					default:
@@ -230,7 +230,7 @@
 				$stat = $zip->statIndex($i);
 				$file_name = mb_convert_encoding($stat['name'], 'UTF-8', 'auto');
 				if(strlen($file_name) != mb_strlen($file_name)) {
-					throw new Exception(_('Multi byte character can not be used. (the contents of the zip file'));
+					throw new Exception(__('Multi byte character can not be used. (the contents of the zip file'));
 				}
 			}
 		}

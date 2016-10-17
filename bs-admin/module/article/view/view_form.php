@@ -1,5 +1,5 @@
 <body onload="bstudio.articleDetailInit('description_flag_1', 'description_flag_2')">
-	<div id="header"><h2 class="article"><?php echo _('Article'); ?></h2></div>
+	<div id="header"><h2 class="article"><?php echo __('Article'); ?></h2></div>
 
 	<form name="F1" method="post" action="index.php">
 		<div id="control">

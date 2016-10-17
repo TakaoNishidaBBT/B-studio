@@ -1,5 +1,5 @@
 <body>
-	<div id="header"><h2 class="article"><?php echo _('Article3'); ?></h2></div>
+	<div id="header"><h2 class="article"><?php echo __('Article3'); ?></h2></div>
 	<form name="F1" method="post" action="index.php">
 		<div id="control">
 			<?php echo $this->result_control->getHtml(); ?>

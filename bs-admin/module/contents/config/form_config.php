@@ -27,8 +27,8 @@ $form_config = array(
 				'id'				=> 'open_widgetmanager',
 				'class'				=> 'B_Link',
 				'link'				=> 'index.php',
-				'value'				=> _('Widget'),
-				'special_html'		=> 'title="' . _('Widget') . '" style="display:none"',
+				'value'				=> __('Widget'),
+				'special_html'		=> 'title="' . __('Widget') . '" style="display:none"',
 				'fixedparam'		=>
 				array(
 					'terminal_id'	=> TERMINAL_ID,
@@ -105,7 +105,7 @@ $tab_control_config = array(
 		'end_html'			=> '</li>',
 		'link'				=> 'html',
 		'special_html'		=> 'class="bframe_tab" onclick="bframe.inline.blur()"',
-		'value'				=> _('HTML'),
+		'value'				=> __('HTML'),
 	),
 	array(
 		'name'				=> 'visual_editor_index',
@@ -114,7 +114,7 @@ $tab_control_config = array(
 		'end_html'			=> '</li>',
 		'link'				=> 'visual',
 		'special_html'		=> 'class="bframe_tab" onclick="bframe.inline.submit(\'F1\', \'' . B_SITE_BASE . 'index.php' . '\', \'inline\', \'inline_frame\'); return false;"',
-		'value'				=> _('WYSWYG'),
+		'value'				=> __('WYSWYG'),
 	),
 	array(
 		'name'				=> 'css_editor_index',
@@ -122,7 +122,7 @@ $tab_control_config = array(
 		'start_html'		=> '<li>',
 		'end_html'			=> '</li>',
 		'link'				=> 'css',
-		'value'				=> _('CSS'),
+		'value'				=> __('CSS'),
 		'special_html'		=> 'class="bframe_tab"',
 	),
 	array(
@@ -131,7 +131,7 @@ $tab_control_config = array(
 		'start_html'		=> '<li>',
 		'end_html'			=> '</li>',
 		'link'				=> 'php',
-		'value'				=> _('PHP'),
+		'value'				=> __('PHP'),
 		'special_html'		=> 'class="bframe_tab"',
 	),
 	array(
@@ -140,7 +140,7 @@ $tab_control_config = array(
 		'start_html'		=> '<li>',
 		'end_html'			=> '</li>',
 		'link'				=> 'config',
-		'value'				=> _('Settings'),
+		'value'				=> __('Settings'),
 		'special_html'		=> 'class="bframe_tab"',
 	),
 	array(
@@ -149,7 +149,7 @@ $tab_control_config = array(
 		'start_html'		=> '<li>',
 		'end_html'			=> '</li>',
 		'link'				=> 'preview',
-		'value'				=> _('Preview'),
+		'value'				=> __('Preview'),
 		'special_html'		=> 'class="bframe_tab" onclick="bframe.preview.submit(\'F1\', \'' . B_SITE_BASE . 'index.php' . '\', \'preview\', \'preview_frame\'); return false;"',
 	),
 	array(
@@ -163,7 +163,7 @@ $tab_control_config = array(
 				'name'			=> 'register',
 				'start_html'	=> '<span id="register" class="register-button" onclick="bframe.ajaxSubmit.submit(\'F1\', \'' . $this->module . '\', \'form\', \'register\', \'confirm\', true)">',
 				'end_html'		=> '</span>',
-				'value'			=> '<img src="images/common/save.png" alt="Save" />' . _('Save'),
+				'value'			=> '<img src="images/common/save.png" alt="Save" />' . __('Save'),
 			),
 		),
 		array(
@@ -191,7 +191,7 @@ $config_form_config = array(
 				'start_html'			=> '<th>',
 				'end_html'				=> '</th>',
 				array(
-					'value'				=> _('Title'),
+					'value'				=> __('Title'),
 					'no_linefeed'		=> true,
 				),
 			),
@@ -213,7 +213,7 @@ $config_form_config = array(
 			array(
 				'start_html'		=> '<th>',
 				'end_html'			=> '</th>',
-				'value'				=> _('Template'),
+				'value'				=> __('Template'),
 			),
 			array(
 				'start_html'		=> '<td>',
@@ -231,7 +231,7 @@ $config_form_config = array(
 					'name'				=> 'open_template',
 					'class'				=> 'B_Link',
 					'link'				=> 'index.php',
-					'special_html'		=> 'title="' . _('Template') . '" class="settings-button" onclick="top.bframe.modalWindow.activate(this, window, \'template_id\'); return false;" params="width:350,height:400"',
+					'special_html'		=> 'title="' . __('Template') . '" class="settings-button" onclick="top.bframe.modalWindow.activate(this, window, \'template_id\'); return false;" params="width:350,height:400"',
 					'fixedparam'		=>
 					array(
 						'terminal_id'		=> TERMINAL_ID,
@@ -239,14 +239,14 @@ $config_form_config = array(
 						'page'				=> 'select_tree',
 					),
 					'specialchars'		=> 'none',
-					'value'				=> '<img alt="' . _('Template') . '" src="images/common/gear_gray.png" />',
+					'value'				=> '<img alt="' . __('Template') . '" src="images/common/gear_gray.png" />',
 				),
 				array(
 					'class'				=> 'B_Link',
 					'link'				=> '#',
-					'special_html'		=> 'title="' . _('Clear') . '" class="clear-button" onclick="bstudio.clearText(\'template_name\', \'template_id\'); return false;" ',
+					'special_html'		=> 'title="' . __('Clear') . '" class="clear-button" onclick="bstudio.clearText(\'template_name\', \'template_id\'); return false;" ',
 					'specialchars'		=> 'none',
-					'value'				=> '<img alt="' . _('Clear') . '" src="images/common/clear_gray.png" />',
+					'value'				=> '<img alt="' . __('Clear') . '" src="images/common/clear_gray.png" />',
 				),
 			),
 		),
@@ -258,7 +258,7 @@ $config_form_config = array(
 				'start_html'			=> '<th>',
 				'end_html'				=> '</th>',
 				array(
-					'value'				=> _('Breadcrumbs'),
+					'value'				=> __('Breadcrumbs'),
 					'no_linefeed'		=> true,
 				),
 			),
@@ -280,7 +280,7 @@ $config_form_config = array(
 			array(
 				'start_html'			=> '<th>',
 				'end_html'				=> '</th>',
-				'value'					=> _('Keywords'),
+				'value'					=> __('Keywords'),
 			),
 			array(
 				'start_html'			=> '<td>',
@@ -299,7 +299,7 @@ $config_form_config = array(
 			array(
 				'start_html'			=> '<th>',
 				'end_html'				=> '</th>',
-				'value'					=> _('Description'),
+				'value'					=> __('Description'),
 			),
 			array(
 				'start_html'			=> '<td>',
@@ -318,7 +318,7 @@ $config_form_config = array(
 			array(
 				'start_html'			=> '<th>',
 				'end_html'				=> '</th>',
-				'value'					=> _('External CSS'),
+				'value'					=> __('External CSS'),
 			),
 			array(
 				'start_html'			=> '<td>',
@@ -337,7 +337,7 @@ $config_form_config = array(
 			array(
 				'start_html'			=> '<th>',
 				'end_html'				=> '</th>',
-				'value'					=> _('External javascript'),
+				'value'					=> __('External javascript'),
 			),
 			array(
 				'start_html'			=> '<td>',
@@ -356,7 +356,7 @@ $config_form_config = array(
 			array(
 				'start_html'			=> '<th>',
 				'end_html'				=> '</th>',
-				'value'					=> _('Header elements'),
+				'value'					=> __('Header elements'),
 			),
 			array(
 				'start_html'			=> '<td>',

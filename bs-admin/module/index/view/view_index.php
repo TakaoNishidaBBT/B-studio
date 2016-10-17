@@ -27,11 +27,11 @@
 			<ul>
 				<li>
 					<dl class="login-user">
-						<dt><?php echo _('User:'); ?></dt>
+						<dt><?php echo __('User:'); ?></dt>
 						<dd><strong><?php echo $this->user_name ?></strong></dd>
 					</dl>
 				</li>
-				<li><a href="<?php echo DISPATCH_URL ?>&amp;module=index&amp;page=logout" target="_top" ><?php echo _('Log out'); ?></a></li>
+				<li><a href="<?php echo DISPATCH_URL ?>&amp;module=index&amp;page=logout" target="_top" ><?php echo __('Log out'); ?></a></li>
 			</ul>
 		</div>
 	</div>
