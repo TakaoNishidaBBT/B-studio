@@ -27,8 +27,8 @@ $form_config = array(
 				'id'				=> 'open_widgetmanager',
 				'class'				=> 'B_Link',
 				'link'				=> 'index.php',
-				'value'				=> __('Widget'),
-				'special_html'		=> 'title="' . __('Widget') . '" style="display:none"',
+				'value'				=> __('Widgets'),
+				'special_html'		=> 'title="' . __('Widgets') . '" style="display:none"',
 				'fixedparam'		=>
 				array(
 					'terminal_id'	=> TERMINAL_ID,

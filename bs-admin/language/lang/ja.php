@@ -123,7 +123,7 @@
 		'Templates'						=> 'テンプレート',
 		'Resources'						=> 'リソース',
 		'Resource manager'				=> 'リソース管理',
-		'Widget'						=> 'ウィジェット',
+		'Widgets'						=> 'ウィジェット',
 		'Posts'							=> '投稿',
 		'Article'						=> '記事',
 		'Article2'						=> '記事2',

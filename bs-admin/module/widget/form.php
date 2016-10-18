@@ -53,7 +53,7 @@
 				$row = $this->db->fetch_assoc($rs);
 			}
 
-			// DBから値を設定
+			// Set value from DB
 			$row['node_id'] = $node_info['node_id'];
 			$this->form->setValue($row);
 		}
@@ -83,7 +83,7 @@
 					if($this->post['mode'] == 'confirm' && $row['update_datetime'] > $this->post['update_datetime']) {
 						$this->status = true;
 						$this->mode = 'confirm';
-						$this->message = "他のユーザに更新されています。\n上書きしますか？";
+						$this->message = __("Other user updated this file\nAre you sure to overwrite?");
 					}
 					else {
 						$this->update($this->user_id, $contents_id);
@@ -127,12 +127,12 @@
 			if($ret) {
 				$this->db->commit();
 				$this->status = true;
-				$this->message = "保存しました";
+				$this->message = __('Saved');
 			}
 			else {
 				$this->db->rollback();
 				$this->status = false;
-				$this->message = "保存に失敗しました";
+				$this->message = __('It failed to save');
 			}
 		}
 
@@ -155,12 +155,12 @@
 			if($ret) {
 				$this->db->commit();
 				$this->status = true;
-				$this->message = "保存しました";
+				$this->message = __('Saved');
 			}
 			else {
 				$this->db->rollback();
 				$this->status = false;
-				$this->message = "保存に失敗しました";
+				$this->message = __('It failed to save');
 			}
 		}
 
@@ -198,18 +198,25 @@
 			if($ret) {
 				$this->db->commit();
 				$this->status = true;
-				$this->message = "保存しました";
+				$this->message = __('Saved');
 			}
 			else {
 				$this->db->rollback();
 				$this->status = false;
-				$this->message = "保存に失敗しました";
+				$this->message = __('It failed to save');
 			}
 		}
 
 		function view() {
+			// Start buffering
+			ob_start();
 
-			// HTTPヘッダー出力
+			require_once('./view/view_form.php');
+
+			// Get buffer
+			$contents = ob_get_clean();
+
+			// Send HTTP header
 			$this->sendHttpHeader();
 
 			$this->html_header->appendProperty('css', '<link href="css/widget_form.css" type="text/css" rel="stylesheet" media="all" />');
@@ -227,21 +234,23 @@
 			$this->html_header->appendProperty('script', '<script src="js/ace/mode-css.js" type="text/javascript"></script>');
 			$this->html_header->appendProperty('script', '<script src="js/ace/mode-php.js" type="text/javascript"></script>');
 
-			// HTMLヘッダー出力
+			// Show HTML header
 			$this->showHtmlHeader();
 
-			require_once('./view/view_form.php');
+			// Show HTML body
+			echo $contents;
 		}
 
 		function view_folder() {
-			// HTTPヘッダー出力
+			// Send HTTP header
 			$this->sendHttpHeader();
 
 			$this->html_header->appendProperty('css', '<link href="css/widget_form.css" type="text/css" rel="stylesheet" media="all" />');
 
-			// HTMLヘッダー出力
+			// Show HTML header
 			$this->showHtmlHeader();
 
+			// Show HTML body
 			echo '<body></body>';
 		}
 	}
