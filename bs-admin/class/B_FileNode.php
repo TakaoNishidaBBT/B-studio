@@ -190,8 +190,10 @@
 			$list['thumbnail_image_path'] = $this->thumbnail_image_path;
 			$list['node_count'] = $this->node_count;
 			$list['folder_count'] = $this->folder_count;
-			$list['update_datetime_t'] = $this->update_datetime_t;
+			$list['create_datetime_u'] = $this->update_datetime_u;
 			$list['create_datetime_t'] = $this->update_datetime_t;
+			$list['update_datetime_u'] = $this->update_datetime_u;
+			$list['update_datetime_t'] = $this->update_datetime_t;
 			if($this->node_type != 'folder') {
 				$list['file_size'] = $this->file_size;
 				$list['human_file_size'] = B_Util::human_filesize($this->file_size, 'K');
