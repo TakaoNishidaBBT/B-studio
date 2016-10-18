@@ -66,7 +66,7 @@ $tab_control_config = array(
 		'start_html'		=> '<li>',
 		'end_html'			=> '</li>',
 		'link'				=> 'html',
-		'value'				=> 'HTML',
+		'value'				=> __('HTML'),
 		'special_html'		=> 'class="bframe_tab"',
 	),
 	array(
@@ -75,7 +75,7 @@ $tab_control_config = array(
 		'start_html'		=> '<li>',
 		'end_html'			=> '</li>',
 		'link'				=> 'css',
-		'value'				=> 'CSS',
+		'value'				=> __('CSS'),
 		'special_html'		=> 'class="bframe_tab"',
 	),
 	array(
@@ -84,7 +84,7 @@ $tab_control_config = array(
 		'start_html'		=> '<li>',
 		'end_html'			=> '</li>',
 		'link'				=> 'php',
-		'value'				=> 'PHP',
+		'value'				=> __('PHP'),
 		'special_html'		=> 'class="bframe_tab"',
 	),
 	array(
@@ -93,7 +93,7 @@ $tab_control_config = array(
 		'start_html'		=> '<li>',
 		'end_html'			=> '</li>',
 		'link'				=> 'preview',
-		'value'				=> 'プレビュー',
+		'value'				=> __('Preview'),
 		'special_html'		=> 'class="bframe_tab" onclick="bframe.preview.submit(\'F1\', \'' . B_SITE_BASE . 'index.php' . '\', \'widget_preview\', \'preview_frame\'); return false;"',
 	),
 	array(
@@ -107,7 +107,7 @@ $tab_control_config = array(
 				'name'			=> 'register',
 				'start_html'	=> '<span id="register" class="register-button" onclick="bframe.ajaxSubmit.submit(\'F1\', \'' . $this->module . '\', \'form\', \'register\', \'confirm\', true)">',
 				'end_html'		=> '</span>',
-				'value'			=> '<img src="images/common/save.png" alt="保存" />保存',
+				'value'			=> '<img src="images/common/save.png" alt="Save" />' . __('Save'),
 			),
 		),
 		array(

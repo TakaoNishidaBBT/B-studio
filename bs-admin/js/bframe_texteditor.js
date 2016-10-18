@@ -70,7 +70,7 @@
 			control.appendChild(li);
 			widget = bframe.searchNodeById(parent, 'open_widgetmanager');
 			if(widget) {
-				li = createControlButton('images/editor/gear.png', 'widget', openWidget);
+				li = createControlButton('images/editor/gear.png', 'widgets', openWidget);
 				control.appendChild(li);
 			}
 		}

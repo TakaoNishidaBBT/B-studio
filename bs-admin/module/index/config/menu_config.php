@@ -66,7 +66,7 @@ $menu_config = array(
 								'func'		=> 'openUrl',
 							),
 							array(
-								'menu'		=> __('Widget'),
+								'menu'		=> __('Widgets'),
 								'param'		=> DISPATCH_URL . '&module=widget&page=index&method=init,main',
 								'func'		=> 'openUrl',
 							),
