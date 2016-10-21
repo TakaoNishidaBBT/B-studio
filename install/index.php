@@ -117,6 +117,9 @@
 		case 'ja':
 			return 'ja/';
 
+		case 'zh-cn':
+			return 'zh-cn/';
+
 		default:
 			return;
 		}

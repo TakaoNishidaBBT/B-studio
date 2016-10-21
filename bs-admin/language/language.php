@@ -16,8 +16,8 @@
 		require_once(B_LNGUAGE_DIR . 'lang/ja.php');
 		break;
 
-	case 'zh':
-		require_once(B_LNGUAGE_DIR . 'lang/zh.php');
+	case 'zh-cn':
+		require_once(B_LNGUAGE_DIR . 'lang/zh-cn.php');
 		break;
 
 	default:
