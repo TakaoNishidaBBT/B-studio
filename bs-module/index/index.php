@@ -66,7 +66,7 @@
 			$this->contents_node = $this->getContentsNode($url_array);
 
 			if(!$this->contents_node) {
-				unset($this->breadcrumbs);		// unset bread crumbs
+				unset($this->breadcrumbs);		// Unset bread crumbs
 				$url_array = explode('/', 'notfound.html');
 				$this->contents_node = $this->getContentsNode($url_array);
 				$this->http_status = '404';
