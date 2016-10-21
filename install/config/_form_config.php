@@ -8,6 +8,7 @@
 $language = array(
 	'en'	=> __('English'),
 	'ja'	=> __('Japanese'),
+	'zh-cn'	=> __('Chinese'),
 );
 
 $select_language_config = array(

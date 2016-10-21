@@ -9,6 +9,7 @@
 		array(
 				'en'	=> __('English'),
 				'ja'	=> __('Japanese'),
+				'zh-cn'	=> __('Chinese'),
 		);
 
 	${$g_data_set}['row_per_page'] =
