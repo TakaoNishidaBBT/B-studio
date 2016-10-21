@@ -159,7 +159,7 @@ $form_config = array(
 					'name'					=> 'admin_user_pwd',
 					'class'					=> 'B_Password',
 					'special_html'			=> 'class="textbox ime-off" size="40" maxlength="100" autocomplete="off" ',
-					'confirm_message'		=> __('Password you set'),
+					'confirm_message'		=> __('(Password you set)'),
 					'validate'				=>
 					array(
 						array(
