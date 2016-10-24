@@ -313,34 +313,3 @@ line：14218
 
 
 	4.releaseディレクトリに実行形式が出来上がる
-
-■Mergely
-
-1.非表示のエディタでのoffsetの計算でバグ
-
-	function _calculate_offsetsを修正
-
-//			if (!top_offset) return;//try again
-			if (top_offset < 0) return;//try again
-
-2.初期表示の幅が画面にFITしない。リサイズすれば直る。
-
-	jQuery.extend(Mgly.mergely.prototype, {
-
-	name: 'mergely',
-	//http://jupiterjs.com/news/writing-the-perfect-jquery-plugin
-	init: function(el, options) {
-
-			：
-			：
-//				var w = jQuery(el).parent().width() + scrollbar;
-				var w = jQuery(el).parent().width();
-
-3.見栄えの調整
-
-	function _draw_diff
-
-//		ctx_lhs.fillRect(1.5, lfrom, 4.5, lto);
-//		ctx_rhs.fillRect(1.5, rfrom, 4.5, rto);
-		ctx_lhs.fillRect(0, lfrom, 8, lto);
-		ctx_rhs.fillRect(0, rfrom, 8, rto);
