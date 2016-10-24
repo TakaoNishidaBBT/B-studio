@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="<?php echo $_SESSION['language']; ?>">
 <head>
 <meta charset="utf-8" />
 <link rel="stylesheet" href="css/install.css" type="text/css" media="all" />
@@ -14,7 +14,7 @@
 		<?php if($error_message) { ?>
 			<div class="error">
 				<fieldset>
-					<legend>エラー</legend>
+					<legend>Error</legend>
 					<?php echo $error_message; ?>
 				</fieldset>
 			</div>

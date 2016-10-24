@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="<?php echo $_SESSION['language']; ?>">
 <head>
 <meta charset="utf-8" />
 <link rel="stylesheet" href="css/install.css" type="text/css" media="all" />
