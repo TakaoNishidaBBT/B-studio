@@ -136,7 +136,8 @@ span.error-message {
 p.error-message {
 	clear: both;
 	color: #f00;
-	margin: 0px 0px 0px 3px;
+	margin: 5px 0 0 0;
+	text-indent: 0;
 }
 
 ul {
