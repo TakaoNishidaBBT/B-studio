@@ -31,16 +31,25 @@
 		}
 
 		function view() {
-			// HTTPヘッダー出力
+			// Start buffering
+			ob_start();
+
+			require_once('./view/view_select_tree.php');
+
+			// Get buffer
+			$contents = ob_get_clean();
+
+			// Send HTTP header
 			$this->sendHttpHeader();
 
 			$this->html_header->appendProperty('css', '<link href="css/widget_tree.css" type="text/css" rel="stylesheet" media="all" />');
 			$this->html_header->appendProperty('script', '<script src="js/bframe_tree.js" type="text/javascript"></script>');
 
-			// HTMLヘッダー出力
+			// Show HTML header
 			$this->showHtmlHeader();
 
-			require_once('./view/view_select_tree.php');
+			// Show HTML body
+			echo $contents;
 		}
 
 		function getNodeList() {
