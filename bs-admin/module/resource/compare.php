@@ -19,13 +19,24 @@
 		}
 
 		function view() {
+			// Start buffering
+			ob_start();
+
+			require_once('./view/view_compare.php');
+
+			// Get buffer
+			$contents = ob_get_clean();
+
+			// Send HTTP header
 			$this->sendHttpHeader();
 
 			$this->html_header->appendProperty('css', '<link href="css/resource.css" type="text/css" rel="stylesheet" media="all" />');
 			$this->html_header->appendProperty('script', '<script src="js/bframe_splitter.js" type="text/javascript"></script>');
 
+			// Show HTML header
 			$this->showHtmlHeader();
 
-			require_once('./view/view_compare.php');
+			// Show HTML body
+			echo $contents;
 		}
 	}

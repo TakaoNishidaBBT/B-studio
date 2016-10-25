@@ -82,7 +82,8 @@
 		function pasteNode() {
 			if($this->request['source_node_id'] && $this->request['source_node_id'] != 'null') {
 				if($this->request['destination_node_id'] != 'trash' && $this->tree->checkDuplicateById($this->request['destination_node_id'], $this->request['source_node_id'])) {
-					$this->message = '既に存在しています';
+
+					$this->message = __('Already exists');
 					$this->status = false;
 				}
 				else {
@@ -455,15 +456,15 @@
 		function checkFileName($node_id, $file_name) {
 			$file_info = pathinfo($file_name);
 			if(!strlen(trim($file_name))) {
-				$this->message = '名前を入力してください。';
+				$this->message = __('Please enter file name');
 				return false;
 			}
 			if(strlen($file_name) != mb_strlen($file_name)) {
-				$this->message = '日本語は使用できません';
+				$this->message = __('Multi byte character can not be used');
 				return false;
 			}
 			if($this->tree->checkDuplicateByName($node_id, $file_name)) {
-				$this->message = '名前を変更できません。指定されたファイル名は既に存在します。別の名前を指定してください。';
+				$this->message = __('This name can not be used. Because this name already exists. Please enter the other name.');
 				return false;
 			}
 			if(substr($file_name, -1) == '.') {
@@ -471,7 +472,7 @@
 				return false;
 			}
 			if(preg_match('/[\\\\:\/\*\?<>\|\s]/', $file_name)) {
-				$this->message = 'ファイル名／フォルダ名に次の文字は使えません \ / : * ? " < > | スペース';
+				$this->message = __('Followed charcters can not be used for file name and folder name (\ / : * ? " < > | space)');
 				return false;
 			}
 
@@ -481,7 +482,7 @@
 		function updateDispSeq() {
 			if($this->request['parent_node_id'] && $this->request['parent_node_id'] != 'null') {
 				if($this->tree->checkDuplicateById($this->request['parent_node_id'], $this->request['source_node_id'])) {
-					$this->message = '既に存在しています';
+					$this->message = __('Already exists');
 					$this->status = false;
 				}
 				else {
@@ -533,7 +534,7 @@
 					$info = pathinfo($nodes[0]->node_name);
 					$file_path = B_RESOURCE_DIR . $nodes[0]->contents_id . '.' . $info['extension'];
 
-					// ダウンロード
+					// Download
 					header('Pragma: cache;');
 					header('Cache-Control: public');
 
@@ -595,7 +596,7 @@
 					}
 					$zip->close();
 
-					// ダウンロード
+					// Download
 					header('Pragma: cache;');
 					header('Cache-Control: public');
 					header('Content-type: application/x-zip-dummy-content-type');
@@ -603,7 +604,7 @@
 					ob_end_clean();
 					readfile($file_path);
 
-					// 削除
+					// Remove
 					unlink($file_path);
 				}
 			}
@@ -627,7 +628,7 @@
 
 				$path = $node->getPath();
 
-				// index.phpへリダイレクト
+				// Redirect to index.php
 				$path = B_SITE_BASE . $path;
 				header("Location:$path");
 			}
