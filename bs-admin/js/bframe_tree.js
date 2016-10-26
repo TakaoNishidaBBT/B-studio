@@ -3768,7 +3768,7 @@
 			if(!node) return;
 
 			span = document.getElementById('s' + node.id);
-			span.style.textDecoration = 'none';
+			if(span) span.style.textDecoration = 'none';
 
 			if(property.editable == 'true') {
 				drag_control.dragging(event);

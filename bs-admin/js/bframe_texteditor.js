@@ -190,7 +190,7 @@
 		}
 
 		function insert(code) {
-			ace_editor.insert(code);
+			if(typeof(code)  == 'string') ace_editor.insert(code);
 		}
 
 		function splith(event) {
