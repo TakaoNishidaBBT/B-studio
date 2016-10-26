@@ -193,11 +193,9 @@
 		'Category'						=> 'カテゴリ',
 		'Date'							=> '日付',
 		'Date: '						=> '日付：',
-		'Title'							=> 'タイトル',
 		'Title: '						=> 'タイトル：',
 		'Open/Preview/Close'			=> '公開／プレビュー／非公開',
 		'Published'						=> '公開',
-		'Preview'						=> 'プレビュー',
 		'Closed'						=> '非公開',
 		'Publication date'				=> '掲載日',
 		'Please enter publication date'	=> '掲載日を入力してください',
@@ -215,8 +213,6 @@
 		'Property'						=> 'プロパティー',
 		'newCategory'					=> '新しいカテゴリ',
 		'newFolder'						=> '新しいフォルダ',
-		'Property'						=> 'プロパティー',
-		'Are you sure to delete?'		=> '削除します。よろしいですか？',
 
 		// Category
 		'Will be set when you double-clidk'
@@ -225,8 +221,6 @@
 		'Backgroud-color'				=> '背景色',
 		'Icon'							=> 'アイコン',
 		'Image selection'				=> '画像選択',
-		'Icon'							=> 'アイコン',
-		'Already exists'				=> '既に存在しています',
 		'This name can not be used. Because this category already exists. Please enter the other name.'
 										=> '名前を変更できません。指定されたカテゴリ名は既に存在します。別の名前を指定してください。',
 
@@ -298,7 +292,6 @@
 										=> 'このバージョンで作成したコンテンツすべてを削除します。\nこの作業は元に戻せません\n\nよろしいですか？',
 		'Version: '						=> 'バージョン：',
 		'Publish date and time: '		=> '　公開日時：',
-		'Version: '						=> 'バージョン：',
 		'This version can not be deleted. Because it\'s not ths latest version.'
 										=> '最新バージョンではありませんので削除できません',
 		'Working version can not be deleted.'
@@ -314,7 +307,6 @@
 		'will be registerd.'			=> 'に設定します。',
 		'published immediately'			=> '即時反映',
 		'Scheduled to be published'		=> '予約登録',
-		'will be registerd.'			=> 'に設定します。',
 
 		// Diff
 		'Diff Versions Left: %LEFT_VERSION% &nbsp;Right: %RIGHT_VERSION%'
@@ -377,14 +369,10 @@
 		'Please enter host name'		=> 'ホスト名を入力してください',
 		'Please confirm the input content'
 										=> '入力内容を確認してください',
-		'User name'						=> 'ユーザ名',
-		'Please enter user name'		=> 'ユーザー名を入力してください',
 		'Please enter user name using alphanumeric, hyphen(-) and underbar(_)'
 										=> 'ユーザ名は英数とハイフン(-)アンダーバー(_)で入力してください',
-		'Please enter password'			=> 'パスワードを入力してください',
 		'Please enter password using alphanumeric, hyphen(-) and underbar(_)'
 										=> 'パスワードは英数とハイフン(-)アンダーバー(_)で入力してください',
-		'Password'						=> 'パスワード',
 		'Schema name'					=> 'データベース名',
 		'Please enter schema name'		=> 'データベース名を入力してください',
 		'Table prefix'					=> 'テーブル・プリフィックス',
@@ -400,7 +388,6 @@
 		'Please enable MySQL library'	=> 'MySQLライブラリを有効にしてください。',
 		'Please enable GD library'		=> 'GDライブラリを有効にしてください。',
 		'ZipArchive is necessary'		=> 'ZipArchiveクラスが必要です。',
-		'Please enable GD library'		=> 'GDライブラリを有効にしてください。',
 
 		' : write permission is OK. '	=> ' の書き込み権限はOKです。',
 		' : write permission is not set. '
