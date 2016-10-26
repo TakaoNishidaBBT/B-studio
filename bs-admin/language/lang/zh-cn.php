@@ -56,7 +56,7 @@
 										=> "文件已被其他用户更改。\n确定要覆盖更改吗？",
 		'Saved'							=> '文件已保存',
 		'It failed to save'				=> '未能保存当前文件',
-		'Already exists'				=> '文件已经存在',
+		'Already exists'				=> '已存在',
 		'Please enter name'				=> '请输入文件名',
 		'Multi byte character can not be used'
 										=> '不能使用汉字字符',
@@ -80,7 +80,7 @@
 		// Login Error
 		'Error'							=> '错误',
 		'Please enter your login ID and password correctly.'
-										=> '请输入正确用户名和密码',
+										=> '请输入正确用户ID和密码',
 
 		// Error message for date and time
 		' (out of range)'				=> '（超出范围）',
@@ -119,7 +119,7 @@
 										=> "数据已被其他用户更改。",
 		// Menu
 		'Open publish page'				=> '打开首页',
-		'Contents'						=> '页面',
+		'Contents'						=> '内容页',
 		'Templates'						=> '模板',
 		'Resources'						=> '资源',
 		'Resource manager'				=> '资源管理',
@@ -193,11 +193,9 @@
 		'Category'						=> '分类',
 		'Date'							=> '日期',
 		'Date: '						=> '日期：',
-		'Title'							=> '标题',
 		'Title: '						=> '标题：',
 		'Open/Preview/Close'			=> '发布／预览／关闭',
 		'Published'						=> '发布',
-		'Preview'						=> '预览',
 		'Closed'						=> '关闭',
 		'Publication date'				=> '发布日期',
 		'Please enter publication date'	=> '请输入发布日期',
@@ -215,8 +213,6 @@
 		'Property'						=> '属性',
 		'newCategory'					=> '新建分类',
 		'newFolder'						=> '新建文件夹',
-		'Property'						=> '属性',
-		'Are you sure to delete?'		=> '确实删除吗？',
 
 		// Category
 		'Will be set when you double-clidk'
@@ -225,8 +221,6 @@
 		'Backgroud-color'				=> '背景颜色',
 		'Icon'							=> '图标',
 		'Image selection'				=> '选择图片',
-		'Icon'							=> '图标',
-		'Already exists'				=> '已存在',
 		'This name can not be used. Because this category already exists. Please enter the other name.'
 										=> '无法更改分类名。指定分类名已存在。请使用其他分类名。。',
 
@@ -298,7 +292,6 @@
 										=> '将删除所选版本的所有内容。\n该版本将无法恢复\n\n确实删除该版本吗？',
 		'Version: '						=> '版本：',
 		'Publish date and time: '		=> '　发布日期：',
-		'Version: '						=> '版本：',
 		'This version can not be deleted. Because it\'s not ths latest version.'
 										=> '无法删除旧版本',
 		'Working version can not be deleted.'
@@ -314,7 +307,6 @@
 		'will be registerd.'			=> '将被设置。',
 		'published immediately'			=> '立即公布',
 		'Scheduled to be published'		=> '预约公布',
-		'will be registerd.'			=> '将被设置。',
 
 		// Diff
 		'Diff Versions Left: %LEFT_VERSION% &nbsp;Right: %RIGHT_VERSION%'
@@ -324,13 +316,13 @@
 		'Name'							=> '用户名',
 		'User ID'						=> '用户ID',
 		'User ID: '						=> '用户ID',
-		'Password'						=> '用户密码',
+		'Password'						=> '密码',
 		'Authority'						=> '授权',
 		'Enabled'						=> '有效',
 		'Disabled'						=> '无效',
 		'Admin'							=> '网站管理员',
 		'Editor'						=> '投稿者',
-		'Please enter User ID'			=> '请输入用户登录ID',
+		'Please enter User ID'			=> '请输入用户ID',
 		'Please enter User ID using alphanumeric, hyphen(-) and underbar(_)'
 										=> '用户ID请使用英文、数字、横线(-)、下划线(_)输入',
 		'This ID is already exists'		=> '该用户ID已登录',
@@ -343,19 +335,19 @@
 		'Chinese'						=> '简体中文',
 
 		// Site admin
-		'User name'						=> '管理员名',
-		'Login ID'						=> '管理员ID',
-		'Password (Re-entry)'			=> '管理员密码（重新输入）',
+		'User name'						=> '用户名',
+		'Login ID'						=> '用户ID',
+		'Password (Re-entry)'			=> '密码（重新输入）',
 		'(Password you set)'			=> '（密码设置）',
 		'If you change password, please enter password. If you don\'t, keep this field empty'
 										=> '如需更改密码，请输入新密码。否则无需填写。',
 		'For confirmation, please re-enter password'
 										=> '为确认密码，请再次输入',
-		'Please enter user name'		=> '请输入管理员名',
-		'Please enter login ID'			=> '请输入管理员ID',
+		'Please enter user name'		=> '请输入用户名',
+		'Please enter login ID'			=> '请输入用户ID',
 		'Please enter login ID using alphanumeric, hyphen(-) and underbar(_)'
-										=> '管理员ID请使用英文、数字、横线(-)、下划线(_)输入',
-		'Password is not matched'		=> '管理员密码与确认密码不一致',
+										=> '用户ID请使用英文、数字、横线(-)、下划线(_)输入',
+		'Password is not matched'		=> '密码与确认密码不一致',
 		'Back to site admin form'		=> '返回到管理员设置',
 		'Configuration of site admin was updated'
 										=> '网站管理员设置已更新',
@@ -377,14 +369,10 @@
 		'Please enter host name'		=> '请输入主机名',
 		'Please confirm the input content'
 										=> '请确认输入内容',
-		'User name'						=> '认证ID',
-		'Please enter user name'		=> '请输入认证ID',
 		'Please enter user name using alphanumeric, hyphen(-) and underbar(_)'
-										=> '认证ID请使用英文、数字、横线(-)、下划线(_)输入',
-		'Please enter password'			=> '请输入认证密码',
+										=> '用户名请使用英文、数字、横线(-)、下划线(_)输入',
 		'Please enter password using alphanumeric, hyphen(-) and underbar(_)'
-										=> '认证密码请使用英文、数字、横线(-)、下划线(_)输入',
-		'Password'						=> '认证密码',
+										=> '密码请使用英文、数字、横线(-)、下划线(_)输入',
 		'Schema name'					=> '数据库名',
 		'Please enter schema name'		=> '请输入数据库名',
 		'Table prefix'					=> '表前缀名',
@@ -400,11 +388,10 @@
 		'Please enable MySQL library'	=> '请启用 MySQL 数据库。',
 		'Please enable GD library'		=> '请启用 GD 图形库。',
 		'ZipArchive is necessary'		=> '安装需要 ZipArchive类。',
-		'Please enable GD library'		=> '请启用 GD 图形库。',
 
-		' : write permission is OK. '	=> ' : 文本写入权限设定 OK。',
+		' : write permission is OK. '	=> ' : 已授权文本写入权限。',
 		' : write permission is not set. '
-										=> ' : 文本没有设定写入权限。',
+										=> ' : 没有授权文本写入权限。',
 
 		'Connecting to the DB is OK. But failed to select the schema'
 										=> '成功连接至数据库，但没有找到指定构架',

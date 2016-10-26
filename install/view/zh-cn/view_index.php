@@ -39,11 +39,11 @@
 			<?php echo $db_install_form->getHtml(); ?>
 		</fieldset>
 
-		<h2>管理页面基本认证</h2>
+		<h2>管理页面 Basic 认证</h2>
 
-		<p>设置管理页面基本认证。这是防止未经授权的访问所必需的。</p>
+		<p>设置管理页面 Basic 认证。这是防止未经授权的访问所必需的。</p>
 		<fieldset>
-			<legend>管理页面基本认证</legend>
+			<legend>管理页面 Basic 认证</legend>
 			<?php echo $admin_basic_auth_form->getHtml(); ?>
 		</fieldset>
 
@@ -57,7 +57,7 @@
 
 		<h2>htaccess</h2>
 
-		<p>安装 Bstudio 时,根目录所生成的 htaccess 文本内容</p>
+		<p>安装 B-studio 时,根目录所生成的 htaccess 文本内容</p>
 		<fieldset>
 			<legend>htaccess</legend>
 			<?php echo $root_htaccess->getHtml(); ?>

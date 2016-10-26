@@ -27,10 +27,10 @@
 			<?php echo $db_install_form->getHtml('confirm'); ?>
 		</fieldset>
 
-		<h2>管理页面基本认证</h2>
+		<h2>管理页面 Basic 认证</h2>
 
 		<fieldset>
-			<legend>管理页面基本认证</legend>
+			<legend>管理页面 Basic 认证</legend>
 			<?php echo $admin_basic_auth_form->getHtml('confirm'); ?>
 		</fieldset>
 
