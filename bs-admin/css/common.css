@@ -733,16 +733,6 @@ ul.page-locator li.page_info {
 div.drop_shadow {
 	box-shadow: 4px 5px 8px -2px rgba(0,0,0,0.3), 0 2px 20px -7px rgba(0,0,0,0.4);
 }
-div.popup_shadow {
-	position:absolute;
-	top: 5px;
-	left: 5px;
-	right: 4px;
-	bottom: 4px;
-	filter:progid:DXImageTransform.Microsoft.Blur(pixelradius=5);
-	-ms-filter:"progid:DXImageTransform.Microsoft.Blur(pixelradius=5)";
-	background-color:#222;
-}
 
 /* clone node */
 div.clone_node img {
