@@ -704,7 +704,7 @@ ul.page-locator li.page {
 	line-height: 23px;
 	width: 23px;
 	text-align: center;
-	background: url(../images/pagenation/page_back.png); no-repeat top left;
+	background: url(../images/pagenation/page_back.png) no-repeat top left;
 }
 ul.page-locator li.current {
 	font-weight: bold;
