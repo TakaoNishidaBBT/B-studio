@@ -2811,22 +2811,22 @@
 					'message': msg,
 					'buttons': [
 						{
-							'name': top.bframe.message.getProperty('uplado_zip_confirm_dialog1'),
+							'name': top.bframe.message.getProperty('upload_zip_confirm_dialog1'),
 							'className': 'button',
 							'action': funcExtract
 						},
 						{
-							'name': top.bframe.message.getProperty('uplado_zip_confirm_dialog2'),
+							'name': top.bframe.message.getProperty('upload_zip_confirm_dialog2'),
 							'className': 'button',
 							'action': funcExtractAll
 						},
 						{
-							'name': top.bframe.message.getProperty('uplado_zip_confirm_dialog3'),
+							'name': top.bframe.message.getProperty('upload_zip_confirm_dialog3'),
 							'className': 'button',
 							'action': funcNoExtract
 						},
 						{
-							'name': top.bframe.message.getProperty('uplado_zip_confirm_dialog4'),
+							'name': top.bframe.message.getProperty('upload_zip_confirm_dialog4'),
 							'className': 'button',
 							'action': cancel
 						}
@@ -2843,22 +2843,22 @@
 					'message': msg,
 					'buttons': [
 						{
-							'name': top.bframe.message.getProperty('uplado_confirm_dialog1'),
+							'name': top.bframe.message.getProperty('upload_confirm_dialog1'),
 							'className': 'button',
 							'action': funcYes
 						},
 						{
-							'name': top.bframe.message.getProperty('uplado_confirm_dialog2'),
+							'name': top.bframe.message.getProperty('upload_confirm_dialog2'),
 							'className': 'button',
 							'action': funcYesToAll
 						},
 						{
-							'name': top.bframe.message.getProperty('uplado_confirm_dialog3'),
+							'name': top.bframe.message.getProperty('upload_confirm_dialog3'),
 							'className': 'button',
 							'action': funcNo
 						},
 						{
-							'name': top.bframe.message.getProperty('uplado_confirm_dialog4'),
+							'name': top.bframe.message.getProperty('upload_confirm_dialog4'),
 							'className': 'button',
 							'action': funcNoToAll
 						}

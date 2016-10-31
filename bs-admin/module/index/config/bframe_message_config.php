@@ -13,15 +13,15 @@ $bframe_message_config = array(
 		array(
 			'session_time_out'				=> __('Your session has timed out, Please log in again'),
 
-			'uplado_zip_confirm_dialog1'	=> __('Yes'),
-			'uplado_zip_confirm_dialog2'	=> __('Extract all'),
-			'uplado_zip_confirm_dialog3'	=> __('No'),
-			'uplado_zip_confirm_dialog4'	=> __('Cancel'),
+			'upload_zip_confirm_dialog1'	=> __('Yes'),
+			'upload_zip_confirm_dialog2'	=> __('Extract all'),
+			'upload_zip_confirm_dialog3'	=> __('No'),
+			'upload_zip_confirm_dialog4'	=> __('Cancel'),
 
-			'uplado_confirm_dialog1'		=> __('Yes'),
-			'uplado_confirm_dialog2'		=> __('Overwrite all'),
-			'uplado_confirm_dialog3'		=> __('No'),
-			'uplado_confirm_dialog4'		=> __('Cancel'),
+			'upload_confirm_dialog1'		=> __('Yes'),
+			'upload_confirm_dialog2'		=> __('Overwrite all'),
+			'upload_confirm_dialog3'		=> __('No'),
+			'upload_confirm_dialog4'		=> __('Cancel'),
 		),
 	),
 );
