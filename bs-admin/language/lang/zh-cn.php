@@ -90,7 +90,7 @@
 
 		// Error message for Node
 		'DB error'						=> '数据库错误',
-		'The folder you copy to or move to is subfloder'
+		'The folder you copy or move to is the subfolder'
 										=> '目标文件夹为当前文件夹的子文件夹',
 		'The template you copy to or move to is subtemplate'
 										=> '目标模板为当前模板的子模版',

@@ -78,7 +78,7 @@
 	${$g_data_set}['node_error'] =
 		array(
 				'0'		=> __('DB error'),
-				'1'		=> __('The folder you copy or move to is the subfloder'),
+				'1'		=> __('The folder you copy or move to is the subfolder'),
 				'2'		=> __('The number of nodes are differnt. Please sort in right pane.'),
 				'3'		=> __('Other user updated this record'),
 		);

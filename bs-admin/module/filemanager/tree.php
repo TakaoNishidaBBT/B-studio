@@ -96,10 +96,12 @@
 					$root = new B_FileNode($this->dir, 'root', null, null, 'all');
 					$this->refleshThumnailCache($root);
 				}
+				else {
+					$this->message = $this->getErrorMessage($source->getErrorNo());
+				}
 				break;
 
 			case 'cut':
-
 				foreach($this->request['source_node_id'] as $node_id) {
 					$source = $root->getNodeById($node_id);
 
@@ -135,12 +137,12 @@
 				if($this->status) {
 					$this->refleshThumnailCache($root);
 				}
+				else {
+					$this->message = $this->getErrorMessage($dest->getErrorNo());
+				}
 				break;
 			}
 
-			if(!$this->status && !$this->message) {
-				$this->message = $this->getErrorMessage($source->getErrorNo());
-			}
 			$this->response($this->request['node_id'], 'select');
 			exit;
 		}
@@ -361,7 +363,6 @@
 			if(!file_exists(B_FILE_INFO_THUMB)) {
 				$this->createThumbnailCacheFile();
 			}
-
 			$response['status'] = $this->status;
 			if($this->message) {
 				$response['message'] = $this->message;

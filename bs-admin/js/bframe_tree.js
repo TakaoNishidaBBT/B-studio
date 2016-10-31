@@ -25,6 +25,7 @@
 		var target_id = bframe.getID(target);
 
 		var response_wait = false;
+		var paste_mode = false;
 		var response;
 		var httpObj;
 
@@ -290,6 +291,17 @@
 					if(pane && clipboard.target) {
 						selected_node.set(current_node.id());
 						pasteNode();
+						bframe.stopPropagation(event);
+					}
+				}
+				break;
+
+			case 88:	// ctrl+x
+				if(event.ctrlKey || event.metaKey) {
+					if(pane && !current_edit_node) {
+						if(selected_node.length()) {
+							cutNode();
+						}
 						bframe.stopPropagation(event);
 					}
 				}
@@ -630,6 +642,17 @@
 				selected_node.setColor('selected');
 				current_node.reload();
 				current_node.setColor('current');
+
+				// set cut status
+				if(paste_mode) {
+					if(clipboard.target) {
+						delete clipboard.target;
+					}
+					paste_mode = false;
+				}
+				else {
+					setCutStatus();
+				}
 
 				// hide upload button in trash
 				if(property.upload) {
@@ -1095,20 +1118,67 @@
 		}
 		this.reloadTree = reloadTree;
 
+		function setCutStatus() {
+			if(!clipboard.target) return;
+
+			for(var i=0; i<clipboard.target.length; i++) {
+				var node_id = clipboard.target[i].substr(1)
+
+				var node = document.getElementById('t' + node_id);
+				if(node) {
+					var img_border = bframe.searchNodeByName(node, 'img_border');
+					img_border.className = 'img-border cut';
+				}
+
+				var node = document.getElementById('p' + node_id);
+				if(node) {
+					var img_border = bframe.searchNodeByName(node, 'img_border');
+					img_border.className = 'img-border cut';
+				}
+			}
+		}
+
+		function resetCutStatus() {
+			if(!clipboard.target) return;
+
+			for(var i=0; i<clipboard.target.length; i++) {
+				var node_id = clipboard.target[i].substr(1)
+
+				var node = document.getElementById('t' + node_id);
+				if(node) {
+					var img_border = bframe.searchNodeByName(node, 'img_border');
+					img_border.className = 'img-border';
+				}
+
+				var node = document.getElementById('p' + node_id);
+				if(node) {
+					var img_border = bframe.searchNodeByName(node, 'img_border');
+					img_border.className = 'img-border';
+				}
+			}
+		}
+
 		function cutNode() {
-			if(clipboard.target) delete clipboard.target;
+			if(clipboard.target) {
+				resetCutStatus();
+				delete clipboard.target;
+			}
 			clipboard.target = new Array();
 
 			for(var i=0; i<selected_node.length(); i++) {
 				clipboard.target[i] = selected_node.id(i);
 			}
+			setCutStatus();
 			clipboard.mode = 'cut';
 			context_menu.enableElement(context_paste_index);
 		}
 		this.cutNode = cutNode;
 
 		function copyNode() {
-			if(clipboard.target) delete clipboard.target;
+			if(clipboard.target) {
+				resetCutStatus();
+				delete clipboard.target;
+			}
 			clipboard.target = new Array();
 
 			for(var i=0; i<selected_node.length(); i++) {
@@ -1131,6 +1201,7 @@
 				httpObj = createXMLHttpRequest(showNode);
 				eventHandler(httpObj, property.module, property.file, property.method.pasteNode, 'POST', param);
 				response_wait = true;
+				paste_mode = true;
 			}
 		}
 		this.pasteNode = pasteNode;
@@ -1147,6 +1218,7 @@
 				httpObj = createXMLHttpRequest(showNode);
 				eventHandler(httpObj, property.module, property.file, property.method.pasteAriasNode, 'POST', param);
 				response_wait = true;
+				paste_mode = true;
 			}
 		}
 		this.pasteAriasNode = pasteAriasNode;
@@ -3262,6 +3334,7 @@
 
 			img_span = document.createElement('span');
 			img_span.className = 'img-border';
+			img_span.name = 'img_border';
 			a.appendChild(img_span);
 
 			obj_img = document.createElement('img');
@@ -3512,6 +3585,7 @@
 			div.onmouseout = onNodeMouseOut;
 
 			img_span = document.createElement('span');
+			img_span.name = 'img_border';
 			img_span.className = 'img-border';
 			a.appendChild(img_span);
 

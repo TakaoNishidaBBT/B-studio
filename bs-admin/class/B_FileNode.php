@@ -296,6 +296,11 @@
 		}
 
 		function move($source) {
+			if($this->isMyParent($source->fullpath)) {
+				$this->error_no = 1;
+				return false;
+			}
+
 			try {
 				if(file_exists($this->fullpath)) {
 					if(is_dir($this->fullpath)) {
@@ -420,6 +425,17 @@
 				}
 			}
 
+			return false;
+		}
+
+		function isMyParent($path) {
+			$path_array = explode('/', $path);
+
+			for($i=0, $dir=$this->fullpath; $i<count($path_array); $dir = dirname($dir), $i++) {
+				if($path == $dir) {
+					return true;
+				}
+			}
 			return false;
 		}
 

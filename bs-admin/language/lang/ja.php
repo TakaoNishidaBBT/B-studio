@@ -90,7 +90,7 @@
 
 		// Error message for Node
 		'DB error'						=> 'DBエラー',
-		'The folder you copy to or move to is subfloder'
+		'The folder you copy or move to is the subfolder'
 										=> '受け側のフォルダは送り側のフォルダのサブフォルダです',
 		'The template you copy to or move to is subtemplate'
 										=> '受け側のテンプレートは送り側のサブテンプレートです',

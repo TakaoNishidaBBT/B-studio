@@ -39,6 +39,9 @@ div.bframe_tree li.tree-list div.tree {
 }
 div.bframe_tree li.tree-list div.tree:hover {
 }
+div.bframe_tree li.tree-list span.cut img {
+	opacity: 0.5;
+}
 div.bframe_tree li.tree-list div.selected {
 	border-top: 1px dotted #f00;
 }
@@ -87,6 +90,9 @@ div.thumbs li.tree-list div.tree a {
 	display: block;
 	width: 110px;
 }
+div.thumbs li.tree-list span.cut img {
+	opacity: 0.5;
+}
 div.thumbs li.tree-list div.selected {
 	border-left: 1px dotted #f00;
 }
@@ -104,7 +110,6 @@ div.thumbs li.tree-list span.edit input {
 div.thumbs li.tree-list span.node-name {
 	display: block;
 	margin: 0 auto;
-/*	padding: 5px 0 2px 0;*/
 	line-height: 19px;
 	font-size: 12px;
 }
@@ -252,6 +257,9 @@ div.detail table td.image-size {
 div.detail table td img {
 	vertical-align: -25%;
 	margin-right: 2px;
+}
+div.detail table td span.cut img {
+	opacity: 0.5;
 }
 div.detail table td span.img-border {
 	display: inline-block;
