@@ -650,7 +650,7 @@
 					}
 					paste_mode = false;
 				}
-				else {
+				else if(clipboard.mode == 'cut') {
 					setCutStatus();
 				}
 
