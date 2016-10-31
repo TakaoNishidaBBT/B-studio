@@ -254,6 +254,8 @@
 		'Are you sure you want these %NODE_COUNT% objects to delete?'
 										=> 'これら%NODE_COUNT%個の項目を削除します。よろしいですか？',
 		'Please use server browser'		=> 'サーバブラウザを使用してください',
+		'An error has occured'			=> 'エラーが発生しました',
+		'The name could not be changed'	=> '名前を変更できません',
 
 		// Version
 		'Keyword'						=> 'キーワード',

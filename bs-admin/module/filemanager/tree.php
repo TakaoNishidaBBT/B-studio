@@ -72,11 +72,11 @@
 					$source = $root->getNodeById($node_id);
 
 					if(!file_exists($source->fullpath)) {
-						$this->message = '他のユーザに更新されています';
+						$this->message = __('Other user updated this record');
 						$this->status = false;
 					}
 					if(!file_exists($dest->fullpath)) {
-						$this->message = '他のユーザに更新されています';
+						$this->message = __('Other user updated this record');
 						$this->status = false;
 					}
 					else {
@@ -106,15 +106,15 @@
 					$source = $root->getNodeById($node_id);
 
 					if(!file_exists($source->fullpath)) {
-						$this->message = '他のユーザに更新されています';
+						$this->message = __('Other user updated this record');
 						$this->status = false;
 					}
 					if(!file_exists($dest->fullpath)) {
-						$this->message = '他のユーザに更新されています';
+						$this->message = __('Other user updated this record');
 						$this->status = false;
 					}
 					else if(file_exists($dest->fullpath . '/' . $source->file_name)) {
-						$this->message = '既に存在しています';
+						$this->message = __('Already exists');
 						$this->status = false;
 					}
 					else {
@@ -137,7 +137,7 @@
 				if($this->status) {
 					$this->refleshThumnailCache($root);
 				}
-				else {
+				else if(!$this->message) {
 					$this->message = $this->getErrorMessage($dest->getErrorNo());
 				}
 				break;
@@ -165,7 +165,7 @@
 			}
 			else {
 				$this->status = false;
-				$this->message = 'エラーが発生しました';
+				$this->message = __('An error has occured');
 			}
 			$this->response($new_node_id, 'new_node');
 			exit;
@@ -176,7 +176,7 @@
 				foreach($this->request['delete_node_id'] as $node_id) {
 					$node = new B_FileNode($this->dir, $node_id, null, null, 'all');
 					if(!file_exists($node->fullpath)) {
-						$this->message = '他のユーザに更新されています';
+						$this->message = __('Other user updated this record');
 						$this->status = false;
 					}
 					else {
@@ -186,7 +186,7 @@
 						}
 						else {
 							$this->status = false;
-							$this->message = 'エラーが発生しました';
+							$this->message = __('An error has occured');
 							break;
 						}
 					}
@@ -223,7 +223,7 @@
 						$this->refleshThumnailCache($root);
 					}
 					else {
-						$this->message = '名前を変更できません。';
+						$this->message = __('The name could not be changed');
 					}
 				}
 			}
@@ -233,23 +233,23 @@
 
 		function checkFileName($path, $file_name, $file_info) {
 			if(!strlen(trim($file_name))) {
-				$this->message = '名前を入力してください。';
+				$this->message = __('Please enter file name');
 				return false;
 			}
 			if(strlen($file_name) != mb_strlen($file_name)) {
-				$this->message = '日本語は使用できません';
+				$this->message = __('Multi byte character can not be used');
 				return false;
 			}
 			if(!file_exists(B_Util::getPath($this->dir, $file_info['path']))) {
-				$this->message = '他のユーザに更新されています';
+				$this->message = __('Other user updated this record');
 				return false;
 			}
 			if(file_exists($path) && strtolower($file_info['basename']) != strtolower($file_name)) {
-				$this->message = '名前を変更できません。指定されたファイル名は既に存在します。別の名前を指定してください。';
+				$this->message = __('This name can not be used. Because this name already exists. Please enter the other name.');
 				return false;
 			}
 			if(preg_match('/[\\\\:\/\*\?<>\|\s]/', $file_name)) {
-				$this->message = 'ファイル名／フォルダ名に次の文字は使えません \ / : * ? " < > | スペース';
+				$this->message = __('Followed charcters can not be used for file name and folder name (\ / : * ? " < > | space)');
 				return false;
 			}
 
@@ -272,7 +272,7 @@
 				if(count($nodes) == 1 && $nodes[0]->node_type == 'file') {
 					$info = pathinfo($nodes[0]->file_name);
 
-					// ダウンロード
+					// Send HTTP header for download
 					header('Pragma: cache;');
 					header('Cache-Control: public');
 
@@ -332,7 +332,7 @@
 					}
 					$zip->close();
 
-					// ダウンロード
+					// Send HTTP header for download
 					header('Pragma: cache;');
 					header('Cache-Control: public');
 					header('Content-type: application/x-zip-dummy-content-type');
@@ -340,7 +340,7 @@
 					ob_end_clean();
 					readfile($file_path);
 
-					// 削除
+					// Remove
 					unlink($file_path);
 				}
 			}
@@ -350,7 +350,7 @@
 
 		function preview() {
 			if($this->request['node_id'] && $this->request['node_id'] != 'null') {
-				// index.phpへリダイレクト
+				// Redircet to top page
 				$path = B_Util::getPath(B_UPLOAD_URL, $this->request['node_id']);
 				header("Location:$path");
 			}
@@ -359,7 +359,7 @@
 		}
 
 		function response($node_id, $category) {
-			// if thumb-nail cache file not exists
+			// If thumb-nail cache file not exists
 			if(!file_exists(B_FILE_INFO_THUMB)) {
 				$this->createThumbnailCacheFile();
 			}
