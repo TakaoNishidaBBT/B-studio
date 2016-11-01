@@ -193,8 +193,7 @@ div#config {
 	background-color: #555;
 	overflow: auto;
 }
-div#config textarea.keywords,
-div#config textarea.description {
+div#config textarea.keywords {
 	height: 40px;
 }
 div#config textarea.external_css,

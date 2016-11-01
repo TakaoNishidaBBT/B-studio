@@ -288,7 +288,7 @@ $config_form_config = array(
 				array(
 					'name'					=> 'keywords',
 					'class'					=> 'B_TextArea',
-					'special_html'			=> 'class="keyword bframe_textarea"',
+					'special_html'			=> 'class="keywords bframe_textarea"',
 				),
 			),
 		),
@@ -318,7 +318,7 @@ $config_form_config = array(
 			array(
 				'start_html'			=> '<th>',
 				'end_html'				=> '</th>',
-				'value'					=> __('External CSS'),
+				'value'					=> __('External css'),
 			),
 			array(
 				'start_html'			=> '<td>',

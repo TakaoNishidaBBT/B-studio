@@ -152,8 +152,8 @@
 		'Breadcrumbs'					=> 'パンくず',
 		'Keywords'						=> 'Keywords',
 		'Description'					=> 'Description',
-		'External css'					=> '外部css',
-		'External javascript'			=> '外部javascript',
+		'External css'					=> '外部 css',
+		'External javascript'			=> '外部 javascript',
 		'Header elements'				=> 'ヘッダー要素',
 
 		// Resource
