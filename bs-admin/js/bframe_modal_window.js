@@ -109,6 +109,7 @@
 
 		function onContainerHeaderMouseDown(event) {
 			drag_control.dragStart(event);
+			bframe.fireEvent(top.document, 'click');
 		}
 
 		function onContainerHeaderMouseMove(event) {
