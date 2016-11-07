@@ -1,7 +1,7 @@
 <?php
 /*
- * B-studio : Contents Management System
- * Copyright (c) BigBeat Inc. all rights reserved. (http://www.bigbeat.co.jp)
+ * B-studio : Content Management System
+ * Copyright (c) BigBeat Inc. All rights reserved. (http://www.bigbeat.co.jp)
  *
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
@@ -22,41 +22,43 @@
 		'50 lines'						=> '50件',
 		'100 lines'						=> '100件',
 
-		'Pages:'						=> 'ページ ：',
+		'Page:'							=> 'ページ ：',
 		'User:'							=> 'ユーザー：',
 		'Log out'						=> 'ログアウト',
 
-		'Publish version'				=> '公開バージョン',
+		'Published version'				=> '公開バージョン',
 		'Working version'				=> '作業中バージョン',
 		'Compare versions'				=> 'バージョン比較',
 
 		'Cut'							=> '切り取り',
 		'Copy'							=> 'コピー',
 		'Paste'							=> '貼り付け',
-		'Remove'						=> '削除',
+		'Delete'						=> '削除',
 		'New'							=> '新規',
-		'Edit name'						=> '名前の変更',
+		'Rename'						=> '名前の変更',
 		'Empty the trash'				=> 'ゴミ箱を空にする',
 		'Folder'						=> 'フォルダ',
 		'File'							=> 'ファイル',
 		'Page'							=> 'ページ',
 
-		'Are you sure you want %NODE_NAME% to move to the trash?'
+		'Are you sure you want to move %NODE_NAME% to the trash?'
 										=> '%NODE_NAME%をゴミ箱に移動します。よろしいですか？',
-		'Are you sure you want these %NODE_COUNT% objects to move to the trash?'
+		'Are you sure you want to move these %NODE_COUNT% objects to the trash?'
 										=> 'これら%NODE_COUNT%をゴミ箱に移動します。よろしいですか？',
-		'Are you sure you completely remove files in the trah?'
+		'Are you sure you want to permanently remove the items in the trah?'
 										=> '完全に削除します。よろしいですか？',
-		"Other user updated this record\nAre you sure to overwrite?"
+		"Another user has updated this file\nAre you sure you want to overwrite?"
 										=> "他のユーザに更新されています。\n上書きしますか？",
 		'Saved'							=> '保存しました',
-		'It failed to save'				=> '保存に失敗しました',
+		'Failed to save'				=> '保存に失敗しました',
 		'Already exists'				=> '既に存在しています',
 		'Please enter name'				=> '名前を入力してください。',
-		'Multi byte character can not be used'
+		'Multi-byte characters cannot be used'
 										=> '日本語は使用できません',
-		'This name can not be used. Because this name already exists. Please enter the other name.'
+		'A file with this name already exists. Please enter a different name.'
 										=> '名前を変更できません。指定されたファイル名は既に存在します。別の名前を指定してください。',
+		'A template with this name already exists. Please enter a different name.'
+										=> '名前を変更できません。指定されたテンプレートは既に存在します。別の名前を指定してください。',
 		'Extension is necessary'		=> '拡張子が必要です。',
 		'Followed extensions can not be used (css swf jpg jpeg gif png)'
 										=> '次の拡張子は使用できません css swf jpg jpeg gif png',
@@ -98,17 +100,17 @@
 		'*'								=> '※',
 		' is required field'			=> '：必須項目',
 		'was saved.'					=> 'を保存しました。',
-		'was faild to saved.'			=> 'の保存に失敗しました。',
+		'was failed to saved.'			=> 'の保存に失敗しました。',
 		'was registered.'				=> 'を登録しました。',
-		'was faild to register.'		=> 'の登録に失敗しました。',
+		'was failed to register.'		=> 'の登録に失敗しました。',
 		'was updated.'					=> 'を更新しました。',
 		'was failed to update.'			=> 'の更新に失敗しました。',
 		'was set.'						=> 'を設定しました。',
-		'was faild to set.'				=> 'の設定に失敗しました。',
+		'was failed to set.'				=> 'の設定に失敗しました。',
 		'were set.'						=> 'を設定しました。',
-		'were faild to set.'			=> 'の設定に失敗しました。',
+		'were failed to set.'			=> 'の設定に失敗しました。',
 		'was deleted.'					=> 'を削除しました。',
-		'was faild to delete.'			=> 'の削除に失敗しました。',
+		'was failed to delete.'			=> 'の削除に失敗しました。',
 
 		'Other user updated this record'
 										=> "他のユーザに更新されています",
@@ -163,8 +165,8 @@
 		'Extract %FILE_NAME% ?'			=> '%FILE_NAME%を展開しますか？',
 		'%FILE_NAME% already exists. Are you sure to overwrite?'
 										=> '%FILE_NAME%は既に存在します。<br />上書きしてもよろしいですか？',
-		'Faild to create directory'		=> 'ディレクトリの作成に失敗しました',
-		'Multi byte character can not be used. (the contents of the zip file)'
+		'Failed to create directory'		=> 'ディレクトリの作成に失敗しました',
+		'Multi-byte characters cannot be used in file names. Please check contents of the zip file.'
 										=> '日本語ファイル名は使用できません。（zipファイル中）',
 		'The uploaded file exceeds the upload_max_filesize directive in php.ini.'
 										=> 'アップロードされたファイルは、php.ini の upload_max_filesize ディレクティブの値を超えています。',
@@ -216,7 +218,7 @@
 		'Backgroud-color'				=> '背景色',
 		'Icon'							=> 'アイコン',
 		'Image selection'				=> '画像選択',
-		'This name can not be used. Because this category already exists. Please enter the other name.'
+		'A category with this name already exists. Please enter a differnt name.'
 										=> '名前を変更できません。指定されたカテゴリ名は既に存在します。別の名前を指定してください。',
 
 		// Carendar
@@ -392,16 +394,16 @@
 
 		'Connecting to the DB is OK. But failed to select the schema'
 										=> 'DBへ接続はできましたがスキーマの選択に失敗しました。',
-		'Faild to connect DB.'			=> 'DBへの接続に失敗しました。',
+		'Failed to connect DB.'			=> 'DBへの接続に失敗しました。',
 		'This is an error in your entry<br />Please check any error message and re-enter the necessary information'
 										=> '入力内容に誤りがあります。<br />各欄のエラーメッセージをご覧の上、入力し直してください。',
 
-		'Faild to create a table.'		=> 'テーブルの作成に失敗しました。',
-		'Faild to create a view.'		=> 'ビューの作成に失敗しました。',
-		'Faild to insert a version record.'
+		'Failed to create a table.'		=> 'テーブルの作成に失敗しました。',
+		'Failed to create a view.'		=> 'ビューの作成に失敗しました。',
+		'Failed to insert a version record.'
 										=> 'バージョンレコードの作成に失敗しました。',
-		'Faild to insert current version record.'
+		'Failed to insert current version record.'
 										=> 'カレントバージョンレコードの作成に失敗しました。',
-		'Faild to insert a configuration record.'
+		'Failed to insert a configuration record.'
 										=> '基本設定レコードの作成に失敗しました。',
 	);

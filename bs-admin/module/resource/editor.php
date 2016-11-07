@@ -1,7 +1,7 @@
 <?php
 /*
- * B-studio : Contents Management System
- * Copyright (c) BigBeat Inc. all rights reserved. (http://www.bigbeat.co.jp)
+ * B-studio : Content Management System
+ * Copyright (c) BigBeat Inc. All rights reserved. (http://www.bigbeat.co.jp)
  *
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
@@ -101,7 +101,7 @@
 			}
 			if(!$ret) {
 				$this->db->rollback();
-				$message = __('It failed to save');
+				$message = __('Failed to save');
 			}
 
 			$response['status'] = true;
@@ -144,7 +144,7 @@
 			$filepath = B_RESOURCE_DIR . $contents_id . '.' . $this->post['extension'];
 			if(file_exists($filepath) && $this->post['mode'] == 'confirm' && filemtime($filepath) > $this->post['update_datetime']) {
 				$mode = 'confirm';
-				$message = __("Other user updated this file\nAre you sure to overwrite?");
+				$message = __("Another user has updated this file\nAre you sure you want to overwrite?");
 			}
 			else {
 				if($this->post['encoding'] == 'ASCII' || $this->post['encoding'] == 'UTF-8') {

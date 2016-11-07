@@ -1,7 +1,7 @@
 <?php
 /*
- * B-studio : Contents Management System
- * Copyright (c) BigBeat Inc. all rights reserved. (http://www.bigbeat.co.jp)
+ * B-studio : Content Management System
+ * Copyright (c) BigBeat Inc. All rights reserved. (http://www.bigbeat.co.jp)
  *
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
@@ -282,7 +282,7 @@
 				return false;
 			}
 			if(strlen($file_name) != mb_strlen($file_name)) {
-				$this->message = __('Multi byte character can not be used');
+				$this->message = __('Multi-byte characters cannot be used');
 				return false;
 			}
 			if($this->tree->checkDuplicateByName($node_id, $file_name)) {

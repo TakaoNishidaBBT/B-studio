@@ -1,7 +1,7 @@
 <?php
 /*
- * B-studio : Contents Management System
- * Copyright (c) BigBeat Inc. all rights reserved. (http://www.bigbeat.co.jp)
+ * B-studio : Content Management System
+ * Copyright (c) BigBeat Inc. All rights reserved. (http://www.bigbeat.co.jp)
  *
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
@@ -36,7 +36,7 @@
 	 			// Check file name
 				$file = pathinfo($_POST['filename']);
 				if(strlen($file['basename']) != mb_strlen($file['basename'])) {
-					throw new Exception(__('Multi byte character can not be used'));
+					throw new Exception(__('Multi-byte characters cannot be used'));
 				}
 				if(preg_match('/[\\\\:\/\*\?<>\|\s]/', $file['basename'])) {
 					throw new Exception(__('Followed charcters can not be used for file name and folder name (\ / : * ? " < > | space)'));
@@ -230,7 +230,7 @@
 				$stat = $zip->statIndex($i);
 				$file_name = mb_convert_encoding($stat['name'], 'UTF-8', 'auto');
 				if(strlen($file_name) != mb_strlen($file_name)) {
-					throw new Exception(__('Multi byte character can not be used. (the contents of the zip file'));
+					throw new Exception(__('Multi-byte characters cannot be used in file names. Please check contents of the zip file.'));
 				}
 			}
 		}

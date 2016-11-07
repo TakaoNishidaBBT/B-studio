@@ -1,7 +1,7 @@
 <?php
 /*
- * B-studio : Contents Management System
- * Copyright (c) BigBeat Inc. all rights reserved. (http://www.bigbeat.co.jp)
+ * B-studio : Content Management System
+ * Copyright (c) BigBeat Inc. All rights reserved. (http://www.bigbeat.co.jp)
  *
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
@@ -29,7 +29,7 @@
 			$this->version = $this->db->fetch_assoc($rs);
 
 			// Set version info
-			$this->version_info = __('Publish version:%PUBLISH_VERSION% &nbsp;Working version:%WROKING_VERSION%');
+			$this->version_info = __('Published version:%PUBLISH_VERSION% &nbsp;Working version:%WROKING_VERSION%');
 			$this->version_info = str_replace('%PUBLISH_VERSION%', $this->version['current_version'], $this->version_info);
 			$this->version_info = str_replace('%WROKING_VERSION%', $this->version['working_version'], $this->version_info);
 		}

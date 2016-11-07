@@ -1,7 +1,7 @@
 <?php
 /*
- * B-studio : Contents Management System
- * Copyright (c) BigBeat Inc. all rights reserved. (http://www.bigbeat.co.jp)
+ * B-studio : Content Management System
+ * Copyright (c) BigBeat Inc. All rights reserved. (http://www.bigbeat.co.jp)
  *
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
@@ -79,12 +79,12 @@ $tree_config = array(
 					'func'		=> 'pasteNode',
 				),
 				array(
-					'menu'		=> __('Remove'),
+					'menu'		=> __('Delete'),
 					'func'		=> 'deleteNode',
 					'confirm'	=>
 					array(
-						'single'	=> __('Are you sure you want %NODE_NAME% to move to the trash?'),
-						'plural'	=> __('Are you sure you want these %NODE_COUNT% objects to move to the trash?'),
+						'single'	=> __('Are you sure you want to move %NODE_NAME% to the trash?'),
+						'plural'	=> __('Are you sure you want to move these %NODE_COUNT% objects to the trash?'),
 					),
 				),
 				array(
@@ -108,7 +108,7 @@ $tree_config = array(
 					'submenu_width'	=> '130',
 				),
 				array(
-					'menu'		=> __('Edit name'),
+					'menu'		=> __('Rename'),
 					'func'		=> 'editName',
 				),
 				array(
@@ -121,7 +121,7 @@ $tree_config = array(
 				array(
 					'menu'		=> __('Empty the trash'),
 					'func'		=> 'truncateNode',
-					'confirm'	=> __('Are you sure you completely remove files in the trah?'),
+					'confirm'	=> __('Are you sure you want to permanently remove the items in the trah?'),
 				),
 			),
 			'context_menu_width'	=> '138',

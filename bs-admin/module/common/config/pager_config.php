@@ -1,7 +1,7 @@
 <?php
 /*
- * B-studio : Contents Management System
- * Copyright (c) BigBeat Inc. all rights reserved. (http://www.bigbeat.co.jp)
+ * B-studio : Content Management System
+ * Copyright (c) BigBeat Inc. All rights reserved. (http://www.bigbeat.co.jp)
  *
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
@@ -9,7 +9,7 @@ $pager_config =
 array(
 	'row_per_page'	=> '10',
 	'page_link_max'	=> '5',
-	'start_html'	=> '<ul class="page-locator"><li class="title">' . __('Pages:') . '</li>',
+	'start_html'	=> '<ul class="page-locator"><li class="title">' . __('Page:') . '</li>',
 	'end_html'		=> '</ul>',
 	'location'		=>
 	array(

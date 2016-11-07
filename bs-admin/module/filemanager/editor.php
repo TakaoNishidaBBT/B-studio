@@ -1,7 +1,7 @@
 <?php
 /*
- * B-studio : Contents Management System
- * Copyright (c) BigBeat Inc. all rights reserved. (http://www.bigbeat.co.jp)
+ * B-studio : Content Management System
+ * Copyright (c) BigBeat Inc. All rights reserved. (http://www.bigbeat.co.jp)
  *
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
@@ -60,7 +60,7 @@
 		function register() {
 			if(file_exists($this->post['file_path']) && $this->post['mode'] == 'confirm' && filemtime($this->post['file_path']) > $this->post['update_datetime']) {
 				$mode = 'confirm';
-				$message = __("Other user updated this file\nAre you sure to overwrite?");
+				$message = __("Another user has updated this file\nAre you sure you want to overwrite?");
 			}
 			else {
 				if($this->post['encoding'] == 'ASCII' || $this->post['encoding'] == 'UTF-8') {

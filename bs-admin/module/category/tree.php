@@ -1,7 +1,7 @@
 <?php
 /*
- * B-studio : Contents Management System
- * Copyright (c) BigBeat Inc. all rights reserved. (http://www.bigbeat.co.jp)
+ * B-studio : Content Management System
+ * Copyright (c) BigBeat Inc. All rights reserved. (http://www.bigbeat.co.jp)
  *
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
@@ -197,7 +197,7 @@
 					$this->message = __('Please enter name');
 				}
 				else if($this->tree->checkDuplicateByName($this->request['node_id'], $this->request['node_name'])) {
-					$this->message = __('This name can not be used. Because this category already exists. Please enter the other name.');
+					$this->message = __('A category with this name already exists. Please enter a differnt name.');
 					$status = false;
 				}
 				else {

@@ -1,7 +1,7 @@
 <?php
 /*
- * B-studio : Contents Management System
- * Copyright (c) BigBeat Inc. all rights reserved. (http://www.bigbeat.co.jp)
+ * B-studio : Content Management System
+ * Copyright (c) BigBeat Inc. All rights reserved. (http://www.bigbeat.co.jp)
  *
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
@@ -83,7 +83,7 @@
 					if($this->post['mode'] == 'confirm' && $row['update_datetime'] > $this->post['update_datetime']) {
 						$this->status = true;
 						$this->mode = 'confirm';
-						$this->message = __("Other user updated this file\nAre you sure to overwrite?");
+						$this->message = __("Another user has updated this file\nAre you sure you want to overwrite?");
 					}
 					else {
 						$this->update($this->user_id, $contents_id);
@@ -132,7 +132,7 @@
 			else {
 				$this->db->rollback();
 				$this->status = false;
-				$this->message = __('It failed to save');
+				$this->message = __('Failed to save');
 			}
 		}
 
@@ -160,7 +160,7 @@
 			else {
 				$this->db->rollback();
 				$this->status = false;
-				$this->message = __('It failed to save');
+				$this->message = __('Failed to save');
 			}
 		}
 
@@ -203,7 +203,7 @@
 			else {
 				$this->db->rollback();
 				$this->status = false;
-				$this->message = __('It failed to save');
+				$this->message = __('Failed to save');
 			}
 		}
 

@@ -1,7 +1,7 @@
 <?php
 /*
- * B-studio : Contents Management System
- * Copyright (c) BigBeat Inc. all rights reserved. (http://www.bigbeat.co.jp)
+ * B-studio : Content Management System
+ * Copyright (c) BigBeat Inc. All rights reserved. (http://www.bigbeat.co.jp)
  *
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
@@ -307,7 +307,7 @@ $version_info_config = array(
 			array(
 				'start_html'	=> '<span>',
 				'end_html'		=> '</span>',
-				'value'			=> __('Publish version'),
+				'value'			=> __('Published version'),
 			),
 		),
 		array(
