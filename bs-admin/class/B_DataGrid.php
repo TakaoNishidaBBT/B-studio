@@ -284,7 +284,7 @@
 
 			// tr call back
 			for($i=0; $i < $this->callback_index; $i++) {
-				for($j=0 ; $j < count($this->row) ; $j++) {
+				for($j=0; $j < count($this->row); $j++) {
 					$param = array('row' => &$this->row[$j], 'cnt' => $j);
 
 					if($this->callback[$i]['param']) {
@@ -412,7 +412,7 @@
 			$ret = true;
 
 			for($i=0; $i < count($this->row); $i++) {
-				for($j=0 ; $j < $this->validate_callback_index ; $j++) {
+				for($j=0; $j < $this->validate_callback_index; $j++) {
 					$param = array('row' => &$this->row[$i], 'cnt' => $i);
 					if($this->validate_callback[$j]['param']) {
 						if(is_array($this->validate_callback[$j]['param'])) {
@@ -482,7 +482,9 @@
 
 			// get record data
 			$rs = $this->db->query($sql);
-			for($record_cnt=0 ; $row = $this->db->fetch_assoc($rs) ; $record_cnt++) {
+			for($record_cnt=0; $row = $this->db->fetch_assoc($rs); $record_cnt++) {
+				if($row['display'] == 'none') continue;
+
 				fputcsv($fp, $this->getRowData($row, $record_cnt), $this->csv_config['delimiter']);
 			}
 
@@ -492,7 +494,9 @@
 
 		function getRowData($row, $record_cnt) {
 			global $g_data_set, ${$g_data_set};
+
 			unset($csv);
+
 			// csv call back
 			for($i=0; $i < $this->csv_callback_index; $i++) {
 				$param = array('row' => &$row, 'cnt' => $record_cnt);
@@ -512,9 +516,6 @@
 				}
 			}
 
-			if($row['display'] == 'none') {
-				continue;
-			}
 			foreach($this->csv_config['row'] as $key => $config) {
 				unset($item);
 				unset($data_set);
@@ -682,7 +683,9 @@
 			else {
 				$sql = $this->createSQL();
 				$rs = $this->db->query($sql);
-				for($record_cnt=0 ; $row = $this->db->fetch_assoc($rs) ; $record_cnt++) {
+				for($record_cnt=0; $row = $this->db->fetch_assoc($rs); $record_cnt++) {
+					if($row['display'] == 'none') continue;
+
 					$this->_getRowExcel($sheet, $row_num, $row);
 					$row_num++;
 				}
@@ -693,10 +696,6 @@
 
 		function _getRowExcel($sheet, $row_num, $row) {
 			global $g_data_set, ${$g_data_set};
-
-			if($row['display'] == 'none') {
-				continue;
-			}
 
 			$refsheet = $sheet;
 			$refrow = $this->excel_config['detail_start_row'];
