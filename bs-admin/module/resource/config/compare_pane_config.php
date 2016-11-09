@@ -71,7 +71,7 @@ $compare_pane_detail_config = array(
 
 	'select_sql'	=> "select * from " . B_DB_PREFIX . "v_article where 1=1 ",
 
-	'empty_message'	=> '<span class="bold">　' . __('No record was found') . '</span>',
+	'empty_message'	=> '<span class="bold">　' . __('No record found') . '</span>',
 
 	'header'	=>
 	array(

@@ -61,24 +61,24 @@ $form_config = array(
 					array(
 						array(
 							'type' 			=> 'required',
-							'error_message'	=> __('Please enter User ID'),
+							'error_message'	=> __('Please enter user ID'),
 						),
 						array(
 							'type' 			=> 'pattern',
 							'pattern'		=> '^[a-zA-Z0-9\_\-]+$',
-							'error_message'	=> __('Please enter User ID using alphanumeric, hyphen(-) and underbar(_)'),
+							'error_message'	=> __('Please enter user ID using only alphanumeric, hyphen(-) and underbar(_)'),
 						),
 						array(
 							'type'			=> 'callback',
 							'obj'			=> $this,
 							'method'		=> '_validate_callback',
-							'error_message'	=> __('This ID is already exists'),
+							'error_message'	=> __('This ID is already in use'),
 						),
 						array(
 							'type'			=> 'callback',
 							'obj'			=> $this,
 							'method'		=> '_validate_callback2',
-							'error_message'	=> __('This ID can not be used'),
+							'error_message'	=> __('This ID cannot be used'),
 						),
 					),
 				),
@@ -178,7 +178,7 @@ $form_config = array(
 			),
 		),
 
-		// Authority
+		// User type
 		array(
 			'error_group'	=> true,
 			'start_html'	=> '<tr>',
@@ -188,7 +188,7 @@ $form_config = array(
 				'invalid_start_html'	=> '<th class="error">',
 				'end_html'				=> '</th>',
 				array(
-					'value'					=> __('Authority'),
+					'value'					=> __('User type'),
 				),
 				array(
 					'class'				=> 'B_Guidance',
@@ -206,7 +206,7 @@ $form_config = array(
 				array(
 					array(
 						'type' 			=> 'required',
-						'error_message'	=> 'Please set user privilege',
+						'error_message'	=> 'Please set user type',
 					),
 				),
 				array(

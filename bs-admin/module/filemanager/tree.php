@@ -72,11 +72,11 @@
 					$source = $root->getNodeById($node_id);
 
 					if(!file_exists($source->fullpath)) {
-						$this->message = __('Other user updated this record');
+						$this->message = __('Another user has updated this record');
 						$this->status = false;
 					}
 					if(!file_exists($dest->fullpath)) {
-						$this->message = __('Other user updated this record');
+						$this->message = __('Another user has updated this record');
 						$this->status = false;
 					}
 					else {
@@ -106,11 +106,11 @@
 					$source = $root->getNodeById($node_id);
 
 					if(!file_exists($source->fullpath)) {
-						$this->message = __('Other user updated this record');
+						$this->message = __('Another user has updated this record');
 						$this->status = false;
 					}
 					if(!file_exists($dest->fullpath)) {
-						$this->message = __('Other user updated this record');
+						$this->message = __('Another user has updated this record');
 						$this->status = false;
 					}
 					else if(file_exists($dest->fullpath . '/' . $source->file_name)) {
@@ -165,7 +165,7 @@
 			}
 			else {
 				$this->status = false;
-				$this->message = __('An error has occured');
+				$this->message = __('An error has occurred');
 			}
 			$this->response($new_node_id, 'new_node');
 			exit;
@@ -176,7 +176,7 @@
 				foreach($this->request['delete_node_id'] as $node_id) {
 					$node = new B_FileNode($this->dir, $node_id, null, null, 'all');
 					if(!file_exists($node->fullpath)) {
-						$this->message = __('Other user updated this record');
+						$this->message = __('Another user has updated this record');
 						$this->status = false;
 					}
 					else {
@@ -186,7 +186,7 @@
 						}
 						else {
 							$this->status = false;
-							$this->message = __('An error has occured');
+							$this->message = __('An error has occurred');
 							break;
 						}
 					}
@@ -241,15 +241,17 @@
 				return false;
 			}
 			if(!file_exists(B_Util::getPath($this->dir, $file_info['path']))) {
-				$this->message = __('Other user updated this record');
+				$this->message = __('Another user has updated this record');
 				return false;
 			}
 			if(file_exists($path) && strtolower($file_info['basename']) != strtolower($file_name)) {
-				$this->message = __('A file with this name already exists. Please enter a different name.');
+				$this->message = __('A %ITEM% with this name already exists. Please enter a different name.');
+				$node_type = is_dir($path) ? 'folder' : 'file';
+				$this->message = str_replace('%ITEM%', __($node_type), $this->message);
 				return false;
 			}
 			if(preg_match('/[\\\\:\/\*\?<>\|\s]/', $file_name)) {
-				$this->message = __('Followed charcters can not be used for file name and folder name (\ / : * ? " < > | space)');
+				$this->message = __('The following charcters cannot be used in file or folder names (\ / : * ? " < > | space)');
 				return false;
 			}
 

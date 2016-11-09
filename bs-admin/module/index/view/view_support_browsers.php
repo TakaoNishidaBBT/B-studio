@@ -15,7 +15,7 @@
 
 	<div class="support">
 		<p>
-			<?php echo __('Your browser is not supported. <br />Please use following browsers.'); ?>
+			<?php echo __('Your browser is not supported. <br />Please use one of the browsers listed below.'); ?>
 		</p>
 		<table class="browsers">
 			<tr>

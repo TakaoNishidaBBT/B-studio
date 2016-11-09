@@ -49,7 +49,6 @@ $tree_config = array(
 				'folder_open'	=> array('src' => './images/folders/folder_open.png'),
 				'widget'		=> array('src' => './images/folders/widget.png'),
 			),
-			'session_timeout'		=> __('Your session has timed out, Please log in again'),
 		),
 	),
 );

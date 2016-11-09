@@ -185,7 +185,7 @@
 			}
 
 			if($select_message) {
-				$select_message = '<p class="condition"><span class="bold">' . __('Search condition') . '&nbsp;</span>' . $select_message . '</p>';
+				$select_message = '<p class="condition"><span class="bold">' . __('Search conditions') . '&nbsp;</span>' . $select_message . '</p>';
 			}
 
 			$this->sql_where = $sql_where . $sql_where_invalid;

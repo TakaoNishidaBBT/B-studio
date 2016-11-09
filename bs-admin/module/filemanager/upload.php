@@ -28,7 +28,7 @@
 					else {
 						$limit = ini_get('upload_max_filesize');
 					}
-					$message = __('File size is too large. Maximun upload file size is %LIMIT%');
+					$message = __('The file size is too large. The maximun file upload size is %LIMIT%');
 					$message = str_replace('%LIMIT%', $limit, $message);
 					throw new Exception($message);
 				}
@@ -39,7 +39,7 @@
 					throw new Exception(__('Multi-byte characters cannot be used'));
 				}
 				if(preg_match('/[\\\\:\/\*\?<>\|\s]/', $file['basename'])) {
-					throw new Exception(__('Followed charcters can not be used for file name and folder name (\ / : * ? " < > | space)'));
+					throw new Exception(__('The following charcters cannot be used in file or folder names (\ / : * ? " < > | space)'));
 				}
 				if($this->global_session[$this->session['relation']]['current_node'] != 'root') {
 					$path = $this->global_session[$this->session['relation']]['current_node'] . '/';
@@ -59,7 +59,7 @@
 					case 'noextract':
 						if(file_exists(B_UPLOAD_DIR . $path . $file['basename']) && $this->request['mode'] == 'confirm') {
 							$response_mode = 'confirm';
-							$message = __('%FILE_NAME% already exists. Are you sure to overwrite?');
+							$message = __('%FILE_NAME% already exists. Are you sure you want to overwrite?');
 							$message = str_replace('%FILE_NAME%', $file['basename'], $message);
 						}
 						break;
@@ -68,7 +68,7 @@
 				else {
 					if($this->request['mode'] == 'confirm' && file_exists(B_UPLOAD_DIR . $path . $file['basename'])) {
 						$response_mode = 'confirm';
-						$message = __('%FILE_NAME% already exists. Are you sure to overwrite?');
+						$message = __('%FILE_NAME% already exists. Are you sure you want to overwrite?');
 						$message = str_replace('%FILE_NAME%', $file['basename'], $message);
 					}
 				}

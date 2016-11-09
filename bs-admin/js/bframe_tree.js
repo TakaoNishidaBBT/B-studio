@@ -581,7 +581,7 @@
 					var node_info = response.node_info;
 				}
 				catch(e) {
-					alert(property.session_timeout);
+					alert(top.bframe.message.getProperty('session_time_out'));
 					target.style.cursor = 'default';
 					if(pane) pane.style.cursor = 'default';
 					response_wait = false;
@@ -2661,7 +2661,7 @@
 						var response = eval('('+httpObj.responseText+')');
 					}
 					catch(e) {
-						var response = {status: false, message: 'セッションが切れました' };
+						var response = {status: false, message: top.bframe.message.getProperty('session_time_out') };
 					}
 
 					if(response.status) {

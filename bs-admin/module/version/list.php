@@ -133,7 +133,7 @@
 			}
 
 			if($select_message) {
-				$select_message = '<p class="condition"><strong>' . __('Search condition') . '&nbsp;</strong>' . $select_message . '</p>';
+				$select_message = '<p class="condition"><strong>' . __('Search conditions') . '&nbsp;</strong>' . $select_message . '</p>';
 			}
 
 			$this->sql_where = $sql_where . $sql_where_invalid;
@@ -143,7 +143,7 @@
 
 		function confirm() {
 			if(!$this->post['reserved_version_id'] || !$this->post['working_version_id']) {
-				$this->error_message.= '<span class="bold">' . __('Please set versions.') . '</span>';
+				$this->error_message.= '<span class="bold">' . __('Please select version.') . '</span>';
 				$this->back();
 			}
 			else {
@@ -167,11 +167,11 @@
 					}
 					else {
 						$this->session['publish_caution'] = __('published immediately');
-						$this->session['publish_message'] = __('<img src="images/common/caution.png" alt="#" />If you set scheduled to be published this version, you must set current published version');
+						$this->session['publish_message'] = __('<img src="images/common/caution.png" alt="#" />If you schedule this version to be published at a later date, you must set the current published version');
 					}
 				}
 				else {
-					$this->session['publish_caution'] = __('published immediately');
+					$this->session['publish_caution'] = __('Changes will be reflected immediately');
 				}
 
 				$row = $version_table->selectByPk(array('version_id' => $this->session['working_version_id']));

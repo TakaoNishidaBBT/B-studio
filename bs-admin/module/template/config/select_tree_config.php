@@ -48,55 +48,6 @@ $tree_config = array(
 				'folder_open'	=> array('src' => './images/folders/folder_open.png'),
 				'template'		=> array('src' => './images/folders/template.png'),
 			),
-			'context_menu'		=>
-			array(
-				array(
-					'menu'		=> '切り取り',
-					'func'		=> 'cutNode',
-				),
-				array(
-					'menu'		=> 'コピー',
-					'func'		=> 'copyNode',
-				),
-				array(
-					'menu'		=> '貼り付け',
-					'func'		=> 'pasteNode',
-				),
-				array(
-					'menu'		=> 'エイリアスとして貼り付け',
-					'func'		=> 'pasteAriasNode',
-				),
-				array(
-					'menu'		=> '削除',
-					'func'		=> 'deleteNode',
-					'confirm'	=>
-					array(
-						'normal'	=> '削除します。よろしいですか？',
-						'complete'	=> '完全に削除します。よろしいですか？',
-					),
-				),
-				array(
-					'menu'		=> '新規',
-					'func'		=> 'createNode',
-					'submenu'	=>
-					array(
-						array(
-							'menu'		=> 'テンプレート',
-							'func'		=> 'createNode',
-							'icon'		=> './images/folders/template.png',
-							'param'		=> 'node_type=template&node_class=template',
-						),
-					),
-					'submenu_width'	=> '120',
-				),
-				array(
-					'menu'		=> '名前の変更',
-					'func'		=> 'editName',
-				),
-			),
-			'context_menu_width'	=> '138',
-			'context_menu_frame'	=> 'top',
-			'session_timeout'		=> 'セッションが切れました。ログインしなおしてください。',
 		),
 	),
 );

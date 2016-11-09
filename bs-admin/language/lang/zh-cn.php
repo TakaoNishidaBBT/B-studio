@@ -45,7 +45,7 @@
 										=> '??要把“%NODE_NAME%”放入回收站?？',
 		'Are you sure you want to move these %NODE_COUNT% objects to the trash?'
 										=> '??要把? %NODE_COUNT% ?移?到回收站?？',
-		'Are you sure you want to permanently remove the items in the trah?'
+		'Are you sure you want to permanently remove the items in the trash?'
 										=> '??要?除所有文件?？',
 		"Another user has updated this record\nAre you sure you want to overwrite?"
 										=> "文件已被其他用?更改。\n?定要覆盖更改?？",
@@ -110,10 +110,10 @@
 		'was deleted.'					=> '已?除。',
 		'was faild to delete.'			=> '?除失?。',
 
-		'Other user updated this record'
+		'Another user has updated this record'
 										=> "数据已被其他用?更改。",
 		// Menu
-		'Open publish page'				=> '打?首?',
+		'Open published page'			=> '打?首?',
 		'Contents'						=> '内容?',
 		'Templates'						=> '模板',
 		'Resources'						=> '?源',

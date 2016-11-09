@@ -20,7 +20,7 @@ array(
 						from " . B_DB_PREFIX . "user
 						where 1=1 ",
 
-	'empty_message'	=> '<span class="bold">　' . __('No record was found') . '</span>',
+	'empty_message'	=> '<span class="bold">　' . __('No record found') . '</span>',
 
 	'header'	=>
 	array(
@@ -53,7 +53,7 @@ array(
 			'name'			=> 'user_auth',
 			'start_html'	=> '<th class="sortable" style="width:60px">',
 			'end_html'		=> '</th>',
-			'value'			=> __('Authority'),
+			'value'			=> __('User type'),
 			'class'			=> 'B_Link',
 			'link'			=> DISPATCH_URL,
 			'cond_html'		=> 'class="current-key"',

@@ -408,7 +408,7 @@ $form_config = array(
 					array(
 						array(
 							'type' 			=> 'status',
-							'error_message'	=> __('When you choose external link on, please enter URL'),
+							'error_message'	=> __('After turninng external link on, please enter URL'),
 						),
 					),
 				),
@@ -445,7 +445,7 @@ $form_config = array(
 			),
 		),
 
-		// Detail
+		// Details
 		array(
 			'error_group'	=> true,
 			'name'			=> 'contents_row',
@@ -454,7 +454,7 @@ $form_config = array(
 			array(
 				'start_html'	=> '<th>',
 				'end_html'		=> '</th>',
-				'value'			=> __('Detail'),
+				'value'			=> __('Details'),
 			),
 			array(
 				'start_html'	=> '<td>',
@@ -585,7 +585,7 @@ $delete_control_config = array(
 		'start_html'	=> '<li>',
 		'end_html'		=> '</li>',
 		array(
-			'start_html'	=> '<span class="right-button" onclick="bframe.confirmSubmit(\'' . __('Are you sure to delete?') . '\', \'F1\', \'' . $this->module . '\', \'form\', \'delete\', \'\');">',
+			'start_html'	=> '<span class="right-button" onclick="bframe.confirmSubmit(\'' . __('Are you sure you want to delete?') . '\', \'F1\', \'' . $this->module . '\', \'form\', \'delete\', \'\');">',
 			'end_html'		=> '</span>',
 			array(
 				'start_html'	=> '<span class="text">',

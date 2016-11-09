@@ -11,7 +11,7 @@ $bframe_message_config = array(
 	array(
 		'bframe_message'	=>
 		array(
-			'session_time_out'				=> __('Your session has timed out, Please log in again'),
+			'session_time_out'				=> __('Your session has timed out. Please log in again'),
 
 			'upload_zip_confirm_dialog1'	=> __('Yes'),
 			'upload_zip_confirm_dialog2'	=> __('Extract all'),

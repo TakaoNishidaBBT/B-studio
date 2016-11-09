@@ -307,11 +307,11 @@
 			case 'jpeg':
 			case 'gif':
 			case 'png':
-				$this->message = __('Followed extensions can not be used (css swf jpg jpeg gif png)');
+				$this->message = __('The following extensions cannot be used (css swf jpg jpeg gif png)');
 				return false;
 			}
 			if(preg_match('/[\\\\:\/\*\?<>\|\s]/', $file_name)) {
-				$this->message = __('Followed charcters can not be used for file name and folder name (\ / : * ? " < > | space)');
+				$this->message = __('The following charcters cannot be used in file or folder names (\ / : * ? " < > | space)');
 				return false;
 			}
 

@@ -170,8 +170,8 @@ $tree_config = array(
 					'func'		=> 'deleteNode',
 					'confirm'	=>
 					array(
-						'single'	=> __('Are you sure you want %NODE_NAME% to delete?'),
-						'plural'	=> __('Are you sure you want these %NODE_COUNT% objects to delete?'),
+						'single'	=> __('Are you sure you want to delete %NODE_NAME%?'),
+						'plural'	=> __('Are you sure you want to delete these %NODE_COUNT% objects?'),
 					),
 				),
 				array(
@@ -209,7 +209,6 @@ $tree_config = array(
 			),
 			'context_menu_width'	=> '138',
 			'context_menu_frame'	=> 'top',
-			'session_timeout'		=> __('Your session has timed out, Please log in again'),
 			'abbr'					=> '…',
 		),
 	),

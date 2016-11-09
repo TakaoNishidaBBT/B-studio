@@ -76,7 +76,7 @@
 			if($this->mode == 'update') {
 				$row = $this->table->selectByPk($value);
 				if($this->session['init_value']['update_datetime'] < $row['update_datetime']) {
-					$error_message = __('Other user updated this record');
+					$error_message = __('Another user has updated this record');
 					$this->action_message = $error_message;
 
 					$this->form->setValue($this->session['init_value']);
@@ -93,7 +93,7 @@
 
 		function register() {
 			if(!$this->checkAlt($this->session['post'])) {
-				$message = __('Other user updated this record');
+				$message = __('Another user has updated this record');
 				return false;
 			}
 
@@ -177,17 +177,17 @@
 			// Check version condition before delete
 			$max_version_id = $this->table->selectMaxValue('version_id');
 			if($row['version_id'] != $max_version_id) {
-				$this->message = __('This version can not be deleted. Because it\'s not ths latest version.');
+				$this->message = __('This version cannot be deleted because it is not ths most recent version.');
 				$this->setView('error_view');
 				return;
 			}
 			if($this->version['working_version_id'] == $row['version_id']) {
-				$this->message = __('Working version can not be deleted.');
+				$this->message = __('The working version cannot be deleted.');
 				$this->setView('error_view');
 				return;
 			}
 			if($this->version['current_version_id'] == $row['version_id']) {
-				$this->message = __('Published version can not be deleted.');
+				$this->message = __('The published version cannot be deleted.');
 				$this->setView('error_view');
 				return;
 			}

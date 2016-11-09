@@ -102,7 +102,7 @@
 			if($this->request['mode'] == 'update') {
 				$row = $this->table->selectByPk($value);
 				if($this->session['init_value']['update_datetime'] < $row['update_datetime']) {
-					$error_message = __('Other user updated this record');
+					$error_message = __('Another user has updated this record');
 					$this->action_message = $error_message;
 
 					$this->form->setValue($this->session['init_value']);
@@ -148,7 +148,7 @@
 
 		function _register(&$message) {
 			if(!$this->checkAlt($this->session['post'])) {
-				$message = __('Other user updated this record');
+				$message = __('Another user has updated this record');
 				return false;
 			}
 

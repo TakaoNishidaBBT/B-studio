@@ -464,15 +464,17 @@
 				return false;
 			}
 			if($this->tree->checkDuplicateByName($node_id, $file_name)) {
-				$this->message = __('A file with this name already exists. Please enter a different name.');
+				$this->message = __('A %ITEM% with this name already exists. Please enter a different name.');
+				$node_type = $this->tree->getNodeTypeById($node_id);
+				$this->message = str_replace('%ITEM%', __($node_type), $this->message);
 				return false;
 			}
 			if(substr($file_name, -1) == '.') {
-				$this->message = '拡張子が必要です。';
+				$this->message = __('Please enter the file extension');
 				return false;
 			}
 			if(preg_match('/[\\\\:\/\*\?<>\|\s]/', $file_name)) {
-				$this->message = __('Followed charcters can not be used for file name and folder name (\ / : * ? " < > | space)');
+				$this->message = __('The following charcters cannot be used in file or folder names (\ / : * ? " < > | space)');
 				return false;
 			}
 

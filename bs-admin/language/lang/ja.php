@@ -38,14 +38,16 @@
 		'Rename'						=> '名前の変更',
 		'Empty the trash'				=> 'ゴミ箱を空にする',
 		'Folder'						=> 'フォルダ',
+		'folder'						=> 'フォルダ',
 		'File'							=> 'ファイル',
+		'file'							=> 'ファイル',
 		'Page'							=> 'ページ',
 
 		'Are you sure you want to move %NODE_NAME% to the trash?'
 										=> '%NODE_NAME%をゴミ箱に移動します。よろしいですか？',
 		'Are you sure you want to move these %NODE_COUNT% objects to the trash?'
 										=> 'これら%NODE_COUNT%をゴミ箱に移動します。よろしいですか？',
-		'Are you sure you want to permanently remove the items in the trah?'
+		'Are you sure you want to permanently remove the items in the trash?'
 										=> '完全に削除します。よろしいですか？',
 		"Another user has updated this file\nAre you sure you want to overwrite?"
 										=> "他のユーザに更新されています。\n上書きしますか？",
@@ -55,28 +57,27 @@
 		'Please enter name'				=> '名前を入力してください。',
 		'Multi-byte characters cannot be used'
 										=> '日本語は使用できません',
-		'A file with this name already exists. Please enter a different name.'
-										=> '名前を変更できません。指定されたファイル名は既に存在します。別の名前を指定してください。',
-		'A template with this name already exists. Please enter a different name.'
-										=> '名前を変更できません。指定されたテンプレートは既に存在します。別の名前を指定してください。',
-		'Extension is necessary'		=> '拡張子が必要です。',
-		'Followed extensions can not be used (css swf jpg jpeg gif png)'
+		'A %ITEM% with this name already exists. Please enter a different name.'
+										=> '名前を変更できません。指定された%ITEM%名は既に存在します。別の名前を指定してください。',
+		'Please enter the file extension'
+										=> '拡張子が必要です。',
+		'The following extensions cannot be used (css swf jpg jpeg gif png)'
 										=> '次の拡張子は使用できません css swf jpg jpeg gif png',
-		'Followed charcters can not be used for file name and folder name (\ / : * ? " < > | space)'
+		'The following charcters cannot be used in file or folder names (\ / : * ? " < > | space)'
 										=> 'ファイル名／フォルダ名に次の文字は使えません \ / : * ? " < > | スペース',
 		'Displaying %RECORD_FROM% to %RECORD_TO% of %TOTAL% items'
 										=> ' 全%TOTAL%件中　%RECORD_FROM%～%RECORD_TO%件目',
 
 		// Message
-		'Your session has timed out, Please log in again'
+		'Your session has timed out. Please log in again'
 										=> 'セッションが切れました。ログインしなおしてください。',
 
 		// Browser check
-		'Your browser is not supported. <br />Please use following browsers.'
+		'Your browser is not supported. <br />Please use one of the browsers listed below.'
 										=> 'お使いのブラウザはサポートされていません<br />以下のブラウザをご使用ください',
 		// Login Error
 		'Error'							=> 'エラー',
-		'Please enter your login ID and password correctly.'
+		'The Login ID or password you entered is invalid.'
 										=> 'ログインIDとパスワードを正しく入力してください',
 
 		// Error message for date and time
@@ -87,9 +88,9 @@
 
 		// Error message for Node
 		'DB error'						=> 'DBエラー',
-		'The folder you copy or move to is the subfolder'
+		'The destination folder is a subfolder of the selected folder'
 										=> '受け側のフォルダは送り側のフォルダのサブフォルダです',
-		'The template you copy to or move to is subtemplate'
+		'The destination template is a subtemplate of the selecter template'
 										=> '受け側のテンプレートは送り側のサブテンプレートです',
 		'The number of nodes are differnt. Please sort in right pane.'
 										=> 'ノードの数が違っています(右側のフォルダペインでソートしてください)',
@@ -106,27 +107,28 @@
 		'was updated.'					=> 'を更新しました。',
 		'was failed to update.'			=> 'の更新に失敗しました。',
 		'was set.'						=> 'を設定しました。',
-		'was failed to set.'				=> 'の設定に失敗しました。',
+		'was failed to set.'			=> 'の設定に失敗しました。',
 		'were set.'						=> 'を設定しました。',
 		'were failed to set.'			=> 'の設定に失敗しました。',
 		'was deleted.'					=> 'を削除しました。',
 		'was failed to delete.'			=> 'の削除に失敗しました。',
 
-		'Other user updated this record'
+		'Another user has updated this record'
 										=> "他のユーザに更新されています",
 		// Menu
-		'Open publish page'				=> '公開画面を開きます',
+		'Open published page'			=> '公開画面を開きます',
 		'Contents'						=> 'コンテンツ',
 		'Templates'						=> 'テンプレート',
 		'Resources'						=> 'リソース',
 		'Resource manager'				=> 'リソース管理',
 		'Widgets'						=> 'ウィジェット',
+		'widget'						=> 'ウィジェット',
 		'Posts'							=> '投稿',
 		'Article'						=> '記事',
 		'Article2'						=> '記事2',
 		'Article3'						=> '記事3',
 		'File manager'					=> 'ファイル管理',
-		'Configuration'					=> '基本設定',
+		'Basic settings'				=> '基本設定',
 		'Versions'						=> 'バージョン管理',
 		'Users'							=> 'ユーザ管理',
 		'Site admin'					=> 'サイト管理者設定',
@@ -146,6 +148,7 @@
 		'Preview'						=> 'プレビュー',
 		'Title'							=> 'タイトル',
 		'Template'						=> 'テンプレート',
+		'template'						=> 'テンプレート',
 		'Breadcrumbs'					=> 'パンくず',
 		'Keywords'						=> 'Keywords',
 		'Description'					=> 'Description',
@@ -159,13 +162,13 @@
 		'Modified'						=> '更新日時',
 		'File size'						=> 'ファイルサイズ',
 		'Image size'					=> 'イメージサイズ',
-		'Folder is not selected'		=> 'フォルダが選択されていません',
-		'File size is too large. Maximun upload file size is {$limit}'
-										=> 'ファイルサイズが大きすぎます。アップロードできるのは{$limit}までです',
+		'No folder selected'			=> 'フォルダが選択されていません',
+		'The file size is too large. The maximun file upload size is %LIMIT%'
+										=> 'ファイルサイズが大きすぎます。アップロードできるのは%LIMIT%までです',
 		'Extract %FILE_NAME% ?'			=> '%FILE_NAME%を展開しますか？',
-		'%FILE_NAME% already exists. Are you sure to overwrite?'
+		'%FILE_NAME% already exists. Are you sure you want to overwrite?'
 										=> '%FILE_NAME%は既に存在します。<br />上書きしてもよろしいですか？',
-		'Failed to create directory'		=> 'ディレクトリの作成に失敗しました',
+		'Failed to create directory'	=> 'ディレクトリの作成に失敗しました',
 		'Multi-byte characters cannot be used in file names. Please check contents of the zip file.'
 										=> '日本語ファイル名は使用できません。（zipファイル中）',
 		'The uploaded file exceeds the upload_max_filesize directive in php.ini.'
@@ -182,16 +185,14 @@
 		'A PHP extension stopped the file upload.'
 										=> 'ファイルのアップロードが拡張モジュールによって停止されました。',
 
-		// Resource editor
-		"Other user updated this file\nAre you sure to overwrite?"
-										=> "他のユーザに更新されています。\n上書きしますか？",
 		// Article
 		'Category: '					=> 'カテゴリ：',
 		'Category'						=> 'カテゴリ',
+		'category'						=> 'カテゴリ',
 		'Date'							=> '日付',
 		'Date: '						=> '日付：',
 		'Title: '						=> 'タイトル：',
-		'Open/Preview/Close'			=> '公開／プレビュー／非公開',
+		'Published/Preview/Closed'		=> '公開／プレビュー／非公開',
 		'Published'						=> '公開',
 		'Closed'						=> '非公開',
 		'Publication date'				=> '掲載日',
@@ -202,27 +203,25 @@
 		'On'							=> 'あり',
 		'Off'							=> 'なし',
 		'External link'					=> '外部リンク',
-		'When you choose external link on, please enter URL'
+		'After turninng external link on, please enter URL'
 										=> '「外部リンクあり」を選択した場合は、URLを入力してください',
 		'Open link in new window'		=> '別ウインドウ',
-		'Detail'						=> '詳細',
-		'Are you sure to delete?'		=> '削除します。\n\nよろしいですか',
-		'Property'						=> 'プロパティー',
+		'Details'						=> '詳細',
+		'Are you sure you want to delete?'
+										=> '削除します。\n\nよろしいですか',
+		'Properties'					=> 'プロパティー',
 		'newCategory'					=> '新しいカテゴリ',
 		'newFolder'						=> '新しいフォルダ',
 
 		// Category
-		'Will be set when you double-clidk'
-										=> 'カテゴリ名をダブルクリックすると設定されます',
+		'Double-click to set'			=> 'カテゴリ名をダブルクリックすると設定されます',
 		'Text color'					=> '文字色',
-		'Backgroud-color'				=> '背景色',
+		'Backgroud color'				=> '背景色',
 		'Icon'							=> 'アイコン',
 		'Image selection'				=> '画像選択',
-		'A category with this name already exists. Please enter a differnt name.'
-										=> '名前を変更できません。指定されたカテゴリ名は既に存在します。別の名前を指定してください。',
 
-		// Carendar
-		'Calendar'						=> 'カレンダー',					
+		// Calendar
+		'Calendar'						=> 'カレンダー',
 		'%MONTH% %YEAR%'				=> '%YEAR%年 %MONTH%',
 		'Jan'							=> '1月',
 		'Feb'							=> '2月',
@@ -246,28 +245,27 @@
 		'Sat'							=> '土',
 
 		// File manager
-		'Are you sure you want %NODE_NAME% to delete?'
+		'Are you sure you want to delete %NODE_NAME%?'
 										=> '%NODE_NAME%を削除します。よろしいですか？',
-		'Are you sure you want these %NODE_COUNT% objects to delete?'
+		'Are you sure you want to delete these %NODE_COUNT% objects?'
 										=> 'これら%NODE_COUNT%個の項目を削除します。よろしいですか？',
 		'Please use server browser'		=> 'サーバブラウザを使用してください',
-		'An error has occured'			=> 'エラーが発生しました',
+		'An error has occurred'			=> 'エラーが発生しました',
 		'The name could not be changed'	=> '名前を変更できません',
 
 		// Version
 		'Keyword'						=> 'キーワード',
 		'Keyword: '						=> 'キーワード：',
-		'Search condition'				=> '検索条件',
-		'No record was found'			=> '該当レコードはありません',
+		'Search conditions'				=> '検索条件',
+		'No record found'				=> '該当レコードはありません',
 		'Display'						=> '表示',
 		'Search'						=> '検索',
 		'Clear'							=> 'クリア',
 		'New '							=> '新規作成',
-		'lines display'					=> '件目',
 		'Publish'						=> '公開',
 		'Working'						=> '作業中',
 		'ID'							=> 'ID',
-		'Publish date time'				=> '公開日時',
+		'Publish date/time'				=> '公開日時',
 		'Status'						=> '状態',
 		'Status ■:Published  ★:Scheduled to be published'
 										=> '状態　■：公開　★：公開予約',
@@ -287,24 +285,25 @@
 		'ex) 2020/01/01 12:00'			=> '例）2020/01/01 12:00',
 		'Version name'					=> 'バージョン（名称）',
 		'Please enter version name'		=> 'バージョン（名称）を入力してください',
-		'All the contents you made on this version will be completely deleted.\nThis operation can not be undone.\n\nAre your sure to delete?'
+		'All the contents in this version will be completely deleted.\nThis operation cannot be undone.\n\nAre your sure you want to delete?'
 										=> 'このバージョンで作成したコンテンツすべてを削除します。\nこの作業は元に戻せません\n\nよろしいですか？',
 		'Version: '						=> 'バージョン：',
 		'Publish date and time: '		=> '　公開日時：',
-		'This version can not be deleted. Because it\'s not ths latest version.'
+		'This version can not be deleted because it is not ths most recent version.'
 										=> '最新バージョンではありませんので削除できません',
-		'Working version can not be deleted.'
+		'The working version cannot be deleted.'
 										=> '作業中バージョンなので削除できません',
-		'Published version can not be deleted.'
+		'The published version cannot be deleted.'
 										=> '公開バージョンなので削除できません',
-		'Please set versions.'			=> 'バージョンを選択してください',
-		'<img src="images/common/caution.png" alt="#" />If you set scheduled to be published this version, you must set current published version'
+		'Please select version.'		=> 'バージョンを選択してください',
+		'<img src="images/common/caution.png" alt="#" />If you schedule this version to be published at a later date, you must set the current published version'
 										=> '<img src="images/common/caution.png" alt="#" />このバージョンを予約登録するには、それまでに公開されるバージョンを設定してから再度、予約登録する必要があります。',
 		'Published version:%PUBLISH_VERSION% &nbsp;Working version:%WROKING_VERSION%'
 										=> '公開バージョン：%PUBLISH_VERSION% &nbsp;作業中バージョン：%WROKING_VERSION%',
 
-		'will be registerd.'			=> 'に設定します。',
-		'published immediately'			=> '即時反映',
+		'will be set.'					=> 'に設定します。',
+		'Changes will be reflected immediately'
+										=> '即時反映',
 		'Scheduled to be published'		=> '予約登録',
 
 		// Diff
@@ -316,18 +315,18 @@
 		'User ID'						=> 'ユーザID',
 		'User ID: '						=> 'ユーザID：',
 		'Password'						=> 'パスワード',
-		'Authority'						=> '権限',
+		'User type'						=> '権限',
 		'Enabled'						=> '有効',
 		'Disabled'						=> '無効',
 		'Admin'							=> '管理者',
 		'Editor'						=> '投稿者',
-		'Please enter User ID'			=> 'ユーザIDを入力してください',
-		'Please enter User ID using alphanumeric, hyphen(-) and underbar(_)'
+		'Please enter user ID'			=> 'ユーザIDを入力してください',
+		'Please enter user ID using only alphanumeric, hyphen(-) and underbar(_)'
 										=> 'ユーザIDは英数とハイフン(-)アンダーバー(_)で入力してください',
-		'This ID is already exists'		=> '既に登録されています',
-		'This ID can not be used'		=> 'そのIDは登録できません',
+		'This ID is already in use'		=> '既に登録されています',
+		'This ID cannot be used'		=> 'そのIDは登録できません',
 		'Please enter password'			=> 'パスワードを入力してください',
-		'Please set user privilege'		=> 'ユーザ権限を選択してください',
+		'Please set user type'			=> 'ユーザ権限を選択してください',
 		'Please enter a name'			=> '氏名を入力してください',
 		'English'						=> '英語',
 		'Japanese'						=> '日本語',
@@ -337,7 +336,7 @@
 		'User name'						=> 'ユーザ名',
 		'Login ID'						=> 'ログインID',
 		'Password (Re-entry)'			=> 'パスワード（再入力）',
-		'(Password you set)'			=> '（設定されたパスワード）',
+		'(set password)'				=> '（設定されたパスワード）',
 		'If you change password, please enter password. If you don\'t, keep this field empty'
 										=> 'パスワードを変更する場合は新しいパスワードを入力し、変更しない場合は空のままにしておいてください',
 		'For confirmation, please re-enter password'

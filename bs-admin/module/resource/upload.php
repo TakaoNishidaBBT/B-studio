@@ -18,7 +18,7 @@
 
 			try {
 				if(!$this->current_folder) {
-					throw new Exception(__('Folder is not selected'));
+					throw new Exception(__('No folder selected'));
 				}
 
 	 			// Check file size
@@ -32,7 +32,7 @@
 					else {
 						$limit = ini_get('upload_max_filesize');
 					}
-					$message = __('File size is too large. Maximun upload file size is %LIMIT%');
+					$message = __('The file size is too large. The maximun file upload size is %LIMIT%');
 					$message = str_replace('%LIMIT%', $limit, $message);
 					throw new Exception($message);
 				}
@@ -46,7 +46,7 @@
 					throw new Exception(__('Multi-byte characters cannot be used'));
 				}
 				if(preg_match('/[\\\\:\/\*\?<>\|\s]/', $file['basename'])) {
-					throw new Exception(__('Followed charcters can not be used for file name and folder name (\ / : * ? " < > | space)'));
+					throw new Exception(__('The following charcters cannot be used in file or folder names (\ / : * ? " < > | space)'));
 				}
 
 				if($file['extension'] == 'zip') {
@@ -60,7 +60,7 @@
 					case 'noextract':
 						if($this->file_exists($file['basename']) && $this->request['mode'] == 'confirm') {
 							$response_mode = 'confirm';
-							$message = __('%FILE_NAME% already exists. Are you sure to overwrite?');
+							$message = __('%FILE_NAME% already exists. Are you sure you want to overwrite?');
 							$message = str_replace('%FILE_NAME%', $file['basename'], $message);
 						}
 						break;
@@ -69,7 +69,7 @@
 				else {
 					if($this->request['mode'] == 'confirm' && $this->file_exists($file['basename'])) {
 						$response_mode = 'confirm';
-						$message = __('%FILE_NAME% already exists. Are you sure to overwrite?');
+						$message = __('%FILE_NAME% already exists. Are you sure you want to overwrite?');
 						$message = str_replace('%FILE_NAME%', $file['basename'], $message);
 					}
 				}
@@ -223,9 +223,10 @@
 
 			for($i=0; $i < $zip->numFiles; $i++) {
 				$stat = $zip->statIndex($i);
-				$file_name = mb_convert_encoding($stat['name'], 'UTF-8', 'auto');
+				$file_name = mb_convert_encoding($stat['name'], 'UTF-8', MB_FROM_ENCODING);
 				if(strlen($file_name) != mb_strlen($file_name)) {
-					throw new Exception(__('Multi-byte characters cannot be used in file names. Please check contents of the zip file.);
+					$message = __('Multi-byte characters cannot be used in file names. Please check contents of the zip file.');
+					throw new Exception($message);
 				}
 			}
 		}

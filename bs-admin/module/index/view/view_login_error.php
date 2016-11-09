@@ -10,7 +10,7 @@
 	<div class="message">
 		<dl class="error">
 			<dt><img src="images/login/warning.png" alt="Error" /><?php echo __('Error'); ?></dt>
-			<dd><p class="error-message"><strong><?php echo __('Please enter your login ID and password correctly.'); ?></strong></p></dd>
+			<dd><p class="error-message"><strong><?php echo __('The Login ID or password you entered is invalid.'); ?></strong></p></dd>
 		</dl>
 
 		<div class="icon">

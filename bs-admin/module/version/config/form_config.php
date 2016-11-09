@@ -54,7 +54,7 @@ $form_config = array(
 			),
 		),
 
-		// Publish date and time
+		// Publish date/time
 		array(
 			'error_group'	=> true,
 			'start_html'	=> '<tr>',
@@ -290,7 +290,7 @@ $delete_control_config = array(
 		'start_html'	=> '<li>',
 		'end_html'		=> '</li>',
 		array(
-			'start_html'	=> '<span class="right-button" onclick="bframe.confirmSubmit(\'' . __('All the contents you made on this version will be completely deleted.\nThis operation can not be undone.\n\nAre your sure to delete?') . '\', \'F1\', \'' . $this->module . '\', \'form\', \'delete\', \'\');">',
+			'start_html'	=> '<span class="right-button" onclick="bframe.confirmSubmit(\'' . __('All the contents in this version will be completely deleted.\nThis operation cannot be undone.\n\nAre your sure you want to delete?') . '\', \'F1\', \'' . $this->module . '\', \'form\', \'delete\', \'\');">',
 			'end_html'		=> '</span>',
 			array(
 				'start_html'	=> '<span class="text">',

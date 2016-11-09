@@ -78,7 +78,7 @@ $config_form_config = array(
 					),
 				),
 
-				// Backgroud-color
+				// Backgroud color
 				array(
 					'start_html'	=> '<tr>',
 					'end_html'		=> '</tr>',
@@ -86,7 +86,7 @@ $config_form_config = array(
 						'start_html'		=> '<th>',
 						'end_html'			=> '</th>',
 						array(
-							'value'				=> __('Backgroud-color'),
+							'value'				=> __('Backgroud color'),
 						),
 					),
 					array(

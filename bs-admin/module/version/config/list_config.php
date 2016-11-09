@@ -29,7 +29,7 @@ array(
 						on 1=1
 						where del_flag='0' ",
 
-	'empty_message'	=> '<strong>　' . __('No record was found') . '</strong>',
+	'empty_message'	=> '<strong>　' . __('No record found') . '</strong>',
 
 	'header'	=>
 	array(
@@ -58,7 +58,7 @@ array(
 			'name'			=> 'publication_date',
 			'start_html'	=> '<th class="center">',
 			'end_html'		=> '</th>',
-			'value'			=> __('Publish date time'),
+			'value'			=> __('Publish date/time'),
 		),
 		array(
 			'name'			=> 'version',

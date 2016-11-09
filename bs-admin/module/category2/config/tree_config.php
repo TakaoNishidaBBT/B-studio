@@ -41,7 +41,7 @@ $tree_config = array(
 				array(
 					'url'		=> DISPATCH_URL . '&module=' . $this->module . '&page=property&method=select',
 					'params'	=> 'width:360,height:330',
-					'title'		=> __('Property'),
+					'title'		=> __('Properties'),
 					'func'		=> 'reloadTree',
 				),
 			),
@@ -75,7 +75,7 @@ $tree_config = array(
 				array(
 					'menu'		=> __('Delete'),
 					'func'		=> 'deleteNode',
-					'confirm'	=> __('Are you sure to delete?'),
+					'confirm'	=> __('Are you sure you want to delete?'),
 				),
 				array(
 					'menu'		=> __('New'),
@@ -96,13 +96,12 @@ $tree_config = array(
 					'func'		=> 'editName',
 				),
 				array(
-					'menu'		=> __('Property'),
+					'menu'		=> __('Properties'),
 					'func'		=> 'open_property',
 				),
 			),
 			'context_menu_width'	=> '138',
 			'context_menu_frame'	=> 'top',
-			'session_timeout'		=> __('Your session has timed out, Please log in again'),
 		),
 	),
 );

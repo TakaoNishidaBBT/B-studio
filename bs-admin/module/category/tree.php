@@ -197,7 +197,9 @@
 					$this->message = __('Please enter name');
 				}
 				else if($this->tree->checkDuplicateByName($this->request['node_id'], $this->request['node_name'])) {
-					$this->message = __('A category with this name already exists. Please enter a differnt name.');
+					$this->message = __('A %ITEM% with this name already exists. Please enter a different name.');
+					$node_type = $this->tree->getNodeTypeById($this->request['node_id']);
+					$this->message = str_replace('%ITEM%', __($node_type), $this->message);
 					$status = false;
 				}
 				else {

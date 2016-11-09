@@ -130,6 +130,14 @@
 			}
 		}
 
+		function getNodeTypeById($node_id) {
+			$sql = "select * from %VIEW% where node_id='$node_id'";
+			$sql = str_replace('%VIEW%', B_DB_PREFIX . $this->view, $sql);
+			$rs = $this->db->query($sql);
+			$row = $this->db->fetch_assoc($rs);
+			return $row['node_type'];
+		}
+
 		function sort(&$list) {
 			if(!is_array($list)) return;
 

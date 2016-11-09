@@ -15,7 +15,7 @@ $menu_config = array(
 			'start_html'	=> '<li class="title">',
 			'end_html'		=> '</li>',
 			array(
-				'start_html'	=> '<a href="' . B_SITE_ROOT . '" title="' . __('Open publish page') . '" onclick="window.open(this.href); return false;">',
+				'start_html'	=> '<a href="' . B_SITE_ROOT . '" title="' . __('Open published page') . '" onclick="window.open(this.href); return false;">',
 				'end_html'		=> '</a>',
 				array(
 					'start_html'	=> '<span class="title">',
@@ -139,7 +139,7 @@ $menu_config = array(
 						'context_menu'		=>
 						array(
 							array(
-								'menu'		=> __('Configuration'),
+								'menu'		=> __('Basic settings'),
 								'param'		=> DISPATCH_URL . '&module=settings&page=form&method=select,main',
 								'func'		=> 'openUrl',
 							),
@@ -183,7 +183,7 @@ $menu_config = array(
 						'context_menu'		=>
 						array(
 							array(
-								'menu'		=> __('Configuration'),
+								'menu'		=> __('Basic settings'),
 								'param'		=> DISPATCH_URL . '&module=settings&page=form&method=select,main',
 								'func'		=> 'openUrl',
 							),
@@ -222,7 +222,7 @@ $menu_config = array(
 						'context_menu'		=>
 						array(
 							array(
-								'menu'		=> __('Configuration'),
+								'menu'		=> __('Basic settings'),
 								'param'		=> DISPATCH_URL . '&module=settings&page=form&method=select,main',
 								'func'		=> 'openUrl',
 							),

@@ -286,7 +286,9 @@
 				return false;
 			}
 			if($this->tree->checkDuplicateByName($node_id, $file_name)) {
-				$this->message = __('This name can not be used. Because this name already exists. Please enter the other name.');
+				$this->message = __('A %ITEM% with this name already exists. Please enter a different name.');
+				$node_type = $this->tree->getNodeTypeById($node_id);
+				$this->message = str_replace('%ITEM%', __($node_type), $this->message);
 				return false;
 			}
 

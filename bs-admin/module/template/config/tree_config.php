@@ -102,7 +102,8 @@ $tree_config = array(
 				array(
 					'menu'		=> __('Empty the trash'),
 					'func'		=> 'truncateNode',
-					'confirm'	=> __('Are you sure you completely remove files in the trah?'),
+					'confirm'	=> __('Are you sure you want to permanently remove the items in the trash?'),
+
 				),
 			),
 			'context_menu_width'	=> '138',
