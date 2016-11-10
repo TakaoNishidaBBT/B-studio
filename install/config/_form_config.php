@@ -43,7 +43,7 @@ $db_install_form_config = array(
 				'start_html'			=> '<th>',
 				'invalid_start_html'	=> '<th class="error">',
 				'end_html'				=> '</th>',
-				'value'					=> __('Host name'),
+				'value'					=> __('Hostname'),
 			),
 			array(
 				'start_html'	=> '<td>',
@@ -57,7 +57,7 @@ $db_install_form_config = array(
 					array(
 						array(
 							'type' 			=> 'required',
-							'error_message'	=> __('Please enter host name'),
+							'error_message'	=> __('Please enter hostname'),
 						),
 						array(
 							'type' 			=> 'status',
@@ -74,7 +74,7 @@ $db_install_form_config = array(
 			),
 		),
 
-		// User name
+		// Username
 		array(
 			'error_group'	=> 'true',
 			'start_html'	=> '<tr>',
@@ -83,7 +83,7 @@ $db_install_form_config = array(
 				'start_html'			=> '<th>',
 				'invalid_start_html'	=> '<th class="error">',
 				'end_html'				=> '</th>',
-				'value'					=> __('User name'),
+				'value'					=> __('Username'),
 			),
 			array(
 				'start_html'	=> '<td>',
@@ -97,7 +97,7 @@ $db_install_form_config = array(
 					array(
 						array(
 							'type' 			=> 'required',
-							'error_message'	=> __('Please enter user name'),
+							'error_message'	=> __('Please enter username'),
 						),
 						array(
 							'type' 			=> 'status',
@@ -225,7 +225,7 @@ $db_install_form_config = array(
 					'start_html'			=> '<span class="notice">',
 					'end_html'				=> '</span>',
 					'class'					=> 'B_Guidance',
-					'value'					=> __('Usually changing this field is unnecessary. This field could be changed when B-studio will be installed in one schema.'),
+					'value'					=> __('Usually changing this field is unnecessary. Please change This field when installing B-studio multiple times in one schema.'),
 				),
 				array(
 					'name'					=> 'error_message',
@@ -252,7 +252,7 @@ $admin_basic_auth_config = array(
 				'start_html'			=> '<th>',
 				'invalid_start_html'	=> '<th class="error">',
 				'end_html'				=> '</th>',
-				'value'					=> __('User name'),
+				'value'					=> __('Username'),
 			),
 			array(
 				'start_html'	=> '<td>',
@@ -265,12 +265,12 @@ $admin_basic_auth_config = array(
 					array(
 						array(
 							'type' 			=> 'required',
-							'error_message'	=> __('Please enter user name'),
+							'error_message'	=> __('Please enter username'),
 						),
 						array(
 							'type' 			=> 'pattern',
 							'pattern'		=> '^[a-zA-Z0-9\_\-]+$',
-							'error_message'	=> __('Please enter user name using alphanumeric, hyphen(-) and underbar(_)'),
+							'error_message'	=> __('Please enter username using only alphanumeric, hyphen(-) and underbar(_)'),
 						),
 					),
 				),
@@ -311,7 +311,7 @@ $admin_basic_auth_config = array(
 						array(
 							'type' 			=> 'pattern',
 							'pattern'		=> '^[a-zA-Z0-9\_\-]+$',
-							'error_message'	=> __('Please enter password using alphanumeric, hyphen(-) and underbar(_)'),
+							'error_message'	=> __('Please enter password using only alphanumeric, hyphen(-) and underbar(_)'),
 						),
 					),
 				),
@@ -352,7 +352,7 @@ $admin_basic_auth_config = array(
 						array(
 							'type' 			=> 'match',
 							'target'		=> 'basic_auth_pwd',
-							'error_message'	=> __('Password is not matched'),
+							'error_message'	=> __('Password does not match'),
 						),
 					),
 				),
@@ -373,7 +373,7 @@ $admin_user_form_config = array(
 		'start_html'	=> '<table class="form"><tbody>',
 		'end_html'		=> '</tbody></table>',
 
-		// User name
+		// Username
 		array(
 			'error_group'	=> 'true',
 			'start_html'	=> '<tr>',
@@ -382,7 +382,7 @@ $admin_user_form_config = array(
 				'start_html'			=> '<th>',
 				'invalid_start_html'	=> '<th class="error">',
 				'end_html'				=> '</th>',
-				'value'					=> __('User name'),
+				'value'					=> __('Username'),
 			),
 			array(
 				'start_html'	=> '<td>',
@@ -390,12 +390,12 @@ $admin_user_form_config = array(
 				array(
 					'name'					=> 'admin_user_name',
 					'class'					=> 'B_InputText',
-					'special_html'			=> 'class="textbox ime-on" size="40" maxlength="100" ',
+					'special_html'			=> 'class="textbox" size="40" maxlength="100" ',
 					'validate'				=>
 					array(
 						array(
 							'type' 			=> 'required',
-							'error_message'	=> __('Please enter user name'),
+							'error_message'	=> __('Please enter username'),
 						),
 					),
 				),
@@ -466,7 +466,7 @@ $admin_user_form_config = array(
 					'name'					=> 'admin_user_pwd',
 					'class'					=> 'B_Password',
 					'special_html'			=> 'class="textbox ime-off" size="40" maxlength="100" ',
-					'confirm_message'		=> __('(Entered password)'),
+					'confirm_message'		=> __('(Set password)'),
 					'validate'				=>
 					array(
 						array(

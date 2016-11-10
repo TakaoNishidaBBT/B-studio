@@ -155,17 +155,17 @@
 
 	function checkPermission($path, &$message) {
 		if(!file_exists($path)) {
-			$message.= '<span class="status_ok">' . $path  . __(' write permission is OK. ') .  '(file not exist)</span><br />';
+			$message.= '<span class="status_ok">' . $path  . __(' write permission granted. ') .  '(file not exist)</span><br />';
 			return true;
 		}
 		else {
 			$perms = fileperms($path);
 			if(is_writable($path)) {
-				$message.= '<span class="status_ok">' . $path  . __(' : write permission is OK. ') . '(permission:' . substr(sprintf('%o',$perms), -3) . ')</span><br />';
+				$message.= '<span class="status_ok">' . $path  . __(' : write permission granted. ') . '(permission:' . substr(sprintf('%o',$perms), -3) . ')</span><br />';
 				return true;
 			}
 			else {
-				$message.= '<span class="status_ng">' . $path  . __(' : write permission is not set. ') . '(permission:' . substr(sprintf('%o',$perms), -3) . ')</span><br />';
+				$message.= '<span class="status_ng">' . $path  . __(' : write permission not set. ') . '(permission:' . substr(sprintf('%o',$perms), -3) . ')</span><br />';
 				return false;
 			}
 		}
@@ -198,7 +198,7 @@
 						$obj = $db_install_form->getElementByName('db_nme');
 						$obj->status = false;
 						$status = $db_install_form->validate();
-						$error_message = __('Connecting to the DB is OK. But failed to select the schema');
+						$error_message = __('Able to connect to DB but failed to select schema.');
 					}
 				}
 			}
@@ -213,7 +213,7 @@
 				$obj = $db_install_form->getElementByName('db_nme');
 				$obj->status = false;
 				$status = $db_install_form->validate();
-				$error_message = __('Faild to connect DB.');
+				$error_message = __('Faild to connect to DB.');
 				if($db->connect_error) {
 					$error_message.= '<br />(' . $db->connect_error . ')';
 				}

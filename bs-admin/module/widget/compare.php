@@ -13,7 +13,7 @@
 			$this->version_right = $this->global_session['version_right'];
 
 			// Set version info
-			$this->version_info = __('Diff Versions Left: %LEFT_VERSION% &nbsp;Right: %RIGHT_VERSION%');
+			$this->version_info = __('Compare Versions Left: %LEFT_VERSION% &nbsp;Right: %RIGHT_VERSION%');
 			$this->version_info = str_replace('%LEFT_VERSION%', $this->version_left['version'], $this->version_info);
 			$this->version_info = str_replace('%RIGHT_VERSION%', $this->version_right['version'], $this->version_info);
 		}

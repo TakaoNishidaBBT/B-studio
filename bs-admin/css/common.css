@@ -87,7 +87,7 @@ hr.clear {
 	margin: 0;
 }
 .ime_on, .ime-on {
-	ime-mode: disabled;
+	ime-mode: active;
 }
 .ime_off, .ime-off {
 	ime-mode: disabled;

@@ -28,7 +28,7 @@ $form_config = array(
 		'start_html'	=> '<table class="form" border="0" cellspacing="0" cellpadding="0"><tbody>',
 		'end_html'		=> '</tbody></table>',
 
-		// User name
+		// Username
 		array(
 			'error_group'	=> true,
 			'start_html'	=> '<tr>',
@@ -38,7 +38,7 @@ $form_config = array(
 				'end_html'				=> '</th>',
 				'invalid_start_html'	=> '<th class="error">',
 				array(
-					'value'				=> __('User name'),
+					'value'				=> __('Username'),
 				),
 				array(
 					'class'				=> 'B_Guidance',
@@ -51,12 +51,12 @@ $form_config = array(
 				array(
 					'name'					=> 'admin_user_name',
 					'class'					=> 'B_InputText',
-					'special_html'			=> 'class="textbox ime-on" size="40" maxlength="100" ',
+					'special_html'			=> 'class="textbox" size="40" maxlength="100" ',
 					'validate'				=>
 					array(
 						array(
 							'type' 			=> 'required',
-							'error_message'	=> __('Please enter user name'),
+							'error_message'	=> __('Please enter username'),
 						),
 					),
 				),
@@ -102,7 +102,7 @@ $form_config = array(
 						array(
 							'type' 			=> 'pattern',
 							'pattern'		=> '^[a-zA-Z0-9\_\-]+$',
-							'error_message'	=> __('Please enter login ID using alphanumeric, hyphen(-) and underbar(_)'),
+							'error_message'	=> __('Please enter login ID using only alphanumeric, hyphen(-) and underbar(_)'),
 						),
 						array(
 							'type'			=> 'callback',
@@ -173,7 +173,7 @@ $form_config = array(
 					'start_html'			=> '<span class="notice">',
 					'end_html'				=> '</span>',
 					'class'					=> 'B_Guidance',
-					'value'					=> __('If you change password, please enter password. If you don\'t, keep this field empty'),
+					'value'					=> __('If you would like to change your password, please enter new password here. If not, please leave this field blank.'),
 				),
 				array(
 					'name'					=> 'error_message',
@@ -208,7 +208,7 @@ $form_config = array(
 						array(
 							'type' 			=> 'match',
 							'target'		=> 'admin_user_pwd',
-							'error_message'	=> __('Password is not matched'),
+							'error_message'	=> __('Password dose not match'),
 						),
 					),
 				),
@@ -328,7 +328,7 @@ $result_control_config = array(
 			array(
 				'start_html'	=> '<span class="text">',
 				'end_html'		=> '</span>',
-				'value'			=> __('Back to site admin form'),
+				'value'			=> __('Back to site admin settings'),
 			),
 		),
 	),

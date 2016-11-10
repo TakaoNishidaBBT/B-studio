@@ -52,7 +52,7 @@
 			$table = new B_Table($this->db, $table_name);
 			$status = $table->create();
 			if(!$status) {
-				throw new Exception(__('Faild to create a table.');
+				throw new Exception(__('Faild to create table.');
 			}
 		}
 
@@ -99,7 +99,7 @@
 			$sql = str_replace('%DB_PREFIX%', B_DB_PREFIX, $sql);
 			$status = $this->db->query($sql);
 			if(!$status) {
-				throw new Exception(__('Faild to create a view.'));
+				throw new Exception(__('Faild to create view.'));
 			}
 		}
 
@@ -118,7 +118,7 @@
 
 			$status = $version->insert($param);
 			if(!$status) {
-				throw new Exception(__('Faild to insert a version record.'));
+				throw new Exception(__('Faild to create version record.'));
 			}
 		}
 
@@ -129,12 +129,12 @@
 			$param['current_version_id'] = '00001';
 			$param['reserved_version_id'] = '00001';
 			$param['working_version_id'] = '00001';
-			$param["create_datetime"] = time();
-			$param["create_user"] = 'installer';
+			$param['create_datetime'] = time();
+			$param['create_user'] = 'installer';
 
 			$status = $current_version->insert($param);
 			if(!$status) {
-				throw new Exception(__('Faild to insert current version record.'));
+				throw new Exception(__('Faild to create current version record.'));
 			}
 		}
 
@@ -146,7 +146,7 @@
 
 			$status = $settings->insert($param);
 			if(!$status) {
-				throw new Exception(__('Faild to insert a configuration record.'));
+				throw new Exception(__('Faild to create configuration record.'));
 			}
 		}
 

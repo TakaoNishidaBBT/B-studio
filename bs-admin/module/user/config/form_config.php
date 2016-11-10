@@ -160,7 +160,7 @@ $form_config = array(
 				array(
 					'name'					=> 'name',
 					'class'					=> 'B_InputText',
-					'special_html'			=> 'class="textbox ime-on" size="20" maxlength="100" ',
+					'special_html'			=> 'class="textbox" size="20" maxlength="100" ',
 					'validate'				=>
 					array(
 						array(

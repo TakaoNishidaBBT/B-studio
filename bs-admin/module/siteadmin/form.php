@@ -86,7 +86,7 @@
 
 			file_put_contents(B_DOC_ROOT . B_ADMIN_ROOT . 'user/users.php', $contents);
 
-			$param['action_message'] = '<p><span class="bold">' . __('Configuration of site admin was updated') . '</span></p>';
+			$param['action_message'] = '<p><span class="bold">' . __('The site admin settings has been updated') . '</span></p>';
 
 			$this->result = new B_Element($this->result_config);
 			$this->result_control = new B_Element($this->result_control_config);

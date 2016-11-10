@@ -90,7 +90,7 @@ array(
 		array(
 			'start_html'	=> '<th class="center" style="width:40px" nowrap>',
 			'end_html'		=> '</th>',
-			'value'			=> __('Diff'),
+			'value'			=> __('Compare'),
 		),
 		array(
 			'start_html'	=> '<th class="center" style="width:40px" nowrap>',
@@ -183,7 +183,7 @@ array(
 				'class'			=> 'B_Link',
 				'link'			=> 'index.php',
 				'special_html'	=> 'class="compare-button" onclick="window.open(this.href); return false;"',
-				'value'			=> __('Diff'),
+				'value'			=> __('Compare'),
 				'fixedparam'	=>
 				array(
 					'terminal_id'	=> $this->util->getRandomText(12),
@@ -201,7 +201,7 @@ array(
 				'id'			=> 'compare_disable',
 				'class'			=> 'B_Link',
 				'special_html'	=> 'class="compare-button-disable" onclick="return false;"',
-				'value'			=> __('Diff'),
+				'value'			=> __('Compare'),
 				'display'		=> 'none',
 			),
 		),

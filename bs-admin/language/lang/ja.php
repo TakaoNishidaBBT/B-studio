@@ -272,7 +272,7 @@
 		'Notes'							=> 'メモ',
 		'Change versions'				=> 'バージョン変更',
 		'Edit'							=> '編集',
-		'Diff'							=> '比較',
+		'Compare'						=> '比較',
 		'Delete'						=> '削除',
 		'Submit'						=> '設定',
 		'Back to list'					=> '一覧に戻る',
@@ -306,8 +306,8 @@
 										=> '即時反映',
 		'Scheduled to be published'		=> '予約登録',
 
-		// Diff
-		'Diff Versions Left: %LEFT_VERSION% &nbsp;Right: %RIGHT_VERSION%'
+		// Compare
+		'Compare Versions Left: %LEFT_VERSION% &nbsp;Right: %RIGHT_VERSION%'
 										=> 'バージョン比較 Left: %LEFT_VERSION% Right: %RIGHT_VERSION%',
 
 		// Users
@@ -333,53 +333,53 @@
 		'Chinese'						=> '中国語',
 
 		// Site admin
-		'User name'						=> 'ユーザ名',
+		'Username'						=> 'ユーザ名',
 		'Login ID'						=> 'ログインID',
 		'Password (Re-entry)'			=> 'パスワード（再入力）',
 		'(set password)'				=> '（設定されたパスワード）',
-		'If you change password, please enter password. If you don\'t, keep this field empty'
+		'If you would like to change your password, please enter new password here. If not, please leave this field blank.'
 										=> 'パスワードを変更する場合は新しいパスワードを入力し、変更しない場合は空のままにしておいてください',
 		'For confirmation, please re-enter password'
 										=> '確認のため、パスワードを再入力してください',
-		'Please enter user name'		=> 'ユーザ名を入力してください',
+		'Please enter username'			=> 'ユーザ名を入力してください',
 		'Please enter login ID'			=> 'ログインIDを入力してください',
-		'Please enter login ID using alphanumeric, hyphen(-) and underbar(_)'
+		'Please enter login ID using only alphanumeric, hyphen(-) and underbar(_)'
 										=> 'ログインIDは英数とハイフン(-)アンダーバー(_)で入力してください',
-		'Password is not matched'		=> 'パスワードが一致していません',
-		'Back to site admin form'		=> '設定画面に戻る',
-		'Configuration of site admin was updated'
+		'Password dose not match'		=> 'パスワードが一致していません',
+		'Back to site admin settings'	=> '設定画面に戻る',
+		'The site admin settings has been updated'
 										=> 'サイト管理者の情報を更新しました',
 
-		// Configuration
+		// Basic settings
 		'Admin page title'				=> '管理画面タイトル',
 		'Language'						=> '言語',
 		'DB backup'						=> 'DBバックアップ',
 		'Full backup'					=> 'FULLバックアップ',
 		'Re-install backup'				=> '再インストール用バックアップ',
 		'Download'						=> 'ダウンロード',
-		'Back to configuration form'	=> '基本設定に戻る',
-		'Configuration: Saved'			=> '基本設定：保存しました。',
-		'Configuration: Failed'			=> '基本設定：保存に失敗しました。',
+		'Back to basic settings'		=> '基本設定に戻る',
+		'Basic settings: Saved'			=> '基本設定：保存しました。',
+		'Basic settings: Failed'		=> '基本設定：保存に失敗しました。',
 
 		// Install
 		'Select language: '				=> '言語を選択してください：',
-		'Host name'						=> 'ホスト名',
-		'Please enter host name'		=> 'ホスト名を入力してください',
+		'Hostname'						=> 'ホスト名',
+		'Please enter hostname'			=> 'ホスト名を入力してください',
 		'Please confirm the input content'
 										=> '入力内容を確認してください',
-		'Please enter user name using alphanumeric, hyphen(-) and underbar(_)'
+		'Please enter username using only alphanumeric, hyphen(-) and underbar(_)'
 										=> 'ユーザ名は英数とハイフン(-)アンダーバー(_)で入力してください',
-		'Please enter password using alphanumeric, hyphen(-) and underbar(_)'
+		'Please enter password using only alphanumeric, hyphen(-) and underbar(_)'
 										=> 'パスワードは英数とハイフン(-)アンダーバー(_)で入力してください',
-		'Schema name'					=> 'データベース名',
-		'Please enter schema name'		=> 'データベース名を入力してください',
+		'Schema name'					=> 'スキーマ',
+		'Please enter schema name'		=> 'スキーマを入力してください',
 		'Table prefix'					=> 'テーブル・プリフィックス',
 		'Please enter table prefix'		=> 'テーブル・プリフィックスを入力してください',
-		'Usually changing this field is unnecessary. This field could be changed when B-studio will be installed in one schema.'
+		'Usually changing this field is unnecessary. Please change This field when installing B-studio multiple times in one schema.'
 										=> '※通常この項目を変更する必要はありません。ひとつのDBにB-studioを複数インストールする場合は変更してください。',
 		'Please re-enter password'		=> 'パスワードを再入力してください',
-		'Password is not matched'		=> 'パスワードが一致していません',
-		'(Entered password)'			=> '（設定されたパスワード）',
+		'Password does not match'		=> 'パスワードが一致していません',
+		'(Set password)'				=> '（設定されたパスワード）',
 
 		'Please enable mbstring module'	=> 'mbstringモジュールを有効にしてください。',
 		'Please set session.save_path'	=> 'session.save_pathを設定してください。',
@@ -387,22 +387,21 @@
 		'Please enable GD library'		=> 'GDライブラリを有効にしてください。',
 		'ZipArchive is necessary'		=> 'ZipArchiveクラスが必要です。',
 
-		' : write permission is OK. '	=> ' の書き込み権限はOKです。',
-		' : write permission is not set. '
-										=> ' に書き込み権限がありません。',
+		' : write permission granted. '	=> ' の書き込み権限はOKです。',
+		' : write permission not set. '	=> ' に書き込み権限がありません。',
 
-		'Connecting to the DB is OK. But failed to select the schema'
+		'Able to connect to DB but failed to select schema.'
 										=> 'DBへ接続はできましたがスキーマの選択に失敗しました。',
-		'Failed to connect DB.'			=> 'DBへの接続に失敗しました。',
+		'Failed to connect to DB.'		=> 'DBへの接続に失敗しました。',
 		'This is an error in your entry<br />Please check any error message and re-enter the necessary information'
 										=> '入力内容に誤りがあります。<br />各欄のエラーメッセージをご覧の上、入力し直してください。',
 
-		'Failed to create a table.'		=> 'テーブルの作成に失敗しました。',
-		'Failed to create a view.'		=> 'ビューの作成に失敗しました。',
-		'Failed to insert a version record.'
+		'Failed to create table.'		=> 'テーブルの作成に失敗しました。',
+		'Failed to create view.'		=> 'ビューの作成に失敗しました。',
+		'Failed to create version record.'
 										=> 'バージョンレコードの作成に失敗しました。',
-		'Failed to insert current version record.'
+		'Failed to create current version record.'
 										=> 'カレントバージョンレコードの作成に失敗しました。',
-		'Failed to insert a configuration record.'
+		'Failed to create configuration record.'
 										=> '基本設定レコードの作成に失敗しました。',
 	);

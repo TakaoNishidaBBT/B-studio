@@ -293,7 +293,10 @@
 				return false;
 			}
 			if($this->tree->checkDuplicateByName($node_id, $file_name)) {
-				$this->message = __('A file with this name already exists. Please enter a different name.');
+				$this->message = __('A %ITEM% with this name already exists. Please enter a different name.');
+				$node_type = $this->tree->getNodeTypeById($node_id);
+				if($node_type == 'page') $node_type = 'file';
+				$this->message = str_replace('%ITEM%', __($node_type), $this->message);
 				return false;
 			}
 			if(substr($file_name, -1) == '.') {

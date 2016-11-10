@@ -218,7 +218,7 @@ $result_control_config = array(
 			array(
 				'start_html'	=> '<span class="text">',
 				'end_html'		=> '</span>',
-				'value'			=> __('Back to configuration form'),
+				'value'			=> __('Back to basic settings'),
 			),
 		),
 	),

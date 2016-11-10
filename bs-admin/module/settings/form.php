@@ -79,11 +79,11 @@
 
 			if($ret) {
 				$this->db->commit();
-				$param['action_message'] = '<p><strong>' . __('Configuration: Saved') . '</strong></p>';
+				$param['action_message'] = '<p><strong>' . __('Basic settings: Saved') . '</strong></p>';
 			}
 			else {
 				$this->db->rollback();
-				$param['action_message'] = '<p><strong>' . __('Configuration: Failed') . '</strong></p>';
+				$param['action_message'] = '<p><strong>' . __('Basic settings: Failed') . '</strong></p>';
 			}
 			$this->result = new B_Element($this->result_config);
 			$this->result_control = new B_Element($this->result_control_config);
