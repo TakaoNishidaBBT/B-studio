@@ -1368,42 +1368,47 @@
 	// class B_SelectBox
 	// 
 	// -------------------------------------------------------------------------
-	class B_SelectBox extends B_Element {
+	class B_SelectBox extends B_SelectedText {
 		function getElementsHtml($mode=null) {
 			if($mode == 'confirm') {
-				return B_SelectedText::getElementsHtml($mode);
+				$html = parent::getElementsHtml($mode);
 			}
+			else {
+				$html = 
+					'<select ' .
+					$this->special_html . ' ' .
+					'name="' . $this->name_prefix . $this->name . '" ' .
+					'id="' . $this->_gethtmlid() . '">' . "\n";
 
-			$html = 
-				'<select ' .
-				$this->special_html . ' ' .
-				'name="' . $this->name_prefix . $this->name . '" ' .
-				'id="' . $this->_gethtmlid() . '">' . "\n";
-
-			if(isset($this->data_set_value) && is_array($this->data_set_value)) {
-				foreach($this->data_set_value as $key => $value) {
-					$html.=
-						'  <option value="' .
-						$key . '" ';
-					if(isset($this->value)) {
-						if($key == $this->value) {
-							$html.= 'selected="selected"';
+				if(isset($this->data_set_value) && is_array($this->data_set_value)) {
+					foreach($this->data_set_value as $key => $value) {
+						$html.=
+							'  <option value="' .
+							$key . '" ';
+						if(isset($this->value)) {
+							if($key == $this->value) {
+								$html.= 'selected="selected"';
+							}
 						}
+						$html.= '>' . $value . '</option>' ."\n";
 					}
-					$html.= '>' . $value . '</option>' ."\n";
 				}
-			}
-			$html.= '</select>' . "\n";
+				$html.= '</select>' . "\n";
 
-			if($this->special_text) {
-				foreach($this->elements as $obj) {
-					if($obj->index == $key) {
-						$html.= $obj->getElementsHtmlSpecial();
+				if($this->special_text) {
+					foreach($this->elements as $obj) {
+						if($obj->index == $key) {
+							$html.= $obj->getElementsHtmlSpecial();
+						}
 					}
 				}
 			}
 
 			return $html;
+		}
+
+		function _getHiddenHtml() {
+			return;
 		}
 	}
 
