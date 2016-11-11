@@ -27,10 +27,13 @@
 				$info = pathinfo($row['node_name']);
 				$file_path = B_RESOURCE_DIR . $row['contents_id'] . '.' . $info['extension'];
 				$update_datetime = filemtime($file_path);
-				$contents = file_get_contents($file_path);
-				$encoding = mb_detect_encoding($contents, 'UTF-8, EUC-JP, SJIS');
 				$obj = $this->editor->getElementByName('contents');
-				$obj->value = mb_convert_encoding($contents, 'UTF-8', 'auto');
+				$contents = file_get_contents($file_path);
+				if($contents) {
+					$encoding = mb_detect_encoding($contents);
+					$obj->value = mb_convert_encoding($contents, 'UTF-8', 'auto');
+				}
+
 				switch(strtolower($info['extension'])) {
 				case 'js':
 					$obj->special_html = str_replace('%SYNTAX%', 'syntax="javascript"', $obj->special_html);
@@ -46,22 +49,25 @@
 				}
 
 				$obj = $this->editor->getElementByName('node_id');
-				$obj->value = $row['node_id'];
+				if($obj) $obj->value = $row['node_id'];
 
 				$obj = $this->editor->getElementByName('contents_id');
-				$obj->value = $row['contents_id'];
+				if($obj) $obj->value = $row['contents_id'];
 
 				$obj = $this->editor->getElementByName('extension');
-				$obj->value = $info['extension'];
+				if($obj) $obj->value = $info['extension'];
 
 				$obj = $this->tab_control->getElementByName('encoding');
-				$obj->value = $encoding;
+				if($obj) {
+					$obj->data_set_value = B_Util::get_mb_detect_order();
+					$obj->value = $encoding;
+				}
 
 				$obj = $this->editor->getElementByName('update_datetime');
-				$obj->value = $update_datetime;
+				if($obj) $obj->value = $update_datetime;
 
 				$obj = $this->tab_control->getElementByName('text_editor_index');
-				$obj->value = B_SITE_BASE . $this->getFilePath($this->request['node_id']);
+				if($obj) $obj->value = B_SITE_BASE . $this->getFilePath($this->request['node_id']);
 
 				$this->setTitle($row['node_name']);
 			}
@@ -151,7 +157,7 @@
 					$contents = $this->post['contents'];
 				}
 				else {
-					$contents = mb_convert_encoding($this->post['contents'], $this->post['encoding'], 'auto');
+					$contents = mb_convert_encoding($this->post['contents'], $this->post['encoding'], 'UTF-8');
 				}
 
 				// Get file size

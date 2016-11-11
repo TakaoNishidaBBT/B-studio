@@ -144,6 +144,14 @@
 			return $ret;
 		}
 
+		public static function get_mb_detect_order() {
+			$order = mb_detect_order();
+			foreach($order as $key => $value) {
+				$array[$value] = $value;
+			}
+			return $array;
+		}
+
 		public static function is_binary($file) {
 			$fp = fopen($file, 'r');
 			while($line = fgets($fp)) {

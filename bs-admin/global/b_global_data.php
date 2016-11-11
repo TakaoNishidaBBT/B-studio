@@ -91,13 +91,6 @@
 				'3'		=> __('Another user has updated this record'),
 		);
 
-	${$g_data_set}['encoding'] =
-		array(
-				'UTF-8'		=> 'UTF-8',
-				'EUC-JP'	=> 'EUC-JP',
-				'SJIS'		=> 'SJIS',
-		);
-
 	${$g_data_set}['table']['contents_node'] =
 		array(							// Data Types			Length	PK		Auto-Increment
 			'version_id'				=> array('char', 		'5', 	'1', 	''),

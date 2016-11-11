@@ -20,10 +20,13 @@
 				$file_path = B_Util::getPath(B_UPLOAD_DIR , $this->request['node_id']);
 				$info = pathinfo($file_path);
 				$update_datetime = filemtime($file_path);
-				$contents = file_get_contents($file_path);
-				$encoding = mb_detect_encoding($contents, 'UTF-8, EUC-JP, SJIS');
 				$obj = $this->editor->getElementByName('contents');
-				$obj->value = mb_convert_encoding($contents, 'UTF-8', 'auto');
+				$contents = file_get_contents($file_path);
+				if($contents) {
+					$encoding = mb_detect_encoding($contents);
+					$obj->value = mb_convert_encoding($contents, 'UTF-8', 'auto');
+				}
+
 				switch(strtolower($info['extension'])) {
 				case 'js':
 					$obj->special_html = str_replace('%SYNTAX%', 'syntax="javascript"', $obj->special_html);
@@ -45,7 +48,10 @@
 				if($obj) $obj->value = $info['extension'];
 
 				$obj = $this->tab_control->getElementByName('encoding');
-				if($obj) $obj->value = $encoding;
+				if($obj) {
+					$obj->data_set_value = B_Util::get_mb_detect_order();
+					$obj->value = $encoding;
+				}
 
 				$obj = $this->editor->getElementByName('update_datetime');
 				if($obj) $obj->value = $update_datetime;
@@ -67,7 +73,7 @@
 					$contents = $this->post['contents'];
 				}
 				else {
-					$contents = mb_convert_encoding($this->post['contents'], $this->post['encoding'], 'auto');
+					$contents = mb_convert_encoding($this->post['contents'], $this->post['encoding'], 'UTF-8');
 				}
 				file_put_contents($this->post['file_path'], $contents, LOCK_EX);
 

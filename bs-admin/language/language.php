@@ -14,12 +14,14 @@
 	switch($lang) {
 	case 'ja':
 		require_once(B_LNGUAGE_DIR . 'lang/ja.php');
-		define('MB_FROM_ENCODING', 'JIS,UTF-8,EUC-JP,SJIS');
+		mb_language('japanese');
+		mb_detect_order('UTF-8,EUC-JP,SJIS');
 		break;
 
 	case 'zh-cn':
 		require_once(B_LNGUAGE_DIR . 'lang/zh-cn.php');
-		define('MB_FROM_ENCODING', 'GB18030,UTF-8,');
+		mb_language('Simplified Chinese');
+		mb_detect_order('UTF-8,GB18030,EUC-CN');
 		break;
 
 	default:
