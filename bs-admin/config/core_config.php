@@ -1,29 +1,32 @@
 <?php
 /*
- * B-studio : Contents Management System
- * Copyright (c) BigBeat Inc. all rights reserved. (http://www.bigbeat.co.jp)
+ * B-studio : Content Management System
+ * Copyright (c) BigBeat Inc. All rights reserved. (http://www.bigbeat.co.jp)
  *
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
-	// タイトル
+	// Language config
+	require_once('lang_config.php');
+
+	// System Name
 	define('B_SYSTEM_NAME', 'B-studio');
 
-	// SITE
+	// Site Name
 	define('B_SITE_NAME', 'bstudio');
 
-	// DEBUGモード
+	// Debaug Msode
 	define('B_DEBUG_MODE', 'OFF');
 
-	// 管理画面SSL接続設定
+	// SSL for Admin Page
 	define('B_ADMIN_SSL', 'OFF');
 
-	// 管理画面セッション名
+	// Session Name for Admin Page
 	define('B_ADMIN_SESSION_NAME', B_SITE_NAME . '-bs-admin');
 
-	//HTTP_HOST
+	//HTTP HOST
 	define('B_HTTP_HOST', $_SERVER['SERVER_NAME']);
 
-	//ドキュメントルート
+	//Document Root Directory
 	if(substr($_SERVER['DOCUMENT_ROOT'], -1) == '/') {
 		define('B_DOC_ROOT', substr($_SERVER['DOCUMENT_ROOT'], 0, -1));
 	}
@@ -31,20 +34,20 @@
 		define('B_DOC_ROOT', $_SERVER['DOCUMENT_ROOT']);
 	}
 
-	// カレントルート
+	// Current Root Directory (This System's Top Directory)
 	define('B_CURRENT_ROOT', '/bstudio/');
-	define('B_CURRENT_DIR', B_DOC_ROOT . B_CURRENT_ROOT);
 
-	// Adminルート
+	// Directory for Admin Page
 	define('B_ADMIN_ROOT', B_CURRENT_ROOT . 'bs-admin/');
 
-	// DB PREFIX
+	// DataBase Table Prefix
 	define('B_DB_PREFIX', 'bs_');
 
-	// サイトルート
+	// This is Full URL for Top Page
 	define('B_SITE_ROOT', 'http://' . B_HTTP_HOST . B_CURRENT_ROOT);
 	define('B_SITE_ROOT_SSL', 'https://' . B_HTTP_HOST . B_CURRENT_ROOT);
 
+	// Site Base Directory (for Base Tag)
 	if(empty($_SERVER['HTTPS']) === true || $_SERVER['HTTPS'] !== 'on') {
 		define('B_SITE_BASE', B_SITE_ROOT);
 	}
@@ -52,27 +55,30 @@
 		define('B_SITE_BASE', B_SITE_ROOT_SSL);
 	}
 
-	// LOG FILES
-	// archive logファイル
+	// Log Files
+	// Archive Log File
 	define('B_ARCHIVE_LOG_FILE', B_DOC_ROOT . B_ADMIN_ROOT . 'archive/archive.log');
 
-	// access logファイル
+	// Access Log File
 	define('B_ACCESS_LOG_FILE', B_DOC_ROOT . B_ADMIN_ROOT . 'log/access.log');
 
-	// Mail logファイル
+	// Mail Log File
 	define('B_MAIL_LOG_FILE', B_DOC_ROOT . B_ADMIN_ROOT . 'log/mail.log');
 
-	// logファイル
+	// Log File
 	define('B_LOG_FILE', B_DOC_ROOT . B_ADMIN_ROOT . 'log/log.txt');
 
-	//DB接続ファイル
+	// Language files Directory
+	define('B_LNGUAGE_DIR', B_DOC_ROOT . B_ADMIN_ROOT . 'language/');
+
+	// DataBase Connect File
 	define('B_DB_CONNECT_INFO', B_DOC_ROOT . B_ADMIN_ROOT . 'db/db_connect.php');
 	require_once(B_DB_CONNECT_INFO);
 
-	// ダウンロードディレクトリ
+	// Download Directory
 	define('B_DOWNLOAD_DIR', B_DOC_ROOT . B_ADMIN_ROOT . 'download/');
 
-	// ユーザファイルディレクトリ
+	// User File Directory for Resource
 	define('B_ADMIN_FILES', 'bs-admin-files/');
 	define('B_ADMIN_FILES_DIR', B_DOC_ROOT . B_CURRENT_ROOT . B_ADMIN_FILES);
 	define('B_RESOURCE_DIR', B_ADMIN_FILES_DIR . 'files/');
@@ -80,23 +86,23 @@
 	define('B_RESOURCE_WORK_DIR', B_ADMIN_FILES_DIR);
 	define('B_RESOURCE_EXTRACT_DIR', B_ADMIN_FILES_DIR . 'extract/');
 
-	// 記事イメージファイルアップロードディレクトリ
+	// User File Directory for Article
 	define('B_UPLOAD_FILES', 'files/');
 	define('B_UPLOAD_DIR', B_DOC_ROOT . B_CURRENT_ROOT . B_UPLOAD_FILES);
 	define('B_UPLOAD_THUMBDIR', B_ADMIN_FILES_DIR . 'thumbs/');
 	define('B_UPLOAD_URL', B_CURRENT_ROOT . B_UPLOAD_FILES);
 
-	//ダンプファイル
+	// Dump File
 	define('B_DUMP_FILE', 'dump/');
 
-	// サムネイル
+	// Thunbnail
 	define('B_THUMB_PREFIX', 'thumb_');
 	define('B_THUMB_MAX_SIZE', '100');
 
-	// ゴミ箱
+	// Trash
 	define('B_TRASH_PATH', 'trash/');
 
-	// ファイル情報
+	// File Information
 	define('B_CACHE_DIR', B_DOC_ROOT . B_ADMIN_ROOT . 'cache/');
 	define('B_FILE_INFO_C', B_CACHE_DIR . 'file_info_c.txt');
 	define('B_FILE_INFO_W', B_CACHE_DIR . 'file_info_w.txt');
@@ -106,30 +112,27 @@
 	define('B_FILE_INFO_THUMB_SEMAPHORE', B_CACHE_DIR . 'file_info_thumb_semaphore.txt');
 	define('B_LIMIT_FILE_INFO', B_CACHE_DIR . 'limit_info_c.txt');
 
-	// DBエンコード
+	// DB Encode
 	define('B_ENCODE', 'utf8');
 
-	// CHARSET
+	// Charset
 	define('B_CHARSET', 'UTF-8');
 
-	// CHARSET for header
+	// Charset for Header
 	define('B_CHARSET_HEADER', 'UTF-8');
 
-	// CHARSET for xml header
+	// Charset for xml header
 	define('B_CHARSET_XML_HEADER', 'UTF-8');
 
-	// TESTサーバ設定
-	if(preg_match('/www.test-server.com/', B_HTTP_HOST)) {
-		define('B_TITLE_PREFIX', '【テスト】');
-		define('B_ARCHIVE_LOG_MODE', 'DEBUG');
+	// ffmpeg
+	if(substr(PHP_OS, 0, 3) === 'WIN') {
+		define('FFMPEG', B_DOC_ROOT . B_ADMIN_ROOT . 'class/ffmpeg/ffmpeg_for_windows.exe');
 	}
-	else if(preg_match('/localhost/', B_HTTP_HOST)) {
-		define('B_TITLE_PREFIX', '【テスト】');
-		define('B_ARCHIVE_LOG_MODE', 'DEBUG');
+	else if(substr(PHP_OS, 0, 5) === 'Linux') {
+		define('FFMPEG', B_DOC_ROOT . B_ADMIN_ROOT . 'class/ffmpeg/ffmpeg_for_linux');
 	}
 	else {
-		define('B_TITLE_PREFIX', '');
-		define('B_ARCHIVE_LOG_MODE', '');
+		define('FFMPEG', B_DOC_ROOT . B_ADMIN_ROOT . 'class/ffmpeg/ffmpeg_for_mac');
 	}
 
 	// Table
@@ -180,11 +183,7 @@
 	define('B_COMPARE_TEMPLATE_NODE_VIEW', 'v_compare_template_node');
 	define('B_COMPARE_WIDGET_NODE_VIEW', 'v_compare_widget_node');
 
-	// グローバルデータファイル
-	$g_data_set = 'b_global_data';
-	require_once(B_DOC_ROOT . B_ADMIN_ROOT . 'global/' . $g_data_set . '.php');
-
-	// PHPエラーログ表示設定
+	// PHP Display Errors
 	ini_set('display_errors','Off');
 	ini_set('log_errors','On');
 	ini_set('error_log', B_DOC_ROOT . B_ADMIN_ROOT . 'log/system.log');
