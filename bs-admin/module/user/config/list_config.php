@@ -155,7 +155,7 @@ array(
 				'class'			=> 'B_Link',
 				'link'			=> 'index.php',
 				'special_html'	=> 'class="edit-button"',
-				'value'			=> 'detail',
+				'value'			=> 'edit',
 				'fixedparam'	=>
 				array(
 					'terminal_id'	=> TERMINAL_ID,
