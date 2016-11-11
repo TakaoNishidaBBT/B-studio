@@ -7,10 +7,10 @@
 */
 	require_once('core_config.php');
 
-	// ログインユーザ定義ファイル
+	// Built-in user file 
 	require_once(B_DOC_ROOT . B_ADMIN_ROOT . 'user/users.php');
 
-	// クラスファイル
+	// Class files
 	require_once(B_DOC_ROOT . B_ADMIN_ROOT . 'class/B_AdminAuth.php');
 	require_once(B_DOC_ROOT . B_ADMIN_ROOT . 'class/B_Article.php');
 	require_once(B_DOC_ROOT . B_ADMIN_ROOT . 'class/B_Calendar.php');
