@@ -455,8 +455,11 @@
 
 		function checkFileName($node_id, $file_name) {
 			$file_info = pathinfo($file_name);
+			$node_type = $this->tree->getNodeTypeById($node_id);
+
 			if(!strlen(trim($file_name))) {
-				$this->message = __('Please enter file name');
+				$this->message = __('Please enter a name for the %ITEM%');
+				$this->message = str_replace('%ITEM%', __($node_type), $this->message);
 				return false;
 			}
 			if(strlen($file_name) != mb_strlen($file_name)) {
@@ -465,7 +468,6 @@
 			}
 			if($this->tree->checkDuplicateByName($node_id, $file_name)) {
 				$this->message = __('A %ITEM% with this name already exists. Please enter a different name.');
-				$node_type = $this->tree->getNodeTypeById($node_id);
 				$this->message = str_replace('%ITEM%', __($node_type), $this->message);
 				return false;
 			}

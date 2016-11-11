@@ -206,9 +206,10 @@
 				$file_info = pathinfo($this->request['node_id']);
 				$node_name = trim($this->request['node_name']);
 				$new_node_id = B_Util::getPath($file_info['dirname'], $node_name);
-				$path = B_Util::getPath($this->dir , $new_node_id);
+				$source = B_Util::getPath($this->dir , $this->request['node_id']);
+				$dest = B_Util::getPath($this->dir , $new_node_id);
 
-				if($this->checkFileName($path, $node_name, $file_info)) {
+				if($this->checkFileName($source, $dest, $node_name, $file_info)) {
 					$root = new B_FileNode($this->dir, 'root', null, null, 'all');
 					$ret = $root->rename($this->request['node_id'], $new_node_id);
 					if($ret) {
@@ -231,9 +232,12 @@
 			exit;
 		}
 
-		function checkFileName($path, $file_name, $file_info) {
+		function checkFileName($source, $dest, $file_name, $file_info) {
+			$node_type = is_dir($source) ? 'folder' : 'file';
+
 			if(!strlen(trim($file_name))) {
-				$this->message = __('Please enter file name');
+				$this->message = __('Please enter a name for the %ITEM%');
+				$this->message = str_replace('%ITEM%', __($node_type), $this->message);
 				return false;
 			}
 			if(strlen($file_name) != mb_strlen($file_name)) {
@@ -244,9 +248,8 @@
 				$this->message = __('Another user has updated this record');
 				return false;
 			}
-			if(file_exists($path) && strtolower($file_info['basename']) != strtolower($file_name)) {
+			if(file_exists($dest) && strtolower($file_info['basename']) != strtolower($file_name)) {
 				$this->message = __('A %ITEM% with this name already exists. Please enter a different name.');
-				$node_type = is_dir($path) ? 'folder' : 'file';
 				$this->message = str_replace('%ITEM%', __($node_type), $this->message);
 				return false;
 			}

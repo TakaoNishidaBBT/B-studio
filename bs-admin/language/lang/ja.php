@@ -55,6 +55,8 @@
 		'Failed to save'				=> '保存に失敗しました',
 		'Already exists'				=> '既に存在しています',
 		'Please enter name'				=> '名前を入力してください。',
+		'Please enter a name for the %ITEM%'
+										=> '%ITEM%名を入力してください。',
 		'Multi-byte characters cannot be used'
 										=> '日本語は使用できません',
 		'A %ITEM% with this name already exists. Please enter a different name.'
