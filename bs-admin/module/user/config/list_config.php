@@ -155,7 +155,7 @@ array(
 				'class'			=> 'B_Link',
 				'link'			=> 'index.php',
 				'special_html'	=> 'class="edit-button"',
-				'value'			=> '詳細',
+				'value'			=> 'detail',
 				'fixedparam'	=>
 				array(
 					'terminal_id'	=> TERMINAL_ID,
@@ -179,7 +179,7 @@ array(
 				'class'			=> 'B_Link',
 				'link'			=> 'index.php',
 				'special_html'	=> 'class="delete-button"',
-				'value'			=> '削除',
+				'value'			=> 'delete',
 				'fixedparam'	=>
 				array(
 					'terminal_id'	=> TERMINAL_ID,

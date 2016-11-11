@@ -86,6 +86,7 @@
 		}
 
 		function setHeader() {
+			// Set header
 			if($this->session) {
 				$this->header->setValue($this->session);
 			}
@@ -334,6 +335,7 @@
 			// Send HTTP header
 			$this->sendHttpHeader();
 
+			// Set css and javascript
 			$this->html_header->appendProperty('css', '<link href="css/version.css" type="text/css" rel="stylesheet" media="all" />');
 
 			// Show HTML header

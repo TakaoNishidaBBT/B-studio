@@ -216,7 +216,7 @@
 			// Send HTTP header
 			$this->sendHttpHeader();
 
-			// HTML ヘッダー出力
+			// Set css and javascript
 			$this->html_header->appendProperty('css', '<link href="css/article.css" type="text/css" rel="stylesheet" media="all" />');
 			$this->html_header->appendProperty('css', '<link href="css/selectbox_white.css" type="text/css" rel="stylesheet" media="all" />');
 			$this->html_header->appendProperty('script', '<script src="js/bframe_selectbox.js" type="text/javascript"></script>');
