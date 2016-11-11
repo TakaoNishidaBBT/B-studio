@@ -13,7 +13,7 @@
 		function __construct($db, $config) {
 			$this->db = $db;
 			$this->config = $config;
-			$this->months = array('1' => 'Jan', '2' => 'Feb', '3' => 'Mar', '4' => 'Apr', '5' => 'May', '6' => 'Jun', '7' => 'Jly', '8' => 'Aug', '9' => 'Sep', '10' => 'Oct', '11' => 'Nov', '12' => 'Dec');
+			$this->months = array('1' => 'Jan', '2' => 'Feb', '3' => 'Mar', '4' => 'Apr', '5' => 'May', '6' => 'Jun', '7' => 'Jul', '8' => 'Aug', '9' => 'Sep', '10' => 'Oct', '11' => 'Nov', '12' => 'Dec');
 
 			$this->cal = new B_DataGrid($this->db, $this->config['grid']);
 			$this->caption = new B_Element($this->config['caption']);
