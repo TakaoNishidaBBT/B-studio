@@ -107,7 +107,7 @@
 				$keyword = $this->db->real_escape_string_for_like($this->keyword);
 
 				$sql = "select version_id from %DB_PREFIX%version
-						where version like '%KEYWORD%' or memo like '%KEYWORD%'";
+						where version like '%KEYWORD%' or notes like '%KEYWORD%'";
 
 				$sql = str_replace("%DB_PREFIX%", B_DB_PREFIX, $sql);
 				$sql = str_replace("%KEYWORD%", "%" . $keyword . "%", $sql);

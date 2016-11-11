@@ -141,9 +141,8 @@
 				$sql = "select id from %DB_PREFIX%user
 						where
 						user_id like '%KEYWORD%' or
-						f_name like '%KEYWORD%' or
-						g_name like '%KEYWORD%' or
-						memo like '%KEYWORD%'
+						name like '%KEYWORD%' or
+						notes like '%KEYWORD%'
 						group by user_id";
 
 				$sql = str_replace("%DB_PREFIX%", B_DB_PREFIX, $sql);
