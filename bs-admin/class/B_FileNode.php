@@ -241,7 +241,6 @@
 		}
 
 		function copy($destination, &$new_node_name, $recursive=false) {
-			// if destination node is my child
 			if($this->isMyChild($destination)) {
 				$this->error_no = 1;
 				return false;

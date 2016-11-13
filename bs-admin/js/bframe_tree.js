@@ -155,6 +155,7 @@
 
 			display_mode = 'thumbnail';
 			getNodeList(current_node.id());
+			bframe.stopPropagation(event);
 		}
 
 		function display_detail_mode(event) {
@@ -162,6 +163,7 @@
 
 			display_mode = 'detail';
 			getNodeList(current_node.id());
+			bframe.stopPropagation(event);
 		}
 
 		function setEventHandler() {
