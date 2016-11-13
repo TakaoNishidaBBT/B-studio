@@ -151,19 +151,19 @@
 		}
 
 		function display_thumbnail_mode(event) {
+			bframe.stopPropagation(event);
 			if(display_mode == 'thumbnail') return;
 
 			display_mode = 'thumbnail';
 			getNodeList(current_node.id());
-			bframe.stopPropagation(event);
 		}
 
 		function display_detail_mode(event) {
+			bframe.stopPropagation(event);
 			if(display_mode == 'detail') return;
 
 			display_mode = 'detail';
 			getNodeList(current_node.id());
-			bframe.stopPropagation(event);
 		}
 
 		function setEventHandler() {
