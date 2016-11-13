@@ -101,7 +101,7 @@
 
 		// Form
 		'*'								=> '※',
-		' is required field'			=> '：必須項目',
+		' Indicates required field'		=> '：必須項目',
 		'was saved.'					=> 'を保存しました。',
 		'was failed to saved.'			=> 'の保存に失敗しました。',
 		'was registered.'				=> 'を登録しました。',

@@ -101,7 +101,7 @@
 
 		// Form
 		'*'								=> '※',
-		' is required field'			=> '：必须填写',
+		' Indicates required field'		=> '：必须填写',
 		'was saved.'					=> '已保存。',
 		'was failed to saved.'			=> '保存失败。',
 		'was registered.'				=> '已注册。',
