@@ -66,8 +66,12 @@
 				$this->initial_page = DISPATCH_URL . '&amp;module=contents&amp;page=index&amp;method=init';
 				break;
 
-			default:
+			case 'editor':
 				$this->initial_page = DISPATCH_URL . '&amp;module=article&amp;page=list';
+				break;
+
+			default:
+				$this->initial_page = DISPATCH_URL . '&amp;module=preview&amp;page=form';
 				break;
 			}
 

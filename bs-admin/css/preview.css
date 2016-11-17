@@ -1,0 +1,40 @@
+@charset "UTF-8";
+
+h2.preview {
+	margin: 0;
+	padding-left: 10px;
+	font-size: 15px;
+	background-color: #aad;
+	color: #fff;
+	color: #fff;
+	line-height: 33px;
+}
+h2.preview span {
+	font-size: 11px;
+	font-weight: normal;
+	margin-left: 10px;
+	line-height: 24px;
+}
+
+a.preview-button {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	margin: auto;
+	display: block;
+	box-sizing: border-box;
+	width: 260px;
+	height: 114px;
+	text-align: center;
+	border: 1px solid; #aad;
+	border-radius: 3px;
+	text-decoration: none;
+	padding: 40px 40px;
+	font-size: 30px;
+}
+a.preview-button:hover {
+	background-color: #aad;
+	color: #fff
+}

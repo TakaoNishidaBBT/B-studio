@@ -25,6 +25,7 @@
 		array(
 				'admin'		=> __('Admin'),
 				'editor'	=> __('Editor'),
+				'preview'	=> __('Preview'),
 		);
 
 	${$g_data_set}['user_status'] =
