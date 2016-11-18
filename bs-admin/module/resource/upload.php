@@ -144,6 +144,7 @@
 						ob_flush();
 
 						// Send start message
+						$response['status'] = 'extracting';
 						$response['progress'] = 0;
 						$this->sendChunk(json_encode($response));
 
@@ -251,6 +252,7 @@
 			}
 
 			$this->registerd_files++;
+			$response['status'] = 'extracting';
 			$response['progress'] = round($this->registerd_files / $this->extracted_files * 100);
 			$this->sendChunk(',' . json_encode($response));
 		}

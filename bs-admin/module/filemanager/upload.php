@@ -141,7 +141,7 @@
 						$this->registerd_files = 0;
 
 						// register extract files
-						$node->walk($this, registerArchive);
+						$node->walk($this, register_archive);
 
 						// remove all extract files
 						$node->remove();
@@ -242,7 +242,7 @@
 			}
 		}
 
-		function registerArchive($node) {
+		function register_archive($node) {
 			if(!$node->parent ) return;
 
 			$dest = B_Util::getPath(B_UPLOAD_DIR, B_Util::getPath($this->path, $node->path));
