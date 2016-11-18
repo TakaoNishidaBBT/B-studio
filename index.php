@@ -180,7 +180,7 @@
 
 		// close and unlink semaphore
 		fclose($fp_semaphore);
-		unlink($semaphore);
+		if(file_exists($semaphore)) unlink($semaphore);
 
 		return;
 	}
