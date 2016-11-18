@@ -137,6 +137,8 @@
 
 					$zip_file = B_RESOURCE_WORK_DIR . $file['basename'];
 					if($status = $this->_move_uploaded_file($_FILES['Filedata']['tmp_name'], $zip_file)) {
+						usleep(300000);
+
 						// send progress
 						header('Content-Type: application/octet-stream');
 						header('Transfer-encoding: chunked');

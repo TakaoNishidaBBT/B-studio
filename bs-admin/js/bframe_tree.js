@@ -2592,6 +2592,7 @@
 				if(upload_queue[index]) return false;
 
 				bframe.fireEvent(upload_file, 'click');
+				bframe.stopPropagation(event);
 			}
 
 			function uploadFiles(event) {

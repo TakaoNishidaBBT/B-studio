@@ -116,6 +116,8 @@
 					$status = move_uploaded_file($_FILES['Filedata']['tmp_name'], $zip_file);
 
 					if($status) {
+						usleep(300000);
+
 						// Send progress
 						header('Content-Type: application/octet-stream');
 						header('Transfer-encoding: chunked');
@@ -142,6 +144,11 @@
 
 						// register extract files
 						$node->walk($this, register_archive);
+						$response['status'] = 'extracting';
+						$response['progress'] = 100;
+						$this->sendChunk(',' . json_encode($response));
+
+						usleep(300000);
 
 						// remove all extract files
 						$node->remove();
