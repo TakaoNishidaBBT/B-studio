@@ -34,7 +34,7 @@
 				}
 
 	 			// Check file name
-				$file = pathinfo($_POST['filename']);
+				$file = B_Util::pathinfo($_POST['filename']);
 				if(strlen($file['basename']) != mb_strlen($file['basename'])) {
 					throw new Exception(__('Multi-byte characters cannot be used'));
 				}
@@ -100,7 +100,7 @@
 				}
 
 				// Get file info
-				$file = pathinfo($_FILES['Filedata']['name']);
+				$file = B_Util::pathinfo($_FILES['Filedata']['name']);
 
 				if(strtolower($file['extension']) == 'zip' && class_exists('ZipArchive') && $this->request['extract_mode'] == 'extract') {
 					// Set time limit to 10 minutes

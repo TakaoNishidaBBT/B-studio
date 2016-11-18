@@ -37,7 +37,7 @@
 					throw new Exception($message);
 				}
 				// Get file info
-				$file = pathinfo($_POST['filename']);
+				$file = B_Util::pathinfo($_POST['filename']);
 
 				// Unify extension to lowercase for windows system
 				$file['extension'] = strtolower($file['extension']);
@@ -114,7 +114,7 @@
 
 			try {
 				// Get file info
-				$file = pathinfo($_FILES['Filedata']['name']);
+				$file = B_Util::pathinfo($_FILES['Filedata']['name']);
 
 				if(!is_dir($this->dir)) {
 					if(mkdir($this->dir)) {
@@ -240,7 +240,7 @@
 				$node->db_node_id = $node_id;
 			}
 			if($node->node_type != 'folder') {
-				$file = pathinfo($node->path);
+				$file = B_Util::pathinfo($node->path);
 				if(rename(B_RESOURCE_EXTRACT_DIR . $node->path, $this->dir . $contents_id . '.' . $file['extension'])) {
 					chmod($this->dir . $contents_id . '.' . $file['extension'], 0777);
 					$this->createthumbnail($this->dir, $contents_id, $file['extension'], B_THUMB_PREFIX, B_THUMB_MAX_SIZE);

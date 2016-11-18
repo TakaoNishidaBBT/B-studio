@@ -72,6 +72,35 @@
 			return false;
 		}
 
+		public static function pathinfo($path) {
+			$info['path'] = $path;
+			$info['dirname'] = '';
+			$info['basename'] = '';
+			$info['filename'] = '';
+			$info['extension'] = '';
+
+			$i = strrpos($path, '/');
+			if($i !== false ){
+				if($i) $info['dirname'] = substr($path, 0, $i);
+				else $info['dirname'] = substr($path, 0, $i+1);
+				$info['basename'] = substr($path, $i+1);
+			}
+			else {
+				$info['basename'] = $path;
+			}
+
+			$i = strrpos($info['basename'], '.');
+			if($i) {
+				$info['filename'] = substr($info['basename'], 0, $i);
+				$info['extension'] = substr($info['basename'], $i+1);
+			}
+			else {
+				$info['filename'] = $info['basename'];
+			}
+
+			return $info;
+		}
+
 		public static function getPath($dir, $file_name) {
 			$dir = str_replace('\\', '/', $dir);
 			if(substr($dir, -1) == '/') {
