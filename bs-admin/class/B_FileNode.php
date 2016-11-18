@@ -451,14 +451,17 @@
 			return $max;
 		}
 
-		function createthumbnail(&$data, &$index=0) {
+		function createthumbnail(&$data, &$index=0, $callback=null) {
 			if(is_array($this->node)) {
 				foreach(array_keys($this->node) as $key) {
-					$this->node[$key]->createthumbnail($data, $index);
+					$this->node[$key]->createthumbnail($data, $index, $callback);
 				}
 			}
 			else if($this->node_type != 'folder' && $this->node_type != 'root') {
-				$this->_createthumbnail($data, $index);
+				$ret = $this->_createthumbnail($data, $index);
+			}
+			if($callback && $ret) {
+				$this->callBack($callback);
 			}
 		}
 
@@ -546,7 +549,6 @@
 			}
 			if(!$width) $width=1;
 			if(!$height) $height=1;
-
 			$new_image = imagecreatetruecolor($width, $height);
 			ImageCopyResampled($new_image, $image, 0, 0, 0, 0, $width, $height, $image_size[0], $image_size[1]);
 
@@ -583,7 +585,7 @@
 			chmod(B_UPLOAD_THUMBDIR . $thumbnail_file_path, 0777);
 			$data[$this->thumbnail_image_path] = $thumbnail_file_path;
 
-			return;
+			return true;
 		}
 
 		function createMovieThumbnail($filename) {
@@ -600,8 +602,8 @@
 				}
 			}
 			else {
-				$cmdline = "ffmpeg -ss 3 -i $filename -f image2 -vframes 1 $output";
-				exec("$cmdline > /dev/null &");
+				$cmdline = "$ffmpeg -ss 3 -i $filename -f image2 -vframes 1 $output";
+				exec("$cmdline > /dev/null");
 			}
 			return $output;
 		}
@@ -647,6 +649,21 @@
 				}
 			}
 			return $count;
+		}
+
+		function callBack($call_back) {
+			if(is_array($call_back)) {
+				$obj = $call_back['obj'];
+				$method = $call_back['method'];
+				if(method_exists($obj, $method)) {
+					$ret = $obj->$method($this);
+				}
+			}
+			else {
+				$ret = call_user_func_array($call_back, array($this));
+			}
+
+			return $ret;
 		}
 
 		function getErrorNo() {

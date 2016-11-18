@@ -2681,6 +2681,7 @@
 						var progress = upload_queue[index].progress;
 						progress.setError();
 						progress.setStatus(response.message);
+						scroll(progress.object());
 						confirm(++index);
 					}
 				}
@@ -2730,9 +2731,16 @@
 				if((httpObj.readyState == 3) && httpObj.status == 200){
 					var response = eval('('+httpObj.responseText+')');
 					var animate = '';
-					if(response['progress']) var animate = ' animate';
-					progress.setProgress(response['progress'], animate);
-					progress.setStatus('Extracting...');
+					if(response['status'] == 'extracting') {
+						if(response['progress']) var animate = ' animate';
+						progress.setProgress(response['progress'], animate);
+						progress.setStatus('Extracting...');
+					}
+					if(response['status'] == 'creating') {
+						if(response['progress']) var animate = ' animate';
+						progress.setProgress(response['progress'], animate);
+						progress.setStatus('Creating Thumbnails...');
+					}
 				}
 				if((httpObj.readyState == 4) && httpObj.status == 200){
 					var response = eval('('+httpObj.responseText+')');

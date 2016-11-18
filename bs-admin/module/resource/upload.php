@@ -357,11 +357,11 @@
 			if($row['node_type'] == 'file') {
 				$param['file_size'] = filesize($filepath);
 				$param['human_file_size'] = B_Util::human_filesize($param['file_size'], 'K');
-			}
-			$size = getimagesize($filepath);
-			if($size) {
-				$param['image_size'] = $size[0] * $size[1];
-				$param['human_image_size'] = $size[0] . 'x' . $size[1];
+				$size = getimagesize($filepath);
+				if($size) {
+					$param['image_size'] = $size[0] * $size[1];
+					$param['human_image_size'] = $size[0] . 'x' . $size[1];
+				}
 			}
 
 			$ret = $this->resource_node_table->update($param);
@@ -655,7 +655,7 @@
 			}
 			else {
 				$cmdline = "$ffmpeg -ss 3 -i $filename -f image2 -vframes 1 $output";
-				exec("$cmdline");
+				exec("$cmdline > /dev/null");
 			}
 			return $output;
 		}

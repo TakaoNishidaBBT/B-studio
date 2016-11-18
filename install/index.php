@@ -54,6 +54,17 @@
 		exit;
 	}
 
+	// ffmpeg
+	if(substr(PHP_OS, 0, 3) === 'WIN') {
+		define('FFMPEG', 'ffmpeg_for_windows.exe');
+	}
+	else if(substr(PHP_OS, 0, 5) === 'Linux') {
+		define('FFMPEG', 'ffmpeg_for_linux');
+	}
+	else {
+		define('FFMPEG', 'ffmpeg_for_mac');
+	}
+
 	// Confirm timezone
 	date('Ymd');
 
@@ -134,26 +145,27 @@
 	}
 
 	function confirmPermission(&$message) {
-		$status  = checkPermission(DOC_ROOT . ROOT_DIR . '.htaccess', $message);
-		$status &= checkPermission(DOC_ROOT . ROOT_DIR . 'bs-admin/.htaccess', $message);
-		$status &= checkPermission(DOC_ROOT . ROOT_DIR . 'bs-admin/.htpassword', $message);
-		$status &= checkPermission(DOC_ROOT . ROOT_DIR . 'bs-admin/archive', $message);
-		$status &= checkPermission(DOC_ROOT . ROOT_DIR . 'bs-admin/cache', $message);
-		$status &= checkPermission(DOC_ROOT . ROOT_DIR . 'bs-admin/config/core_config.php', $message);
-		$status &= checkPermission(DOC_ROOT . ROOT_DIR . 'bs-admin/config/lang_config.php', $message);
-		$status &= checkPermission(DOC_ROOT . ROOT_DIR . 'bs-admin/db/db_connect.php', $message);
-		$status &= checkPermission(DOC_ROOT . ROOT_DIR . 'bs-admin/download', $message);
-		$status &= checkPermission(DOC_ROOT . ROOT_DIR . 'bs-admin/log', $message);
-		$status &= checkPermission(DOC_ROOT . ROOT_DIR . 'bs-admin/user/users.php', $message);
-		$status &= checkPermission(DOC_ROOT . ROOT_DIR . 'bs-admin-files', $message);
-		$status &= checkPermission(DOC_ROOT . ROOT_DIR . 'bs-admin-files/.htaccess', $message);
-		$status &= checkPermission(DOC_ROOT . ROOT_DIR . 'bs-admin-files/files', $message);
-		$status &= checkPermission(DOC_ROOT . ROOT_DIR . 'bs-admin-files/thumbs', $message);
-		$status &= checkPermission(DOC_ROOT . ROOT_DIR . 'files', $message);
+		$status  = checkWritePermission(DOC_ROOT . ROOT_DIR . '.htaccess', $message);
+		$status &= checkWritePermission(DOC_ROOT . ROOT_DIR . 'bs-admin/.htaccess', $message);
+		$status &= checkWritePermission(DOC_ROOT . ROOT_DIR . 'bs-admin/.htpassword', $message);
+		$status &= checkWritePermission(DOC_ROOT . ROOT_DIR . 'bs-admin/archive', $message);
+		$status &= checkWritePermission(DOC_ROOT . ROOT_DIR . 'bs-admin/cache', $message);
+		$status &= checkWritePermission(DOC_ROOT . ROOT_DIR . 'bs-admin/config/core_config.php', $message);
+		$status &= checkWritePermission(DOC_ROOT . ROOT_DIR . 'bs-admin/config/lang_config.php', $message);
+		$status &= checkWritePermission(DOC_ROOT . ROOT_DIR . 'bs-admin/db/db_connect.php', $message);
+		$status &= checkWritePermission(DOC_ROOT . ROOT_DIR . 'bs-admin/download', $message);
+		$status &= checkWritePermission(DOC_ROOT . ROOT_DIR . 'bs-admin/log', $message);
+		$status &= checkWritePermission(DOC_ROOT . ROOT_DIR . 'bs-admin/user/users.php', $message);
+		$status &= checkWritePermission(DOC_ROOT . ROOT_DIR . 'bs-admin-files', $message);
+		$status &= checkWritePermission(DOC_ROOT . ROOT_DIR . 'bs-admin-files/.htaccess', $message);
+		$status &= checkWritePermission(DOC_ROOT . ROOT_DIR . 'bs-admin-files/files', $message);
+		$status &= checkWritePermission(DOC_ROOT . ROOT_DIR . 'bs-admin-files/thumbs', $message);
+		$status &= checkWritePermission(DOC_ROOT . ROOT_DIR . 'files', $message);
+		$status &= checkExecutePermission(DOC_ROOT . ROOT_DIR . 'bs-admin/class/ffmpeg/' . FFMPEG, $message);
 		return $status;
 	}
 
-	function checkPermission($path, &$message) {
+	function checkWritePermission($path, &$message) {
 		if(!file_exists($path)) {
 			$message.= '<span class="status_ok">' . $path  . __(' write permission granted. ') .  '(file not exist)</span><br />';
 			return true;
@@ -166,6 +178,24 @@
 			}
 			else {
 				$message.= '<span class="status_ng">' . $path  . __(' : write permission not set. ') . '(permission:' . substr(sprintf('%o',$perms), -3) . ')</span><br />';
+				return false;
+			}
+		}
+	}
+
+	function checkExecutePermission($path, &$message) {
+		if(!file_exists($path)) {
+			$message.= '<span class="status_ng">' . $path  .  '(file not exist)</span><br />';
+			return false;
+		}
+		else {
+			$perms = fileperms($path);
+			if(is_executable($path)) {
+				$message.= '<span class="status_ok">' . $path  . __(' : execute permission granted. ') . '(permission:' . substr(sprintf('%o',$perms), -3) . ')</span><br />';
+				return true;
+			}
+			else {
+				$message.= '<span class="status_ng">' . $path  . __(' : execute permission not set. ') . '(permission:' . substr(sprintf('%o',$perms), -3) . ')</span><br />';
 				return false;
 			}
 		}

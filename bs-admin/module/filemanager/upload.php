@@ -123,6 +123,7 @@
 						ob_flush();
 
 						// Send start message
+						$response['status'] = 'extracting';
 						$response['progress'] = 0;
 						$this->sendChunk(json_encode($response));
 
@@ -133,22 +134,28 @@
 						unlink($zip_file);
 
 						// Controll extracted files
-						$node = new B_FileNode(B_RESOURCE_EXTRACT_DIR, '/', null, null, 1);
+						$node = new B_FileNode(B_RESOURCE_EXTRACT_DIR, '/', null, null, 'all');
 
 						// Count extract files
 						$this->extracted_files = $node->nodes_count();
 						$this->registerd_files = 0;
 
 						// register extract files
-						$node->walk($this, register_archive);
+						$node->walk($this, registerArchive);
+
+						// remove all extract files
 						$node->remove();
-						$this->removeThumbnailCacheFile();
+
+						$response['status'] = 'creating';
+						$response['progress'] = 0;
+						$this->sendChunk(',' . json_encode($response));
 
 						$root = new B_FileNode(B_UPLOAD_DIR, '/', null, null, 'all');
-						$this->refleshThumnailCache($root);
+						$this->createTumbnail_files = 0;
+						$this->refleshThumnailCache($root, array('obj' => $this, 'method' => 'createThumbnail_callback'));
 
 						foreach($this->registered_archive_node as $path) {
-							$node = new B_FileNode(B_UPLOAD_DIR, '/' . B_Util::getPath($this->path, $path), null, null, 0);
+							$node = new B_FileNode(B_UPLOAD_DIR, B_Util::getPath($this->path, $path), null, null, 0);
 							$response['node_info'][] = $node->getNodeList('', '', $this->path);
 						}
 
@@ -160,7 +167,7 @@
 					}
 				}
 				else {
-					$status = move_uploaded_file($_FILES['Filedata']['tmp_name'], B_UPLOAD_DIR . $this->path . $file['basename']);
+					$status = move_uploaded_file($_FILES['Filedata']['tmp_name'], B_Util::getPath(B_UPLOAD_DIR, B_Util::getPath($this->path, $file['basename'])));
 					if($status) {
 						chmod(B_UPLOAD_DIR . $this->path . $file['basename'], 0777);
 						$this->removeThumbnail($this->path, $file['basename']);
@@ -235,20 +242,36 @@
 			}
 		}
 
-		function register_archive($node) {
+		function registerArchive($node) {
 			if(!$node->parent ) return;
 
-			rename($node->fullpath, B_UPLOAD_DIR . $this->path. $node->path);
-			if(!$node->parent->db_node_id) {
+			$dest = B_Util::getPath(B_UPLOAD_DIR, B_Util::getPath($this->path, $node->path));
+			if(is_dir($node->fullpath)) {
+ 				if(!file_exists($dest)) {
+					mkdir($dest);
+				}
+			}
+			else {
+				copy($node->fullpath, B_Util::getPath(B_UPLOAD_DIR, B_Util::getPath($this->path, $node->path)));
+			}
+			if($node->level == 1) {
 				$this->registered_archive_node[] = $node->path;
 			}
 
 			$this->registerd_files++;
+			$response['status'] = 'extracting';
 			$response['progress'] = round($this->registerd_files / $this->extracted_files * 100);
 			$this->sendChunk(',' . json_encode($response));
 		}
 
-		function sendChunk($response) {
+		function createThumbnail_callback() {
+			$this->createTumbnail_files++;
+			$response['status'] = 'creating';
+			$response['progress'] = round($this->createTumbnail_files / $this->extracted_files * 100);
+			$this->sendChunk(',' . json_encode($response));
+		}
+
+		function sendChunk($response='') {
 			if($response) {
 				$response = $response . str_repeat(' ', 8000);
 				echo sprintf("%x\r\n", strlen($response));
@@ -273,9 +296,9 @@
 			}
 		}
 
-		function refleshThumnailCache($root) {
+		function refleshThumnailCache($root, $callback=null) {
 			$max = $root->getMaxThumbnailNo();
-			$root->createthumbnail($data, $max);
+			$root->createthumbnail($data, $max, $callback);
 			$fp = fopen(B_FILE_INFO_THUMB, 'w+');
 			fwrite($fp, serialize($data));
 			fclose($fp);
