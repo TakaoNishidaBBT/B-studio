@@ -1,6 +1,6 @@
 /*
  * B-frame : php web application framework
- * Copyright (c) BigBeat Inc. all rights reserved. (http://www.bigbeat.co.jp)
+ * Copyright (c) BigBeat Inc. All rights reserved. (http://www.bigbeat.co.jp)
  *
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
@@ -176,7 +176,7 @@
 			}
 
 			this.removeChild = function() {
-				for(var i=0 ; element.childNodes.length ; i++) {
+				for(var i=0; element.childNodes.length; i++) {
 					element.removeChild(element.childNodes.item(i));
 				}
 			}
@@ -194,24 +194,21 @@
 			}
 
 			this.show = function() {
-				if(cv) {
-					cv.show();
-				}
+				if(cv) cv.show();
+
 				element.style.visibility='visible';
 			}
 
 			this.hide = function() {
-				if(cv) {
-					cv.hide();
-				}
+				if(cv) cv.hide();
+
 				element.style.visibility='hidden';
 			}
 
 			this.cleanUp = function() {
 				bframe.removeElement(element);
-				if(cv) {
-					cv.cleanUp();
-				}
+
+				if(cv) cv.cleanUp();
 			}
 
 			this.visibility = function() {

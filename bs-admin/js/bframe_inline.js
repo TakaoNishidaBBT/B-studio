@@ -1,6 +1,6 @@
 /*
  * B-frame : php web application framework
- * Copyright (c) BigBeat Inc. all rights reserved. (http://www.bigbeat.co.jp)
+ * Copyright (c) BigBeat Inc. All rights reserved. (http://www.bigbeat.co.jp)
  *
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
@@ -45,7 +45,7 @@
 		}
 
 		this.removeCallBackFunction = function(func) {
-			for(var i=0 ; i<cb.length ; i++) {
+			for(var i=0; i < cb.length; i++) {
 				if(func == cb[i]) {
 					cb.splice(i, 1);
 				}
@@ -53,7 +53,7 @@
 		}
 
 		inlineExecuteCallBack = function() {
-			for(var i=0 ; i<cb.length ; i++) {
+			for(var i=0; i < cb.length; i++) {
 				func = cb[i];
 				func();
 			}
@@ -64,7 +64,7 @@
 		}
 
 		this.removeBlurCallBackFunction = function(func) {
-			for(var i=0 ; i<bcb.length ; i++) {
+			for(var i=0; i < bcb.length; i++) {
 				if(func == bcb[i]) {
 					bcb.splice(i, 1);
 				}
@@ -76,7 +76,7 @@
 		}
 
 		inlineBlurExecuteCallBack = function() {
-			for(var i=0 ; i<bcb.length ; i++) {
+			for(var i=0; i < bcb.length; i++) {
 				func = bcb[i];
 				func();
 			}

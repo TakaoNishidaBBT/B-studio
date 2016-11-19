@@ -4,7 +4,7 @@
  *
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
-	if(typeof bstudio == 'undefined' || !bstudio){
+	if(typeof bstudio == 'undefined' || !bstudio) {
 		var bstudio = {};
 	}
 
@@ -109,7 +109,7 @@
 		var value;
 
 		var obj = element.getElementsByTagName('input');
-		for(i=0; i < obj.length; i++){
+		for(i=0; i < obj.length; i++) {
 			if(obj[i].type == 'text') {
 				if(value = obj[i].getAttribute('data-default')) {
 					obj[i].value = value;
@@ -124,7 +124,7 @@
 		}
 		var obj = element.getElementsByTagName('select');
 
-		for(i=0; i < obj.length; i++){
+		for(i=0; i < obj.length; i++) {
 			if(value = obj[i].getAttribute('data-default')) {
 				obj[i].value = value;
 			}
@@ -241,4 +241,3 @@
 		bframe.ajaxSubmit.registerCallBackFunctionAfter(window.frameElement.deactivate);
 		bframe.ajaxSubmit.submit('F1', module, 'property', 'register', '', true);
 	}
-

@@ -1,15 +1,15 @@
 /*
  * B-frame : php web application framework
- * Copyright (c) BigBeat Inc. all rights reserved. (http://www.bigbeat.co.jp)
+ * Copyright (c) BigBeat Inc. All rights reserved. (http://www.bigbeat.co.jp)
  *
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
 	bframe.addEventListner(window, 'load' ,bframeFormInit);
 
-	function bframeFormInit(){
+	function bframeFormInit() {
 		var table = document.getElementsByTagName('table');
 
-		for(var i=0; i<table.length; i++) {
+		for(var i=0; i < table.length; i++) {
 			if(bframe.checkClassName('bframe_form', table[i])) {
 				var s = new bframe.form(table[i]);
 			}
@@ -227,7 +227,7 @@
 			context_menu_height = context_menu_element.size.height;
 
 			var tr = target.getElementsByTagName('tr');
-			for(i=0 ; i < tr.length ; i++){
+			for(i=0; i < tr.length; i++){
 				if(bframe.searchParentByTagName(tr[i], 'table') != target) continue;
 
 				tr[i].oncontextmenu = showContextMenu;
@@ -242,7 +242,7 @@
 		}
 
 		function reflectionProperty(tr) {
-			for(var i=0 ; i < tr.cells.length ; i++) {
+			for(var i=0; i < tr.cells.length; i++) {
 				var td = tr.cells[i];
 				if(bframe.checkClassName('bframe_form_property', td)) {
 					var clone = td.childNodes[0].reflectionNode(true);
@@ -274,7 +274,7 @@
 
 		function synchro(event) {
 			var clone = property_pane.childNodes[0].reflectionNode(true);
-			for(var i=0 ; i < currentRow.cells.length ; i++) {
+			for(var i=0; i < currentRow.cells.length; i++) {
 				var td = currentRow.cells[i];
 				if(bframe.checkClassName('bframe_form_property', td)) {
 					current_cell = td;

@@ -1,6 +1,6 @@
 /*
  * B-frame : php web application framework
- * Copyright (c) BigBeat Inc. all rights reserved. (http://www.bigbeat.co.jp)
+ * Copyright (c) BigBeat Inc. All rights reserved. (http://www.bigbeat.co.jp)
  *
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
@@ -11,7 +11,7 @@
 	bframe.preview = function() {
 		var cb = new Array,
 			previewExecuteCallBack = function() {
-				for(var i=0 ; i<cb.length ; i++) {
+				for(var i=0; i < cb.length; i++) {
 					func = cb[i];
 					func();
 				}
@@ -63,10 +63,8 @@
 			},
 
 			removeCallBackFunction: function(func) {
-				for(var i=0 ; i<cb.length ; i++) {
-					if(func == cb[i]) {
-						cb.splice(i, 1);
-					}
+				for(var i=0; i<cb.length; i++) {
+					if(func == cb[i]) cb.splice(i, 1);
 				}
 			},
 		}

@@ -1,6 +1,6 @@
 /*
  * B-frame : php web application framework
- * Copyright (c) BigBeat Inc. all rights reserved. (http://www.bigbeat.co.jp)
+ * Copyright (c) BigBeat Inc. All rights reserved. (http://www.bigbeat.co.jp)
  *
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
@@ -56,7 +56,7 @@
 
 			bframe.removeAllChild(progressFieldId);
 
-			for(var i=0; i<files.length; i++){
+			for(var i=0; i < files.length; i++){
 				files[i].id = i;
 				var progress = new FileProgress(files[i], progressFieldId);
 				progress.setStatus('Pending...');
@@ -104,7 +104,7 @@
 		}
 
 		function confirmResult() {
-			if(httpObj.readyState == 4 && httpObj.status == 200){
+			if(httpObj.readyState == 4 && httpObj.status == 200) {
 				try {
 					var response = eval('('+httpObj.responseText+')');
 				}
@@ -113,10 +113,10 @@
 				}
 
 				if(response.status) {
-					if(response.mode == 'zipConfirm'){
+					if(response.mode == 'zipConfirm') {
 						showZipConfirmDialog(response.message, extract, extractAll, noextract, cancelAll);
 					}
-					else if(response.mode == 'confirm'){
+					else if(response.mode == 'confirm') {
 						showConfirmDialog(response.message, overwrite, overwriteAll, cancel, cancelAll);
 					}
 					else {

@@ -1,15 +1,15 @@
 /*
  * B-frame : php web application framework
- * Copyright (c) BigBeat Inc. all rights reserved. (http://www.bigbeat.co.jp)
+ * Copyright (c) BigBeat Inc. All rights reserved. (http://www.bigbeat.co.jp)
  *
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
 	bframe.addEventListner(window, 'load' , bframeShortcutInit);
 
-	function bframeShortcutInit(){
+	function bframeShortcutInit() {
 		var d = document.getElementsByTagName('div');
 
-		for(var i=0; i<d.length; i++) {
+		for(var i=0; i < d.length; i++) {
 			if(window.getSelection && bframe.checkClassName('bframe_shortcut', d[i])) {
 				var s = new bframe.shortcut(d[i]);
 			}

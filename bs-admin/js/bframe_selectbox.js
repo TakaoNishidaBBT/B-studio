@@ -1,6 +1,6 @@
 /*
  * B-frame : php web application framework
- * Copyright (c) BigBeat Inc. all rights reserved. (http://www.bigbeat.co.jp)
+ * Copyright (c) BigBeat Inc. All rights reserved. (http://www.bigbeat.co.jp)
  *
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
@@ -11,7 +11,7 @@
 		var select = document.getElementsByTagName('select');
 		var s = new Array();
 
-		for(var i=0, j=0; i<select.length; i++) {
+		for(var i=0, j=0; i < select.length; i++) {
 			if(bframe.checkClassName('bframe_selectbox', select[i])) {
 				s[j++] = new bframe.selectbox(select[i], sc);
 			}
@@ -25,7 +25,7 @@
 		var select = document.getElementsByTagName('select');
 		var s = new Array();
 
-		for(var i=0, j=0; i<select.length; i++) {
+		for(var i=0, j=0; i < select.length; i++) {
 			if(bframe.checkClassName('bframe_selectbox', select[i])) {
 				s[j++] = new bframe.selectbox(select[i], bframe.selectBoxContainer);
 			}
@@ -49,7 +49,7 @@
 		}
 
 		this.closeAll = function() {
-			for(var i=0 ; i<elements.length; i++) {
+			for(var i=0; i < elements.length; i++) {
 				if(elements[i].hidePullDownMenu) {
 					elements[i].hidePullDownMenu();
 				}
@@ -57,7 +57,7 @@
 		}
 
 		this.reload = function() {
-			for(var i=0 ; i<elements.length; i++) {
+			for(var i=0; i < elements.length; i++) {
 				elements[i].reload();
 			}
 		}
@@ -128,7 +128,7 @@
 
 			context_menu_frame_offset = bframe.getFrameOffset(window, context_menu_frame);
 			context_menu.setWidth(context_menu_width);
-			for(var i=0; i<target.length; i++) {
+			for(var i=0; i < target.length; i++) {
 				options[i] = {};
 				options[i].menu = target.options[i].text;
 				options[i].param = {'index': i, 'value': target.options[i].value, 'text': target.options[i].text};

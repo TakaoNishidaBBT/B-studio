@@ -1,6 +1,6 @@
 /*
  * B-frame : php web application framework
- * Copyright (c) BigBeat Inc. all rights reserved. (http://www.bigbeat.co.jp)
+ * Copyright (c) BigBeat Inc. All rights reserved. (http://www.bigbeat.co.jp)
  *
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
@@ -11,7 +11,7 @@
 		var link = document.getElementsByTagName('a');
 		var m = new Array();
 
-		for(var i=0, j=0; i<link.length; i++) {
+		for(var i=0, j=0; i < link.length; i++) {
 			if(bframe.checkClassName('bframe_menu', link[i])) {
 				m[j++] = new bframe.menu(link[i], mc);
 			}
@@ -33,7 +33,7 @@
 		}
 
 		this.closeAll = function() {
-			for(var i=0 ; i<menu.length; i++) {
+			for(var i=0; i < menu.length; i++) {
 				if(menu[i].hidePullDownMenu) {
 					menu[i].hidePullDownMenu();
 				}
@@ -41,7 +41,7 @@
 		}
 
 		this.reload = function() {
-			for(var i=0 ; i<menu.length; i++) {
+			for(var i=0; i < menu.length; i++) {
 				menu[i].reload();
 			}
 		}

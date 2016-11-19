@@ -1,6 +1,6 @@
 /*
  * B-frame : php web application framework
- * Copyright (c) BigBeat Inc. all rights reserved. (http://www.bigbeat.co.jp)
+ * Copyright (c) BigBeat Inc. All rights reserved. (http://www.bigbeat.co.jp)
  *
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
@@ -15,9 +15,8 @@
 	// 
 	// -------------------------------------------------------------------------
 	bframe.contextMenu = function(zindex) {
-		if(!zindex) {
-			zindex = 1;
-		}
+		if(!zindex) zindex = 1;
+
 		var self = this;
 		var popup;
 		var row_index = -1;
@@ -68,9 +67,8 @@
 		bframe.addEventListner(window, 'beforeunload' ,cleanUp);
 
 		function cleanUp() {
-			if(popup) {
-				popup.cleanUp();
-			}
+			if(popup) popup.cleanUp();
+
 			for(var i=0 ; i<submenu.length ; i++) {
 				if(submenu[i] && submenu[i].cleanUp) {
 					submenu[i].cleanUp();
@@ -386,12 +384,12 @@
 		}
 
 		function getMousePosition(event) {
-			if (!event) {
+			if(!event) {
 				if(window.event) var event=window.event;
 				if(frame.event) var event=frame.event;
 			}
-			if (!event.pageX) event.pageX = event.clientX + document.body.scrollLeft;
-			if (!event.pageY) event.pageY = event.clientY + document.body.scrollTop;
+			if(!event.pageX) event.pageX = event.clientX + document.body.scrollLeft;
+			if(!event.pageY) event.pageY = event.clientY + document.body.scrollTop;
 			return event;
 		}
 
@@ -420,7 +418,8 @@
 
 		function select(index){
 			if(!element) return;
-			for(i=0 ; i < element.rows.length ; i++) {
+
+			for(i=0; i < element.rows.length; i++) {
 				if(disabled[i] == 'disabled') continue;
 
 				if(i == index) {
@@ -463,7 +462,7 @@
 			if(r.top < p.top+2) {
 				var t = scrollTop - (p.top - r.top);
 				if(t >= 0) {
-					popup.setScrollTop(t-2);
+					popup.setScrollTop(t - 2);
 				}
 			}
 		}
@@ -604,7 +603,7 @@
 
 		function reset() {
 			if(!element) return;
-			for(i=0 ; i < element.rows.length ; i++) {
+			for(i=0; i < element.rows.length; i++) {
 
 				if(disabled[i] == 'disabled') {
 					element.rows[i].cells[0].className = 'disabled';

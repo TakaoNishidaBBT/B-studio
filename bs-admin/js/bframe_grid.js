@@ -1,6 +1,6 @@
 /*
  * B-frame : php web application framework
- * Copyright (c) BigBeat Inc. all rights reserved. (http://www.bigbeat.co.jp)
+ * Copyright (c) BigBeat Inc. All rights reserved. (http://www.bigbeat.co.jp)
  *
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
@@ -9,7 +9,7 @@
 	function bframeGridInit(){
 		var table = document.getElementsByTagName('table');
 
-		for(var i=0; i<table.length; i++) {
+		for(var i=0; i < table.length; i++) {
 			if(bframe.checkClassName('bframe_grid', table[i])) {
 				var s = new bframe.grid(table[i]);
 			}
@@ -20,7 +20,6 @@
 	// class bframe.grid
 	// 
 	// -------------------------------------------------------------------------
-
 	bframe.grid = function(target) {
 
 		var open = false;
@@ -50,7 +49,7 @@
 		var down_control;
 
 		// set event handller
-		for(var i=0; i<target.rows.length; i++) {
+		for(var i=0; i < target.rows.length; i++) {
 			target.rows[i].ondblclick = selectRow;
 		}
 
@@ -104,7 +103,7 @@
 			context_menu_height = context_menu_element.size.height;
 
 			var tr = target.getElementsByTagName('tr');
-			for(i=1 ; i < tr.length ; i++){
+			for(i=1; i < tr.length; i++){
 				tr[i].oncontextmenu=showContextMenu;
 			}
 		}
@@ -127,11 +126,11 @@
 		function setOnKeyDown() {
 			itemListonkeydown
 			var tr = target.getElementsByTagName('tr');
-			for(i=1 ; i < tr.length ; i++){
+			for(i=1; i < tr.length; i++){
 				var current_tr = tr[i];
-				for(var j=0 ; j < current_tr.cells.length ; j++) {
+				for(var j=0; j < current_tr.cells.length; j++) {
 					var current_td = current_tr.cells[j];
-					for(var k=0 ; k < current_td.childNodes.length ; k++) {
+					for(var k=0; k < current_td.childNodes.length; k++) {
 						if(current_td.childNodes[k].tagName && current_td.childNodes[k].tagName.toLowerCase() == 'input') {
 							bframe.addEventListner(current_td.childNodes[k], 'keydown', itemListonkeydown);
 						}
@@ -195,7 +194,7 @@
 			return {left:Math.round(left), top:Math.round(top)};
 		}
 
-		function hideContextMenu(){
+		function hideContextMenu() {
 			if(document.detachEvent) {
 				document.detachEvent('onmousewheel', cancelEvent);
 			}
@@ -280,15 +279,15 @@
 			UpDownBtnControl();
 		}
 
-		function clickUpButton(event){
+		function clickUpButton(event) {
 			clickUpDownButton('UP', event);
 		}
 
-		function clickDownButton(event){
+		function clickDownButton(event) {
 			clickUpDownButton('DOWN', event);
 		}
 
-		function clickUpDownButton(dir, event){
+		function clickUpDownButton(dir, event) {
 			if(currentRow) {
 				// child node
 				if(dir == 'UP') {
@@ -345,10 +344,10 @@
 				p.appendChild(newTR);
 			}
 
-			for(var i=0 ; i < newTR.cells.length ; i++) {
+			for(var i=0; i < newTR.cells.length; i++) {
 				var newTD = newTR.cells[i];
 
-				for(var j=0 ; j < newTD.childNodes.length ; j++) {
+				for(var j=0; j < newTD.childNodes.length; j++) {
 					if(reset) {
 						if(!setDefault(newTD.childNodes[j])) {
 							if(newTD.childNodes[j].tagName) {
@@ -405,7 +404,7 @@
 		}
 
 		function cancelEvent(e) {
-			e.preventDefault? e.preventDefault() : e.returnValue = false;
+			e.preventDefault ? e.preventDefault() : e.returnValue = false;
 		}
 
 		function itemListonkeydown(event) {
@@ -428,8 +427,8 @@
 					var cellIndex = p.cellIndex;
 				}
 
-				for(i=cellIndex+1 ; i<tr.cells.length ; i++) {
-					for(var j=0 ; j<tr.cells[i].childNodes.length ; j++) {
+				for(i=cellIndex+1; i < tr.cells.length; i++) {
+					for(var j=0; j<tr.cells[i].childNodes.length; j++) {
 						var item = tr.cells[i].childNodes[j];
 						if(item.tagName && item.tagName.toLowerCase() == 'input') {
 							item.focus();
@@ -448,8 +447,8 @@
 					else {
 						tr = target.rows[property.header_row_cnt];
 					}
-					for(i=0 ; i<tr.cells.length ; i++) {
-						for(var j=0 ; j<tr.cells[i].childNodes.length ; j++) {
+					for(i=0; i < tr.cells.length; i++) {
+						for(var j=0; j < tr.cells[i].childNodes.length; j++) {
 							var item = tr.cells[i].childNodes[j];
 							if(item.tagName && item.tagName.toLowerCase() == 'input') {
 								item.focus();

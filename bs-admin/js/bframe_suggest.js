@@ -1,15 +1,15 @@
 /*
  * B-frame : php web application framework
- * Copyright (c) BigBeat Inc. all rights reserved. (http://www.bigbeat.co.jp)
+ * Copyright (c) BigBeat Inc. All rights reserved. (http://www.bigbeat.co.jp)
  *
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
 	bframe.addEventListner(window, 'load' , bframeSuggestInit);
 
-	function bframeSuggestInit(){
+	function bframeSuggestInit() {
 		var input = document.getElementsByTagName('input');
 
-		for(var i=0; i<input.length; i++) {
+		for(var i=0; i < input.length; i++) {
 			var s = new bframe.suggest(input[i]);
 		}
 	}
@@ -18,7 +18,6 @@
 	// class bframe.suggest
 	// 
 	// -------------------------------------------------------------------------
-
 	bframe.suggest = function(target) {
 		if(!bframe.checkClassName('bframe_suggest', target)) {
 			return false;
@@ -75,13 +74,13 @@
 			response_wait = true;
 		}
 
-		function initResponse(){
+		function initResponse() {
 			var rel;
 
 			if(httpObj.readyState == 4 && httpObj.status == 200 && response_wait){
 				property = eval('('+httpObj.responseText+')');
 				if(property.relation && bframe.isArray(property.relation)) {
-					for(var i=0; i<property.relation.length; i++) {
+					for(var i=0; i < property.relation.length; i++) {
 						if(property.relation[i].id) {
 							if(rel = bframe.getRelationObject(target, property.relation[i].id)) {
 								property.relation[i].obj = rel;
@@ -93,7 +92,7 @@
 					}
 				}
 				if(property.post && bframe.isArray(property.post)) {
-					for(var i=0; i<property.post.length; i++) {
+					for(var i=0; i < property.post.length; i++) {
 						if(property.post[i].id) {
 							if(rel = bframe.getRelationObject(target, property.post[i].id)) {
 								property.post[i].obj = rel;
@@ -357,7 +356,7 @@
 				var child = node.childNodes[i];
 
 				if(child.tagName && child.tagName != 'array' && child.tagName != target_id) {
-					for(var j=0, obj=''; j<property.relation.length; j++) {
+					for(var j=0, obj=''; j < property.relation.length; j++) {
 						if(child.tagName == property.relation[j].id) {
 							obj = property.relation[j].obj;
 							break;
@@ -412,7 +411,7 @@
 
 		function clear() {
 			if(property.relation) {
-				for(var i=0; i<property.relation.length; i++) {
+				for(var i=0; i < property.relation.length; i++) {
 					switch(property.relation[i].obj.tagName.toLowerCase()) {
 					case 'input':
 					case 'select':

@@ -1,6 +1,6 @@
 /*
  * B-frame : php web application framework
- * Copyright (c) BigBeat Inc. all rights reserved. (http://www.bigbeat.co.jp)
+ * Copyright (c) BigBeat Inc. All rights reserved. (http://www.bigbeat.co.jp)
  *
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
@@ -38,7 +38,7 @@
 		buttons.className = 'buttons';
 		box.appendChild(buttons);
 
-		for(var i=0 ; i<params.buttons.length ; i++) {
+		for(var i=0; i<params.buttons.length; i++) {
 			var a = createButton(params.buttons[i]);
 			buttons.appendChild(a);
 		}

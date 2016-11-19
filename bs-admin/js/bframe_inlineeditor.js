@@ -1,6 +1,6 @@
 /*
  * B-frame : php web application framework
- * Copyright (c) BigBeat Inc. all rights reserved. (http://www.bigbeat.co.jp)
+ * Copyright (c) BigBeat Inc. All rights reserved. (http://www.bigbeat.co.jp)
  *
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
@@ -8,10 +8,10 @@
 
 	CKEDITOR.disableAutoInline = true;
 
-	function bframeInlineEditorInit(){
+	function bframeInlineEditorInit() {
 		var div = document.getElementsByTagName('div');
 
-		for(var i=0; i<div.length; i++) {
+		for(var i=0; i < div.length; i++) {
 			if(bframe.checkClassName('bframe_inlineeditor', div[i])) {
 				var s = new bframe.inlineeditor(div[i]);
 			}

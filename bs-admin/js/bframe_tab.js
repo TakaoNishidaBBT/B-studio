@@ -1,17 +1,17 @@
 /*
  * B-frame : php web application framework
- * Copyright (c) BigBeat Inc. all rights reserved. (http://www.bigbeat.co.jp)
+ * Copyright (c) BigBeat Inc. All rights reserved. (http://www.bigbeat.co.jp)
  *
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
 	bframe.addEventListner(window, 'load' , bframeTabInit);
 
-	function bframeTabInit(){
+	function bframeTabInit() {
 		var tc = new bframe.tab_container();
 		var a = document.getElementsByTagName('a');
 		var t = new Array();
 
-		for(var i=0, j=0; i<a.length; i++) {
+		for(var i=0, j=0; i < a.length; i++) {
 			if(bframe.checkClassName('bframe_tab', a[i])) {
 				t[j++] = new bframe.tab(a[i], tc);
 			}
@@ -36,7 +36,7 @@
 		}
 
 		function controlTab(evtSrc) {
-			for(var i=0 ; i<tabs.length ; i++) {
+			for(var i=0; i < tabs.length; i++) {
 				if(bframe.isChild(tabs[i].getSelf(), evtSrc)) {
 					tabs[i].show();
 				}

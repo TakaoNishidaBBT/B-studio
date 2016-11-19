@@ -1,10 +1,10 @@
 /*
  * B-frame : php web application framework
- * Copyright (c) BigBeat Inc. all rights reserved. (http://www.bigbeat.co.jp)
+ * Copyright (c) BigBeat Inc. All rights reserved. (http://www.bigbeat.co.jp)
  *
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
-	bframe.addEventListner(window, 'load' , bframeSplitterInit);
+	bframe.addEventListner (window, 'load' , bframeSplitterInit);
 
 	function bframeSplitterInit(){
 		var div = document.getElementsByTagName('div');
@@ -26,6 +26,7 @@
 		var start_x;
 		var param = target.getAttribute('param');
 		var margin = 0;
+		var splitbar_width = target.offsetWidth;
 
 		if(param) {
 			m = bframe.getParam('margin', param);
@@ -119,23 +120,43 @@
 		}
 
 		function resize(event) {
-			if(!resize_status) {
-				return;
-			}
+			if(!resize_status) return;
+
+			var w = top.window.innerWidth || top.document.documentElement.clientWidth || top.document.body.clientWidth;
 			var mp = bframe.getMousePosition(event);
 			var ep = bframe.getElementPosition(self);
-			ep.left = parseInt(mp.screenX - start_x);
+			var rp = mp.screenX - start_x;
+
+			if(w - rp < splitbar_width) {
+				ep.left = parseInt(w - splitbar_width);
+			}
+			else if(rp < 0) {
+				ep.left = 0;
+			}
+			else {
+				ep.left = rp;
+			}
 			splitbar.position(ep);
 		}
 
 		function stop(event) {
-			if(!resize_status) {
-				return;
-			}
-			splitbar.hide();
+			if(!resize_status) return;
+
+			var w = top.window.innerWidth || top.document.documentElement.clientWidth || top.document.body.clientWidth;
 			var mp = bframe.getMousePosition(event);
 			var ep = bframe.getElementPosition(self);
-			ep.left = parseInt(mp.screenX - start_x);
+			var rp = mp.screenX - start_x;
+
+			if(w - rp < splitbar_width) {
+				ep.left = parseInt(w - splitbar_width);
+			}
+			else if(rp < 0) {
+				ep.left = 0;
+			}
+			else {
+				ep.left = rp;
+			}
+
 			pane.position(ep);
 			splitbar.hide();
 			self.style.visibility = 'visible';
