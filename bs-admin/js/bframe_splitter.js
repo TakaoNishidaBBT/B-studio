@@ -122,7 +122,7 @@
 		function resize(event) {
 			if(!resize_status) return;
 
-			var w = top.window.innerWidth || top.document.documentElement.clientWidth || top.document.body.clientWidth;
+			var w = document.documentElement.clientWidth  || document.body.clientWidth;
 			var mp = bframe.getMousePosition(event);
 			var ep = bframe.getElementPosition(self);
 			var rp = mp.screenX - start_x;
@@ -142,7 +142,7 @@
 		function stop(event) {
 			if(!resize_status) return;
 
-			var w = top.window.innerWidth || top.document.documentElement.clientWidth || top.document.body.clientWidth;
+			var w = document.documentElement.clientWidth  || document.body.clientWidth;
 			var mp = bframe.getMousePosition(event);
 			var ep = bframe.getElementPosition(self);
 			var rp = mp.screenX - start_x;
