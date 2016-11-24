@@ -550,7 +550,7 @@
 			if(!$width) $width=1;
 			if(!$height) $height=1;
 			$new_image = imagecreatetruecolor($width, $height);
-			ImageCopyResampled($new_image, $image, 0, 0, 0, 0, $width, $height, $image_size[0], $image_size[1]);
+			imagecopyresampled($new_image, $image, 0, 0, 0, 0, $width, $height, $image_size[0], $image_size[1]);
 
 			switch(strtolower($file_info['extension'])) {
 			case 'jpg':

@@ -116,7 +116,7 @@
 		'was failed to delete.'			=> 'の削除に失敗しました。',
 
 		'Another user has updated this record'
-										=> "他のユーザに更新されています",
+										=> '他のユーザに更新されています',
 		// Menu
 		'Open published page'			=> '公開画面を開きます',
 		'Contents'						=> 'コンテンツ',
