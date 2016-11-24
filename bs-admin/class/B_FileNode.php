@@ -531,6 +531,33 @@
 			$image_size = getimagesize($source_file_path);
 			$width = $image_size[0];
 			$height = $image_size[1];
+
+			// check rotate
+			$exif = exif_read_data($source_file_path);
+
+			if(isset($exif['Orientation'])) {
+				switch($exif['Orientation']) {
+				case 3:
+					$image = imagerotate($image, 180, 0);
+					break;
+
+				case 6:
+					$image = imagerotate($image, 270, 0);
+					$width = $image_size[1];
+					$height = $image_size[0];
+					$rotate = true;
+					break;
+
+				case 8:
+					$image = imagerotate($image, 90, 0);
+					$width = $image_size[1];
+					$height = $image_size[0];
+					$rotate = true;
+					break;
+				}
+			}
+
+			// scale down
 			$max_size = B_THUMB_MAX_SIZE;
 
 			if($width > $max_size) {
@@ -550,7 +577,13 @@
 			if(!$width) $width=1;
 			if(!$height) $height=1;
 			$new_image = imagecreatetruecolor($width, $height);
-			imagecopyresampled($new_image, $image, 0, 0, 0, 0, $width, $height, $image_size[0], $image_size[1]);
+
+			if($rotate) {
+				ImageCopyResampled($new_image, $image, 0, 0, 0, 0, $width, $height, $image_size[1], $image_size[0]);
+			}
+			else {
+				ImageCopyResampled($new_image, $image, 0, 0, 0, 0, $width, $height, $image_size[0], $image_size[1]);
+			}
 
 			switch(strtolower($file_info['extension'])) {
 			case 'jpg':
