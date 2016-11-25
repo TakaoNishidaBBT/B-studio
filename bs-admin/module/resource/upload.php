@@ -522,8 +522,8 @@
 			$source_file_path = $dir . $file_name . '.' . $file_extension;
 			$thumbnail_file_path = $dir . $prefix . $file_name . '.' . $file_extension;
 
-			B_Util::createthumbnail($source_file_path, $thumbnail_file_path, B_THUMB_MAX_SIZE);
-
-			chmod($thumbnail_file_path, 0777);
+			if(B_Util::createthumbnail($source_file_path, $thumbnail_file_path, B_THUMB_MAX_SIZE)) {
+				chmod($thumbnail_file_path, 0777);
+			}
 		}
 	}

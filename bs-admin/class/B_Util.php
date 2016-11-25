@@ -201,7 +201,7 @@
 			return false;
 		}
 
-		public static function createthumbnail($src, $dest, $max_size) {
+		public static function createthumbnail($src, &$dest, $max_size) {
 			$file_info = B_Util::pathinfo($src);
 
 			switch(strtolower($file_info['extension'])) {
@@ -317,8 +317,6 @@
 				imagecopyresampled($new_image, $image, 0, 0, 0, 0, $width, $height, $image_size[0], $image_size[1]);
 			}
 
-			$thumbnail_file_path = $dir . $prefix . $file_name . '.' . $file_extension;
-
 			switch(strtolower($file_info['extension'])) {
 			case 'jpg':
 			case 'jpeg':
@@ -341,8 +339,8 @@
 			case 'mpg':
 			case 'mpeg':
 			case 'wmv':
-				$thumbnail_file_path = B_Util::changeExtension($dest, 'jpg');
-				imagejpeg($new_image, $thumbnail_file_path, 100);
+				$dest = B_Util::changeExtension($dest, 'jpg');
+				imagejpeg($new_image, $dest, 100);
 				unlink($src);
 				break;
 			}

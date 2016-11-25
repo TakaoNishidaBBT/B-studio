@@ -488,22 +488,11 @@
 
 			$file_info = pathinfo($this->path);
 			$index++;
-			$thumbnail_file_path = str_pad($index, 10, '0', STR_PAD_LEFT) . '.' . $file_info['extension'];
+			$thumbnail_file_path = B_UPLOAD_THUMBDIR . str_pad($index, 10, '0', STR_PAD_LEFT) . '.' . $file_info['extension'];
 
 			// create thumbnail
-			if(B_Util::createthumbnail($this->fullpath, B_UPLOAD_THUMBDIR . $thumbnail_file_path, B_THUMB_MAX_SIZE)) {
-				switch(strtolower($file_info['extension'])) {
-				case 'avi':
-				case 'flv':
-				case 'mov':
-				case 'mp4':
-				case 'mpg':
-				case 'mpeg':
-				case 'wmv':
-					$thumbnail_file_path = B_Util::changeExtension($thumbnail_file_path, 'jpg');
-				}
-
-				chmod(B_UPLOAD_THUMBDIR . $thumbnail_file_path, 0777);
+			if(B_Util::createthumbnail($this->fullpath, $thumbnail_file_path, B_THUMB_MAX_SIZE)) {
+				chmod($thumbnail_file_path, 0777);
 				$data[$this->thumbnail_image_path] = $thumbnail_file_path;
 
 				return true;

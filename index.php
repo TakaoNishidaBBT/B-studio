@@ -137,7 +137,7 @@
 				header('Content-Type: image/' . strtolower($file['extension']));
 				break;
 			}
-			readfile(B_UPLOAD_THUMBDIR . $info[B_CURRENT_ROOT . $url]);
+			readfile($info[B_CURRENT_ROOT . $url]);
 			exit;
 		}
 	}
