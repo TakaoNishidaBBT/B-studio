@@ -109,6 +109,9 @@
 	if(!function_exists('gd_info')) {
 		$error_message = __('Please enable GD library');
 	}
+	if(!function_exists('exif_read_data')) {
+		$error_message = __('Please enable exif library');
+	}
 	if(!class_exists('ZipArchive')) {
 		$error_message = __('ZipArchive is necessary');
 	}

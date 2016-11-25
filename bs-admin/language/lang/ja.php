@@ -387,6 +387,7 @@
 		'Please set session.save_path'	=> 'session.save_pathを設定してください。',
 		'Please enable MySQL library'	=> 'MySQLライブラリを有効にしてください。',
 		'Please enable GD library'		=> 'GDライブラリを有効にしてください。',
+		'Please enable exif library'	=> 'exifライブラリを有効にしてください。',
 		'ZipArchive is necessary'		=> 'ZipArchiveクラスが必要です。',
 
 		' : write permission granted. '	=> ' の書き込み権限はOKです。',

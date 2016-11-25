@@ -494,6 +494,8 @@
 			case 'jpeg':
 				if(!function_exists('imagecreatefromjpeg')) return;
 				$image = @imagecreatefromjpeg($source_file_path);
+				// check rotate
+				$exif = exif_read_data($source_file_path);
 				break;
 
 			case 'gif':
@@ -532,10 +534,7 @@
 			$width = $image_size[0];
 			$height = $image_size[1];
 
-			// check rotate
-			$exif = exif_read_data($source_file_path);
-
-			if(isset($exif['Orientation'])) {
+			if($exif && isset($exif['Orientation'])) {
 				switch($exif['Orientation']) {
 				case 3:
 					$image = imagerotate($image, 180, 0);
@@ -584,6 +583,25 @@
 			else {
 				ImageCopyResampled($new_image, $image, 0, 0, 0, 0, $width, $height, $image_size[0], $image_size[1]);
 			}
+
+			if(($image_size[2] == IMAGETYPE_GIF) || ($image_size[2] == IMAGETYPE_PNG) ) {
+				// set transparency
+				$trnprt_indx = imagecolortransparent($image);
+				if($trnprt_indx >= 0) {
+					$trnprt_color = imagecolorsforindex($image, $trnprt_indx);
+					$trnprt_indx = imagecolorallocate($new_image, $trnprt_color['red'], $trnprt_color['green'], $trnprt_color['blue']);
+					imagefill($new_image, 0, 0, $trnprt_indx);
+					imagecolortransparent($new_image, $trnprt_indx);
+				} 
+				else if($image_size[2] == IMAGETYPE_PNG) {
+					imagealphablending($new_image, false);
+					$color = imagecolorallocatealpha($new_image, 0, 0, 0, 127);
+					imagefill($new_image, 0, 0, $color);
+					imagesavealpha($new_image, true);
+				}
+			}
+
+			imagecopyresampled($new_image, $image, 0, 0, 0, 0, $width, $height, $image_size[0], $image_size[1]);
 
 			switch(strtolower($file_info['extension'])) {
 			case 'jpg':
