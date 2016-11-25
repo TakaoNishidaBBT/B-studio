@@ -101,6 +101,13 @@
 			return $info;
 		}
 
+		public static function changeExtension($path, $extension) {
+			$i = strrpos($path, '.');
+			if($i) $new_path = substr($path, 0, $i) . '.' . $extension;
+
+			return $new_path;
+		}
+
 		public static function getPath($dir, $file_name) {
 			$dir = str_replace('\\', '/', $dir);
 			if(substr($dir, -1) == '/') {
@@ -194,8 +201,175 @@
 			return false;
 		}
 
-		public static function imagecreatefrombmp($filename) {
-			if(!$fp = fopen($filename, 'rb')) return false;
+		public static function createthumbnail($src, $dest, $max_size) {
+			$file_info = B_Util::pathinfo($src);
+
+			switch(strtolower($file_info['extension'])) {
+			case 'jpg':
+			case 'jpeg':
+				if(!function_exists('imagecreatefromjpeg')) return;
+				$image = @imagecreatefromjpeg($src);
+				// check rotate
+				$exif = exif_read_data($src);
+				break;
+
+			case 'gif':
+				if(!function_exists('imagecreatefromgif')) return;
+				$image = @imagecreatefromgif($src);
+				break;
+
+			case 'png':
+				if(!function_exists('imagecreatefrompng')) return;
+				$image = @imagecreatefrompng($src);
+				break;
+
+			case 'bmp':
+				$image = B_Util::imagecreatefrombmp($src);
+				break;
+
+			case 'avi':
+			case 'flv':
+			case 'mov':
+			case 'mp4':
+			case 'mpg':
+			case 'mpeg':
+			case 'wmv':
+				$src = B_Util::createMovieThumbnail($src);
+				if(!function_exists('imagecreatefromjpeg')) return;
+				$image = @imagecreatefromjpeg($src);
+				break;
+
+			default:
+				return;
+			}
+
+			// get image size
+			$image_size = getimagesize($src);
+			$width = $image_size[0];
+			$height = $image_size[1];
+
+			// check rotate
+			if($exif && isset($exif['Orientation'])) {
+				switch($exif['Orientation']) {
+				case 3:
+					$image = imagerotate($image, 180, 0);
+					break;
+
+				case 6:
+					$image = imagerotate($image, 270, 0);
+					$width = $image_size[1];
+					$height = $image_size[0];
+					$rotate = true;
+					break;
+
+				case 8:
+					$image = imagerotate($image, 90, 0);
+					$width = $image_size[1];
+					$height = $image_size[0];
+					$rotate = true;
+					break;
+				}
+			}
+
+			// scale down
+			if($width > $max_size) {
+				if($width > $height) {
+					$height = round($height * $max_size / $width);
+					$width = $max_size;
+				}
+				else {
+					$width = round($width * $max_size / $height);
+					$height = $max_size;
+				}
+			}
+			else if($height > $max_size) {
+				$width = round($width * $max_size / $height);
+				$height = $max_size;
+			}
+			if(!$width) $width=1;
+			if(!$height) $height=1;
+
+			// create new image
+			$new_image = imagecreatetruecolor($width, $height);
+
+			if($rotate) {
+				imagecopyresampled($new_image, $image, 0, 0, 0, 0, $width, $height, $image_size[1], $image_size[0]);
+			}
+			else {
+				imagecopyresampled($new_image, $image, 0, 0, 0, 0, $width, $height, $image_size[0], $image_size[1]);
+			}
+
+			if(($image_size[2] == IMAGETYPE_GIF) || ($image_size[2] == IMAGETYPE_PNG) ) {
+				// set transparency
+				$trnprt_indx = imagecolortransparent($image);
+				if($trnprt_indx >= 0) {
+					$trnprt_color = imagecolorsforindex($image, $trnprt_indx);
+					$trnprt_indx = imagecolorallocate($new_image, $trnprt_color['red'], $trnprt_color['green'], $trnprt_color['blue']);
+					imagefill($new_image, 0, 0, $trnprt_indx);
+					imagecolortransparent($new_image, $trnprt_indx);
+				} 
+				else if($image_size[2] == IMAGETYPE_PNG) {
+					imagealphablending($new_image, false);
+					$color = imagecolorallocatealpha($new_image, 0, 0, 0, 127);
+					imagefill($new_image, 0, 0, $color);
+					imagesavealpha($new_image, true);
+				}
+				imagecopyresampled($new_image, $image, 0, 0, 0, 0, $width, $height, $image_size[0], $image_size[1]);
+			}
+
+			$thumbnail_file_path = $dir . $prefix . $file_name . '.' . $file_extension;
+
+			switch(strtolower($file_info['extension'])) {
+			case 'jpg':
+			case 'jpeg':
+			case 'bmp':
+				imagejpeg($new_image, $dest, 100);
+				break;
+
+			case 'gif':
+				imagegif($new_image, $dest);
+				break;
+
+			case 'png':
+				imagepng($new_image, $dest);
+				break;
+
+			case 'avi':
+			case 'flv':
+			case 'mov':
+			case 'mp4':
+			case 'mpg':
+			case 'mpeg':
+			case 'wmv':
+				$thumbnail_file_path = B_Util::changeExtension($dest, 'jpg');
+				imagejpeg($new_image, $thumbnail_file_path, 100);
+				unlink($src);
+				break;
+			}
+		}
+
+		public static function createMovieThumbnail($src) {
+			$ffmpeg = FFMPEG;
+			$output = B_RESOURCE_WORK_DIR . time() . 'tmp.jpg';
+			if(substr(PHP_OS, 0, 3) === 'WIN') {
+				$cmdline = "$ffmpeg -ss 3 -i $src -f image2 -vframes 1 $output 2>&1";
+				$p = popen($cmdline, 'r');
+				if($p) {
+		            pclose($p);
+				}
+				else {
+					$this->log->write('error');
+				}
+			}
+			else {
+				$cmdline = "$ffmpeg -ss 3 -i $src -f image2 -vframes 1 $output";
+				exec("$cmdline > /dev/null");
+			}
+			return $output;
+		}
+
+		public static function imagecreatefrombmp($src) {
+			if(!$fp = fopen($src, 'rb')) return false;
 
 			$file = unpack('vfile_type/Vfile_size/Vreserved/Vbitmap_offset', fread($fp, 14));
 			if($file['file_type'] != 19778) return false;
