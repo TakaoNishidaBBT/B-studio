@@ -346,6 +346,8 @@
 				unlink($src);
 				break;
 			}
+
+			return true;
 		}
 
 		public static function createMovieThumbnail($src) {

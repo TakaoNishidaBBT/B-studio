@@ -491,23 +491,23 @@
 			$thumbnail_file_path = str_pad($index, 10, '0', STR_PAD_LEFT) . '.' . $file_info['extension'];
 
 			// create thumbnail
-			B_Util::createthumbnail($this->fullpath, B_UPLOAD_THUMBDIR . $thumbnail_file_path, B_THUMB_MAX_SIZE);
+			if(B_Util::createthumbnail($this->fullpath, B_UPLOAD_THUMBDIR . $thumbnail_file_path, B_THUMB_MAX_SIZE)) {
+				switch(strtolower($file_info['extension'])) {
+				case 'avi':
+				case 'flv':
+				case 'mov':
+				case 'mp4':
+				case 'mpg':
+				case 'mpeg':
+				case 'wmv':
+					$thumbnail_file_path = B_Util::changeExtension($thumbnail_file_path, 'jpg');
+				}
 
-			switch(strtolower($file_info['extension'])) {
-			case 'avi':
-			case 'flv':
-			case 'mov':
-			case 'mp4':
-			case 'mpg':
-			case 'mpeg':
-			case 'wmv':
-				$thumbnail_file_path = B_Util::changeExtension($thumbnail_file_path, 'jpg');
+				chmod(B_UPLOAD_THUMBDIR . $thumbnail_file_path, 0777);
+				$data[$this->thumbnail_image_path] = $thumbnail_file_path;
+
+				return true;
 			}
-
-			chmod(B_UPLOAD_THUMBDIR . $thumbnail_file_path, 0777);
-			$data[$this->thumbnail_image_path] = $thumbnail_file_path;
-
-			return true;
 		}
 
 		function getNodeById($node_id) {
