@@ -245,7 +245,7 @@
 				$file = B_Util::pathinfo($node->path);
 				if(rename(B_RESOURCE_EXTRACT_DIR . $node->path, $this->dir . $contents_id . '.' . $file['extension'])) {
 					chmod($this->dir . $contents_id . '.' . $file['extension'], 0777);
-					$this->createthumbnail($this->dir, $contents_id, $file['extension'], B_THUMB_PREFIX, B_THUMB_MAX_SIZE);
+					$this->createthumbnail($this->dir, $contents_id, $file['extension'], B_THUMB_PREFIX);
 				}
 			}
 
@@ -309,7 +309,7 @@
 
 			if($this->_move_uploaded_file($_FILES['Filedata']['tmp_name'], $this->dir . $contents_id . '.' . $file['extension'])) {
 				chmod($this->dir . $contents_id . '.' . $file['extension'], 0777);
-				$this->createthumbnail($this->dir, $contents_id, $file['extension'], B_THUMB_PREFIX, B_THUMB_MAX_SIZE);
+				$this->createthumbnail($this->dir, $contents_id, $file['extension'], B_THUMB_PREFIX);
 				$this->removeCacheFile();
 			}
 			return $node_id;
@@ -518,149 +518,12 @@
 			return true;
 		}
 
-		function createthumbnail($dir, $file_name, $file_extension, $prefix, $max_size) {
+		function createthumbnail($dir, $file_name, $file_extension, $prefix) {
 			$source_file_path = $dir . $file_name . '.' . $file_extension;
-			switch(strtolower($file_extension)) {
-			case 'jpg':
-			case 'jpeg':
-				if(!function_exists('imagecreatefromjpeg')) return;
-				$image = @imagecreatefromjpeg($source_file_path);
-				break;
-
-			case 'gif':
-				if(!function_exists('imagecreatefromgif')) return;
-				$image = @imagecreatefromgif($source_file_path);
-				break;
-
-			case 'png':
-				if(!function_exists('imagecreatefrompng')) return;
-				$image = @imagecreatefrompng($source_file_path);
-				break;
-
-			case 'bmp':
-				$image = B_Util::imagecreatefrombmp($source_file_path);
-				break;
-
-			case 'avi':
-			case 'flv':
-			case 'mov':
-			case 'mp4':
-			case 'mpg':
-			case 'mpeg':
-			case 'wmv':
-				$source_file_path = $this->createMovieThumbnail($source_file_path);
-				if(!function_exists('imagecreatefromjpeg')) return;
-				$image = @imagecreatefromjpeg($source_file_path);
-				break;
-
-			default:
-				return;
-			}
-
-			$image_size = getimagesize($source_file_path);
-			$width = $image_size[0];
-			$height = $image_size[1];
-
-			if($width > $max_size) {
-				if($width > $height) {
-					$height = round($height * $max_size / $width);
-					$width = $max_size;
-				}
-				else {
-					$width = round($width * $max_size / $height);
-					$height = $max_size;
-				}
-			}
-			else if($height > $max_size) {
-				$width = round($width * $max_size / $height);
-				$height = $max_size;
-			}
-			if(!$width) $width=1;
-			if(!$height) $height=1;
-
-			$new_image = imagecreatetruecolor($width, $height);
-
-			switch(strtolower($file_extension)) {
-			case 'gif':
-				$trnprt_indx = imagecolortransparent($image);
-				if($trnprt_indx >= 0) {
-					$trnprt_color = imagecolorsforindex($image, $trnprt_indx);
-					$trnprt_indx = imagecolorallocate($new_image, $trnprt_color['red'], $trnprt_color['green'], $trnprt_color['blue']);
-					imagefill($new_image, 0, 0, $trnprt_indx);
-					imagecolortransparent($new_image, $trnprt_indx);
-
-				} 
-				break;
-
-			case 'png':
-				$trnprt_indx = imagecolortransparent($image);
-				if($trnprt_indx >= 0) {
-					$trnprt_color = imagecolorsforindex($image, $trnprt_indx);
-					$trnprt_indx = imagecolorallocate($new_image, $trnprt_color['red'], $trnprt_color['green'], $trnprt_color['blue']);
-					imagefill($new_image, 0, 0, $trnprt_indx);
-					imagecolortransparent($new_image, $trnprt_indx);
-
-				} 
-				imagealphablending($new_image, false);
-				$color = imagecolorallocatealpha($new_image, 0, 0, 0, 127);
-				imagefill($new_image, 0, 0, $color);
-				imagesavealpha($new_image, true);
-				break;
-			}
-
-			imagecopyresampled($new_image, $image, 0, 0, 0, 0, $width, $height, $image_size[0], $image_size[1]);
-
 			$thumbnail_file_path = $dir . $prefix . $file_name . '.' . $file_extension;
 
-			switch(strtolower($file_extension)) {
-			case 'jpg':
-			case 'jpeg':
-			case 'bmp':
-				imagejpeg($new_image, $thumbnail_file_path, 100);
-				break;
-
-			case 'gif':
-				imagegif($new_image, $thumbnail_file_path);
-				break;
-
-			case 'png':
-				imagepng($new_image, $thumbnail_file_path);
-				break;
-
-			case 'avi':
-			case 'flv':
-			case 'mov':
-			case 'mp4':
-			case 'mpg':
-			case 'mpeg':
-			case 'wmv':
-				$thumbnail_file_path = $dir . $prefix . $file_name . '.jpg';
-				imagejpeg($new_image, $thumbnail_file_path, 100);
-				unlink($source_file_path);
-				break;
-			}
+			B_Util::createthumbnail($source_file_path, $thumbnail_file_path, B_THUMB_MAX_SIZE);
 
 			chmod($thumbnail_file_path, 0777);
-		}
-
-		function createMovieThumbnail($filename) {
-			$ffmpeg = FFMPEG;
-			$output = B_RESOURCE_WORK_DIR . time() . 'tmp.jpg';
-			if(substr(PHP_OS, 0, 3) === 'WIN') {
-				$cmdline = "$ffmpeg -ss 3 -i $filename -f image2 -vframes 1 $output 2>&1";
-				$p = popen($cmdline, 'r');
-				if($p) {
-					$this->log->write(fread($p, 2096));
-					pclose($p);
-				}
-				else {
-					$this->log->write('error');
-				}
-			}
-			else {
-				$cmdline = "$ffmpeg -ss 3 -i $filename -f image2 -vframes 1 $output";
-				exec("$cmdline > /dev/null");
-			}
-			return $output;
 		}
 	}
