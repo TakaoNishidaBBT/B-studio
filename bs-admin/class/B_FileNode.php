@@ -492,8 +492,9 @@
 
 			// create thumbnail
 			if(B_Util::createthumbnail($this->fullpath, $thumbnail_file_path, B_THUMB_MAX_SIZE)) {
+				$info = B_Util::pathinfo($thumbnail_file_path);
 				chmod($thumbnail_file_path, 0777);
-				$data[$this->thumbnail_image_path] = $thumbnail_file_path;
+				$data[$this->thumbnail_image_path] = $info['basename'];
 
 				return true;
 			}
