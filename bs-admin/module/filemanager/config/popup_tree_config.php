@@ -88,7 +88,7 @@ $tree_config = array(
 						'name'			=> 'file_name',
 						'title'			=> __('File Name'),
 						'className'		=> 'file-name',
-						'sort_key'		=> 'node_name',
+						'sort_key'		=> 'file_name',
 					),
 					array(
 						'name'			=> 'update_datetime_t',

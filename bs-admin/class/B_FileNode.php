@@ -76,8 +76,6 @@
 				}
 			}
 
-			$this->sort('primary');
-
 			closedir($handle);
 		}
 
@@ -172,6 +170,9 @@
 			if(is_array($this->node)) {
 				if($this->sort_key) {
 					$this->sort();
+				}
+				else {
+					$this->sort('primary');
 				}
 				$disp_seq=0;
 				foreach(array_keys($this->node) as $key) {

@@ -94,9 +94,6 @@
 				// Set path
 				if($this->global_session[$this->session['relation']]['current_node'] != 'root') {
 					$this->path = $this->global_session[$this->session['relation']]['current_node'] . '/';
-					if(substr($this->path, 0, 1) == '/') {
-						$this->path = substr($this->path, 1);
-					}
 				}
 
 				// Get file info
@@ -176,7 +173,7 @@
 				else {
 					$status = move_uploaded_file($_FILES['Filedata']['tmp_name'], B_Util::getPath(B_UPLOAD_DIR, B_Util::getPath($this->path, $file['basename'])));
 					if($status) {
-						chmod(B_UPLOAD_DIR . $this->path . $file['basename'], 0777);
+						chmod(B_Util::getPath(B_UPLOAD_DIR, $this->path) . $file['basename'], 0777);
 						$this->removeThumbnail($this->path, $file['basename']);
 						$root = new B_FileNode(B_UPLOAD_DIR, 'root', null, null, 'all');
 						$this->refleshThumnailCache($root);
@@ -292,7 +289,7 @@
 		}
 
 		function removeThumbnail($path, $filename) {
-			$thumb = B_CURRENT_ROOT . B_UPLOAD_FILES . $path . B_THUMB_PREFIX . $filename;
+			$thumb = B_CURRENT_ROOT . B_Util::getPath(B_UPLOAD_FILES, $path) . B_THUMB_PREFIX . $filename;
 			if(file_exists(B_FILE_INFO_THUMB)) {
 				$serializedString = file_get_contents(B_FILE_INFO_THUMB);
 				$thumb_info = unserialize($serializedString);
