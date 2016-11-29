@@ -64,8 +64,6 @@
 			}
 		}
 
-		bframe.addEventListner(window, 'beforeunload' ,cleanUp);
-
 		function cleanUp() {
 			if(popup) popup.cleanUp();
 
@@ -76,7 +74,7 @@
 			}
 		}
 
-		this.cleanUp = cleanUp();
+		this.cleanUp = cleanUp;
 
 		this.createElementFromXml = function(data) {
 			element = _createElementFromXml(data);
