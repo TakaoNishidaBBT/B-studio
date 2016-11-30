@@ -216,7 +216,7 @@
 			// Get templates array
 			$this->getTemplates($this->contents['template_id']);
 
-			for($i=0 ; $i<count($this->templates) ; $i++) {
+			for($i=0; $i < count($this->templates); $i++) {
 				$this->start_html = $this->templates[$i]['start_html'] . $this->start_html;
 				$this->end_html.= $this->templates[$i]['end_html'];
 			}
@@ -245,7 +245,7 @@
 			$sql_org = str_replace('%TEMPLATE_NODE_VIEW%', B_DB_PREFIX . $this->template_node_view, $sql_org);
 			$sql_org = str_replace('%TEMPLATE_VIEW%', B_DB_PREFIX . $this->template_view, $sql_org);
 
-			for($i=0, $node_id = $template_node_id ; $node_id && $node_id != 'root' ; $node_id = $row['parent_node'], $i++) {
+			for($i=0, $node_id = $template_node_id; $node_id && $node_id != 'root'; $node_id = $row['parent_node'], $i++) {
 				$sql = str_replace('%NODE_ID%', $node_id, $sql_org);
 
 				$rs = $this->db->query($sql);
@@ -256,7 +256,7 @@
 		}
 
 		function setTemplateCssLink() {
-			for($i=count($this->templates)-1 ; $i>=0 ; $i--) {
+			for($i=count($this->templates)-1; $i >= 0; $i--) {
 				if($this->templates[$i]['css']) {
 					$this->html_header->appendProperty('css',
 						'<link rel="stylesheet" href="T' . $this->templates[$i]['contents_id'] . '.css" type="text/css" media="all" />');
@@ -265,7 +265,7 @@
 		}
 
 		function setTemplateExternalCss() {
-			for($i=count($this->templates)-1 ; $i>=0 ; $i--) {
+			for($i=count($this->templates)-1; $i >= 0; $i--) {
 				$this->setCss($this->templates[$i]['external_css']);
 			}
 		}
@@ -276,7 +276,7 @@
 		}
 
 		function setTemplateExternalScript() {
-			for($i=count($this->templates)-1 ; $i>=0 ; $i--) {
+			for($i=count($this->templates)-1; $i >= 0; $i--) {
 				$this->setScript($this->templates[$i]['external_js']);
 			}
 		}
@@ -287,7 +287,7 @@
 		}
 
 		function setTemplateHeaderElement() {
-			for($i=count($this->templates)-1 ; $i>=0 ; $i--) {
+			for($i=count($this->templates)-1; $i >= 0; $i--) {
 				$this->setHeaderElement($this->templates[$i]['header_element']);
 			}
 		}
@@ -349,13 +349,13 @@
 
 			$this->getContentsNodeForPreview($this->contents['node_id']);
 
-			for($i=count($this->contents_node), $level=0 ; $i>=0 ; $i--, $level++) {
+			for($i=count($this->contents_node), $level=0; $i >= 0; $i--, $level++) {
 				$this->createBreadCrumbs($this->contents_node[$i], $level);
 			}
 
 			$this->getTemplates($this->contents['template_id']);
 
-			for($i=0 ; $i<count($this->templates) ; $i++) {
+			for($i=0; $i < count($this->templates); $i++) {
 				$this->start_html = $this->templates[$i]['start_html'] . $this->start_html;
 				$this->end_html.= $this->templates[$i]['end_html'];
 			}
@@ -402,13 +402,13 @@
 
 			$this->getContentsNodeForPreview($this->contents['node_id']);
 
-			for($i=count($this->contents_node), $level=0 ; $i>=0 ; $i--, $level++) {
+			for($i=count($this->contents_node), $level=0; $i >= 0; $i--, $level++) {
 				$this->createBreadCrumbs($this->contents_node[$i], $level);
 			}
 
 			$this->getTemplates($this->contents['template_id']);
 
-			for($i=0 ; $i<count($this->templates) ; $i++) {
+			for($i=0; $i < count($this->templates); $i++) {
 				$this->start_html = $this->templates[$i]['start_html'] . $this->start_html;
 				$this->end_html.= $this->templates[$i]['end_html'];
 			}
@@ -454,7 +454,7 @@
 
 			$sql_org = str_replace('%CONETNTS_NODE_VIEW%', B_DB_PREFIX . $this->node_view, $sql_org);
 
-			for($i=0, $node_id = $this->db->real_escape_string($contents_node_id) ; $node_id && $node_id != 'root' ; $node_id = $row['parent_node'], $i++) {
+			for($i=0, $node_id = $this->db->real_escape_string($contents_node_id); $node_id && $node_id != 'root'; $node_id = $row['parent_node'], $i++) {
 				$sql = str_replace('%NODE_ID%', $node_id, $sql_org);
 
 				$rs = $this->db->query($sql);
@@ -485,7 +485,7 @@
 
 			$this->getTemplates($row['parent_node']);
 
-			for($i=0 ; $i<count($this->templates) ; $i++) {
+			for($i=0; $i < count($this->templates); $i++) {
 				$start_html = $this->templates[$i]['start_html'] . $start_html;
 				$end_html.= $this->templates[$i]['end_html'];
 			}
