@@ -1,5 +1,5 @@
 <body>
-	<div id="header"><h2 class="settings"><?php echo __('Basic settings'); ?></h2></div>
+	<div id="header"><h2 class="settings"><?php echo __('Basic Settings'); ?></h2></div>
 	<?php
 		if($this->action_message) {
 			echo '<span class="error-message">' . $this->action_message . '</span>' . "\n";

@@ -61,7 +61,7 @@ $menu_config = array(
 						'context_menu'		=>
 						array(
 							array(
-								'menu'		=> __('Resource manager'),
+								'menu'		=> __('Resource Manager'),
 								'param'		=> DISPATCH_URL . '&module=resource&page=tree,main',
 								'func'		=> 'openUrl',
 							),
@@ -110,7 +110,7 @@ $menu_config = array(
 								'func'		=> 'openUrl',
 							),
 							array(
-								'menu'		=> __('File manager'),
+								'menu'		=> __('File Manager'),
 								'param'		=> DISPATCH_URL . '&module=filemanager&page=tree,main',
 								'func'		=> 'openUrl',
 							),
@@ -139,7 +139,7 @@ $menu_config = array(
 						'context_menu'		=>
 						array(
 							array(
-								'menu'		=> __('Basic settings'),
+								'menu'		=> __('Basic Settings'),
 								'param'		=> DISPATCH_URL . '&module=settings&page=form&method=select,main',
 								'func'		=> 'openUrl',
 							),
@@ -154,7 +154,7 @@ $menu_config = array(
 								'func'		=> 'openUrl',
 							),
 							array(
-								'menu'		=> __('Site admin'),
+								'menu'		=> __('Site Admin'),
 								'param'		=> DISPATCH_URL . '&module=siteadmin&page=form&method=select,main',
 								'func'		=> 'openUrl',
 							),
@@ -183,7 +183,7 @@ $menu_config = array(
 						'context_menu'		=>
 						array(
 							array(
-								'menu'		=> __('Basic settings'),
+								'menu'		=> __('Basic Settings'),
 								'param'		=> DISPATCH_URL . '&module=settings&page=form&method=select,main',
 								'func'		=> 'openUrl',
 							),
@@ -222,7 +222,7 @@ $menu_config = array(
 						'context_menu'		=>
 						array(
 							array(
-								'menu'		=> __('Basic settings'),
+								'menu'		=> __('Basic Settings'),
 								'param'		=> DISPATCH_URL . '&module=settings&page=form&method=select,main',
 								'func'		=> 'openUrl',
 							),
