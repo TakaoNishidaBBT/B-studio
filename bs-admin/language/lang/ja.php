@@ -143,7 +143,7 @@
 
 		// Contents
 		'HTML'							=> 'HTML',
-		'WYSWYG'						=> 'ビジュアル',
+		'Visual'						=> 'ビジュアル',
 		'CSS'							=> 'CSS',
 		'PHP'							=> 'PHP',
 		'Settings'						=> '設定',

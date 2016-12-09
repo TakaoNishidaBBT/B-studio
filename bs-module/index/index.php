@@ -67,11 +67,11 @@
 
 			if(!$this->contents_node) {
 				unset($this->breadcrumbs);		// Unset bread crumbs
-				$url_array = explode('/', 'notfound.html');
+				$url_array = explode('/', '404.html');
 				$this->contents_node = $this->getContentsNode($url_array);
 				$this->http_status = '404';
 			}
-			if($this->url == 'notfound.html') {
+			if($this->url == '404.html') {
 				$this->http_status = '404';
 			}
 
@@ -644,7 +644,7 @@
 	}
 
 	function notfound() {
-		$_REQUEST['url'] = 'notfound.html';
+		$_REQUEST['url'] = '404.html';
 		unset($_POST['method']);
 		chdir(B_DOC_ROOT . B_CURRENT_ROOT);
 		require('./bs-controller/controller.php');

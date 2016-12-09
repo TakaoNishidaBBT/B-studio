@@ -114,7 +114,7 @@ $tab_control_config = array(
 		'end_html'			=> '</li>',
 		'link'				=> 'visual',
 		'special_html'		=> 'class="bframe_tab" onclick="bframe.inline.submit(\'F1\', \'' . B_SITE_BASE . 'index.php' . '\', \'inline\', \'inline_frame\'); return false;"',
-		'value'				=> __('WYSWYG'),
+		'value'				=> __('Visual'),
 	),
 	array(
 		'name'				=> 'css_editor_index',

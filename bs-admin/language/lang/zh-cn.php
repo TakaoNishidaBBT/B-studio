@@ -143,7 +143,7 @@
 
 		// Contents
 		'HTML'							=> 'HTML',
-		'WYSWYG'						=> '外观',
+		'Visual'						=> '外观',
 		'CSS'							=> 'CSS',
 		'PHP'							=> 'PHP',
 		'Settings'						=> '设置',
