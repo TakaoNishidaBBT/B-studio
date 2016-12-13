@@ -11,7 +11,6 @@
 
 	// CHARSET
 	define('B_CHARSET', 'UTF-8');
-	mb_internal_encoding(B_CHARSET);
 
 	// Start session
 	require_once('../bs-admin/class/B_Session.php');
@@ -41,18 +40,13 @@
 	define('LANG', 'en');
 	if(!$_SESSION['language']) $_SESSION['language'] = LANG;
 
-	if($_POST['action'] == 'select-language') {
+	if($_POST['action'] == 'select-language' && function_exists('mb_internal_encoding')) {
 		$_SESSION['language'] = $_POST['language'];
 		$_SESSION['install_confirm'] = false;
 	}
 
 	// Language file
 	require_once('../bs-admin/language/language.php');
-
-	if($_SESSION['language'] != 'en' and !function_exists('mb_internal_encoding')) {
-		echo __('Please enable mbstring module');
-		exit;
-	}
 
 	// ffmpeg
 	if(substr(PHP_OS, 0, 3) === 'WIN') {
@@ -98,8 +92,12 @@
 	}
 
 	// Set value to language selectbox
-	$select_language->setValue(array('language' => $_SESSION['language']));
-
+	if(function_exists('mb_internal_encoding')) {
+		$select_language->setValue(array('language' => $_SESSION['language']));
+	}
+	else {
+		$error_message = __('Please enable mbstring module');
+	}
 	if(!session_save_path()) {
 		$error_message = __('Please set session.save_path');
 	}

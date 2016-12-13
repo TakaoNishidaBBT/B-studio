@@ -448,11 +448,11 @@
 			}
 
 			// convert sigle byte to multi byte
-			$value = mb_convert_kana($value, 'KV');
+			if(function_exists('mb_convert_kana')) $value = mb_convert_kana($value, 'KV');
 
 			// convert
 			if($this->convert) {
-				$value = mb_convert_kana($value, $this->convert);
+				if(function_exists('mb_convert_kana')) $value = mb_convert_kana($value, $this->convert);
 			}
 			if($this->convert_text) {
 				$value = $this->convert_text($value, $this->convert_text);
@@ -465,9 +465,11 @@
 		}
 
 		function mb_trim($str) {
-			$s = mb_convert_kana(' ', 'S');
-			$expression = '/^[\s' . $s . ']*(.*?)[\s' . $s . ']*$/u';
-			$str = preg_replace($expression, '\1', $str);
+			if(function_exists('mb_convert_kana')) {
+				$s = mb_convert_kana(' ', 'S');
+				$expression = '/^[\s' . $s . ']*(.*?)[\s' . $s . ']*$/u';
+				$str = preg_replace($expression, '\1', $str);
+			}
 			return $str;
 		}
 
