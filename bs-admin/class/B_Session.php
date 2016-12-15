@@ -13,7 +13,7 @@
 		function start($limiter, $name, $path, $secure=false) {
 			session_cache_limiter($limiter);
 			session_name($name);
-			session_set_cookie_params(0, $path, null, $secure);
+			session_set_cookie_params(0, $path, null, $secure, true);
 			session_start();
 		}
 
