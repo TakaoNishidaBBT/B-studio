@@ -80,10 +80,10 @@
 				$this->setTemplateExternalCss();
 				$this->setTemplateExternalScript();
 				$this->setTemplateHeaderElement();
+				$this->setTemplateCssLink();
 				$this->setCss($this->contents['external_css']);
 				$this->setScript($this->contents['external_js']);
 				$this->setHeaderElement($this->contents['header_element']);
-				$this->setTemplateCssLink();
 
 				if($this->contents['css']) {
 					$this->html_header->appendProperty('css',
@@ -414,12 +414,13 @@
 			}
 
 			$this->innerHTML = $this->contents['html1'];
-			$this->setTemplateExternalScript();
 			$this->setTemplateExternalCss();
+			$this->setTemplateExternalScript();
 			$this->setTemplateHeaderElement();
 			$this->setTemplateCssLink();
-			$this->setScript($this->contents['external_js']);
 			$this->setCss($this->contents['external_css']);
+			$this->setScript($this->contents['external_js']);
+			$this->setHeaderElement($this->contents['header_element']);
 
 			if($this->contents['css']) {
 				$this->html_header->appendProperty('css', '<style>' . $this->contents['css'] . '</style>');
