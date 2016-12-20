@@ -393,8 +393,6 @@
 					context_menu.show();
 				}
 			}
-			bframe.addEventListener(document, 'DOMMouseScroll', bframe.cancelEvent);
-			bframe.addEventListener(document, 'mousewheel', bframe.cancelEvent);
 
 			trash_context_menu.hide();
 			return false;
@@ -438,8 +436,6 @@
 				trash_context_menu.positionAbsolute(position);
 				trash_context_menu.show();
 			}
-			bframe.addEventListener(document, 'DOMMouseScroll', bframe.cancelEvent);
-			bframe.addEventListener(document, 'mousewheel', bframe.cancelEvent);
 			context_menu.hide();
 
 			return false;
@@ -542,9 +538,6 @@
 
 		function hideContextMenu(event){
 			if(!context_menu || !document || typeof bframe == 'undefined' || !bframe) return;
-
-			bframe.removeEventListener(document, 'DOMMouseScroll', bframe.cancelEvent);
-			bframe.removeEventListener(document, 'mousewheel', bframe.cancelEvent);
 
 			context_menu.hide();
 			trash_context_menu.hide();
