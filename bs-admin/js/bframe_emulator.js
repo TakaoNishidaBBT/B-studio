@@ -4,7 +4,7 @@
  *
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
-	bframe.addEventListner(window, 'load' , bframeDeviceEmultorInit);
+	bframe.addEventListener(window, 'load' , bframeDeviceEmultorInit);
 
 	function bframeDeviceEmultorInit() {
 		var div = document.getElementsByTagName('div');
@@ -56,7 +56,7 @@
 			var a = document.createElement('a');
 			a.title = title;
 			if(func) {
-				bframe.addEventListner(a, 'mousedown',func);
+				bframe.addEventListener(a, 'mousedown',func);
 			}
 			li.appendChild(a);
 			img = document.createElement('img');

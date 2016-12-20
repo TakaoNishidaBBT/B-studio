@@ -4,7 +4,7 @@
  *
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
-	bframe.addEventListner(window, 'load' , bframeSelectBoxInit);
+	bframe.addEventListener(window, 'load' , bframeSelectBoxInit);
 
 	function bframeSelectBoxInit() {
 		var sc = new bframe.selectbox_container();
@@ -100,14 +100,14 @@
 
 		function setEventHandler() {
 			// set event handller
-			bframe.addEventListnerAllFrames(top, 'load', hidePullDownMenuAllFrames);
-			bframe.addEventListnerAllFrames(top, 'mousedown', hidePullDownMenu);
-			bframe.addEventListnerAllFrames(top, 'keydown', keydown);
+			bframe.addEventListenerAllFrames(top, 'load', hidePullDownMenuAllFrames);
+			bframe.addEventListenerAllFrames(top, 'mousedown', hidePullDownMenu);
+			bframe.addEventListenerAllFrames(top, 'keydown', keydown);
 		}
 
 		function hidePullDownMenuAllFrames(event) {
-			bframe.addEventListnerAllFrames(top, 'mousedown', hidePullDownMenu);
-			bframe.addEventListnerAllFrames(top, 'load', hidePullDownMenuAllFrames);
+			bframe.addEventListenerAllFrames(top, 'mousedown', hidePullDownMenu);
+			bframe.addEventListenerAllFrames(top, 'load', hidePullDownMenuAllFrames);
 		}
 
 		function setContextMenu() {
@@ -147,10 +147,10 @@
 			var border = parseInt(border_left_width) + parseInt(border_right_width);
 			selectbox.style.width = (context_menu.getRealWidth() - (padding + border)) + 'px';
 
-			bframe.addEventListner(target, 'change', onchange);
-			bframe.addEventListner(selectbox, 'focus', onfocus);
-			bframe.addEventListner(selectbox, 'blur', onblur);
-			bframe.addEventListner(selectbox, 'mousedown', showContextMenu);
+			bframe.addEventListener(target, 'change', onchange);
+			bframe.addEventListener(selectbox, 'focus', onfocus);
+			bframe.addEventListener(selectbox, 'blur', onblur);
+			bframe.addEventListener(selectbox, 'mousedown', showContextMenu);
 		}
 
 		function onfocus(event) {
@@ -181,7 +181,7 @@
 			context_menu.positionAbsolute(position);
 			context_menu.show();
 			context_menu.select(target.selectedIndex);
-			bframe.addEventListner(document, 'mousewheel', bframe.cancelEvent);
+			bframe.addEventListener(document, 'mousewheel', bframe.cancelEvent);
 			selectbox.className+= ' opened';
 			opened = true;
 			selectbox.focus();

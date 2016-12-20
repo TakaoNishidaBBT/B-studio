@@ -4,7 +4,7 @@
  *
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
-	bframe.addEventListner(window, 'load' , bframeInlineEditorInit);
+	bframe.addEventListener(window, 'load' , bframeInlineEditorInit);
 
 	CKEDITOR.disableAutoInline = true;
 
@@ -144,7 +144,7 @@
 				}
 			});
 
-			bframe.addEventListner(window, 'unload', cleanUp);
+			bframe.addEventListener(window, 'unload', cleanUp);
 		}
 
 		function onblurEditor() {

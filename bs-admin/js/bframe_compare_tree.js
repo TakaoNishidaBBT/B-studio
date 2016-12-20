@@ -4,7 +4,7 @@
  *
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
-	bframe.addEventListner(window, 'load' , bframeCompareTreeInit);
+	bframe.addEventListener(window, 'load' , bframeCompareTreeInit);
 
 	function bframeCompareTreeInit(){
 		var tc = new bframe.compare_tree_container();

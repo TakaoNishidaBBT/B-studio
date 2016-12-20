@@ -4,7 +4,7 @@
  *
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
-	bframe.addEventListner(window, 'load' , bframeCalendarInit);
+	bframe.addEventListener(window, 'load' , bframeCalendarInit);
 
 	function bframeCalendarInit() {
 		var cc = new bframe.calendar_container();
@@ -78,8 +78,8 @@
 
 		var target;
 
-		bframe.addEventListner(target, 'click' , show);
-		bframe.addEventListnerAllFrames(top, 'click', hide);
+		bframe.addEventListener(target, 'click' , show);
+		bframe.addEventListenerAllFrames(top, 'click', hide);
 
 		init();
 

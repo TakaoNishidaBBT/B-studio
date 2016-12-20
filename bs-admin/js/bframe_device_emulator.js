@@ -4,7 +4,7 @@
  *
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
-	bframe.addEventListner(window, 'load' , deviceEmulator);
+	bframe.addEventListener(window, 'load' , deviceEmulator);
 
 	// -------------------------------------------------------------------------
 	// class bframe.emu

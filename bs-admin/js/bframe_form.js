@@ -4,7 +4,7 @@
  *
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
-	bframe.addEventListner(window, 'load' ,bframeFormInit);
+	bframe.addEventListener(window, 'load' ,bframeFormInit);
 
 	function bframeFormInit() {
 		var table = document.getElementsByTagName('table');
@@ -195,14 +195,14 @@
 		function setControl() {
 			if(property.control) {
 				up_control = document.getElementById(property.control.up);
-				bframe.addEventListner(up_control, 'click', clickUpButton);
+				bframe.addEventListener(up_control, 'click', clickUpButton);
 
 				down_control = document.getElementById(property.control.down);
-				bframe.addEventListner(down_control, 'click', clickDownButton);
+				bframe.addEventListener(down_control, 'click', clickDownButton);
 
 				if(_isIE) {
-					bframe.addEventListner(up_control, 'dblclick', clickUpButton);
-					bframe.addEventListner(down_control, 'dblclick', clickDownButton);
+					bframe.addEventListener(up_control, 'dblclick', clickUpButton);
+					bframe.addEventListener(down_control, 'dblclick', clickDownButton);
 				}
 			}
 		}
@@ -233,7 +233,7 @@
 				tr[i].oncontextmenu = showContextMenu;
 				tr[i].onclick = onClick;
 			}
-			bframe.addEventListner(document, "click", hideContextMenu);
+			bframe.addEventListener(document, "click", hideContextMenu);
 		}
 
 		function onClick(event){
@@ -253,22 +253,22 @@
 						property_pane.appendChild(clone);
 					}
 
-					addEventListnerAllEditableElement(clone, 'input', 'blur', synchro);
-					addEventListnerAllEditableElement(clone, 'input', 'click', synchro);
-					addEventListnerAllEditableElement(clone, 'input', 'change', changeFieldValue);
-					addEventListnerAllEditableElement(clone, 'textarea', 'change', changeFieldValue);
-					addEventListnerAllEditableElement(clone, 'select', 'change', selectFieldType);
+					addEventListenerAllEditableElement(clone, 'input', 'blur', synchro);
+					addEventListenerAllEditableElement(clone, 'input', 'click', synchro);
+					addEventListenerAllEditableElement(clone, 'input', 'change', changeFieldValue);
+					addEventListenerAllEditableElement(clone, 'textarea', 'change', changeFieldValue);
+					addEventListenerAllEditableElement(clone, 'select', 'change', selectFieldType);
 				}
 			}
 		}
 
-		function addEventListnerAllEditableElement(node, type, event, func) {
+		function addEventListenerAllEditableElement(node, type, event, func) {
 			if(node.tagName && node.tagName.toLowerCase() == type) {
-				bframe.addEventListner(node, event, func);
+				bframe.addEventListener(node, event, func);
 			}
 
 			for(var i=0; i<node.childNodes.length; i++) {
-				addEventListnerAllEditableElement(node.childNodes[i], type, event, func);
+				addEventListenerAllEditableElement(node.childNodes[i], type, event, func);
 			}
 		}
 
@@ -349,7 +349,7 @@
 				context_menu.positionAbsolute(position);
 				context_menu.show();
 			}
-			bframe.addEventListner(document, 'mousewheel', cancelEvent);
+			bframe.addEventListener(document, 'mousewheel', cancelEvent);
 			selectRow(event);
 
 			return false;

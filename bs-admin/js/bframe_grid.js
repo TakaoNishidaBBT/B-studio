@@ -4,7 +4,7 @@
  *
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
-	bframe.addEventListner(window, 'load' ,bframeGridInit);
+	bframe.addEventListener(window, 'load' ,bframeGridInit);
 
 	function bframeGridInit(){
 		var table = document.getElementsByTagName('table');
@@ -53,7 +53,7 @@
 			target.rows[i].ondblclick = selectRow;
 		}
 
-		bframe.addEventListner(document, 'click', cleanUp);
+		bframe.addEventListener(document, 'click', cleanUp);
 
 		function cleanUp() {
 			hideContextMenu();
@@ -111,14 +111,14 @@
 		function setControl() {
 			if(property.control) {
 				up_control = document.getElementById(property.control.up);
-				bframe.addEventListner(up_control, 'click', clickUpButton);
+				bframe.addEventListener(up_control, 'click', clickUpButton);
 
 				down_control = document.getElementById(property.control.down);
-				bframe.addEventListner(down_control, 'click', clickDownButton);
+				bframe.addEventListener(down_control, 'click', clickDownButton);
 
 				if(_isIE) {
-					bframe.addEventListner(up_control, 'dblclick', clickUpButton);
-					bframe.addEventListner(down_control, 'dblclick', clickDownButton);
+					bframe.addEventListener(up_control, 'dblclick', clickUpButton);
+					bframe.addEventListener(down_control, 'dblclick', clickDownButton);
 				}
 			}
 		}
@@ -132,7 +132,7 @@
 					var current_td = current_tr.cells[j];
 					for(var k=0; k < current_td.childNodes.length; k++) {
 						if(current_td.childNodes[k].tagName && current_td.childNodes[k].tagName.toLowerCase() == 'input') {
-							bframe.addEventListner(current_td.childNodes[k], 'keydown', itemListonkeydown);
+							bframe.addEventListener(current_td.childNodes[k], 'keydown', itemListonkeydown);
 						}
 					}
 				}
@@ -149,7 +149,7 @@
 				context_menu.positionAbsolute(position);
 				context_menu.show();
 			}
-			bframe.addEventListner(document, 'mousewheel', cancelEvent);
+			bframe.addEventListener(document, 'mousewheel', cancelEvent);
 			selectRow(event);
 
 			return false;
@@ -377,7 +377,7 @@
 					if(newTD.childNodes[j].id == property.error_message_id) {
 						newTD.removeChild(newTD.childNodes[j]);
 					}
-					bframe.addEventListner(newTD.childNodes[j], 'keydown', itemListonkeydown);
+					bframe.addEventListener(newTD.childNodes[j], 'keydown', itemListonkeydown);
 				}
 			}
 			return newTR;

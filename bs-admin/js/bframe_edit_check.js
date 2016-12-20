@@ -4,7 +4,7 @@
  *
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
-	bframe.addEventListner(window, 'load', bframeEditCheckInit);
+	bframe.addEventListener(window, 'load', bframeEditCheckInit);
 
 	function bframeEditCheckInit(){
 		bframe.editCheck_handler.init();
@@ -74,7 +74,7 @@
 
 			for(var i=0; i < obj.length; i++) {
 				if(bframe.checkClassName('no-check', obj[i])) continue;
-				bframe.addEventListner(obj[i], 'change', setEditFlag);
+				bframe.addEventListener(obj[i], 'change', setEditFlag);
 			}
 		}
 

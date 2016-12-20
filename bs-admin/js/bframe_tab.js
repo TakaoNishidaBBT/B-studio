@@ -4,7 +4,7 @@
  *
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
-	bframe.addEventListner(window, 'load' , bframeTabInit);
+	bframe.addEventListener(window, 'load' , bframeTabInit);
 
 	function bframeTabInit() {
 		var tc = new bframe.tab_container();
@@ -69,7 +69,7 @@
 			visible = false;
 		}
 
-		bframe.addEventListner(self, 'click', tc.clickTab);
+		bframe.addEventListener(self, 'click', tc.clickTab);
 
 		if(target.style.display != 'none') {
 			bframe.appendClass('selected', self);

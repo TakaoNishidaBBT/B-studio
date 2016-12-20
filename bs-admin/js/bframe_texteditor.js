@@ -4,7 +4,7 @@
  *
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
-	bframe.addEventListner(window, 'load' , bframeTextEditorInit);
+	bframe.addEventListener(window, 'load' , bframeTextEditorInit);
 
 	function bframeTextEditorInit(){
 		var ta = document.getElementsByTagName('textarea');
@@ -82,7 +82,7 @@
 			var a = document.createElement('a');
 			a.title = title;
 			if(func) {
-				bframe.addEventListner(a, 'mousedown',func);
+				bframe.addEventListener(a, 'mousedown',func);
 			}
 			li.appendChild(a);
 			img = document.createElement('img');
@@ -146,9 +146,9 @@
 
 			target.style.display = 'none';
 
-			bframe.addEventListner(parent,				'focus',	onFocus);
-			bframe.addEventListner(parent.parentNode,	'focus',	onFocus);
-			bframe.addEventListner(target,				'change',	updateEditor);
+			bframe.addEventListener(parent,				'focus',	onFocus);
+			bframe.addEventListener(parent.parentNode,	'focus',	onFocus);
+			bframe.addEventListener(target,				'change',	updateEditor);
 
 			bframe.resize_handler.registerCallBackFunction(onFocus);
 

@@ -19,7 +19,7 @@
 <script src="js/bframe_effect.js" type="text/javascript"></script>
 <script src="js/bframe_modal_window.js" type="text/javascript"></script>
 <title><?php echo $this->title ?></title></head>
-<body onload="bframe.addEventListner(document, 'mousewheel', bframe.cancelEvent)">
+<body onload="bframe.addEventListener(document, 'mousewheel', bframe.cancelEvent)">
 	<script type="text/javascript">if(window != top) top.location.href='.'</script>
 	<div id="title-header">
 		<h1><?php echo $this->site_title ?></h1>

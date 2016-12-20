@@ -4,7 +4,7 @@
  *
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
-	bframe.addEventListner(window, 'load' , bframeComparePaneInit);
+	bframe.addEventListener(window, 'load' , bframeComparePaneInit);
 
 	function bframeComparePaneInit(){
 		var pc = new bframe.compare_pane_container();
@@ -70,8 +70,8 @@
 			display_thumbnail = document.getElementById(property.display_mode.thumbnail.id);
 			display_detail = document.getElementById(property.display_mode.detail.id);
 
-			bframe.addEventListner(display_thumbnail, 'click', display_thumbnail_mode);
-			bframe.addEventListner(display_detail, 'click', display_detail_mode);
+			bframe.addEventListener(display_thumbnail, 'click', display_thumbnail_mode);
+			bframe.addEventListener(display_detail, 'click', display_detail_mode);
 			display_mode = property.display_mode.default;
 
 			if(display_mode == 'detail') {

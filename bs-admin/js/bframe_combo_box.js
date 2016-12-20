@@ -4,7 +4,7 @@
  *
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
-	bframe.addEventListner(window, 'load' ,bframeComboBoxInit);
+	bframe.addEventListener(window, 'load' ,bframeComboBoxInit);
 
 	function bframeComboBoxInit(){
 		var input = document.getElementsByTagName('img');
@@ -49,8 +49,8 @@
 
 		target.style.cursor = 'pointer';
 
-		bframe.addEventListner(document, 'click' ,hide);
-		bframe.addEventListner(top.document, 'click' ,hide);
+		bframe.addEventListener(document, 'click' ,hide);
+		bframe.addEventListener(top.document, 'click' ,hide);
 
 		// auto complete off
 		target.setAttribute('autocomplete', 'off');

@@ -483,10 +483,10 @@
 		e.preventDefault ? e.preventDefault() : window.event.returnValue = false;
 	}
 
-	bframe.addEventListner = function(obj, event, func) {
+	bframe.addEventListener = function(obj, event, func, capture) {
 		if(obj.addEventListener) {
-			obj.removeEventListener(event, func, false);
-			obj.addEventListener(event, func, false);
+			obj.removeEventListener(event, func, capture);
+			obj.addEventListener(event, func, capture);
 		}
 		else if(obj.attachEvent) {
 			obj.detachEvent('on'+event, func);
@@ -494,16 +494,16 @@
 		}
 	}
 
-	bframe.removeEventListner = function(obj, event, func) {
+	bframe.removeEventListener = function(obj, event, func, capture) {
 		if(obj.removeEventListener) {
-			obj.removeEventListener(event, func, false);
+			obj.removeEventListener(event, func, capture);
 		}
 		else if(obj.attachEvent) {
 			obj.detachEvent('on'+event, func);
 		}
 	}
 
-	bframe.addEventListnerAllFrames = function(obj, event, func) {
+	bframe.addEventListenerAllFrames = function(obj, event, func, capture) {
 		try {
 			if(!obj) return;
 
@@ -511,7 +511,7 @@
 				if(obj.parent && obj.name) {
 					var iframe = obj.parent.document.getElementsByName(obj.name);
 					if(iframe[0]) {
-						bframe.addEventListner(iframe[0], event, func);
+						bframe.addEventListener(iframe[0], event, func, capture);
 						if(document.all) {
 							iframe[0].onreadystatechange = bframe.onReadyStateChange;
 						}
@@ -523,34 +523,34 @@
 			}
 			else {
 				var doc = obj.contentDocument || obj.contentWindow || obj.document;
-				bframe.addEventListner(doc, event, func);
+				bframe.addEventListener(doc, event, func, capture);
 			}
 
 			for(var i=0;  i < obj.frames.length; i++) {
-				bframe.addEventListnerAllFrames(obj.frames[i], event, func);
+				bframe.addEventListenerAllFrames(obj.frames[i], event, func, capture);
 			}
 		}
 		catch(e) {
 		}
 	}
 
-	bframe.removeEventListnerAllFrames = function(obj, event, func) {
+	bframe.removeEventListenerAllFrames = function(obj, event, func, capture) {
 		try {
 			if(event.toLowerCase() == 'load') {
 				if(obj.parent && obj.name) {
 					var iframe = obj.parent.document.getElementsByName(obj.name);
 					if(iframe[0]) {
-						bframe.removeEventListner(iframe[0], event, func);
+						bframe.removeEventListener(iframe[0], event, func, capture);
 					}
 				}
 			}
 			else {
 				var doc = obj.contentDocument || obj.contentWindow || obj.document;
-				bframe.removeEventListner(doc, event, func);
+				bframe.removeEventListener(doc, event, func, capture);
 			}
 
-			for(var i=0;  i < obj.frames.length; i++) {
-				bframe.removeEventListnerAllFrames(obj.frames[i], event, func);
+			for(var i=0; i < obj.frames.length; i++) {
+				bframe.removeEventListenerAllFrames(obj.frames[i], event, func, capture);
 			}
 		}
 		catch(e) {

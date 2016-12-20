@@ -4,7 +4,7 @@
  *
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
-	bframe.addEventListner(window, 'load' , bframeModalWindowInit);
+	bframe.addEventListener(window, 'load' , bframeModalWindowInit);
 
 	function bframeModalWindowInit() {
 		if(!bframe.modalWindow) {
@@ -60,7 +60,7 @@
 		close.className = 'close';
 		close.style.zIndex = baseIndex + 5;
 		close.innerHTML = 'close';
-		bframe.addEventListner(close, 'click', deactivate);
+		bframe.addEventListener(close, 'click', deactivate);
 		title_bar.appendChild(close);
 
 		container.className = 'container';
@@ -87,7 +87,7 @@
 		}
 		container.appendChild(containerBody);
 
-		bframe.addEventListner(overlay, 'click', deactivate);
+		bframe.addEventListener(overlay, 'click', deactivate);
 
 		var drag_control = new dragControl();
 
@@ -313,11 +313,11 @@
 			drag_overlay.style.opacity = 0;
 			document.body.appendChild(drag_overlay);
 
-			bframe.addEventListner(window, 'mousemove', onMouseMove);
-			bframe.addEventListner(window, 'mouseup', onMouseUp);
-			bframe.addEventListner(drag_overlay, 'mousemove', dragging);
-			bframe.addEventListner(drag_overlay, 'mousemove', onMouseMove);
-			bframe.addEventListner(drag_overlay, 'mouseup', onMouseUp);
+			bframe.addEventListener(window, 'mousemove', onMouseMove);
+			bframe.addEventListener(window, 'mouseup', onMouseUp);
+			bframe.addEventListener(drag_overlay, 'mousemove', dragging);
+			bframe.addEventListener(drag_overlay, 'mousemove', onMouseMove);
+			bframe.addEventListener(drag_overlay, 'mouseup', onMouseUp);
 
 			this.dragStart = function(event) {
 				if(bframe.getButton(event) != 'L') return;

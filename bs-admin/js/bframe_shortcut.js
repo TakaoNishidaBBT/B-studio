@@ -4,7 +4,7 @@
  *
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
-	bframe.addEventListner(window, 'load' , bframeShortcutInit);
+	bframe.addEventListener(window, 'load' , bframeShortcutInit);
 
 	function bframeShortcutInit() {
 		var d = document.getElementsByTagName('div');
@@ -26,7 +26,7 @@
 		// register button
 		var register_button = document.getElementById('register');
 
-		bframe.addEventListner(target, 'keydown', keydown);
+		bframe.addEventListener(target, 'keydown', keydown);
 
 		function keydown(event) {
 			if(window.event) {

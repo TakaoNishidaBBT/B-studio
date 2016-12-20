@@ -4,7 +4,7 @@
  *
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
-	bframe.addEventListner(window, 'load' , bframeAdjustWindowInit);
+	bframe.addEventListener(window, 'load' , bframeAdjustWindowInit);
 
 	function bframeAdjustWindowInit() {
 		var i, aw, ap;
@@ -38,7 +38,7 @@
 			var offset = bframe.getFrameOffset(self.contentWindow, '');
 		}
 
-		bframe.addEventListner(target, 'load' , adjustWindow);
+		bframe.addEventListener(target, 'load' , adjustWindow);
 		bframe.resize_handler.registerCallBackFunction(adjustWindow);
 		bframe.resize_handler.onResize();
 
@@ -139,7 +139,7 @@
 		var timer;
 		var cb = [];
 
-		bframe.addEventListner(window, 'resize' , onResize);
+		bframe.addEventListener(window, 'resize' , onResize);
 
 		function onResize() {
 			if(resize_status) return;

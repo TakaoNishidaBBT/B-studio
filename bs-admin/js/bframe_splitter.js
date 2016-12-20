@@ -4,7 +4,7 @@
  *
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
-	bframe.addEventListner (window, 'load' , bframeSplitterInit);
+	bframe.addEventListener (window, 'load' , bframeSplitterInit);
 
 	function bframeSplitterInit(){
 		var div = document.getElementsByTagName('div');
@@ -65,31 +65,31 @@
 
 		document.body.appendChild(drag_overlay);
 
-		bframe.addEventListner(self, 'mousedown', start);
-		bframe.addEventListner(drag_overlay, 'mousemove', resize);
-		bframe.addEventListner(drag_overlay, 'mouseup', stop);
+		bframe.addEventListener(self, 'mousedown', start);
+		bframe.addEventListener(drag_overlay, 'mousemove', resize);
+		bframe.addEventListener(drag_overlay, 'mouseup', stop);
 
 		setEventHandler();
 
 		function setEventHandler() {
 			// set event handller
-			bframe.addEventListnerAllFrames(top, 'load', setEventHandlerAllFrames);
-			bframe.addEventListnerAllFrames(top, 'mousemove', resize);
-			bframe.addEventListnerAllFrames(top, 'mouseup', stop);
+			bframe.addEventListenerAllFrames(top, 'load', setEventHandlerAllFrames);
+			bframe.addEventListenerAllFrames(top, 'mousemove', resize);
+			bframe.addEventListenerAllFrames(top, 'mouseup', stop);
 		}
 
 		function setEventHandlerAllFrames() {
 			if(typeof bframe == 'undefined' || !bframe){
 				return;
 			}
-			bframe.addEventListnerAllFrames(top, 'mousemove', resize);
-			bframe.addEventListnerAllFrames(top, 'mouseup', stop);
+			bframe.addEventListenerAllFrames(top, 'mousemove', resize);
+			bframe.addEventListenerAllFrames(top, 'mouseup', stop);
 		}
 
 		function cleanUp() {
-			bframe.removeEventListnerAllFrames(top, 'load', setEventHandlerAllFrames);
-			bframe.removeEventListnerAllFrames(top, 'mousemove', resize);
-			bframe.removeEventListnerAllFrames(top, 'mouseup', stop);
+			bframe.removeEventListenerAllFrames(top, 'load', setEventHandlerAllFrames);
+			bframe.removeEventListenerAllFrames(top, 'mousemove', resize);
+			bframe.removeEventListenerAllFrames(top, 'mouseup', stop);
 
 			splitbar.cleanUp();
 		}

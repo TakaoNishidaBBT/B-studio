@@ -4,7 +4,7 @@
  *
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
-	bframe.addEventListner(window, 'load' , bframeUploaderInit);
+	bframe.addEventListener(window, 'load' , bframeUploaderInit);
 
 	function bframeUploaderInit(){
 		bframe_uploader = new bframe.uploader();

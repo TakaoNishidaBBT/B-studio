@@ -4,7 +4,7 @@
  *
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
-	bframe.addEventListner(window, 'load' , bframeContextMenuInit);
+	bframe.addEventListener(window, 'load' , bframeContextMenuInit);
 
 	function bframeContextMenuInit(){
 		bframe.context_menu = new bframe.contextMenu(2000);
@@ -562,8 +562,8 @@
 			popup.size(size);
 
 			if(!parent_menu && popup.visibility() != 'visible') {
-				bframe.addEventListnerAllFrames(top, 'DOMMouseScroll', bframe.cancelEvent);
-				bframe.addEventListnerAllFrames(top, 'mousewheel', bframe.cancelEvent);
+				bframe.addEventListenerAllFrames(top, 'DOMMouseScroll', bframe.cancelEvent);
+				bframe.addEventListenerAllFrames(top, 'mousewheel', bframe.cancelEvent);
 			}
 			popup.show();
 			opened = true;
@@ -577,8 +577,8 @@
 				submenu_open_index = -1;
 			}
 			if(!parent_menu && popup.visibility() == 'visible') {
-				bframe.removeEventListnerAllFrames(top, 'DOMMouseScroll', bframe.cancelEvent);
-				bframe.removeEventListnerAllFrames(top, 'mousewheel', bframe.cancelEvent);
+				bframe.removeEventListenerAllFrames(top, 'DOMMouseScroll', bframe.cancelEvent);
+				bframe.removeEventListenerAllFrames(top, 'mousewheel', bframe.cancelEvent);
 			}
 			popup.hide();
 			self.clearTimer();

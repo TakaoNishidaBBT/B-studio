@@ -4,7 +4,7 @@
  *
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
-	bframe.addEventListner(window, 'load' , bframeVisualEditorInit);
+	bframe.addEventListener(window, 'load' , bframeVisualEditorInit);
 
 	function bframeVisualEditorInit() {
 		var textarea = document.getElementsByTagName('textarea');
@@ -162,7 +162,7 @@
 							});
 
 							// for sychronization
-							bframe.addEventListner(target, 'change' ,applyValueToEditor);
+							bframe.addEventListener(target, 'change' ,applyValueToEditor);
 
 							// for submit
 							if(bframe.ajaxSubmit) {
@@ -222,7 +222,7 @@
 							});
 
 							// for sychronization
-							bframe.addEventListner(target, 'change' ,applyValueToEditor);
+							bframe.addEventListener(target, 'change' ,applyValueToEditor);
 
 							// for submit
 							if(bframe.ajaxSubmit) {
@@ -239,7 +239,7 @@
 				});
 			}
 
-			bframe.addEventListner(window, 'unload', cleanUp);
+			bframe.addEventListener(window, 'unload', cleanUp);
 		}
 
 		function onblurEditor() {

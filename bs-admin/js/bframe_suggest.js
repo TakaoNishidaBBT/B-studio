@@ -4,7 +4,7 @@
  *
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
-	bframe.addEventListner(window, 'load' , bframeSuggestInit);
+	bframe.addEventListener(window, 'load' , bframeSuggestInit);
 
 	function bframeSuggestInit() {
 		var input = document.getElementsByTagName('input');
@@ -58,8 +58,8 @@
 		target.onblur = stop;
 		target.onkeydown = onkeydown;
 
-		bframe.addEventListner(document, 'click', hide);
-		bframe.addEventListner(document, 'contextmenu', hide);
+		bframe.addEventListener(document, 'click', hide);
+		bframe.addEventListener(document, 'contextmenu', hide);
 
 		// auto complete off
 		target.setAttribute('autocomplete', 'off');

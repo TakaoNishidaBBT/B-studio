@@ -4,7 +4,7 @@
  *
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
-	bframe.addEventListner(window, 'load' , bframeProgressBarInit);
+	bframe.addEventListener(window, 'load' , bframeProgressBarInit);
 
 	function bframeProgressBarInit() {
 		var div = document.getElementsByTagName('span');

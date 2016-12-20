@@ -4,7 +4,7 @@
  *
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
-	bframe.addEventListner(window, 'load' , bframeCompareInit);
+	bframe.addEventListener(window, 'load' , bframeCompareInit);
 
 	function bframeCompareInit(){
 		var c = new bframe.compare();
@@ -26,9 +26,9 @@
 
 		showDiff();
 
-		bframe.addEventListner(split, 'click', showSideDiff);
-		bframe.addEventListner(unified, 'click', showLineDiff);
-		bframe.addEventListner(view_all, 'click', toggleViewAll);
+		bframe.addEventListener(split, 'click', showSideDiff);
+		bframe.addEventListener(unified, 'click', showLineDiff);
+		bframe.addEventListener(view_all, 'click', toggleViewAll);
 
 		function toggleViewAll(event) {
 			if(range.checked) {

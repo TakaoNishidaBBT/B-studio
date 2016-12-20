@@ -4,7 +4,7 @@
  *
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
-	bframe.addEventListner(window, 'load' , bframeMessageInit);
+	bframe.addEventListener(window, 'load' , bframeMessageInit);
 
 	function bframeMessageInit() {
 		bframe.message = new bframe.Message;
