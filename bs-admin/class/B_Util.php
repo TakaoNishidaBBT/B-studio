@@ -229,7 +229,7 @@
 				if(!function_exists('imagecreatefromjpeg')) return;
 				$image = @imagecreatefromjpeg($src);
 				// check rotate
-				$exif = exif_read_data($src);
+				$exif = @exif_read_data($src);
 				break;
 
 			case 'gif':

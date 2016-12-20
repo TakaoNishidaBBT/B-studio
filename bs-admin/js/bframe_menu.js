@@ -82,6 +82,8 @@
 
 		var mark_span;
 
+		var own_event;
+
 		this.hidePullDownMenu = hidePullDownMenu;
 		this.reload = init;
 		bframe.addEventListener(target, 'mousedown', showContextMenu);
@@ -160,9 +162,8 @@
 
 		function showContextMenu(event) {
 			if(bframe.getButton(event) != 'L') return;
-			bframe.stopPropagation(event);
+			bframe.cancelEvent(event);
 			if(context_menu.opened()) return false;
-
 			if(bframe.isObject(property)) {
 				menu_container.closeAll();
 				var position = bframe.getElementPosition(target);
@@ -173,10 +174,15 @@
 				context_menu.show();
 				bframe.addEventListener(document, 'mousewheel', bframe.cancelEvent);
 			}
+			own_event = true;
 			return false;
 		}
 
 		function hidePullDownMenu(event) {
+			if(own_event) {
+				own_event = false;
+				return;
+			}
 			if(document.detachEvent) {
 				document.detachEvent('onmousewheel', bframe.cancelEvent);
 			}

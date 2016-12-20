@@ -168,9 +168,11 @@
 
 		function setEventHandler() {
 			bframe.addEventListener(window, 'beforeunload', cleanUp);
+			bframe.addEventListener(window, 'resize', hideContextMenu);
 
 			// set event handller
 			bframe.addEventListenerAllFrames(top, 'load', hideContextMenuAllFrames);
+			bframe.addEventListenerAllFrames(top, 'mousedown', hideContextMenu);
 			bframe.addEventListenerAllFrames(top, 'click', hideContextMenu);
 			bframe.addEventListenerAllFrames(top, 'mouseup', drag_control.onMouseUp);
 			bframe.addEventListenerAllFrames(top, 'mousedown', saveName);
@@ -321,6 +323,7 @@
 			if(typeof bframe == 'undefined' || !bframe){
 				return;
 			}
+			bframe.addEventListenerAllFrames(top, 'mousedown', hideContextMenu);
 			bframe.addEventListenerAllFrames(top, 'click', hideContextMenu);
 			bframe.addEventListenerAllFrames(top, 'mouseup', drag_control.onMouseUp);
 			bframe.addEventListenerAllFrames(top, 'mousedown', saveName);
@@ -333,6 +336,7 @@
 			}
 			drag_control.cleanUp();
 			bframe.removeEventListenerAllFrames(top, 'load', hideContextMenuAllFrames);
+			bframe.removeEventListenerAllFrames(top, 'mousedown', hideContextMenu);
 			bframe.removeEventListenerAllFrames(top, 'click', hideContextMenu);
 			bframe.removeEventListenerAllFrames(top, 'mouseup', drag_control.onMouseUp);
 			bframe.removeEventListenerAllFrames(top, 'mousedown', saveName);

@@ -16,7 +16,7 @@
 	$dir = $url['dirname'] ? $url['dirname'] : '.';
 	$module = $url['filename'] ? $url['filename'] : 'index';
 	$page = $module . '.php';
-	$path = $dir . "/bs-module/" . $module;
+	$path = $dir . '/bs-module/' . $module;
 	$file_name = $path . '/' . $page;
 
 	if(file_exists($file_name)) {

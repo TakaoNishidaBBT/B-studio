@@ -159,7 +159,7 @@
 		if(file_exists($semaphore)) return;
 
 		// open and lock semaphore
-		$fp_semaphore = fopen($semaphore, 'w');
+		if(!$fp_semaphore = fopen($semaphore, 'x')) return;
 
 		require_once('./bs-admin/config/config.php');
 

@@ -48,7 +48,7 @@
 			if(file_exists($semaphore)) return;
 
 			// open semaphore for lock
-			$fp_semaphore = fopen($semaphore, 'w');
+			if(!$fp_semaphore = fopen($semaphore, 'x')) return;
 
 			// create serialized resource cache file
 			$node = new B_Node($this->db, B_RESOURCE_NODE_TABLE, $node_view, '', '', 'root', null, 'all', '');
@@ -68,7 +68,7 @@
 			if(file_exists(B_FILE_INFO_THUMB_SEMAPHORE)) return;
 
 			// open semaphore for lock
-			$fp_semaphore = fopen(B_FILE_INFO_THUMB_SEMAPHORE, 'w');
+			if(!$fp_semaphore = fopen(B_FILE_INFO_THUMB_SEMAPHORE, 'x')) return;
 
 			// set time limit to 2 minutes
 			set_time_limit(120);
