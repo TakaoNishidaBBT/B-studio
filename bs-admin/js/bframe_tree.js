@@ -4,7 +4,7 @@
  *
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
-	bframe.addEventListner(window, 'load', bframeTreeInit);
+	bframe.addEventListener(window, 'load', bframeTreeInit);
 
 	function bframeTreeInit() {
 		var div = document.getElementsByTagName('div');
@@ -139,8 +139,8 @@
 			display_thumbnail = document.getElementById(property.display_mode.thumbnail.id);
 			display_detail = document.getElementById(property.display_mode.detail.id);
 
-			bframe.addEventListner(display_thumbnail, 'click', display_thumbnail_mode);
-			bframe.addEventListner(display_detail, 'click', display_detail_mode);
+			bframe.addEventListener(display_thumbnail, 'click', display_thumbnail_mode);
+			bframe.addEventListener(display_detail, 'click', display_detail_mode);
 			display_mode = property.display_mode.default;
 			if(display_mode == 'detail') {
 				bframe.appendClass('current', display_detail);
@@ -167,14 +167,14 @@
 		}
 
 		function setEventHandler() {
-			bframe.addEventListner(window, 'beforeunload', cleanUp);
+			bframe.addEventListener(window, 'beforeunload', cleanUp);
 
 			// set event handller
-			bframe.addEventListnerAllFrames(top, 'load', hideContextMenuAllFrames);
-			bframe.addEventListnerAllFrames(top, 'click', hideContextMenu);
-			bframe.addEventListnerAllFrames(top, 'mouseup', drag_control.onMouseUp);
-			bframe.addEventListnerAllFrames(top, 'mousedown', saveName);
-			bframe.addEventListnerAllFrames(top, 'keydown', keydown);
+			bframe.addEventListenerAllFrames(top, 'load', hideContextMenuAllFrames);
+			bframe.addEventListenerAllFrames(top, 'click', hideContextMenu);
+			bframe.addEventListenerAllFrames(top, 'mouseup', drag_control.onMouseUp);
+			bframe.addEventListenerAllFrames(top, 'mousedown', saveName);
+			bframe.addEventListenerAllFrames(top, 'keydown', keydown);
 		}
 
 		function keydown(event) {
@@ -321,10 +321,10 @@
 			if(typeof bframe == 'undefined' || !bframe){
 				return;
 			}
-			bframe.addEventListnerAllFrames(top, 'click', hideContextMenu);
-			bframe.addEventListnerAllFrames(top, 'mouseup', drag_control.onMouseUp);
-			bframe.addEventListnerAllFrames(top, 'mousedown', saveName);
-			bframe.addEventListnerAllFrames(top, 'keydown', keydown);
+			bframe.addEventListenerAllFrames(top, 'click', hideContextMenu);
+			bframe.addEventListenerAllFrames(top, 'mouseup', drag_control.onMouseUp);
+			bframe.addEventListenerAllFrames(top, 'mousedown', saveName);
+			bframe.addEventListenerAllFrames(top, 'keydown', keydown);
 		}
 
 		function cleanUp() {
@@ -332,11 +332,11 @@
 				return;
 			}
 			drag_control.cleanUp();
-			bframe.removeEventListnerAllFrames(top, 'load', hideContextMenuAllFrames);
-			bframe.removeEventListnerAllFrames(top, 'click', hideContextMenu);
-			bframe.removeEventListnerAllFrames(top, 'mouseup', drag_control.onMouseUp);
-			bframe.removeEventListnerAllFrames(top, 'mousedown', saveName);
-			bframe.removeEventListnerAllFrames(top, 'keydown', keydown);
+			bframe.removeEventListenerAllFrames(top, 'load', hideContextMenuAllFrames);
+			bframe.removeEventListenerAllFrames(top, 'click', hideContextMenu);
+			bframe.removeEventListenerAllFrames(top, 'mouseup', drag_control.onMouseUp);
+			bframe.removeEventListenerAllFrames(top, 'mousedown', saveName);
+			bframe.removeEventListenerAllFrames(top, 'keydown', keydown);
 		}
 		this.cleanUp = cleanUp;
 
@@ -389,8 +389,8 @@
 					context_menu.show();
 				}
 			}
-			bframe.addEventListner(document, 'DOMMouseScroll', bframe.cancelEvent);
-			bframe.addEventListner(document, 'mousewheel', bframe.cancelEvent);
+			bframe.addEventListener(document, 'DOMMouseScroll', bframe.cancelEvent);
+			bframe.addEventListener(document, 'mousewheel', bframe.cancelEvent);
 
 			trash_context_menu.hide();
 			return false;
@@ -434,8 +434,8 @@
 				trash_context_menu.positionAbsolute(position);
 				trash_context_menu.show();
 			}
-			bframe.addEventListner(document, 'DOMMouseScroll', bframe.cancelEvent);
-			bframe.addEventListner(document, 'mousewheel', bframe.cancelEvent);
+			bframe.addEventListener(document, 'DOMMouseScroll', bframe.cancelEvent);
+			bframe.addEventListener(document, 'mousewheel', bframe.cancelEvent);
 			context_menu.hide();
 
 			return false;
@@ -539,8 +539,8 @@
 		function hideContextMenu(event){
 			if(!context_menu || !document || typeof bframe == 'undefined' || !bframe) return;
 
-			bframe.removeEventListner(document, 'DOMMouseScroll', bframe.cancelEvent);
-			bframe.removeEventListner(document, 'mousewheel', bframe.cancelEvent);
+			bframe.removeEventListener(document, 'DOMMouseScroll', bframe.cancelEvent);
+			bframe.removeEventListener(document, 'mousewheel', bframe.cancelEvent);
 
 			context_menu.hide();
 			trash_context_menu.hide();
@@ -2095,29 +2095,29 @@
 			}
 
 			function setEventHandler() {
-				bframe.addEventListner(window, 'beforeunload', cleanUp);
+				bframe.addEventListener(window, 'beforeunload', cleanUp);
 
 				// set event handller
-				bframe.addEventListnerAllFrames(top, 'load', setEventHandlerAllFrames);
-				bframe.addEventListnerAllFrames(top, 'mousemove', onMouseMove);
-				bframe.addEventListnerAllFrames(top, 'mouseup', onMouseUp);
+				bframe.addEventListenerAllFrames(top, 'load', setEventHandlerAllFrames);
+				bframe.addEventListenerAllFrames(top, 'mousemove', onMouseMove);
+				bframe.addEventListenerAllFrames(top, 'mouseup', onMouseUp);
 			}
 
 			function setEventHandlerAllFrames() {
 				if(typeof bframe == 'undefined' || !bframe){
 					return;
 				}
-				bframe.addEventListnerAllFrames(top, 'mousemove', onMouseMove);
-				bframe.addEventListnerAllFrames(top, 'mouseup', onMouseUp);
+				bframe.addEventListenerAllFrames(top, 'mousemove', onMouseMove);
+				bframe.addEventListenerAllFrames(top, 'mouseup', onMouseUp);
 			}
 
 			function cleanUp() {
 				if(typeof bframe == 'undefined' || !bframe){
 					return;
 				}
-				bframe.removeEventListnerAllFrames(top, 'load', setEventHandlerAllFrames);
-				bframe.removeEventListnerAllFrames(top, 'mousemove', onMouseMove);
-				bframe.removeEventListnerAllFrames(top, 'mouseup', onMouseUp);
+				bframe.removeEventListenerAllFrames(top, 'load', setEventHandlerAllFrames);
+				bframe.removeEventListenerAllFrames(top, 'mousemove', onMouseMove);
+				bframe.removeEventListenerAllFrames(top, 'mouseup', onMouseUp);
 			}
 
 			this.dragStart = function(event, node_id) {
@@ -3016,7 +3016,7 @@
 					fileProgressElement.className = 'progressContainer red';
 					fileProgressElement.childNodes[1].className = 'progressBarError';
 					fileProgressElement.childNodes[1].style.width = '';
-					bframe.addEventListner(fileProgressElement, 'click', clickErrorObject);
+					bframe.addEventListener(fileProgressElement, 'click', clickErrorObject);
 				}
 				this.setError = setError;
 
@@ -3033,16 +3033,16 @@
 					}
 					if(fileProgressWrapper) {
 						bframe.appendClass('fadeout2', fileProgressWrapper);
-						bframe.addEventListner(fileProgressWrapper, 'animationend', onAnimationEnd);
+						bframe.addEventListener(fileProgressWrapper, 'animationend', onAnimationEnd);
 					}
 					else {
 						if(fileProgressElement) {
 							fileProgressElement.className = 'progressContainer red fadeout2';
-							bframe.addEventListner(fileProgressElement, 'animationend', onAnimationEnd);
+							bframe.addEventListener(fileProgressElement, 'animationend', onAnimationEnd);
 						}
 						if(fileProgressTree) {
 							bframe.appendClass('fadeout2', fileProgressTree);
-							bframe.addEventListner(fileProgressTree, 'animationend', onAnimationEnd);
+							bframe.addEventListener(fileProgressTree, 'animationend', onAnimationEnd);
 						}
 					}
 				}
@@ -3060,16 +3060,16 @@
 					}
 					if(fileProgressWrapper) {
 						bframe.appendClass('fadeout', fileProgressWrapper);
-						bframe.addEventListner(fileProgressWrapper, 'animationend', onAnimationEnd);
+						bframe.addEventListener(fileProgressWrapper, 'animationend', onAnimationEnd);
 					}
 					else {
 						if(fileProgressElement) {
 							fileProgressElement.className = 'progressContainer cancelled fadeout';
-							bframe.addEventListner(fileProgressElement, 'animationend', onAnimationEnd);
+							bframe.addEventListener(fileProgressElement, 'animationend', onAnimationEnd);
 						}
 						if(fileProgressTree) {
 							bframe.appendClass('fadeout', fileProgressTree);
-							bframe.addEventListner(fileProgressTree, 'animationend', onAnimationEnd);
+							bframe.addEventListener(fileProgressTree, 'animationend', onAnimationEnd);
 						}
 					}
 				}

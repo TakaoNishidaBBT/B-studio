@@ -4,7 +4,7 @@
  *
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
-	bframe.addEventListner(window, 'load' , bframeMenuInit);
+	bframe.addEventListener(window, 'load' , bframeMenuInit);
 
 	function bframeMenuInit(){
 		var mc = new bframe.menu_container();
@@ -84,8 +84,8 @@
 
 		this.hidePullDownMenu = hidePullDownMenu;
 		this.reload = init;
-		bframe.addEventListner(target, 'mousedown', showContextMenu);
-		bframe.addEventListner(target, 'click', showContextMenu);
+		bframe.addEventListener(target, 'mousedown', showContextMenu);
+		bframe.addEventListener(target, 'click', showContextMenu);
 
 		init();
 
@@ -114,13 +114,13 @@
 
 		function setEventHandler() {
 			// set event handller
-			bframe.addEventListnerAllFrames(top, 'load', hidePullDownMenuAllFrames);
-			bframe.addEventListnerAllFrames(top, 'mousedown', hidePullDownMenu);
+			bframe.addEventListenerAllFrames(top, 'load', hidePullDownMenuAllFrames);
+			bframe.addEventListenerAllFrames(top, 'mousedown', hidePullDownMenu);
 		}
 
 		function hidePullDownMenuAllFrames(event) {
-			bframe.addEventListnerAllFrames(top, 'mousedown', hidePullDownMenu);
-			bframe.addEventListnerAllFrames(top, 'load', hidePullDownMenuAllFrames);
+			bframe.addEventListenerAllFrames(top, 'mousedown', hidePullDownMenu);
+			bframe.addEventListenerAllFrames(top, 'load', hidePullDownMenuAllFrames);
 		}
 
 		function setMark() {
@@ -154,8 +154,8 @@
 			context_menu.createElementFromObject(property.context_menu, this);
 
 			context_menu.setOffsetHeight(target.offsetHeight-1);
-			bframe.addEventListner(target, 'mouseout', context_menu.setTimer);
-			bframe.addEventListner(target, 'mouseover', context_menu.clearTimer);
+			bframe.addEventListener(target, 'mouseout', context_menu.setTimer);
+			bframe.addEventListener(target, 'mouseover', context_menu.clearTimer);
 		}
 
 		function showContextMenu(event) {
@@ -171,7 +171,7 @@
 				context_menu.positionAbsolute(position);
 
 				context_menu.show();
-				bframe.addEventListner(document, 'mousewheel', bframe.cancelEvent);
+				bframe.addEventListener(document, 'mousewheel', bframe.cancelEvent);
 			}
 			return false;
 		}
