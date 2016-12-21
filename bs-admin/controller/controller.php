@@ -24,7 +24,7 @@
 
 		// Set TERMINAL_ID
 		define('TERMINAL_ID', $_REQUEST['terminal_id']);
-		define("DISPATCH_URL", 'index.php?terminal_id=' . TERMINAL_ID);
+		define('DISPATCH_URL', 'index.php?terminal_id=' . TERMINAL_ID);
 
 		$module_dir = 'module/';
 		$page = $_REQUEST['page'] . '.php';
@@ -34,8 +34,8 @@
 		if(!file_exists($file_name)) {
 			throw new Exception();
 		}
-		$class = $_REQUEST['module'] . "_" . $_REQUEST['page'];
-		$method = "func_default";
+		$class = $_REQUEST['module'] . '_' . $_REQUEST['page'];
+		$method = 'func_default';
 		if(isset($_REQUEST['method'])) {
 			$method = $_REQUEST['method'];
 		}

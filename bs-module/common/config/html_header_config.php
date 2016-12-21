@@ -8,7 +8,7 @@
 $html_header_config = array(
 	// HTML5
 	'doc_type'	=> '<!DOCTYPE html>',
-	'html'		=> '<html>',
+	'html'		=> '<html lang="ja">',
 	'meta'		=> array(),
 	'misc'		=> array(),
 	'base'		=>
