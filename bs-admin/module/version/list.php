@@ -233,8 +233,14 @@
 			$row = $this->db->fetch_assoc($rs);
 
 			// Create cache files
-			$this->createCacheFile(B_FILE_INFO_W, B_FILE_INFO_SEMAPHORE_W, B_WORKING_RESOURCE_NODE_VIEW);
-			$this->createCacheFile(B_FILE_INFO_C, B_FILE_INFO_SEMAPHORE_C, B_CURRENT_RESOURCE_NODE_VIEW);
+			$serialized_string = $this->createCacheFile(B_FILE_INFO_W, B_FILE_INFO_SEMAPHORE_W, B_WORKING_RESOURCE_NODE_VIEW);
+			// if current and working versions are the same
+			if($param['current_version_id'] == $param['working_version_id']) {
+				$this->replaceCacheFile(B_FILE_INFO_C, B_FILE_INFO_SEMAPHORE_C, $serialized_string);
+			}
+			else {
+				$this->createCacheFile(B_FILE_INFO_C, B_FILE_INFO_SEMAPHORE_C, B_CURRENT_RESOURCE_NODE_VIEW);
+			}
 
 			$this->createLimitFile(B_LIMIT_FILE_INFO, $row['publication_datetime_u']);
 

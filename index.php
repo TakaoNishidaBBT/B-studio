@@ -25,6 +25,7 @@
 		$admin_mode = true;
 		$admin_language = $session['language'];
 		$file_info = B_FILE_INFO_W;
+		$remove_file_info = B_FILE_REMOVE_W;
 		$semaphore = B_FILE_INFO_SEMAPHORE_W;
 		$node_view = B_WORKING_RESOURCE_NODE_VIEW;
 
@@ -34,6 +35,7 @@
 	}
 	else {
 		$file_info = B_FILE_INFO_C;
+		$remove_file_info = B_FILE_REMOVE_C;
 		$semaphore = B_FILE_INFO_SEMAPHORE_C;
 		$node_view = B_CURRENT_RESOURCE_NODE_VIEW;
 
@@ -45,9 +47,8 @@
 			if($fp_limit = fopen(B_LIMIT_FILE_INFO, 'r')) {
 				$limit = fgets($fp_limit);
 				if($limit <= time()) {
-					if(file_exists($file_info)) {
-						unlink($file_info);
-					}
+					$fp_remove = fopen($remove_file_info, 'w');
+					fclose($fp_remove);
 					fclose($fp_limit);
 					unlink(B_LIMIT_FILE_INFO);
 				}
@@ -56,8 +57,8 @@
 	}
 
 	// If cache file not exists
-	if(!file_exists($file_info) || !filesize($file_info)) {
-		createCacheFile($file_info, $semaphore, $node_view);
+	if(!file_exists($file_info) || !filesize($file_info) || file_exists($remove_file_info)) {
+		createCacheFile($file_info, $semaphore, $remove_file_info, $node_view);
 	}
 
 	if(file_exists($file_info)) {
@@ -155,7 +156,7 @@
 	define('FILE_NAME', __FILE__);
 	require_once('./bs-controller/controller.php');
 
-	function createCacheFile($file_info, $semaphore, $node_view) {
+	function createCacheFile($file_info, $semaphore, $file_remove_info, $node_view) {
 		if(file_exists($semaphore)) return;
 
 		// open and lock semaphore
@@ -177,6 +178,9 @@
 		$fp = fopen($file_info, 'w');
 		fwrite($fp, serialize($data));
 		fclose($fp);
+
+		// unlink remove file
+		if(file_exists($file_remove_info)) unlink($file_remove_info);
 
 		// close and unlink semaphore
 		fclose($fp_semaphore);

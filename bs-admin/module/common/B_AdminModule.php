@@ -35,13 +35,34 @@
 		}
 
 		function removeCacheFile() {
-			if(file_exists(B_FILE_INFO_W)) {
-				unlink(B_FILE_INFO_W);
+/*
+			fopen(B_FILE_REMOVE_W, 'w');
+			if(file_exists(B_FILE_INFO_SEMAPHORE_W)) unlink(B_FILE_INFO_SEMAPHORE_W);
+
+			// if current and working versions are the same
+			if($this->version['current_version'] == $this->version['working_version']) {
+				fopen(B_FILE_REMOVE_C, 'w');
+				if(file_exists(B_FILE_INFO_SEMAPHORE_C)) unlink(B_FILE_INFO_SEMAPHORE_C);
 			}
-			// if current and working versions are same
-			if($this->version['current_version'] == $this->version['working_version'] && file_exists(B_FILE_INFO_C)) {
-				unlink(B_FILE_INFO_C);
+*/
+
+			if(substr(PHP_OS, 0, 3) === 'WIN') {
+				$cmd = B_DOC_ROOT . B_ADMIN_ROOT . 'module/common/cache.php';
+//				$p = popen('start "" ./cache.php 2>&1', 'r');
+//$this->log->write("php $cmd 2>&1");
+//return;
+				$p = popen("php $cmd 2>&1", 'r');
+				if($p) {
+		            pclose($p);
+				}
+				else {
+					$this->log->write('error');
+				}
 			}
+			else {
+				exec("$cmd > /dev/null &");
+			}
+
 		}
 
 		function createCacheFile($file_info, $semaphore, $node_view) {
@@ -53,10 +74,29 @@
 			// create serialized resource cache file
 			$node = new B_Node($this->db, B_RESOURCE_NODE_TABLE, $node_view, '', '', 'root', null, 'all', '');
 			$node->serialize($data);
+			$serialized_string = serialize($data);
 
 			// write serialized data into cache file
 			$fp = fopen($file_info, 'w');
-			fwrite($fp, serialize($data));
+			fwrite($fp, $serialized_string);
+			fclose($fp);
+
+			// close and unlink semaphore
+			fclose($fp_semaphore);
+			unlink($semaphore);
+
+			return $serialized_string;
+		}
+
+		function replaceCacheFile($file_info, $semaphore, $serialized_string) {
+			if(file_exists($semaphore)) return;
+
+			// open semaphore for lock
+			if(!$fp_semaphore = fopen($semaphore, 'x')) return;
+
+			// write serialized data into cache file
+			$fp = fopen($file_info, 'w');
+			fwrite($fp, $serialized_string);
 			fclose($fp);
 
 			// close and unlink semaphore
