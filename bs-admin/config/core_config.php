@@ -108,6 +108,8 @@
 	define('B_FILE_INFO_W', B_CACHE_DIR . 'file_info_w.txt');
 	define('B_FILE_INFO_SEMAPHORE_C', B_CACHE_DIR . 'file_info_semaphore_c.txt');
 	define('B_FILE_INFO_SEMAPHORE_W', B_CACHE_DIR . 'file_info_semaphore_w.txt');
+	define('B_FILE_REMOVE_C', B_CACHE_DIR . 'file_remove_c.txt');
+	define('B_FILE_REMOVE_W', B_CACHE_DIR . 'file_remove_w.txt');
 	define('B_FILE_INFO_THUMB', B_CACHE_DIR . 'file_info_thumb.txt');
 	define('B_FILE_INFO_THUMB_SEMAPHORE', B_CACHE_DIR . 'file_info_thumb_semaphore.txt');
 	define('B_LIMIT_FILE_INFO', B_CACHE_DIR . 'limit_info_c.txt');

@@ -35,34 +35,18 @@
 		}
 
 		function removeCacheFile() {
-/*
-			fopen(B_FILE_REMOVE_W, 'w');
+			$fp = fopen(B_FILE_REMOVE_W, 'w');
+			fclose($fp);
+			chmod(B_FILE_REMOVE_W, 0777);
 			if(file_exists(B_FILE_INFO_SEMAPHORE_W)) unlink(B_FILE_INFO_SEMAPHORE_W);
 
 			// if current and working versions are the same
 			if($this->version['current_version'] == $this->version['working_version']) {
-				fopen(B_FILE_REMOVE_C, 'w');
+				$fp = fopen(B_FILE_REMOVE_C, 'w');
+				fclose($fp);
+				chmod(B_FILE_REMOVE_C, 0777);
 				if(file_exists(B_FILE_INFO_SEMAPHORE_C)) unlink(B_FILE_INFO_SEMAPHORE_C);
 			}
-*/
-
-			if(substr(PHP_OS, 0, 3) === 'WIN') {
-				$cmd = B_DOC_ROOT . B_ADMIN_ROOT . 'module/common/cache.php';
-//				$p = popen('start "" ./cache.php 2>&1', 'r');
-//$this->log->write("php $cmd 2>&1");
-//return;
-				$p = popen("php $cmd 2>&1", 'r');
-				if($p) {
-		            pclose($p);
-				}
-				else {
-					$this->log->write('error');
-				}
-			}
-			else {
-				exec("$cmd > /dev/null &");
-			}
-
 		}
 
 		function createCacheFile($file_info, $semaphore, $node_view) {
@@ -80,12 +64,24 @@
 			$fp = fopen($file_info, 'w');
 			fwrite($fp, $serialized_string);
 			fclose($fp);
+			chmod($file_info, 0777);
 
 			// close and unlink semaphore
 			fclose($fp_semaphore);
 			unlink($semaphore);
 
 			return $serialized_string;
+		}
+
+		function refreshCache() {
+			$cmdline = 'php ' . B_DOC_ROOT . B_ADMIN_ROOT . 'module/common/cache.php';
+			$cmdline .= ' ' . $_SERVER['SERVER_NAME'];
+			$cmdline .= ' ' . $_SERVER['DOCUMENT_ROOT'];
+			$cmdline .= ' ' . $_SERVER['HTTPS'];
+			B_Util::fork($cmdline, false);
+
+			if(file_exists(B_FILE_REMOVE_W)) unlink(B_FILE_REMOVE_W);
+			if(file_exists(B_FILE_REMOVE_C)) unlink(B_FILE_REMOVE_C);
 		}
 
 		function replaceCacheFile($file_info, $semaphore, $serialized_string) {
@@ -98,6 +94,7 @@
 			$fp = fopen($file_info, 'w');
 			fwrite($fp, $serialized_string);
 			fclose($fp);
+			chmod($file_info, 0777);
 
 			// close and unlink semaphore
 			fclose($fp_semaphore);
@@ -127,6 +124,7 @@
 			$fp = fopen(B_FILE_INFO_THUMB, 'w');
 			fwrite($fp, serialize($data));
 			fclose($fp);
+			chmod($file_info, 0777);
 
 			// close and unlock semaphore
 			fclose($fp_semaphore);

@@ -2720,7 +2720,7 @@
 
 				form_data.append('extract_mode', extract_mode);
 				form_data.append('Filedata', upload_queue[index].file);
-
+				form_data.append('last_file', index + 1 == upload_queue.length ? true : false);
 				httpObj.open('POST','index.php');
 				httpObj.send(form_data);
 			}

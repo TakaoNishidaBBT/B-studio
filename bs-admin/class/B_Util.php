@@ -519,4 +519,27 @@
 				return 'pc';
 			}
 		}
+
+		 public static function fork($cmd, $async=true) {
+			try {
+				if(!$async) $sync = '&';
+				if(substr(PHP_OS, 0, 3) === 'WIN') {
+					$cmdline = "$cmd 2>&1";
+					$p = popen($cmdline, 'r');
+					if($p) {
+						pclose($p);
+					}
+					else {
+						$this->log->write('error');
+					}
+				}
+				else {
+					$cmdline = "$cmd > /dev/null $sync";
+					exec("$cmdline");
+				}
+			}
+			catch(Exception $e) {
+				return false;
+			}
+		}
 	}

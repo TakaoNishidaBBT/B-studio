@@ -24,6 +24,7 @@
 			}
 
 			$this->fp = fopen($this->file_name, 'at+');
+			chmod($this->file_name, 0777);
 		}
 
 		function write() {

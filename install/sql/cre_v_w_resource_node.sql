@@ -6,7 +6,7 @@ where concat(a.version_id, a.revision_id) = (
 	from %DB_PREFIX%resource_node b
 		,%DB_PREFIX%v_current_version c
 		,%DB_PREFIX%version d
-	where a.node_id=b.node_id
+	where a.node_id = b.node_id
 	and b.version_id = d.version_id
 	and ((b.version_id < c.working_version_id and b.revision_id < d.private_revision_id)
 	or (b.version_id = c.working_version_id and b.revision_id <= d.private_revision_id))

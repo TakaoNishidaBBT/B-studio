@@ -1,10 +1,22 @@
 <?php
+/*
+ * B-studio : Content Management System
+ * Copyright (c) BigBeat Inc. All rights reserved. (http://www.bigbeat.co.jp)
+ *
+ * Licensed under the GPL, LGPL and MPL Open Source licenses.
+*/
+	error_reporting(E_ALL & ~E_NOTICE & ~E_STRICT);
+
+	$_SERVER['SERVER_NAME'] = $argv[1];
+	$_SERVER['DOCUMENT_ROOT'] = $argv[2];
+	$_SERVER['HTTPS'] = $argv[3];
+
 	require_once('../../config/config.php');
+	require_once('../../language/language.php');
 
 	$archive = new B_Log(B_ARCHIVE_LOG_FILE);
 	$log = new B_Log(B_LOG_FILE);
-$log->write('cache.php');
-exit;
+
 	// Connect to DB
 	$db = new B_DBaccess($archive);
 	$ret = $db->connect(B_DB_SRV, B_DB_USR, B_DB_PWD, B_DB_CHARSET);
@@ -16,8 +28,8 @@ exit;
 	$serialized_string = serialize($data);
 
 	$sql = "select * from " . B_DB_PREFIX . "v_current_version";
-	$rs = $this->db->query($sql);
-	$row = $this->db->fetch_assoc($rs);
+	$rs = $db->query($sql);
+	$row = $db->fetch_assoc($rs);
 
 	// write serialized data into working version cache file
 	$fp = fopen(B_FILE_INFO_W, 'w');
@@ -32,8 +44,7 @@ exit;
 	}
 
 	// egister cache into version table
-	$table = new B_Table($this->db, 'version');
+	$table = new B_Table($db, 'version');
 	$param['version_id'] = $row['working_version_id'];
 	$param['cache'] = $serialized_string;
 	$ret = $table->update($param);
-

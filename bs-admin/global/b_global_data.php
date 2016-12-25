@@ -266,6 +266,7 @@
 			'publication_status'		=> array('char', 		'1', 	'', 	''),
 			'version'					=> array('text', 		'', 	'', 	''),
 			'notes'						=> array('text', 		'', 	'', 	''),
+			'cache'						=> array('mediumtext', 	'', 	'', 	''),
 			'del_flag'					=> array('char', 		'1', 	'', 	''),
 			'reserve1'					=> array('text', 		'', 	'', 	''),
 			'reserve2'					=> array('text', 		'', 	'', 	''),
