@@ -54,14 +54,13 @@
 
 			if($this->node_class == 'leaf') return;
 
-			$rs = $this->selectChild($node_id);
-
-			while($row = $this->db->fetch_assoc($rs)) {
-				$this->node_count++;
-				if($row['node_type'] == 'folder') {
-					$this->folder_count++;
-				}
-				if((is_array($open_nodes) && $open_nodes[$node_id]) || ($expand_level === 'all' || $level < $expand_level)) {
+			if((is_array($open_nodes) && $open_nodes[$node_id]) || ($expand_level === 'all' || $level < $expand_level)) {
+				$rs = $this->selectChild($node_id);
+				while($row = $this->db->fetch_assoc($rs)) {
+					$this->node_count++;
+					if($row['node_type'] == 'folder') {
+						$this->folder_count++;
+					}
 					$object = new B_Node($db
 										, $this->table
 										, $view
@@ -76,6 +75,9 @@
 										, $row);
 					$this->addNodes($object);
 				}
+			}
+			else {
+				$this->folder_count = $this->getSubFolderCount($node_id);
 			}
 		}
 
@@ -122,6 +124,24 @@
 			$rs = $this->db->query($sql);
 
 			return $rs;
+		}
+
+		function getSubFolderCount($node_id) {
+			$sql = "select count(*) cnt from %VIEW% ";
+
+			if($node_id) {
+				$sql.= "where parent_node = '$node_id'";
+			}
+			else {
+				// get root node
+				$sql.= "where parent_node is null";
+			}
+			$sql.= " and node_type = 'folder' and del_flag='0'";
+			$sql = str_replace('%VIEW%', B_DB_PREFIX . $this->view, $sql);
+			$rs = $this->db->query($sql);
+			$row = $this->db->fetch_assoc($rs);
+
+			return $row['cnt'];
 		}
 
 		function setConfig($config) {
@@ -718,7 +738,7 @@
 			else if($this->parent && $this->node_type != 'folder') {
 				$info = pathinfo($mypath);
 				$data[$mypath] = $this->contents_id . '.' . $info['extension'];
-				$data[$this->node_id] = $mypath;
+//				$data[$this->node_id] = $mypath;
 			}
 		}
 
