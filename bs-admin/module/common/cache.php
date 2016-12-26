@@ -16,11 +16,17 @@
 
 	$archive = new B_Log(B_ARCHIVE_LOG_FILE);
 	$log = new B_Log(B_LOG_FILE);
+//$log->write('cache.php', $argv);
+
+$log->write('whoami', passthru('whoami'));
 
 	// Connect to DB
 	$db = new B_DBaccess($archive);
 	$ret = $db->connect(B_DB_SRV, B_DB_USR, B_DB_PWD, B_DB_CHARSET);
 	$ret = $db->select_db(B_DB_NME);
+
+	// start transaction
+	$db->begin();
 
 	// create serialized resource cache file
 	$node = new B_Node($db, B_RESOURCE_NODE_TABLE, B_WORKING_RESOURCE_NODE_VIEW, '', '', 'root', null, 'all', '');
@@ -36,15 +42,24 @@
 	fwrite($fp, $serialized_string);
 	fclose($fp);
 
+	// if current_version is the same as working_version
 	if($row['current_version_id'] == $row['working_version_id']) {
 		// write serialized data into current version cache file
-		$fp = fopen(B_FILE_INFO_W, 'w');
+		$fp = fopen(B_FILE_INFO_C, 'w');
 		fwrite($fp, $serialized_string);
 		fclose($fp);
 	}
 
-	// egister cache into version table
+	// register cache into version table
 	$table = new B_Table($db, 'version');
 	$param['version_id'] = $row['working_version_id'];
 	$param['cache'] = $serialized_string;
 	$ret = $table->update($param);
+
+	// end of transaction
+	if($ret) {
+		$db->commit();
+	}
+	else {
+		$db->rollback();
+	}

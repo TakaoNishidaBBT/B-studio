@@ -524,7 +524,7 @@
 			try {
 				if(!$async) $sync = '&';
 				if(substr(PHP_OS, 0, 3) === 'WIN') {
-					$cmdline = "$cmd 2>&1";
+					$cmdline = "$cmd 2>&1 $sync";
 					$p = popen($cmdline, 'r');
 					if($p) {
 						pclose($p);
