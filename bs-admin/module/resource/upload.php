@@ -167,7 +167,9 @@
 						// Register extract files
 						$node->walk($this, register_archive);
 						$node->remove();
-//						$this->removeCacheFile();
+
+						// kick refresh-cache process
+						$this->refreshCache();
 
 						// Create response node_info
 						foreach($this->registered_archive_node as $value) {
@@ -190,7 +192,6 @@
 					$response['progress'] = 100;
 					$this->sendChunk(',' . json_encode($response));
 					$this->sendChunk();	// terminate
-					exit;
 				}
 				else {
 					$node_id = $this->register($file);
@@ -206,21 +207,23 @@
 										, 'auto');
 					$path = $node->getParentPath();
 					$response['node_info'][] = $node->getNodeList('', '', B_RESOURCE_DIR, $path);
+
+					// last upload file
+					if($this->post['last_file'] == 'true') {
+						// kick refresh-cache process
+						$this->refreshCache();
+					}
+
+					$response['status'] = $status;
+					$response['message'] = $message;
+					header('Content-Type: application/x-javascript charset=utf-8');
+					echo json_encode($response);
 				}
 			}
 			catch(Exception $e) {
 				$status = false;
 				$message = $e->getMessage();
 			}
-
-			if($this->post['last_file'] == 'true') {
-				$this->refreshCache();
-			}
-
-			$response['status'] = $status;
-			$response['message'] = $message;
-			header('Content-Type: application/x-javascript charset=utf-8');
-			echo json_encode($response);
 
 			exit;
 		}
@@ -315,7 +318,6 @@
 			if($this->_move_uploaded_file($_FILES['Filedata']['tmp_name'], $this->dir . $contents_id . '.' . $file['extension'])) {
 				chmod($this->dir . $contents_id . '.' . $file['extension'], 0777);
 				$this->createthumbnail($this->dir, $contents_id, $file['extension'], B_THUMB_PREFIX);
-//				$this->removeCacheFile();
 			}
 			return $node_id;
 		}

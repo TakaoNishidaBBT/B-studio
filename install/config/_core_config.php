@@ -149,6 +149,7 @@
 	define('B_CATEGORY_TABLE', 'category');
 	define('B_CATEGORY2_TABLE', 'category2');
 	define('B_CATEGORY3_TABLE', 'category3');
+	define('B_VERSION_TABLE', 'version');
 
 	// View
 	define('B_WORKING_CONTENTS_NODE_VIEW', 'v_w_contents_node');
@@ -172,6 +173,8 @@
 	define('B_CURRENT_FORM_VIEW', 'v_c_form');
 	define('B_CURRENT_FORM_NODE_VIEW', 'v_c_form_node');
 	define('B_CURRENT_RESOURCE_NODE_VIEW', 'v_c_resource_node');
+
+	define('B_CURRENT_VERSION_VIEW', 'v_current_version');
 
 	define('B_CATEGORY_VIEW', 'v_category');
 	define('B_CATEGORY2_VIEW', 'v_category2');

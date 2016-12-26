@@ -25,7 +25,6 @@
 		$admin_mode = true;
 		$admin_language = $session['language'];
 		$file_info = B_FILE_INFO_W;
-		$remove_file_info = B_FILE_REMOVE_W;
 		$semaphore = B_FILE_INFO_SEMAPHORE_W;
 		$node_view = B_WORKING_RESOURCE_NODE_VIEW;
 
@@ -35,29 +34,28 @@
 	}
 	else {
 		$file_info = B_FILE_INFO_C;
-		$remove_file_info = B_FILE_REMOVE_C;
 		$semaphore = B_FILE_INFO_SEMAPHORE_C;
 		$node_view = B_CURRENT_RESOURCE_NODE_VIEW;
 
 		define('B_ARTICLE_VIEW',  B_DB_PREFIX . 'v_article');
 		define('B_ARTICLE_VIEW2', B_DB_PREFIX . 'v_article2');
 		define('B_ARTICLE_VIEW3', B_DB_PREFIX . 'v_article3');
+	}
 
-		if(file_exists(B_LIMIT_FILE_INFO)) {
-			if($fp_limit = fopen(B_LIMIT_FILE_INFO, 'r')) {
-				$limit = fgets($fp_limit);
-				if($limit <= time()) {
-					$fp_remove = fopen($remove_file_info, 'w');
-					fclose($fp_remove);
-					fclose($fp_limit);
-					unlink(B_LIMIT_FILE_INFO);
-				}
+	// reserved version exists
+	if(file_exists(B_LIMIT_FILE_INFO)) {
+		if($fp_limit = fopen(B_LIMIT_FILE_INFO, 'r')) {
+			$limit = fgets($fp_limit);
+			if($limit <= time()) {
+				fclose($fp_limit);
+				unlink(B_LIMIT_FILE_INFO);
+				replaceCacheFile();
 			}
 		}
 	}
 
 	// If cache file not exists
-	if(!file_exists($file_info) || !filesize($file_info) || file_exists($remove_file_info)) {
+	if(!file_exists($file_info) || !filesize($file_info)) {
 		createCacheFile($file_info, $semaphore, $remove_file_info, $node_view);
 	}
 
@@ -156,6 +154,31 @@
 	define('FILE_NAME', __FILE__);
 	require_once('./bs-controller/controller.php');
 
+	function replaceCacheFile() {
+		require_once('./bs-admin/config/config.php');
+
+		$archive = new B_Log(B_ARCHIVE_LOG_FILE);
+
+		$db = new B_DBaccess($archive);
+		$ret = $db->connect(B_DB_SRV, B_DB_USR, B_DB_PWD, B_DB_CHARSET);
+		$ret = $db->select_db(B_DB_NME);
+
+		$version_table = B_DB_PREFIX . B_VERSION_TABLE;
+		$current_version = B_DB_PREFIX . B_CURRENT_VERSION_VIEW;
+		$sql = "select a.* from $version_table a, $current_version b
+				where a.version_id = b.current_version_id";
+
+		$rs = $db->query($sql);
+		$row = $db->fetch_assoc($rs);
+
+		// write serialized data into cache file
+		$fp = fopen(B_FILE_INFO_C, 'w');
+		fwrite($fp, $row['cache']);
+		fclose($fp);
+
+		return;
+	}
+
 	function createCacheFile($file_info, $semaphore, $file_remove_info, $node_view) {
 		if(file_exists($semaphore)) return;
 
@@ -178,9 +201,6 @@
 		$fp = fopen($file_info, 'w');
 		fwrite($fp, serialize($data));
 		fclose($fp);
-
-		// unlink remove file
-		if(file_exists($file_remove_info)) unlink($file_remove_info);
 
 		// close and unlink semaphore
 		fclose($fp_semaphore);

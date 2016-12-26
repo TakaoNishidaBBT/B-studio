@@ -99,8 +99,8 @@
 
 			$param = $this->session['post'];
 			$param['del_flag'] = '0';
-			$param["update_datetime"] = time();
-			$param["update_user"] = $this->user_id;
+			$param['update_datetime'] = time();
+			$param['update_user'] = $this->user_id;
 
 			// Change text date and time to UNIX date
 			$param['publication_datetime_u'] = strtotime($param['publication_datetime_t']);
@@ -119,14 +119,14 @@
 
 				$update_param = $row;
 				$update_param['private_revision_id'] = str_pad(((int)$update_param['private_revision_id'] + 1), 2, '0', STR_PAD_LEFT);
-				$update_param["update_datetime"] = time();
-				$update_param["update_user"] = $this->user_id;
+				$update_param['update_datetime'] = time();
+				$update_param['update_user'] = $this->user_id;
 
 				$ret = $this->table->update($update_param);
 
 				$param['private_revision_id'] = '00';
 				$param['create_user'] = $this->user_id;
-				$param["create_datetime"] = time();
+				$param['create_datetime'] = time();
 				$ret = $this->table->selectInsert($param);
 				$param['action_message'] = __('was saved.');
 			}
@@ -139,7 +139,8 @@
 					if($row['reserved_version_id'] == $param['version_id'] || $row['current_version_id'] == $param['version_id']) {
 						$this->createLimitFile(B_LIMIT_FILE_INFO, $row['publication_datetime_u']);
 						if(file_exists(B_FILE_INFO_C)) {
-							unlink(B_FILE_INFO_C);
+							$row = $this->getCacheFromDB('current_version_id');
+							$this->replaceCacheFile(B_FILE_INFO_C, B_FILE_INFO_SEMAPHORE_C, $row['cache']);
 						}
 					}
 				}
@@ -169,7 +170,7 @@
 
 		function delete() {
 			$param = $this->post;
-			$param['del_flag'] = "1";
+			$param['del_flag'] = '1';
 
 			$this->db->begin();
 			$row = $this->table->selectByPk($this->post);

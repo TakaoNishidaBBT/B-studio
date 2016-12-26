@@ -16,9 +16,6 @@
 
 	$archive = new B_Log(B_ARCHIVE_LOG_FILE);
 	$log = new B_Log(B_LOG_FILE);
-//$log->write('cache.php', $argv);
-
-$log->write('whoami', passthru('whoami'));
 
 	// Connect to DB
 	$db = new B_DBaccess($archive);

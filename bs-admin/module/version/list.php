@@ -219,6 +219,16 @@
 				$this->current_version_table = new B_Table($this->db, 'current_version');
 				$ret = $this->current_version_table->update($param);
 			}
+
+			// create cache from DB
+			$row = $this->getCacheFromDB('working_version_id');
+			$this->replaceCacheFile(B_FILE_INFO_W, B_FILE_INFO_SEMAPHORE_W, $row['cache']);
+
+			$row = $this->getCacheFromDB('current_version_id');
+			$this->replaceCacheFile(B_FILE_INFO_C, B_FILE_INFO_SEMAPHORE_C, $row['cache']);
+
+			$this->createLimitFile(B_LIMIT_FILE_INFO, $row['publication_datetime_u']);
+
 			if($ret) {
 				$this->db->commit();
 				$this->action_message = __('were set.');
@@ -227,22 +237,6 @@
 				$this->db->rollback();
 				$this->action_message = __('were failed to set.');
 			}
-
-			$sql = "select * from " . B_DB_PREFIX . "v_current_version";
-			$rs = $this->db->query($sql);
-			$row = $this->db->fetch_assoc($rs);
-
-			// Create cache files
-			$serialized_string = $this->createCacheFile(B_FILE_INFO_W, B_FILE_INFO_SEMAPHORE_W, B_WORKING_RESOURCE_NODE_VIEW);
-			// if current and working versions are the same
-			if($param['current_version_id'] == $param['working_version_id']) {
-				$this->replaceCacheFile(B_FILE_INFO_C, B_FILE_INFO_SEMAPHORE_C, $serialized_string);
-			}
-			else {
-				$this->createCacheFile(B_FILE_INFO_C, B_FILE_INFO_SEMAPHORE_C, B_CURRENT_RESOURCE_NODE_VIEW);
-			}
-
-			$this->createLimitFile(B_LIMIT_FILE_INFO, $row['publication_datetime_u']);
 
 			// update version info
 			$this->getVersionInfo();

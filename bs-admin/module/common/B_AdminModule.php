@@ -34,54 +34,14 @@
 			$this->version_info = str_replace('%WROKING_VERSION%', $this->version['working_version'], $this->version_info);
 		}
 
-		function removeCacheFile() {
-			$fp = fopen(B_FILE_REMOVE_W, 'w');
-			fclose($fp);
-			chmod(B_FILE_REMOVE_W, 0777);
-			if(file_exists(B_FILE_INFO_SEMAPHORE_W)) unlink(B_FILE_INFO_SEMAPHORE_W);
-
-			// if current and working versions are the same
-			if($this->version['current_version'] == $this->version['working_version']) {
-				$fp = fopen(B_FILE_REMOVE_C, 'w');
-				fclose($fp);
-				chmod(B_FILE_REMOVE_C, 0777);
-				if(file_exists(B_FILE_INFO_SEMAPHORE_C)) unlink(B_FILE_INFO_SEMAPHORE_C);
-			}
-		}
-
-		function createCacheFile($file_info, $semaphore, $node_view) {
-			if(file_exists($semaphore)) return;
-
-			// open semaphore for lock
-			if(!$fp_semaphore = fopen($semaphore, 'x')) return;
-
-			// create serialized resource cache file
-			$node = new B_Node($this->db, B_RESOURCE_NODE_TABLE, $node_view, '', '', 'root', null, 'all', '');
-			$node->serialize($data);
-			$serialized_string = serialize($data);
-
-			// write serialized data into cache file
-			$fp = fopen($file_info, 'w');
-			fwrite($fp, $serialized_string);
-			fclose($fp);
-			chmod($file_info, 0777);
-
-			// close and unlink semaphore
-			fclose($fp_semaphore);
-			unlink($semaphore);
-
-			return $serialized_string;
-		}
-
 		function refreshCache() {
 			$cmdline = 'php ' . B_DOC_ROOT . B_ADMIN_ROOT . 'module/common/cache.php';
 			$cmdline .= ' ' . $_SERVER['SERVER_NAME'];
 			$cmdline .= ' ' . $_SERVER['DOCUMENT_ROOT'];
 			$cmdline .= ' ' . $_SERVER['HTTPS'];
-			B_Util::fork($cmdline, false);
 
-			if(file_exists(B_FILE_REMOVE_W)) unlink(B_FILE_REMOVE_W);
-			if(file_exists(B_FILE_REMOVE_C)) unlink(B_FILE_REMOVE_C);
+			// kick as a background process
+			B_Util::fork($cmdline, false);
 		}
 
 		function replaceCacheFile($file_info, $semaphore, $serialized_string) {
@@ -99,6 +59,17 @@
 			// close and unlink semaphore
 			fclose($fp_semaphore);
 			unlink($semaphore);
+		}
+
+		function getCacheFromDB($version) {
+			// get cache from DB
+			$version_table = B_DB_PREFIX . B_VERSION_TABLE;
+			$current_version = B_DB_PREFIX . B_CURRENT_VERSION_VIEW;
+			$sql = "select * from $version_table a, $current_version b
+					where a.version_id = b.{$version}";
+
+			$rs = $this->db->query($sql);
+			return $this->db->fetch_assoc($rs);
 		}
 
 		function createThumbnailCacheFile() {

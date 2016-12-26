@@ -103,7 +103,7 @@
 			}
 			if($ret) {
 				$this->db->commit();
-				$this->removeCacheFile();
+				$this->refreshCache();
 			}
 			if(!$ret) {
 				$this->db->rollback();

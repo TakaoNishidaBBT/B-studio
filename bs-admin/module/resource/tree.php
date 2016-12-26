@@ -153,9 +153,8 @@
 						$this->status = true;
 						$this->db->commit();
 
-						// remove cache files
-//						$this->removeCacheFile();
-						$this->refresh = true;
+						// kick refresh-cache process
+						$this->refreshCache();
 					}
 					else {
 						$this->status = false;
@@ -277,9 +276,8 @@
 					$this->status = true;
 					$this->db->commit();
 
-					// remove cache files
-//					$this->removeCacheFile();
-					$this->refresh = true;
+					// kick refresh-cache process
+					$this->refreshCache();
 				}
 				else {
 					$this->status = false;
@@ -323,9 +321,8 @@
 					$this->status = true;
 					$this->db->commit();
 
-					// remove cache files
-//					$this->removeCacheFile();
-					$this->refresh = true;
+					// kick refresh-cache process
+					$this->refreshCache();
 				}
 				else {
 					$this->status = false;
@@ -442,9 +439,8 @@
 						$this->status = true;
 						$this->db->commit();
 
-						// remove cache files
-//						$this->removeCacheFile();
-						$this->refresh = true;
+						// kick refresh-cache process
+						$this->refreshCache();
 					}
 					else {
 						$this->status = false;
@@ -511,9 +507,8 @@
 						$this->status = true;
 						$this->db->commit();
 
-						// remove cache files
-//						$this->removeCacheFile();
-						$this->refresh = true;
+						// kick refresh-cache process
+						$this->refreshCache();
 					}
 					else {
 						$this->status = false;
@@ -708,14 +703,7 @@
 			}
 
 			header('Content-Type: application/x-javascript charset=utf-8');
-			$response = json_encode($response) . str_repeat(' ', 8000);
-			echo $response;
-			flush();
-			ob_flush();
-
-			if($this->refresh) {
-				$this->refreshCache();
-			}
+			echo json_encode($response);
 		}
 
 		function getErrorMessage($error) {
