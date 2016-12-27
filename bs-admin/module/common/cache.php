@@ -25,29 +25,16 @@
 	// start transaction
 	$db->begin();
 
-	// create serialized resource cache file
-	$node = new B_Node($db, B_RESOURCE_NODE_TABLE, B_WORKING_RESOURCE_NODE_VIEW, '', '', 'root', null, 'all', '');
-	$node->serialize($data);
-	$serialized_string = serialize($data);
-
 	$sql = "select * from " . B_DB_PREFIX . "v_current_version";
 	$rs = $db->query($sql);
 	$row = $db->fetch_assoc($rs);
 
-	// write serialized data into working version cache file
-	$fp = fopen(B_FILE_INFO_W, 'w');
-	fwrite($fp, $serialized_string);
-	fclose($fp);
+	// create serialized resource cache data
+	$node = new B_Node($db, B_RESOURCE_NODE_TABLE, B_WORKING_RESOURCE_NODE_VIEW, null, null, 'root', null, 'all', null);
+	$node->serialize($data);
+	$serialized_string = serialize($data);
 
-	// if current_version is the same as working_version
-	if($row['current_version_id'] == $row['working_version_id']) {
-		// write serialized data into current version cache file
-		$fp = fopen(B_FILE_INFO_C, 'w');
-		fwrite($fp, $serialized_string);
-		fclose($fp);
-	}
-
-	// register cache into version table
+	// register cache data to version table
 	$table = new B_Table($db, 'version');
 	$param['version_id'] = $row['working_version_id'];
 	$param['cache'] = $serialized_string;
@@ -60,3 +47,21 @@
 	else {
 		$db->rollback();
 	}
+
+	$sql = "select * from " . B_DB_PREFIX . "v_current_version";
+	$rs = $db->query($sql);
+	$row = $db->fetch_assoc($rs);
+
+	// overwrite serialized data to working version cache file
+	$fp = fopen(B_FILE_INFO_W, 'w');
+	fwrite($fp, $serialized_string);
+	fclose($fp);
+
+	// if current_version is the same as working_version
+	if($row['current_version_id'] == $row['working_version_id']) {
+		// overwrite serialized data to current version cache file
+		$fp = fopen(B_FILE_INFO_C, 'w');
+		fwrite($fp, $serialized_string);
+		fclose($fp);
+	}
+

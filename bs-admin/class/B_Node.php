@@ -14,7 +14,7 @@
 	// 		   : 3	node was updated by other user
 	// -------------------------------------------------------------------------
 	class B_Node {
-		function __construct($db, $table, $view, $version, $revision, $node_id, $parent, $expand_level, $open_nodes, $sort_mode='manual', $level=0, $row=null) {
+		function __construct($db, $table, $view, $version, $revision, $node_id, $parent, $expand_level, $open_nodes, $node_count=false, $sort_mode='manual', $level=0, $row=null) {
 			$this->db = $db;
 			$this->table = $table;
 			$this->view = $view;
@@ -70,6 +70,7 @@
 										, $this
 										, $expand_level
 										, $open_nodes
+										, $node_count
 										, $sort_mode
 										, $level+1
 										, $row);
@@ -77,7 +78,12 @@
 				}
 			}
 			else {
-				$this->folder_count = $this->getSubFolderCount($node_id);
+				if($node_count) {
+					$this->node_count = $this->getSubNodeCount($node_id);
+				}
+				else {
+					$this->folder_count = $this->getSubFolderCount($node_id);
+				}
 			}
 		}
 
@@ -137,6 +143,24 @@
 				$sql.= "where parent_node is null";
 			}
 			$sql.= " and node_type = 'folder' and del_flag='0'";
+			$sql = str_replace('%VIEW%', B_DB_PREFIX . $this->view, $sql);
+			$rs = $this->db->query($sql);
+			$row = $this->db->fetch_assoc($rs);
+
+			return $row['cnt'];
+		}
+
+		function getSubNodeCount($node_id) {
+			$sql = "select count(*) cnt from %VIEW% ";
+
+			if($node_id) {
+				$sql.= "where parent_node = '$node_id'";
+			}
+			else {
+				// get root node
+				$sql.= "where parent_node is null";
+			}
+			$sql.= " and del_flag='0'";
 			$sql = str_replace('%VIEW%', B_DB_PREFIX . $this->view, $sql);
 			$rs = $this->db->query($sql);
 			$row = $this->db->fetch_assoc($rs);

@@ -9,7 +9,7 @@
 	// class B_VNode
 	// -------------------------------------------------------------------------
 	class B_VNode {
-		function __construct($db, $view, $version, $revision, $node_id, $parent, $expand_level, $open_nodes, $level=0, $row=null) {
+		function __construct($db, $view, $version, $revision, $node_id, $parent, $expand_level, $open_nodes, $node_count=false, $level=0, $row=null) {
 			$this->db = $db;
 			$this->view = $view;
 			$this->version = $version;
@@ -43,14 +43,15 @@
 				$this->parent = $row['parent_node'];
 			}
 
-			$rs = $this->selectChild($node_id);
+			if($this->node_class == 'leaf') return;
 
-			while($row = $this->db->fetch_assoc($rs)) {
-				$this->node_count++;
-				if($row['node_type'] == 'folder') {
-					$this->folder_count++;
-				}
-				if((is_array($open_nodes) && $open_nodes[$node_id]) || ($expand_level === 'all' || $level < $expand_level)) {
+			if((is_array($open_nodes) && $open_nodes[$node_id]) || ($expand_level === 'all' || $level < $expand_level)) {
+				$rs = $this->selectChild($node_id);
+				while($row = $this->db->fetch_assoc($rs)) {
+					$this->node_count++;
+					if($row['node_type'] == 'folder') {
+						$this->folder_count++;
+					}
 					$object = new B_VNode($db
 										, $view
 										, $version
@@ -59,9 +60,18 @@
 										, $this
 										, $expand_level
 										, $open_nodes
+										, $node_count
 										, $level+1
 										, $row);
 					$this->addNodes($object);
+				}
+			}
+			else {
+				if($node_count) {
+					$this->node_count = $this->getSubNodeCount($node_id);
+				}
+				else {
+					$this->folder_count = $this->getSubFolderCount($node_id);
 				}
 			}
 		}

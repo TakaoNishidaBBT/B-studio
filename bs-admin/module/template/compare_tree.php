@@ -108,7 +108,8 @@
 									, 'root'
 									, null
 									, 'all'
-									, $this->session['open_nodes']);
+									, $this->session['open_nodes']
+									, true);
 
 			$this->compare($left, $right);
 			$root_node->compare($this->version_right['version_id'], $left, $right);

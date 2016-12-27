@@ -179,9 +179,10 @@
 												, $this->version['working_version_id']
 												, $this->version['revision_id']
 												, $value
-												, ''
+												, null
 												, 0
-												, ''
+												, null
+												, false
 												, 'auto');
 							$path = $node->getParentPath();
 							$response['node_info'][] = $node->getNodeList('', '', B_RESOURCE_DIR, $path);
@@ -201,9 +202,10 @@
 										, $this->version['working_version_id']
 										, $this->version['revision_id']
 										, $node_id
-										, ''
+										, null
 										, 1
-										, ''
+										, null
+										, false
 										, 'auto');
 					$path = $node->getParentPath();
 					$response['node_info'][] = $node->getNodeList('', '', B_RESOURCE_DIR, $path);

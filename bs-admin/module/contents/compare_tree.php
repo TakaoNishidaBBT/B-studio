@@ -12,22 +12,22 @@
 			$this->version_left = $this->global_session['version_left'];
 			$this->version_right = $this->global_session['version_right'];
 			$this->tree_left = new B_VNode($this->db
-									, B_COMPARE_CONTENTS_NODE_VIEW
-									, $this->version_left['version_id']
-									, $this->version_left['revision_id']
-									, null
-									, null
-									, 0
-									, null);
+											, B_COMPARE_CONTENTS_NODE_VIEW
+											, $this->version_left['version_id']
+											, $this->version_left['revision_id']
+											, null
+											, null
+											, 0
+											, null);
 
 			$this->tree_right = new B_VNode($this->db
-									, B_COMPARE_CONTENTS_NODE_VIEW
-									, $this->version_right['version_id']
-									, $this->version_right['revision_id']
-									, null
-									, null
-									, 0
-									, null);
+											, B_COMPARE_CONTENTS_NODE_VIEW
+											, $this->version_right['version_id']
+											, $this->version_right['revision_id']
+											, null
+											, null
+											, 0
+											, null);
 
 			require_once('./config/compare_tree_config.php');
 			$this->tree_left->setConfig($left_tree_config);
@@ -130,7 +130,8 @@
 									, 'root'
 									, null
 									, 'all'
-									, $this->session['open_nodes']);
+									, $this->session['open_nodes']
+									, true);
 
 			$this->compare($left, $right);
 			$root_node->compare($this->version_right['version_id'], $left, $right);

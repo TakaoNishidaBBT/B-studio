@@ -22,7 +22,6 @@
 									, $this->version['revision_id']
 									, null
 									, null
-									, null
 									, 0
 									, null);
 
@@ -280,7 +279,8 @@
 									, 'root'
 									, null
 									, 1
-									, $this->session['open_nodes']);
+									, $this->session['open_nodes']
+									, true);
 
 			$list[] = $root_node->getNodeList($node_id, $category);
 

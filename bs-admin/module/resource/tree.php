@@ -18,7 +18,6 @@
 									, $this->version['revision_id']
 									, null
 									, null
-									, null
 									, 0
 									, null);
 
@@ -655,6 +654,7 @@
 									, null
 									, 1
 									, $this->session['open_nodes']
+									, false
 									, 'auto');
 
 			if($this->session['sort_key']) {
@@ -675,7 +675,7 @@
 									, null
 									, 0
 									, $this->session['open_nodes']
-									, 'trash'
+									, false
 									, 'auto');
 
 			if($this->session['sort_key']) {

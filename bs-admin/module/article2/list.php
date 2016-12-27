@@ -35,7 +35,8 @@
 									, 'root'
 									, null
 									, all
-									, $this->session['open_nodes']);
+									, $this->session['open_nodes']
+									, true);
 			$list[''] = '  --  ';
 			$list+= $root_node->getSelectNodeList();
 			return $list;

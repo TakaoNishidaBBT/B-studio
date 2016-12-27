@@ -21,7 +21,6 @@
 									, $this->version['revision_id']
 									, null
 									, null
-									, null
 									, 1
 									, null);
 
@@ -36,15 +35,25 @@
 			if(is_array($_FILES['upload'])) {
 				$response['CKEditorFuncNum'] = $this->request['CKEditorFuncNum'];
 				$response['url'] = '';
-				$response['message'] = 'サーバブラウザを使用してください';
+				$response['message'] = __('Please use server browser');
 
-				// HTTPヘッダー出力
-				$this->sendHttpHeader();
-
-				// HTMLヘッダー出力
-				$this->showHtmlHeader();
+				// Start buffering
+				ob_start();
 
 				require_once('./view/view_quick_upload.php');
+
+				// Get buffer
+				$contents = ob_get_clean();
+
+				// Send HTTP header
+				$this->sendHttpHeader();
+
+				// Show HTML header
+				$this->showHtmlHeader();
+
+				// Show HTML body
+				echo $contents;
+
 				exit;
 			}
 		}
@@ -56,7 +65,15 @@
 		}
 
 		function view() {
-			// HTTPヘッダー出力
+			// Start buffering
+			ob_start();
+
+			require_once('./view/view_index.php');
+
+			// Get buffer
+			$contents = ob_get_clean();
+
+			// Send HTTP header
 			$this->sendHttpHeader();
 
 			$this->html_header->appendProperty('css', '<link href="css/resource.css" type="text/css" rel="stylesheet" media="all" />');
@@ -67,9 +84,10 @@
 			$this->html_header->appendProperty('script', '<script src="js/bframe_splitter.js" type="text/javascript"></script>');
 			$this->html_header->appendProperty('script', '<script src="js/bframe_effect.js" type="text/javascript"></script>');
 
-			// HTMLヘッダー出力
+			// Show HTML header
 			$this->showHtmlHeader();
 
-			require_once('./view/view_index.php');
+			// Show HTML body
+			echo $contents;
 		}
 	}

@@ -121,7 +121,8 @@
 									, 'root'
 									, null
 									, 'all'
-									, null);
+									, null
+									, true);
 
 			$this->compare($left, $right);
 			$root_node->compare($this->version_right['version_id'], $left, $right);

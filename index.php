@@ -194,7 +194,7 @@
 		$ret = $db->select_db(B_DB_NME);
 
 		// create serialized resource cache file
-		$root = new B_Node($db, B_RESOURCE_NODE_TABLE, $node_view, '', '', 'root', null, 'all', '');
+		$root = new B_Node($db, B_RESOURCE_NODE_TABLE, $node_view, null, null, 'root', null, 'all', null);
 		$root->serialize($data);
 
 		// write serialized data into cache file

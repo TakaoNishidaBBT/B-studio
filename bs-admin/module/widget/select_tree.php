@@ -21,7 +21,6 @@
 									, B_WORKING_WIDGET_NODE_VIEW
 									, $this->version['working_version_id']
 									, $this->version['revision_id']
-									, 'node'
 									, null
 									, null
 									, 1
@@ -64,7 +63,8 @@
 									, 'root'
 									, null
 									, 1
-									, $this->session['open_nodes']);
+									, $this->session['open_nodes']
+									, true);
 
 			$list[] = $root_node->getNodeList($this->request['node_id'], 'select');
 
