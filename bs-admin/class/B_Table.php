@@ -503,10 +503,17 @@
 
 				// primary key
 				if($config[2]) {
-					if($primary) $primary.=',';
-					$primary.= $key;
+					$primary_array[$config[2]] = $key;
 				}
 			}
+			if(is_array($primary_array)) {
+				ksort($primary_array);
+				foreach($primary_array as $value) {
+					if($primary) $primary.=',';
+					$primary.= $value;
+				}
+			}
+
 			if($primary) $primary = "primary key($primary) ";
 
 			$sql = "create table $this->prefix$this->table ($v, $primary) default charset=" . B_DB_CHARSET;

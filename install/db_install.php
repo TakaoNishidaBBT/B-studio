@@ -52,7 +52,7 @@
 			$table = new B_Table($this->db, $table_name);
 			$status = $table->create();
 			if(!$status) {
-				throw new Exception(__('Faild to create table.');
+				throw new Exception(__('Faild to create table.'));
 			}
 		}
 

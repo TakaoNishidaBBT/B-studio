@@ -94,8 +94,8 @@
 
 	${$g_data_set}['table']['contents_node'] =
 		array(							// Data Types			Length	PK		Auto-Increment
-			'version_id'				=> array('char', 		'5', 	'1', 	''),
-			'revision_id'				=> array('char', 		'2', 	'1', 	''),
+			'version_id'				=> array('char', 		'5', 	'2', 	''),
+			'revision_id'				=> array('char', 		'2', 	'3', 	''),
 			'node_id'					=> array('char', 		'10', 	'1', 	'1'),
 			'parent_node'				=> array('char', 		'10', 	'', 	''),
 			'node_type'					=> array('char', 		'10', 	'', 	''),
@@ -112,8 +112,8 @@
 
 	${$g_data_set}['table']['contents'] =
 		array(							// Data Types			Length	PK		Auto-Increment
-			'version_id'				=> array('char', 		'5', 	'1', 	''),
-			'revision_id'				=> array('char', 		'2', 	'1', 	''),
+			'version_id'				=> array('char', 		'5', 	'2', 	''),
+			'revision_id'				=> array('char', 		'2', 	'3', 	''),
 			'contents_id'				=> array('char', 		'10', 	'1', 	'1'),
 			'contents_date'				=> array('char', 		'10', 	'', 	''),
 			'template_id'				=> array('char', 		'10', 	'', 	''),
@@ -142,8 +142,8 @@
 
 	${$g_data_set}['table']['template_node'] =
 		array(							// Data Types			Length	PK		Auto-Increment
-			'version_id'				=> array('char', 		'5', 	'1', 	''),
-			'revision_id'				=> array('char', 		'2', 	'1', 	''),
+			'version_id'				=> array('char', 		'5', 	'2', 	''),
+			'revision_id'				=> array('char', 		'2', 	'3', 	''),
 			'node_id'					=> array('char', 		'10', 	'1', 	'1'),
 			'parent_node'				=> array('char', 		'10', 	'', 	''),
 			'node_type'					=> array('char', 		'10', 	'', 	''),
@@ -160,8 +160,8 @@
 
 	${$g_data_set}['table']['template'] =
 		array(							// Data Types			Length	PK		Auto-Increment
-			'version_id'				=> array('char',		'5', 	'1', 	''),
-			'revision_id'				=> array('char', 		'2', 	'1', 	''),
+			'version_id'				=> array('char',		'5', 	'2', 	''),
+			'revision_id'				=> array('char', 		'2', 	'3', 	''),
 			'contents_id'				=> array('char', 		'10', 	'1', 	'1'),
 			'contents_date'				=> array('char', 		'10', 	'', 	''),
 			'template_id'				=> array('char', 		'10', 	'', 	''),
@@ -184,8 +184,8 @@
 
 	${$g_data_set}['table']['widget_node'] =
 		array(							// Data Types			Length	PK		Auto-Increment
-			'version_id'				=> array('char',	 	'5', 	'1', 	''),
-			'revision_id'				=> array('char', 		'2', 	'1', 	''),
+			'version_id'				=> array('char',	 	'5', 	'2', 	''),
+			'revision_id'				=> array('char', 		'2', 	'3', 	''),
 			'node_id'					=> array('char', 		'10', 	'1', 	'1'),
 			'parent_node'				=> array('char', 		'10', 	'', 	''),
 			'node_type'					=> array('char', 		'10', 	'', 	''),
@@ -202,8 +202,8 @@
 
 	${$g_data_set}['table']['widget'] =
 		array(							// Data Types			Length	PK		Auto-Increment
-			'version_id'				=> array('char', 		'5', 	'1', 	''),
-			'revision_id'				=> array('char', 		'2', 	'1', 	''),
+			'version_id'				=> array('char', 		'5', 	'2', 	''),
+			'revision_id'				=> array('char', 		'2', 	'3', 	''),
 			'contents_id'				=> array('char', 		'10', 	'1', 	'1'),
 			'contents_date'				=> array('char', 		'10', 	'', 	''),
 			'widget_id'					=> array('char', 		'10', 	'', 	''),
@@ -222,8 +222,8 @@
 
 	${$g_data_set}['table']['resource_node'] =
 		array(							// Data Types			Length	PK		Auto-Increment
-			'version_id'				=> array('char',	 	'5', 	'1', 	''),
-			'revision_id'				=> array('char', 		'2', 	'1', 	''),
+			'version_id'				=> array('char',	 	'5', 	'2', 	''),
+			'revision_id'				=> array('char', 		'2', 	'3', 	''),
 			'node_id'					=> array('char', 		'10', 	'1', 	'1'),
 			'parent_node'				=> array('char', 		'10', 	'', 	''),
 			'node_type'					=> array('char', 		'10', 	'', 	''),

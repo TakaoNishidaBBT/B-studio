@@ -30,6 +30,7 @@
 	if(substr($doc_root, -1) == '/') {
 		$doc_root = substr($doc_root, 0, -1);
 	}
+	define('B_HTTP_HOST', $_SERVER['SERVER_NAME']);
 	define('SESSION_DIR', $info['dirname']);
 	define('ROOT_DIR', $root_dir . '/');
 	define('DOC_ROOT', $doc_root);
@@ -165,6 +166,10 @@
 	}
 
 	function contents_install(&$error_message) {
+		if(!file_exists('./default/bstudio.zip')) {
+			return true;
+		}
+
 		require_once('contents_install.php');
 		$contents_install = new contents_install();
 		$status = $contents_install->install();
