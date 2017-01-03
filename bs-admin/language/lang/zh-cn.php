@@ -168,7 +168,7 @@
 		'The file size is too large. The maximun file upload size is %LIMIT%'
 										=> '所选文件过大，上传文件不能超过 %LIMIT%',
 		'Extract %FILE_NAME% ?'			=> '确定展开“%FILE_NAME%”文件？',
-		'%FILE_NAME% already exists. Are you sure you want to overwrite?'
+		'%FILE_NAME% already exists.<br />Are you sure you want to overwrite?'
 										=> '文件“%FILE_NAME%”已存在。<br />确定要覆盖吗？',
 		'Failed to create directory'	=> '无法生成目录',
 		'Multi-byte characters cannot be used in file names. Please check contents of the zip file.'

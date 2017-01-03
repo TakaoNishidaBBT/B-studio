@@ -107,24 +107,59 @@
 						break;
 
 					case 'copy':
+						// Set time limit to 5 minutes
+						set_time_limit(300);
+
 						// start transaction
 						$this->db->begin();
+
+						$this->copy_nodes = 0;
+						$this->total_copy_nodes = 0;
 						foreach($this->request['source_node_id'] as $node_id) {
 							if(!$node_id) continue;
-							$source_node = new B_Node($this->db
-													, B_RESOURCE_NODE_TABLE
-													, B_WORKING_RESOURCE_NODE_VIEW
-													, $this->version['working_version_id']
-													, $this->version['revision_id']
-													, $node_id
-													, null
-													, 'all'
-													, null);
+							$node = new B_Node($this->db
+											, B_RESOURCE_NODE_TABLE
+											, B_WORKING_RESOURCE_NODE_VIEW
+											, $this->version['working_version_id']
+											, $this->version['revision_id']
+											, $node_id
+											, null
+											, 'all'
+											, null
+											, true);
 
-							$ret = $source_node->copy($this->request['destination_node_id'], $this->user_id, $new_node_id, array('obj' => $this, 'method' => 'copy_callback'));
+							$this->total_copy_nodes += $node->nodeCount();
+							$source_node[] = $node;
+						}
+
+						if($this->total_copy_nodes >= 40) {
+							// send progress
+							header('Content-Type: application/octet-stream');
+							header('Transfer-encoding: chunked');
+							flush();
+							ob_flush();
+
+							// Send start message
+							$response['status'] = 'show';
+							$response['message'] = 'Copying ...';
+							$response['progress'] = 0;
+							$this->progress = 0;
+							$this->sendChunk(json_encode($response));
+
+							$this->show_progress = true;
+						}
+
+						foreach($source_node as $node) {
+							$ret = $node->copy($this->request['destination_node_id'], $this->user_id, $new_node_id, array('obj' => $this, 'method' => 'copy_callback'));
 							if(!$ret) break;
 							$this->selected_node[] = $new_node_id[0];
-							$new_node_id = '';
+						}
+
+						if($this->show_progress) {
+							$response['status'] = 'finished';
+							$response['progress'] = 100;
+							$this->sendChunk(',' . json_encode($response));
+							$this->sendChunk();	// terminate
 						}
 						break;
 
@@ -158,43 +193,53 @@
 					else {
 						$this->status = false;
 						$this->db->rollback();
-						$node = $source_node ? $source_node : $destination_node;
+						if(!$node) $node = $source_node ? $source_node : $destination_node;
 						$this->message = $this->getErrorMessage($node->getErrorNo());
 					}
 				}
 			}
-			$this->response($this->request['node_id'], 'select');
+			if(!$response) $this->response($this->request['node_id'], 'select');
 			exit;
 		}
 
 		function copy_callback(&$node) {
-			if($node->node_type != 'file') return true;
+			$this->copy_nodes++;
 
-			$tbl_node = new B_Table($this->db, B_RESOURCE_NODE_TABLE);
+			if($node->node_type == 'file') {
+				$tbl_node = new B_Table($this->db, B_RESOURCE_NODE_TABLE);
 
-			// new_contents_id
-			$new_contents_id = $tbl_node->selectMaxValuePlusOne('node_id');
-			$node->new_contents_id = $new_contents_id . '_' . $this->version['working_version_id'] . '_' . $this->version['revision_id'];
+				// new_contents_id
+				$new_contents_id = $tbl_node->selectMaxValuePlusOne('node_id');
+				$node->new_contents_id = $new_contents_id . '_' . $this->version['working_version_id'] . '_' . $this->version['revision_id'];
 
-			// copy
-			$file = pathinfo($node->node_name);
-			$file_name = B_RESOURCE_DIR . $node->contents_id . '.' . $file['extension'];
-			$new_file_name = B_RESOURCE_DIR . $node->new_contents_id . '.' . $file['extension'];
-			copy($file_name, $new_file_name);
+				// copy
+				$file = pathinfo($node->node_name);
+				$file_name = B_RESOURCE_DIR . $node->contents_id . '.' . $file['extension'];
+				$new_file_name = B_RESOURCE_DIR . $node->new_contents_id . '.' . $file['extension'];
+				copy($file_name, $new_file_name);
 
-			// copy thumbnail
-			switch(strtolower($file['extension'])) {
-			case 'jpg':
-			case 'jpeg':
-			case 'gif':
-			case 'png':
-			case 'bmp':
-				$thumb_file_name = B_RESOURCE_DIR . 'thumb_' . $node->contents_id . '.' . $file['extension'];
-				$new_thumb_file_name = B_RESOURCE_DIR . 'thumb_' . $node->new_contents_id . '.' . $file['extension'];
-				copy($thumb_file_name, $new_thumb_file_name);
-				break;
+				// copy thumbnail
+				switch(strtolower($file['extension'])) {
+				case 'jpg':
+				case 'jpeg':
+				case 'gif':
+				case 'png':
+				case 'bmp':
+					$thumb_file_name = B_RESOURCE_DIR . 'thumb_' . $node->contents_id . '.' . $file['extension'];
+					$new_thumb_file_name = B_RESOURCE_DIR . 'thumb_' . $node->new_contents_id . '.' . $file['extension'];
+					copy($thumb_file_name, $new_thumb_file_name);
+					break;
+				}
 			}
 
+			if($this->show_progress) {
+				$response['status'] = 'progress';
+				$response['progress'] = round($this->copy_nodes / $this->total_copy_nodes * 100);
+				if($this->progress != $response['progress']) {
+					$this->sendChunk(',' . json_encode($response));
+					$this->progress = $response['progress'];
+				}
+			}
 			return true;
 		}
 
@@ -290,6 +335,14 @@
 
 		function truncateNode() {
 			if($this->request['node_id'] && $this->request['node_id'] != 'null') {
+				ignore_user_abort(true);
+
+				// set time limit to 10 minutes
+				set_time_limit(600);
+
+				// start transaction
+				$this->db->begin();
+
 				$node = new B_Node($this->db
 								, B_RESOURCE_NODE_TABLE
 								, B_WORKING_RESOURCE_NODE_VIEW
@@ -300,21 +353,50 @@
 								, 'all'
 								, null);
 
-				ignore_user_abort(true);
+				$this->total_truncate_nodes = $node->nodeCount();
+				if($this->total_truncate_nodes >= 10) {
+					// send progress
+					header('Content-Type: application/octet-stream');
+					header('Transfer-encoding: chunked');
+					flush();
+					ob_flush();
 
-				// set time limit to 10 minutes
-				set_time_limit(600);
+					// Send start message
+					$response['status'] = 'show';
+					$response['message'] = 'Processing ...';
+					$response['progress'] = 0;
+					$this->progress = 0;
+					$this->sendChunk(json_encode($response));
 
-				// start transaction
-				$this->db->begin();
+					$this->show_progress = true;
+				}
 
-				$ret = $node->delete();
+				$ret = $node->delete(array('obj' => $this, 'method' => 'truncate_callback'));
 				if($ret) {
-					// delete useless files
-					$this->truncateFiles();
+					if($this->show_progress) {
+						$response['status'] = 'message';
+						$response['message'] = 'Clean up Files';
+						$this->sendChunk(',' . json_encode($response));
 
-					// clean up DB
-					$ret = $this->cleanUpDB();
+						// delete useless files
+						$this->truncateFiles();
+						sleep(2);
+
+						$response['status'] = 'message';
+						$response['message'] = 'Clean up DB';
+						$this->sendChunk(',' . json_encode($response));
+
+						// clean up DB
+						$ret = $this->cleanUpDB();
+						sleep(2);
+					}
+					else {
+						// delete useless files
+						$this->truncateFiles();
+
+						// clean up DB
+						$ret = $this->cleanUpDB();
+					}
 				}
 				if($ret) {
 					$this->status = true;
@@ -329,8 +411,30 @@
 					$this->message = $this->getErrorMessage($node->getErrorNo());
 				}
 			}
-			$this->response($this->request['node_id'], 'select');
+			if($this->show_progress) {
+				$response['status'] = 'finished';
+				$response['progress'] = 100;
+				$this->sendChunk(',' . json_encode($response));
+				$this->sendChunk();	// terminate
+			}
+			else {
+				$this->response($this->request['node_id'], 'select');
+			}
 			exit;
+		}
+
+		function truncate_callback(&$node) {
+			$this->truncate_nodes++;
+
+			if($this->show_progress) {
+				$response['status'] = 'progress';
+				$response['progress'] = round($this->truncate_nodes / $this->total_truncate_nodes * 100);
+				if($this->progress != $response['progress']) {
+					$this->sendChunk(',' . json_encode($response));
+					$this->progress = $response['progress'];
+				}
+			}
+			return true;
 		}
 
 		function truncateFiles() {
@@ -339,6 +443,7 @@
 					where node_type = 'file'
 					group by contents_id
 					having cnt = 1 and del_flag = '1'";
+
 			$rs = $this->db->query($sql);
 			while($row = $this->db->fetch_assoc($rs)) {
 				$info = pathinfo($row['node_name']);
@@ -357,6 +462,8 @@
 					$thumb_file_name = B_RESOURCE_DIR . B_THUMB_PREFIX . $row['contents_id'] . '.' . strtolower($info['extension']);
 					break;
 				}
+				$truncate_files++;
+
 				if(file_exists($file_name)) {
 					unlink($file_name);
 				}
@@ -381,7 +488,8 @@
 						where del_flag = '1'
 					)";
 
-			return $this->db->query($sql);
+			$ret = $this->db->query($sql);
+			return $ret;
 		}
 
 		function saveName() {
@@ -701,7 +809,6 @@
 				$response['sort_key'] = $this->session['sort_key'];
 				$response['sort_order'] = $this->session['sort_order'];
 			}
-
 			header('Content-Type: application/x-javascript charset=utf-8');
 			echo json_encode($response);
 		}
@@ -729,6 +836,7 @@
 			$this->html_header->appendProperty('css', '<link href="css/upload.css" type="text/css" rel="stylesheet" media="all" />');
 			$this->html_header->appendProperty('script', '<script src="js/bframe_tree.js" type="text/javascript"></script>');
 			$this->html_header->appendProperty('script', '<script src="js/bframe_dialog.js" type="text/javascript"></script>');
+			$this->html_header->appendProperty('script', '<script src="js/bframe_progress_bar.js" type="text/javascript"></script>');
 			$this->html_header->appendProperty('script', '<script src="js/bframe_splitter.js" type="text/javascript"></script>');
 			$this->html_header->appendProperty('script', '<script src="js/bframe_effect.js" type="text/javascript"></script>');
 

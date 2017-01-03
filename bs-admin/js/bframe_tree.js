@@ -77,6 +77,8 @@
 		var display_thumbnail;
 		var display_detail;
 
+		var progress;
+
 		var opener = window.opener;
 
 		init();
@@ -1197,13 +1199,51 @@
 					param+= '&source_node_id[' + i + ']=' + encodeURIComponent(clipboard.target[i].substr(1));
 				}
 				param+= '&destination_node_id='+encodeURIComponent(selected_node.id().substr(1));
-				httpObj = createXMLHttpRequest(showNode);
+				httpObj = createXMLHttpRequest(showprogress);
 				eventHandler(httpObj, property.module, property.file, property.method.pasteNode, 'POST', param);
 				response_wait = true;
 				paste_mode = true;
+				var params = {
+					'id': 		'copyDialog', 
+					'icon': 	'images/common/copy.png',
+				}
+				progress = new bframe.progressBar(params);
 			}
 		}
 		this.pasteNode = pasteNode;
+
+		function showprogress() {
+			if((httpObj.readyState == 3) && httpObj.status == 200) {
+				var response = eval('('+httpObj.responseText+')');
+				var animate = '';
+
+				switch(response['status']) {
+				case 'show':
+					progress.show();
+
+				case 'progress':
+					if(response['progress']) var animate = ' animate';
+					progress.setProgress(response['progress'], animate);
+					progress.setStatus(Math.round(response['progress']) + '%');
+					if(response['message']) progress.setMessage(response['message']);
+					break;
+
+				case 'message':
+					progress.setMessage(response['message']);
+					break;
+				}
+			}
+			if((httpObj.readyState == 4) && httpObj.status == 200) {
+				var response = eval('('+httpObj.responseText+')');
+				if(response['status'] == 'finished') {
+					progress.setComplete();
+					getNodeList(current_node.id());
+				}
+				else {
+					showNode();
+				}
+			}
+		}
 
 		function pasteAriasNode() {
 			if(clipboard.target) {
@@ -1263,9 +1303,15 @@
 			}
 
 			param = 'terminal_id='+terminal_id+'&node_id='+encodeURIComponent(selected_node.id().substr(1));
-			httpObj = createXMLHttpRequest(showNode);
+			httpObj = createXMLHttpRequest(showprogress);
 			eventHandler(httpObj, property.module, property.file, property.method.truncateNode, 'POST', param);
 			response_wait = true;
+
+			var params = {
+				'id': 		'truncateDialog',
+				'icon': 	'images/common/truncate.png',
+			}
+			progress = new bframe.progressBar(params);
 		}
 		this.truncateNode = truncateNode;
 

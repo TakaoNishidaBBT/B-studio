@@ -9,6 +9,7 @@
 <link href="css/menu.css" type="text/css" rel="stylesheet" media="all" />
 <link href="css/context_menu.css" type="text/css" rel="stylesheet" media="all" />
 <link href="css/modal_window.css" type="text/css" rel="stylesheet" media="all" />
+<link href="css/progress_bar.css" rel="stylesheet" media="all" />
 <script src="js/bframe.js" type="text/javascript"></script>
 <script src="js/bframe_ajax.js" type="text/javascript"></script>
 <script src="js/bframe_message.js" type="text/javascript"></script>

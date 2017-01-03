@@ -71,7 +71,7 @@
 					$this->folder_count++;
 				}
 				if((is_array($open_nodes) && $open_nodes[$this->node_id]) || ($expand_level === 'all' || $level < $expand_level)) {
-					$object = new B_FileNode($this->dir, B_Util::getPath($this->path, $file_name), $open_nodes, $this, $expand_level, $level+1);
+					$object = new B_FileNode($this->dir, B_Util::getPath($this->path, $file_name), $open_nodes, $this, $expand_level, $level+1, $thumb_info);
 					$this->addNodes($object);
 				}
 			}
@@ -241,12 +241,11 @@
 			return true;
 		}
 
-		function copy($destination, &$new_node_name, $recursive=false) {
+		function copy($destination, &$new_node_name, $recursive=false, $callback=null) {
 			if($this->isMyChild($destination)) {
 				$this->error_no = 1;
 				return false;
 			}
-
 			if(file_exists($this->fullpath)) {
 				if(is_dir($this->fullpath)) {
 					$new_node_name = $this->getNewNodeName($destination, $this->file_name, 'copy');
@@ -261,17 +260,20 @@
 					copy($this->fullpath, B_Util::getPath($destination, $new_node_name));
 					chmod(B_Util::getPath($destination, $new_node_name), 0777);
 				}
+				if($callback) {
+					$this->callBack($callback);
+				}
 			}
 			if($recursive && is_array($this->node)) {
 				foreach(array_keys($this->node) as $key) {
-					$this->node[$key]->copy($destination, $recursive);
+					$this->node[$key]->_copy($destination, $recursive, $callback);
 				}
 			}
 
 			return true;
 		}
 
-		function _copy($destination, $recursive=false) {
+		function _copy($destination, $recursive=false, $callback=null) {
 			if(file_exists($this->fullpath)) {
 				if(is_dir($this->fullpath)) {
 					$destination = B_Util::getPath($destination, $this->file_name);
@@ -285,10 +287,13 @@
 					copy($this->fullpath, $destination);
 					chmod($destination, 0777);
 				}
+				if($callback) {
+					$this->callBack($callback);
+				}
 			}
 			if($recursive && is_array($this->node)) {
 				foreach(array_keys($this->node) as $key) {
-					$this->node[$key]->_copy($destination, $recursive);
+					$this->node[$key]->_copy($destination, $recursive, $callback);
 				}
 			}
 
@@ -461,21 +466,8 @@
 			else if($this->node_type != 'folder' && $this->node_type != 'root') {
 				$ret = $this->_createthumbnail($data, $index);
 			}
-			if($callback && $ret) {
+			if($callback) {
 				$this->callBack($callback);
-			}
-		}
-
-		function getThumbnailImgPath() {
-			$file_info = pathinfo($this->path);
-			if(strtolower($file_info['extension']) != 'svg') {
-				$thumb_prefix = B_THUMB_PREFIX;
-			}
-			if($file_info['dirname'] != '.' && $file_info['dirname'] != '\\') {
-				return B_Util::getPath(B_Util::getPath(B_UPLOAD_URL, $file_info['dirname']), $thumb_prefix . $file_info['basename']);
-			}
-			else {
-				return B_Util::getPath(B_UPLOAD_URL, $thumb_prefix . $file_info['basename']);
 			}
 		}
 
@@ -498,6 +490,19 @@
 				$data[$this->thumbnail_image_path] = $info['basename'];
 
 				return true;
+			}
+		}
+
+		function getThumbnailImgPath() {
+			$file_info = pathinfo($this->path);
+			if(strtolower($file_info['extension']) != 'svg') {
+				$thumb_prefix = B_THUMB_PREFIX;
+			}
+			if($file_info['dirname'] != '.' && $file_info['dirname'] != '\\') {
+				return B_Util::getPath(B_Util::getPath(B_UPLOAD_URL, $file_info['dirname']), $thumb_prefix . $file_info['basename']);
+			}
+			else {
+				return B_Util::getPath(B_UPLOAD_URL, $thumb_prefix . $file_info['basename']);
 			}
 		}
 
@@ -534,14 +539,24 @@
 			}
 		}
 
-		function nodes_count() {
+		function nodeCount() {
 			if(is_array($this->node)) {
-				$count = count($this->node);
 				foreach(array_keys($this->node) as $key) {
-					$count += $this->node[$key]->nodes_count();
+					$count += $this->node[$key]->nodeCount();
 				}
 			}
-			return $count;
+			return $count + 1;
+		}
+
+		function totalFilesize() {
+			if($this->file_size) $size = $this->file_size;
+
+			if(is_array($this->node)) {
+				foreach(array_keys($this->node) as $key) {
+					$size += $this->node[$key]->totalFilesize();
+				}
+			}
+			return $size;
 		}
 
 		function callBack($call_back) {

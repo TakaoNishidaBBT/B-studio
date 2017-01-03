@@ -87,7 +87,7 @@ $form_config = array(
 				'end_html'			=> '</td>',
 				array(
 					'name'				=> 'backup',
-					'start_html'		=> '<span class="download-button" onclick="bframe.submit(\'F1\', \'' . $this->module . '\', \'form\', \'backupAll\', \'\', true)" >',
+					'start_html'		=> '<span class="download-button" onclick="bstudio.backupAll(\'F1\', \'' . $this->module . '\', \'form\', \'backupAll\', \'\', true)" >',
 					'end_html'			=> '</span>',
 					'value'				=> '<img src="images/common/download.png" alt="' . __('Download') . '" />' . __('Download'),
 				),
@@ -110,7 +110,7 @@ $form_config = array(
 				'end_html'			=> '</td>',
 				array(
 					'name'				=> 'backup',
-					'start_html'		=> '<span class="download-button" onclick="bframe.submit(\'F1\', \'' . $this->module . '\', \'form\', \'backupAll\', \'install\', true)" >',
+					'start_html'		=> '<span class="download-button" onclick="bstudio.backupAll(\'F1\', \'' . $this->module . '\', \'form\', \'backupAll\', \'install\', true)" >',
 					'end_html'			=> '</span>',
 					'value'				=> '<img src="images/common/download.png" alt="' . __('Download') . '" />' . __('Download'),
 				),

@@ -95,7 +95,7 @@
 			$fp = fopen(B_FILE_INFO_THUMB, 'w');
 			fwrite($fp, serialize($data));
 			fclose($fp);
-			chmod($file_info, 0777);
+			chmod(B_FILE_INFO_THUMB, 0777);
 
 			// close and unlock semaphore
 			fclose($fp_semaphore);
@@ -155,5 +155,18 @@
 			$html = str_replace('%HEIGHT%', $height, $html);
 
 			return $html;
+		}
+
+		function sendChunk($response=null) {
+			if($response) {
+				$response = $response . str_repeat(' ', 8000);
+				echo sprintf("%x\r\n", strlen($response));
+				echo $response . "\r\n";
+			}
+			else {
+				echo "0\r\n\r\n";
+			}
+			flush();
+			ob_flush();
 		}
 	}

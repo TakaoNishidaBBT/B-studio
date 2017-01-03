@@ -66,9 +66,37 @@
 
 			switch($this->request['mode']) {
 			case 'copy':
+				// Set time limit to 5 minutes
+				set_time_limit(300);
+
 				$this->session['selected_node'] = '';
 
+				$this->total_copy_nodes = 0;
+				$this->copy_nodes = 0;
 				foreach($this->request['source_node_id'] as $node_id) {
+					$node = $root->getNodeById($node_id);
+					$this->total_copy_nodes += $node->nodeCount(); 
+					$source_node[] = $root->getNodeById($node_id);
+				}
+				if($this->total_copy_nodes) {
+					// send progress
+					header('Content-Type: application/octet-stream');
+					header('Transfer-encoding: chunked');
+					flush();
+					ob_flush();
+
+					// Send start message
+					$response['status'] = 'show';
+					$response['message'] = 'Copying ...';
+					$response['progress'] = 0;
+					$this->progress = 0;
+					$this->sendChunk(json_encode($response));
+					$this->show_progress = true;
+
+					usleep(1000);
+				}
+
+				foreach($source_node as $source) {
 					$source = $root->getNodeById($node_id);
 
 					if(!file_exists($source->fullpath)) {
@@ -81,7 +109,8 @@
 					}
 					else {
 						if($dest->node_type == 'folder' || $dest->node_type == 'root') {
-							$ret = $source->copy($dest->fullpath, $new_node_name, true);
+							if($this->show_progress) $callback = array('obj' => $this, 'method' => 'copy_callback');
+							$ret = $source->copy($dest->fullpath, $new_node_name, true, $callback);
 						}
 						if($ret) {
 							$this->status = true;
@@ -94,10 +123,18 @@
 				}
 				if($this->status) {
 					$root = new B_FileNode($this->dir, 'root', null, null, 'all');
-					$this->refleshThumnailCache($root);
+					sleep(1);
+					$this->refleshThumnailCache($root, $this->show_progress);
 				}
 				else {
 					$this->message = $this->getErrorMessage($source->getErrorNo());
+				}
+
+				if($this->show_progress) {
+					$response['status'] = 'finished';
+					$response['progress'] = 100;
+					$this->sendChunk(',' . json_encode($response));
+					$this->sendChunk();	// terminate
 				}
 				break;
 
@@ -143,8 +180,19 @@
 				break;
 			}
 
-			$this->response($this->request['node_id'], 'select');
+			if(!$response) $this->response($this->request['node_id'], 'select');
 			exit;
+		}
+
+		function copy_callback($file_node) {
+			$this->copy_nodes++;
+
+			$response['status'] = 'progress';
+			$response['progress'] = round($this->copy_nodes / $this->total_copy_nodes * 100);
+			if($this->progress != $response['progress']) {
+				$this->sendChunk(',' . json_encode($response));
+				$this->progress = $response['progress'];
+			}
 		}
 
 		function createNode() {
@@ -261,12 +309,47 @@
 			return true;
 		}
 
-		function refleshThumnailCache($root) {
+		function refleshThumnailCache($root, $progress=false) {
 			$max = $root->getMaxThumbnailNo();
-			$root->createthumbnail($data, $max);
+			if($progress) {
+				$this->total_nodes = $root->nodeCount();
+
+				$response['status'] = 'progress';
+				$response['progress'] = 0;
+				$this->sendChunk(',' . json_encode($response));
+
+				sleep(1);
+
+				$response['status'] = 'message';
+				$response['message'] = 'Refreshing...';
+				$this->sendChunk(',' . json_encode($response));
+
+				usleep(1000);
+
+				$callback = array('obj' => $this, 'method' => 'create_thumbnail_callback');
+			}
+			$root->createthumbnail($data, $max, $callback);
 			$fp = fopen(B_FILE_INFO_THUMB, 'w+');
 			fwrite($fp, serialize($data));
 			fclose($fp);
+
+			if($progress) {
+				$response['status'] = 'progress';
+				$response['progress'] = 100;
+				$this->sendChunk(',' . json_encode($response));
+				sleep(2);
+			}
+		}
+
+		function create_thumbnail_callback() {
+			$this->create_nodes++;
+			$response['status'] = 'progress';
+			$response['progress'] = round($this->create_nodes / $this->total_nodes * 100);
+			if($this->progress != $response['progress']) {
+				$this->sendChunk(',' . json_encode($response));
+				$this->progress = $response['progress'];
+			}
+
 		}
 
 		function download() {
@@ -424,6 +507,7 @@
 			$this->html_header->appendProperty('css', '<link href="css/upload.css" type="text/css" rel="stylesheet" media="all" />');
 			$this->html_header->appendProperty('script', '<script src="js/bframe_tree.js" type="text/javascript"></script>');
 			$this->html_header->appendProperty('script', '<script src="js/bframe_dialog.js" type="text/javascript"></script>');
+			$this->html_header->appendProperty('script', '<script src="js/bframe_progress_bar.js" type="text/javascript"></script>');
 			$this->html_header->appendProperty('script', '<script src="js/bframe_splitter.js" type="text/javascript"></script>');
 			$this->html_header->appendProperty('script', '<script src="js/bframe_effect.js" type="text/javascript"></script>');
 

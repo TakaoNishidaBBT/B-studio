@@ -1,0 +1,83 @@
+@charset "UTF-8";
+
+/* dialog */
+.progress-overlay {
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	top: 0;
+	left: 0;
+	background-color: rgba(0, 0, 0, 0.3);
+	z-index: 100000;
+}
+.progress-container {
+	margin: 0 auto;
+	width:  380px;
+	top: 35%;
+	position: relative;
+	box-shadow: 4px 5px 8px -2px rgba(0,0,0,0.3), 0 2px 20px -7px rgba(0,0,0,0.4);
+}
+.progress-containerHeader {
+	background-color: #505050;
+	height: 17px;
+}
+
+.progress-box {
+	border: 1px solid #666;
+	padding: 12px;
+	background-color: #fff;
+	overflow: hidden;
+}
+.progress-title {
+	margin: 0;
+	padding: 13px 0 13px 120px;
+}
+#copyDialog .progress-message {
+	display: inline-block;
+	padding-left: 14px;
+	vertical-align: 10px;
+}
+
+#truncateDialog .progress-icon {
+	animation: spin 1.5s linear infinite;
+}
+#truncateDialog .progress-message {
+	display: inline-block;
+	padding-left: 10px;
+	vertical-align: 10px;
+}
+
+#backupDialog .progress-message {
+	display: inline-block;
+	padding-left: 14px;
+	vertical-align: 10px;
+}
+
+@keyframes spin {
+	0% {transform: rotate(0deg);}
+	100% {transform: rotate(360deg);}
+}
+
+/* progressbar */
+.progressWrapper {
+	overflow: hidden;
+}
+.progressContainer {
+	padding: 8px 4px;
+	margin: 0 4px;
+	background-color: transparent;
+	overflow: hidden;
+	position: relative;
+}
+.progressBarStatus {
+	padding-left: 4px;
+	font-size: 10px;
+}
+.progressBarInProgress {
+	font-size: 0;
+	width: 0%;
+	height: 2px;
+	background-color: #22a8f6;
+	border-bottom: #1298e6 1px solid;
+	margin-top: 2px;
+}

@@ -241,3 +241,55 @@
 		bframe.ajaxSubmit.registerCallBackFunctionAfter(window.frameElement.deactivate);
 		bframe.ajaxSubmit.submit('F1', module, 'property', 'register', '', true);
 	}
+
+	bstudio.backupAll = function(fname, module, page, method, mode, nocheck) {
+		var info = bframe.getPageInfo();
+
+		param = 'terminal_id='+info['terminal_id']+'&mode='+mode;
+		if(mode) param+= '&mode='+mode;
+
+		var httpObj = createXMLHttpRequest(showprogress);
+		eventHandler(httpObj, module, page, method, 'POST', param);
+
+		var params = {
+			'id': 		'backupDialog', 
+			'icon': 	'images/common/create.png',
+		}
+		progress = new bframe.progressBar(params);
+
+	 	function showprogress() {
+			if((httpObj.readyState == 3) && httpObj.status == 200) {
+				var response = eval('('+httpObj.responseText+')');
+				var animate = '';
+				switch(response['status']) {
+				case 'show':
+					progress.show();
+
+				case 'progress':
+					if(response['progress']) var animate = ' animate';
+					progress.setProgress(response['progress'], animate);
+					progress.setStatus(Math.round(response['progress']) + '%');
+					if(response['message']) progress.setMessage(response['message']);
+					break;
+
+				case 'message':
+					progress.setMessage(response['message']);
+					break;
+				}
+			}
+
+			if((httpObj.readyState == 4) && httpObj.status == 200) {
+				var response = eval('('+httpObj.responseText+')');
+				if(response['status'] == 'finished') {
+					progress.setMessage(response['message']);
+					progress.setComplete();
+
+					var form = fname ? document.forms[fname] : document.forms[0];
+					bframe.appendHiddenElement(form, 'file_name', response['file_name']);
+					bframe.appendHiddenElement(form, 'file_path', response['file_path']);
+
+					bframe.submit(fname, module, page, method, 'download', nocheck);
+				}
+			}
+		}
+	}

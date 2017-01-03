@@ -469,16 +469,20 @@
 			return $this->tbl_node->update($param);
 		}
 
-		function delete() {
+		function delete($callback=null) {
 			if(!$this->node_id) return;
 
 			if(count($this->node)) {
 				foreach(array_keys($this->node) as $key) {
-					$ret = $this->node[$key]->delete();
+					$ret = $this->node[$key]->delete($callback);
 					if(!$ret) return $ret;
 				}
 			}
 			$this->cloneNode($this->node_id);
+
+			if($callback) {
+				if(!$ret = $this->callBack($callback)) return $ret;
+			}
 
 			$param['node_id'] = $this->node_id;
 			$param['del_flag'] = '1';
@@ -750,6 +754,15 @@
 			return $row['cnt'];
 		}
 
+		function nodeCount() {
+			if(is_array($this->node)) {
+				foreach(array_keys($this->node) as $key) {
+					$count+= $this->node[$key]->nodeCount();
+				}
+			}
+			return $count + 1;
+		}
+
 		function serialize(&$data, $path='') {
 			if($path) $path.= '/';
 			$mypath = $path . $this->node_name;
@@ -762,7 +775,6 @@
 			else if($this->parent && $this->node_type != 'folder') {
 				$info = pathinfo($mypath);
 				$data[$mypath] = $this->contents_id . '.' . $info['extension'];
-//				$data[$this->node_id] = $mypath;
 			}
 		}
 

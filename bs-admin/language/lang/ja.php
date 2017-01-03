@@ -168,7 +168,7 @@
 		'The file size is too large. The maximun file upload size is %LIMIT%'
 										=> 'ファイルサイズが大きすぎます。アップロードできるのは%LIMIT%までです',
 		'Extract %FILE_NAME% ?'			=> '%FILE_NAME%を展開しますか？',
-		'%FILE_NAME% already exists. Are you sure you want to overwrite?'
+		'%FILE_NAME% already exists.<br />Are you sure you want to overwrite?'
 										=> '%FILE_NAME%は既に存在します。<br />上書きしてもよろしいですか？',
 		'Failed to create directory'	=> 'ディレクトリの作成に失敗しました',
 		'Multi-byte characters cannot be used in file names. Please check contents of the zip file.'

@@ -25,6 +25,7 @@
 				$obj = $this->form->getElementByName('full_backup2');
 				$obj->display = 'block';
 			}
+			define('BACKUP_PROGRESS_SIZE', 500 * 1024 * 1024);
 		}
 
 		function func_default() {
@@ -99,67 +100,113 @@
 		}
 
 		function backupAll() {
+			if($this->request['mode'] == 'download') {
+				$this->backupDownload($this->request['file_name'], $this->request['file_path']);
+			}
+			else {
+				$this->createBackupFile();
+			}
+		}
+
+		function createBackupFile() {
 			if(!class_exists('ZipArchive')) exit;
 
-			// Set time limit to 3 minutes
-			set_time_limit(180);
+			// Set time limit to infinity
+			set_time_limit(0);
 
-			$zip = new ZipArchive();
 			$file_name = 'bstudio_' . date('YmdHis') . '.zip';
 			$file_path = B_DOWNLOAD_DIR . $this->user_id . time() . $file_name;
-
-			if(!$zip->open($file_path, ZipArchive::CREATE)) {
-				exit;
-			}
 
 			// Continue whether a client disconnect or not
 			ignore_user_abort(true);
 
-			$node = new B_FileNode(B_ADMIN_FILES_DIR, 'root', null, null, 'all');
-			$node->serializeForDownload($admin_file_data);
-			if(is_array($admin_file_data)) {
-				foreach($admin_file_data as $key => $value) {
-					if($value) {
-						$info = pathinfo($key);
-						if(substr($info['basename'], 0, 1) == '.') continue;
-						$zip->addFile($value, B_ADMIN_FILES . $key);
-					}
-					else {
-						$zip->addEmptyDir(B_ADMIN_FILES . $key);
-					}
-				}
-			}
+			// send progress
+			header('Content-Type: application/octet-stream');
+			header('Transfer-encoding: chunked');
+			flush();
+			ob_flush();
+
+			// Send start message
+			$response['status'] = 'show';
+			$response['progress'] = 0;
+			$progress = 0;
+			$this->sendChunk(json_encode($response));
+
+			// create archive file
+			$cmdline = 'php ' . B_DOC_ROOT . B_ADMIN_ROOT . 'module/settings/archive.php';
+			$cmdline .= ' ' . $_SERVER['SERVER_NAME'];
+			$cmdline .= ' ' . $_SERVER['DOCUMENT_ROOT'];
+			$cmdline .= ' ' . $file_path;
+			$cmdline .= ' ' . $this->request['mode'];
+
+			// kick as a background process
+			B_Util::fork($cmdline, false);
+
+			$resource_node_table = B_DB_PREFIX . B_RESOURCE_NODE_TABLE;
+			$sql = "select sum(file_size) total_size from (
+						select * from $resource_node_table
+						where node_type = 'file'
+						group by contents_id
+					) a";
+
+			$rs = $this->db->query($sql);
+			$row = $this->db->fetch_assoc($rs);
+			$resource_total_size = $row['total_size'];
 
 			$node = new B_FileNode(B_UPLOAD_DIR, 'root', null, null, 'all');
-			$node->serializeForDownload($file_data);
-			if(is_array($file_data)) {
-				foreach($file_data as $key => $value) {
-					if($value) {
-						$info = pathinfo($key);
-						if(substr($info['basename'], 0, 1) == '.') continue;
-						$zip->addFile($value, B_UPLOAD_FILES . $key);
+			$files_total_size = $node->totalFilesize();
+			$total_file_size = $resource_total_size + $files_total_size;
+
+			// send progress 
+			for($cnt=0 ;; $cnt++) {
+				usleep(40000);
+				if(file_exists($file_path)) {
+					$response['status'] = 'progress';
+					$response['progress'] = 100;
+					$response['message'] = 'Complete!';
+					$this->sendChunk(',' . json_encode($response));
+
+					sleep(2);
+
+					break;
+				}
+
+				if($cnt%4 == 0) {
+					unset($dots);
+					for($i=0; $i<($cnt/4%8); $i++) {
+						$dots.= '.';
 					}
-					else {
-						$zip->addEmptyDir(B_UPLOAD_FILES . $key);
-					}
+					$response['status'] = 'message';
+					$response['message'] = "Creating {$dots}";
+
+					$this->sendChunk(',' . json_encode($response));
+				}
+
+				usleep(40000);
+
+				$response['status'] = 'progress';
+				$response['progress'] = round($cnt / $total_file_size * 100 * 1000000);
+				if($response['progress'] > 99) $response['progress'] = 99;
+
+				if($progress != $response['progress']) {
+					$this->sendChunk(',' . json_encode($response));
+					$progress = $response['progress'];
 				}
 			}
 
-			$dump_file_name = 'bstudio_' . date('YmdHis') . '.sql';
-			$dump_file_path = B_DOWNLOAD_DIR . $dump_file_name;
-			if(!$this->db->backupTables($dump_file_path, $this->request['mode'])) {
-				$this->result = new B_Element($this->result_config);
-				$this->result_control = new B_Element($this->result_control_config);
-				$param['action_message'] = '<p class="error-message">' . $this->db->getErrorMsg() . '</p>';
-				$this->result->setValue($param);
-				$this->setView('view_result');
-
-				return;
+			// finish
+			$response['status'] = 'finished';
+			$response['file_name'] = $file_name;
+			$response['file_path'] = $file_path;
+			$this->sendChunk(',' . json_encode($response));
+			$this->sendChunk();	// terminate
+			if(connection_status()) {
+				unlink($file_path);
 			}
-			$zip->addFile($dump_file_path, B_DUMP_FILE . $dump_file_name);
+			exit;
+		}
 
-			$zip->close();
-
+		function backupDownload($file_name, $file_path) {
 			header('content-disposition: attachment; filename='.$file_name);
 			header('Content-type: application/sql');
 			header('Cache-control: public');
@@ -168,7 +215,7 @@
 			ob_end_clean();
 			readfile($file_path);
 			unlink($file_path);
-			unlink($dump_file_path);
+
 			exit;
 		}
 
@@ -215,6 +262,7 @@
 			$this->html_header->appendProperty('css', '<link href="css/selectbox_white.css" type="text/css" rel="stylesheet" media="all" />');
 			$this->html_header->appendProperty('script', '<script src="js/bframe_edit_check.js" type="text/javascript"></script>');
 			$this->html_header->appendProperty('script', '<script src="js/bframe_selectbox.js" type="text/javascript"></script>');
+			$this->html_header->appendProperty('script', '<script src="js/bframe_progress_bar.js" type="text/javascript"></script>');
 
 			// Show HTML header
 			$this->showHtmlHeader();

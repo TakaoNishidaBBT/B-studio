@@ -60,7 +60,7 @@
 					case 'noextract':
 						if($this->file_exists($file['basename']) && $this->request['mode'] == 'confirm') {
 							$response_mode = 'confirm';
-							$message = __('%FILE_NAME% already exists. Are you sure you want to overwrite?');
+							$message = __('%FILE_NAME% already exists.<br />Are you sure you want to overwrite?');
 							$message = str_replace('%FILE_NAME%', $file['basename'], $message);
 						}
 						break;
@@ -69,7 +69,7 @@
 				else {
 					if($this->request['mode'] == 'confirm' && $this->file_exists($file['basename'])) {
 						$response_mode = 'confirm';
-						$message = __('%FILE_NAME% already exists. Are you sure you want to overwrite?');
+						$message = __('%FILE_NAME% already exists.<br />Are you sure you want to overwrite?');
 						$message = str_replace('%FILE_NAME%', $file['basename'], $message);
 					}
 				}
@@ -267,19 +267,6 @@
 			$response['status'] = 'extracting';
 			$response['progress'] = round($this->registerd_files / $this->extracted_files * 100);
 			$this->sendChunk(',' . json_encode($response));
-		}
-
-		function sendChunk($response=null) {
-			if($response) {
-				$response = $response . str_repeat(' ', 8000);
-				echo sprintf("%x\r\n", strlen($response));
-				echo $response . "\r\n";
-			}
-			else {
-				echo "0\r\n\r\n";
-			}
-			flush();
-			ob_flush();
 		}
 
 		function _register_archive($node, &$node_id, &$contents_id) {

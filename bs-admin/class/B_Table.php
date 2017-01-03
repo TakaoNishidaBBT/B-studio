@@ -60,7 +60,7 @@
 			$status = false;
 
 			foreach($this->config as $key => $value) {
-				if($value[2] == '1' &&  isset($param[$key]) && $param[$key] != '') { // primary key
+				if($value[2] && isset($param[$key]) && $param[$key] != '') { // primary key
 					switch($value[0]) {	// type
 					case 'char':
 					case 'text':
@@ -95,7 +95,7 @@
 			if(!is_array($param)) return false;
 			foreach($param as $key => $value) {
 				if(!isset($this->config[$key])) continue;
-				if($this->config[$key][2] == '1') continue; // pk
+				if($this->config[$key][2]) continue; // pk
 
 				if(isset($v)) $v.= ',';
 				$v.= $this->setUpdateVlues($key, $value);
@@ -211,7 +211,7 @@
 		}
 
 		function setInsertValues($key, $config, $param) {
-			if($config[3] == '1' && (!isset($param[$key]) || $param[$key] == '')) { // auto increment
+			if($config[3] && (!isset($param[$key]) || $param[$key] == '')) { // auto increment
 				switch($config[0]) { // data type
 				case 'char':
 				case 'text':
@@ -302,7 +302,7 @@
 
 		function selectMaxValuePlusOne($field) {
 			$config = $this->config[$field];
-			if($config[3] == '1' && (!isset($param[$key]) || $param[$key] == '')) { // auto increment
+			if($config[3] && (!isset($param[$key]) || $param[$key] == '')) { // auto increment
 				switch($config[0]) { // data type
 				case 'char':
 				case 'text':
@@ -460,7 +460,7 @@
 
 		function setInsertValuesForLoad($key, $config, $param, &$index) {
 			$value = $param[$index];
-			if($config[3] == '1') { // auto increment
+			if($config[3]) { // auto increment
 				switch($config[0]) { // data type
 				case 'char':
 				case 'text':
