@@ -75,9 +75,16 @@
 				$this->copy_nodes = 0;
 				foreach($this->request['source_node_id'] as $node_id) {
 					$node = $root->getNodeById($node_id);
+					if($node->isMyChild($dest->fullpath)) {
+						$this->message = $this->getErrorMessage(1);
+						$this->status = false;
+						break;
+					}
 					$this->total_copy_nodes += $node->nodeCount(); 
-					$source_node[] = $root->getNodeById($node_id);
+					$source_node[] = $node;
 				}
+				if(!$this->status) break;
+
 				if($this->total_copy_nodes) {
 					// send progress
 					header('Content-Type: application/octet-stream');
@@ -97,8 +104,6 @@
 				}
 
 				foreach($source_node as $source) {
-					$source = $root->getNodeById($node_id);
-
 					if(!file_exists($source->fullpath)) {
 						$this->message = __('Another user has updated this record');
 						$this->status = false;
@@ -123,11 +128,17 @@
 				}
 				if($this->status) {
 					$root = new B_FileNode($this->dir, 'root', null, null, 'all');
-					sleep(1);
-					$this->refleshThumnailCache($root, $this->show_progress);
+					$this->refreshThumbnailCache($root, $this->show_progress);
 				}
 				else {
 					$this->message = $this->getErrorMessage($source->getErrorNo());
+
+					if($this->show_progress) {
+						$response['status'] = 'error';
+						$response['message'] = $this->getErrorMessage($source->getErrorNo());
+						$this->sendChunk(',' . json_encode($response));
+						sleep(1);
+					}
 				}
 
 				if($this->show_progress) {
@@ -172,7 +183,7 @@
 					}
 				}
 				if($this->status) {
-					$this->refleshThumnailCache($root);
+					$this->refreshThumbnailCache($root);
 				}
 				else if(!$this->message) {
 					$this->message = $this->getErrorMessage($dest->getErrorNo());
@@ -241,7 +252,7 @@
 				}
 				if($this->status) {
 					$root = new B_FileNode($this->dir, 'root', null, null, 'all');
-					$this->refleshThumnailCache($root);
+					$this->refreshThumbnailCache($root);
 				}
 			}
 
@@ -269,7 +280,7 @@
 						}
 						$this->session['open_nodes'][$this->request['node_id']] = false;
 						$this->session['open_nodes'][$new_node_id] = true;
-						$this->refleshThumnailCache($root);
+						$this->refreshThumbnailCache($root);
 					}
 					else {
 						$this->message = __('The name could not be changed');
@@ -309,24 +320,21 @@
 			return true;
 		}
 
-		function refleshThumnailCache($root, $progress=false) {
+		function refreshThumbnailCache($root, $progress=false) {
 			$max = $root->getMaxThumbnailNo();
 			if($progress) {
 				$this->total_nodes = $root->nodeCount();
 
+				usleep(500000);
+
 				$response['status'] = 'progress';
 				$response['progress'] = 0;
-				$this->sendChunk(',' . json_encode($response));
-
-				sleep(1);
-
-				$response['status'] = 'message';
 				$response['message'] = 'Refreshing...';
 				$this->sendChunk(',' . json_encode($response));
 
-				usleep(1000);
+				usleep(500000);
 
-				$callback = array('obj' => $this, 'method' => 'create_thumbnail_callback');
+				$callback = array('obj' => $this, 'method' => 'createThumbnail_callback');
 			}
 			$root->createthumbnail($data, $max, $callback);
 			$fp = fopen(B_FILE_INFO_THUMB, 'w+');
@@ -337,11 +345,11 @@
 				$response['status'] = 'progress';
 				$response['progress'] = 100;
 				$this->sendChunk(',' . json_encode($response));
-				sleep(2);
+				sleep(1);
 			}
 		}
 
-		function create_thumbnail_callback() {
+		function createThumbnail_callback() {
 			$this->create_nodes++;
 			$response['status'] = 'progress';
 			$response['progress'] = round($this->create_nodes / $this->total_nodes * 100);

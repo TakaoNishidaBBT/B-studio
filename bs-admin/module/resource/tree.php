@@ -115,6 +115,7 @@
 
 						$this->copy_nodes = 0;
 						$this->total_copy_nodes = 0;
+						$ret = true;
 						foreach($this->request['source_node_id'] as $node_id) {
 							if(!$node_id) continue;
 							$node = new B_Node($this->db
@@ -128,9 +129,16 @@
 											, null
 											, true);
 
+							if($node->isMyChild($this->request['destination_node_id'])) {
+								$node->error_no = 1;
+								$ret = false;
+								break;
+							}
+
 							$this->total_copy_nodes += $node->nodeCount();
 							$source_node[] = $node;
 						}
+						if(!$ret) break;
 
 						if($this->total_copy_nodes >= 40) {
 							// send progress
@@ -155,12 +163,6 @@
 							$this->selected_node[] = $new_node_id[0];
 						}
 
-						if($this->show_progress) {
-							$response['status'] = 'finished';
-							$response['progress'] = 100;
-							$this->sendChunk(',' . json_encode($response));
-							$this->sendChunk();	// terminate
-						}
 						break;
 
 					case 'cut':
@@ -195,9 +197,23 @@
 						$this->db->rollback();
 						if(!$node) $node = $source_node ? $source_node : $destination_node;
 						$this->message = $this->getErrorMessage($node->getErrorNo());
+
+						if($this->show_progress) {
+							$response['status'] = 'error';
+							$response['message'] = $this->getErrorMessage($node->getErrorNo());
+							$this->sendChunk(',' . json_encode($response));
+							sleep(1);
+						}
 					}
 				}
 			}
+			if($this->show_progress) {
+				$response['status'] = 'finished';
+				$response['progress'] = 100;
+				$this->sendChunk(',' . json_encode($response));
+				$this->sendChunk();	// terminate
+			}
+
 			if(!$response) $this->response($this->request['node_id'], 'select');
 			exit;
 		}

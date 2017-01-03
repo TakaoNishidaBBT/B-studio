@@ -1204,8 +1204,8 @@
 				response_wait = true;
 				paste_mode = true;
 				var params = {
-					'id': 		'copyDialog', 
-					'icon': 	'images/common/copy.png',
+					'id': 		property.copy_progress_id, 
+					'icon': 	property.copy_progress_icon,
 				}
 				progress = new bframe.progressBar(params);
 			}
@@ -1230,6 +1230,10 @@
 
 				case 'message':
 					progress.setMessage(response['message']);
+					break;
+
+				case 'error':
+					alert(response['message']);
 					break;
 				}
 			}
@@ -1308,8 +1312,8 @@
 			response_wait = true;
 
 			var params = {
-				'id': 		'truncateDialog',
-				'icon': 	'images/common/truncate.png',
+				'id': 		property.truncate_progress_id,
+				'icon': 	property.truncate_progress_icon,
 			}
 			progress = new bframe.progressBar(params);
 		}
