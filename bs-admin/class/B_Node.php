@@ -763,6 +763,15 @@
 			return $count + 1;
 		}
 
+		function fileSize() {
+			if(is_array($this->node)) {
+				foreach(array_keys($this->node) as $key) {
+					$size+= $this->node[$key]->fileSize();
+				}
+			}
+			return $size + $this->file_size;
+		}
+
 		function serialize(&$data, $path='') {
 			if($path) $path.= '/';
 			$mypath = $path . $this->node_name;

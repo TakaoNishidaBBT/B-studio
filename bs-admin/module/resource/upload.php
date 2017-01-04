@@ -161,7 +161,7 @@
 						$node = new B_FileNode(B_RESOURCE_EXTRACT_DIR, '/', null, null, 'all');
 
 						// Count extract files
-						$this->extracted_files = $node->nodes_count();
+						$this->extracted_files = $node->nodeCount();
 						$this->registerd_files = 0;
 
 						// Register extract files
