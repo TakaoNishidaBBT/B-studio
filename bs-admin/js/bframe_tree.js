@@ -491,6 +491,7 @@
 			else {
 				var suffix = node_name.substring(node_name.lastIndexOf('.')+1, node_name.length);
 				switch(suffix.toLowerCase()) {
+				case 'html':
 				case 'jpg':
 				case 'jpeg':
 				case 'gif':
