@@ -32,7 +32,7 @@
 			    $thumb_info = unserialize($serializedString);
 			}
 			$this->thumb_info = $thumb_info;
-			$this->thumbnail_image_path = $this->getThumbnailImgPath();
+			$this->thumbnail_image_path = $this->getThumbnailImgPath($this->path);
 			$this->thumb = $this->thumb_info[$this->thumbnail_image_path];
 
 			if(!file_exists($this->fullpath)) return;
@@ -222,12 +222,12 @@
 
 				$this->node_id = $new_name;
 				$this->path = $new_name;
-				$this->thumbnail_image_path = $this->getThumbnailImgPath();
+				$this->thumbnail_image_path = $this->getThumbnailImgPath($this->path);
 			}
 			else {
 				$this->path = B_Util::getPath($this->parent->path, $this->file_name);
 				$this->node_id = B_Util::getPath($this->parent->path, $this->file_name);
-				$this->thumbnail_image_path = $this->getThumbnailImgPath();
+				$this->thumbnail_image_path = $this->getThumbnailImgPath($this->path);
 			}
 
 			$this->fullpath = B_Util::getPath($this->dir, $this->path);
@@ -241,7 +241,8 @@
 			return true;
 		}
 
-		function copy($destination, &$new_node_name, $recursive=false, $callback=null) {
+		function copy($dest, &$new_node_name, &$data, &$index, $recursive=false, $callback=null) {
+			$destination = B_Util::getPath($this->dir, $dest);
 			if($this->isMyChild($destination)) {
 				$this->error_no = 1;
 				return false;
@@ -249,7 +250,8 @@
 			if(file_exists($this->fullpath)) {
 				if(is_dir($this->fullpath)) {
 					$new_node_name = $this->getNewNodeName($destination, $this->file_name, 'copy');
-					$destination = B_Util::getPath($destination, $new_node_name);
+					$dest = B_Util::getPath($dest, $new_node_name);
+					$destination = B_Util::getPath($this->dir, $dest);
 					if(!file_exists($destination)) {
 						mkdir($destination);
 						chmod($destination, 0777);
@@ -257,8 +259,22 @@
 				}
 				else {
 					$new_node_name = $this->getNewNodeName($destination, $this->file_name, 'copy');
-					copy($this->fullpath, B_Util::getPath($destination, $new_node_name));
-					chmod(B_Util::getPath($destination, $new_node_name), 0777);
+					$dest = B_Util::getPath($dest, $new_node_name);
+					$destination = B_Util::getPath($this->dir, $dest);
+					copy($this->fullpath, $destination);
+					chmod($dest, 0777);
+
+					// copy thumbnail
+					if($this->thumb && file_exists(B_UPLOAD_THUMBDIR . $this->thumb)) {
+						$file_info = pathinfo($this->path);
+						$index++;
+						$thumbnail_file_path = B_UPLOAD_THUMBDIR . str_pad($index, 10, '0', STR_PAD_LEFT) . '.' . $file_info['extension'];
+						copy(B_UPLOAD_THUMBDIR . $this->thumb, $thumbnail_file_path);
+						chmod($thumbnail_file_path, 0777);
+						$thumbnail_image_path = $this->getThumbnailImgPath($dest);
+						$info = B_Util::pathinfo($thumbnail_file_path);
+						$data[$thumbnail_image_path] = $info['basename'];
+					}
 				}
 				if($callback) {
 					$this->callBack($callback);
@@ -266,26 +282,41 @@
 			}
 			if($recursive && is_array($this->node)) {
 				foreach(array_keys($this->node) as $key) {
-					$this->node[$key]->_copy($destination, $recursive, $callback);
+					$this->node[$key]->_copy($dest, $data, $index, $recursive, $callback);
 				}
 			}
 
 			return true;
 		}
 
-		function _copy($destination, $recursive=false, $callback=null) {
+		function _copy($dest, &$data, &$index, $recursive=false, $callback=null) {
+			$destination = B_Util::getPath($this->dir, $dest);
 			if(file_exists($this->fullpath)) {
 				if(is_dir($this->fullpath)) {
-					$destination = B_Util::getPath($destination, $this->file_name);
+					$dest = B_Util::getPath($dest, $this->file_name);
+					$destination = B_Util::getPath($this->dir, $dest);
 					if(!file_exists($destination)) {
 						mkdir($destination);
 						chmod($destination, 0777);
 					}
 				}
 				else {
-					$destination = B_Util::getPath($destination, $this->file_name);
+					$dest = B_Util::getPath($dest, $this->file_name);
+					$destination = B_Util::getPath($this->dir, $dest);
 					copy($this->fullpath, $destination);
 					chmod($destination, 0777);
+
+					// copy thumbnail
+					if($this->thumb && file_exists(B_UPLOAD_THUMBDIR . $this->thumb)) {
+						$file_info = pathinfo($this->path);
+						$index++;
+						$thumbnail_file_path = B_UPLOAD_THUMBDIR . str_pad($index, 10, '0', STR_PAD_LEFT) . '.' . $file_info['extension'];
+						copy(B_UPLOAD_THUMBDIR . $this->thumb, $thumbnail_file_path);
+						chmod($thumbnail_file_path, 0777);
+						$thumbnail_image_path = $this->getThumbnailImgPath($dest);
+						$info = B_Util::pathinfo($thumbnail_file_path);
+						$data[$thumbnail_image_path] = $info['basename'];
+					}
 				}
 				if($callback) {
 					$this->callBack($callback);
@@ -293,7 +324,7 @@
 			}
 			if($recursive && is_array($this->node)) {
 				foreach(array_keys($this->node) as $key) {
-					$this->node[$key]->_copy($destination, $recursive, $callback);
+					$this->node[$key]->_copy($dest, $data, $index, $recursive, $callback);
 				}
 			}
 
@@ -493,8 +524,8 @@
 			}
 		}
 
-		function getThumbnailImgPath() {
-			$file_info = pathinfo($this->path);
+		function getThumbnailImgPath($path) {
+			$file_info = pathinfo($path);
 			if(strtolower($file_info['extension']) != 'svg') {
 				$thumb_prefix = B_THUMB_PREFIX;
 			}

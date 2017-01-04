@@ -85,7 +85,9 @@
 				}
 				if(!$this->status) break;
 
-				if($this->total_copy_nodes) {
+				$max = $node->getMaxThumbnailNo();
+
+				if(10 < $this->total_copy_nodes) {
 					// send progress
 					header('Content-Type: application/octet-stream');
 					header('Transfer-encoding: chunked');
@@ -115,7 +117,7 @@
 					else {
 						if($dest->node_type == 'folder' || $dest->node_type == 'root') {
 							if($this->show_progress) $callback = array('obj' => $this, 'method' => 'copy_callback');
-							$ret = $source->copy($dest->fullpath, $new_node_name, true, $callback);
+							$ret = $source->copy($dest->path, $new_node_name, $data, $max, true, $callback);
 						}
 						if($ret) {
 							$this->status = true;
@@ -127,8 +129,14 @@
 					}
 				}
 				if($this->status) {
+					$serializedString = file_get_contents(B_FILE_INFO_THUMB);
+					$info = unserialize($serializedString);
+
+					$fp = fopen(B_FILE_INFO_THUMB, 'w');
+					fwrite($fp, serialize(array_merge($info, $data)));
+					fclose($fp);
+
 					$root = new B_FileNode($this->dir, 'root', null, null, 'all');
-					$this->refreshThumbnailCache($root, $this->show_progress);
 				}
 				else {
 					$this->message = $this->getErrorMessage($source->getErrorNo());
@@ -322,31 +330,10 @@
 
 		function refreshThumbnailCache($root, $progress=false) {
 			$max = $root->getMaxThumbnailNo();
-			if($progress) {
-				$this->total_nodes = $root->nodeCount();
-
-				usleep(500000);
-
-				$response['status'] = 'progress';
-				$response['progress'] = 0;
-				$response['message'] = 'Refreshing...';
-				$this->sendChunk(',' . json_encode($response));
-
-				usleep(500000);
-
-				$callback = array('obj' => $this, 'method' => 'createThumbnail_callback');
-			}
 			$root->createthumbnail($data, $max, $callback);
 			$fp = fopen(B_FILE_INFO_THUMB, 'w+');
 			fwrite($fp, serialize($data));
 			fclose($fp);
-
-			if($progress) {
-				$response['status'] = 'progress';
-				$response['progress'] = 100;
-				$this->sendChunk(',' . json_encode($response));
-				sleep(1);
-			}
 		}
 
 		function createThumbnail_callback() {
