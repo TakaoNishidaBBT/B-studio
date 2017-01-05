@@ -10,7 +10,7 @@
 			parent::__construct(__FILE__);
 
 			$this->dir = B_RESOURCE_DIR;
-			$this->current_folder = $this->global_session['resource']['current_node'];
+			$this->current_folder = $this->session['current_node'];
 		}
 
 		function confirm() {
@@ -167,7 +167,7 @@
 
 						// Register extract files
 						$node->walk($this, register_archive);
-//						$node->remove();
+						$node->remove();
 
 						// kick refresh-cache process
 						$this->refreshCache();
