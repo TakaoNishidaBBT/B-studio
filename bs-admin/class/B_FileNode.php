@@ -331,6 +331,32 @@
 			return true;
 		}
 
+		function fileCopy($destination, $recursive=false, $callback=null) {
+			if(file_exists($this->fullpath)) {
+				if(is_dir($this->fullpath)) {
+					$destination = B_Util::getPath($destination, $this->file_name);
+					if(!file_exists($destination)) {
+						mkdir($destination);
+						chmod($destination, 0777);
+					}
+				}
+				else {
+					$destination = B_Util::getPath($destination, $this->file_name);
+					copy($this->fullpath, $destination);
+					chmod($destination, 0777);
+				}
+				if($callback) {
+					$this->callBack($callback);
+				}
+			}
+			if($recursive && is_array($this->node)) {
+				foreach(array_keys($this->node) as $key) {
+					$this->node[$key]->fileCopy($destination, $recursive, $callback);
+				}
+			}
+			return true;
+		}
+
 		function move($source) {
 			if($this->isMyParent($source->fullpath)) {
 				$this->error_no = 1;
