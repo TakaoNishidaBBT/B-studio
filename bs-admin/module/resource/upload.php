@@ -161,12 +161,13 @@
 						$node = new B_FileNode(B_RESOURCE_EXTRACT_DIR, '/', null, null, 'all');
 
 						// Count extract files
-						$this->extracted_files = $node->nodeCount();
+						$this->except = array_flip(array('__MACOSX', '._' . $file['file_name']));
+						$this->extracted_files = $node->nodeCount($this->except);
 						$this->registerd_files = 0;
 
 						// Register extract files
 						$node->walk($this, register_archive);
-						$node->remove();
+//						$node->remove();
 
 						// kick refresh-cache process
 						$this->refreshCache();
@@ -245,7 +246,10 @@
 		}
 
 		function register_archive($node) {
-			if(!$node->parent) return;
+			if(!$node->parent) return true;
+
+			// except file or folder (stop walking)
+			if(array_key_exists($node->file_name, $this->except)) return false;
 
 			$ret = $this->_register_archive($node, $node_id, $contents_id);
 			if($ret) {
@@ -267,6 +271,8 @@
 			$response['status'] = 'extracting';
 			$response['progress'] = round($this->registerd_files / $this->extracted_files * 100);
 			$this->sendChunk(',' . json_encode($response));
+
+			return true;
 		}
 
 		function _register_archive($node, &$node_id, &$contents_id) {

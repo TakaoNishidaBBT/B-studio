@@ -153,10 +153,10 @@
 
 		function walk($obj, $method) {
 			if(method_exists($obj, $method)) {
-				$obj->$method($this);
+				$ret = $obj->$method($this);
 			}
 
-			if(is_array($this->node)) {
+			if($ret && is_array($this->node)) {
 				foreach(array_keys($this->node) as $key) {
 					$this->node[$key]->walk($obj, $method);
 				}
@@ -596,10 +596,12 @@
 			}
 		}
 
-		function nodeCount() {
+		function nodeCount($except_array=null) {
+			if(is_array($except_array) && array_key_exists($this->file_name, $except_array)) return;
+
 			if(is_array($this->node)) {
 				foreach(array_keys($this->node) as $key) {
-					$count += $this->node[$key]->nodeCount();
+					$count += $this->node[$key]->nodeCount($except_array);
 				}
 			}
 			return $count + 1;
