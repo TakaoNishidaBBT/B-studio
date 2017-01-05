@@ -454,7 +454,7 @@
 		}
 
 		function truncateFiles() {
-			$sql = "select contents_id, count(*) cnt, max(del_flag) del_flag, node_name
+			$sql = "select contents_id, count(*) cnt, max(del_flag) del_flag, max(node_name)
 					from " . B_DB_PREFIX . B_RESOURCE_NODE_TABLE . "
 					where node_type = 'file'
 					group by contents_id
@@ -495,8 +495,8 @@
 					where concat(version_id, revision_id, node_id) in
 					(
 						select id from (
-							select concat(version_id, revision_id, node_id) id
-								   ,del_flag
+							select concat(max(version_id), max(revision_id), node_id) id
+								   , max(del_flag) del_flag
 							from " . B_DB_PREFIX . B_RESOURCE_NODE_TABLE . "
 							 group by node_id
 							 having count(*) = 1
