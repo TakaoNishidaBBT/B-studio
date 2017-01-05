@@ -114,7 +114,8 @@
 				$contents = file_get_contents(B_RESOURCE_DIR . $info[$url]);
 				$encoding = mb_detect_encoding($contents, ${$g_data_set}['encoding']);
 				header('Content-Type: text/html; charset=' . $encoding);
-				break;
+				eval('?>' . $contents);
+				exit;
 
 			default:
 				if(!$info[$url]) {
