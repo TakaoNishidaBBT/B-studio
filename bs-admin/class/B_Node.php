@@ -777,6 +777,7 @@
 			$mypath = $path . $this->node_name;
 
 			if(is_array($this->node)) {
+				$data[$mypath] = '';
 				foreach(array_keys($this->node) as $key) {
 					$this->node[$key]->serialize($data, $mypath);
 				}

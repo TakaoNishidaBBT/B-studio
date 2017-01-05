@@ -6,11 +6,13 @@
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
 	error_reporting(E_ALL & ~E_NOTICE & ~E_STRICT);
-	$file = pathinfo($_REQUEST['url']);
 
 	require_once('./bs-admin/config/core_config.php');
+	require_once(B_DOC_ROOT . B_ADMIN_ROOT . 'class/B_Util.php');
 	require_once(B_DOC_ROOT . B_ADMIN_ROOT . 'class/B_Session.php');
 	$ses = new B_Session;
+
+	$file = B_Util::pathinfo($_REQUEST['url']);
 
 	// To get real url
 	$url = $_SERVER['REQUEST_URI'];
@@ -63,8 +65,14 @@
 		$serializedString = file_get_contents($file_info);
 		$info = unserialize($serializedString);
 
+		// set DirectoryIndex
+		if(!$file['basename']) {
+			$url.= 'index.html';
+			$file = B_Util::pathinfo($url);
+		}
+
 		// If requested file exists in resource cache file
-		if($info[$url]) {
+		if(array_key_exists($url, $info)) {
 			if(isset($_SERVER['HTTP_IF_MODIFIED_SINCE'])) {
 				if(strtotime($_SERVER['HTTP_IF_MODIFIED_SINCE']) >= filemtime($file_info)) {
 					header('HTTP/1.1 304 Not Modified');
@@ -109,6 +117,12 @@
 				break;
 
 			default:
+				if(!$info[$url]) {
+					$path = B_SITE_ROOT . $url . '/';
+					header("Location:$path");
+					exit;
+				}
+
 				header('Content-Type: application/' . strtolower($file['extension']));
 				break;
 			}
