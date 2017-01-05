@@ -119,6 +119,7 @@
 			default:
 				if(!$info[$url]) {
 					$path = B_SITE_ROOT . $url . '/';
+					header('HTTP/1.1 302 Found');
 					header("Location:$path");
 					exit;
 				}
