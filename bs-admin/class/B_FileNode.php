@@ -515,8 +515,8 @@ $this->log = new B_Log(B_LOG_FILE);
 		}
 
 		function createthumbnail(&$data, &$index=0, $except_array=null, $callback=null) {
-$this->log->write($this->file_name);
-			if(is_array($except_array) && array_key_exists($this->file_name, $except_array)) return;
+$this->log->write('createthumbnail', $this->file_name);
+			if($this->file_name && is_array($except_array) && array_key_exists($this->file_name, $except_array)) return;
 
 			if(is_array($this->node)) {
 				foreach(array_keys($this->node) as $key) {
@@ -532,6 +532,7 @@ $this->log->write($this->file_name);
 		}
 
 		function _createthumbnail(&$data, &$index) {
+			if($this->node_type == 'folder') return true;
 			if(!file_exists($this->fullpath)) return;
 
 			if($this->thumb && file_exists(B_UPLOAD_THUMBDIR . $this->thumb)) {
@@ -599,15 +600,20 @@ $this->log->write($this->file_name);
 			}
 		}
 
-		function nodeCount($except_array=null) {
-			if(is_array($except_array) && array_key_exists($this->file_name, $except_array)) return;
+		function nodeCount($file_only=false, $except_array=null) {
+$this->log->write('nodeCount:$this->file_name', $this->file_name);
+			if($this->file_name && is_array($except_array) && array_key_exists($this->file_name, $except_array)) return;
 
 			if(is_array($this->node)) {
 				foreach(array_keys($this->node) as $key) {
-					$count += $this->node[$key]->nodeCount($except_array);
+					$count += $this->node[$key]->nodeCount($file_only, $except_array);
 				}
 			}
-			return $count + 1;
+			if(!$file_only || $this->node_type == 'file') {
+				$mynode = 1;
+			}
+
+			return $count + $mynode;
 		}
 
 		function totalFilesize() {

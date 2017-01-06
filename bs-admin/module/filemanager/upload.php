@@ -101,7 +101,7 @@
 
 				if(strtolower($file['extension']) == 'zip' && class_exists('ZipArchive') && $this->request['extract_mode'] == 'extract') {
 					// Set time limit to 10 minutes
-//					set_time_limit(600);
+					set_time_limit(600);
 
 					// Continue whether a client disconnect or not
 					ignore_user_abort(true);
@@ -140,7 +140,7 @@ $this->log->write($zip_file);
 						$this->except = array_flip(array('__MACOSX', '._' . $file['file_name']));
 
 						// Count extract files
-						$this->extracted_files = $node->nodeCount($this->except);
+						$this->extracted_files = $node->nodeCount(true, $this->except);
 $this->log->write('$this->extracted_files', $this->extracted_files);
 						$this->registerd_files = 0;
 						$this->progress = 0;
