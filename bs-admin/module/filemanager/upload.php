@@ -101,7 +101,7 @@
 
 				if(strtolower($file['extension']) == 'zip' && class_exists('ZipArchive') && $this->request['extract_mode'] == 'extract') {
 					// Set time limit to 10 minutes
-					set_time_limit(600);
+					set_time_limit(180);
 
 					// Continue whether a client disconnect or not
 					ignore_user_abort(true);
@@ -111,7 +111,6 @@
 
 					$zip_file = B_RESOURCE_WORK_DIR . $file['basename'];
 					$status = move_uploaded_file($_FILES['Filedata']['tmp_name'], $zip_file);
-$this->log->write('file', $file);
 
 					if($status) {
 						usleep(300000);
@@ -126,9 +125,9 @@ $this->log->write('file', $file);
 						$response['status'] = 'extracting';
 						$response['progress'] = 0;
 						$this->sendChunk(json_encode($response));
-$this->log->write($zip_file);
+
 						$zip = new ZipArchive();
-						$zip->open($zip_file);
+						$zip->open($zip_file, ZIPARCHIVE::CREATE);
 						$zip->extractTo(B_RESOURCE_EXTRACT_DIR);
 						$zip->close();
 						unlink($zip_file);
@@ -141,7 +140,6 @@ $this->log->write($zip_file);
 
 						// Count extract files
 						$this->extracted_files = $node->nodeCount(true, $this->except);
-$this->log->write('$this->extracted_files', $this->extracted_files);
 						$this->registerd_files = 0;
 						$this->progress = 0;
 
@@ -285,14 +283,13 @@ $this->log->write('$this->extracted_files', $this->extracted_files);
 			return true;
 		}
 
-		function createThumbnail_callback() {
+		function createThumbnail_callback($node) {
 			$this->createTumbnail_files++;
 			$response['status'] = 'creating';
 			$response['progress'] = round($this->createTumbnail_files / $this->extracted_files * 100);
 			if($this->progress != $response['progress']) {
 				$this->sendChunk(',' . json_encode($response));
 				$this->progress = $response['progress'];
-$this->log->write('createThumbnail_callback $this->progress', $this->createTumbnail_files, $this->extracted_files, $this->progress);
 			}
 		}
 

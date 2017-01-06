@@ -12,7 +12,7 @@
 	class B_FileNode {
 		function __construct($dir, $path, $open_nodes=null, $parent=null, $expand_level=0, $level=0, $thumb_info=null) {
 			if(!$path) return;
-$this->log = new B_Log(B_LOG_FILE);
+
 			$this->dir = $dir;
 			$this->path = $path == 'root' ? '' : $path;
 			$this->node_id = $path == '/' ? 'root' : $path;
@@ -515,7 +515,6 @@ $this->log = new B_Log(B_LOG_FILE);
 		}
 
 		function createthumbnail(&$data, &$index=0, $except_array=null, $callback=null) {
-$this->log->write('createthumbnail', $this->file_name);
 			if($this->file_name && is_array($except_array) && array_key_exists($this->file_name, $except_array)) return;
 
 			if(is_array($this->node)) {
@@ -601,7 +600,6 @@ $this->log->write('createthumbnail', $this->file_name);
 		}
 
 		function nodeCount($file_only=false, $except_array=null) {
-$this->log->write('nodeCount:$this->file_name', $this->file_name);
 			if($this->file_name && is_array($except_array) && array_key_exists($this->file_name, $except_array)) return;
 
 			if(is_array($this->node)) {
