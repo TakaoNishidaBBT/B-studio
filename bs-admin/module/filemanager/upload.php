@@ -248,9 +248,12 @@
 				$stat = $zip->statIndex($i);
 				$file_name = mb_convert_encoding($stat['name'], 'UTF-8', 'auto');
 				if(strlen($file_name) != mb_strlen($file_name)) {
+					$zip->close();
 					throw new Exception(__('Multi-byte characters cannot be used in file names. Please check contents of the zip file.'));
 				}
 			}
+
+			$zip->close();
 		}
 
 		function register_archive($node) {
