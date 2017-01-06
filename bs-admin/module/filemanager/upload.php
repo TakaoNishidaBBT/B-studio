@@ -106,11 +106,11 @@
 					// Continue whether a client disconnect or not
 					ignore_user_abort(true);
 
-					// Check Contents of zip file
-					$this->checkZipFile($_FILES['Filedata']['tmp_name']);
-
 					$zip_file = B_RESOURCE_WORK_DIR . $file['basename'];
 					$status = move_uploaded_file($_FILES['Filedata']['tmp_name'], $zip_file);
+
+					// Check Contents of zip file
+					$this->checkZipFile($zip_file);
 
 					if($status) {
 						usleep(300000);
@@ -127,7 +127,7 @@
 						$this->sendChunk(json_encode($response));
 
 						$zip = new ZipArchive();
-						$zip->open($zip_file, ZipArchive::CREATE);
+						$zip->open($zip_file);
 						$zip->extractTo(B_RESOURCE_EXTRACT_DIR);
 						$zip->close();
 						unlink($zip_file);
@@ -242,7 +242,7 @@
 
 		function checkZipFile($zip_file) {
 			$zip = new ZipArchive();
-			$zip->open($zip_file, ZipArchive::CREATE);
+			$zip->open($zip_file);
 
 			for($i=0; $i < $zip->numFiles; $i++) {
 				$stat = $zip->statIndex($i);

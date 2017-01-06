@@ -152,7 +152,7 @@
 
 						// Extract
 						$zip = new ZipArchive();
-						$zip->open($zip_file, ZipArchive::CREATE);
+						$zip->open($zip_file);
 						$zip->extractTo(B_RESOURCE_EXTRACT_DIR);
 						$zip->close();
 						unlink($zip_file);
@@ -236,7 +236,7 @@
 
 		function checkZipFile($zip_file) {
 			$zip = new ZipArchive();
-			$zip->open($zip_file, ZipArchive::CREATE);
+			$zip->open($zip_file);
 
 			for($i=0; $i < $zip->numFiles; $i++) {
 				$stat = $zip->statIndex($i);
