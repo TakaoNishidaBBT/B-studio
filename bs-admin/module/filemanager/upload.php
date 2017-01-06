@@ -100,7 +100,7 @@
 				$file = B_Util::pathinfo($_FILES['Filedata']['name']);
 
 				if(strtolower($file['extension']) == 'zip' && class_exists('ZipArchive') && $this->request['extract_mode'] == 'extract') {
-					// Set time limit to 10 minutes
+					// Set time limit to 3 minutes
 					set_time_limit(180);
 
 					// Continue whether a client disconnect or not
