@@ -101,7 +101,7 @@
 
 				if(strtolower($file['extension']) == 'zip' && class_exists('ZipArchive') && $this->request['extract_mode'] == 'extract') {
 					// Set time limit to 10 minutes
-					set_time_limit(600);
+//					set_time_limit(600);
 
 					// Continue whether a client disconnect or not
 					ignore_user_abort(true);
@@ -111,6 +111,7 @@
 
 					$zip_file = B_RESOURCE_WORK_DIR . $file['basename'];
 					$status = move_uploaded_file($_FILES['Filedata']['tmp_name'], $zip_file);
+$this->log->write('file', $file);
 
 					if($status) {
 						usleep(300000);
@@ -125,7 +126,7 @@
 						$response['status'] = 'extracting';
 						$response['progress'] = 0;
 						$this->sendChunk(json_encode($response));
-
+$this->log->write($zip_file);
 						$zip = new ZipArchive();
 						$zip->open($zip_file);
 						$zip->extractTo(B_RESOURCE_EXTRACT_DIR);
@@ -135,9 +136,14 @@
 						// Controll extracted files
 						$node = new B_FileNode(B_RESOURCE_EXTRACT_DIR, '/', null, null, 'all');
 
+						// except file or folder
+						$this->except = array_flip(array('__MACOSX', '._' . $file['file_name']));
+
 						// Count extract files
-						$this->extracted_files = $node->nodeCount();
+						$this->extracted_files = $node->nodeCount($this->except);
+$this->log->write('$this->extracted_files', $this->extracted_files);
 						$this->registerd_files = 0;
+						$this->progress = 0;
 
 						// register extract files
 						$node->walk($this, register_archive);
@@ -154,8 +160,11 @@
 						$response['progress'] = 0;
 						$this->sendChunk(',' . json_encode($response));
 
+						usleep(300000);
+
 						$root = new B_FileNode(B_UPLOAD_DIR, '/', null, null, 'all');
 						$this->createTumbnail_files = 0;
+						$this->progress = 0;
 						$this->refleshThumnailCache($root, array('obj' => $this, 'method' => 'createThumbnail_callback'));
 
 						foreach($this->registered_archive_node as $path) {
@@ -247,7 +256,10 @@
 		}
 
 		function register_archive($node) {
-			if(!$node->parent ) return;
+			if(!$node->parent ) return true;
+
+			// except file or folder (stop walking)
+			if(array_key_exists($node->file_name, $this->except)) return false;
 
 			$dest = B_Util::getPath(B_UPLOAD_DIR, B_Util::getPath($this->path, $node->path));
 			if(is_dir($node->fullpath)) {
@@ -265,14 +277,23 @@
 			$this->registerd_files++;
 			$response['status'] = 'extracting';
 			$response['progress'] = round($this->registerd_files / $this->extracted_files * 100);
-			$this->sendChunk(',' . json_encode($response));
+			if($this->progress != $response['progress']) {
+				$this->sendChunk(',' . json_encode($response));
+				$this->progress = $response['progress'];
+			}
+
+			return true;
 		}
 
 		function createThumbnail_callback() {
 			$this->createTumbnail_files++;
 			$response['status'] = 'creating';
 			$response['progress'] = round($this->createTumbnail_files / $this->extracted_files * 100);
-			$this->sendChunk(',' . json_encode($response));
+			if($this->progress != $response['progress']) {
+				$this->sendChunk(',' . json_encode($response));
+				$this->progress = $response['progress'];
+$this->log->write('createThumbnail_callback $this->progress', $this->createTumbnail_files, $this->extracted_files, $this->progress);
+			}
 		}
 
 		function sendChunk($response='') {
@@ -302,7 +323,7 @@
 
 		function refleshThumnailCache($root, $callback=null) {
 			$max = $root->getMaxThumbnailNo();
-			$root->createthumbnail($data, $max, $callback);
+			$root->createthumbnail($data, $max, $this->except, $callback);
 			$fp = fopen(B_FILE_INFO_THUMB, 'w+');
 			fwrite($fp, serialize($data));
 			fclose($fp);

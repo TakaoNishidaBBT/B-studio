@@ -160,9 +160,12 @@
 						// Controll extracted files
 						$node = new B_FileNode(B_RESOURCE_EXTRACT_DIR, '/', null, null, 'all');
 
-						// Count extract files
+						// except file or folder
 						$this->except = array_flip(array('__MACOSX', '._' . $file['file_name']));
+
+						// Count extract files
 						$this->extracted_files = $node->nodeCount($this->except);
+
 						$this->registerd_files = 0;
 
 						// Register extract files
@@ -270,7 +273,10 @@
 			$this->registerd_files++;
 			$response['status'] = 'extracting';
 			$response['progress'] = round($this->registerd_files / $this->extracted_files * 100);
-			$this->sendChunk(',' . json_encode($response));
+			if($this->progress != $response['progress']) {
+				$this->sendChunk(',' . json_encode($response));
+				$this->progress = $response['progress'];
+			}
 
 			return true;
 		}
