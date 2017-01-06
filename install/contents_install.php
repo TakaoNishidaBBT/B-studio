@@ -16,7 +16,7 @@
 			}
 			try {
 				$this->zip = new ZipArchive();
-				$this->zip->open('./default/bstudio.zip');
+				$this->zip->open('./default/bstudio.zip', ZipArchive::CREATE);
 				$this->zip->extractTo(B_RESOURCE_EXTRACT_DIR);
 				$this->zip->close();
 

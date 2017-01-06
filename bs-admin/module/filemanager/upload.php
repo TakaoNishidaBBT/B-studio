@@ -127,7 +127,7 @@
 						$this->sendChunk(json_encode($response));
 
 						$zip = new ZipArchive();
-						$zip->open($zip_file, ZIPARCHIVE::CREATE);
+						$zip->open($zip_file, ZipArchive::CREATE);
 						$zip->extractTo(B_RESOURCE_EXTRACT_DIR);
 						$zip->close();
 						unlink($zip_file);
@@ -242,7 +242,7 @@
 
 		function checkZipFile($zip_file) {
 			$zip = new ZipArchive();
-			$zip->open($zip_file);
+			$zip->open($zip_file, ZipArchive::CREATE);
 
 			for($i=0; $i < $zip->numFiles; $i++) {
 				$stat = $zip->statIndex($i);
