@@ -21,6 +21,10 @@
 
 			require_once(B_DOC_ROOT . B_ADMIN_ROOT . 'module/common/config/pager_config.php');
 			$this->pager_config = $pager_config;
+
+			// bframe_message config
+			require_once(B_DOC_ROOT . B_ADMIN_ROOT . 'module/common/config/bframe_message_config.php');
+			$this->bframe_message_config = $bframe_message_config;
 		}
 
 		function getVersionInfo() {

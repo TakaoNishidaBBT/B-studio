@@ -9,6 +9,9 @@
 		function __construct() {
 			parent::__construct(__FILE__);
 
+			// bframe_message
+			$this->bframe_message = new B_Element($this->bframe_message_config, $this->user_auth);
+
 			$this->_setProperty('target', '');
 			$this->_setProperty('target_id', '');
 
@@ -80,6 +83,7 @@
 			$this->html_header->appendProperty('css', '<link href="css/resource_tree.css" type="text/css" rel="stylesheet" media="all" />');
 			$this->html_header->appendProperty('css', '<link href="css/upload.css" type="text/css" rel="stylesheet" media="all" />');
 			$this->html_header->appendProperty('css', '<link href="css/progress_bar.css" type="text/css" rel="stylesheet" media="all" />');
+			$this->html_header->appendProperty('script', '<script src="js/bframe_message.js" type="text/javascript"></script>');
 			$this->html_header->appendProperty('script', '<script src="js/bframe_tree.js" type="text/javascript"></script>');
 			$this->html_header->appendProperty('script', '<script src="js/bframe_dialog.js" type="text/javascript"></script>');
 			$this->html_header->appendProperty('script', '<script src="js/bframe_progress_bar.js" type="text/javascript"></script>');

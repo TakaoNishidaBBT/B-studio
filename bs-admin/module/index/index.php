@@ -52,8 +52,7 @@
 			define('DISPATCH_URL', 'index.php?terminal_id=' . TERMINAL_ID);
 
 			// bframe_message
-			require_once('./config/bframe_message_config.php');
-			$this->bframe_message = new B_Element($bframe_message_config, $this->user_auth);
+			$this->bframe_message = new B_Element($this->bframe_message_config, $this->user_auth);
 
 			// Menu
 			require_once('./config/menu_config.php');
