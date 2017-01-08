@@ -28,29 +28,40 @@
 	background-color: #fff;
 	overflow: hidden;
 }
+
 .progress-title {
 	margin: 0;
 	padding: 13px 0 13px 120px;
 }
-#copyDialog .progress-message {
-	display: inline-block;
-	padding-left: 14px;
-	vertical-align: 10px;
-}
-
-#truncateDialog .progress-icon {
-	animation: spin 1.5s linear infinite;
-}
-#truncateDialog .progress-message {
+.progress-message {
 	display: inline-block;
 	padding-left: 10px;
 	vertical-align: 10px;
 }
+.progress-icon {
+	animation: spin 2.0s linear infinite;
+}
+
+#progressDialog .progress-title {
+	padding: 13px 0 13px 94px;
+}
+
+#copyDialog .progress-message {
+	padding-left: 14px;
+}
+
+#truncateDialog .progress-icon {
+	animation: spin 2.0s linear infinite;
+}
+#truncateDialog .complete-icon {
+	animation: none;
+}
+#truncateDialog .progress-message {
+	padding-left: 10px;
+}
 
 #backupDialog .progress-message {
-	display: inline-block;
-	padding-left: 14px;
-	vertical-align: 10px;
+	padding-left: 10px;
 }
 
 @keyframes spin {
@@ -80,4 +91,10 @@
 	background-color: #22a8f6;
 	border-bottom: #1298e6 1px solid;
 	margin-top: 2px;
+}
+.animate {
+	transition-property: width;
+	transition-duration: 0.2s;
+	transition-timing-function: linear;
+	transition-delay: 0;
 }

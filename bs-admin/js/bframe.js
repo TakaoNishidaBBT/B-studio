@@ -4,7 +4,7 @@
  *
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
-	if(typeof bframe == 'undefined' || !bframe){
+	if(typeof bframe == 'undefined' || !bframe) {
 		var bframe = {};
 	}
 

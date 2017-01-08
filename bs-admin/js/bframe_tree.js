@@ -92,8 +92,8 @@
 			response_wait = true;
 		}
 
-		function initResponse(){
-			if(httpObj.readyState == 4 && httpObj.status == 200 && response_wait){
+		function initResponse() {
+			if(httpObj.readyState == 4 && httpObj.status == 200 && response_wait) {
 				property = eval('('+httpObj.responseText+')');
 				response_wait = false;
 				getPane();
@@ -322,7 +322,7 @@
 		}
 
 		function hideContextMenuAllFrames() {
-			if(typeof bframe == 'undefined' || !bframe){
+			if(typeof bframe == 'undefined' || !bframe) {
 				return;
 			}
 			bframe.addEventListenerAllFrames(top, 'mousedown', hideContextMenu);
@@ -333,7 +333,7 @@
 		}
 
 		function cleanUp() {
-			if(typeof bframe == 'undefined' || !bframe){
+			if(typeof bframe == 'undefined' || !bframe) {
 				return;
 			}
 			drag_control.cleanUp();
@@ -346,7 +346,7 @@
 		}
 		this.cleanUp = cleanUp;
 
-		function setContextMenu(){
+		function setContextMenu() {
 			if(property.context_menu_frame) {
 				context_menu_frame = eval(property.context_menu_frame);
 				context_menu.setDocument(context_menu_frame.window);
@@ -400,7 +400,7 @@
 			return false;
 		}
 
-		function setTrashContextMenu(){
+		function setTrashContextMenu() {
 			if(!property.trash_context_menu) return;
 
 			if(property.context_menu_frame) {
@@ -539,7 +539,7 @@
 		}
 		this.context_filter = context_filter;
 
-		function hideContextMenu(event){
+		function hideContextMenu(event) {
 			if(!context_menu || !document || typeof bframe == 'undefined' || !bframe) return;
 
 			context_menu.hide();
@@ -563,7 +563,19 @@
 			if(mode) {
 				param+= '&mode='+mode;
 			}
-			httpObj = createXMLHttpRequest(showNode);
+			if(bframe.progressBar) {
+				httpObj = createXMLHttpRequest(showProgress);
+				var params = {
+					'id': 				property.progress_id, 
+					'icon': 			property.progress_icon,
+					'complete_icon': 	property.complete_icon,
+				}
+				progress = new bframe.progressBar(params);
+			}
+			else {
+				httpObj = createXMLHttpRequest(showNode);
+			}
+
 			eventHandler(httpObj, property.module, property.file, property.method.getNodeList, 'POST', param);
 			target.style.cursor = 'wait';
 			if(pane) pane.style.cursor = 'wait';
@@ -574,8 +586,74 @@
 			response_wait = true;
 		}
 
+		function showProgress() {
+			if((httpObj.readyState == 3) && httpObj.status == 200) {
+				var response = eval('('+httpObj.responseText+')');
+				var animate = '';
+
+				switch(response['status']) {
+				case 'show':
+					progress.show();
+					if(response['message']) progress.setMessage(response['message']);
+
+				case 'progress':
+					if(response['progress']) var animate = ' animate';
+					progress.setProgress(response['progress'], animate);
+					progress.setStatus(Math.round(response['progress']) + '%');
+					if(response['message']) progress.setMessage(response['message']);
+					break;
+
+				case 'message':
+					progress.setMessage(response['message']);
+					if(response['icon']) progress.setIcon(response['icon']);
+					break;
+
+				case 'complete':
+					if(response['progress']) var animate = ' animate';
+					progress.setProgress(response['progress'], animate);
+					progress.setStatus(Math.round(response['progress']) + '%');
+					progress.complete(response['message']);
+					break;
+
+				case 'error':
+					alert(response['message']);
+					break;
+				}
+			}
+			if((httpObj.readyState == 4) && httpObj.status == 200) {
+				var response = eval('('+httpObj.responseText+')');
+				switch(response['status']) {
+				case 'finished':
+					progress.remove();
+					getNodeList(current_node.id());
+					break;
+
+				case 'download':
+					progress.remove();
+					param = '&file_name='+response['file_name']+'&file_path='+response['file_path']+'&remove='+response['remove'];
+					param+= '&mode=download';
+
+					var iframe = document.getElementById('download_iframe');
+					if(!iframe) {
+						var iframe = document.createElement('iframe');
+						iframe.id = 'download_iframe';
+						iframe.name = 'download_iframe';
+						document.body.appendChild(iframe);
+					}
+					download_iframe.location.href = property.relation.download.url+param;
+					response_wait = false;
+					break;
+
+				default:
+					if(progress) progress.remove();
+					showNode();
+					break;
+				}
+			}
+		}
+
 		function showNode() {
-			if(httpObj.readyState == 4 && httpObj.status == 200 && response_wait){
+			if(httpObj.readyState == 4 && httpObj.status == 200 && response_wait)　{
 				try {
 					node_number = 0;
 					current_edit_node = '';
@@ -800,7 +878,7 @@
 		}
 
 		function closeNodeResponse() {
-			if(httpObj.readyState == 4 && httpObj.status == 200 && response_wait){
+			if(httpObj.readyState == 4 && httpObj.status == 200 && response_wait) {
 				response_wait = false;
 			}
 		}
@@ -1200,7 +1278,7 @@
 					param+= '&source_node_id[' + i + ']=' + encodeURIComponent(clipboard.target[i].substr(1));
 				}
 				param+= '&destination_node_id='+encodeURIComponent(selected_node.id().substr(1));
-				httpObj = createXMLHttpRequest(showprogress);
+				httpObj = createXMLHttpRequest(showProgress);
 				eventHandler(httpObj, property.module, property.file, property.method.pasteNode, 'POST', param);
 				response_wait = true;
 				paste_mode = true;
@@ -1212,43 +1290,6 @@
 			}
 		}
 		this.pasteNode = pasteNode;
-
-		function showprogress() {
-			if((httpObj.readyState == 3) && httpObj.status == 200) {
-				var response = eval('('+httpObj.responseText+')');
-				var animate = '';
-
-				switch(response['status']) {
-				case 'show':
-					progress.show();
-
-				case 'progress':
-					if(response['progress']) var animate = ' animate';
-					progress.setProgress(response['progress'], animate);
-					progress.setStatus(Math.round(response['progress']) + '%');
-					if(response['message']) progress.setMessage(response['message']);
-					break;
-
-				case 'message':
-					progress.setMessage(response['message']);
-					break;
-
-				case 'error':
-					alert(response['message']);
-					break;
-				}
-			}
-			if((httpObj.readyState == 4) && httpObj.status == 200) {
-				var response = eval('('+httpObj.responseText+')');
-				if(response['status'] == 'finished') {
-					progress.setComplete();
-					getNodeList(current_node.id());
-				}
-				else {
-					showNode();
-				}
-			}
-		}
 
 		function pasteAriasNode() {
 			if(clipboard.target) {
@@ -1308,7 +1349,7 @@
 			}
 
 			param = 'terminal_id='+terminal_id+'&node_id='+encodeURIComponent(selected_node.id().substr(1));
-			httpObj = createXMLHttpRequest(showprogress);
+			httpObj = createXMLHttpRequest(showProgress);
 			eventHandler(httpObj, property.module, property.file, property.method.truncateNode, 'POST', param);
 			response_wait = true;
 
@@ -1697,18 +1738,20 @@
 
 			if(!selected_node.length()) return;
 
+			param = 'terminal_id='+terminal_id;
 			for(var i=0; i < selected_node.length(); i++) {
 				if(!selected_node.id(i)) continue;
 				param+= '&download_node_id[' + i + ']='+encodeURIComponent(selected_node.id(i).substr(1));
 			}
-			iframe = document.getElementById('download_iframe');
-			if(!iframe) {
-				var iframe = document.createElement('iframe');
-				iframe.id = 'download_iframe';
-				iframe.name = 'download_iframe';
-				document.body.appendChild(iframe);
+			httpObj = createXMLHttpRequest(showProgress);
+			eventHandler(httpObj, property.module, property.file, property.method.download, 'POST', param);
+			response_wait = true;
+			var params = {
+				'id': 				property.download_progress_id,
+				'icon': 			property.download_progress_icon,
+				'complete_icon': 	property.complete_icon,
 			}
-			download_iframe.location.href = property.relation.download.url+param;
+			progress = new bframe.progressBar(params);
 		}
 		this.download = download;
 
@@ -2152,7 +2195,7 @@
 			}
 
 			function setEventHandlerAllFrames() {
-				if(typeof bframe == 'undefined' || !bframe){
+				if(typeof bframe == 'undefined' || !bframe) {
 					return;
 				}
 				bframe.addEventListenerAllFrames(top, 'mousemove', onMouseMove);
@@ -2160,7 +2203,7 @@
 			}
 
 			function cleanUp() {
-				if(typeof bframe == 'undefined' || !bframe){
+				if(typeof bframe == 'undefined' || !bframe) {
 					return;
 				}
 				bframe.removeEventListenerAllFrames(top, 'load', setEventHandlerAllFrames);
@@ -2400,7 +2443,7 @@
 
 				if(drag_type == 'move' && selected_node.place() == 'pane' && destination_node_id == current_node.id()) return false;
 				if(destination_node_id == 'ttrash') {
-					if(bframe.searchNodeById(trash, source_node_id)){
+					if(bframe.searchNodeById(trash, source_node_id)) {
 						return false;
 					}
 					return true;
@@ -2668,7 +2711,7 @@
 						disp_type = 'thumbnail';
 					}
 
-					for(var i=0; i<files.length; i++){
+					for(var i=0; i<files.length; i++) {
 						files[i].id = i;
 						var progress = new fileProgress(files[i], tree_id, pane_id, disp_type);
 						upload_queue[i] = {'file' : files[i], 'progress' : progress};
@@ -2684,7 +2727,7 @@
 
 				httpObj = new XMLHttpRequest();
 
-				if(httpObj.upload){
+				if(httpObj.upload) {
 					httpObj.onreadystatechange = confirmResult;
 					progress = upload_queue[index].progress;
 					progress.setStatus('Uploading...');
@@ -2707,7 +2750,7 @@
 			}
 
 			function confirmResult() {
-				if(httpObj.readyState == 4 && httpObj.status == 200){
+				if(httpObj.readyState == 4 && httpObj.status == 200) {
 					try {
 						var response = eval('('+httpObj.responseText+')');
 					}
@@ -2716,10 +2759,10 @@
 					}
 
 					if(response.status) {
-						if(response.mode == 'zipConfirm'){
+						if(response.mode == 'zipConfirm') {
 							showZipConfirmDialog(response.message, extract, extractAll, noextract, cancelAll);
 						}
-						else if(response.mode == 'confirm'){
+						else if(response.mode == 'confirm') {
 							showConfirmDialog(response.message, overwrite, overwriteAll, cancel, cancelAll);
 						}
 						else {
@@ -2742,7 +2785,7 @@
 
 				httpObj = new XMLHttpRequest();
 
-				if(httpObj.upload){
+				if(httpObj.upload) {
 					if(extract_mode == 'extract') {
 						httpObj.onreadystatechange = extracting;
 					}
@@ -2753,7 +2796,7 @@
 					progress.setStatus('Uploading...');
 					scroll(progress.object());
 
-					httpObj.upload.onprogress = function (e){
+					httpObj.upload.onprogress = function (e) {
 						var percent = Math.ceil((e.loaded / e.total) * 100);
 						if(percent) var animate = ' animate';
 						progress.setProgress(percent, animate);
@@ -2777,7 +2820,7 @@
 			}
 
 			function extracting() {
-				if((httpObj.readyState == 3) && httpObj.status == 200){
+				if((httpObj.readyState == 3) && httpObj.status == 200) {
 					var response = eval('('+httpObj.responseText+')');
 					var animate = '';
 					if(response['status'] == 'extracting') {
@@ -2791,7 +2834,7 @@
 						progress.setStatus('Creating Thumbnails...');
 					}
 				}
-				if((httpObj.readyState == 4) && httpObj.status == 200){
+				if((httpObj.readyState == 4) && httpObj.status == 200) {
 					var response = eval('('+httpObj.responseText+')');
 					result(response);
 					confirm(++index);
@@ -2799,7 +2842,7 @@
 			}
 
 			function setUploadResult() {
-				if(httpObj.readyState == 4 && httpObj.status == 200){
+				if(httpObj.readyState == 4 && httpObj.status == 200) {
 					var response = eval('('+httpObj.responseText+')');
 					result(response);
 					confirm(++index);
@@ -2852,7 +2895,7 @@
 			}
 
 			function cancelAll() {
-				for(; upload_queue[index]; index++){
+				for(; upload_queue[index]; index++) {
 					cancelUpload();
 				}
 			}
@@ -3342,6 +3385,7 @@
 			control = document.createElement('img');
 			control.id = 'c' + node_id;
 			control.name = 'node_control';
+			control.style.cursor = 'pointer';
 			div.appendChild(control);
 
 			control.className = 'control';

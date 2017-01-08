@@ -614,12 +614,12 @@
 			return $count + $mynode;
 		}
 
-		function totalFilesize() {
+		function filesize() {
 			if($this->file_size) $size = $this->file_size;
 
 			if(is_array($this->node)) {
 				foreach(array_keys($this->node) as $key) {
-					$size += $this->node[$key]->totalFilesize();
+					$size += $this->node[$key]->filesize();
 				}
 			}
 			return $size;

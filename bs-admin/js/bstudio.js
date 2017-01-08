@@ -252,8 +252,9 @@
 		eventHandler(httpObj, module, page, method, 'POST', param);
 
 		var params = {
-			'id': 		'backupDialog', 
-			'icon': 	'images/common/create.png',
+			'id': 				'backupDialog', 
+			'icon': 			'images/common/process.png',
+			'complete_icon': 	'images/common/complete.png',
 		}
 		progress = new bframe.progressBar(params);
 
@@ -264,6 +265,7 @@
 				switch(response['status']) {
 				case 'show':
 					progress.show();
+					if(response['message']) progress.setMessage(response['message']);
 
 				case 'progress':
 					if(response['progress']) var animate = ' animate';
@@ -274,15 +276,28 @@
 
 				case 'message':
 					progress.setMessage(response['message']);
+					if(response['icon']) progress.setIcon(response['icon']);
+					break;
+
+				case 'complete':
+					if(response['progress']) var animate = ' animate';
+					progress.setProgress(response['progress'], animate);
+					progress.setStatus(Math.round(response['progress']) + '%');
+					progress.complete(response['message']);
+					break;
+
+				case 'error':
+					alert(response['message']);
 					break;
 				}
 			}
 
 			if((httpObj.readyState == 4) && httpObj.status == 200) {
 				var response = eval('('+httpObj.responseText+')');
-				if(response['status'] == 'finished') {
-					progress.setMessage(response['message']);
-					progress.setComplete();
+				if(response['status'] == 'download') {
+					progress.remove();
+					param = '&file_name='+response['file_name']+'&file_path='+response['file_path']+'&remove='+response['remove'];
+					param+= '&mode=download';
 
 					var form = fname ? document.forms[fname] : document.forms[0];
 					bframe.appendHiddenElement(form, 'file_name', response['file_name']);

@@ -101,14 +101,14 @@
 
 		function backupAll() {
 			if($this->request['mode'] == 'download') {
-				$this->backupDownload($this->request['file_name'], $this->request['file_path']);
+				$this->downloadArchive($this->request['file_name'], $this->request['file_path']);
 			}
 			else {
-				$this->createBackupFile();
+				$this->createArchive();
 			}
 		}
 
-		function createBackupFile() {
+		function createArchive() {
 			if(!class_exists('ZipArchive')) exit;
 
 			// Set time limit to infinity
@@ -154,7 +154,7 @@
 			$resource_total_size = $row['total_size'];
 
 			$node = new B_FileNode(B_UPLOAD_DIR, 'root', null, null, 'all');
-			$files_total_size = $node->totalFilesize();
+			$files_total_size = $node->filesize();
 			$total_file_size = $resource_total_size + $files_total_size;
 
 			// send progress 
@@ -163,10 +163,13 @@
 				if(file_exists($file_path)) {
 					$response['status'] = 'progress';
 					$response['progress'] = 100;
+					$this->sendChunk(',' . json_encode($response));
+					usleep(300000);
+					$response['status'] = 'complete';
+					$response['progress'] = 100;
 					$response['message'] = 'Complete!';
 					$this->sendChunk(',' . json_encode($response));
-
-					sleep(2);
+					sleep(1);
 
 					break;
 				}
@@ -185,7 +188,7 @@
 				usleep(40000);
 
 				$response['status'] = 'progress';
-				$response['progress'] = round($cnt / $total_file_size * 100 * 1000000);
+				$response['progress'] = round($cnt / $total_file_size * 100 * 500000);
 				if($response['progress'] > 99) $response['progress'] = 99;
 
 				if($progress != $response['progress']) {
@@ -195,7 +198,8 @@
 			}
 
 			// finish
-			$response['status'] = 'finished';
+			$response['status'] = 'download';
+			$response['remove'] = true;
 			$response['file_name'] = $file_name;
 			$response['file_path'] = $file_path;
 			$this->sendChunk(',' . json_encode($response));
@@ -206,7 +210,7 @@
 			exit;
 		}
 
-		function backupDownload($file_name, $file_path) {
+		function downloadArchive($file_name, $file_path) {
 			header('content-disposition: attachment; filename='.$file_name);
 			header('Content-type: application/sql');
 			header('Cache-control: public');

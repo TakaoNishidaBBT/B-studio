@@ -645,6 +645,15 @@
 		}
 
 		function download() {
+			if($this->request['mode'] == 'download') {
+				$this->downloadFile($this->request['file_name'], $this->request['file_path'], $this->request['remove']);
+			}
+			else {
+				$this->createFile();
+			}
+		}
+
+		function createFile() {
 			if($this->request['download_node_id'] && $this->request['download_node_id'] != 'null') {
 				foreach($this->request['download_node_id'] as $node_id) {
 					$nodes[] = new B_Node($this->db
@@ -661,35 +670,28 @@
 					$info = pathinfo($nodes[0]->node_name);
 					$file_path = B_RESOURCE_DIR . $nodes[0]->contents_id . '.' . $info['extension'];
 
-					// Download
-					header('Pragma: cache;');
-					header('Cache-Control: public');
-
-					switch(strtolower($info['extension'])) {
-					case 'swf':
-						header('Content-type: application/x-shockwave-flash');
-						break;
-
-					case 'css':
-						header('Content-Type: text/css; charset=' . B_CHARSET);
-						break;
-
-					case 'js':
-						header('Content-type: application/x-javascript');
-						break;
-
-					default:
-						header('Content-Type: image/' . strtolower($info['extension']));
-						break;
-					}
-					header('Content-Disposition: attachment; filename=' . $nodes[0]->node_name);
-					ob_end_clean();
-					readfile($file_path);
+					// finish
+					$response['status'] = 'download';
+					$response['remove'] = false;
+					$response['file_name'] = $nodes[0]->node_name;
+					$response['file_path'] = $file_path;
+					header('Content-Type: application/x-javascript charset=utf-8');
+					echo json_encode($response);
 				}
 				else {
 					if(!class_exists('ZipArchive')) exit;
 
-					$zip = new ZipArchive();
+					// send progress
+					header('Content-Type: application/octet-stream');
+					header('Transfer-encoding: chunked');
+					flush();
+					ob_flush();
+
+					// Send start message
+					$response['status'] = 'show';
+					$response['progress'] = 0;
+					$progress = 0;
+					$this->sendChunk(json_encode($response));
 
 					if(count($nodes) == 1) {
 						if($this->request['download_node_id'][0] == 'root') {
@@ -705,36 +707,110 @@
 
 					$file_path = B_DOWNLOAD_DIR . $this->user_id . time() . $file_name;
 
-					if(!$zip->open($file_path, ZipArchive::CREATE)) {
-						exit;
+					$cmdline = 'php ' . B_DOC_ROOT . B_ADMIN_ROOT . 'module/resource/archive.php';
+					$cmdline .= ' ' . $_SERVER['SERVER_NAME'];
+					$cmdline .= ' ' . $_SERVER['DOCUMENT_ROOT'];
+					$cmdline .= ' ' . $this->version['working_version_id'];
+					$cmdline .= ' ' . $this->version['revision_id'];
+					$cmdline .= ' ' . $file_path;
+					foreach($this->request['download_node_id'] as $node_id) {
+						$cmdline .= ' ' . $node_id;
+					}
+					// kick as a background process
+					B_Util::fork($cmdline, false);
+
+					for($total_file_size=0, $i=0; $i<count($nodes); $i++) {
+						$total_file_size+= $nodes[$i]->fileSize();
 					}
 
-					foreach($nodes as $node) {
-						$node->serializeForDownload($data);
-						foreach($data as $key => $value) {
-							if($value) {
-								$file = B_RESOURCE_DIR . $value;
-								$zip->addFile($file, $key);
+					// send progress 
+					for($cnt=0 ;; $cnt++) {
+						usleep(40000);
+						if(file_exists($file_path)) {
+							$response['status'] = 'progress';
+							$response['progress'] = 100;
+							$this->sendChunk(',' . json_encode($response));
+							usleep(300000);
+
+							$response['status'] = 'complete';
+							$response['progress'] = 100;
+							$response['message'] = 'Complete!';
+							$this->sendChunk(',' . json_encode($response));
+							sleep(1);
+							break;
+						}
+
+						if($cnt%4 == 0) {
+							unset($dots);
+							for($i=0; $i<($cnt/4%8); $i++) {
+								$dots.= '.';
 							}
-							else {
-								$zip->addEmptyDir($key);
-							}
+							$response['status'] = 'message';
+							$response['message'] = "Creating {$dots}";
+
+							$this->sendChunk(',' . json_encode($response));
+						}
+
+						usleep(40000);
+
+						$response['status'] = 'progress';
+						$response['progress'] = round($cnt / $total_file_size * 100 * 1300000);
+						if($response['progress'] > 99) $response['progress'] = 99;
+
+						if($progress != $response['progress']) {
+$this->log->write(',' . json_encode($response));
+							$this->sendChunk(',' . json_encode($response));
+							$progress = $response['progress'];
 						}
 					}
-					$zip->close();
 
-					// Download
-					header('Pragma: cache;');
-					header('Cache-Control: public');
-					header('Content-type: application/x-zip-dummy-content-type');
-					header('Content-Disposition: attachment; filename=' . $file_name);
-					ob_end_clean();
-					readfile($file_path);
-
-					// Remove
-					unlink($file_path);
+					// finish
+					$response['status'] = 'download';
+					$response['remove'] = true;
+					$response['file_name'] = $file_name;
+					$response['file_path'] = $file_path;
+					$this->sendChunk(',' . json_encode($response));
+					$this->sendChunk();	// terminate
+					if(connection_status()) {
+						unlink($file_path);
+					}
 				}
 			}
+			exit;
+		}
+
+		function downloadFile($file_name, $file_path, $remove) {
+			// Download
+			header('Pragma: cache;');
+			header('Cache-Control: public');
+
+			$info = pathinfo($file_name);
+			switch(strtolower($info['extension'])) {
+			case 'swf':
+				header('Content-type: application/x-shockwave-flash');
+				break;
+
+			case 'css':
+				header('Content-Type: text/css; charset=' . B_CHARSET);
+				break;
+
+			case 'js':
+				header('Content-type: application/x-javascript');
+				break;
+
+				case 'zip':
+				header('Content-type: application/x-zip-dummy-content-type');
+
+			default:
+				header('Content-Type: image/' . strtolower($info['extension']));
+				break;
+			}
+
+			header('Content-Disposition: attachment; filename=' . $file_name);
+
+			ob_end_clean();
+			readfile($file_path);
+			if($remove === 'true') unlink($file_path);
 
 			exit;
 		}

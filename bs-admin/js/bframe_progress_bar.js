@@ -10,7 +10,8 @@
 		var containerHeader = document.createElement('div');
 		var box = document.createElement('div');
 		var title = document.createElement('div');
-		var icon = document.createElement('img');
+		var progress_icon = document.createElement('img');
+		var complete_icon = document.createElement('img');
 		var message = document.createElement('span');
 		var progressElement = document.createElement('div');
 		var progressStatus = document.createElement('div');
@@ -33,9 +34,16 @@
 		title.className = 'progress-title';
 		box.appendChild(title);
 
-		icon.className = 'progress-icon';
-		icon.src = params.icon;
-		title.appendChild(icon);
+		progress_icon.className = 'progress-icon';
+		progress_icon.src = params.icon;
+		title.appendChild(progress_icon);
+
+		if(params.complete_icon) {
+			complete_icon.className = 'complete-icon';
+			complete_icon.src = params.complete_icon;
+			complete_icon.style.display = 'none';
+			title.appendChild(complete_icon);
+		}
 
 		message.className = 'progress-message';
 		message.innerHTML = params.message;
@@ -64,6 +72,16 @@
 		}
 		this.show = show;
 
+		function setClassName(className) {
+			overlay.className = 'progress-overlay '+className;
+		}
+		this.setClassName = setClassName;
+
+		function setIcon(src) {
+			progress_icon.src = src
+		}
+		this.setIcon = setIcon;
+
 		function setMessage(str) {
 			message.innerHTML = str;
 		}
@@ -82,8 +100,18 @@
 		}
 		this.setProgress = setProgress;
 
-		function setComplete() {
+		function complete(str) {
+			if(complete_icon) {
+				progress_icon.style.display = 'none';
+				complete_icon.style.display = 'inline';
+			}
+			if(str) message.innerHTML = str;
+			overlay.className = 'progress-overlay complete';
+		}
+		this.complete = complete;
+
+		function remove() {
 			top.document.body.removeChild(overlay);
 		}
-		this.setComplete = setComplete;
+		this.remove = remove;
 	}
