@@ -41,27 +41,16 @@
 .progress-icon {
 	animation: spin 2.0s linear infinite;
 }
-
-#progressDialog .progress-title {
-	padding: 13px 0 13px 94px;
-}
-
-#copyDialog .progress-message {
-	padding-left: 14px;
-}
-
-#truncateDialog .progress-icon {
-	animation: spin 2.0s linear infinite;
-}
-#truncateDialog .complete-icon {
+.complete-icon {
 	animation: none;
 }
-#truncateDialog .progress-message {
-	padding-left: 10px;
+
+#progressDialog .progress-title {
+	padding: 13px 0 13px 102px;
 }
 
-#backupDialog .progress-message {
-	padding-left: 10px;
+#backupDialog .progress-title {
+	padding: 13px 0 13px 90px;
 }
 
 @keyframes spin {

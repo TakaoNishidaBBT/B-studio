@@ -384,6 +384,7 @@
 					// Send start message
 					$response['status'] = 'show';
 					$response['progress'] = 0;
+					$response['message'] = 'Creating zip file';
 					$progress = 0;
 					$this->sendChunk(json_encode($response));
 
@@ -440,7 +441,7 @@
 								$dots.= '.';
 							}
 							$response['status'] = 'message';
-							$response['message'] = "Creating {$dots}";
+							$response['message'] = "Creating zip file {$dots}";
 
 							$this->sendChunk(',' . json_encode($response));
 						}
@@ -521,8 +522,9 @@
 		function response($node_id, $category) {
 			// If thumb-nail cache file not exists
 			if(!file_exists(B_FILE_INFO_THUMB)) {
-				$this->createThumbnailCacheFile();
-				exit;
+				if($this->createThumbnailCacheFile()) {
+					exit;
+				}
 			}
 			$response['status'] = $this->status;
 			if($this->message) {

@@ -131,6 +131,7 @@
 				$response['progress'] = 100;
 				$this->sendChunk(',' . json_encode($response));
 				$this->sendChunk();	// terminate
+				return true;
 			}
 		}
 

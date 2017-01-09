@@ -129,6 +129,7 @@
 			// Send start message
 			$response['status'] = 'show';
 			$response['progress'] = 0;
+			$response['message'] = 'Creating archive file';
 			$progress = 0;
 			$this->sendChunk(json_encode($response));
 
@@ -180,7 +181,7 @@
 						$dots.= '.';
 					}
 					$response['status'] = 'message';
-					$response['message'] = "Creating {$dots}";
+					$response['message'] = "Creating archive file {$dots}";
 
 					$this->sendChunk(',' . json_encode($response));
 				}
