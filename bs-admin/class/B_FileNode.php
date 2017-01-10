@@ -392,7 +392,7 @@
 			}
 			else if(file_exists($this->fullpath)) {
 				unlink($this->fullpath);
-				if(file_exists(B_UPLOAD_THUMBDIR . $this->thumb) && !is_dir(B_UPLOAD_THUMBDIR . $this->thumb)) {
+				if($this->dir == B_UPLOAD_DIR && file_exists(B_UPLOAD_THUMBDIR . $this->thumb) && !is_dir(B_UPLOAD_THUMBDIR . $this->thumb)) {
 					unlink(B_UPLOAD_THUMBDIR . $this->thumb);
 				}
 			}
