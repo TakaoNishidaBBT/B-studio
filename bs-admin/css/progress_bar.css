@@ -33,6 +33,11 @@
 	margin: 0;
 	padding: 13px 0 13px 120px;
 }
+.complete .progress-title {
+	margin: 0;
+	padding: 13px 0 !important;
+	text-align: center;
+}
 .progress-message {
 	display: inline-block;
 	padding-left: 10px;

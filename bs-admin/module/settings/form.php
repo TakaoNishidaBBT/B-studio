@@ -168,7 +168,7 @@
 					usleep(300000);
 					$response['status'] = 'complete';
 					$response['progress'] = 100;
-					$response['message'] = 'Complete!';
+					$response['message'] = 'Complete !';
 					$this->sendChunk(',' . json_encode($response));
 					sleep(1);
 
