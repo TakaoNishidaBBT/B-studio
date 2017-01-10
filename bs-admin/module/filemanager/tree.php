@@ -375,6 +375,11 @@
 				else {
 					if(!class_exists('ZipArchive')) exit;
 
+					ignore_user_abort(true);
+
+					// set time limit to 5 minutes
+					set_time_limit(300);
+
 					// send progress
 					header('Content-Type: application/octet-stream');
 					header('Transfer-encoding: chunked');

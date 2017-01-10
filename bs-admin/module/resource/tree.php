@@ -353,8 +353,8 @@
 			if($this->request['node_id'] && $this->request['node_id'] != 'null') {
 				ignore_user_abort(true);
 
-				// set time limit to 10 minutes
-				set_time_limit(600);
+				// set time limit to 5 minutes
+				set_time_limit(300);
 
 				// start transaction
 				$this->db->begin();
@@ -681,6 +681,11 @@
 				else {
 					if(!class_exists('ZipArchive')) exit;
 
+					ignore_user_abort(true);
+
+					// set time limit to 5 minutes
+					set_time_limit(300);
+
 					// send progress
 					header('Content-Type: application/octet-stream');
 					header('Transfer-encoding: chunked');
@@ -755,11 +760,10 @@
 						usleep(40000);
 
 						$response['status'] = 'progress';
-						$response['progress'] = round($cnt / $total_file_size * 100 * 1300000);
+						$response['progress'] = round($cnt / $total_file_size * 100 * 1000000);
 						if($response['progress'] > 99) $response['progress'] = 99;
 
 						if($progress != $response['progress']) {
-$this->log->write(',' . json_encode($response));
 							$this->sendChunk(',' . json_encode($response));
 							$progress = $response['progress'];
 						}
