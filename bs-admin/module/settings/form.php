@@ -144,16 +144,13 @@
 			B_Util::fork($cmdline, false);
 
 			$resource_node_table = B_DB_PREFIX . B_RESOURCE_NODE_TABLE;
-			$sql = "select sum(file_size) total_size from (
-						select * from $resource_node_table
-						where node_type = 'file'
-						group by contents_id
-					) a";
+			$sql = "select sum(file_size) total_size
+					from $resource_node_table
+					where del_flag <> '1'";
 
 			$rs = $this->db->query($sql);
 			$row = $this->db->fetch_assoc($rs);
 			$resource_total_size = $row['total_size'];
-
 			$node = new B_FileNode(B_UPLOAD_DIR, 'root', null, null, 'all');
 			$files_total_size = $node->filesize();
 			$total_file_size = $resource_total_size + $files_total_size;

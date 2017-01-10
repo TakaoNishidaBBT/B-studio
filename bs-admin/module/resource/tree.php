@@ -444,7 +444,6 @@
 
 		function truncate_callback(&$node) {
 			$this->truncate_nodes++;
-$this->log->write('truncate_nodes', $this->truncate_nodes, $this->total_truncate_nodes);
 			if($this->show_progress) {
 				$response['status'] = 'progress';
 				$response['progress'] = round($this->truncate_nodes / $this->total_truncate_nodes * 100);
