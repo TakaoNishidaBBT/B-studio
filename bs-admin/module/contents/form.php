@@ -11,10 +11,10 @@
 
 			require_once('./config/form_config.php');
 			$this->form = new B_Element($form_config);
-			$this->config_form = new B_Element($config_form_config);
+			$this->settings_form = new B_Element($settings_form_config);
 
-			$obj = $this->form->getElementByName('config_form');
-			$obj->addElement($this->config_form);
+			$obj = $this->form->getElementByName('settings_form');
+			$obj->addElement($this->settings_form);
 
 			$this->tab_control = new B_Element($tab_control_config);
 

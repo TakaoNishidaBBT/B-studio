@@ -69,10 +69,10 @@ $form_config = array(
 			),
 		),
 		array(
-			'start_html'	=> '<div id="config" class="bframe_adjustparent" param="margin:25" style="display:none">',
+			'start_html'	=> '<div id="settings" class="bframe_adjustparent" param="margin:25" style="display:none">',
 			'end_html'		=> '</div>',
 			array(
-				'name'				=> 'config_form',
+				'name'				=> 'settings_form',
 			),
 		),
 		array(
@@ -135,11 +135,11 @@ $tab_control_config = array(
 		'special_html'		=> 'class="bframe_tab"',
 	),
 	array(
-		'name'				=> 'config_index',
+		'name'				=> 'settings_index',
 		'class'				=> 'B_Link',
 		'start_html'		=> '<li>',
 		'end_html'			=> '</li>',
-		'link'				=> 'config',
+		'link'				=> 'settings',
 		'value'				=> __('Settings'),
 		'special_html'		=> 'class="bframe_tab"',
 	),
@@ -177,7 +177,7 @@ $tab_control_config = array(
 	),
 );
 
-$config_form_config = array(
+$settings_form_config = array(
 	array(
 		// Table
 		'start_html'	=> '<table class="form" border="0" cellspacing="0" cellpadding="0"><tbody>',

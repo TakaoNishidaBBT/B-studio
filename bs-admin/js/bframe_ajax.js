@@ -4,30 +4,30 @@
  *
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
-	function createXMLHttpRequest(cbFunc){
+	function createXMLHttpRequest(cbFunc) {
 		var XMLhttpObject = null;
-		try{
+		try {
 			XMLhttpObject = new XMLHttpRequest();
 		}
-		catch(e){
-			try{
+		catch(e) {
+			try {
 				XMLhttpObject = new ActiveXObject('Msxml2.XMLHTTP');
 			}
-			catch(e){
-				try{
+			catch(e) {
+				try {
 					XMLhttpObject = new ActiveXObject('Microsoft.XMLHTTP');
 				}
-				catch(e){
+				catch(e) {
 					return null;
 				}
 			}
 		}
-		if (XMLhttpObject) XMLhttpObject.onreadystatechange = cbFunc;
+		if(XMLhttpObject) XMLhttpObject.onreadystatechange = cbFunc;
 		return XMLhttpObject;
 	}
 
-	function eventHandler(httpObj, module, page, m, method, param){
-		if(httpObj){
+	function eventHandler(httpObj, module, page, m, method, param) {
+		if(httpObj) {
 			if(method == 'POST') {
 				var url = 'index.php';
 				var p = param+
