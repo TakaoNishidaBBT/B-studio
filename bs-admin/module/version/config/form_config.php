@@ -344,7 +344,7 @@ $result_config = array(
 					'start_html'	=> '<span class="version">',
 					'end_html'		=> '</span>',
 					array(
-						'value'			=> __('Version: '),
+						'value'			=> __('Version : '),
 					),
 					array(
 						'name'			=> 'version',
@@ -357,7 +357,7 @@ $result_config = array(
 					'start_html'	=> '<span class="date-time">',
 					'end_html'		=> '</span>',
 					array(
-						'value'			=> __('Publish date and time: '),
+						'value'			=> __('Publish date and time : '),
 					),
 					array(
 						'name'			=> 'publication_datetime_t',

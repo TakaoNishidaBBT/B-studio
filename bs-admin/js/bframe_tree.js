@@ -587,68 +587,73 @@
 		}
 
 		function showProgress() {
-			if((httpObj.readyState == 3) && httpObj.status == 200) {
-				var response = eval('('+httpObj.responseText+')');
-				var animate = '';
+			try {
+				if((httpObj.readyState == 3) && httpObj.status == 200) {
+					var response = eval('('+httpObj.responseText+')');
+					var animate = '';
 
-				switch(response['status']) {
-				case 'show':
-					progress.show();
-					if(response['message']) progress.setMessage(response['message']);
+					switch(response['status']) {
+					case 'show':
+						progress.show();
+						if(response['message']) progress.setMessage(response['message']);
 
-				case 'progress':
-					if(response['progress']) var animate = ' animate';
-					progress.setProgress(response['progress'], animate);
-					progress.setStatus(Math.round(response['progress']) + '%');
-					if(response['message']) progress.setMessage(response['message']);
-					break;
+					case 'progress':
+						if(response['progress']) var animate = ' animate';
+						progress.setProgress(response['progress'], animate);
+						progress.setStatus(Math.round(response['progress']) + '%');
+						if(response['message']) progress.setMessage(response['message']);
+						break;
 
-				case 'message':
-					progress.setMessage(response['message']);
-					if(response['icon']) progress.setIcon(response['icon']);
-					break;
+					case 'message':
+						progress.setMessage(response['message']);
+						if(response['icon']) progress.setIcon(response['icon']);
+						break;
 
-				case 'complete':
-					if(response['progress']) var animate = ' animate';
-					progress.setProgress(response['progress'], animate);
-					progress.setStatus(Math.round(response['progress']) + '%');
-					progress.complete(response['message']);
-					break;
+					case 'complete':
+						if(response['progress']) var animate = ' animate';
+						progress.setProgress(response['progress'], animate);
+						progress.setStatus(Math.round(response['progress']) + '%');
+						progress.complete(response['message']);
+						break;
 
-				case 'error':
-					alert(response['message']);
-					break;
+					case 'error':
+						alert(response['message']);
+						break;
+					}
+				}
+				if((httpObj.readyState == 4) && httpObj.status == 200) {
+					var response = eval('('+httpObj.responseText+')');
+					switch(response['status']) {
+					case 'finished':
+						progress.remove();
+						getNodeList(current_node.id());
+						break;
+
+					case 'download':
+						progress.remove();
+						param = '&file_name='+response['file_name']+'&file_path='+response['file_path']+'&remove='+response['remove'];
+						param+= '&mode=download';
+
+						var iframe = document.getElementById('download_iframe');
+						if(!iframe) {
+							var iframe = document.createElement('iframe');
+							iframe.id = 'download_iframe';
+							iframe.name = 'download_iframe';
+							document.body.appendChild(iframe);
+						}
+						download_iframe.location.href = property.relation.download.url+param;
+						response_wait = false;
+						break;
+
+					default:
+						if(progress) progress.remove();
+						showNode();
+						break;
+					}
 				}
 			}
-			if((httpObj.readyState == 4) && httpObj.status == 200) {
-				var response = eval('('+httpObj.responseText+')');
-				switch(response['status']) {
-				case 'finished':
-					progress.remove();
-					getNodeList(current_node.id());
-					break;
-
-				case 'download':
-					progress.remove();
-					param = '&file_name='+response['file_name']+'&file_path='+response['file_path']+'&remove='+response['remove'];
-					param+= '&mode=download';
-
-					var iframe = document.getElementById('download_iframe');
-					if(!iframe) {
-						var iframe = document.createElement('iframe');
-						iframe.id = 'download_iframe';
-						iframe.name = 'download_iframe';
-						document.body.appendChild(iframe);
-					}
-					download_iframe.location.href = property.relation.download.url+param;
-					response_wait = false;
-					break;
-
-				default:
-					if(progress) progress.remove();
-					showNode();
-					break;
-				}
+			catch(e) {
+				return;
 			}
 		}
 

@@ -648,10 +648,10 @@ table.form tr:first-child td {
 	border-top: 1px solid #d8e0ef;
 }
 table.form th.error{
-	border-top: 1px solid #fff8f8;
-	border-left: 1px solid #f8e0ef;
-	border-bottom: 1px solid #f8caef;
-	border-right: 1px solid #f8caef;
+	border-top: 1px solid #fee;
+	border-left: 1px solid #f0e4e4;
+	border-bottom: 1px solid #d8e0ef;
+	border-right: 1px solid #ffe5f2;
 	background: #fee;
 }
 table.form tr:first-child th.error {

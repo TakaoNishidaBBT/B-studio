@@ -103,8 +103,6 @@
 				$row = $this->table->selectByPk($value);
 				if($this->session['init_value']['update_datetime'] < $row['update_datetime']) {
 					$error_message = __('Another user has updated this record');
-					$this->action_message = $error_message;
-
 					$this->form->setValue($this->session['init_value']);
 					$this->form->checkAlt($row, $error_message);
 					$this->form->setValue($value);
@@ -133,6 +131,7 @@
 			}
 			else {
 				$this->db->rollback();
+				return;
 			}
 			// end transaction
 

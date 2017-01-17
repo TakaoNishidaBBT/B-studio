@@ -289,8 +289,8 @@
 		'Please enter version name'		=> '请输入版本名称',
 		'All the contents in this version will be completely deleted.\nThis operation cannot be undone.\n\nAre your sure you want to delete?'
 										=> '将删除所选版本的所有内容。\n该版本将无法恢复\n\n确实删除该版本吗？',
-		'Version: '						=> '版本：',
-		'Publish date and time: '		=> '　发布日期：',
+		'Version : '					=> '版本：',
+		'Publish date and time : '		=> '　发布日期：',
 		'This version can not be deleted because it is not ths most recent version.'
 										=> '无法删除旧版本',
 		'The working version cannot be deleted.'

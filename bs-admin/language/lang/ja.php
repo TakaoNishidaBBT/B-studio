@@ -289,8 +289,8 @@
 		'Please enter version name'		=> 'バージョン（名称）を入力してください',
 		'All the contents in this version will be completely deleted.\nThis operation cannot be undone.\n\nAre your sure you want to delete?'
 										=> 'このバージョンで作成したコンテンツすべてを削除します。\nこの作業は元に戻せません\n\nよろしいですか？',
-		'Version: '						=> 'バージョン：',
-		'Publish date and time: '		=> '　公開日時：',
+		'Version : '					=> 'バージョン ：',
+		'Publish date and time : '		=> '公開日時 ：',
 		'This version can not be deleted because it is not ths most recent version.'
 										=> '最新バージョンではありませんので削除できません',
 		'The working version cannot be deleted.'

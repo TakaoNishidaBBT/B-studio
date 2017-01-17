@@ -32,13 +32,13 @@
 
 			if(is_file($session_file)) {
 				$serializedString = file_get_contents($session_file);
-			    $session_array = $this->unserializeSession($serializedString, $vars);
+			    $session_array = $this->unserializeSession($serializedString);
 			}
 			return $session_array;
 		}
 
 		function unserializeSession($data) {
-			$vars=preg_split('/([a-zA-Z0-9_]+)\|/',$data,-1,PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE);
+			$vars=preg_split('/([a-zA-Z0-9_]+)\|/', $data, -1, PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE);
 
 			for($i=0; $vars[$i]; $i++) {
 				$result[$vars[$i++]]=unserialize($vars[$i]);
