@@ -413,7 +413,8 @@
 					$cmdline .= ' ' . $this->dir;
 					$cmdline .= ' ' . $file_path;
 					foreach($this->request['download_node_id'] as $node_id) {
-						$cmdline .= ' ' . $node_id;
+						$node_id = str_replace("'",  "'\''", $node_id);
+						$cmdline .= ' ' . "'" . $node_id . "'";
 					}
 					// kick as a background process
 					B_Util::fork($cmdline, false);
