@@ -20,7 +20,7 @@ $form_config = array(
 			),
 			array(
 				'class'			=> 'B_Guidance',
-				'value'			=> __(' is required field'),
+				'value'			=> __(' Indicates required field'),
 			),
 		),
 

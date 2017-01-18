@@ -329,7 +329,7 @@
 		'This ID cannot be used'		=> 'そのIDは登録できません',
 		'Please enter password'			=> 'パスワードを入力してください',
 		'Please set user type'			=> 'ユーザ権限を選択してください',
-		'Please enter a name'			=> '氏名を入力してください',
+		'Please enter a name'			=> '名前を入力してください',
 		'English'						=> '英語',
 		'Japanese'						=> '日本語',
 		'Chinese'						=> '中国語',

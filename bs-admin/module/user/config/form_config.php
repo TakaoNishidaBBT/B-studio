@@ -165,7 +165,7 @@ $form_config = array(
 					array(
 						array(
 							'type' 			=> 'required',
-							'error_message'	=> 'Please enter a name',
+							'error_message'	=> __('Please enter a name'),
 						),
 					),
 				),
