@@ -276,16 +276,20 @@
 		}
 
 		function checkFileName($node_id, $file_name) {
-			$file_info = pathinfo($file_name);
+			if(preg_match('/[\\\\:\/\*\?\"\'<>\|\s]/', $file_name)) {
+				$this->message = __('The following charcters cannot be used in file or folder names (\ / : * ? " \' < > | space)');
+				return false;
+			}
+			if(strlen($file_name) != mb_strlen($file_name)) {
+				$this->message = __('Multi-byte characters cannot be used');
+				return false;
+			}
+
 			$node_type = $this->tree->getNodeTypeById($node_id);
 
 			if(!strlen(trim($file_name))) {
 				$this->message = __('Please enter a name for the %ITEM%');
 				$this->message = str_replace('%ITEM%', __($node_type), $this->message);
-				return false;
-			}
-			if(strlen($file_name) != mb_strlen($file_name)) {
-				$this->message = __('Multi-byte characters cannot be used');
 				return false;
 			}
 			if($this->tree->checkDuplicateByName($node_id, $file_name)) {

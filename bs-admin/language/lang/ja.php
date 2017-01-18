@@ -65,8 +65,8 @@
 										=> '拡張子が必要です。',
 		'The following extensions cannot be used (css swf jpg jpeg gif png)'
 										=> '次の拡張子は使用できません css swf jpg jpeg gif png',
-		'The following charcters cannot be used in file or folder names (\ / : * ? " < > | space)'
-										=> 'ファイル名／フォルダ名に次の文字は使えません \ / : * ? " < > | スペース',
+		'The following charcters cannot be used in file or folder names (\ / : * ? " \' < > | space)'
+										=> 'ファイル名／フォルダ名に次の文字は使えません \ / : * ? " \' < > | スペース',
 		'Displaying %RECORD_FROM% to %RECORD_TO% of %TOTAL% items'
 										=> ' 全%TOTAL%件中　%RECORD_FROM%～%RECORD_TO%件目',
 

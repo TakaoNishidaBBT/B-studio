@@ -579,7 +579,19 @@
 		}
 
 		function checkFileName($node_id, $file_name) {
-			$file_info = pathinfo($file_name);
+			if(preg_match('/[\\\\:\/\*\?\"\'<>\|\s]/', $file_name)) {
+				$this->message = __('The following charcters cannot be used in file or folder names (\ / : * ? " \' < > | space)');
+				return false;
+			}
+			if(strlen($file_name) != mb_strlen($file_name)) {
+				$this->message = __('Multi-byte characters cannot be used');
+				return false;
+			}
+			if(substr($file_name, -1) == '.') {
+				$this->message = __('Please enter the file extension');
+				return false;
+			}
+
 			$node_type = $this->tree->getNodeTypeById($node_id);
 
 			if(!strlen(trim($file_name))) {
@@ -587,24 +599,11 @@
 				$this->message = str_replace('%ITEM%', __($node_type), $this->message);
 				return false;
 			}
-			if(strlen($file_name) != mb_strlen($file_name)) {
-				$this->message = __('Multi-byte characters cannot be used');
-				return false;
-			}
 			if($this->tree->checkDuplicateByName($node_id, $file_name)) {
 				$this->message = __('A %ITEM% with this name already exists. Please enter a different name.');
 				$this->message = str_replace('%ITEM%', __($node_type), $this->message);
 				return false;
 			}
-			if(substr($file_name, -1) == '.') {
-				$this->message = __('Please enter the file extension');
-				return false;
-			}
-			if(preg_match('/[\\\\:\/\*\?<>\|\s]/', $file_name)) {
-				$this->message = __('The following charcters cannot be used in file or folder names (\ / : * ? " < > | space)');
-				return false;
-			}
-
 			return true;
 		}
 
@@ -721,10 +720,12 @@
 					$cmdline .= ' ' . $this->version['working_version_id'];
 					$cmdline .= ' ' . $this->version['revision_id'];
 					$cmdline .= ' ' . $file_path;
+
+					$escape = '"';
 					foreach($this->request['download_node_id'] as $node_id) {
-						$node_id = str_replace("'",  "'\''", $node_id);
-						$cmdline .= ' ' . "'" . $node_id . "'";
+						$cmdline .= ' ' . $escape . $node_id . $escape;
 					}
+
 					// kick as a background process
 					B_Util::fork($cmdline, false);
 

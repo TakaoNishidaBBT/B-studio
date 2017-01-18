@@ -300,11 +300,8 @@
 		}
 
 		function checkFileName($source, $dest, $file_name, $file_info) {
-			$node_type = is_dir($source) ? 'folder' : 'file';
-
-			if(!strlen(trim($file_name))) {
-				$this->message = __('Please enter a name for the %ITEM%');
-				$this->message = str_replace('%ITEM%', __($node_type), $this->message);
+			if(preg_match('/[\\\\:\/\*\?\"\'<>\|\s]/', $file_name)) {
+				$this->message = __('The following charcters cannot be used in file or folder names (\ / : * ? " \' < > | space)');
 				return false;
 			}
 			if(strlen($file_name) != mb_strlen($file_name)) {
@@ -315,16 +312,19 @@
 				$this->message = __('Another user has updated this record');
 				return false;
 			}
+
+			$node_type = is_dir($source) ? 'folder' : 'file';
+
+			if(!strlen(trim($file_name))) {
+				$this->message = __('Please enter a name for the %ITEM%');
+				$this->message = str_replace('%ITEM%', __($node_type), $this->message);
+				return false;
+			}
 			if(file_exists($dest) && strtolower($file_info['basename']) != strtolower($file_name)) {
 				$this->message = __('A %ITEM% with this name already exists. Please enter a different name.');
 				$this->message = str_replace('%ITEM%', __($node_type), $this->message);
 				return false;
 			}
-			if(preg_match('/[\\\\:\/\*\?<>\|\s]/', $file_name)) {
-				$this->message = __('The following charcters cannot be used in file or folder names (\ / : * ? " < > | space)');
-				return false;
-			}
-
 			return true;
 		}
 
@@ -412,10 +412,12 @@
 					$cmdline .= ' ' . $_SERVER['DOCUMENT_ROOT'];
 					$cmdline .= ' ' . $this->dir;
 					$cmdline .= ' ' . $file_path;
+
+					$escape = '"';
 					foreach($this->request['download_node_id'] as $node_id) {
-						$node_id = str_replace("'",  "'\''", $node_id);
-						$cmdline .= ' ' . "'" . $node_id . "'";
+						$cmdline .= ' ' . $escape . $node_id . $escape;
 					}
+
 					// kick as a background process
 					B_Util::fork($cmdline, false);
 

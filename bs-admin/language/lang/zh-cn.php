@@ -65,8 +65,8 @@
 										=> '需要文件扩展名。',
 		'The following extensions cannot be used (css swf jpg jpeg gif png)'
 										=> '无法使用下列扩展名 css swf jpg jpeg gif png',
-		'The following charcters cannot be used in file or folder names (\ / : * ? " < > | space)'
-										=> '文件名或文件夹名中无法使用以下字符 \ / : * ? " < > | 空格',
+		'The following charcters cannot be used in file or folder names (\ / : * ? " \' < > | space)'
+										=> '文件名或文件夹名中无法使用以下字符 \ / : * ? " \' < > | 空格',
 		'Displaying %RECORD_FROM% to %RECORD_TO% of %TOTAL% items'
 										=> ' 全部%TOTAL%条相关结果中　第%RECORD_FROM%～%RECORD_TO%条',
 

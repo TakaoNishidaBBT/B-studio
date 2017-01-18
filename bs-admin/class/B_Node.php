@@ -110,6 +110,7 @@
 		}
 
 		function selectChild($node_id) {
+			$node_id = $this->db->real_escape_string($node_id);
 			$sql = "select * from %VIEW% ";
 
 			if($node_id) {
@@ -133,6 +134,7 @@
 		}
 
 		function getSubFolderCount($node_id) {
+			$node_id = $this->db->real_escape_string($node_id);
 			$sql = "select count(*) cnt from %VIEW% ";
 
 			if($node_id) {
@@ -151,6 +153,7 @@
 		}
 
 		function getSubNodeCount($node_id) {
+			$node_id = $this->db->real_escape_string($node_id);
 			$sql = "select count(*) cnt from %VIEW% ";
 
 			if($node_id) {
@@ -175,6 +178,7 @@
 		}
 
 		function getNodeTypeById($node_id) {
+			$node_id = $this->db->real_escape_string($node_id);
 			$sql = "select * from %VIEW% where node_id='$node_id'";
 			$sql = str_replace('%VIEW%', B_DB_PREFIX . $this->view, $sql);
 			$rs = $this->db->query($sql);
@@ -429,6 +433,7 @@
 
 			$row = $this->tbl_node->selectByPk($param);
 			if(!$row) {
+				$node_id = $this->db->real_escape_string($node_id);
 				$sql = "select * from %VIEW% where node_id='$node_id'";
 				$sql = str_replace('%VIEW%', B_DB_PREFIX . $this->view, $sql);
 				$rs = $this->db->query($sql);
@@ -538,6 +543,7 @@
 		}
 
 		function getNewNodeName($parent_node, $default_name, $mode) {
+			$parent_node = $this->db->real_escape_string($parent_node);
 			$sql = "select node_name from %VIEW% where parent_node='$parent_node' order by node_name";
 			$sql = str_replace('%VIEW%', B_DB_PREFIX . $this->view, $sql);
 			$rs = $this->db->query($sql);
@@ -688,7 +694,7 @@
 		function getMaxDispSeq($parent_node_id) {
 			$sql = "select ifnull(max(disp_seq)+1, 0) disp_seq from %VIEW% where parent_node='%PARENT_NODE%'";
 			$sql = str_replace('%VIEW%', B_DB_PREFIX . $this->view, $sql);
-			$sql = str_replace('%PARENT_NODE%', $parent_node_id, $sql);
+			$sql = str_replace('%PARENT_NODE%', $this->db->real_escape_string($parent_node_id), $sql);
 
 			$rs = $this->db->query($sql);
 			$row = $this->db->fetch_assoc($rs);
@@ -697,6 +703,9 @@
 		}
 
 		function checkDuplicateByName($node_id, $node_name) {
+			$node_id = $this->db->real_escape_string($node_id);
+			$node_name = $this->db->real_escape_string($node_name);
+
 			$sql = "select count(*) cnt
 					from %VIEW%
 					where binary node_name='$node_name'
@@ -718,6 +727,9 @@
 		}
 
 		function checkDuplicateById($parent_node_id, $node_id) {
+			$parent_node_id = $this->db->real_escape_string($parent_node_id);
+			$node_id = $this->db->real_escape_string($node_id);
+
 			for($nodes='', $i=0; $i<count($node_id); $i++) {
 				if($nodes) $nodes.= ',';
 				$nodes.= "'" . $node_id[$i] . "'";

@@ -282,7 +282,19 @@
 		}
 
 		function checkFileName($node_id, $file_name) {
-			$file_info = pathinfo($file_name);
+			if(preg_match('/[\\\\:\/\*\?\"\'<>\|\s]/', $file_name)) {
+				$this->message = __('The following charcters cannot be used in file or folder names (\ / : * ? " \' < > | space)');
+				return false;
+			}
+			if(strlen($file_name) != mb_strlen($file_name)) {
+				$this->message = __('Multi-byte characters cannot be used');
+				return false;
+			}
+			if(substr($file_name, -1) == '.') {
+				$this->message = __('Extension is necessary');
+				return false;
+			}
+
 			$node_type = $this->tree->getNodeTypeById($node_id);
 			if($node_type == 'page') $node_type = 'file';
 
@@ -291,19 +303,13 @@
 				$this->message = str_replace('%ITEM%', __($node_type), $this->message);
 				return false;
 			}
-			if(strlen($file_name) != mb_strlen($file_name)) {
-				$this->message = __('Multi-byte characters cannot be used');
-				return false;
-			}
 			if($this->tree->checkDuplicateByName($node_id, $file_name)) {
 				$this->message = __('A %ITEM% with this name already exists. Please enter a different name.');
 				$this->message = str_replace('%ITEM%', __($node_type), $this->message);
 				return false;
 			}
-			if(substr($file_name, -1) == '.') {
-				$this->message = __('Extension is necessary');
-				return false;
-			}
+
+			$file_info = pathinfo($file_name);
 			switch($file_info['extension']) {
 			case 'css':
 			case 'swf':
@@ -314,11 +320,6 @@
 				$this->message = __('The following extensions cannot be used (css swf jpg jpeg gif png)');
 				return false;
 			}
-			if(preg_match('/[\\\\:\/\*\?<>\|\s]/', $file_name)) {
-				$this->message = __('The following charcters cannot be used in file or folder names (\ / : * ? " < > | space)');
-				return false;
-			}
-
 			return true;
 		}
 
