@@ -68,9 +68,6 @@
 		function register() {
 			$this->form->setValue($this->post);
 
-			// Start transaction
-			$this->db->begin();
-
 			if($this->post['contents_id']) {
 				$contents_id = $this->post['contents_id'];
 
@@ -92,27 +89,15 @@
 						$this->message = __("Another user has updated this record\nAre you sure you want to overwrite?");
 					}
 					else {
-						$ret = $this->update($this->user_id, $contents_id);
+						$this->update($this->user_id, $contents_id);
 					}
 				}
 				else {
-					$ret = $this->insert($this->user_id, $contents_id);
+					$this->insert($this->user_id, $contents_id);
 				}
 			}
 			else {
-				$ret = $this->selectInsert($this->user_id, $contents_id);
-			}
-
-			// End transaction
-			if($ret) {
-				$this->db->commit();
-				$this->status = true;
-				$this->message = __('Saved');
-			}
-			else {
-				$this->db->rollback();
-				$this->status = false;
-				$this->message =  __('Failed to save');
+				$this->selectInsert($this->user_id, $contents_id);
 			}
 
 			$response['status'] = $this->status;
@@ -129,6 +114,9 @@
 		}
 
 		function update($user_id, $contents_id) {
+			// start transaction
+			$this->db->begin();
+
 			$this->form->getValue($contents_data);
 
 			$contents_data['contents_id'] = $contents_id;
@@ -137,10 +125,24 @@
 			$contents_data['version_id'] = $this->version['working_version_id'];
 			$contents_data['revision_id'] = $this->version['revision_id'];
 
-			return $this->contents_table->update($contents_data);
+			$ret = $this->contents_table->update($contents_data);
+
+			if($ret) {
+				$this->db->commit();
+				$this->status = true;
+				$this->message = __('Saved');
+			}
+			else {
+				$this->db->rollback();
+				$this->status = false;
+				$this->message =  __('Failed to save');
+			}
 		}
 
 		function insert($user_id, $contents_id) {
+			// start transaction
+			$this->db->begin();
+
 			$this->form->getValue($contents_data);
 
 			$contents_data['create_user'] = $user_id;
@@ -153,9 +155,23 @@
 			$contents_data['contents_id'] = $contents_id;
 
 			return $this->contents_table->insert($contents_data);
+
+			if($ret) {
+				$this->db->commit();
+				$this->status = true;
+				$this->message = __('Saved');
+			}
+			else {
+				$this->db->rollback();
+				$this->status = false;
+				$this->message =  __('Failed to save');
+			}
 		}
 
 		function selectInsert($user_id, &$contents_id) {
+			// start transaction
+			$this->db->begin();
+
 			$this->form->getValue($contents_data);
 
 			$contents_data['create_user'] = $user_id;
@@ -183,7 +199,16 @@
 				$ret = $this->node->setContentsId($contents_id, $user_id);
 			}
 
-			return $ret;
+			if($ret) {
+				$this->db->commit();
+				$this->status = true;
+				$this->message = __('Saved');
+			}
+			else {
+				$this->db->rollback();
+				$this->status = false;
+				$this->message =  __('Failed to save');
+			}
 		}
 
 		function view() {

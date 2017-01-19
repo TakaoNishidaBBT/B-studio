@@ -49,7 +49,7 @@
 										=> 'これら%NODE_COUNT%をゴミ箱に移動します。よろしいですか？',
 		'Are you sure you want to permanently remove the items in the trash?'
 										=> '完全に削除します。よろしいですか？',
-		"Another user has updated this file\nAre you sure you want to overwrite?"
+		"Another user has updated this record\nAre you sure you want to overwrite?"
 										=> "他のユーザに更新されています。\n上書きしますか？",
 		'Saved'							=> '保存しました',
 		'Failed to save'				=> '保存に失敗しました',
@@ -210,7 +210,7 @@
 		'Open link in new window'		=> '別ウインドウ',
 		'Details'						=> '詳細',
 		'Are you sure you want to delete?'
-										=> '削除します。\n\nよろしいですか',
+										=> '削除します。よろしいですか',
 		'Properties'					=> 'プロパティー',
 		'newCategory'					=> '新しいカテゴリ',
 		'newFolder'						=> '新しいフォルダ',

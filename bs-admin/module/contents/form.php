@@ -181,6 +181,7 @@
 			$contents_data['contents_id'] = $contents_id;
 
 			$ret = $this->contents_table->insert($contents_data);
+
 			if($ret) {
 				$this->db->commit();
 				$this->status = true;
