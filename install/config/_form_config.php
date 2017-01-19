@@ -301,7 +301,7 @@ $admin_basic_auth_config = array(
 					'name'					=> 'basic_auth_pwd',
 					'class'					=> 'B_Password',
 					'special_html'			=> 'class="textbox ime-off" size="40" maxlength="100" ',
-					'confirm_message'		=> __('(Entered password)'),
+					'confirm_message'		=> __('(Set password)'),
 					'validate'				=>
 					array(
 						array(

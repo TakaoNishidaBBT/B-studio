@@ -62,7 +62,7 @@
 			<p><span class="caution">※</span>如果文本已存在，新生成的文本将覆盖原文本。</p>
 		</fieldset>
 
-		<p>点击「安装」按钮开始安装。</p>
+		<p class="center">点击「安装」按钮开始安装。</p>
 
 		<div class="confirm">
 			<input name="action" value="install" type="hidden" />

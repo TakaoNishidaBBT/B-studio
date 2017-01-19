@@ -62,7 +62,7 @@
 			<p><span class="caution">※</span>ファイルが存在する場合は上書きされます。</p>
 		</fieldset>
 
-		<p>「インストール」ボタンをクリックすると、この内容でインストールを開始します。</p>
+		<p class="center">「インストール」ボタンをクリックすると、この内容でインストールを開始します。</p>
 
 		<div class="confirm">
 			<input name="action" value="install" type="hidden" />

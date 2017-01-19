@@ -62,7 +62,7 @@
 			<p><span class="caution">※</span>The files will be overwriten when files are already exist.</p>
 		</fieldset>
 
-		<p>Click "Install" button to start install in the contents above.</p>
+		<p class="center">Click "Install" button to start install in the contents above.</p>
 
 		<div class="confirm">
 			<input name="action" value="install" type="hidden" />

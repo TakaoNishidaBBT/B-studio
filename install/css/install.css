@@ -189,3 +189,6 @@ input.button:hover, input.buttonHover {
 	height: 200px;
 	font-family: "ＭＳ ゴシック","MS Gothic","Lucida Grande","Lucida Sans Unicode","Helvetica Neue","Hiragino Kaku Gothic Pro","ヒラギノ角ゴ Pro W3",Arial,Verdana,sans-serif;
 }
+p.center {
+	text-align: center;
+}
