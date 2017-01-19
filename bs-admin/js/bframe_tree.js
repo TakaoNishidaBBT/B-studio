@@ -1330,7 +1330,9 @@
 					current_node.set(current_node.parent().id);
 				}
 			}
-			param+= '&node_id='+encodeURIComponent(current_node.id().substr(1));
+			if(current_node.id()) {
+				param+= '&node_id='+encodeURIComponent(current_node.id().substr(1));
+			}
 
 			httpObj = createXMLHttpRequest(showNode);
 			if(bframe.searchParentById(selected_node.object(), 'trash')) {
@@ -1898,9 +1900,11 @@
 			}
 
 			this.exists = function(node_id) {
-				for(var i=0; i < current_node.length; i++) {
-					if(current_node[i].id.substr(1) == node_id.substr(1)) {
-						return true;
+				if(node_id) {
+					for(var i=0; i < current_node.length; i++) {
+						if(current_node[i].id.substr(1) == node_id.substr(1)) {
+							return true;
+						}
 					}
 				}
 
