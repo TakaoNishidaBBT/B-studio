@@ -726,13 +726,12 @@
 			return $row['cnt'];
 		}
 
-		function checkDuplicateById($parent_node_id, $node_id) {
+		function checkDuplicateById($parent_node_id, $node_id_array) {
 			$parent_node_id = $this->db->real_escape_string($parent_node_id);
-			$node_id = $this->db->real_escape_string($node_id);
 
-			for($nodes='', $i=0; $i<count($node_id); $i++) {
+			for($nodes='', $i=0; $i<count($node_id_array); $i++) {
 				if($nodes) $nodes.= ',';
-				$nodes.= "'" . $node_id[$i] . "'";
+				$nodes.= "'" . $this->db->real_escape_string($node_id_array[$i]) . "'";
 			}
 
 			$sql = "select node_name, count(*) cnt
