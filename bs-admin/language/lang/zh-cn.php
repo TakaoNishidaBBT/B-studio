@@ -328,7 +328,7 @@
 		'This ID is already in use'		=> '该用户ID已登录',
 		'This ID cannot be used'		=> '该用户ID无法使用',
 		'Please enter password'			=> '请输入密码',
-		'Please set user type'			=> '请选择用户授权',
+		'Please select user type'		=> '请选择用户授权',
 		'Please enter a name'			=> '请输入用户名',
 		'English'						=> '英文',
 		'Japanese'						=> '日文',

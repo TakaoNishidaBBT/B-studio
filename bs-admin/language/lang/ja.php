@@ -328,7 +328,7 @@
 		'This ID is already in use'		=> '既に登録されています',
 		'This ID cannot be used'		=> 'そのIDは登録できません',
 		'Please enter password'			=> 'パスワードを入力してください',
-		'Please set user type'			=> 'ユーザ権限を選択してください',
+		'Please select user type'		=> 'ユーザ権限を選択してください',
 		'Please enter a name'			=> '名前を入力してください',
 		'English'						=> '英語',
 		'Japanese'						=> '日本語',
