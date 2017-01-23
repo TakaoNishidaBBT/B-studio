@@ -1,7 +1,7 @@
 <?php
 /*
  * B-frame : php web application framework
- * Copyright (c) BigBeat Inc. All rights reserved. (http://www.bigbeat.co.jp)
+ * Copyright (c) Bigbeat Inc. All rights reserved. (http://www.bigbeat.co.jp)
  *
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
