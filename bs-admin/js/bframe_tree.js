@@ -2723,7 +2723,14 @@
 					for(var i=0; i<files.length; i++) {
 						files[i].id = i;
 						var progress = new fileProgress(files[i], tree_id, pane_id, disp_type);
-						upload_queue[i] = {'file' : files[i], 'progress' : progress};
+
+						if(!files[i].type && files[i].size % 4096 == 0) {
+							progress.setError();
+							progress.setStatus(property.upload.error_message);
+						}
+						else {
+							upload_queue[i] = {'file' : files[i], 'progress' : progress};
+						}
 					}
 					confirm(0);
 				}

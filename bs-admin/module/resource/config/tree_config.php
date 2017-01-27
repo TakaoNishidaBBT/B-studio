@@ -91,6 +91,7 @@ $tree_config = array(
 				'file'			=> 'upload_file',
 				'module'		=> $this->module,
 				'page'			=> 'upload',
+				'error_message'	=> __('Folder is not allowed'),
 			),
 			'display_mode'	=>
 			array(

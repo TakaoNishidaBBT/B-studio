@@ -59,7 +59,7 @@
 					case 'noextract':
 						if(file_exists(B_UPLOAD_DIR . $path . $file['basename']) && $this->request['mode'] == 'confirm') {
 							$response_mode = 'confirm';
-							$message = __('%FILE_NAME% already exists. Are you sure you want to overwrite?');
+							$message = __('%FILE_NAME% already exists.<br />Are you sure you want to overwrite?');
 							$message = str_replace('%FILE_NAME%', $file['basename'], $message);
 						}
 						break;
@@ -68,7 +68,7 @@
 				else {
 					if($this->request['mode'] == 'confirm' && file_exists(B_UPLOAD_DIR . $path . $file['basename'])) {
 						$response_mode = 'confirm';
-						$message = __('%FILE_NAME% already exists. Are you sure you want to overwrite?');
+						$message = __('%FILE_NAME% already exists.<br />Are you sure you want to overwrite?');
 						$message = str_replace('%FILE_NAME%', $file['basename'], $message);
 					}
 				}

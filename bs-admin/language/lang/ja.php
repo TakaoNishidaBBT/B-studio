@@ -254,6 +254,7 @@
 		'Please use server browser'		=> 'サーバブラウザを使用してください',
 		'An error has occurred'			=> 'エラーが発生しました',
 		'The name could not be changed'	=> '名前を変更できません',
+		'Folder is not allowed'			=> 'フォルダはアップロードできません',
 
 		// Version
 		'Keyword'						=> 'キーワード',
