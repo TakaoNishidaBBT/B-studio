@@ -11,7 +11,7 @@
 	// Error No: 0	DB error
 	// 		   : 1	paste(or move) node to sub folder
 	// 		   : 2	node count is not much
-	// 		   : 3	node was updated by other user
+	// 		   : 3	node was updated by another user
 	// -------------------------------------------------------------------------
 	class B_Node {
 		function __construct($db, $table, $view, $version, $revision, $node_id, $parent, $expand_level, $open_nodes, $node_count=false, $sort_mode='manual', $level=0, $row=null) {
