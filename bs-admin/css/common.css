@@ -720,12 +720,12 @@ ul.page-locator li.other a:hover {
 }
 ul.page-locator li.title {
 	width: 46px;
-	line-height: 27px;
+	line-height: 23px;
 }
 ul.page-locator li.page_info {
 	width: 180px;
 	padding-left: 10px;
-	line-height: 27px;
+	line-height: 25px;
 	text-align: left;
 }
 
