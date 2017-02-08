@@ -58,7 +58,7 @@
 
 		function _validate_callback($param) {
 			// Check user id already exists
-			$sql = "select count(*) cnt from " . B_DB_PREFIX . "user where user_id='" . $param['value'] . "'";
+			$sql = "select count(*) cnt from " . B_DB_PREFIX . "user where user_id = binary '" . $param['value'] . "'";
 			$rs = $this->db->query($sql);
 			$row = $this->db->fetch_assoc($rs);
 			if($row['cnt'] == 0) {

@@ -430,7 +430,7 @@ $result_control_config = array(
 		'start_html'	=> '<li>',
 		'end_html'		=> '</li>',
 		array(
-			'start_html'	=> '<span class="left-button" style="width:150px" onclick="bframe.submit(\'F1\', \'' . $this->module . '\', \'list\', \'back\', \'\')">',
+			'start_html'	=> '<span class="left-button" onclick="bframe.submit(\'F1\', \'' . $this->module . '\', \'list\', \'back\', \'\')">',
 			'end_html'		=> '</span>',
 			array(
 				'start_html'	=> '<span class="img-cover">',
