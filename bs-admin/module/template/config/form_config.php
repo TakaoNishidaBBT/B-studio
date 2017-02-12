@@ -85,6 +85,20 @@ $form_config = array(
 				'special_html'		=> 'class="textarea bframe_adjustparent bframe_texteditor" param="margin:32" syntax="php" style="width:100%"',
 				'no_trim'			=> true,
 			),
+			array(
+				'id'				=> 'open_widgetmanager',
+				'class'				=> 'B_Link',
+				'link'				=> 'index.php',
+				'value'				=> __('Widgets'),
+				'special_html'		=> 'title="' . __('Widgets') . '" style="display:none"',
+				'fixedparam'		=>
+				array(
+					'terminal_id'	=> TERMINAL_ID,
+					'module'		=> 'widget', 
+					'page'			=> 'select_tree',
+					'target_id'		=> 'start_html',
+				),
+			),
 		),
 		array(
 			'start_html'	=> '<div id="config" class="bframe_adjustparent" param="margin:26" style="display:none">',
