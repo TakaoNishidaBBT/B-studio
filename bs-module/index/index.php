@@ -217,8 +217,8 @@
 			$this->getTemplates($this->contents['template_id']);
 
 			for($i=0; $i < count($this->templates); $i++) {
-				$this->start_html = $this->templates[$i]['start_html'] . $this->start_html;
-				$this->end_html.= $this->templates[$i]['end_html'];
+				$this->start_html.= $this->templates[$i]['start_html'];
+				$this->end_html = $this->templates[$i]['end_html'] . $this->end_html;
 			}
 			return $this->start_html . $this->innerHTML . $this->end_html;
 		}
@@ -253,10 +253,11 @@
 
 				$this->templates[] = $row;
 			}
+			$this->templates = array_reverse($this->templates);
 		}
 
 		function setTemplateCssLink() {
-			for($i=count($this->templates)-1; $i >= 0; $i--) {
+			for($i=0; $i < count($this->templates); $i++) {
 				if($this->templates[$i]['css']) {
 					$this->html_header->appendProperty('css',
 						'<link rel="stylesheet" href="T' . $this->templates[$i]['contents_id'] . '.css" type="text/css" media="all" />');
@@ -265,7 +266,7 @@
 		}
 
 		function setTemplateExternalCss() {
-			for($i=count($this->templates)-1; $i >= 0; $i--) {
+			for($i=0; $i < count($this->templates); $i++) {
 				$this->setCss($this->templates[$i]['external_css']);
 			}
 		}
@@ -276,7 +277,7 @@
 		}
 
 		function setTemplateExternalScript() {
-			for($i=count($this->templates)-1; $i >= 0; $i--) {
+			for($i=0; $i < count($this->templates); $i++) {
 				$this->setScript($this->templates[$i]['external_js']);
 			}
 		}
@@ -287,7 +288,7 @@
 		}
 
 		function setTemplateHeaderElement() {
-			for($i=count($this->templates)-1; $i >= 0; $i--) {
+			for($i=0; $i < count($this->templates); $i++) {
 				$this->setHeaderElement($this->templates[$i]['header_element']);
 			}
 		}
@@ -356,8 +357,8 @@
 			$this->getTemplates($this->contents['template_id']);
 
 			for($i=0; $i < count($this->templates); $i++) {
-				$this->start_html = $this->templates[$i]['start_html'] . $this->start_html;
-				$this->end_html.= $this->templates[$i]['end_html'];
+				$this->start_html.= $this->templates[$i]['start_html'];
+				$this->end_html = $this->templates[$i]['end_html'] . $this->end_html;
 			}
 
 			$this->innerHTML = '<div id="inline_editor" class="bframe_inlineeditor" bframe_inlineeditor_param="filebrowser:bs-admin/index.php?terminal_id=' . $this->post['terminal_id'] . '&amp;module=resource&amp;page=popup,language:' . $admin_language . '" style="outline:none">' . $this->contents['html1'] . '</div>';
@@ -409,8 +410,8 @@
 			$this->getTemplates($this->contents['template_id']);
 
 			for($i=0; $i < count($this->templates); $i++) {
-				$this->start_html = $this->templates[$i]['start_html'] . $this->start_html;
-				$this->end_html.= $this->templates[$i]['end_html'];
+				$this->start_html.= $this->templates[$i]['start_html'];
+				$this->end_html = $this->templates[$i]['end_html'] . $this->end_html;
 			}
 
 			$this->innerHTML = $this->contents['html1'];
@@ -487,8 +488,8 @@
 			$this->getTemplates($row['parent_node']);
 
 			for($i=0; $i < count($this->templates); $i++) {
-				$start_html = $this->templates[$i]['start_html'] . $start_html;
-				$end_html.= $this->templates[$i]['end_html'];
+				$start_html.= $this->templates[$i]['start_html'];
+				$end_html = $this->templates[$i]['end_html'] . $end_html;
 			}
 
 			$this->innerHTML = $start_html . $this->post['start_html'] . $this->post['end_html'] . $end_html;
