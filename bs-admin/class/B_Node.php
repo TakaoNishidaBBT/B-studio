@@ -301,7 +301,7 @@
 			$list = array();
 
 			if($this->node_id != 'root') {
-				for($i=1, $indent='' ; $i<$this->level ; $i++) $indent.= '&emsp;';	// indent
+				for($i=1, $indent=''; $i<$this->level; $i++) $indent.= '&emsp;';	// indent
 				$list[$this->node_id] = $indent . mb_convert_encoding($this->node_name, 'UTF-8', 'auto');
 			}
 			if(is_array($this->node)) {
@@ -548,7 +548,7 @@
 			$sql = str_replace('%VIEW%', B_DB_PREFIX . $this->view, $sql);
 			$rs = $this->db->query($sql);
 
-			for($cnt=0 ; $row[$cnt] = $this->db->fetch_assoc($rs) ; $cnt++);
+			for($cnt=0; $row[$cnt] = $this->db->fetch_assoc($rs); $cnt++);
 
 			if(strlen($default_name) == mb_strlen($default_name)) {
 				$info = pathinfo($default_name);
@@ -561,10 +561,10 @@
 
 			for($i=2, $node_name = $info['filename'] ;; $node_name = $prefix . $info['filename'] . $extend) {
 				if($info['extension']) {
-					for($j=0 ; $j<$cnt && $row[$j]['node_name'] != $node_name . '.' . $info['extension']; $j++);
+					for($j=0; $j<$cnt && $row[$j]['node_name'] != $node_name . '.' . $info['extension']; $j++);
 				}
 				else {
-					for($j=0 ; $j<$cnt && $row[$j]['node_name'] != $node_name; $j++);
+					for($j=0; $j<$cnt && $row[$j]['node_name'] != $node_name; $j++);
 				}
 
 				if($j == $cnt) {
@@ -613,7 +613,7 @@
 		function updateDispSeq($request, $user_id) {
 			if(!$this->node_id) return;
 
-			for($i=0 ; $i<count($request['node_list']) ; $i++) {
+			for($i=0; $i<count($request['node_list']); $i++) {
 				if($this->isMyParent($request['node_list'])) {
 					$this->error_no = 1;
 					return false;
@@ -625,7 +625,7 @@
 				return false;
 			}
 
-			for($i=0 ; $i<count($request['node_list']) ; $i++) {
+			for($i=0; $i<count($request['node_list']); $i++) {
 				if(is_array($this->node)) {
 					foreach(array_keys($this->node) as $key) {
 						if($this->node[$key]->node_id == $request['node_list'][$i]) {
@@ -639,7 +639,7 @@
 			}
 
 			// update
-			for($i=0 ; $i<count($request['node_list']) ; $i++) {
+			for($i=0; $i<count($request['node_list']); $i++) {
 				$this->cloneNode($request['node_list'][$i]);
 
 				$param['node_id'] = $request['node_list'][$i];
@@ -861,7 +861,7 @@
 				$i=0;
 				$this->roots[$i++] = $node_id;
 
-				for($id = $node_id; $row = $this->selectNode($id) ; $id = $row['parent_node']) {
+				for($id = $node_id; $row = $this->selectNode($id); $id = $row['parent_node']) {
 					$this->roots[$i++] = $row['parent_node'];
 				}
 			}
