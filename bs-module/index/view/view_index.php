@@ -1,9 +1,9 @@
 <?php
+	for($__i=0; $__i < count($__templates); $__i++) {
+		eval('?>' . $__templates[$__i]['php']);
+	}
 	if($__contents['php']) {
 		eval('?>' . $__contents['php']);
-	}
-	for($i=0; $i < count($__templates); $i++) {
-		eval('?>' . $__templates[$i]['php']);
 	}
 	if($__start_html || $__innerHTML || $__end_html) {
 		eval('?>' . $__start_html . $__innerHTML . $__end_html);
