@@ -94,7 +94,7 @@
 										=> '受け側のフォルダは送り側のフォルダのサブフォルダです',
 		'The destination template is a subtemplate of the selecter template'
 										=> '受け側のテンプレートは送り側のサブテンプレートです',
-		'The number of nodes are differnt. Please sort in right pane.'
+		'The number of nodes are different. Please sort in the right pane.'
 										=> 'ノードの数が違っています(右側のフォルダペインでソートしてください)',
 		'The number of nodes are different'
 										=> 'ノードの数が違っています',

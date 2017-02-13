@@ -244,7 +244,7 @@
 									, $this->version['revision_id']
 									, $this->request['parent_node_id']
 									, null
-									, 0
+									, 1
 									, null);
 
 					// Start transaction

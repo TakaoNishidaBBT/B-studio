@@ -94,7 +94,7 @@
 										=> '目?文件??当前文件?的子文件?',
 		'The destination template is a subtemplate of the selecter template'
 										=> '目?模板?当前模板的子模版',
-		'The number of nodes are differnt. Please sort in right pane.'
+		'The number of nodes are different. Please sort in the right pane.'
 										=> '?点数不同。 (?在右窗格中排序)',
 		'The number of nodes are different'
 										=> '?点数不同。',
