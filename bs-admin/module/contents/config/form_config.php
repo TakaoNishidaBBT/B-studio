@@ -282,7 +282,7 @@ $settings_form_config = array(
 				array(
 					'name'					=> 'breadcrumbs',
 					'class'					=> 'B_InputText',
-					'special_html'			=> 'class="breadcrumbs bframe_textarea"" ',
+					'special_html'			=> 'class="breadcrumbs bframe_textarea"',
 					'no_trim'				=> true,
 				),
 			),
