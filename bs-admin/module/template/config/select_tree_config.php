@@ -7,7 +7,7 @@
 */
 $tree_config = array(
 	'id'			=> 'tree',
-	'start_html'	=> '<div id="tree" class="bframe_tree bframe_adjustparent" param="margin:20" unselectable="on">',
+	'start_html'	=> '<div id="tree" class="bframe_tree bframe_adjustparent" data-param="margin:20">',
 	'end_html'		=> '</div>',
 	'script'		=>
 	array(

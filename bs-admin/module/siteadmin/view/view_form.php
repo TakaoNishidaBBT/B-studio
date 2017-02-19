@@ -9,7 +9,7 @@
 		<div id="control">
 			<?php echo $this->control->getHtml(); ?>
 		</div>
-		<div id="main" class="bframe_adjustparent" param="margin:120">
+		<div id="main" class="bframe_adjustparent" data-param="margin:120">
 			<?php
 				if($this->error_message) {
 					echo $this->error_message;

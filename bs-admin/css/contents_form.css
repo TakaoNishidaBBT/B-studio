@@ -171,6 +171,11 @@ div#preview {
 #preview_frame {
 	background-color: #ffffff;
 }
+iframe#inline_frame,
+iframe#preview_frame {
+	width: 100%;
+	border: none;
+}
 div.text_editor {
 	margin: 0;
 	padding: 0;

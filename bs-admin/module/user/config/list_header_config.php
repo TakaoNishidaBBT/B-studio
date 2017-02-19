@@ -27,7 +27,7 @@ $list_header_config = array(
 					'end_html'				=> '</li>',
 					array(
 						'class'					=> 'B_Text',
-						'start_html'			=> '<label for="item_name">',
+						'start_html'			=> '<label for="keyword">',
 						'end_html'				=> '</label>',
 						'value'					=> __('Keyword'),
 					),
@@ -48,7 +48,7 @@ $list_header_config = array(
 					'end_html'				=> '</li>',
 					array(
 						'class'					=> 'B_Text',
-						'start_html'			=> '<label for="rows">',
+						'start_html'			=> '<label for="row_per_page">',
 						'end_html'				=> '</label>',
 						'value'					=> __('Display'),
 					),
@@ -60,6 +60,8 @@ $list_header_config = array(
 					),
 				),
 				array(
+					'id'			=> 'search-button',
+					'name'			=> 'search-button',
 					'class'			=> 'B_Button',
 					'start_html'	=> '<li>',
 					'end_html'		=> '</li>',
@@ -67,6 +69,8 @@ $list_header_config = array(
 					'value'			=> __('Search'),
 				),
 				array(
+					'id'			=> 'clear-button',
+					'name'			=> 'clear-button',
 					'class'			=> 'B_Button',
 					'start_html'	=> '<li>',
 					'end_html'		=> '</li>',
@@ -74,6 +78,8 @@ $list_header_config = array(
 					'value'			=> __('Clear'),
 				),
 				array(
+					'id'			=> 'insert-button',
+					'name'			=> 'insert-button',
 					'auth_filter'	=> 'super_admin/admin',
 					'class'			=> 'B_Button',
 					'start_html'	=> '<li>',

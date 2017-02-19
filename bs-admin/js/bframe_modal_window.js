@@ -160,13 +160,13 @@
 
 			set_width = false;
 			set_height = false;
-			var params = target.getAttribute('params');
-			if(params) {
-				if(w = bframe.getParam('width', params)) {
+			var param = target.getAttribute('data-param');
+			if(param) {
+				if(w = bframe.getParam('width', param)) {
 					window_width_default = w;
 					set_width = true;
 				}
-				if(h = bframe.getParam('height', params)) {
+				if(h = bframe.getParam('height', param)) {
 					window_height_default = h;
 					set_height = true;
 				}

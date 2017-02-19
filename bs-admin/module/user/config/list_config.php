@@ -89,12 +89,12 @@ array(
 			'value'			=> __('Notes'),
 		),
 		array(
-			'start_html'	=> '<th class="center" style="width:40px" nowrap>',
+			'start_html'	=> '<th class="center" style="width:40px">',
 			'end_html'		=> '</th>',
 			'value'			=> __('Edit'),
 		),
 		array(
-			'start_html'	=> '<th class="center" style="width:40px" nowrap>',
+			'start_html'	=> '<th class="center" style="width:40px">',
 			'end_html'		=> '</th>',
 			'value'			=> __('Delete'),
 		),

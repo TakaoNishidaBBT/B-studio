@@ -26,7 +26,7 @@
 	// -------------------------------------------------------------------------
 	bframe.adjustwindow = function(target) {
 		var self = target;
-		var param = target.getAttribute('param');
+		var param = target.getAttribute('data-param');
 		var margin = 0;
 
 		if(param) {
@@ -70,7 +70,7 @@
 	bframe.adjustparent = function(target) {
 		var self = target;
 		var pos = bframe.getElementPosition(self);
-		var param = target.getAttribute('param');
+		var param = target.getAttribute('data-param');
 		var margin = 0;
 		var param_height = 100;
 

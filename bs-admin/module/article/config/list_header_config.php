@@ -66,6 +66,8 @@ $list_header_config = array(
 					),
 				),
 				array(
+					'id'			=> 'search-button',
+					'name'			=> 'search-button',
 					'class'			=> 'B_Button',
 					'start_html'	=> '<li>',
 					'end_html'		=> '</li>',
@@ -73,6 +75,8 @@ $list_header_config = array(
 					'value'			=> __('Search'),
 				),
 				array(
+					'id'			=> 'clear-button',
+					'name'			=> 'clear-button',
 					'class'			=> 'B_Button',
 					'start_html'	=> '<li>',
 					'end_html'		=> '</li>',
@@ -80,6 +84,8 @@ $list_header_config = array(
 					'value'			=> __('Clear'),
 				),
 				array(
+					'id'			=> 'insert-button',
+					'name'			=> 'insert-button',
 					'class'			=> 'B_Button',
 					'start_html'	=> '<li class="insert">',
 					'end_html'		=> '</li>',

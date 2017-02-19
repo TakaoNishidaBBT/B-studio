@@ -12,10 +12,10 @@ $form_config = array(
 	array('class' => 'B_Hidden', 'name' => 'contents_id'),
 	array('class' => 'B_Hidden', 'name' => 'update_datetime'),
 	array(
-		'start_html'	=> '<div class="editor_container bframe_adjustwindow" param="margin:8" >',
+		'start_html'	=> '<div class="editor_container bframe_adjustwindow" data-param="margin:8" >',
 		'end_html'		=> '</div>',
 		array(
-			'start_html'	=> '<div id="html" class="text_editor bframe_adjustparent" param="margin:22">',
+			'start_html'	=> '<div id="html" class="text_editor bframe_adjustparent" data-param="margin:22">',
 			'end_html'		=> '</div>',
 			array(
 				'start_html'	=> '<div class="bframe_compare" id="compare_html">',
@@ -37,7 +37,7 @@ $form_config = array(
 			),
 		),
 		array(
-			'start_html'	=> '<div id="css" class="text_editor bframe_adjustparent" param="margin:22" style="display:none">',
+			'start_html'	=> '<div id="css" class="text_editor bframe_adjustparent" data-param="margin:22" style="display:none">',
 			'end_html'		=> '</div>',
 			array(
 				'start_html'	=> '<div class="bframe_compare" id="compare_css">',
@@ -59,7 +59,7 @@ $form_config = array(
 			),
 		),
 		array(
-			'start_html'	=> '<div id="php" class="text_editor bframe_adjustparent" param="margin:22" style="display:none">',
+			'start_html'	=> '<div id="php" class="text_editor bframe_adjustparent" data-param="margin:22" style="display:none">',
 			'end_html'		=> '</div>',
 			array(
 				'start_html'	=> '<div class="bframe_compare" id="compare_php">',
@@ -81,7 +81,7 @@ $form_config = array(
 			),
 		),
 		array(
-			'start_html'	=> '<div id="config" class="bframe_adjustparent" param="margin:30" style="display:none">',
+			'start_html'	=> '<div id="config" class="bframe_adjustparent" data-param="margin:30" style="display:none">',
 			'end_html'		=> '</div>',
 			array(
 				'name'				=> 'config_form',
@@ -160,7 +160,7 @@ $tab_control_config = array(
 $config_form_config = array(
 	array(
 		// Table
-		'start_html'	=> '<table class="form" border="0" cellspacing="0" cellpadding="0"><tbody>',
+		'start_html'	=> '<table class="form"><tbody>',
 		'end_html'		=> '</tbody></table>',
 
 		// Titlte
