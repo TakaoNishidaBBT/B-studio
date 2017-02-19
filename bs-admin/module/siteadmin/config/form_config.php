@@ -6,26 +6,26 @@
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
 $form_config = array(
+	// Required message
 	array(
-		// Required message
+		'class'			=> 'B_Guidance',
+		'start_html'	=> '<p>',
+		'end_html'		=> '</p>',
 		array(
 			'class'			=> 'B_Guidance',
-			'start_html'	=> '<p>',
-			'end_html'		=> '</p>',
-			array(
-				'class'			=> 'B_Guidance',
-				'start_html'	=> '<span class="require">',
-				'end_html'		=> '</span>',
-				'value'			=> __('*'),
-			),
-			array(
-				'class'			=> 'B_Guidance',
-				'value'			=> __(' Indicates required field'),
-			),
+			'start_html'	=> '<span class="require">',
+			'end_html'		=> '</span>',
+			'value'			=> __('*'),
 		),
+		array(
+			'class'			=> 'B_Guidance',
+			'value'			=> __(' Indicates required field'),
+		),
+	),
 
+	array(
 		// Table
-		'start_html'	=> '<table class="form" border="0" cellspacing="0" cellpadding="0"><tbody>',
+		'start_html'	=> '<table class="form"><tbody>',
 		'end_html'		=> '</tbody></table>',
 
 		// Username

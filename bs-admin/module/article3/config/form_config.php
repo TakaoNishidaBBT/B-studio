@@ -12,26 +12,27 @@ $form_config = array(
 	array('class' => 'B_Hidden', 'name' => 'visual_editor_styles', 'value' => 'default:' . B_CURRENT_ROOT . 'visualeditor/article3/styles/styles.js'),
 	array('class' => 'B_Hidden', 'name' => 'visual_editor_css',	'value' => B_CURRENT_ROOT . 'visualeditor/article3/css/default.css'),
 	array('class' => 'B_Hidden', 'name' => 'visual_editor_templates', 'value' => B_CURRENT_ROOT . 'visualeditor/article3/templates/default.js'),
+
+	// Required message
 	array(
-		// Required message
+		'class'			=> 'B_Guidance',
+		'start_html'	=> '<p>',
+		'end_html'		=> '</p>',
 		array(
 			'class'			=> 'B_Guidance',
-			'start_html'	=> '<p>',
-			'end_html'		=> '</p>',
-			array(
-				'class'			=> 'B_Guidance',
-				'start_html'	=> '<span class="require">',
-				'end_html'		=> '</span>',
-				'value'			=> __('*'),
-			),
-			array(
-				'class'			=> 'B_Guidance',
-				'value'			=> __(' Indicates required field'),
-			),
+			'start_html'	=> '<span class="require">',
+			'end_html'		=> '</span>',
+			'value'			=> __('*'),
 		),
+		array(
+			'class'			=> 'B_Guidance',
+			'value'			=> __(' Indicates required field'),
+		),
+	),
 
+	array(
 		// Table
-		'start_html'	=> '<table class="form" border="0" cellspacing="0" cellpadding="0"><tbody>',
+		'start_html'	=> '<table class="form"><tbody>',
 		'end_html'		=> '</tbody></table>',
 
 		// ID
@@ -147,7 +148,7 @@ $form_config = array(
 					'name'				=> 'open_category',
 					'class'				=> 'B_Link',
 					'link'				=> 'index.php',
-					'special_html'		=> 'title="' . __('Category') . '" class="settings-button" onclick="top.bframe.modalWindow.activate(this, window, \'category_id\'); return false;" params="width:350,height:400"',
+					'special_html'		=> 'title="' . __('Category') . '" class="settings-button" onclick="top.bframe.modalWindow.activate(this, window, \'category_id\'); return false;" data-param="width:350,height:400"',
 					'fixedparam'		=>
 					array(
 						'terminal_id'		=> TERMINAL_ID,
@@ -207,7 +208,7 @@ $form_config = array(
 				array(
 					'name'				=> 'description',
 					'class'				=> 'B_TextArea',
-					'special_html'		=> 'class="textarea title ime_on" size="120" maxlength="100"',
+					'special_html'		=> 'class="textarea title ime_on" maxlength="100"',
 				),
 			),
 		),
@@ -261,7 +262,7 @@ $form_config = array(
 				array(
 					'name'					=> 'title',
 					'class'					=> 'B_TextArea',
-					'special_html'			=> 'class="textarea title ime_on" size="120" maxlength="100"',
+					'special_html'			=> 'class="textarea title ime_on" maxlength="100"',
 					'validate'				=>
 					array(
 						array(

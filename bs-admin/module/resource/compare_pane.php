@@ -393,4 +393,14 @@
 			// Show HTML body
 			echo $contents;
 		}
+
+		function view_folder() {
+			$this->sendHttpHeader();
+
+			$this->html_header->appendProperty('css', '<link href="css/resource_compare.css" type="text/css" rel="stylesheet" media="all" />');
+
+			$this->showHtmlHeader();
+
+			echo '<body></body>';
+		}
 	}

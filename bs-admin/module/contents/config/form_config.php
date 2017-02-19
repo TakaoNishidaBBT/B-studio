@@ -12,23 +12,22 @@ $form_config = array(
 	array('class' => 'B_Hidden', 'name' => 'contents_id'),
 	array('class' => 'B_Hidden', 'name' => 'update_datetime'),
 	array(
-		'start_html'	=> '<div class="editor_container bframe_adjustwindow" param="margin:8" >',
+		'start_html'	=> '<div class="editor_container bframe_adjustwindow" data-param="margin:8" >',
 		'end_html'		=> '</div>',
 		array(
-			'start_html'	=> '<div id="html" class="text_editor bframe_adjustparent" param="margin:21">',
+			'start_html'	=> '<div id="html" class="text_editor bframe_adjustparent" data-param="margin:21">',
 			'end_html'		=> '</div>',
 			array(
 				'name'				=> 'html1',
 				'class'				=> 'B_TextArea',
-				'special_html'		=> 'class="textarea bframe_adjustparent bframe_texteditor" param="margin:32" style="width:100%"',
+				'special_html'		=> 'class="textarea bframe_adjustparent bframe_texteditor" data-param="margin:32" style="width:100%"',
 				'no_trim'			=> true,
 			),
 			array(
-				'id'				=> 'open_widgetmanager',
 				'class'				=> 'B_Link',
 				'link'				=> 'index.php',
 				'value'				=> __('Widgets'),
-				'special_html'		=> 'title="' . __('Widgets') . '" style="display:none"',
+				'special_html'		=> 'class="open_widgetmanager" title="' . __('Widgets') . '" style="display:none"',
 				'fixedparam'		=>
 				array(
 					'terminal_id'	=> TERMINAL_ID,
@@ -39,32 +38,32 @@ $form_config = array(
 			),
 		),
 		array(
-			'start_html'	=> '<div id="visual" class="visual_editor bframe_adjustparent" param="margin:21" style="display:none">',
+			'start_html'	=> '<div id="visual" class="visual_editor bframe_adjustparent" data-param="margin:21" style="display:none">',
 			'end_html'		=> '</div>',
 			array(
-				'start_html'	=> '<iframe id="inline_frame" name="inline_frame" class="bframe_adjustparent" frameborder="0" align="top" scrolling="auto" noresize="noresize" width="100%">',
+				'start_html'	=> '<iframe id="inline_frame" name="inline_frame" class="bframe_adjustparent">',
 				'end_html'		=> '</iframe>',
 			),
 		),
 		array(
-			'start_html'	=> '<div id="css" class="text_editor bframe_adjustparent" param="margin:21" style="display:none">',
+			'start_html'	=> '<div id="css" class="text_editor bframe_adjustparent" data-param="margin:21" style="display:none">',
 			'end_html'		=> '</div>',
 			array(
 				'id'				=> 'css_editor',
 				'name'				=> 'css',
 				'class'				=> 'B_TextArea',
-				'special_html'		=> 'class="textarea bframe_adjustparent bframe_texteditor" param="margin:32" syntax="css" style="width:100%"',
+				'special_html'		=> 'class="textarea bframe_adjustparent bframe_texteditor" data-param="margin:32" data-syntax="css" style="width:100%"',
 				'no_trim'			=> true,
 			),
 		),
 		array(
-			'start_html'	=> '<div id="php" class="text_editor bframe_adjustparent" param="margin:21" style="display:none">',
+			'start_html'	=> '<div id="php" class="text_editor bframe_adjustparent" data-param="margin:21" style="display:none">',
 			'end_html'		=> '</div>',
 			array(
 				'id'				=> 'php_editor',
 				'name'				=> 'php',
 				'class'				=> 'B_TextArea',
-				'special_html'		=> 'class="textarea bframe_adjustparent bframe_texteditor" param="margin:32" syntax="php" style="width:100%"',
+				'special_html'		=> 'class="textarea bframe_adjustparent bframe_texteditor" data-param="margin:32" data-syntax="php" style="width:100%"',
 				'no_trim'			=> true,
 			),
 			array(
@@ -83,20 +82,20 @@ $form_config = array(
 			),
 		),
 		array(
-			'start_html'	=> '<div id="settings" class="bframe_adjustparent" param="margin:25" style="display:none">',
+			'start_html'	=> '<div id="settings" class="bframe_adjustparent" data-param="margin:25" style="display:none">',
 			'end_html'		=> '</div>',
 			array(
 				'name'				=> 'settings_form',
 			),
 		),
 		array(
-			'start_html'	=> '<div id="preview" class="bframe_adjustparent" param="margin:22" style="display:none;position:relative;">',
+			'start_html'	=> '<div id="preview" class="bframe_adjustparent" data-param="margin:22" style="display:none;position:relative;">',
 			'end_html'		=> '</div>',
 			array(
 				'start_html'	=> '<div id="preview_frame_container" class="bframe_adjustparent" style="margin: 0 auto;">',
 				'end_html'		=> '</div>',
 				array(
-					'start_html'	=> '<iframe id="preview_frame" name="preview_frame" class="bframe_adjustparent" frameborder="0" align="top" scrolling="auto" noresize="noresize" style="width:100%">',
+					'start_html'	=> '<iframe id="preview_frame" name="preview_frame" class="bframe_adjustparent">',
 					'end_html'		=> '</iframe>',
 				),
 			),
@@ -194,7 +193,7 @@ $tab_control_config = array(
 $settings_form_config = array(
 	array(
 		// Table
-		'start_html'	=> '<table class="form" border="0" cellspacing="0" cellpadding="0"><tbody>',
+		'start_html'	=> '<table class="form"><tbody>',
 		'end_html'		=> '</tbody></table>',
 
 		// Title
@@ -245,7 +244,7 @@ $settings_form_config = array(
 					'name'				=> 'open_template',
 					'class'				=> 'B_Link',
 					'link'				=> 'index.php',
-					'special_html'		=> 'title="' . __('Template') . '" class="settings-button" onclick="top.bframe.modalWindow.activate(this, window, \'template_id\'); return false;" params="width:350,height:400"',
+					'special_html'		=> 'title="' . __('Template') . '" class="settings-button" onclick="top.bframe.modalWindow.activate(this, window, \'template_id\'); return false;" data-param="width:350,height:400"',
 					'fixedparam'		=>
 					array(
 						'terminal_id'		=> TERMINAL_ID,
@@ -282,7 +281,7 @@ $settings_form_config = array(
 				array(
 					'name'					=> 'breadcrumbs',
 					'class'					=> 'B_InputText',
-					'special_html'			=> 'class="breadcrumbs bframe_textarea"" ',
+					'special_html'			=> 'class="breadcrumbs bframe_textarea" ',
 					'no_trim'				=> true,
 				),
 			),

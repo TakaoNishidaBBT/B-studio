@@ -165,6 +165,9 @@ div.editor_container {
 div#preview {
 	background-color: #fff;
 }
+iframe#preview_frame {
+	width: 100%;
+}
 div.text_editor {
 	margin: 0;
 	padding: 0;

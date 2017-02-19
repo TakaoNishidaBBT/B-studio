@@ -75,12 +75,12 @@ $list_config = array(
 			'param'			=> '&amp;module=' . $this->module . '&amp;page=list&amp;method=sort&amp;sort_key=publication',
 		),
 		array(
-			'start_html'	=> '<th class="center" style="width:40px" nowrap>',
+			'start_html'	=> '<th class="center" style="width:40px">',
 			'end_html'		=> '</th>',
 			'value'			=> __('Edit'),
 		),
 		array(
-			'start_html'	=> '<th class="center" style="width:40px" nowrap>',
+			'start_html'	=> '<th class="center" style="width:40px">',
 			'end_html'		=> '</th>',
 			'value'			=> __('Delete'),
 		),

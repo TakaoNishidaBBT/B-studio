@@ -23,7 +23,7 @@
 	bframe.texteditor = function(target) {
 		var self = this;
 		var container, editor;
-		var syntax = target.getAttribute('syntax');
+		var syntax = target.getAttribute('data-syntax');
 		var register_button;
 		var widget;
 		var ace_editor, theme, Split, split, UndoManager;
@@ -68,7 +68,7 @@
 			control.appendChild(li);
 			li = createControlButton('images/editor/invisible_object.png', 'show invisibles', invisible);
 			control.appendChild(li);
-			widget = bframe.searchNodeById(parent, 'open_widgetmanager');
+			widget = bframe.searchNodeByClassName(parent, 'open_widgetmanager');
 			if(widget) {
 				li = createControlButton('images/editor/gear.png', 'widgets', openWidget);
 				control.appendChild(li);
@@ -104,8 +104,8 @@
 			container.style.height = (target.offsetHeight) + 'px';
 			container.className = 'container';
 			container.onSelectStart = function() {return false;};
-			var param = target.getAttribute('param');
-			container.setAttribute('param', param);
+			var param = target.getAttribute('data-param');
+			container.setAttribute('data-param', param);
 			parent.appendChild(container);
 			var aw = new bframe.adjustparent(container);
 

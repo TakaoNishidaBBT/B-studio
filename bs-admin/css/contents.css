@@ -47,6 +47,8 @@ iframe.tree {
 	display:block;
 	float:left;
 	margin: 0;
+	width: 15%;
+	border: none;
 }
 div.splitter {
 	float:left;
@@ -60,6 +62,7 @@ iframe.form {
 	display:block;
 	float:left;
 	margin: 0;
+	border: none;
 }
 span.message {
 	color: #204030;

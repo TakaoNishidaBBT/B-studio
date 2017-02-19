@@ -7,7 +7,7 @@
 */
 $left_tree_config = array(
 	'id'			=> 'left_tree',
-	'start_html'	=> '<div id="left_tree" class="bframe_compare_tree" unselectable="on">',
+	'start_html'	=> '<div id="left_tree" class="bframe_compare_tree">',
 	'end_html'		=> '</div>',
 	'script'		=>
 	array(
@@ -54,7 +54,7 @@ $left_tree_config = array(
 );
 $right_tree_config = array(
 	'id'			=> 'right_tree',
-	'start_html'	=> '<div id="right_tree" class="bframe_compare_tree" unselectable="on">',
+	'start_html'	=> '<div id="right_tree" class="bframe_compare_tree">',
 	'end_html'		=> '</div>',
 	'script'		=>
 	array(

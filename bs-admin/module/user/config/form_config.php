@@ -8,28 +8,28 @@
 $form_config = array(
 	array('class' => 'B_Hidden', 'name' => 'mode'),
 	array('class' => 'B_Hidden', 'name' => 'id'),
-	array('class' => 'B_Hidden', 'name' => 'user_id'),
-	array(
+//	array('class' => 'B_Hidden', 'name' => 'user_id'),
 
-		// Required message
+	// Required message
+	array(
+		'class'			=> 'B_Guidance',
+		'start_html'	=> '<p>',
+		'end_html'		=> '</p>',
 		array(
 			'class'			=> 'B_Guidance',
-			'start_html'	=> '<p>',
-			'end_html'		=> '</p>',
-			array(
-				'class'			=> 'B_Guidance',
-				'start_html'	=> '<span class="require">',
-				'end_html'		=> '</span>',
-				'value'			=> __('*'),
-			),
-			array(
-				'class'			=> 'B_Guidance',
-				'value'			=> __(' Indicates required field'),
-			),
+			'start_html'	=> '<span class="require">',
+			'end_html'		=> '</span>',
+			'value'			=> __('*'),
 		),
+		array(
+			'class'			=> 'B_Guidance',
+			'value'			=> __(' Indicates required field'),
+		),
+	),
 
+	array(
 		// Table
-		'start_html'	=> '<table class="form" border="0" cellspacing="0" cellpadding="0"><tbody>',
+		'start_html'	=> '<table class="form"><tbody>',
 		'end_html'		=> '</tbody></table>',
 
 		// User ID

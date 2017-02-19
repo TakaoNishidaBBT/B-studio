@@ -47,6 +47,7 @@ iframe.tree {
 	display:block;
 	float:left;
 	margin: 0;
+	border: none;
 }
 div.splitter {
 	float:left;
@@ -60,6 +61,7 @@ iframe.form {
 	display:block;
 	float:left;
 	margin: 0;
+	border: none;
 }
 div.bframe_tree_container {
 	display:block;

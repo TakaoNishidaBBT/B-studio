@@ -10,7 +10,7 @@
 				echo '<span class="error-message">' . $this->action_message . '</span>' . "\n";
 			}
 		?>
-		<div id="main" class="bframe_adjustparent" param="margin:120">
+		<div id="main" class="bframe_adjustparent" data-param="margin:120">
 			<?php echo $this->form->getHtml($this->display_mode); ?>
 		</div>
 		<?php echo $this->form->getHiddenHtml(); ?>

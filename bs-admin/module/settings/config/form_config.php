@@ -8,7 +8,7 @@
 $form_config = array(
 	array(
 		// Table
-		'start_html'	=> '<table class="form" border="0" cellspacing="0" cellpadding="0"><tbody>',
+		'start_html'	=> '<table class="form"><tbody>',
 		'end_html'		=> '</tbody></table>',
 		'db_table'		=> 'contents',
 
