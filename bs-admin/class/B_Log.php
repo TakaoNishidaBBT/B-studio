@@ -28,7 +28,7 @@
 
 		function write() {
 			if($this->fp) {
-				for($i=0 ; $i<func_num_args(); $i++) {
+				for($i=0; $i<func_num_args(); $i++) {
 					$param = func_get_arg($i);
 					if(is_array($param)) {
 						$param = print_r($param, true);
