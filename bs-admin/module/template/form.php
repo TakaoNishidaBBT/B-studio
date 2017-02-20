@@ -154,7 +154,7 @@
 			$contents_data['revision_id'] = $this->version['revision_id'];
 			$contents_data['contents_id'] = $contents_id;
 
-			return $this->contents_table->insert($contents_data);
+			$ret = $this->contents_table->insert($contents_data);
 
 			if($ret) {
 				$this->db->commit();
