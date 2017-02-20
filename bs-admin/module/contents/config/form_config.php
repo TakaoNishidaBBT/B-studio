@@ -1,4 +1,3 @@
-@@ -1,385 +0,0 @@
 <?php
 /*
  * B-studio : Content Management System
