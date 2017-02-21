@@ -24,7 +24,7 @@
 		var self = target;
 		var resize_status = false;
 		var start_x;
-		var param = target.getAttribute('param');
+		var param = target.getAttribute('data-param');
 		var margin = 0;
 		var splitbar_width = target.offsetWidth;
 

@@ -210,8 +210,9 @@
 				}
 				if(response.message && response.message_obj) {
 					if(obj = document.getElementById(response.message_obj)) {
+						obj.className = 'fadeout';
 						obj.innerHTML = response.message;
-						bframe.effect.fadeOut(obj, 0, 100, 0, 6000);
+						obj.outerHTML = obj.outerHTML;
 					}
 				}
 				if(response.values) {

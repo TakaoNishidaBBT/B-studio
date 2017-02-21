@@ -1,4 +1,4 @@
-<body>
+<body class="fadein">
 	<h2><span class="accent"></span><?php echo __('Widget'); ?><span><?php echo $this->version_info; ?></span></h2>
 	<div class="header"></div>
 	<iframe id="widget_tree" name="widget_tree" class="tree bframe_splitter_pane bframe_adjustwindow" param="margin:10" frameborder="0"

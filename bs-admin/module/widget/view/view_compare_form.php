@@ -1,4 +1,4 @@
-<body spellcheck="false">
+<body spellcheck="false" class="fadein">
 	<div class="bframe_adjustparent" id="contents_container">
 		<div id="contents" class="bframe_adjustparent">
 			<div class="main_container bframe_adjustwindow" param="margin:0" >

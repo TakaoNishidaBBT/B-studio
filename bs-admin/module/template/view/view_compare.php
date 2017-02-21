@@ -1,4 +1,4 @@
-<body>
+<body class="fadein">
 	<h2><span class="accent"></span><?php echo __('Templates'); ?><span class="version-info"><?php echo $this->version_info; ?></span></h2>
 	<div class="header"></div>
 	<iframe id="template_tree" name="template_tree" class="tree bframe_splitter_pane bframe_adjustwindow" data-param="margin:10"
