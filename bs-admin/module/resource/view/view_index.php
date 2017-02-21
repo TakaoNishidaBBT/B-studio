@@ -1,4 +1,4 @@
-<body spellcheck="false" onload="bframe.effect.fadeIn(document.body, 100, 0, 100, 50);" style="opacity:0">
+<body class="fadein">
 	<h2><span class="accent"></span><?php echo __('Resource Manager'); ?><span><?php echo $this->version_info; ?></span></h2>
 	<div class="header"></div>
 	<div id="bframe_tree_container" class="bframe_tree_container bframe_splitter_pane bframe_adjustwindow" data-param="margin:10">
