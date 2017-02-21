@@ -1,5 +1,8 @@
 @charset "UTF-8";
 
+html, body {
+	background-color: #fff;
+}
 h2.user {
 	margin: 0;
 	padding-left: 10px;

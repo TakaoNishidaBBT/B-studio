@@ -17,7 +17,7 @@ body {
 	font-family: "ＭＳ Ｐゴシック","MS PGothic","Lucida Grande","Lucida Sans Unicode","Helvetica Neue","Hiragino Kaku Gothic Pro","ヒラギノ角ゴ Pro W3",Arial,Verdana,sans-serif;
 	font-size: 12px;
 	text-align: left;
-	background-color: #fff;
+	background-color: #555;
 	color: #444;
 	overflow: hidden;
 }
@@ -791,24 +791,26 @@ div.clone_node_pane span.node-name {
 .pre-fadein {
 	opacity: 0;
 }
-.fadein {
+body.fadein {
 	opacity: 0;
 }
-.fadein {
-	animation-name: fadein;
-	animation-duration: 0.3s;
+body.fadein {
+	animation-name: fadein_body;
+	animation-duration: 0.26s;
 	animation-fill-mode: forwards;
-	-webkit-animation-name: fadein;
-	-webkit-animation-duration: 0.3s;
+	-webkit-animation-name: fadein_body;
+	-webkit-animation-duration: 0.26s;
 	-webkit-animation-fill-mode: forwards;
 }
-@keyframes fadein {
-	from	{opacity: 0}
-	to		{opacity: 1}
+@keyframes fadein_body {
+	0%		{opacity: 0}
+	50%		{opacity: 0}
+	100%	{opacity: 1}
 }
-@-webkit-keyframes fadein {
-	from	{opacity: 0}
-	to		{opacity: 1}
+@-webkit-keyframes fadein_body {
+	0%		{opacity: 0}
+	50%		{opacity: 0}
+	100%	{opacity: 1}
 }
 
 /* fade out */

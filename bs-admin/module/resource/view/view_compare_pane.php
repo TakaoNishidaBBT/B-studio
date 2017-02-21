@@ -1,4 +1,4 @@
-<body>
+<body class="fadein">
 	<input type="hidden" id="node_id" value="<?php echo $this->request['node_id']; ?>" />
 	<input type="hidden" id="target_id" value="<?php echo $this->request['target_id']; ?>" />
 	<div id="resource_pane" class="bframe_adjustwindow">
