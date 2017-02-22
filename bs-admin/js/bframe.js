@@ -210,9 +210,17 @@
 				}
 				if(response.message && response.message_obj) {
 					if(obj = document.getElementById(response.message_obj)) {
-						obj.className = 'fadeout';
-						obj.innerHTML = response.message;
-						obj.outerHTML = obj.outerHTML;
+						if(response.status) {
+							obj.className = 'fadeout';
+							obj.innerHTML = response.message;
+							obj.outerHTML = obj.outerHTML;
+						}
+						else {
+							obj.className = 'error-message';
+							obj.innerHTML = response.message;
+							obj.outerHTML = obj.outerHTML;
+							return;
+						}
 					}
 				}
 				if(response.values) {
