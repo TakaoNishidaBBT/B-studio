@@ -92,38 +92,45 @@
 		}
 
 		function register() {
-			$this->form->setValue($this->post);
+			try {
+				$this->form->setValue($this->post);
 
-			if($this->post['contents_id']) {
-				$contents_id = $this->post['contents_id'];
+				if($this->post['contents_id']) {
+					$contents_id = $this->post['contents_id'];
 
-				$sql = "select * from %CONTENTS_TABLE%
-						where version_id = '%VERSION_ID%'
-						and revision_id = '%REVISION_ID%'
-						and contents_id='$contents_id'";
+					$sql = "select * from %CONTENTS_TABLE%
+							where version_id = '%VERSION_ID%'
+							and revision_id = '%REVISION_ID%'
+							and contents_id='$contents_id'";
 
-				$sql = str_replace('%CONTENTS_TABLE%', B_DB_PREFIX . B_CONTENTS_TABLE, $sql);
-				$sql = str_replace('%VERSION_ID%', $this->version['working_version_id'], $sql);
-				$sql = str_replace('%REVISION_ID%', $this->version['revision_id'], $sql);
-				$rs = $this->db->query($sql);
-				$row = $this->db->fetch_assoc($rs);
+					$sql = str_replace('%CONTENTS_TABLE%', B_DB_PREFIX . B_CONTENTS_TABLE, $sql);
+					$sql = str_replace('%VERSION_ID%', $this->version['working_version_id'], $sql);
+					$sql = str_replace('%REVISION_ID%', $this->version['revision_id'], $sql);
+					$rs = $this->db->query($sql);
+					$row = $this->db->fetch_assoc($rs);
 
-				if($row) {
-					if($this->post['mode'] == 'confirm' && $row['update_datetime'] > $this->post['update_datetime']) {
-						$this->status = true;
-						$this->mode = 'confirm';
-						$this->message = __("Another user has updated this record\nAre you sure you want to overwrite?");
+					if($row) {
+						if($this->post['mode'] == 'confirm' && $row['update_datetime'] > $this->post['update_datetime']) {
+							$this->status = true;
+							$this->mode = 'confirm';
+							$this->message = __("Another user has updated this record\nAre you sure you want to overwrite?");
+						}
+						else {
+							$this->update($this->user_id, $contents_id);
+						}
 					}
 					else {
-						$this->update($this->user_id, $contents_id);
+						$this->insert($this->user_id, $contents_id);
 					}
 				}
 				else {
-					$this->insert($this->user_id, $contents_id);
+					$this->selectInsert($this->user_id, $contents_id);
 				}
 			}
-			else {
-				$this->selectInsert($this->user_id, $contents_id);
+			catch(Exception $e) {
+				$this->status = false;
+				$this->mode = 'alert';
+				$this->message = $e->getMessage();
 			}
 
 			$response['status'] = $this->status;

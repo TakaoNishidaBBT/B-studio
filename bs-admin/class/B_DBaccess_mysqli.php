@@ -27,6 +27,7 @@
 			if(!$ret) {
 				$this->log->write("CHARSET ERROR:[$charset]");
 				$this->is_connect = false;
+				throw new Exception($this->getErrorMsg());
 				return false;
 			}
 			$this->is_connect = true;
@@ -41,23 +42,13 @@
 			}
 			if(!$this->db->select_db($db_name)) {
 				$this->log->write($this->getErrorMsg());
+				throw new Exception($this->getErrorMsg());
 				return false;
 			}
 			return true;
 		}
 
 		function query($sql) {
-			if($this->log_switch || B_ARCHIVE_LOG_MODE == 'DEBUG') {
-				$this->log->write_archive_log($sql);
-			}
-			$rs = $this->db->query($sql);
-			if(!$rs) {
-				$this->log->write($this->getErrorMsg());
-			}
-			return $rs;
-		}
-
-		function iquery($sql) {
 			if($this->log_switch || B_ARCHIVE_LOG_MODE == 'DEBUG') {
 				$this->log->write_archive_log($sql);
 			}
@@ -163,7 +154,7 @@
 
 				$this->begin();
 
-				$rs = $this->iquery("select version()");
+				$rs = $this->query("select version()");
 				$row = $this->fetch_row($rs);
 				$version = $row[0];
 
@@ -192,7 +183,7 @@
 							where name like '%PREFIX%%'
 							and comment = 'VIEW'";
 					$sql = str_replace('%PREFIX%', B_DB_PREFIX, $sql);
-					$rs = $this->iquery($sql);
+					$rs = $this->query($sql);
 					while($row = $this->fetch_assoc($rs)) {
 						$views[] = $row['Name'];
 					}
@@ -211,7 +202,7 @@
 					$result.= "DROP VIEW IF EXISTS `$view_with_prefix`;\n";
 
 					$fields = '';
-					$rs = $this->iquery("SHOW COLUMNS FROM " . $view);
+					$rs = $this->query("SHOW COLUMNS FROM " . $view);
 					while($row = $this->fetch_assoc($rs)) {
 						$field = $row['Field'];
 						$type = $row['Type'];
@@ -233,7 +224,7 @@
 							where name like '%PREFIX%%'
 							and comment <> 'VIEW'";
 					$sql = str_replace('%PREFIX%', B_DB_PREFIX, $sql);
-					$rs = $this->iquery($sql);
+					$rs = $this->query($sql);
 					while($row = $this->fetch_assoc($rs)) {
 						$tables[] = $row['Name'];
 					}
@@ -248,7 +239,7 @@
 					$result.= "-- Definition of table `$table_with_prefix`\n";
 					$result.= "--\n\n";
 
-					$row = $this->fetch_row($this->iquery('SHOW CREATE TABLE ' . $table));
+					$row = $this->fetch_row($this->query('SHOW CREATE TABLE ' . $table));
 					$result.= "DROP TABLE IF EXISTS `$table_with_prefix`;\n";
 					if($install == 'install') {
 						$row[1] = preg_replace('/^CREATE TABLE `' . B_DB_PREFIX . '/',  'CREATE TABLE `%PREFIX%', $row[1]);
@@ -260,7 +251,7 @@
 					$result.= "-- Dumping data for table `$table_with_prefix`\n";
 					$result.= "--\n\n";
 
-					$rs = $this->iquery("select * from " . $table);
+					$rs = $this->query("select * from " . $table);
 					$fcnt = $this->num_fields($rs);
 
 					$field = array();
@@ -312,7 +303,7 @@
 					$result.= "-- Definition of view `$view_with_prefix`\n";
 					$result.= "--\n\n";
 
-					$row = $this->fetch_row($this->iquery('SHOW CREATE TABLE ' . $view));
+					$row = $this->fetch_row($this->query('SHOW CREATE TABLE ' . $view));
 					$result.= "DROP TABLE IF EXISTS `$view_with_prefix`;\n";
 					$result.= "DROP VIEW IF EXISTS `$view_with_prefix`;\n";
 

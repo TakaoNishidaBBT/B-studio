@@ -107,6 +107,7 @@ ul.tabcontrol li.register {
 	text-align: left;
 	border-top: 1px solid #444;
 	overflow: hidden;
+	color: #fff;
 }
 
 /* button */
@@ -146,7 +147,6 @@ span#message {
 	display: table-cell;
 	vertical-align: middle;
 	height: 26px;
-	color: #fff;
 }
 
 div.register {
