@@ -10,17 +10,17 @@
 		$lang = $_SESSION['language'];
 	}
 
+	mb_language('uni');
+
 	// Language file
 	switch($lang) {
 	case 'ja':
 		require_once(B_LNGUAGE_DIR . 'lang/ja.php');
-		mb_language('japanese');
 		mb_detect_order('UTF-8,EUC-JP,SJIS');
 		break;
 
 	case 'zh-cn':
 		require_once(B_LNGUAGE_DIR . 'lang/zh-cn.php');
-		mb_language('Simplified Chinese');
 		mb_detect_order('UTF-8,GB18030,EUC-CN');
 		break;
 

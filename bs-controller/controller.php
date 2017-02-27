@@ -20,8 +20,6 @@
 	$file_name = $path . '/' . $page;
 
 	if(file_exists($file_name)) {
-		mb_language('Japanese');
-
 		// setup module
 		$class = $module;
 		if(isset($_REQUEST['method'])) {
