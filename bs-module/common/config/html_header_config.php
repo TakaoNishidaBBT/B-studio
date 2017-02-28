@@ -13,7 +13,7 @@ $html_header_config = array(
 	'misc'		=> array(),
 	'base'		=>
 	array(
-		'<base href="' . B_SITE_BASE . '" />',
+		'<base href="' . B_SITE_BASE . '">',
 	),
 	'script'	=> array(),
 	'css'		=> array(),

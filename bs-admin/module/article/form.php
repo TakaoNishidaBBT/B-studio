@@ -145,7 +145,7 @@
 			}
 			$this->result->setValue($param);
 
-			$this->setView('result_view');
+			$this->setView('resultView');
 		}
 
 		function delete() {
@@ -169,7 +169,7 @@
 			}
 			$this->result->setValue($param);
 
-			$this->setView('result_view');
+			$this->setView('resultView');
 		}
 
 		function back() {
@@ -211,7 +211,7 @@
 			echo $contents;
 		}
 
-		function result_view() {
+		function resultView() {
 			// Start buffering
 			ob_start();
 
