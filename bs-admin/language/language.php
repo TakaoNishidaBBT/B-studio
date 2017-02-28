@@ -16,12 +16,12 @@
 	switch($lang) {
 	case 'ja':
 		require_once(B_LNGUAGE_DIR . 'lang/ja.php');
-		mb_detect_order('UTF-8,EUC-JP,SJIS');
+		mb_detect_order('UTF-8, EUC-JP, SJIS');
 		break;
 
 	case 'zh-cn':
 		require_once(B_LNGUAGE_DIR . 'lang/zh-cn.php');
-		mb_detect_order('UTF-8,GB18030,EUC-CN');
+		mb_detect_order('UTF-8, GB18030, EUC-CN');
 		break;
 
 	default:
@@ -51,5 +51,5 @@
 
 		global $texts;
 
-		return $texts[$text] ? $texts[$text]: $text;
+		return $texts[$text] ? $texts[$text] : $text;
 	}
