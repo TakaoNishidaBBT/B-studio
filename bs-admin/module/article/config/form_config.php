@@ -67,7 +67,7 @@ $form_config = array(
 				array(
 					'class'				=> 'B_Guidance',
 					'value'				=> '<span class="require">' . __('*') . '</span>',
-				),				
+				),
 			),
 			array(
 				'start_html'		=> '<td>',

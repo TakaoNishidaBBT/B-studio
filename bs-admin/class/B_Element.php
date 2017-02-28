@@ -260,6 +260,10 @@
 			if(isset($value[$name])) {
 				$this->value = $this->_prepareInput($value[$name]);
 			}
+
+			if($this->number_format) {
+				$this->value = str_replace(',', '', $this->value);
+			}
 		}
 
 		function setFilterValue($value) {
