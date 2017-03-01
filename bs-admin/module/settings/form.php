@@ -117,7 +117,7 @@
 			$file_name = 'bstudio_' . date('YmdHis') . '.zip';
 			$file_path = B_DOWNLOAD_DIR . $this->user_id . time() . $file_name;
 
-			// Continue whether a client disconnect or not
+			// Continue no matter whether a client disconnect or not
 			ignore_user_abort(true);
 
 			// send progress
@@ -209,6 +209,9 @@
 		}
 
 		function downloadArchive($file_name, $file_path) {
+			// Continue no matter whether a client download or cancel or disconnect
+			ignore_user_abort(true);
+
 			header('content-disposition: attachment; filename='.$file_name);
 			header('Content-type: application/sql');
 			header('Cache-control: public');
@@ -222,7 +225,7 @@
 		}
 
 		function backupDB() {
-			// Continue whether a client disconnect or not
+			// Continue no matter whether a client download or cancel or disconnect
 			ignore_user_abort(true);
 
 			$dump_file_name = 'bstudio_' . date('YmdHis') . '.sql';
