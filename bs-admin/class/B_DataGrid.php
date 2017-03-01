@@ -797,9 +797,12 @@
 
 			$html = $this->pager['start_html'] . "\n";
 
-			foreach($this->pager['param'] as $key => $value) {
-				$this->setParam($param, $key, $value);
+			if(is_array($this->pager['param'])) {
+				foreach($this->pager['param'] as $key => $value) {
+					$this->setParam($param, $key, $value);
+				}
 			}
+
 			if($param) {
 				$connector = '&';
 			}
