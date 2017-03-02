@@ -1,5 +1,5 @@
 <?php
-	for($i=count($__templates)-1 ; $i>=0 ; $i--) {
+	for($__i=0; $__i < count($__templates); $__i++) {
 		eval('?>' . $__templates[$i]['php']);
 	}
 	if($__start_html) {
