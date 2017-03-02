@@ -1,6 +1,6 @@
 <?php
 	for($__i=0; $__i < count($__templates); $__i++) {
-		eval('?>' . $__templates[$i]['php']);
+		eval('?>' . $__templates[$__i]['php']);
 	}
 	if($__start_html) {
 		eval('?>' . $__start_html);
