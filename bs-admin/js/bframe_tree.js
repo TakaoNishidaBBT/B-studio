@@ -452,6 +452,7 @@
 				context_menu.disableElement('editName');
 				context_menu.enableElement('createNode');
 				context_menu.enableElement('download');
+				context_menu.disableElement('open_property');
 				break;
 
 			default:
@@ -461,6 +462,7 @@
 				context_menu.enableElement('editName');
 				context_menu.enableElement('createNode');
 				context_menu.enableElement('download');
+				context_menu.enableElement('open_property');
 
 				break;
 			}
@@ -1783,7 +1785,7 @@
 				document.body.appendChild(a);
 
 				a.href = property.relation.open_property.url+'&node_id='+encodeURIComponent(id.substr(1));
-				a.setAttribute('params', property.relation.open_property.params);
+				a.setAttribute('data-param', property.relation.open_property.params);
 				a.setAttribute('title', property.relation.open_property.title);
 
 				top.bframe.modalWindow.activate(a, window);

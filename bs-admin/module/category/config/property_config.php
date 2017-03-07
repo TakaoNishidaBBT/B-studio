@@ -10,10 +10,10 @@ $form_config = array(
 	array('class' => 'B_Hidden', 'name' => 'node_id'),
 	array('class' => 'B_Hidden', 'name' => 'update_datetime'),
 	array(
-		'start_html'	=> '<div class="editor_container bframe_adjustparent" param="margin:100" >',
+		'start_html'	=> '<div class="editor_container bframe_adjustparent" data-param="margin:100" >',
 		'end_html'		=> '</div>',
 		array(
-			'start_html'	=> '<div id="config" class="bframe_adjustparent" param="margin:16">',
+			'start_html'	=> '<div id="config" class="bframe_adjustparent" data-param="margin:16">',
 			'end_html'		=> '</div>',
 			array(
 				'name'				=> 'config_form',
