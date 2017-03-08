@@ -3508,7 +3508,7 @@ var TextInput = function(parentNode, host) {
     parentNode.insertBefore(text, parentNode.firstChild);
 
 // 2015.10.16 updated T.Nishida
-	if(useragent.isMozilla) {
+	if(useragent.isMozilla || useragent.isWebKit) {
 	    var PLACEHOLDER = "";
 	}
 	else {
