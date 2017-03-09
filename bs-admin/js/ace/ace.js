@@ -11974,6 +11974,8 @@ background: #f8f8f8;\
 color: #111;\
 z-index: 1000;\
 opacity: 1;\
+letter-spacing: 2.45px;\
+padding-left: 2px;\
 }\
 .ace_layer {\
 z-index: 1;\
