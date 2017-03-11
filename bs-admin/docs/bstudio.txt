@@ -224,6 +224,18 @@ line：14218
 // 2015.11.22 updated T.Nishida
 	3833行目まで
 
+11. 全角入力時のテキストエリアのletter-spacing、padding-leftを追加
+	11972行目
+
+	.ace_text-input.ace_composition {\
+	background: #f8f8f8;\
+	color: #111;\
+	z-index: 1000;\
+	opacity: 1;\
+	letter-spacing: 2.45px;\
+	padding-left: 2px;\
+	}\
+
 
 ■CKEditor
 
