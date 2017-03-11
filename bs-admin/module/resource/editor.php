@@ -36,11 +36,11 @@
 
 				switch(strtolower($info['extension'])) {
 				case 'js':
-					$obj->special_html = str_replace('%SYNTAX%', 'syntax="javascript"', $obj->special_html);
+					$obj->special_html = str_replace('%SYNTAX%', 'data-syntax="javascript"', $obj->special_html);
 					break;
 
 				case 'css':
-					$obj->special_html = str_replace('%SYNTAX%', 'syntax="css"', $obj->special_html);
+					$obj->special_html = str_replace('%SYNTAX%', 'data-syntax="css"', $obj->special_html);
 					break;
 
 				default:
