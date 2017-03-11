@@ -253,7 +253,7 @@
 
 				$this->templates[] = $row;
 			}
-			$this->templates = array_reverse($this->templates);
+			if(is_array($this->templates)) $this->templates = array_reverse($this->templates);
 		}
 
 		function setTemplateCssLink() {
