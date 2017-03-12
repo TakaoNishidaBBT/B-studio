@@ -39,7 +39,7 @@
 			$this->sendHttpHeader();
 
 			// HTML ヘッダー出力
-			$this->html_header->appendProperty('css', '<link href="css/contents_compare_tree.css" type="text/css" rel="stylesheet" media="all" />');
+			$this->html_header->appendProperty('css', '<link href="css/template_compare_tree.css" type="text/css" rel="stylesheet" media="all" />');
 			$this->html_header->appendProperty('script', '<script src="js/bframe_compare_tree.js" type="text/javascript"></script>');
 
 			$this->showHtmlHeader();
