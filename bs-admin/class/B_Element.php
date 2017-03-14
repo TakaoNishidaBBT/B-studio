@@ -1214,25 +1214,18 @@
 	class B_InputFile extends B_Element {
 		function getElementsHtml($mode=null) {
 			if($mode == 'confirm') {
-				if(isset($this->value)) {
-					return htmlspecialchars($this->value, ENT_QUOTES, B_CHARSET);
-				}
+				$confirm = 'data-confirm="true"';
 			}
-			else {
-				$disabled = '';
-				if($this->disabled && $this->disabled == 'disabled') {
-					$disabled = ' disabled="disabled" ';
-				}
-
-				$html.= 
-					'<input ' .
-					$this->special_html . ' ' .
-					'type="file" ' .
-					'name="' . $this->name_prefix . $this->name . '" ' .
-					'id="' . $this->_gethtmlid() . '" ' .
-					$disabled .
-					' />';
-			}
+			$html.= 
+				'<input ' .
+				'type="file" ' .
+				'name="' . $this->data_name . '" ' .
+				'data-action="' . $this->data_action . '" ' .
+				'data-rel="' . $this->name_prefix . $this->name . '" ' .
+				'data-value="' . $this->value . '" ' .
+				$confirm . ' ' .
+				$this->special_html . ' ' .
+				' />';
 
 			return $html;
 		}

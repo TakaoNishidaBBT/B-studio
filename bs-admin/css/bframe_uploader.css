@@ -1,0 +1,100 @@
+@charset "UTF-8";
+
+table.upload-table {
+	border-collapse: collapse;
+}
+table.upload-table td {
+	border: none !important;
+}
+table.upload-table td.icon-field {
+	width: 100px;
+	text-align: center;
+	border: 1px solid #ccc !important;
+	padding: 0 2px;
+}
+table.upload-table td.button-field {
+	border: none !important;
+}
+.file-upload-icon-field {
+	display: inline-block;
+	text-align: center;
+}
+.upload-file-name {
+	display: block;
+	margin: 0;
+	width: 100%;
+	height: 34px;
+	word-break: break-all;
+	line-height: 1.2;
+	font:13px/1.231 Verdana, Meiryo, YuGothic, "Hiragino Kaku Gothic ProN", sans-serif;
+	font-size: 11px;
+}
+.file-upload-button,
+.file-download-button,
+.file-delete-button {
+	display: inline-block;
+	text-align: center;
+	padding: 8px 20px !important;
+	margin: 0 6px;
+	width: 70px;
+	background-color: #333;
+	color: #fff;
+	cursor: pointer;
+}
+.file-upload-button:hover,
+.file-download-button:hover,
+.file-delete-button:hover {
+	opacity: 0.7;
+	color: #fff !important;
+	text-decoration: none;
+}
+.file-download-button.disabled,
+.file-delete-button.disabled {
+	background-color: #888 !important;
+	color: #ccc !important;
+	cursor: default; 
+}
+.file-download-button.disabled:hover,
+.file-delete-button.disabled:hover {
+	background-color: #888 !important;
+	color: #ccc !important;
+	opacity: 1 !important;
+}
+
+/* progressbar */
+.progressWrapper {
+	overflow: hidden;
+	display: table-cell;
+	vertical-align: bottom;
+	text-align: center;
+	height: 66px;
+	width: 100px;
+}
+.progressWrapper.complete {
+	background: url(../images/folder/file_icon_big.png) 50% 70% no-repeat ;
+}
+.progressContainer {
+	padding: 8px 4px;
+	margin: 0 4px;
+	background-color: transparent;
+	overflow: hidden;
+	position: relative;
+}
+.progressBarStatus {
+	padding-left: 4px;
+	font-size: 10px;
+}
+.progressBar {
+	font-size: 0;
+	width: 0%;
+	height: 2px;
+	background-color: #22a8f6;
+	border-bottom: #1298e6 1px solid;
+	margin-top: 2px;
+}
+.animate {
+	transition-property: width;
+	transition-duration: 0.2s;
+	transition-timing-function: linear;
+	transition-delay: 0;
+}
