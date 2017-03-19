@@ -20,6 +20,9 @@
 			if($this->request['node_id']) {
 				$this->openCurrentNode($this->request['node_id']);
 			}
+			if($this->request['mode'] == 'open') {
+				$this->openCurrentNode($this->session['current_node']);
+			}
 
 			$this->status = true;
 			if(!$this->session['sort_order']) $this->session['sort_order'] = 'asc';

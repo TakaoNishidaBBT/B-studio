@@ -62,7 +62,7 @@ $menu_config = array(
 						array(
 							array(
 								'menu'		=> __('Resource Manager'),
-								'param'		=> DISPATCH_URL . '&module=resource&page=tree,main',
+								'param'		=> DISPATCH_URL . '&module=resource&page=tree&mode=open,main',
 								'func'		=> 'openUrl',
 							),
 							array(
@@ -111,7 +111,7 @@ $menu_config = array(
 							),
 							array(
 								'menu'		=> __('File Manager'),
-								'param'		=> DISPATCH_URL . '&module=filemanager&page=tree,main',
+								'param'		=> DISPATCH_URL . '&module=filemanager&page=tree&mode=open,main',
 								'func'		=> 'openUrl',
 							),
 						),
