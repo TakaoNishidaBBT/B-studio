@@ -26,6 +26,9 @@
 			if($this->request['node_id']) {
 				$this->openCurrentNode($this->request['node_id']);
 			}
+			if($this->request['mode'] == 'open') {
+				$this->openCurrentNode($this->session['current_node']);
+			}
 
 			if(!$this->session['sort_order']) $this->session['sort_order'] = 'asc';
 			if(!$this->session['sort_key']) $this->session['sort_key'] = 'node_name';
