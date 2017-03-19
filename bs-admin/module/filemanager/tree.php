@@ -17,9 +17,23 @@
 
 			$this->tree->setConfig($this->tree_config);
 
+			if($this->request['node_id']) {
+				$this->openCurrentNode($this->request['node_id']);
+			}
+
 			$this->status = true;
 			if(!$this->session['sort_order']) $this->session['sort_order'] = 'asc';
 			if(!$this->session['sort_key']) $this->session['sort_key'] = 'file_name';
+		}
+
+		function openCurrentNode($node_id) {
+			$dir = explode('/', $node_id);
+
+			for($i=0; $i<count($dir); $i++) {
+				if(!$dir[$i]) continue;
+				$path.= '/' . $dir[$i];
+				$this->session['open_nodes'][$path] = true;
+			}
 		}
 
 		function getNodeList() {
