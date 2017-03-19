@@ -206,10 +206,7 @@
 			if($this->node_id == $node_id) {
 				$list[$category] = true;
 			}
-			if($path && substr($path, -1) != '/') {
-				$path.= '/';
-			}
-			$list['path'] = $path . $list['node_name'];
+			$list['path'] = $this->path;
 			$list['disp_seq'] = $disp_seq;
 			$list['order'] = $this->order;
 			return $list;
