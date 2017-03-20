@@ -86,6 +86,8 @@ line：14218
 3509行目
 // 2015.10.16 updated T.Nishida　FireFoxのみPLACEHOLDERは無しにする
 	if(useragent.isMozilla) {
+// 2017.03.21 chromeも追加（windowsのみ）
+	if(useragent.isMozilla || (useragent.isWin && useragent.isWebKit)) {
 	    var PLACEHOLDER = "";
 	}
 	else {
