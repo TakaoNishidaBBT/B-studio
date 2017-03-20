@@ -19,7 +19,7 @@
 
 	bstudio.activateModalWindow = function(a, w, h, func) {
 		var p = 'width:' + w + ',height:' + h;
-		a.setAttribute('params', p);
+		a.setAttribute('data-param', p);
 
 		top.bframe.modalWindow.activate(a, window);
 		if(func) top.bframe.modalWindow.registerCallBackFunction(func);
