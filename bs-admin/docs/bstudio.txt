@@ -238,6 +238,28 @@ line：14218
 	padding-left: 2px;\
 	}\
 
+12. webkitの日本語入力でキーを連続して入力するとテキストエリア（ace_conmposition）のサイズが変化しない件を修正
+	3950行目
+
+// 2017/03/22 updated by T.Nishida
+	if (useragent.isGecko) {
+		event.addListener(text, "text", function(){syncComposition.schedule()});
+	} else {
+		event.addListener(text, "keyup", function(){syncComposition.schedule()});
+		event.addListener(text, "keydown", function(){syncComposition.schedule()});
+	}
+
+13. chormeの日本語入力で変換後連続して入力すると変換確定文字がクリアされない件を修正
+	3940行目
+
+// 2017/03/23 updated by T.Nishida
+		// Workaround for #3027, #3045, #3097, #3100
+		if (useragent.isChrome && useragent.isChrome >= 53) {
+			onInput();
+		}
+	};
+
+
 
 ■CKEditor
 
