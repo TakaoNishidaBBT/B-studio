@@ -206,7 +206,7 @@ $form_config = array(
 				array(
 					array(
 						'type' 			=> 'required',
-						'error_message'	=> 'Please select user type',
+						'error_message'	=> __('Please select user type'),
 					),
 				),
 				array(
