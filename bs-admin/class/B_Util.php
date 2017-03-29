@@ -227,19 +227,19 @@
 			case 'jpg':
 			case 'jpeg':
 				if(!function_exists('imagecreatefromjpeg')) return;
-				$image = @imagecreatefromjpeg($src);
+				$image = imagecreatefromjpeg($src);
 				// check rotate
-				$exif = @exif_read_data($src);
+				$exif = exif_read_data($src);
 				break;
 
 			case 'gif':
 				if(!function_exists('imagecreatefromgif')) return;
-				$image = @imagecreatefromgif($src);
+				$image = imagecreatefromgif($src);
 				break;
 
 			case 'png':
 				if(!function_exists('imagecreatefrompng')) return;
-				$image = @imagecreatefrompng($src);
+				$image = imagecreatefrompng($src);
 				break;
 
 			case 'bmp':
@@ -255,7 +255,7 @@
 			case 'wmv':
 				$src = B_Util::createMovieThumbnail($src);
 				if(!function_exists('imagecreatefromjpeg')) return;
-				$image = @imagecreatefromjpeg($src);
+				$image = imagecreatefromjpeg($src);
 				break;
 
 			default:
