@@ -29,6 +29,7 @@
 		var window_width_default;
 		var window_height_default;
 		var window_status;
+		var window_loaded;
 		var set_window_size = false;
 		var child;
 		var opener;
@@ -195,6 +196,7 @@
 
 		function onloadModalWindow() {
 			if(containerBody.contentWindow.location == 'about:blank') return;
+			if(window_loaded) return;
 
 			try {
 				containerBody.contentDocument.onkeydown = onKeyDown;
@@ -214,6 +216,7 @@
 				setWindowSize(w, h);
 				modal_window.className = modal_window.className.replace(' pre-fadein', ' fadein');
 				modal_window.style.filter = 'alpha(opacity=100)';
+				window_loaded = true;
 			} catch(e) {}
 		}
 
@@ -238,6 +241,7 @@
 
 			containerBody.contentWindow.location.replace('about:blank');
 			window_status = false;
+			window_loaded = false;
 
 			executeCallBack(param);
 		}

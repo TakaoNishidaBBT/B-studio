@@ -1,5 +1,9 @@
 @charset "UTF-8";
 
+html, body {
+	background-color: #fff;
+}
+
 /* bframe_tree */
 div#tree_container {
 	margin: 0;
