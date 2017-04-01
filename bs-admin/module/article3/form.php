@@ -39,15 +39,14 @@
 			default:
 				$this->control = new B_Element($this->input_control_config);
 				if($this->request['article_id']) {
+					$article_id = $this->db->real_escape_string($this->request['article_id']);
 					$sql = "select a.*
 								  ,b.node_name category_name
 							from " . B_DB_PREFIX . "article3 a
 							left join " . B_DB_PREFIX . "category3 b
 							on a.category_id = b.node_id
 							and b.del_flag='0'
-							where a.article_id = '%ARTICLE_ID%'";
-
-					$sql = str_replace('%ARTICLE_ID%', $this->request['article_id'], $sql);
+							where a.article_id = '$article_id'";
 
 					$rs=$this->db->query($sql);
 					$row=$this->db->fetch_assoc($rs);
