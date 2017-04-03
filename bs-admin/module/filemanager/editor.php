@@ -24,7 +24,7 @@
 				$contents = file_get_contents($file_path);
 				if($contents) {
 					$encoding = mb_detect_encoding($contents);
-					$obj->value = mb_convert_encoding($contents, 'UTF-8', 'auto');
+					$obj->value = mb_convert_encoding($contents, 'UTF-8', B_MB_DETECT_ORDER);
 				}
 
 				switch(strtolower($info['extension'])) {

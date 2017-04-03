@@ -154,7 +154,7 @@
 				case 'B_Element':
 					$obj = $value->getElementById($this->request['id']);
 					if($obj) {
-						$data = $this->util->mb_convert_encoding($obj->script[$this->request['class']], 'UTF-8', 'auto');
+						$data = $this->util->mb_convert_encoding($obj->script[$this->request['class']], 'UTF-8', B_MB_DETECT_ORDER);
 						$data = json_encode($data);
 						return $data;
 					}
@@ -162,7 +162,7 @@
 
 				case 'B_DataGrid':
 					if($value->id == $this->request['id']) {
-						$data = $this->util->mb_convert_encoding($value->script[$this->request['class']], 'UTF-8', 'auto');
+						$data = $this->util->mb_convert_encoding($value->script[$this->request['class']], 'UTF-8', B_MB_DETECT_ORDER);
 						$data = json_encode($data);
 						return $data;
 					}
@@ -178,7 +178,7 @@
 				case 'B_VNode':
 				case 'B_FileNode':
 					if($value->id == $this->request['id']) {
-						$data = $this->util->mb_convert_encoding($value->script[$this->request['class']], 'UTF-8', 'auto');
+						$data = $this->util->mb_convert_encoding($value->script[$this->request['class']], 'UTF-8', B_MB_DETECT_ORDER);
 						$data = json_encode($data);
 						return $data;
 					}
