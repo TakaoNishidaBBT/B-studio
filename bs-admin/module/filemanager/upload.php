@@ -246,7 +246,7 @@
 
 			for($i=0; $i < $zip->numFiles; $i++) {
 				$stat = $zip->statIndex($i);
-				$file_name = mb_convert_encoding($stat['name'], 'UTF-8', 'auto');
+				$file_name = mb_convert_encoding($stat['name'], 'UTF-8', B_MB_DETECT_ORDER);
 				if(strlen($file_name) != mb_strlen($file_name)) {
 					$zip->close();
 					throw new Exception(__('Multi-byte characters cannot be used in file names. Please check contents of the zip file.'));

@@ -197,6 +197,8 @@
 					$response['progress'] = 100;
 					$this->sendChunk(',' . json_encode($response));
 					$this->sendChunk();	// terminate
+
+					exit;
 				}
 				else {
 					$node_id = $this->register($file);
@@ -220,10 +222,6 @@
 						$this->refreshCache();
 					}
 
-					$response['status'] = $status;
-					$response['message'] = $message;
-					header('Content-Type: application/x-javascript charset=utf-8');
-					echo json_encode($response);
 				}
 			}
 			catch(Exception $e) {
@@ -231,16 +229,20 @@
 				$message = $e->getMessage();
 			}
 
+			$response['status'] = $status;
+			$response['message'] = $message;
+			header('Content-Type: application/x-javascript charset=utf-8');
+			echo json_encode($response);
+
 			exit;
 		}
 
 		function checkZipFile($zip_file) {
 			$zip = new ZipArchive();
 			$zip->open($zip_file);
-
 			for($i=0; $i < $zip->numFiles; $i++) {
 				$stat = $zip->statIndex($i);
-				$file_name = mb_convert_encoding($stat['name'], 'UTF-8', 'auto');
+				$file_name = mb_convert_encoding($stat['name'], 'UTF-8', B_MB_DETECT_ORDER);
 				if(strlen($file_name) != mb_strlen($file_name)) {
 					$zip->close();
 					throw new Exception(__('Multi-byte characters cannot be used in file names. Please check contents of the zip file.'));

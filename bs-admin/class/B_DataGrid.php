@@ -489,7 +489,7 @@
 			}
 
 			$str = ob_get_clean();
-			return mb_convert_encoding($str, 'sjis-win', 'auto');
+			return mb_convert_encoding($str, 'sjis-win', B_MB_DETECT_ORDER);
 		}
 
 		function getRowData($row, $record_cnt) {
