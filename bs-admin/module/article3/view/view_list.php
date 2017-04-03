@@ -4,7 +4,7 @@
 		<?php echo $this->header->gethtml(); ?>
 	</div>
 
-	<div id="list-main" class="bframe_adjustparent" data-param="margin:110">
+	<div id="list-main" class="bframe_adjustparent" data-param="margin:105">
 		<div class="list-container">
 		<?php
 			if($this->select_message) {
