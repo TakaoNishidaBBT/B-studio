@@ -2193,7 +2193,8 @@
 			setEventHandler();
 
 			this.cleanUp = function() {
-				if(div_overwrap && overwrap_remove) parent.document.body.removeChild(div_overwrap);
+				if(div_overwrap && overwrap_remove && div_overwrap.parentNode == parent.document.body) parent.document.body.removeChild(div_overwrap);
+				div_overwrap = null;
 			}
 
 			function setEventHandler() {
