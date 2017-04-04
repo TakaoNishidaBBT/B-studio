@@ -179,6 +179,12 @@
 			bframe.addEventListenerAllFrames(top, 'mouseup', drag_control.onMouseUp);
 			bframe.addEventListenerAllFrames(top, 'mousedown', saveName);
 			bframe.addEventListenerAllFrames(top, 'keydown', keydown);
+			bframe.addEventListenerAllFrames(top, 'drop', preventDefault);
+			bframe.addEventListenerAllFrames(top, 'dragover', preventDefault);
+		}
+
+		function preventDefault(event) {
+			event.preventDefault();
 		}
 
 		function keydown(event) {
@@ -337,6 +343,8 @@
 				return;
 			}
 			drag_control.cleanUp();
+			context_menu.cleanUp();
+			trash_context_menu.cleanUp();
 			bframe.removeEventListenerAllFrames(top, 'load', hideContextMenuAllFrames);
 			bframe.removeEventListenerAllFrames(top, 'mousedown', hideContextMenu);
 			bframe.removeEventListenerAllFrames(top, 'click', hideContextMenu);
