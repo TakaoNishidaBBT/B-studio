@@ -2662,6 +2662,7 @@
 			var files;
 			var module;
 			var page;
+			var overlay;
 
 			var visibility = true;
 
@@ -2679,9 +2680,28 @@
 					upload_file.onchange = uploadFiles;
 					pane.ondrop = uploadFiles;
 					pane.ondragover = dragover;
+
+					createOverlay();
 				}
 			}
 			this.init = init;
+
+			function createOverlay() {
+				overlay = parent.document.getElementById('bframe_tree_upload_overlay');
+				if(!overlay && window.frameElement) {
+					overlay = parent.document.createElement('div');
+					overlay.id = 'bframe_tree_upload_overlay';
+					overlay.style.position = 'absolute';
+					overlay.style.top = 0;
+					overlay.style.left = 0;
+					overlay.style.width = 0;
+					overlay.style.height = 0;
+					overlay.style.opacity = '0.5';
+					overlay.style.zIndex = 900;
+
+					document.body.appendChild(overlay);
+				}
+			}
 
 			function show() {
 				upload_button.style.display = 'block';
@@ -2743,6 +2763,11 @@
 							upload_queue[i] = {'file' : files[i], 'progress' : progress};
 						}
 					}
+					var wsize = bframe.getWindowSize();
+
+					overlay.style.width = wsize.width + 'px';
+					overlay.style.height = wsize.height + 'px';
+
 					confirm(0);
 				}
 				event.preventDefault();
@@ -2750,7 +2775,11 @@
 
 			function confirm(index) {
 				var info = upload_queue[index];
-				if(!info) return;
+				if(!info) {
+					overlay.style.width = 0;
+					overlay.style.height = 0;
+					return;
+				}
 
 				httpObj = new XMLHttpRequest();
 
@@ -2925,6 +2954,8 @@
 				for(; upload_queue[index]; index++) {
 					cancelUpload();
 				}
+				overlay.style.width = 0;
+				overlay.style.height = 0;
 			}
 
 			function cancelUpload() {
