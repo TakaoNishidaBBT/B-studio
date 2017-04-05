@@ -184,3 +184,6 @@ div.pane_container {
 	padding: 0;
 	background-color: #444;
 }
+#bframe_tree_upload_overlay:hover {
+	cursor: wait;
+}
