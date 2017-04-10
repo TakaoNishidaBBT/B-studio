@@ -245,6 +245,7 @@
 				$file_name = mb_convert_encoding($stat['name'], 'UTF-8', B_MB_DETECT_ORDER);
 				if(strlen($file_name) != mb_strlen($file_name)) {
 					$zip->close();
+					unlink($zip_file);
 					throw new Exception(__('Multi-byte characters cannot be used in file names. Please check contents of the zip file.'));
 				}
 			}
