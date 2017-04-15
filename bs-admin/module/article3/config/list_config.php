@@ -131,7 +131,7 @@ $list_config = array(
 				'name'			=> 'edit',
 				'class'			=> 'B_Link',
 				'link'			=> 'index.php',
-				'value'			=> '編集',
+				'value'			=> __('Edit'),
 				'special_html'	=> 'class="edit-button"',
 				'fixedparam'	=>
 				array(
@@ -155,7 +155,7 @@ $list_config = array(
 				'class'			=> 'B_Link',
 				'link'			=> 'index.php',
 				'special_html'	=> 'class="delete-button"',
-				'value'			=> '削除',
+				'value'			=> __('Delete'),
 				'fixedparam'	=>
 				array(
 					'terminal_id'	=> TERMINAL_ID,
