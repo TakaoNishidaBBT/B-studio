@@ -220,10 +220,27 @@
 			return false;
 		}
 
+		public static function checkImageFileType($src) {
+			switch(exif_imagetype($src)) {
+				case IMAGETYPE_GIF:		return 'gif';
+				case IMAGETYPE_JPEG:	return 'jpg';
+				case IMAGETYPE_PNG:		return 'png';
+				case IMAGETYPE_BMP:		return 'bmp';
+				default:				return;
+			}
+		}
+
 		public static function createthumbnail($src, &$dest, $max_size) {
 			$file_info = B_Util::pathinfo($src);
+			$file_extension = strtolower($file_info['extension']);
 
-			switch(strtolower($file_info['extension'])) {
+			// check the type of an image
+			$file_type = B_Util::checkImageFileType($src);
+			if($file_type && $file_type != strtolower($file_info['extension'])) {
+				$file_extension = $file_type;
+			}
+
+			switch($file_extension) {
 			case 'jpg':
 			case 'jpeg':
 				if(!function_exists('imagecreatefromjpeg')) return;
@@ -336,7 +353,7 @@
 				imagecopyresampled($new_image, $image, 0, 0, 0, 0, $width, $height, $image_size[0], $image_size[1]);
 			}
 
-			switch(strtolower($file_info['extension'])) {
+			switch($file_extension) {
 			case 'jpg':
 			case 'jpeg':
 			case 'bmp':
