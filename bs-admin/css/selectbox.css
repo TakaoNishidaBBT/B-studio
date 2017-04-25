@@ -17,7 +17,11 @@ a:active.selectbox {
 	text-decoration: none;
 	text-shadow: -1px -1px #555;
 	cursor: pointer;
-	background: url(../images/common/select_down.png) center right 4px no-repeat #666;
+	background-image: url(../images/common/select_down.png), url(../images/common/select_up.png);
+	background-repeat: no-repeat, no-repeat;
+	background-position: center right 4px, center right 4px;
+	background-size: 16px, 0;
+	background-color: #666;
 }
 a.opened {
 	background-image: url(../images/common/select_up.png);

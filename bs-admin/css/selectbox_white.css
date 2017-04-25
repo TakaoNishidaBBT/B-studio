@@ -17,13 +17,17 @@ a:active.selectbox {
 	color: #000;
 	text-decoration: none;
 	cursor: pointer;
-	background: url(../images/common/select_down_gray.png) center right 4px no-repeat #fff;
+	background-image: url(../images/common/select_down_gray.png), url(../images/common/select_down_black.png), url(../images/common/select_up_black.png);
+	background-repeat: no-repeat, no-repeat, no-repeat;
+	background-position: center right 4px, center right 4px, center right 4px;
+	background-size: 16px, 0, 0;
+	background-color: #fff;
 }
 a.selectbox:focus {
 	background: url(../images/common/select_down_black.png) center right 4px no-repeat #fff;
 }
 a.opened:focus {
-	background-image: url(../images/common/select_up_black.png);
+	background: url(../images/common/select_up_black.png) center right 4px no-repeat #fff;
 }
 
 
