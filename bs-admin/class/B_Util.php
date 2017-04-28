@@ -230,6 +230,31 @@
 			}
 		}
 
+		public static function getimagesize($filepath, $file_name='') {
+			if($file_name) {
+				$file_info = B_Util::pathinfo($file_name);
+			}
+			else {
+				$file_info = B_Util::pathinfo($filepath);
+			}
+			$file_extension = strtolower($file_info['extension']);
+
+			// check the type of an image
+			$file_type = B_Util::checkImageFileType($filepath);
+			if(($file_extension == 'svg') && !$file_type) {
+				$xml = simplexml_load_file($filepath);
+				$attr = $xml->attributes();
+				$size[0] = (string) $attr->width; 
+				$size[1] = (string) $attr->height;
+				if($size[0] && $size[1]) {
+					return $size;
+				}
+			}
+			else {
+				return getimagesize($filepath);
+			}
+		}
+
 		public static function createthumbnail($src, &$dest, $max_size) {
 			$file_info = B_Util::pathinfo($src);
 			$file_extension = strtolower($file_info['extension']);

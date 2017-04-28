@@ -171,6 +171,15 @@
 				// Set file size
 				$param['file_size'] = $filesize;
 				$param['human_file_size'] = B_Util::human_filesize($param['file_size'], 'K');
+				$size = B_Util::getimagesize($filepath);
+				if($size) {
+					$param['image_size'] = $size[0] * $size[1];
+					$param['human_image_size'] = $size[0] . 'x' . $size[1];
+				}
+				else {
+					$param['image_size'] = '';
+					$param['human_image_size'] = '';
+				}
 
 				$resource_node_table = new B_Table($this->db, B_RESOURCE_NODE_TABLE);
 				$ret = $resource_node_table->update($param);

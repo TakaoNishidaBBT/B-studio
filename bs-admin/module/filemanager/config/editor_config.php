@@ -49,7 +49,7 @@ $tab_control_config = array(
 			'end_html'		=> '</div>',
 			array(
 				'name'			=> 'register',
-				'start_html'	=> '<span id="register" class="register-button" onclick="bframe.ajaxSubmit.submit(\'F1\', \'' . $this->module . '\', \'editor\', \'register\', \'confirm\', true)">',
+				'start_html'	=> '<span id="register" class="register-button" onclick="bstudio.registerEditor(\'F1\', \'' . $this->module . '\', \'editor\', \'register\', \'confirm\', true)">',
 				'end_html'		=> '</span>',
 				'value'			=> '<img src="images/common/save.png" alt="Save" />' . __('Save'),
 			),
