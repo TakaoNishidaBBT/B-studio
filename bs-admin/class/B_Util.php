@@ -242,7 +242,9 @@
 			// check the type of an image
 			$file_type = B_Util::checkImageFileType($filepath);
 			if(($file_extension == 'svg') && !$file_type) {
+				libxml_use_internal_errors(true);
 				$xml = simplexml_load_file($filepath);
+				if($xml === false) return false;
 				$attr = $xml->attributes();
 				$size[0] = (string) $attr->width; 
 				$size[1] = (string) $attr->height;
