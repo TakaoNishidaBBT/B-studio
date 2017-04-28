@@ -3552,8 +3552,15 @@
 							}
 							a.title = 'size:' + config.human_image_size + '\n' + 'date:' + config.create_datetime_t;
 							if(suffix.toLowerCase() == 'svg') {
-								obj_img.width = '80';
-								obj_img.height = '80';
+								if(config.human_image_size) {
+									var size = config.human_image_size.split('x');
+									obj_img.width = size[0];
+									obj_img.height = size[1];
+								}
+								else {
+									obj_img.width = '80';
+									obj_img.height = '80';
+								}
 							}
 						}
 						break;
