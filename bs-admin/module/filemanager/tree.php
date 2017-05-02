@@ -424,11 +424,11 @@
 
 					$file_path = B_DOWNLOAD_DIR . $this->user_id . time() . $file_name;
 
-					$cmdline = 'php ' . B_DOC_ROOT . B_ADMIN_ROOT . 'module/filemanager/archive.php';
-					$cmdline .= ' ' . $_SERVER['SERVER_NAME'];
-					$cmdline .= ' ' . $_SERVER['DOCUMENT_ROOT'];
-					$cmdline .= ' ' . $this->dir;
-					$cmdline .= ' ' . $file_path;
+					$cmdline = 'php "' . B_DOC_ROOT . B_ADMIN_ROOT . 'module/filemanager/archive.php"';
+					$cmdline .= ' "' . $_SERVER['SERVER_NAME'] . '"';
+					$cmdline .= ' "' . $_SERVER['DOCUMENT_ROOT'] . '"';
+					$cmdline .= ' "' . $this->dir . '"';
+					$cmdline .= ' "' . $file_path . '"';
 
 					$escape = '"';
 					foreach($this->request['download_node_id'] as $node_id) {
@@ -443,43 +443,45 @@
 					}
 
 					// send progress 
-					for($cnt=0 ;; $cnt++) {
-						usleep(40000);
-						if(file_exists($file_path)) {
-							$response['status'] = 'progress';
-							$response['progress'] = 100;
-							$this->sendChunk(',' . json_encode($response));
-							usleep(300000);
+					if($total_file_size) {
+						for($cnt=0 ;; $cnt++) {
+							usleep(40000);
+							if(file_exists($file_path)) {
+								$response['status'] = 'progress';
+								$response['progress'] = 100;
+								$this->sendChunk(',' . json_encode($response));
+								usleep(300000);
 
-							$response['status'] = 'complete';
-							$response['progress'] = 100;
-							$response['message'] = 'Complete!';
-							$this->sendChunk(',' . json_encode($response));
-							sleep(1);
+								$response['status'] = 'complete';
+								$response['progress'] = 100;
+								$response['message'] = 'Complete!';
+								$this->sendChunk(',' . json_encode($response));
+								sleep(1);
 
-							break;
-						}
-
-						if($cnt%4 == 0) {
-							unset($dots);
-							for($i=0; $i<($cnt/4%8); $i++) {
-								$dots.= '.';
+								break;
 							}
-							$response['status'] = 'message';
-							$response['message'] = "Creating zip file {$dots}";
 
-							$this->sendChunk(',' . json_encode($response));
-						}
+							if($cnt%4 == 0) {
+								unset($dots);
+								for($i=0; $i<($cnt/4%8); $i++) {
+									$dots.= '.';
+								}
+								$response['status'] = 'message';
+								$response['message'] = "Creating zip file {$dots}";
 
-						usleep(40000);
+								$this->sendChunk(',' . json_encode($response));
+							}
 
-						$response['status'] = 'progress';
-						$response['progress'] = round($cnt / $total_file_size * 100 * 1300000);
-						if($response['progress'] > 99) $response['progress'] = 99;
+							usleep(40000);
 
-						if($progress != $response['progress']) {
-							$this->sendChunk(',' . json_encode($response));
-							$progress = $response['progress'];
+							$response['status'] = 'progress';
+							$response['progress'] = round($cnt / $total_file_size * 100 * 1300000);
+							if($response['progress'] > 99) $response['progress'] = 99;
+
+							if($progress != $response['progress']) {
+								$this->sendChunk(',' . json_encode($response));
+								$progress = $response['progress'];
+							}
 						}
 					}
 
