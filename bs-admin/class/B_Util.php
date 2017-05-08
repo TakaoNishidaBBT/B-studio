@@ -246,8 +246,8 @@
 				$xml = simplexml_load_file($filepath);
 				if($xml === false) return false;
 				$attr = $xml->attributes();
-				$size[0] = (string) $attr->width; 
-				$size[1] = (string) $attr->height;
+				$size[0] = str_replace('px', '', $attr->width);
+				$size[1] = str_replace('px', '', $attr->height);
 				if($size[0] && $size[1]) {
 					return $size;
 				}
