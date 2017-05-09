@@ -346,6 +346,8 @@
 		}
 
 		function refreshThumbnailCache($root, $progress=false) {
+			if(file_exists(B_FILE_INFO_THUMB_SEMAPHORE)) return;
+
 			$max = $root->getMaxThumbnailNo();
 			$root->createthumbnail($data, $max, $callback);
 			$fp = fopen(B_FILE_INFO_THUMB, 'w+');
