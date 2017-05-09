@@ -145,7 +145,7 @@
 						}
 					}
 				}
-				if($this->status) {
+				if($this->status && is_array($data)) {
 					$serializedString = file_get_contents(B_FILE_INFO_THUMB);
 					$info = unserialize($serializedString);
 
