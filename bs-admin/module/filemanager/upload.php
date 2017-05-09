@@ -163,7 +163,7 @@
 						$root = new B_FileNode(B_UPLOAD_DIR, '/', null, null, 'all');
 						$this->createTumbnail_files = 0;
 						$this->progress = 0;
-						$this->refreshThumnailCache($root, array('obj' => $this, 'method' => 'createThumbnail_callback'));
+						$this->refreshThumbnailCache($root, array('obj' => $this, 'method' => 'createThumbnail_callback'));
 
 						foreach($this->registered_archive_node as $path) {
 							$node = new B_FileNode(B_UPLOAD_DIR, B_Util::getPath($this->path, $path), null, null, 0);
@@ -183,7 +183,7 @@
 						chmod(B_Util::getPath(B_UPLOAD_DIR, $this->path) . $file['basename'], 0777);
 						$this->removeThumbnail($this->path, $file['basename']);
 						$root = new B_FileNode(B_UPLOAD_DIR, 'root', null, null, 'all');
-						$this->refreshThumnailCache($root);
+						$this->refreshThumbnailCache($root);
 						$node = new B_FileNode(B_UPLOAD_DIR, B_Util::getPath($this->path, $file['basename']), null, null, 1);
 						$response['node_info'][] = $node->getNodeList('', '', $this->path);
 					}
@@ -322,7 +322,7 @@
 			}
 		}
 
-		function refreshThumnailCache($root, $callback=null) {
+		function refreshThumbnailCache($root, $callback=null) {
 			if(file_exists(B_FILE_INFO_THUMB_SEMAPHORE)) return;
 
 			$max = $root->getMaxThumbnailNo();
