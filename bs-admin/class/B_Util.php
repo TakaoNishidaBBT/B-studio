@@ -557,7 +557,7 @@
 			try {
 				if(substr(PHP_OS, 0, 3) === 'WIN') {
 					if($async) {
-						$cmdline = "start /b $cmd 2>&1";
+						$cmdline = "start $cmd 2>&1";
 					}
 					else {
 						$cmdline = "$cmd 2>&1";
