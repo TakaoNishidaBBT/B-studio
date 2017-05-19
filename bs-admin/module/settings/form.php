@@ -111,9 +111,6 @@
 		function createArchive() {
 			if(!class_exists('ZipArchive')) exit;
 
-			// Set time limit to infinity
-			set_time_limit(0);
-
 			$file_name = 'bstudio_' . date('YmdHis') . '.zip';
 			$file_path = B_DOWNLOAD_DIR . $this->user_id . time() . $file_name;
 
@@ -154,6 +151,10 @@
 			$node = new B_FileNode(B_UPLOAD_DIR, 'root', null, null, 'all');
 			$files_total_size = $node->filesize();
 			$total_file_size = $resource_total_size + $files_total_size;
+
+			// Set time limit depends on total file size (1second / 1Mbyte)
+			$time_limit = round($total_file_size / (1000 * 1000));
+			set_time_limit($time_limit);
 
 			// send progress 
 			for($cnt=0 ;; $cnt++) {
