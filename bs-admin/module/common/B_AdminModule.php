@@ -45,7 +45,7 @@
 			$cmdline .= ' ' . $_SERVER['HTTPS'];
 
 			// kick as a background process
-			B_Util::fork($cmdline, false);
+			B_Util::fork($cmdline);
 		}
 
 		function replaceCacheFile($file_info, $semaphore, $serialized_string) {

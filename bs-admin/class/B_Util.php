@@ -414,20 +414,9 @@
 		public static function createMovieThumbnail($src) {
 			$ffmpeg = FFMPEG;
 			$output = B_RESOURCE_WORK_DIR . time() . 'tmp.jpg';
-			if(substr(PHP_OS, 0, 3) === 'WIN') {
-				$cmdline = "$ffmpeg -ss 3 -i $src -f image2 -vframes 1 $output 2>&1";
-				$p = popen($cmdline, 'r');
-				if($p) {
-		            pclose($p);
-				}
-				else {
-					$this->log->write('error');
-				}
-			}
-			else {
-				$cmdline = "$ffmpeg -ss 3 -i $src -f image2 -vframes 1 $output";
-				exec("$cmdline > /dev/null");
-			}
+			$cmdline = "$ffmpeg -ss 3 -i $src -f image2 -vframes 1 $output";
+			B_Util::fork($cmdline, false);
+
 			return $output;
 		}
 
@@ -567,7 +556,7 @@
 		 public static function fork($cmd, $async=true) {
 			try {
 				if(substr(PHP_OS, 0, 3) === 'WIN') {
-					if(!$async) {
+					if($async) {
 						$cmdline = "start /b $cmd 2>&1";
 					}
 					else {
@@ -578,11 +567,11 @@
 						pclose($p);
 					}
 					else {
-						$this->log->write('error');
+						trigger_error('popen error', E_USER_ERROR);
 					}
 				}
 				else {
-					if(!$async) $sync = '&';
+					if($async) $sync = '&';
 					$cmdline = "$cmd > /dev/null $sync";
 					exec("$cmdline");
 				}
