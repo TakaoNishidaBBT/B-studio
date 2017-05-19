@@ -438,7 +438,7 @@
 					}
 
 					// kick as a background process
-					B_Util::fork($cmdline, false);
+					B_Util::fork($cmdline);
 
 					for($total_file_size=0, $i=0; $i<count($nodes); $i++) {
 						$total_file_size+= $nodes[$i]->fileSize();

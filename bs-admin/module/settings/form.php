@@ -141,7 +141,7 @@
 			$cmdline .= ' ' . $this->request['mode'];
 
 			// kick as a background process
-			B_Util::fork($cmdline, false);
+			B_Util::fork($cmdline);
 
 			$resource_node_table = B_DB_PREFIX . B_RESOURCE_NODE_TABLE;
 			$sql = "select sum(file_size) total_size
