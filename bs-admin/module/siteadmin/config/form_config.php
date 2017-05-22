@@ -165,7 +165,7 @@ $form_config = array(
 						array(
 							'type' 			=> 'pattern',
 							'pattern'		=> '^[a-zA-Z0-9\_\-]+$',
-							'error_message'	=> __('Please enter User ID using alphanumeric, hyphen(-) and underbar(_)'),
+							'error_message'	=> __('Please enter password using only alphanumeric, hyphen(-) and underbar(_)'),
 						),
 					),
 				),

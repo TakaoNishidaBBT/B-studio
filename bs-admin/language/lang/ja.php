@@ -348,6 +348,8 @@
 		'Please enter login ID'			=> 'ログインIDを入力してください',
 		'Please enter login ID using only alphanumeric, hyphen(-) and underbar(_)'
 										=> 'ログインIDは英数とハイフン(-)アンダーバー(_)で入力してください',
+		'Please enter password using only alphanumeric, hyphen(-) and underbar(_)'
+										=> 'パスワードは英数とハイフン(-)アンダーバー(_)で入力してください',
 		'Password dose not match'		=> 'パスワードが一致していません',
 		'Back to site admin settings'	=> '設定画面に戻る',
 		'The site admin settings has been updated'
