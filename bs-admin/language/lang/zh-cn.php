@@ -347,6 +347,8 @@
 		'Please enter login ID'			=> '请输入用户ID',
 		'Please enter login ID using only alphanumeric, hyphen(-) and underbar(_)'
 										=> '用户ID请使用英文、数字、横线(-)、下划线(_)输入',
+		'Please enter password using only alphanumeric, hyphen(-) and underbar(_)'
+										=> '密码请使用英文、数字、横线(-)、下划线(_)输入',
 		'Password dose not match'		=> '密码与确认密码不一致',
 		'Back to site admin settings'	=> '返回到管理员设置',
 		'The site admin settings has been updated'
