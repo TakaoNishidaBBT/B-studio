@@ -14,11 +14,11 @@
 		</dl>
 
 		<div class="icon">
-			<img src="images/login/lock.png" alt="lock" />
+			<img src="images/login/lock.svg" alt="lock" />
 		</div>
 
 		<ul class="transition">
-			<li><input class="back" type="button" onclick="history.back()" value="back" /></li>
+			<li><input class="back" type="button" onclick="location.href='.'" value="back" /></li>
 		</ul>
 	</div>
 </body>

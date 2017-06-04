@@ -39,10 +39,10 @@ div.login table th {
 	font-weight: normal;
 }
 div.login table th.user {
-	background: url(../images/login/user.png) 0 12px no-repeat;
+	background: url(../images/login/user.svg) 1px 14px no-repeat;
 }
 div.login table th.key {
-	background: url(../images/login/key.png) 0 12px no-repeat;
+	background: url(../images/login/key.svg) 0 13px no-repeat;
 }
 div.login table td {
 	display: table-cell;
@@ -74,9 +74,25 @@ div.icon {
 	background-color: #ddd;
 	z-index: 2;
 }
+
 div.icon img {
-	vertical-align: -15px;
+	vertical-align: -10px;
+	animation-name: rotate_lock;
+	animation-duration: .5s;
+	animation-fill-mode: forwards;
+	-webkit-animation-name: rotate_lock;
+	-webkit-animation-duration: .5s;
+	-webkit-animation-fill-mode: forwards;
 }
+@keyframes rotate_lock {
+	0%		{transform: rotateY(0deg)}
+	100%	{transform: rotateY(180deg)}
+}
+@-webkit-keyframes rotate_lock {
+	0%		{transform: rotateY(0deg)}
+	100%	{transform: rotateY(180deg)}
+}
+
 
 /* button */
 ul.submit, ul.transition {
