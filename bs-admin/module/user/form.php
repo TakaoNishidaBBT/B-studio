@@ -47,7 +47,7 @@
 				$row = $this->table->selectByPk($param);
 				$this->form->setValue($row);
 				$this->session['post'] = $row;
-				$this->display_mode = "confirm";
+				$this->display_mode = 'confirm';
 
 				$this->control = new B_Element($this->delete_control_config, $this->user_auth);
 				break;
