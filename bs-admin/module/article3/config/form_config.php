@@ -13,6 +13,21 @@ $form_config = array(
 	array('class' => 'B_Hidden', 'name' => 'visual_editor_css',	'value' => B_CURRENT_ROOT . 'visualeditor/article3/css/default.css'),
 	array('class' => 'B_Hidden', 'name' => 'visual_editor_templates', 'value' => B_CURRENT_ROOT . 'visualeditor/article3/templates/default.js'),
 
+	// File browser
+	array(
+		'id'			=> 'filebrowser',
+		'class'			=> 'B_Link',
+		'link'			=> 'index.php',
+		'value'			=> __('File manager'),
+		'special_html'	=> 'style="display:none"',
+		'fixedparam'	=>
+		array(
+			'terminal_id'	=> TERMINAL_ID,
+			'module'		=> 'filemanager', 
+			'page'			=> 'popup', 
+		),
+	),
+
 	// Required message
 	array(
 		'class'			=> 'B_Guidance',
@@ -429,19 +444,6 @@ $form_config = array(
 					'class'			=> 'B_ErrMsg',
 					'start_html'	=> '<p class="error-message">',
 					'end_html'		=> '</p>',
-				),
-				array(
-					'id'			=> 'filebrowser',
-					'class'			=> 'B_Link',
-					'link'			=> 'index.php',
-					'value'			=> __('File manager'),
-					'special_html'	=> 'style="display:none"',
-					'fixedparam'	=>
-					array(
-						'terminal_id'	=> TERMINAL_ID,
-						'module'		=> 'filemanager', 
-						'page'			=> 'popup', 
-					),
 				),
 			),
 		),
