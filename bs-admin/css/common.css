@@ -578,10 +578,10 @@ table.list td.status {
 	text-align: center;
 	color: #8e9cb6;
 }
-table.list tr:nth-child(even) {
+table.list tr:nth-child(odd) {
 	background: #ffffff;
 }
-table.list tr:nth-child(odd) {
+table.list tr:nth-child(even) {
 	background: #f0f3fc;
 }
 table.list tr.alt td {

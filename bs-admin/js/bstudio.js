@@ -12,11 +12,6 @@
 	// class bstudio
 	// 
 	// -------------------------------------------------------------------------
-	bstudio.focusLoginId = function() {
-		var user_id = document.getElementById('user_id');
-		user_id.focus();
-	}
-
 	bstudio.activateModalWindow = function(a, w, h, func) {
 		var p = 'width:' + w + ',height:' + h;
 		a.setAttribute('data-param', p);

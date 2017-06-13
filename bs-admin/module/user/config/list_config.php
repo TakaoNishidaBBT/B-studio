@@ -22,6 +22,19 @@ array(
 
 	'empty_message'	=> '<span class="bold">　' . __('No record found') . '</span>',
 
+	'thead'	=>
+	array(
+		'start_html'	=> '<thead>',
+		'end_html'		=> '</thead>',
+	),
+
+	'tbody'	=>
+	array(
+		'start_html'		=> '<tbody>',
+		'start_html_sort'	=> '<tbody>',
+		'end_html'			=> '</tbody>',
+	),
+
 	'header'	=>
 	array(
 		'start_html'	=> '<tr>',
