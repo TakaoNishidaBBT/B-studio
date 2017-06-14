@@ -2687,9 +2687,9 @@
 			this.init = init;
 
 			function createOverlay() {
-				overlay = parent.document.getElementById('bframe_tree_upload_overlay');
-				if(!overlay && window.frameElement) {
-					overlay = parent.document.createElement('div');
+				overlay = document.getElementById('bframe_tree_upload_overlay');
+				if(!overlay) {
+					overlay = document.createElement('div');
 					overlay.id = 'bframe_tree_upload_overlay';
 					overlay.style.position = 'absolute';
 					overlay.style.top = 0;
