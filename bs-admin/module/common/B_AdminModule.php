@@ -147,12 +147,13 @@
 		}
 
 		function removeThumbnailCacheFile() {
-			$handle = opendir(B_UPLOAD_THUMBDIR);
-			while(false !== ($file_name = readdir($handle))){
-				if($file_name == '.' || $file_name == '..') continue;
-				unlink(B_UPLOAD_THUMBDIR . $file_name);
+			if($handle = opendir(B_UPLOAD_THUMBDIR)) {
+				while(false !== ($file_name = readdir($handle))){
+					if($file_name == '.' || $file_name == '..') continue;
+					unlink(B_UPLOAD_THUMBDIR . $file_name);
+				}
+				closedir($handle);
 			}
-			closedir($handle);
 		}
 
 		function createLimitFile($file_info, $limit) {	
