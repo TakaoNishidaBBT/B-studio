@@ -68,13 +68,15 @@
 		}
 
 		function import() {
-			$handle = opendir(B_RESOURCE_EXTRACT_DIR . 'dump');
-			while(false !== ($file_name = readdir($handle))){
-				if($file_name == '.' || $file_name == '..') continue;
+			if($handle = opendir(B_RESOURCE_EXTRACT_DIR . 'dump')) {
+				while(false !== ($file_name = readdir($handle))){
+					if($file_name == '.' || $file_name == '..') continue;
 
-				if(preg_match('/bstudio_/', $file_name)) {
-					return $this->db->import(B_RESOURCE_EXTRACT_DIR . 'dump/' . $file_name);
+					if(preg_match('/bstudio_/', $file_name)) {
+						return $this->db->import(B_RESOURCE_EXTRACT_DIR . 'dump/' . $file_name);
+					}
 				}
+				closedir($handle);
 			}
 		}
 
