@@ -1,4 +1,4 @@
-create or replace view  %DB_PREFIX%v_preview_article as
+create or replace view %DB_PREFIX%v_preview_article as
 select 	  a.*
 		, concat(a.article_date_u, a.article_id) article_date
 		, b.node_name category
