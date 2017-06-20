@@ -96,19 +96,15 @@
 			}
 		}
 
-		function sort($type=null) {
+		function sort() {
 			if(!is_array($this->node)) return;
-			if($type == 'primary') {
-				usort($this->node, array($this,'_sort_name_callback'));
-			}
-			else {
-				uasort($this->node, array($this,'_sort_name_callback'));
-			}
+
+			uasort($this->node, array($this,'_sort_name_callback'));
+
 			$i=0;
 			foreach($this->node as &$value) {
 				$value->order = $i++;
 			}
-			ksort($this->node);
 		}
 
 		function _sort_name_callback($a, $b) {
@@ -171,12 +167,8 @@
 			$list = $this->_getNodeList($node_id, $category, $path, $disp_seq);
 
 			if(is_array($this->node)) {
-				if($this->sort_key) {
-					$this->sort();
-				}
-				else {
-					$this->sort('primary');
-				}
+				if($this->sort_key) $this->sort();
+
 				$disp_seq=0;
 				foreach(array_keys($this->node) as $key) {
 					$child_list[] = $this->node[$key]->getNodeList($node_id, $category, $list['path'], $disp_seq++);
