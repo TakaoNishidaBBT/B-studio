@@ -76,6 +76,9 @@
 				}
 			}
 
+			// sort by file-name (for tree pain)
+			usort($this->node, array($this, '_sort_name_callback'));
+
 			closedir($handle);
 		}
 
