@@ -118,7 +118,7 @@ $tree_config = array(
 						'name'			=> 'update_datetime_t',
 						'title'			=> __('Modified'),
 						'className'		=> 'update-time',
-						'sort_key'		=> 'update_datetime',
+						'sort_key'		=> 'update_datetime_u',
 					),
 					array(
 						'name'			=> 'human_file_size',
