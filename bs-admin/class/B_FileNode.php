@@ -105,6 +105,7 @@
 			foreach($this->node as &$value) {
 				$value->order = $i++;
 			}
+			ksort($this->node);
 		}
 
 		function _sort_name_callback($a, $b) {
