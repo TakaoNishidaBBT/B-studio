@@ -116,7 +116,7 @@
 
 			if(count($url)) {
 				if($node && $node['node_type'] == 'page') {
-					// Parmalink
+					// Permalink
 					$param = implode('/', $url);
 					$param_array = explode('?', $param);
 					$_REQUEST['id'] = $param_array[0];
