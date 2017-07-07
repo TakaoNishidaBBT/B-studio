@@ -153,7 +153,8 @@
 			$total_file_size = $resource_total_size + $files_total_size;
 
 			// Set time limit depends on total file size (1second / 1Mbyte)
-			$time_limit = round($total_file_size / (1000 * 1000));
+			// windows is 3 times slower than mac
+			$time_limit = round($total_file_size / (1000 * 1000)) * 3;
 			set_time_limit($time_limit);
 
 			// send progress 
