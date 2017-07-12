@@ -236,7 +236,7 @@
 				}
 				break;
 
-			case 37:	// ->
+			case 37:	// left
 				move(event, 'left');
 				break;
 
@@ -244,11 +244,11 @@
 				move(event, 'up');
 				break;
 
-			case 39:	// ->
+			case 39:	// right
 				move(event, 'right');
 				break;
 
-			case 40:	// ->
+			case 40:	// down
 				move(event, 'down');
 				break;
 
@@ -954,16 +954,13 @@
 				return;
 			}
 
-			var top_id = selected_node.id(0);
-			var last_id = selected_node.last_id();
+			var start_id = selected_node.start_id();
+			var end_id = selected_node.end_id();
 
 			switch(dir) {
 			case 'left':
-				if(display_mode != 'detail') { 
+				if(display_mode != 'detail') {
 					if(selected_node.place() == 'pane' && event.shiftKey) {
-						var start_id = selected_node.start_id();
-						var end_id = selected_node.end_id();
-
 						var start_nn = document.getElementById('nn'+start_id);
 						var end_nn = document.getElementById('nn'+end_id);
 
@@ -986,18 +983,21 @@
 						}
 					}
 					else {
-						node = document.getElementById(top_id);
-						if(node && node.previousSibling) selected_node.set(node.previousSibling.id);
+						var end_id = selected_node.end_id();
+						node = document.getElementById(end_id);
+						if(node && node.previousSibling) {
+							selected_node.set(node.previousSibling.id);
+						}
+						else {
+							selected_node.set(end_id);
+						}
 					}
 				}
 				break;
 
 			case 'up':
-				if(display_mode == 'detail') { 
+				if(display_mode == 'detail') {
 					if(selected_node.place() == 'pane' && event.shiftKey) {
-						var start_id = selected_node.start_id();
-						var end_id = selected_node.end_id();
-
 						var start_nn = document.getElementById('nn'+start_id);
 						var end_nn = document.getElementById('nn'+end_id);
 
@@ -1020,7 +1020,7 @@
 						}
 					}
 					else {
-						node = document.getElementById(top_id);
+						node = document.getElementById(start_id);
 						if(node && node.previousSibling && node.rowIndex > 1) selected_node.set(node.previousSibling.id);
 					}
 				}
@@ -1029,9 +1029,6 @@
 					var range=[];
 
 					if(selected_node.place() == 'pane' && event.shiftKey) {
-						var start_id = selected_node.start_id();
-						var end_id = selected_node.end_id();
-
 						var start_nn = document.getElementById('nn'+start_id);
 						var end_nn = document.getElementById('nn'+end_id);
 
@@ -1051,10 +1048,14 @@
 						}
 					}
 					else {
-						var start_id = selected_node.start_id();
-						var node = document.getElementById(start_id);
+						var node = document.getElementById(end_id);
 						for(n=node.previousSibling, i=1; n && i < cnt; n=n.previousSibling, i++);
-						if(n) selected_node.set(n.id);
+						if(n) {
+							selected_node.set(n.id);
+						}
+						else {
+							selected_node.set(end_id);
+						}
 					}
 				}
 				break;
@@ -1062,9 +1063,6 @@
 			case 'right':
 				if(display_mode != 'detail') { 
 					if(selected_node.place() == 'pane' && event.shiftKey) {
-						var start_id = selected_node.start_id();
-						var end_id = selected_node.end_id();
-
 						var start_nn = document.getElementById('nn'+start_id);
 						var end_nn = document.getElementById('nn'+end_id);
 
@@ -1087,12 +1085,12 @@
 						}
 					}
 					else {
-						node = document.getElementById(last_id);
-						for(var n=node.nextSibling; n; n=n.nextSibling) {
-							if(!selected_node.exists(n.id)) break;
+						node = document.getElementById(end_id);
+						if(node && node.nextSibling) {
+							selected_node.set(node.nextSibling.id);
 						}
-						if(n) {
-							selected_node.set(n.id);
+						else {
+							selected_node.set(end_id);
 						}
 					}
 				}
@@ -1101,9 +1099,6 @@
 			case 'down':
 				if(display_mode == 'detail') { 
 					if(selected_node.place() == 'pane' && event.shiftKey) {
-						var start_id = selected_node.start_id();
-						var end_id = selected_node.end_id();
-
 						var start_nn = document.getElementById('nn'+start_id);
 						var end_nn = document.getElementById('nn'+end_id);
 
@@ -1126,7 +1121,8 @@
 						}
 					}
 					else {
-						node = document.getElementById(last_id);
+						node = document.getElementById(end_id);
+console.log(node, node.nextSibling);
 						if(node && node.nextSibling) selected_node.set(node.nextSibling.id);
 					}
 				}
@@ -1135,9 +1131,6 @@
 					var range=[];
 
 					if(selected_node.place() == 'pane' && event.shiftKey) {
-						var start_id = selected_node.start_id();
-						var end_id = selected_node.end_id();
-
 						var start_nn = document.getElementById('nn'+start_id);
 						var end_nn = document.getElementById('nn'+end_id);
 
@@ -1157,10 +1150,14 @@
 						}
 					}
 					else {
-						var start_id = selected_node.start_id();
-						var node = document.getElementById(start_id);
+						var node = document.getElementById(end_id);
 						for(n=node.nextSibling, i=1; n && i < cnt; n=n.nextSibling, i++);
-						if(n) selected_node.set(n.id);
+						if(n) {
+							selected_node.set(n.id);
+						}
+						else {
+							selected_node.set(end_id);
+						}
 					}
 				}
 				break;
@@ -1181,9 +1178,10 @@
 					continue;
 				}
 				if(last_top != pos.top) {
-					return cnt;
+					break;
 				}
 			}
+			return cnt;
 		}
 
 		function scrollToLatest() {
