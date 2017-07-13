@@ -1020,8 +1020,13 @@
 						}
 					}
 					else {
-						node = document.getElementById(start_id);
-						if(node && node.previousSibling && node.rowIndex > 1) selected_node.set(node.previousSibling.id);
+						node = document.getElementById(end_id);
+						if(node.previousSibling && node.rowIndex > 1) {
+							selected_node.set(node.previousSibling.id);
+						}
+						else {
+							selected_node.set(end_id);
+						}
 					}
 				}
 				else {
@@ -1122,8 +1127,12 @@
 					}
 					else {
 						node = document.getElementById(end_id);
-console.log(node, node.nextSibling);
-						if(node && node.nextSibling) selected_node.set(node.nextSibling.id);
+						if(node.nextSibling) {
+							selected_node.set(node.nextSibling.id);
+						}
+						else {
+							selected_node.set(end_id);
+						}
 					}
 				}
 				else {
@@ -1846,7 +1855,7 @@ console.log(node, node.nextSibling);
 
 			this.latest_id = function() {
 				var n=0;
-				var latest;
+				var latest=0;
 
 				if(current_node.length) {
 					for(var i=0; i < current_node.length; i++) {
@@ -1861,7 +1870,7 @@ console.log(node, node.nextSibling);
 
 			this.start_id = function() {
 				var n=0;
-				var start;
+				var start=0;
 
 				if(current_node.length) {
 					for(var i=0; i < current_node.length; i++) {
@@ -1877,6 +1886,8 @@ console.log(node, node.nextSibling);
 			this.end_id = function() {
 				var n=0;
 				var range=[];
+				var start=0;
+				var end;
 
 				if(current_node.length) {
 					for(var i=0; i < current_node.length; i++) {
