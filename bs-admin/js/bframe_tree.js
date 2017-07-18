@@ -70,6 +70,7 @@
 
 		var pane;
 		var pane_ul;
+		var pane_table;
 		var pane_tbody;
 		var pane_offset;
 		var sort_key;
@@ -811,11 +812,11 @@
 				if(display_mode == 'detail') {
 					// detail mode
 					div.className = 'detail';
-					var ptable = document.createElement('table');
-					div.appendChild(ptable);
+					pane_table = document.createElement('table');
+					div.appendChild(pane_table);
 
 					pane_tbody = document.createElement('tbody');
-					ptable.appendChild(pane_tbody);
+					pane_table.appendChild(pane_tbody);
 
 					pane_tbody.id = 'tt' + node_info.node_id;
 					pane_tbody.name = 'nodes';
@@ -829,7 +830,6 @@
 							createDetailNodeObject(pane_tbody, node_info.children[i]);
 							setNewNode(node_info.children[i]);
 						}
-						pane_offset = ptable.offsetTop + pane_tbody.childNodes[1].offsetTop;
 					}
 					bframe.removeClass('current', display_thumbnail);
 					bframe.appendClass('current', display_detail);
@@ -847,7 +847,6 @@
 							createNodeObject(pane_ul, node_info.children[i], 'pane', trash);
 							setNewNode(node_info.children[i]);
 						}
-						pane_offset = pane_ul.childNodes[0].offsetTop;
 					}
 					bframe.removeClass('current', display_detail);
 					bframe.appendClass('current', display_thumbnail);
@@ -1206,6 +1205,15 @@
 			var pos = bframe.getElementPosition(obj);
 			var position = {top:pos.top, bottom:pos.top+obj.offsetHeight};
 			var viewport = {top:0, bottom:pane.offsetHeight};
+
+			if(!pane_offset) {
+				if(display_mode == 'detail') {
+					pane_offset = pane_table.offsetTop + pane_tbody.childNodes[1].offsetTop;
+				}
+				else {
+					pane_offset = pane_ul.childNodes[0].offsetTop;
+				}
+			}
 
 			if(position.bottom > viewport.bottom) {
 				pane.scrollTop = pane.scrollTop+position.bottom-viewport.bottom;
