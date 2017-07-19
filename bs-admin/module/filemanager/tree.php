@@ -145,19 +145,20 @@
 						}
 					}
 				}
-				if($this->status && is_array($data)) {
-					$serializedString = file_get_contents(B_FILE_INFO_THUMB);
-					$info = unserialize($serializedString);
+				if($this->status) {
+					if(is_array($data)) {
+						$serializedString = file_get_contents(B_FILE_INFO_THUMB);
+						$info = unserialize($serializedString);
 
-					$fp = fopen(B_FILE_INFO_THUMB, 'w');
-					fwrite($fp, serialize(array_merge($info, $data)));
-					fclose($fp);
+						$fp = fopen(B_FILE_INFO_THUMB, 'w');
+						fwrite($fp, serialize(array_merge($info, $data)));
+						fclose($fp);
 
-					$root = new B_FileNode($this->dir, 'root', null, null, 'all');
+						$root = new B_FileNode($this->dir, 'root', null, null, 'all');
+					}
 				}
 				else {
 					$this->message = $this->getErrorMessage($source->getErrorNo());
-
 					if($this->show_progress) {
 						$response['status'] = 'error';
 						$response['message'] = $this->getErrorMessage($source->getErrorNo());
