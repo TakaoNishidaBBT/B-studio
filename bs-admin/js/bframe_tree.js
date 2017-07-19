@@ -1195,7 +1195,7 @@
 		function scrollToLatest() {
 			var latest_id = selected_node.latest_id();
 			if(latest_id) var latest = document.getElementById(latest_id);
-			if(latest) scroll(latest);
+			if(latest && selected_node.place() == 'pane') scroll(latest);
 		}
 
 		function scroll(obj) {
