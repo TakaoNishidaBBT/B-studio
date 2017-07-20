@@ -273,7 +273,7 @@
 				if(!function_exists('imagecreatefromjpeg')) return;
 				$image = imagecreatefromjpeg($src);
 				// check rotate
-				$exif = exif_read_data($src);
+				$exif = @exif_read_data($src);
 				break;
 
 			case 'gif':
@@ -366,7 +366,7 @@
 				// set transparency
 				$trnprt_indx = imagecolortransparent($image);
 				if($trnprt_indx >= 0) {
-					$trnprt_color = imagecolorsforindex($image, $trnprt_indx);
+					$trnprt_color = @imagecolorsforindex($image, $trnprt_indx);
 					$trnprt_indx = imagecolorallocate($new_image, $trnprt_color['red'], $trnprt_color['green'], $trnprt_color['blue']);
 					imagefill($new_image, 0, 0, $trnprt_indx);
 					imagecolortransparent($new_image, $trnprt_indx);
