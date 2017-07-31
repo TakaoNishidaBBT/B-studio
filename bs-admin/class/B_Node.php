@@ -857,13 +857,11 @@
 		}
 
 		function getRoots($node_id) {
-			if(!$this->roots) {
-				$i=0;
-				$this->roots[$i++] = $node_id;
+			$i=0;
+			$this->roots[$i++] = $node_id;
 
-				for($id = $node_id; $row = $this->selectNode($id); $id = $row['parent_node']) {
-					$this->roots[$i++] = $row['parent_node'];
-				}
+			for($id = $node_id; $row = $this->selectNode($id); $id = $row['parent_node']) {
+				$this->roots[$i++] = $row['parent_node'];
 			}
 
 			return $this->roots;

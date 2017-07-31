@@ -331,9 +331,17 @@
 											, 0
 											, null);
 
+					$parent = $source_node->parent;
 					$ret = $source_node->move('trash', $this->user_id, $disp_seq);
-					$disp_seq++;
-					if(!$ret) break;
+					if($ret) {
+						$disp_seq++;
+						if($source_node->isMyChild($this->session['current_node'])) {
+							$this->session['current_node'] = $parent;
+						}
+					}
+					else {
+						break;
+					}
 				}
 				if($ret) {
 					$this->status = true;

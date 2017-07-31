@@ -268,6 +268,9 @@
 						$ret = $node->remove();
 						if($ret) {
 							$this->status = true;
+							if($node->isMyChild(B_Util::getPath($this->dir, $this->session['current_node']))) {
+								$this->session['current_node'] = $node->parentPath();
+							}
 						}
 						else {
 							$this->status = false;

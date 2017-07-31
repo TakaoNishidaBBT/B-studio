@@ -494,6 +494,14 @@
 			return false;
 		}
 
+		function parentPath() {
+			if($this->parent) return $this->parent;
+			$parent_path = dirname($this->path);
+			if($parent_path == '\\') $parent_path = 'root';
+
+			return $parent_path;
+		}
+
 		function getMaxThumbnailNo() {
 			if($handle = opendir(B_UPLOAD_THUMBDIR)) {
 				while(false !== ($file_name = readdir($handle))){
