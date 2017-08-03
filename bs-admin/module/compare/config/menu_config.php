@@ -61,12 +61,12 @@ $menu_config = array(
 						'context_menu'		=>
 						array(
 							array(
-								'menu'		=> __('Resource manager'),
+								'menu'		=> __('Resource Manager'),
 								'param'		=> DISPATCH_URL . '&module=resource&page=compare,main',
 								'func'		=> 'openUrl',
 							),
 							array(
-								'menu'		=> __('Widget'),
+								'menu'		=> __('Widgets'),
 								'param'		=> DISPATCH_URL . '&module=widget&page=compare&method=init,main',
 								'func'		=> 'openUrl',
 							),
