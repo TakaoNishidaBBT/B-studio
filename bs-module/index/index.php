@@ -547,7 +547,7 @@
 					'<link rel="stylesheet" href="W' . $__row['contents_id'] . '.css" type="text/css" media="all" />');
 			}
 
-			widgetExec($this->view_mode, './view/view_widget.php', $__row, $this->breadcrumbs);
+			widgetExec($this->view_mode, './view/view_widget.php', $__row, $this->url, $this->breadcrumbs);
 		}
 
 		function view() {
@@ -623,6 +623,7 @@
 	function widgetExec($__view_mode
 					   ,$__view_file
 					   ,$__row
+					   ,&$bs_url
 					   ,&$bs_breadcrumbs) {
 		global $admin_mode;
 
