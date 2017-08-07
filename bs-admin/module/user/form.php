@@ -138,7 +138,7 @@
 			$this->result = new B_Element($this->result_config, $this->user_auth);
 			$this->result_control = new B_Element($this->result_control_config, $this->user_auth);
 
-			$param['user_id'] = $this->post['user_id'];
+			$param['user_id'] = $this->session['post']['user_id'];
 			$param['action_message'] = $message;
 			$this->result->setValue($param);
 
