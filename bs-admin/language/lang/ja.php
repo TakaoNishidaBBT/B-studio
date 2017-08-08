@@ -395,6 +395,10 @@
 
 		' : write permission granted. '	=> ' の書き込み権限はOKです。',
 		' : write permission not set. '	=> ' に書き込み権限がありません。',
+		' : execute permission granted. '
+										=> ' の実行権限はOKです。',
+		' : execute permission not set. '
+										=> ' に実行権限がありません。',
 
 		'Able to connect to DB but failed to select schema.'
 										=> 'DBへ接続はできましたがスキーマの選択に失敗しました。',
