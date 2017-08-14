@@ -229,6 +229,7 @@ array(
 				'link'			=> 'index.php',
 				'special_html'	=> 'class="delete-button"',
 				'value'			=> __('Delete'),
+				'display'		=> 'none',
 				'fixedparam'	=>
 				array(
 					'terminal_id'	=> TERMINAL_ID,
@@ -248,7 +249,6 @@ array(
 				'class'			=> 'B_Link',
 				'special_html'	=> 'class="delete-button-disable" onclick="return false;"',
 				'value'			=> __('Delete'),
-				'display'		=> 'none',
 			),
 		),
 	),

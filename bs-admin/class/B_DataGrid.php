@@ -446,21 +446,16 @@
 		function getElementByNameFromRow($name) {
 			foreach($this->row as $row) {
 				$obj = $row->getElementByName($name);
-				if($obj) {
-					break;
-				}
+				if($obj) return $obj;
 			}
-			return $obj;
 		}
 
 		function getElementByNameFromHeader($name) {
-			$obj = $this->header->getElementByName($name);
-			return $obj;
+			return $this->header->getElementByName($name);
 		}
 
 		function getElementByNameFromRowInstance($name) {
-			$obj = $this->row_instance->getElementByName($name);
-			return $obj;
+			return $this->row_instance->getElementByName($name);
 		}
 
 		function unsetRow() {
@@ -586,9 +581,8 @@
 		}
 
 		function convertText($value, $config) {
-			if(!is_array($config)) {
-				return $value;
-			}
+			if(!is_array($config)) return $value;
+
 			foreach($config as $val) {
 				$arr = explode('/', $val['from']);
 				if($arr) {
@@ -895,12 +889,7 @@
 		}
 
 		function setParam(&$param, $key, $value) {
-			if($param) {
-				$param.= '&';
-			}
-			else{
-				$param.= '?';
-			}
-			$param.= $key . '=' . $value;
+			$conjunction = $param ? '&' : '?';
+			$param.= $conjunction . $key . '=' . $value;
 		}
 	}

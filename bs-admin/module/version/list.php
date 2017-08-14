@@ -27,8 +27,18 @@
 			// Create version info
 			$this->version_information = new B_Element($version_info_config, $this->user_auth);
 
+			// Set max version_id
+			$this->max_version_id = $this->getMaxVersionId();
+
 			// Set call back
 			$this->dg->setCallBack($this, '_list_callback');
+		}
+
+		function getMaxVersionId() {
+			$sql = "select max(version_id) version_id from " . B_DB_PREFIX . "version";
+			$rs = $this->db->query($sql);
+			$row = $this->db->fetch_assoc($rs);
+			return $row['version_id'];
 		}
 
 		function func_default() {
@@ -248,26 +258,21 @@
 
 		function _list_callback(&$array) {
 			$row = &$array['row'];
+			$version_id = $row->getElementByName('version_id');
 
-			if(!$this->disabe_delete) {
-				$this->disabe_delete = true;
+			if($version_id->value == $this->max_version_id ) {
+				$this->delete_disabled = true;
 
 				$reserved_version_id = $row->getElementByName('reserved_version_id');
 				$working_version_id = $row->getElementByName('working_version_id');
 				$publication_status = $row->getElementByName('publication_status');
 
-				if($reserved_version_id->checked || $working_versionid->checked || $publication_status->value != '0') {
-					$obj = $row->getElementById('del_enable');
-					$obj->display = 'none';
+				if(!$reserved_version_id->checked && !$working_version_id->checked && $publication_status->value == '0') {
 					$obj = $row->getElementById('del_disable');
+					$obj->display = 'none';
+					$obj = $row->getElementById('del_enable');
 					$obj->display = 'block';
 				}
-			}
-			else {
-				$obj = $row->getElementById('del_enable');
-				$obj->display = 'none';
-				$obj = $row->getElementById('del_disable');
-				$obj->display = 'block';
 			}
 
 			$obj = $row->getElementByName('version_id');
