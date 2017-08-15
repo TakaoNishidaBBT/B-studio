@@ -280,7 +280,6 @@
 			if($this->record_cnt == 0 || count($this->row) == 0 || !is_array($this->row)) {
 				return $this->empty_message;
 			}
-			$i=0;
 
 			// tr call back
 			for($i=0; $i < $this->callback_index; $i++) {
