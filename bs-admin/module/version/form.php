@@ -122,9 +122,11 @@
 
 				$ret = $this->table->update($update_param);
 
+				$param['cache'] = $row['cache'];
 				$param['private_revision_id'] = '00';
 				$param['create_user'] = $this->user_id;
 				$param['create_datetime'] = time();
+
 				$ret = $this->table->selectInsert($param);
 				$param['action_message'] = __('was saved.');
 			}
