@@ -183,6 +183,7 @@ div.text_editor {
 	overflow-y: auto;
 	border-bottom: 1px #777 solid;
 	position: relative;
+	background-color: #444;
 }
 .bframe_compare_container {
 	overflow: hidden;

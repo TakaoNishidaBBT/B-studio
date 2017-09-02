@@ -4,12 +4,15 @@ html, body {
 	background-color: #444;
 }
 div#contents_container {
-	margin-top: 0;
+	margin: 0;
 	overflow: hidden;
 }
 div#contents {
 	overflow: hidden;
 	background-color: #3a3a3a;
+}
+div#settings {
+	overflow: auto;
 }
 div.main_container {
 	margin: 0 8px 0 0;
@@ -18,7 +21,7 @@ div.main_container {
 	overflow: hidden;
 }
 
-/* tab control */
+/* tab */
 ul.tabcontrol {
 	margin: 0;
 	padding: 0;
@@ -107,7 +110,7 @@ ul.tabcontrol li.register {
 }
 
 /* button */
-div.input_container {
+div.input-container {
 	width: 140px;
 	float: left;
 }
@@ -145,12 +148,9 @@ span#message {
 	color: #fff;
 }
 div.register {
-	background-color: #555;
 	margin-right: 8px;
 	padding: 8px 8px;
 	color: #fff;
-	border-top: #666 1px solid;
-	border-bottom: #3a3a3a 3px solid;
 	overflow: hidden;
 	clear: both;
 }
@@ -163,16 +163,17 @@ div.editor_container {
 	padding: 7px 8px 8px 8px;
 }
 div#preview {
-	background-color: #fff;
+	background-color: #232323;
+	text-align: center;
 }
 div.text_editor {
 	margin: 0;
 	padding: 0;
-	background-color: #000;
 	width: 100%;
 	overflow-y: auto;
 	border-bottom: 1px #777 solid;
 	position: relative;
+	background-color: #444;
 }
 div.text_editor textarea {
 	border: none;

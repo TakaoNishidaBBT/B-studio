@@ -125,7 +125,6 @@ span.register-button {
 	border: 1px solid #666;
 	color: #fff;
 	text-shadow: -1px -1px #555;
-
 	cursor: pointer;
 }
 span.register-button:hover {
@@ -138,7 +137,6 @@ span.register-button img {
 	vertical-align: -3px;
 	margin-right: 8px;
 }
-
 div.message-container {
 	float: left;
 	margin-left: 10px;
@@ -147,14 +145,6 @@ span#message {
 	display: table-cell;
 	vertical-align: middle;
 	height: 26px;
-}
-
-div.register {
-	margin-right: 8px;
-	padding: 8px 8px;
-	color: #fff;
-	overflow: hidden;
-	clear: both;
 }
 
 /* editor */
@@ -166,10 +156,6 @@ div.editor_container {
 }
 div#preview {
 	background-color: #232323;
-	text-align: center;
-}
-#preview_frame {
-	background-color: #ffffff;
 }
 iframe#inline_frame,
 iframe#preview_frame {

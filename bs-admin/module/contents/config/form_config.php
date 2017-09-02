@@ -82,11 +82,9 @@ $form_config = array(
 			),
 		),
 		array(
+			'name'			=> 'settings_form',
 			'start_html'	=> '<div id="settings" class="bframe_adjustparent" data-param="margin:25" style="display:none">',
 			'end_html'		=> '</div>',
-			array(
-				'name'				=> 'settings_form',
-			),
 		),
 		array(
 			'start_html'	=> '<div id="preview" class="bframe_adjustparent" data-param="margin:22" style="display:none;position:relative;">',
@@ -107,7 +105,7 @@ $form_config = array(
 	),
 );
 
-//Tab control
+//tab control
 $tab_control_config = array(
 	'start_html'	=> '<ul class="tabcontrol">',
 	'end_html'		=> '</ul>',

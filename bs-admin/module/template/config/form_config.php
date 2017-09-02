@@ -99,11 +99,9 @@ $form_config = array(
 			),
 		),
 		array(
-			'start_html'	=> '<div id="config" class="bframe_adjustparent" data-param="margin:26" style="display:none">',
+			'name'			=> 'settings_form',
+			'start_html'	=> '<div id="settings" class="bframe_adjustparent" data-param="margin:25" style="display:none">',
 			'end_html'		=> '</div>',
-			array(
-				'name'				=> 'config_form',
-			),
 		),
 		array(
 			'start_html'	=> '<div id="preview" class="bframe_adjustparent" data-param="margin:15" style="display:none">',
@@ -116,7 +114,81 @@ $form_config = array(
 	),
 );
 
-$config_form_config = array(
+//tab control
+$tab_control_config = array(
+	'start_html'	=> '<ul class="tabcontrol">',
+	'end_html'		=> '</ul>',
+	array(
+		'name'				=> 'html_editor_index',
+		'class'				=> 'B_Link',
+		'start_html'		=> '<li>',
+		'end_html'			=> '</li>',
+		'link'				=> 'html',
+		'value'				=> __('HTML'),
+		'special_html'		=> 'class="bframe_tab"',
+	),
+	array(
+		'name'				=> 'css_editor_index',
+		'class'				=> 'B_Link',
+		'start_html'		=> '<li>',
+		'end_html'			=> '</li>',
+		'link'				=> 'css',
+		'value'				=> __('CSS'),
+		'special_html'		=> 'class="bframe_tab"',
+	),
+	array(
+		'name'				=> 'php_editor_index',
+		'class'				=> 'B_Link',
+		'start_html'		=> '<li>',
+		'end_html'			=> '</li>',
+		'link'				=> 'php',
+		'value'				=> __('PHP'),
+		'special_html'		=> 'class="bframe_tab"',
+	),
+	array(
+		'name'				=> 'settings_index',
+		'class'				=> 'B_Link',
+		'start_html'		=> '<li>',
+		'end_html'			=> '</li>',
+		'link'				=> 'settings',
+		'value'				=> __('Settings'),
+		'special_html'		=> 'class="bframe_tab"',
+	),
+	array(
+		'name'				=> 'preview_index',
+		'class'				=> 'B_Link',
+		'start_html'		=> '<li>',
+		'end_html'			=> '</li>',
+		'link'				=> 'preview',
+		'value'				=> __('Preview'),
+		'special_html'		=> 'class="bframe_tab" onclick="bframe.preview.submit(\'F1\', \'' . B_SITE_BASE . 'index.php' . '\', \'template_preview\', \'preview_frame\'); return false;"',
+	),
+	array(
+		'name'				=> 'register_button',
+		'start_html'		=> '<li class="register">',
+		'end_html'			=> '</li>',
+		array(
+			'start_html'	=> '<div class="input_container">',
+			'end_html'		=> '</div>',
+			array(
+				'name'			=> 'register',
+				'start_html'	=> '<span id="register" class="register-button" onclick="bframe.ajaxSubmit.submit(\'F1\', \'' . $this->module . '\', \'form\', \'register\', \'confirm\', true)">',
+				'end_html'		=> '</span>',
+				'value'			=> '<img src="images/common/save.png" alt="Save" />' . __('Save'),
+			),
+		),
+		array(
+			'start_html'	=> '<div class="message-container">',
+			'end_html'		=> '</div>',
+			array(
+				'start_html'	=> '<span id="message">',
+				'end_html'		=> '</span>',
+			),
+		),
+	),
+);
+
+$settings_form_config = array(
 	array(
 		// Table
 		'start_html'	=> '<table class="form"><tbody>',
@@ -179,80 +251,6 @@ $config_form_config = array(
 					'name'					=> 'header_element',
 					'special_html'			=> 'class="header_element"',
 				),
-			),
-		),
-	),
-);
-
-//tab control
-$tab_control_config = array(
-	'start_html'	=> '<ul class="tabcontrol">',
-	'end_html'		=> '</ul>',
-	array(
-		'name'				=> 'html_editor_index',
-		'class'				=> 'B_Link',
-		'start_html'		=> '<li>',
-		'end_html'			=> '</li>',
-		'link'				=> 'html',
-		'value'				=> __('HTML'),
-		'special_html'		=> 'class="bframe_tab"',
-	),
-	array(
-		'name'				=> 'css_editor_index',
-		'class'				=> 'B_Link',
-		'start_html'		=> '<li>',
-		'end_html'			=> '</li>',
-		'link'				=> 'css',
-		'value'				=> __('CSS'),
-		'special_html'		=> 'class="bframe_tab"',
-	),
-	array(
-		'name'				=> 'php_editor_index',
-		'class'				=> 'B_Link',
-		'start_html'		=> '<li>',
-		'end_html'			=> '</li>',
-		'link'				=> 'php',
-		'value'				=> __('PHP'),
-		'special_html'		=> 'class="bframe_tab"',
-	),
-	array(
-		'name'				=> 'config_index',
-		'class'				=> 'B_Link',
-		'start_html'		=> '<li>',
-		'end_html'			=> '</li>',
-		'link'				=> 'config',
-		'value'				=> __('Settings'),
-		'special_html'		=> 'class="bframe_tab"',
-	),
-	array(
-		'name'				=> 'preview_index',
-		'class'				=> 'B_Link',
-		'start_html'		=> '<li>',
-		'end_html'			=> '</li>',
-		'link'				=> 'preview',
-		'value'				=> __('Preview'),
-		'special_html'		=> 'class="bframe_tab" onclick="bframe.preview.submit(\'F1\', \'' . B_SITE_BASE . 'index.php' . '\', \'template_preview\', \'preview_frame\'); return false;"',
-	),
-	array(
-		'name'				=> 'register_button',
-		'start_html'		=> '<li class="register">',
-		'end_html'			=> '</li>',
-		array(
-			'start_html'	=> '<div class="input_container">',
-			'end_html'		=> '</div>',
-			array(
-				'name'			=> 'register',
-				'start_html'	=> '<span id="register" class="register-button" onclick="bframe.ajaxSubmit.submit(\'F1\', \'' . $this->module . '\', \'form\', \'register\', \'confirm\', true)">',
-				'end_html'		=> '</span>',
-				'value'			=> '<img src="images/common/save.png" alt="Save" />' . __('Save'),
-			),
-		),
-		array(
-			'start_html'	=> '<div class="message_container">',
-			'end_html'		=> '</div>',
-			array(
-				'start_html'	=> '<span id="message">',
-				'end_html'		=> '</span>',
 			),
 		),
 	),

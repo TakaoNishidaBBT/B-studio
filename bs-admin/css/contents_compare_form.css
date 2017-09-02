@@ -137,7 +137,6 @@ span.register-button img {
 	vertical-align: -3px;
 	margin-right: 8px;
 }
-
 div.message-container {
 	float: left;
 	margin-left: 10px;
@@ -148,7 +147,6 @@ span#message {
 	height: 26px;
 	color: #fff;
 }
-
 div.register {
 	margin-right: 8px;
 	padding: 8px 8px;
@@ -175,6 +173,7 @@ div.text_editor {
 	overflow-y: auto;
 	border-bottom: 1px #777 solid;
 	position: relative;
+	background-color: #444;
 }
 div.text_editor textarea {
 	border: none;
