@@ -67,8 +67,8 @@
 
 		function bind($data=null) {
 			// data clear
-			$this->row = '';
-			$this->bind_data = '';
+			$this->row = array();
+			$this->bind_data = array();
 
 			// create caption objects
 			if($this->config['caption']) {
@@ -489,7 +489,7 @@
 		function getRowData($row, $record_cnt) {
 			global $g_data_set, ${$g_data_set};
 
-			unset($csv);
+			$csv = array();
 
 			// csv call back
 			for($i=0; $i < $this->csv_callback_index; $i++) {

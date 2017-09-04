@@ -7,23 +7,21 @@ div#contents_container {
 	margin: 0;
 	overflow: hidden;
 }
-div#contents_container_footer {
-	height: 15px;
-	background-image: -moz-linear-gradient(center bottom, #555 0%, #6e6e6e 100%);
-	margin: 0;
-}
 div#contents {
 	overflow: hidden;
 	background-color: #3a3a3a;
 }
+div#settings {
+	overflow: auto;
+}
 div.main_container {
 	margin: 0 8px 0 0;
 	padding: 0;
-	background-color: #555555;
+	background-color: #555;
 	overflow: hidden;
 }
 
-/* tab control */
+/* tab */
 ul.tabcontrol {
 	margin: 0;
 	padding: 0;
@@ -110,6 +108,8 @@ ul.tabcontrol li.register {
 	border-top: 1px solid #444;
 	overflow: hidden;
 }
+
+/* button */
 div.input_container {
 	width: 140px;
 	float: left;
@@ -121,20 +121,14 @@ span.register-button {
 	padding: 4px 0;
 	width: 140px;
 	background-color: #666;
-	border-top: 1px solid #666;
-	border-left: 1px solid #666;
-	border-right: 1px solid #666;
-	border-bottom: 1px solid #666;
+	border: 1px solid #666;
 	color: #fff;
 	text-shadow: -1px -1px #555;
 	cursor: pointer;
 }
 span.register-button:hover {
 	background-color: #777;
-	border-top: 1px solid #777;
-	border-left: 1px solid #777;
-	border-right: 1px solid #777;
-	border-bottom: 1px solid #777;
+	border: 1px solid #777;
 	color: #fff;
 	text-shadow: 1px 1px #555;
 }
@@ -153,40 +147,33 @@ span#message {
 	color: #fff;
 }
 div.register {
-	background-color: #555;
 	margin-right: 8px;
 	padding: 8px 8px;
 	color: #fff;
-	border-top: #666 1px solid;
-	border-bottom: #3a3a3a 3px solid;
 	overflow: hidden;
 	clear: both;
 }
+
+/* editor */
 div.editor_container {
 	clear: both;
 	margin: 0;
 	background-color: #555;
 	padding: 7px 8px 8px 8px;
 }
-div#html {
-	overflow: auto;
-	margin: 0;
-}
 div#preview {
-	background-color: #fff;
+	background-color: #232323;
 }
-div.text_editor {
+div.text_editor,
+div.start_html,
+div.end_html {
 	margin: 0;
 	padding: 0;
-	background-color: #555;
 	width: 100%;
 	overflow-y: auto;
 	border-bottom: 1px #777 solid;
 	position: relative;
 	background-color: #444;
-}
-.bframe_compare_container {
-	overflow: hidden;
 }
 div.text_editor textarea {
 	border: none;
@@ -212,7 +199,7 @@ div.visual_editor {
 
 /* table.form */
 table.form {
-	width: 99%;
+	width: 100%;
 	margin: 0;
 	border: none;
 	border-collapse: separate;
@@ -252,7 +239,7 @@ table.form th a.button {
 	border-right: 1px solid #333;
 	border-bottom: 1px solid #333;
 	border-left: 1px solid #555;
-	background: #4444;
+	background: #444;
 	text-align: center;
 	line-height: 20px;
 }
@@ -284,6 +271,7 @@ table.form td input {
 	height: 22px;
 	padding: 2px 5px;
 	width: 80%;
+	vertical-align: middle;
 }
 table.form td input.template {
 	width: 30%;
@@ -314,13 +302,10 @@ table.form a:hover.button {
 	border-left: 1px solid #666;
 	background-color: #555;
 }
-
-/* compare */
-.bframe_compare_container {
-	height: 300px;
-	margin: 0 0 8px 0;
-}
-
-.start_html, .end_html {
-	overflow: auto;
+table.form th.diff {
+	background-color: #889900;
+	border-top: 1px solid #99aa00;
+	border-bottom: 1px solid #889900;
+	border-right: 1px solid #889900;
+	text-shadow: -1px -1px #777;
 }

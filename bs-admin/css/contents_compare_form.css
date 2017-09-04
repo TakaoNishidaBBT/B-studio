@@ -124,7 +124,6 @@ span.register-button {
 	border: 1px solid #666;
 	color: #fff;
 	text-shadow: -1px -1px #555;
-
 	cursor: pointer;
 }
 span.register-button:hover {
@@ -164,7 +163,6 @@ div.editor_container {
 }
 div#preview {
 	background-color: #232323;
-	text-align: center;
 }
 div.text_editor {
 	margin: 0;
@@ -199,8 +197,6 @@ div#config textarea.external_js {
 }
 div.visual_editor {
 	background-color: #fff;
-	border-top: 1px solid #3a3a3a;
-	border-bottom: 1px solid #777;
 }
 
 /* table.form */
