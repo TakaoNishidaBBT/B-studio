@@ -128,7 +128,6 @@
 				header('Content-Type: application/' . strtolower($file['extension']));
 				break;
 			}
-			header('Cache-Control: no-cache, no-store, must-revalidate');
 			header('X-Content-Type-Options:nosniff');
 			header('Last-Modified: ' . gmdate('D, d M Y H:i:s', filemtime($file_info)) . ' GMT');
 			readfile(B_RESOURCE_DIR . $info[$url]);
