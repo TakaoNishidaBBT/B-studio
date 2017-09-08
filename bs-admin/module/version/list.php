@@ -82,7 +82,6 @@
 		function setRequest() {
 			$this->_setRequest('page_no');
 			$this->_setRequest('keyword');
-			$this->_setRequest('page_no');
 			$this->_setRequest('row_per_page');
 			return;
 		}

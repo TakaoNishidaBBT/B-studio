@@ -33,7 +33,7 @@
 		}
 
 		function select() {
-			$this->session = '';
+			$this->session = array();
 
 			$this->control = new B_Element($this->input_control_config);
 			$param['id'] = '00001';
