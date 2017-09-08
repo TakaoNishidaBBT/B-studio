@@ -331,11 +331,13 @@
 				break;
 
 			default:
-				header("HTTP/1.0 404 Not Found");
+				header('HTTP/1.0 404 Not Found');
 				break;
 			}
 
 			if($row['css']) {
+				header('Cache-Control: no-cache, no-store, must-revalidate');
+				header('X-Content-Type-Options:nosniff');
 				header('Content-Type: text/css; charset=' . B_CHARSET);
 				echo $row['css'];
 			}
@@ -573,10 +575,15 @@
 			// Send HTTP header
 			$this->sendHttpHeader();
 			if($this->http_status == '404') {
-				header("HTTP/1.1 404 Not Found");
+				header('HTTP/1.1 404 Not Found');
 			}
-			else if($admin_mode) {
-				header("X-XSS-Protection: 0");
+			else if($admin_mode && ($this->view_mode == 'preview' || $this->view_mode == 'inline')) {
+				// for preview and visual editor (google map in chrome)
+				header('X-XSS-Protection: 0');
+			}
+			else {
+				header('X-Content-Type-Options: nosniff');
+				header('X-XSS-Protection: 1; mode=block');
 			}
 
 			// Show HTML header
@@ -588,7 +595,7 @@
 
 		function notFound() {
 			$this->sendHttpHeader();
-			header("HTTP/1.1 404 Not Found");
+			header('HTTP/1.1 404 Not Found');
 
 			$this->showHtmlHeader();
 			include('./view/view_not_found.php');
