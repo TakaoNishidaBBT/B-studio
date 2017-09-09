@@ -337,7 +337,6 @@
 
 			if($row['css']) {
 				header('Cache-Control: no-cache, no-store, must-revalidate');
-				header('X-Content-Type-Options:nosniff');
 				header('Content-Type: text/css; charset=' . B_CHARSET);
 				echo $row['css'];
 			}
@@ -573,7 +572,9 @@
 			$contents = ob_get_clean();
 
 			// Send HTTP header
-			$this->sendHttpHeader();
+			header('Cache-Control: no-cache, no-store, must-revalidate');
+			header('Content-Type: text/html; charset=' . B_CHARSET);
+
 			if($this->http_status == '404') {
 				header('HTTP/1.1 404 Not Found');
 			}
@@ -582,7 +583,6 @@
 				header('X-XSS-Protection: 0');
 			}
 			else {
-				header('X-Content-Type-Options: nosniff');
 				header('X-XSS-Protection: 1; mode=block');
 			}
 
