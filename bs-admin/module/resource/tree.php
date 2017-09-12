@@ -189,15 +189,16 @@
 						break;
 					}
 					if($ret) {
-						$this->status = true;
 						$this->db->commit();
+						$this->status = true;
+						$this->session['open_nodes'][$this->request['destination_node_id']] = true;
 
 						// kick refresh-cache process
 						$this->refreshCache();
 					}
 					else {
-						$this->status = false;
 						$this->db->rollback();
+						$this->status = false;
 						if(!$node) $node = $source_node ? $source_node : $destination_node;
 						$this->message = $this->getErrorMessage($node->getErrorNo());
 
@@ -909,7 +910,6 @@
 			$list[] = $trash_node->getNodeList('', '', B_RESOURCE_DIR);
 
 			$response['current_node'] = $this->session['current_node'];
-
 			if($this->selected_node) {
 				$response['selected_node'] = $this->selected_node;
 			}

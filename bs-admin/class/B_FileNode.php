@@ -255,7 +255,7 @@
 					$dest = B_Util::getPath($dest, $new_node_name);
 					$destination = B_Util::getPath($this->dir, $dest);
 					copy($this->fullpath, $destination);
-					chmod($dest, 0777);
+					chmod($destination, 0777);
 
 					// copy thumbnail
 					if($this->thumb && file_exists(B_UPLOAD_THUMBDIR . $this->thumb)) {

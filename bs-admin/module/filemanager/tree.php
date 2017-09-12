@@ -80,29 +80,39 @@
 		function pasteNode() {
 			$root = new B_FileNode($this->dir, 'root', null, null, 'all');
 			$dest = $root->getNodeById($this->request['destination_node_id']);
+			if(!file_exists($dest->fullpath)) {
+				$this->message = __('Another user has updated this record');
+				$this->status = false;
+				$this->response('', '');
+				exit;
+			}
 
 			switch($this->request['mode']) {
 			case 'copy':
 				// Set time limit to 5 minutes
 				set_time_limit(300);
 
-				$this->session['selected_node'] = '';
-
 				$this->total_copy_nodes = 0;
 				$this->copy_nodes = 0;
+
 				foreach($this->request['source_node_id'] as $node_id) {
-					$node = $root->getNodeById($node_id);
-					if($node->isMyChild($dest->fullpath)) {
+					$source = $root->getNodeById($node_id);
+					if(!file_exists($source->fullpath)) {
+						$this->message = __('Another user has updated this record');
+						$this->status = false;
+						break;
+					}
+					if($source->isMyChild($dest->fullpath)) {
 						$this->message = $this->getErrorMessage(1);
 						$this->status = false;
 						break;
 					}
-					$this->total_copy_nodes += $node->nodeCount(); 
-					$source_node[] = $node;
+					$this->total_copy_nodes += $source->nodeCount(); 
+					$source_node[] = $source;
 				}
 				if(!$this->status) break;
 
-				$max = $node->getMaxThumbnailNo();
+				$max = $source->getMaxThumbnailNo();
 
 				if(10 < $this->total_copy_nodes) {
 					// send progress
@@ -122,56 +132,46 @@
 					usleep(1000);
 				}
 
+				$this->session['selected_node'] = array();
+
 				foreach($source_node as $source) {
-					if(!file_exists($source->fullpath)) {
-						$this->message = __('Another user has updated this record');
-						$this->status = false;
+					if($dest->node_type == 'folder' || $dest->node_type == 'root') {
+						if($this->show_progress) $callback = array('obj' => $this, 'method' => '_copy_callback');
+						$ret = $source->copy($dest->path, $new_node_name, $data, $max, true, $callback);
 					}
-					if(!file_exists($dest->fullpath)) {
-						$this->message = __('Another user has updated this record');
-						$this->status = false;
+					if($ret) {
+						$this->session['selected_node'][] = $dest->path . '/' . $new_node_name;
 					}
 					else {
-						if($dest->node_type == 'folder' || $dest->node_type == 'root') {
-							if($this->show_progress) $callback = array('obj' => $this, 'method' => '_copy_callback');
-							$ret = $source->copy($dest->path, $new_node_name, $data, $max, true, $callback);
-						}
-						if($ret) {
-							$this->status = true;
-							$this->session['selected_node'][] = $dest->path . '/' . $new_node_name;
-						}
-						else {
-							$this->status = false;
-						}
+						$this->status = false;
 					}
 				}
-				if($this->status) {
-					if(is_array($data)) {
-						$serializedString = file_get_contents(B_FILE_INFO_THUMB);
-						$info = unserialize($serializedString);
-
-						$fp = fopen(B_FILE_INFO_THUMB, 'w');
-						fwrite($fp, serialize(array_merge($info, $data)));
-						fclose($fp);
-
-						$root = new B_FileNode($this->dir, 'root', null, null, 'all');
-					}
-				}
-				else {
+				if(!$this->status) {
 					$this->message = $this->getErrorMessage($source->getErrorNo());
-					if($this->show_progress) {
+				}
+
+				if(is_array($data)) {
+					$serializedString = file_get_contents(B_FILE_INFO_THUMB);
+					$info = unserialize($serializedString);
+
+					$fp = fopen(B_FILE_INFO_THUMB, 'w');
+					fwrite($fp, serialize(array_merge($info, $data)));
+					fclose($fp);
+				}
+
+				if($this->show_progress) {
+					if($this->status) {
+						$response['status'] = 'finished';
+						$response['progress'] = 100;
+						$this->sendChunk(',' . json_encode($response));
+						$this->sendChunk();	// terminate
+					}
+					else {
 						$response['status'] = 'error';
 						$response['message'] = $this->getErrorMessage($source->getErrorNo());
 						$this->sendChunk(',' . json_encode($response));
 						sleep(1);
 					}
-				}
-
-				if($this->show_progress) {
-					$response['status'] = 'finished';
-					$response['progress'] = 100;
-					$this->sendChunk(',' . json_encode($response));
-					$this->sendChunk();	// terminate
 				}
 				break;
 
@@ -182,42 +182,49 @@
 					if(!file_exists($source->fullpath)) {
 						$this->message = __('Another user has updated this record');
 						$this->status = false;
+						break;
 					}
 					if(!file_exists($dest->fullpath)) {
 						$this->message = __('Another user has updated this record');
 						$this->status = false;
+						break;
 					}
 					else if(file_exists($dest->fullpath . '/' . $source->file_name)) {
 						$this->message = __('Already exists');
 						$this->status = false;
+						break;
+					}
+					$source_node[] = $source;
+				}
+				if(!$this->status) break;
+
+				foreach($source_node as $source) {
+					if($dest->node_type == 'folder' || $dest->node_type == 'root') {
+						$ret = $dest->move($source);
+					}
+					if($ret) {
+						$move_status = true;
+						if($this->session['current_node'] == $node_id) {
+							$this->session['current_node'] = $source->node_id;
+						}
 					}
 					else {
-						if($dest->node_type == 'folder' || $dest->node_type == 'root') {
-							$ret = $dest->move($source);
-						}
-						if($ret) {
-							$this->status = true;
-							if($this->session['current_node'] == $this->request['node_id']) {
-								$this->session['current_node'] = $new_node_id;
-							}
-							$this->session['open_nodes'][$this->request['node_id']] = false;
-							$this->session['open_nodes'][$new_node_id] = true;
-						}
-						else {
-							$this->status = false;
-						}
+						$this->status = false;
 					}
 				}
 				if($this->status) {
-					$this->refreshThumbnailCache($root);
+					$this->session['open_nodes'][$this->request['destination_node_id']] = true;
 				}
 				else if(!$this->message) {
 					$this->message = $this->getErrorMessage($dest->getErrorNo());
 				}
+				if($move_status) {
+					$this->refreshThumbnailCache($root);
+				}
 				break;
 			}
 
-			if(!$response) $this->response($this->request['node_id'], 'select');
+			if(!$response) $this->response('', '');
 			exit;
 		}
 
@@ -565,12 +572,15 @@
 			}
 
 			$root_node = new B_FileNode($this->dir, '/', $this->session['open_nodes'], null, 1);
+			$current_node = $root_node->getNodeById($this->session['current_node']);
+			if(!$current_node) {
+				$current_node = $root_node;
+				$this->session['current_node'] = 'root';
+			}
+
 			if($this->session['sort_key']) {
-				$current_node = $root_node->getNodeById($this->session['current_node']);
-				if($current_node) {
-					$current_node->setSortKey($this->session['sort_key']);
-					$current_node->setSortOrder($this->session['sort_order']);
-				}
+				$current_node->setSortKey($this->session['sort_key']);
+				$current_node->setSortOrder($this->session['sort_order']);
 			}
 
 			$list[] = $root_node->getNodeList($node_id, $category);
