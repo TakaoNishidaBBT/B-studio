@@ -804,26 +804,32 @@
 			}
 
 			if($this->page_no == 1) {
-				$html.= $disp_image['top_image']['start_html'];
-				$html.= $disp_image['top_image']['value'];
-				$html.= $disp_image['top_image']['end_html'];
-
-				$html.= $disp_image['prev_image']['start_html'];
-				$html.= $disp_image['prev_image']['value'];
-				$html.= $disp_image['prev_image']['end_html'];
+				if($disp_image['top_image']) {
+					$html.= $disp_image['top_image']['start_html'];
+					$html.= $disp_image['top_image']['value'];
+					$html.= $disp_image['top_image']['end_html'];
+				}
+				if($disp_image['prev_image']) {
+					$html.= $disp_image['prev_image']['start_html'];
+					$html.= $disp_image['prev_image']['value'];
+					$html.= $disp_image['prev_image']['end_html'];
+				}
 			}
 			else {
-				$html.= $disp_image['top_image']['start_html'];
-				$html.= '<a href="' . $this->pager['link'] . $param . $connector . 'page_no=1">';
-				$html.= $disp_image['top_image']['value'];
-				$html.= '</a>';
-				$html.= $disp_image['top_image']['end_html'];
-
-				$html.= $disp_image['prev_image']['start_html'];
-				$html.= '<a href="' . $this->pager['link'] . $param . $connector . 'page_no=' . ($this->page_no - 1) . '">';
-				$html.= $disp_image['prev_image']['value'];
-				$html.= '</a> ' . "\n";
-				$html.= $disp_image['prev_image']['end_html'];
+				if($disp_image['top_image']) {
+					$html.= $disp_image['top_image']['start_html'];
+					$html.= '<a href="' . $this->pager['link'] . $param . $connector . 'page_no=1">';
+					$html.= $disp_image['top_image']['value'];
+					$html.= '</a>';
+					$html.= $disp_image['top_image']['end_html'];
+				}
+				if($disp_image['prev_image']) {
+					$html.= $disp_image['prev_image']['start_html'];
+					$html.= '<a href="' . $this->pager['link'] . $param . $connector . 'page_no=' . ($this->page_no - 1) . '">';
+					$html.= $disp_image['prev_image']['value'];
+					$html.= '</a> ' . "\n";
+					$html.= $disp_image['prev_image']['end_html'];
+				}
 			}
 
 			if($this->pager['page_link_max']) {
@@ -854,25 +860,32 @@
 			}
 
 			if($this->page_no < $total_page_cnt) {
-				$html.= $disp_image['next_image']['start_html'];
-				$html.= '<a href="' . $this->pager['link'] . $param . $connector . 'page_no=' . ($this->page_no + 1) . '">';
-				$html.= $disp_image['next_image']['value'];
-				$html.= '</a>';
-				$html.= $disp_image['next_image']['end_html'];
-
-				$html.= $disp_image['last_image']['start_html'];
-				$html.= '<a href="' . $this->pager['link'] . $param . $connector .'page_no=' . $total_page_cnt . '">';
-				$html.= $disp_image['last_image']['value'];
-				$html.= '</a>';
-				$html.= $disp_image['last_image']['end_html'];
+				if($disp_image['next_image']) {
+					$html.= $disp_image['next_image']['start_html'];
+					$html.= '<a href="' . $this->pager['link'] . $param . $connector . 'page_no=' . ($this->page_no + 1) . '">';
+					$html.= $disp_image['next_image']['value'];
+					$html.= '</a>';
+					$html.= $disp_image['next_image']['end_html'];
+				}
+				if($disp_image['last_image']) {
+					$html.= $disp_image['last_image']['start_html'];
+					$html.= '<a href="' . $this->pager['link'] . $param . $connector .'page_no=' . $total_page_cnt . '">';
+					$html.= $disp_image['last_image']['value'];
+					$html.= '</a>';
+					$html.= $disp_image['last_image']['end_html'];
+				}
 			}
 			else {
-				$html.= $disp_image['next_image']['start_html'];
-				$html.= $disp_image['next_image']['value'];
-				$html.= $disp_image['next_image']['end_html'];
-				$html.= $disp_image['last_image']['start_html'];
-				$html.= $disp_image['last_image']['value'];
-				$html.= $disp_image['last_image']['end_html'];
+				if($disp_image['next_image']) {
+					$html.= $disp_image['next_image']['start_html'];
+					$html.= $disp_image['next_image']['value'];
+					$html.= $disp_image['next_image']['end_html'];
+				}
+				if($disp_image['last_image']) {
+					$html.= $disp_image['last_image']['start_html'];
+					$html.= $disp_image['last_image']['value'];
+					$html.= $disp_image['last_image']['end_html'];
+				}
 			}
 
 			if($disp_image['information']) {
