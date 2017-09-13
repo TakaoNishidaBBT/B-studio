@@ -115,6 +115,7 @@
 
 			selectbox = document.createElement('a');
 			selectbox.className = 'selectbox';
+			selectbox.style.width = '99999px';
 			selectbox.innerHTML = target.options[target.selectedIndex].text;
 			target.parentNode.insertBefore(selectbox, target);
 			selectbox.tabIndex = target.tabIndex;
