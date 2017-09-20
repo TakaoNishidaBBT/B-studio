@@ -375,8 +375,8 @@
 		function getElementsHtml($mode=null) {
 			$value = $this->value;
 
-			if($this->shorten_text) {
-				$value = $this->shortenText($value, $this->shorten_text);
+			if($this->strip_tags) {
+				$value = strip_tags($value);
 			}
 
 			if($this->number_format && is_numeric($value)) {
@@ -385,8 +385,8 @@
 				}
 			}
 
-			if($this->strip_tags) {
-				$value = strip_tags($value);
+			if($this->shorten_text) {
+				$value = $this->shortenText($value, $this->shorten_text);
 			}
 
 			return $value;
