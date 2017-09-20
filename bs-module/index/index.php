@@ -594,7 +594,9 @@
 		}
 
 		function notFound() {
-			$this->sendHttpHeader();
+			// Send HTTP header
+			header('Cache-Control: no-cache, no-store, must-revalidate');
+			header('Content-Type: text/html; charset=' . B_CHARSET);
 			header('HTTP/1.1 404 Not Found');
 
 			$this->showHtmlHeader();
