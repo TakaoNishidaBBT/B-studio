@@ -977,7 +977,7 @@
 			
 			for($i=0 ; $i < $len ; $i++) {
 				$str = mb_substr($item, $i, 1);
-				if(!preg_match('/[a-zA-Z\/^]/',$str)){
+				if(!preg_match('/[a-zA-Z\/^]/',$str)) {
 					return false;
 				}
 			}
@@ -990,7 +990,7 @@
 			
 			for($i=0 ; $i < $len ; $i++) {
 				$str = mb_substr($item, $i, 1);
-				if(!preg_match('/[0-9\/^]/',$str)){
+				if(!preg_match('/[0-9\/^]/',$str)) {
 					return false;
 				}
 			}
@@ -1029,7 +1029,7 @@
 				$target = $this->getElementByName($value);
 				if($target) {
 					if($i != 0) {
-						if(($target->value && !$last_value) || (!$target->value && $last_value)){
+						if(($target->value && !$last_value) || (!$target->value && $last_value)) {
 							return false;
 						}
 					}
