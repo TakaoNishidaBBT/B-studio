@@ -32,6 +32,7 @@ $tree_config = array(
 				'updateDispSeq'	=> 'updateDispSeq',
 				'saveName'		=> 'saveName',
 				'preview'		=> 'preview',
+				'property'		=> 'property',
 			),
 			'relation'	=>
 			array(
@@ -48,6 +49,13 @@ $tree_config = array(
 				'preview'	=>
 				array(
 					'url'		=> DISPATCH_URL . '&module=' . $this->module . '&page=tree&method=preview',
+				),
+				'open_property'	=>
+				array(
+					'url'		=> DISPATCH_URL . '&module=' . $this->module . '&page=property&method=select',
+					'params'	=> 'width:360,height:200',
+					'title'		=> __('Properties'),
+					'func'		=> 'reloadTree',
 				),
 			),
 			'icon'		=>
@@ -114,6 +122,10 @@ $tree_config = array(
 				array(
 					'menu'		=> __('Preview'),
 					'func'		=> 'preview',
+				),
+				array(
+					'menu'		=> __('Properties'),
+					'func'		=> 'open_property',
 				),
 			),
 			'trash_context_menu'	=>

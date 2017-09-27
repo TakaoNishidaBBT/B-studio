@@ -248,7 +248,13 @@ table.form td input.icon {
 	width: 300px;
 	vertical-align: middle;
 }
-
+table.form td input[type=radio] {
+	width: auto;
+	height: 13px;
+}
+table.form td label {
+	margin: 0 30px 0 4px;
+}
 table.form a:link.button,
 table.form a:visited.button,
 table.form a:active.button,

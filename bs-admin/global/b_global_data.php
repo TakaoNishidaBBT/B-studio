@@ -56,6 +56,12 @@
 				'3'		=> __('Closed'),
 		);
 
+	${$g_data_set}['display'] =
+		array(
+				''		=> __('Published'),
+				'9'		=> __('Private'),
+		);
+
 	${$g_data_set}['description_flag'] =
 		array(
 				'1'		=> __('On'),
