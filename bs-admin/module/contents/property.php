@@ -35,7 +35,7 @@
 
 		function getNodeInfo($node_id) {
 			$sql = "select * from %VIEW% where node_id='$node_id'";
-			$sql = str_replace('%VIEW%', B_DB_PREFIX . B_CATEGORY_VIEW, $sql);
+			$sql = str_replace('%VIEW%', B_DB_PREFIX . B_WORKING_CONTENTS_NODE_VIEW, $sql);
 			$rs = $this->db->query($sql);
 			$row = $this->db->fetch_assoc($rs);
 			return $row;
