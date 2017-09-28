@@ -71,9 +71,9 @@ $config_form_config = array(
 						'start_html'		=> '<td>',
 						'end_html'			=> '</td>',
 						array(
-							'name'			=> 'display',
+							'name'			=> 'node_status',
 							'class'			=> 'B_RadioContainer',
-							'data_set'		=> 'display',
+							'data_set'		=> 'node_status',
 							'value'			=> '1',
 							'item'			=>
 							array(

@@ -26,7 +26,6 @@
 			$this->sort_mode = $sort_mode;
 			$this->level = $level;
 			$this->node_count = 0;
-
 			if(!$node_id) return;
 
 			$this->tbl_node = new B_Table($this->db, $this->table);
@@ -242,12 +241,12 @@
 			return $html;
 		}
 
-		function getNodeList($node_id='', $category='', $dir='', $path='') {
-			$list = $this->_getNodeList($node_id, $category, $dir, $path);
+		function getNodeList($node_id='', $category='', $dir='', $path='', $node_status='') {
+			$list = $this->_getNodeList($node_id, $category, $dir, $path, $node_status);
 
 			if(is_array($this->node)) {
 				foreach(array_keys($this->node) as $key) {
-					$child_list[] = $this->node[$key]->getNodeList($node_id, $category, $dir, $list['path']);
+					$child_list[] = $this->node[$key]->getNodeList($node_id, $category, $dir, $list['path'], $node_status);
 				}
 				if($this->sort_key) {
 					$this->sort($child_list);
@@ -257,7 +256,7 @@
 			return $list;
 		}
 
-		function _getNodeList($node_id, $category, $dir, $path) {
+		function _getNodeList($node_id, $category, $dir, $path, &$node_status) {
 			if($this->property) {
 				foreach($this->property as $key => $value) {
 					$list[$key] = $this->$key;
@@ -276,6 +275,8 @@
 			$list['create_datetime_t'] = date('Y/m/d H:i', $this->create_datetime);
 			$list['update_datetime_u'] = $this->update_datetime;
 			$list['update_datetime_t'] = date('Y/m/d H:i', $this->update_datetime);
+
+			// image size
 			if($this->node_type != 'folder') {
 				$list['file_size'] = $this->file_size;
 				$list['human_file_size'] = B_Util::human_filesize($this->file_size, 'K');
@@ -284,6 +285,13 @@
 				$list['image_size'] = $this->image_size;
 				$list['human_image_size'] = $this->human_image_size;
 			}
+
+			// node status
+			$node_status = $node_status ? $node_status : $this->node_status;
+			if($node_status) {
+				$list['node_status'] = $node_status;
+			}
+
 			$list['level'] = $this->level;
 			$list['disp_seq'] = $this->disp_seq;
 			if($this->node_id == $node_id) {

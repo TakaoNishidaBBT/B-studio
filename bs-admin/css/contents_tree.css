@@ -44,6 +44,15 @@ div.bframe_tree li.tree-list div.tree {
 div.bframe_tree li.tree-list div.selected {
 	border-top: 1px dotted #f00;
 }
+div.bframe_tree li.tree-list .img-border {
+	position: relative;
+}
+div.bframe_tree li.tree-list .img-border .node-status {
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
 div.bframe_tree li.tree-list img {
 	vertical-align: -30%;
 	margin-right: 2px;

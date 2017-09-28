@@ -3620,6 +3620,13 @@
 					obj_img.src = property.icon[config.node_type].src;
 				}
 			}
+			if(config.node_status) {
+				var node_status_img = document.createElement('img');
+				node_status_img.id = 'is' + node_id;
+				node_status_img.className = 'node-status';
+				node_status_img.src = property.icon['status' + config.node_status].src;
+				img_span.appendChild(node_status_img);
+			}
 
 			span = document.createElement('span');
 			span.id = 's' + node_id;

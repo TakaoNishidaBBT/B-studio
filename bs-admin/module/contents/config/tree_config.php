@@ -71,6 +71,7 @@ $tree_config = array(
 				'folder'		=> array('src' => './images/folders/folder.png', 'new' => 'newFolder'),
 				'folder_open'	=> array('src' => './images/folders/folder_open.png'),
 				'page'			=> array('src' => './images/folders/file_icon.png', 'new' => 'newPage'),
+				'status9'		=> array('src' => './images/folders/private.png'),
 			),
 			'context_menu'		=>
 			array(

@@ -56,7 +56,7 @@
 				'3'		=> __('Closed'),
 		);
 
-	${$g_data_set}['display'] =
+	${$g_data_set}['node_status'] =
 		array(
 				''		=> __('Published'),
 				'9'		=> __('Private'),
@@ -107,6 +107,7 @@
 			'node_type'					=> array('char', 		'10', 	'', 	''),
 			'node_class'				=> array('char', 		'10', 	'', 	''),
 			'node_name'					=> array('text', 		'', 	'', 	''),
+			'node_status'				=> array('char', 		'1', 	'', 	''),
 			'contents_id'				=> array('char', 		'10', 	'', 	''),
 			'disp_seq'					=> array('int', 		'', 	'', 	''),
 			'del_flag'					=> array('char', 		'1', 	'', 	''),
