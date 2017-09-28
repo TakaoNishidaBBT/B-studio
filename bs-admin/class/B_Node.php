@@ -26,6 +26,7 @@
 			$this->sort_mode = $sort_mode;
 			$this->level = $level;
 			$this->node_count = 0;
+
 			if(!$node_id) return;
 
 			$this->tbl_node = new B_Table($this->db, $this->table);

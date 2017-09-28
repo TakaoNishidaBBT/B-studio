@@ -73,13 +73,13 @@
 			// start transaction
 			$this->db->begin();
 
-			$file_data = $param;
-			$file_data['node_id'] = $param['node_id'];
-			$file_data['update_user'] = $this->user_id;
-			$file_data['update_datetime'] = time();
+			$category_data = $param;
+			$category_data['node_id'] = $param['node_id'];
+			$category_data['update_user'] = $this->user_id;
+			$category_data['update_datetime'] = time();
 
-			$this->resource_node_table = new B_Table($this->db, B_CATEGORY2_TABLE);
-			$ret = $this->resource_node_table->update($file_data);
+			$this->category_node_table = new B_Table($this->db, B_CATEGORY2_TABLE);
+			$ret = $this->category_node_table->update($category_data);
 
 			if($ret) {
 				$this->db->commit();

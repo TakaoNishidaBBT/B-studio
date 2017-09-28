@@ -10,7 +10,9 @@
 			parent::__construct(__FILE__);
 			global $admin_mode;
 
-			if($admin_mode) {
+			$this->admin_mode = $admin_mode;
+
+			if($this->admin_mode) {
 				$this->node_view = B_WORKING_CONTENTS_NODE_VIEW;
 				$this->contents_view = B_WORKING_CONTENTS_VIEW;
 				$this->template_node_view = B_WORKING_TEMPLATE_NODE_VIEW;
@@ -136,7 +138,7 @@
 				}
 			}
 
-			$sql = "select * from %VIEW% where parent_node='%PARENT_NODE%' %NODE_NAME% order by node_name";
+			$sql = "select * from %VIEW% where parent_node='%PARENT_NODE%' %NODE_NAME% %NODE_STATUS% order by node_name";
 			$sql = str_replace('%VIEW%', B_DB_PREFIX . $this->node_view, $sql);
 			if($node) {
 				$sql = str_replace('%PARENT_NODE%', $this->db->real_escape_string($node['node_id']), $sql);
@@ -153,6 +155,14 @@
 			else {
 				$sql = str_replace('%NODE_NAME%', "and node_name in ('index.html', 'index.php') ", $sql);
 			}
+
+			if($this->admin_mode) {
+				$sql = str_replace('%NODE_STATUS%', "", $sql);
+			}
+			else {
+				$sql = str_replace('%NODE_STATUS%', "and node_status !='9'", $sql);
+			}
+
 			$rs = $this->db->query($sql);
 			$row = $this->db->fetch_assoc($rs);
 
@@ -344,8 +354,8 @@
 		}
 
 		function inline() {
-			global $admin_mode, $admin_language;
-			if(!$admin_mode) return;
+			global $admin_language;
+			if(!$this->admin_mode) return;
 
 			$this->contents = $this->post;
 
@@ -397,8 +407,7 @@
 		}
 
 		function preview() {
-			global $admin_mode;
-			if(!$admin_mode) return;
+			if(!$this->admin_mode) return;
 
 			$this->contents = $this->post;
 
@@ -475,8 +484,7 @@
 		}
 
 		function template_preview() {
-			global $admin_mode;
-			if(!$admin_mode) return;
+			if(!$this->admin_mode) return;
 
 			$this->contents = $this->post;
 
@@ -510,8 +518,7 @@
 		}
 
 		function widget_preview() {
-			global $admin_mode;
-			if(!$admin_mode) return;
+			if(!$this->admin_mode) return;
 
 			$this->contents = $this->post;
 			$this->innerHTML = $this->post['html'];
@@ -552,8 +559,6 @@
 		}
 
 		function view() {
-			global $admin_mode;
-
 			// Start buffering
 			ob_start();
 
@@ -578,7 +583,7 @@
 			if($this->http_status == '404') {
 				header('HTTP/1.1 404 Not Found');
 			}
-			else if($admin_mode && ($this->view_mode == 'preview' || $this->view_mode == 'inline')) {
+			else if($this->admin_mode && ($this->view_mode == 'preview' || $this->view_mode == 'inline')) {
 				// for preview and visual editor (google map in chrome)
 				header('X-XSS-Protection: 0');
 			}

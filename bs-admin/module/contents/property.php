@@ -18,6 +18,8 @@
 
 			$this->tab_control = new B_Element($tab_control_config);
 
+			$this->contents_node_table = new B_Table($this->db, B_CONTENTS_NODE_TABLE);
+
 			$this->status = true;
 		}
 
@@ -53,9 +55,47 @@
 		}
 
 		function register() {
-			$this->form->setValue($this->post);
-			$this->form->getValue($param);
-			$this->update($param);
+			try {
+				$this->form->setValue($this->post);
+
+				if($this->post['node_id']) {
+					$node_id = $this->post['node_id'];
+
+					$sql = "select * from %CONTENTS_NODE_TABLE%
+							where version_id = '%VERSION_ID%'
+							and revision_id = '%REVISION_ID%'
+							and node_id='$node_id'";
+
+					$sql = str_replace('%CONTENTS_NODE_TABLE%', B_DB_PREFIX . B_CONTENTS_NODE_TABLE, $sql);
+					$sql = str_replace('%VERSION_ID%', $this->version['working_version_id'], $sql);
+					$sql = str_replace('%REVISION_ID%', $this->version['revision_id'], $sql);
+					$rs = $this->db->query($sql);
+					$row = $this->db->fetch_assoc($rs);
+
+					if($row) {
+						if($this->post['mode'] == 'confirm' && $row['update_datetime'] > $this->post['update_datetime']) {
+							$this->status = true;
+							$this->mode = 'confirm';
+							$this->message = __("Another user has updated this record\nAre you sure you want to overwrite?");
+						}
+						else {
+							$this->update($node_id);
+						}
+					}
+					else {
+						$this->insert($node_id);
+					}
+				}
+				else {
+					$this->selectInsert($node_id);
+				}
+			}
+			catch(Exception $e) {
+				$this->status = false;
+				$this->mode = 'alert';
+				$this->message = $e->getMessage();
+			}
+
 			$response['status'] = $this->status;
 			$response['mode'] = $this->mode;
 			$response['message_obj'] = 'message';
@@ -69,26 +109,87 @@
 			exit;
 		}
 
-		function update($param) {
+		function update($node_id) {
 			// start transaction
 			$this->db->begin();
 
-			$file_data = $param;
-			$file_data['node_id'] = $param['node_id'];
-			$file_data['update_user'] = $this->user_id;
-			$file_data['update_datetime'] = time();
+			$this->form->getValue($node_data);
+			$node_data['node_id'] = $node_id;
+			$node_data['version_id'] = $this->version['working_version_id'];
+			$node_data['revision_id'] = $this->version['revision_id'];
+			$node_data['update_user'] = $this->user_id;
+			$node_data['update_datetime'] = time();
 
-			$this->resource_node_table = new B_Table($this->db, B_CONTENTS_NODE_TABLE);
-			$ret = $this->resource_node_table->update($file_data);
+			$ret = $this->contents_node_table->update($node_data);
 
 			if($ret) {
 				$this->db->commit();
+				$this->status = true;
+				$this->message = __('Saved');
 			}
 			if(!$ret) {
 				$this->db->rollback();
+				$this->status = false;
+				$this->message =  __('Failed to save');
 			}
+		}
 
-			return $ret;
+		function insert($node_id) {
+			// start transaction
+			$this->db->begin();
+
+			$this->form->getValue($node_data);
+
+			$node_data['node_id'] = $node_id;
+			$node_data['create_user'] = $this->user_id;
+			$node_data['create_datetime'] = time();
+			$node_data['update_user'] = $this->user_id;
+			$node_data['update_datetime'] = time();
+			$node_data['del_flag'] = '0';
+			$node_data['version_id'] = $this->version['working_version_id'];
+			$node_data['revision_id'] = $this->version['revision_id'];
+			$node_data['contents_id'] = $contents_id;
+
+			$ret = $this->contents_node_table->insert($contents_data);
+
+			if($ret) {
+				$this->db->commit();
+				$this->status = true;
+				$this->message = __('Saved');
+			}
+			else {
+				$this->db->rollback();
+				$this->status = false;
+				$this->message =  __('Failed to save');
+			}
+		}
+
+		function selectInsert($node_id) {
+			// start transaction
+			$this->db->begin();
+
+			$this->form->getValue($node_data);
+
+			$node_data['create_user'] = $this->user_id;
+			$node_data['create_datetime'] = time();
+			$node_data['update_user'] = $this->user_id;
+			$node_data['update_datetime'] = time();
+			$node_data['del_flag'] = '0';
+			$node_data['version_id'] = $this->version['working_version_id'];
+			$node_data['revision_id'] = $this->version['revision_id'];
+
+			$ret = $this->contents_node_table->selectInsert($node_data);
+
+			if($ret) {
+				$this->db->commit();
+				$this->status = true;
+				$this->message = __('Saved');
+			}
+			else {
+				$this->db->rollback();
+				$this->status = false;
+				$this->message =  __('Failed to save');
+			}
 		}
 
 		function view() {
