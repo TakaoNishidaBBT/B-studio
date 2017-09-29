@@ -68,6 +68,15 @@
 			) . '"';
 		}
 
+		public static function mb_trim($str) {
+			if(function_exists('mb_convert_kana')) {
+				$s = mb_convert_kana(' ', 'S');
+				$expression = '/^[\s' . $s . ']*(.*?)[\s' . $s . ']*$/u';
+				$str = preg_replace($expression, '\1', $str);
+			}
+			return $str;
+		}
+
 		public static function isKeyExist($array) {
 			$i=0;
 			foreach($array as $key => $value) {
