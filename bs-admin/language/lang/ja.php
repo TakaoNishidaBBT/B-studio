@@ -196,6 +196,7 @@
 		'Title: '						=> 'タイトル：',
 		'Published/Preview/Closed'		=> '公開／プレビュー／非公開',
 		'Published'						=> '公開',
+		'Private'						=> 'プライベート',
 		'Closed'						=> '非公開',
 		'Publication date'				=> '掲載日',
 		'Please enter publication date'	=> '掲載日を入力してください',
