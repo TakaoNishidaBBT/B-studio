@@ -20,6 +20,9 @@ body {
 	background-color: #555;
 	color: #444;
 	overflow: hidden;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	-webkit-user-select: none;
 }
 iframe#main {
 	margin: 0;
@@ -39,6 +42,14 @@ pre {
 input {
 	font-family: "ＭＳ Ｐゴシック","MS PGothic","Lucida Grande","Lucida Sans Unicode","Helvetica Neue","Hiragino Kaku Gothic Pro","ヒラギノ角ゴ Pro W3",Arial,Verdana,sans-serif;
 	font-size: 12px;
+}
+textarea::selection,
+input::selection {
+	background-color: rgba(30, 153, 255, 0.30);
+}
+textarea::-moz-selection,
+input::-moz-selection {
+	background-color: rgba(30, 153, 255, 0.30);
 }
 input.textbox {
 	border-top: 1px solid #999;
