@@ -1728,6 +1728,7 @@
 		function insertImageToCKEditor(node_id) {
 			var funcNum = bframe.getUrlParam('CKEditorFuncNum');
 			var fileUrl = property.root_url + document.getElementById('p' + node_id).value;
+			fileUrl = fileUrl.replace(/\/\/+/g, '/');
 			opener.CKEDITOR.tools.callFunction(funcNum, fileUrl);
 			window.close();
 		}
