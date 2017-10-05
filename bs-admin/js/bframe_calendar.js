@@ -76,7 +76,7 @@
 		var day = 0;
 		var mode = '';
 
-		var target;
+		var date_input;
 
 		bframe.addEventListener(target, 'click' , show);
 		bframe.addEventListenerAllFrames(top, 'click', hide);
@@ -97,7 +97,7 @@
 				property = eval('('+httpObj.responseText+')');
 				size = {width:property.width, height:property.height};
 
-				target = document.getElementById(property.target);
+				date_input = document.getElementById(property.target);
 
 				popup = new bframe.calendarPopup(100, property.drop_shadow, property.transparent);
 
@@ -123,8 +123,8 @@
 			day = 0;
 			mode = '';
 
-			if(target.value) {
-				var date = target.value.split('/');
+			if(date_input.value) {
+				var date = date_input.value.split('/');
 				year = date[0];
 				month = date[1];
 				day = date[2];
@@ -142,6 +142,7 @@
 			bframe.fireEvent(document, 'click');
 
 			position = bframe.getElementPosition(target);
+			position.left += position.width;
 			if(property.offsetLeft) {
 				position.left += parseInt(property.offsetLeft);
 			}
@@ -193,8 +194,8 @@
 			month = ('0' + month).slice(-2);
 			day = ('0' + day).slice(-2);
 
-			if(target.value != year+'/'+month+'/'+day) {
-				target.value = year+'/'+month+'/'+day;
+			if(date_input.value != year+'/'+month+'/'+day) {
+				date_input.value = year+'/'+month+'/'+day;
 				bframe.fireEvent(target, 'change');
 			}
 

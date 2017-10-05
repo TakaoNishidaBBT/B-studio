@@ -90,7 +90,7 @@ $form_config = array(
 				array(
 					'name'				=> 'article_date_t',
 					'class'				=> 'B_InputText',
-					'special_html'		=> 'class="textbox ime_off" size="20" readonly="readonly"',
+					'special_html'		=> 'class="textbox ime_off" readonly="readonly"',
 					'validate'			=>
 					array(
 						array(
@@ -110,7 +110,7 @@ $form_config = array(
 						array(
 							'width'			=> '200',
 							'height'		=> '230',
-							'offsetLeft'	=> '174',
+							'offsetLeft'	=> '4',
 							'drop_shadow'	=> 'true',
 							'target'		=> 'article_date_t',
 							'ajax'			=>
@@ -151,7 +151,7 @@ $form_config = array(
 				array(
 					'name'				=> 'category_name',
 					'class'				=> 'B_InputText',
-					'special_html'		=> 'class="textbox" size="20" readonly="readonly"',
+					'special_html'		=> 'class="textbox" readonly="readonly"',
 				),
 				array(
 					'class'				=> 'B_Hidden',
@@ -200,8 +200,8 @@ $form_config = array(
 				'end_html'		=> '</td>',
 				array(
 					'name'				=> 'keywords',
-					'class'				=> 'B_InputText',
-					'special_html'		=> 'class="textbox" size="120" maxlength="100"',
+					'class'				=> 'B_TextArea',
+					'special_html'		=> 'class="textarea title ime_on" maxlength="100"',
 				),
 			),
 		),

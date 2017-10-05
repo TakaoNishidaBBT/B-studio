@@ -414,7 +414,10 @@
 	bframe.getElementPosition = function(element) {
 		if(element.getBoundingClientRect) {
 			var position = element.getBoundingClientRect();
-			return {left:Math.round(position.left), top:Math.round(position.top)};
+			return {left:Math.round(position.left),
+					top:Math.round(position.top),
+					width:Math.round(position.width),
+					height:Math.round(position.height)};
 		}
 		else {
 			var coords = {left:0, top:0, width: element.offsetWidth, height:element.offsetHeight};
@@ -423,7 +426,10 @@
 				coords.top += element.offsetTop;
 				element = element.offsetParent;
 			}
-			return {left:Math.round(coords.left), top:Math.round(coords.top)};
+			return {left:Math.round(coords.left),
+					top:Math.round(coords.top),
+					width:Math.round(coords.width),
+					height:Math.round(coords.height)};
 		}
 	}
 

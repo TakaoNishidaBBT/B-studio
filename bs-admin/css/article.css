@@ -69,6 +69,15 @@ table.img-item td#title_img {
 	border: 1px solid #eee;
 	text-align: center;
 }
+table.form input#article_date_t {
+	width: 80px;
+}
+table.form input#category_name {
+	width: 220px;
+}
+table.form input#keywords {
+	width: 100%;
+}
 table.form input.radio {
 	vertical-align: -13%;
 	margin-right: 4px;
