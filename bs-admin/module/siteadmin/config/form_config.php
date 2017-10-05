@@ -51,7 +51,7 @@ $form_config = array(
 				array(
 					'name'					=> 'admin_user_name',
 					'class'					=> 'B_InputText',
-					'special_html'			=> 'class="textbox" size="40" maxlength="100" ',
+					'special_html'			=> 'class="textbox" maxlength="100" ',
 					'validate'				=>
 					array(
 						array(
@@ -92,7 +92,7 @@ $form_config = array(
 				array(
 					'name'					=> 'admin_user_id',
 					'class'					=> 'B_InputText',
-					'special_html'			=> 'class="textbox ime-off" size="40" maxlength="100" ',
+					'special_html'			=> 'class="textbox ime-off" maxlength="100" ',
 					'validate'				=>
 					array(
 						array(
@@ -158,7 +158,7 @@ $form_config = array(
 				array(
 					'name'					=> 'admin_user_pwd',
 					'class'					=> 'B_Password',
-					'special_html'			=> 'class="textbox ime-off" size="40" maxlength="100" autocomplete="off" ',
+					'special_html'			=> 'class="textbox ime-off" maxlength="100" autocomplete="off" ',
 					'confirm_message'		=> __('(set password)'),
 					'validate'				=>
 					array(
@@ -202,7 +202,7 @@ $form_config = array(
 				array(
 					'name'					=> 'admin_user_pwd2',
 					'class'					=> 'B_Password',
-					'special_html'			=> 'class="textbox ime-off" size="40" maxlength="100" autocomplete="off" ',
+					'special_html'			=> 'class="textbox ime-off" maxlength="100" autocomplete="off" ',
 					'validate'				=>
 					array(
 						array(

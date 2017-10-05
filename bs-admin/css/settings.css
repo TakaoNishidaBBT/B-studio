@@ -33,3 +33,6 @@ span.download-button img {
 	vertical-align: -8px;
 	margin-right: 8px;
 }
+table.form input#admin_site_title {
+	width: 80%;
+}

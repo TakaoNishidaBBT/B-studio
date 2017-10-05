@@ -134,7 +134,7 @@ $form_config = array(
 				array(
 					'name'				=> 'version',
 					'class'				=> 'B_InputText',
-					'special_html'		=> 'class="textbox ime_on" size="80" maxlength="100"',
+					'special_html'		=> 'class="textbox ime_on" maxlength="100"',
 					'validate'			=>
 					array(
 						array(

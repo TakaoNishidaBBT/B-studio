@@ -690,7 +690,9 @@ table.form td textarea.textarea {
 	width: 99%;
 	padding: 2px 5px;
 }
-
+table.form td input.textbox {
+	width: 150px;
+}
 table.form .example {
 	margin-left: 10px;
 }

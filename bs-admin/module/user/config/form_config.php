@@ -56,7 +56,7 @@ $form_config = array(
 					'config_filter'			=> 'insert',
 					'name'					=> 'user_id',
 					'class'					=> 'B_InputText',
-					'special_html'			=> 'class="textbox ime_off" maxlength="10" size="20"',
+					'special_html'			=> 'class="textbox ime_off" maxlength="10" ',
 					'validate'				=>
 					array(
 						array(
@@ -119,7 +119,7 @@ $form_config = array(
 				array(
 					'name'					=> 'pwd',
 					'class'					=> 'B_InputText',
-					'special_html'			=> 'class="textbox ime_off" size="20" maxlength="100" ',
+					'special_html'			=> 'class="textbox ime_off" maxlength="100" ',
 					'validate'				=>
 					array(
 						array(
@@ -160,7 +160,7 @@ $form_config = array(
 				array(
 					'name'					=> 'name',
 					'class'					=> 'B_InputText',
-					'special_html'			=> 'class="textbox" size="20" maxlength="100" ',
+					'special_html'			=> 'class="textbox" maxlength="100" ',
 					'validate'				=>
 					array(
 						array(
