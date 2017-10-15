@@ -79,10 +79,8 @@ table.form input#keywords {
 	width: 100%;
 }
 table.form input.radio {
-	vertical-align: -13%;
 	margin-right: 4px;
 }
 table.form input.checkbox {
-	vertical-align: -13%;
 	margin-right: 8px;
 }

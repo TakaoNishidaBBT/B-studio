@@ -171,7 +171,6 @@ array(
 				'class'			=> 'B_Link',
 				'link'			=> 'index.php',
 				'special_html'	=> 'class="edit-button"',
-				'value'			=> __('Edit'),
 				'fixedparam'	=>
 				array(
 					'terminal_id'	=> TERMINAL_ID,
@@ -183,6 +182,11 @@ array(
 				'param'		=>
 				array(
 					'version_id'	=> 'version_id',
+				),
+				array(
+					'value'			=> __('Edit'),
+					'start_html'	=> '<span>',
+					'end_html'		=> '</span>',
 				),
 			),
 		),
@@ -196,7 +200,6 @@ array(
 				'class'			=> 'B_Link',
 				'link'			=> 'index.php',
 				'special_html'	=> 'class="compare-button" onclick="window.open(this.href); return false;"',
-				'value'			=> __('Compare'),
 				'fixedparam'	=>
 				array(
 					'terminal_id'	=> $this->util->getRandomText(12),
@@ -208,14 +211,23 @@ array(
 				array(
 					'version_id'	=> 'version_id',
 				),
+				array(
+					'value'			=> __('Compare'),
+					'start_html'	=> '<span>',
+					'end_html'		=> '</span>',
+				)
 			),
 			array(
 				'name'			=> 'compare',
 				'id'			=> 'compare_disable',
 				'class'			=> 'B_Link',
 				'special_html'	=> 'class="compare-button-disable" onclick="return false;"',
-				'value'			=> __('Compare'),
 				'display'		=> 'none',
+				array(
+					'value'			=> __('Compare'),
+					'start_html'	=> '<span>',
+					'end_html'		=> '</span>',
+				)
 			),
 		),
 		array(
@@ -228,7 +240,6 @@ array(
 				'class'			=> 'B_Link',
 				'link'			=> 'index.php',
 				'special_html'	=> 'class="delete-button"',
-				'value'			=> __('Delete'),
 				'display'		=> 'none',
 				'fixedparam'	=>
 				array(
@@ -242,13 +253,22 @@ array(
 				array(
 					'version_id'	=> 'version_id',
 				),
+				array(
+					'value'			=> __('Delete'),
+					'start_html'	=> '<span>',
+					'end_html'		=> '</span>',
+				)
 			),
 			array(
 				'name'			=> 'del',
 				'id'			=> 'del_disable',
 				'class'			=> 'B_Link',
 				'special_html'	=> 'class="delete-button-disable" onclick="return false;"',
-				'value'			=> __('Delete'),
+				array(
+					'value'			=> __('Delete'),
+					'start_html'	=> '<span>',
+					'end_html'		=> '</span>',
+				)
 			),
 		),
 	),

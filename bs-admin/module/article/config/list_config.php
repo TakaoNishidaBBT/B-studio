@@ -144,7 +144,6 @@ $list_config = array(
 				'name'			=> 'edit',
 				'class'			=> 'B_Link',
 				'link'			=> 'index.php',
-				'value'			=> __('Edit'),
 				'special_html'	=> 'class="edit-button"',
 				'fixedparam'	=>
 				array(
@@ -157,6 +156,11 @@ $list_config = array(
 				array(
 					'article_id'	=> 'article_id',
 				),
+				array(
+					'value'			=> __('Edit'),
+					'start_html'	=> '<span>',
+					'end_html'		=> '</span>',
+				),
 			),
 		),
 		array(
@@ -164,11 +168,10 @@ $list_config = array(
 			'end_html'		=> '</td>',
 			'element'		=>
 			array(
-				'name'			=> 'del',
+				'name'			=> 'delete',
 				'class'			=> 'B_Link',
 				'link'			=> 'index.php',
 				'special_html'	=> 'class="delete-button"',
-				'value'			=> __('Delete'),
 				'fixedparam'	=>
 				array(
 					'terminal_id'	=> TERMINAL_ID,
@@ -181,6 +184,11 @@ $list_config = array(
 				array(
 					'article_id'	=> 'article_id',
 				),
+				array(
+					'value'			=> __('Delete'),
+					'start_html'	=> '<span>',
+					'end_html'		=> '</span>',
+				)
 			),
 		),
 	),

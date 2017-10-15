@@ -502,6 +502,8 @@ table.list td {
 table.list td img {
 	vertical-align: middle;
 }
+
+/* buttons */
 table.list td a {
 	text-decoration: none;
 	display: block;
@@ -509,46 +511,48 @@ table.list td a {
 	padding: 10em;
 	background-color: transparent;
 }
-table.list td a.edit-button {
-	background-image: url(../images/common/edit.png), url(../images/common/edit_white.png);
-	background-repeat: no-repeat, no-repeat;
-	background-position: center center, center center;
-	background-size: 16px, 0;
-	text-indent:-9999px;
-}
-table.list td a.edit-button:hover {
-	background: url(../images/common/edit_white.png) no-repeat center center #0689de;
-}
-table.list td a.delete-button {
-	background-image: url(../images/common/clear.png), url(../images/common/clear_white.png);
-	background-repeat: no-repeat, no-repeat;
-	background-position: center center, center center;
-	background-size: 16px, 0;
-	text-indent:-9999px;
-}
-table.list td a.delete-button:hover {
-	background: url(../images/common/clear_white.png) no-repeat center center #0689de;
-}
-table.list td a.delete-button-disable {
-	background: url(../images/common/clear_gray.png) no-repeat center center;
-	text-indent:-9999px;
-	cursor: default;
-}
-table.list td a.compare-button {
-	background-image: url(../images/common/shuffle.png), url(../images/common/shuffle_white.png);
-	background-repeat: no-repeat, no-repeat;
-	background-position: center center, center center;
-	background-size: 16px, 0;
-	text-indent:-9999px;
-}
+table.list td a.edit-button:hover,
+table.list td a.delete-button:hover,
 table.list td a.compare-button:hover {
-	background: url(../images/common/shuffle_white.png) no-repeat center center #0689de;
+	background-color: #0689de;
 }
+table.list td a.edit-button span,
+table.list td a.delete-button span,
+table.list td a.delete-button-disable span,
+table.list td a.compare-button span,
+table.list td a.compare-button-disable span {
+	display: block;
+	margin: 0 auto;
+	width: 16px;
+	height: 16px;
+	text-indent: -9999px;
+}
+table.list td a.edit-button span {
+	background: url(../images/common/edit.png) no-repeat;
+}
+table.list td a.delete-button span,
+table.list td a.delete-button-disable span {
+	background: url(../images/common/delete.png) no-repeat;
+}
+table.list td a.compare-button span,
+table.list td a.compare-button-disable span {
+	background: url(../images/common/shuffle.png) no-repeat;
+}
+
+table.list td a.edit-button:hover span,
+table.list td a.delete-button:hover span,
+table.list td a.compare-button:hover span {
+	background-position: 0 -16px;
+}
+table.list td a.delete-button-disable span,
+table.list td a.compare-button-disable span {
+	background-position: 0 -32px;
+}
+table.list td a.delete-button-disable,
 table.list td a.compare-button-disable {
-	background: url(../images/common/shuffle_gray.png) no-repeat center center;
-	text-indent:-9999px;
 	cursor: default;
 }
+
 table.list td a img {
 	vertical-align: -2px;
 }

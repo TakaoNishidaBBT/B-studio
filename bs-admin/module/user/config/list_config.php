@@ -160,15 +160,14 @@ array(
 			'shorten_text'	=> '50',
 		),
 		array(
-			'start_html'	=> '<td>',
+			'start_html'	=> '<td class="button">',
 			'end_html'		=> '</td>',
 			'element'		=>
 			array(
-				'name'			=> 'detail',
+				'name'			=> 'edit',
 				'class'			=> 'B_Link',
 				'link'			=> 'index.php',
 				'special_html'	=> 'class="edit-button"',
-				'value'			=> __('Edit'),
 				'fixedparam'	=>
 				array(
 					'terminal_id'	=> TERMINAL_ID,
@@ -181,10 +180,15 @@ array(
 				array(
 					'id'	=> 'id',
 				),
+				array(
+					'value'			=> __('Edit'),
+					'start_html'	=> '<span>',
+					'end_html'		=> '</span>',
+				),
 			),
 		),
 		array(
-			'start_html'	=> '<td>',
+			'start_html'	=> '<td class="button">',
 			'end_html'		=> '</td>',
 			'element'		=>
 			array(
@@ -192,7 +196,6 @@ array(
 				'class'			=> 'B_Link',
 				'link'			=> 'index.php',
 				'special_html'	=> 'class="delete-button"',
-				'value'			=> __('Delete'),
 				'fixedparam'	=>
 				array(
 					'terminal_id'	=> TERMINAL_ID,
@@ -205,6 +208,11 @@ array(
 				array(
 					'id'	=> 'id',
 				),
+				array(
+					'value'			=> __('Delete'),
+					'start_html'	=> '<span>',
+					'end_html'		=> '</span>',
+				)
 			),
 		),
 	),
