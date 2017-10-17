@@ -10,7 +10,7 @@
 
 	// Start session
 	$ses = new B_Session;
-	$ses->start('nocache', B_ADMIN_SESSION_NAME, B_CURRENT_ROOT);
+	$ses->start('nocache', B_ADMIN_SESSION_NAME, B_CURRENT_ROOT, B_ADMIN_SESSION_SECURE);
 
 	require_once('./language/language.php');
 

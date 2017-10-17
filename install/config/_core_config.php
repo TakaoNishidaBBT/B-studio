@@ -23,6 +23,14 @@
 	// Session Name for Admin Page
 	define('B_ADMIN_SESSION_NAME', B_SITE_NAME . '-bs-admin');
 
+	// Session Secure
+	if(!preg_match('/localhost/', B_HTTP_HOST) && B_ADMIN_SSL == 'ON') {
+		define('B_ADMIN_SESSION_SECURE', true);
+	}
+	else {
+		define('B_ADMIN_SESSION_SECURE', false);
+	}
+
 	//HTTP HOST
 	define('B_HTTP_HOST', $_SERVER['SERVER_NAME']);
 
