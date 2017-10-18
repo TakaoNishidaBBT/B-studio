@@ -10,7 +10,7 @@
 	// 
 	// -------------------------------------------------------------------------
 	class B_Element {
-		function __construct($config, $auth_filter=NULL, $config_filter=NULL, &$parent=NULL, $level=0) {
+		function __construct($config, $user_auth=NULL, $config_filter=NULL, &$parent=NULL, $level=0) {
 			if(!is_array($config)) {
 				$this->error('CONFIG ERROR');
 				return;
@@ -23,13 +23,13 @@
 
 			foreach($config as $key => $value) {
 				if(is_array($value)) {
-					if(!$this->checkFilter($value['auth_filter'], $auth_filter) || !$this->checkFilter($value['config_filter'], $config_filter)) {
+					if(!$this->checkFilter($value['auth_filter'], $user_auth) || !$this->checkFilter($value['config_filter'], $config_filter)) {
 						continue;
 					}
 					if(is_numeric($key) || $key == 'element') {
 						$class = $value['class'] ? $value['class'] : 'B_Element';
 						if(class_exists($class)) {
-							$element = new $class($value, $auth_filter, $config_filter, $this, $level+1);
+							$element = new $class($value, $user_auth, $config_filter, $this, $level+1);
 						}
 						else {
 							$this->error('CLASS:' . $class . ' not exists');
@@ -66,32 +66,30 @@
 		function checkFilter($filter, $value) {
 			if(!isset($filter)) return true;
 
+			if(substr($filter, 0, 1) == '!') {
+				$filter = substr($filter, 1);
+				$mode = 'deny';
+			}
+
 			$filter_array = explode('/', $filter);
 			foreach($filter_array as $f) {
 				if($this->_checkFilter($f, $value)) {
-					return true;
+					return $mode == 'deny' ? false : true;
 				}
 			}
-			return false;
+			return $mode == 'deny' ? true : false;
 		}
 
 		function _checkFilter($filter, $value) {
 			if(is_array($value)) {
 				foreach($value as $v) {
-					if(is_array($v)) {
-						if($this->_checkFilter($filter, $v)) {
-							return true;
-						}
-					}
-					if($filter == $v) {
+					if($this->_checkFilter($filter, $v)) {
 						return true;
 					}
 				}
 			}
-			else {
-				if($filter == $value) {
-					return true;
-				}
+			else if($filter == $value) {
+				return true;
 			}
 			return false;
 		}
@@ -1524,8 +1522,8 @@
 	// 
 	// -------------------------------------------------------------------------
 	class B_CheckboxContainer extends B_Element {
-		function __construct($config, $auth_filter=NULL, $config_filter=NULL, &$parent=NULL, $level=0) {
-			parent::__construct($config, $auth_filter, $config_filter, $parent, $level);
+		function __construct($config, $user_auth=NULL, $config_filter=NULL, &$parent=NULL, $level=0) {
+			parent::__construct($config, $user_auth, $config_filter, $parent, $level);
 			$this->createInstance();
 		}
 
@@ -1722,8 +1720,8 @@
 	// 
 	// -------------------------------------------------------------------------
 	class B_RadioContainer extends B_Element {
-		function __construct($config, $auth_filter=NULL, $config_filter=NULL, &$parent=NULL, $level=0) {
-			parent::__construct($config, $auth_filter, $config_filter, $parent, $level);
+		function __construct($config, $user_auth=NULL, $config_filter=NULL, &$parent=NULL, $level=0) {
+			parent::__construct($config, $user_auth, $config_filter, $parent, $level);
 			$this->createInstance();
 		}
 
