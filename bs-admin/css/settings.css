@@ -2,6 +2,10 @@
 
 html, body {
 	background-color: #fff;
+	-moz-user-select: auto;
+	-ms-user-select: auto;
+	-webkit-user-select: auto;
+	user-select: auto;
 }
 h2.settings {
 	margin: 0;
