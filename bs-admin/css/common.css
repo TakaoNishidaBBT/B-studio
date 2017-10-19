@@ -44,10 +44,13 @@ input {
 	font-family: "ＭＳ Ｐゴシック","MS PGothic","Lucida Grande","Lucida Sans Unicode","Helvetica Neue","Hiragino Kaku Gothic Pro","ヒラギノ角ゴ Pro W3",Arial,Verdana,sans-serif;
 	font-size: 12px;
 }
+
+::selection,
 textarea::selection,
 input::selection {
 	background-color: rgba(30, 153, 255, 0.30);
 }
+::-moz-selection,
 textarea::-moz-selection,
 input::-moz-selection {
 	background-color: rgba(30, 153, 255, 0.30);
