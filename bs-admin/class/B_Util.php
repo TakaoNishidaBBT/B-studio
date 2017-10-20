@@ -127,12 +127,12 @@
 			}
 
 			$i = strrpos($info['basename'], '.');
-			if($i) {
-				$info['filename'] = substr($info['basename'], 0, $i);
-				$info['extension'] = substr($info['basename'], $i+1);
+			if($i === false) {
+				$info['filename'] = $info['basename'];
 			}
 			else {
-				$info['filename'] = $info['basename'];
+				$info['filename'] = substr($info['basename'], 0, $i);
+				$info['extension'] = substr($info['basename'], $i+1);
 			}
 
 			return $info;
