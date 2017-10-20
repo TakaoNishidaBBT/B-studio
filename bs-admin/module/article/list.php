@@ -153,7 +153,7 @@
 			if($this->keyword) {
 				$keyword = $this->db->real_escape_string_for_like($this->keyword);
 
-				$sql = "select article_id from %DB_PREFIX%article
+				$sql = "select article_id from %DB_PREFIX%v_admin_article
 						where article_id like '%KEYWORD%' or title like '%KEYWORD%' or description like '%KEYWORD%'
 						group by article_id";
 

@@ -15,7 +15,7 @@ $menu_config = array(
 			'start_html'	=> '<li class="title">',
 			'end_html'		=> '</li>',
 			array(
-				'start_html'	=> '<a href="' . B_SITE_ROOT . '" title="' . __('Open published page') . '" onclick="window.open(this.href); return false;">',
+				'start_html'	=> '<a href="' . B_SITE_BASE . '" title="' . __('Open published page') . '" onclick="window.open(this.href); return false;">',
 				'end_html'		=> '</a>',
 				array(
 					'start_html'	=> '<span class="title">',
