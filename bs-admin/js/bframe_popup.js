@@ -77,8 +77,8 @@
 			body.position(p);
 		}
 
-		this.size = function(size)  {
-			body.size(size);
+		this.size = function(size, force)  {
+			body.size(size, force);
 		}
 
 		this.overflowY = function(value) {
@@ -134,9 +134,15 @@
 				}
 			}
 
-			this.size = function(size) {
-				var width = size.width > contents.offsetWidth ? size.width : contents.offsetWidth;
-				var height = size.height > contents.offsetHeight ? size.height : contents.offsetHeight;
+			this.size = function(size, force) {
+				if(force) {
+					var width = size.width;
+					var height = size.height;
+				}
+				else {
+					var width = size.width > contents.offsetWidth ? size.width : contents.offsetWidth;
+					var height = size.height > contents.offsetHeight ? size.height : contents.offsetHeight;
+				}
 				element.style.width = width + 'px';
 				element.style.height = height + 'px';
 				if(cv) {

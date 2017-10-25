@@ -392,6 +392,8 @@
 		'Please enable MySQL library'	=> 'MySQLライブラリを有効にしてください。',
 		'Please enable GD library'		=> 'GDライブラリを有効にしてください。',
 		'Please enable exif library'	=> 'exifライブラリを有効にしてください。',
+		'Please enable SimpleXML library'
+										=> 'SimpleXMLライブラリを有効にしてください。',
 		'ZipArchive is necessary'		=> 'ZipArchiveクラスが必要です。',
 
 		' : write permission granted. '	=> ' の書き込み権限はOKです。',

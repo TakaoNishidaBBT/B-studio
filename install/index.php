@@ -110,6 +110,9 @@
 	if(!function_exists('exif_read_data')) {
 		$error_message = __('Please enable exif library');
 	}
+	if(!function_exists('simplexml_load_file')) {
+		$error_message = __('Please enable SimpleXML library');
+	}
 	if(!class_exists('ZipArchive')) {
 		$error_message = __('ZipArchive is necessary');
 	}

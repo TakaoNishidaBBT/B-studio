@@ -245,7 +245,7 @@
 		}
 
 		this.size = function(s) {
-			popup.size(s);
+			popup.size(s, true);
 		}
 	}
 
