@@ -54,7 +54,7 @@ div.splitter {
 	float:left;
 	margin: 0;
 	width: 8px;
-	background: #3a3a3a url(../images/common/splitter.gif) no-repeat center;
+	background: #3a3a3a url(../images/common/splitter.gif) no-repeat 1px center;
 	visibility: hidden;
 }
 iframe.form {
