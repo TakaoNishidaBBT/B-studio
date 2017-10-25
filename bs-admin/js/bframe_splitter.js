@@ -209,7 +209,7 @@
 			element.style.height = '100%';
 			element.style.overflow = 'hidden';
 			element.style.cursor = 'e-resize';
-
+console.log('obj.offsetWidth', obj.offsetWidth);
 			var size = {width: obj.offsetWidth, height: obj.offsetHeight};
 			popup.size(size);
 		}

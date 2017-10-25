@@ -49,14 +49,6 @@ iframe.tree {
 	margin: 0;
 	border: none;
 }
-div.splitter {
-	float:left;
-	margin: 0;
-	width: 6px;
-	background: #3a3a3a url(../images/common/splitter.gif) no-repeat center;
-	border-right: #3a3a3a 2px solid;
-	visibility: hidden;
-}
 iframe.form {
 	display:block;
 	float:left;
@@ -72,9 +64,8 @@ div.bframe_tree_container {
 div.splitter {
 	float:left;
 	margin: 0;
-	width: 6px;
+	width: 8px;
 	background: #3a3a3a url(../images/common/splitter.gif) no-repeat center;
-	border-right: #3a3a3a 2px solid;
 	visibility: hidden;
 }
 div.bframe_splitter_pane {
