@@ -187,8 +187,14 @@
 
 				usleep(40000);
 
+				if(substr(PHP_OS, 0, 3) === 'WIN') {
+					$ratio = 500000;
+				}
+				else {
+					$ratio = 3000000;	
+				}
 				$response['status'] = 'progress';
-				$response['progress'] = round($cnt / $total_file_size * 100 * 500000);
+				$response['progress'] = round($cnt / $total_file_size * 100 * $ratio);
 				if($response['progress'] > 99) $response['progress'] = 99;
 
 				if($progress != $response['progress']) {
