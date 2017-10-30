@@ -77,6 +77,42 @@
 				CKEDITOR.config.filebrowserUploadUrl = filebrowser;
 			}
 
+			// empty tag 0: remain 1:remove
+			CKEDITOR.dtd.$removeEmpty = {
+				abbr: 0,
+				acronym: 0,
+				b: 0,
+				bdi: 0,
+				bdo: 0,
+				big: 0,
+				cite: 0,
+				code: 0,
+				del: 0,
+				dfn: 0,
+				em: 0,
+				font: 0,
+				i: 0,
+				ins: 0,
+				label: 0,
+				kbd: 0,
+				mark: 0,
+				meter: 0,
+				output: 0,
+				q: 0,
+				ruby: 0,
+				s: 0,
+				samp: 0,
+				small: 0,
+				span: 0,
+				strike: 0,
+				strong: 0,
+				sub: 0,
+				sup: 0,
+				time: 0,
+				tt: 0,
+				u: 0
+			};
+
 			self.contentEditable = true;
 
 			editor = CKEDITOR.inline(target, {
