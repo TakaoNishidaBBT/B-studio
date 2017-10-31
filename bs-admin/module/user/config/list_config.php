@@ -12,7 +12,7 @@ array(
 
 	'select_sql'	=> "select   id
 								,user_id
-								,name
+								,user_name
 								,user_auth
 								,user_status
 								,language
@@ -52,15 +52,15 @@ array(
 			'param'			=> '&amp;module=' . $this->module . '&amp;page=list&amp;method=sort&amp;sort_key=user_id',
 		),
 		array(
-			'name'			=> 'name',
+			'name'			=> 'user_name',
 			'start_html'	=> '<th class="sortable" style="width:80px">',
 			'end_html'		=> '</th>',
 			'value'			=> __('Name'),
 			'class'			=> 'B_Link',
 			'link'			=> DISPATCH_URL,
 			'cond_html'		=> 'class="current-key"',
-			'sort_key'		=> 'name',
-			'param'			=> '&amp;module=' . $this->module . '&amp;page=list&amp;method=sort&amp;sort_key=name',
+			'sort_key'		=> 'user_name',
+			'param'			=> '&amp;module=' . $this->module . '&amp;page=list&amp;method=sort&amp;sort_key=user_name',
 		),
 		array(
 			'name'			=> 'user_auth',
@@ -129,7 +129,7 @@ array(
 			'start_html'	=> '<td class="left">',
 			'end_html'		=> '</td>',
 			'class'			=> 'B_Text',
-			'name'			=> 'name',
+			'name'			=> 'user_name',
 		),
 		array(
 			'start_html'	=> '<td class="left">',

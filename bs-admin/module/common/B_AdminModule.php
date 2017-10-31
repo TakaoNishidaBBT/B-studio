@@ -10,7 +10,7 @@
 			parent::__construct($file_path);
 
 			$auth = new B_AdminAuth;
-			$auth->getUserInfo($this->user_id, $this->user_name, $this->user_auth);
+			$auth->getUserInfo($this->user_id, $this->user_name, $this->user_auth, $this->language);
 
 			// HTML header
 			require_once(B_DOC_ROOT . B_ADMIN_ROOT . 'module/common/config/html_header_config.php');

@@ -9,8 +9,6 @@
 		function __construct() {
 			parent::__construct(__FILE__);
 
-			$auth = new B_AdminAuth;
-			$ret = $auth->getUserInfo($user_id, $this->user_name, $this->user_auth);
 			if($this->user_auth != 'super_admin') exit;
 
 			require_once('./config/form_config.php');

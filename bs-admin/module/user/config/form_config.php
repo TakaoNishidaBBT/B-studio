@@ -158,7 +158,7 @@ $form_config = array(
 				'start_html'	=> '<td>',
 				'end_html'		=> '</td>',
 				array(
-					'name'					=> 'name',
+					'name'					=> 'user_name',
 					'class'					=> 'B_InputText',
 					'special_html'			=> 'class="textbox" maxlength="100" ',
 					'validate'				=>

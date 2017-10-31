@@ -21,7 +21,7 @@
 					return true;
 				}
 			}
-			$sql = " select user_id, name user_name, pwd, user_auth, language from " . B_DB_PREFIX . "user";
+			$sql = " select user_id, user_name, pwd, user_auth, language from " . B_DB_PREFIX . "user";
 			$sql.= " where user_status = '1' and user_id = binary '%USER_ID%' and pwd = binary '%PWD%'";
 
 			$sql = str_replace('%USER_ID%', $db->real_escape_string($user_id), $sql);
@@ -46,13 +46,14 @@
 			return false;
 		}
 
-		function getUserInfo(&$user_id, &$user_name, &$user_auth) {
+		function getUserInfo(&$user_id, &$user_name, &$user_auth, &$language) {
 			if(!$_SESSION['user_id'] || !$_SESSION['user_name'] || !$_SESSION['user_auth']) {
 				return false;
 			}
 			$user_id = $_SESSION['user_id'];
 			$user_name = $_SESSION['user_name'];
 			$user_auth = $_SESSION['user_auth'];
+			$language = $_SESSION['language'];
 			return true;
 		}
 	}

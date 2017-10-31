@@ -444,7 +444,7 @@
 			'user_status'				=> array('text', 		'', 	'', 	''),
 			'user_auth'					=> array('text', 		'', 	'', 	''),
 			'language'					=> array('text', 		'', 	'', 	''),
-			'name'						=> array('text', 		'', 	'', 	''),
+			'user_name'					=> array('text', 		'', 	'', 	''),
 			'email'						=> array('text', 		'', 	'', 	''),
 			'notes'						=> array('text', 		'', 	'', 	''),
 			'del_flag'					=> array('char', 		'1', 	'', 	''),

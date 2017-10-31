@@ -30,7 +30,7 @@
 
 			// Check logedin
 			$auth = new B_AdminAuth;
-			$ret = $auth->getUserInfo($user_id, $this->user_name, $this->user_auth);
+			$ret = $auth->getUserInfo($this->user_id, $this->user_name, $this->user_auth, $this->language);
 			if($ret) {
 				$this->admin();
 			}
