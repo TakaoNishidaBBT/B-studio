@@ -15,22 +15,25 @@
 			$this->log_switch = false;
 		}
 
-		function connect($db_server, $db_user, $db_password, $charset) {
+		function connect($db_server, $db_user, $db_password, $charset, $db_name='') {
 			$this->db_server = $db_server;
 			$this->db_user = $db_user;
 			$this->db_password = $db_password;
+			$this->db_name = $db_name;
 			$this->charset = $charset;
 
-			$this->db = mysql_connect($db_server, $db_user, $db_password);
-			if(!$this->db) {
-				$this->log->write("DB CONNECT ERROR:[$db_server $db_user $db_password]");
+			$this->db = new mysqli($db_server, $db_user, $db_password, $db_name);
+			if($this->db->connect_error) {
+				$this->log->write("DB CONNECT ERROR[$db_server $db_user $db_password]");
 				$this->is_connect = false;
 				return false;
 			}
-			$ret = $this->set_charset($charset);
+
+			$ret = $this->db->set_charset($charset);
 			if(!$ret) {
 				$this->log->write("CHARSET ERROR:[$charset]");
 				$this->is_connect = false;
+				throw new Exception($this->getErrorMsg());
 				return false;
 			}
 			$this->is_connect = true;
@@ -43,9 +46,9 @@
 			if(!$this->is_connect) {
 				return false;
 			}
-			$db_selected = @mysql_select_db($db_name, $this->db);
-			if(!$db_selected) {
-				$this->log->write('DB ERROR no:' . mysql_errno($this->db) . ' message:' . mysql_error($this->db));
+			if(!$this->db->select_db($db_name)) {
+				$this->log->write($this->getErrorMsg());
+				throw new Exception($this->getErrorMsg());
 				return false;
 			}
 			return true;
@@ -55,18 +58,7 @@
 			if($this->log_switch || B_ARCHIVE_LOG_MODE == 'DEBUG') {
 				$this->log->write_archive_log($sql);
 			}
-			$rs = @mysql_query($sql);
-			if(!$rs) {
-				$this->log->write($this->getErrorMsg());
-			}
-			return $rs;
-		}
-
-		function iquery($sql) {
-			if($this->log_switch || B_ARCHIVE_LOG_MODE == 'DEBUG') {
-				$this->log->write_archive_log($sql);
-			}
-			$rs = @mysql_query($sql);
+			$rs = $this->db->query($sql);
 			if(!$rs) {
 				$this->log->write($this->getErrorMsg());
 				throw new Exception($this->getErrorMsg());
@@ -75,39 +67,35 @@
 		}
 
 		function getErrorNo() {
-			return @mysql_errno($this->db);
+			return $this->db->errno;
 		}
 
 		function getErrorMsg() {
-			return 'DB ERROR no:'. mysql_errno($this->db) . ' message:' . mysql_error($this->db);
+			return 'DB ERROR no:' . $this->db->errno . ' message:' . $this->db->error;
 		}
 
 		function fetch_assoc($rs) {
-			return @mysql_fetch_assoc($rs);
+			return $rs->fetch_assoc();
 		}
 
 		function fetch_array($rs) {
-			return @mysql_fetch_array($rs);
+			return $rs->fetch_array();
 		}
 
 		function fetch_row($rs) {
-			return @mysql_fetch_row($rs);
+			return $rs->fetch_row();
 		}
 
-		function fetch_field($rs, $i) {
-			return @mysql_fetch_field($rs, $i);
+		function fetch_field($rs) {
+			return $rs->fetch_field();
 		}
 
 		function num_fields($rs) {
-			return @mysql_num_fields($rs);
+			return $this->db->field_count;
 		}
 
 		function num_rows($rs) {
-			return @mysql_num_rows($rs);
-		}
-
-		function field_name($rs, $i) {
-			return @mysql_field_name($rs, $i);
+			return $rs->num_rows;
 		}
 
 		function begin() {
@@ -125,16 +113,12 @@
 			$this->log_switch = false;
 		}
 
-		function set_charset($charset) {
-			return $this->query("set names " . $charset); 
-		}
-
 		function real_escape_string($string) {
-			return @mysql_real_escape_string($string);
+			return $this->db->escape_string($string);
 		}
 
 		function real_escape_string_for_like($string) {
-			$ret = @mysql_real_escape_string($string);
+			$ret = $this->db->escape_string($string);
 			$ret = str_replace("%", "\%", $ret);
 			$ret = str_replace("_", "\_", $ret);
 
@@ -176,7 +160,7 @@
 
 				$this->begin();
 
-				$rs = $this->iquery("select version()");
+				$rs = $this->query("select version()");
 				$row = $this->fetch_row($rs);
 				$version = $row[0];
 
@@ -185,13 +169,15 @@
 				$result.= "-- ------------------------------------------------------\n";
 				$result.= "-- Server version	$version\n\n";
 
-				$schema = $this->db_name;
-				$result.= "--\n";
-				$result.= "-- Create schema $schema\n";
-				$result.= "--\n\n";
+				if($install != 'install') {
+					$schema = $this->db_name;
+					$result.= "--\n";
+					$result.= "-- Create schema $schema\n";
+					$result.= "--\n\n";
 
-				$result.= "-- CREATE DATABASE IF NOT EXISTS $schema;\n";
-				$result.= "-- USE $schema;\n\n";
+					$result.= "-- CREATE DATABASE IF NOT EXISTS $schema;\n";
+					$result.= "-- USE $schema;\n\n";
+				}
 
 				// views
 				if($views) {
@@ -203,7 +189,7 @@
 							where name like '%PREFIX%%'
 							and comment = 'VIEW'";
 					$sql = str_replace('%PREFIX%', B_DB_PREFIX, $sql);
-					$rs = $this->iquery($sql);
+					$rs = $this->query($sql);
 					while($row = $this->fetch_assoc($rs)) {
 						$views[] = $row['Name'];
 					}
@@ -213,7 +199,7 @@
 				foreach($views as $view) {
 					$view_with_prefix = $view;
 					if($install == 'install') {
-						$view_with_prefix = preg_replace('/^' . B_PREFIX . '/', '%PREFIX%', $view);
+						$view_with_prefix = preg_replace('/^' . B_DB_PREFIX . '/', '%PREFIX%', $view);
 					}
 					$result.= "--\n";
 					$result.= "-- Temporary table structure for view `$view_with_prefix`\n";
@@ -222,7 +208,7 @@
 					$result.= "DROP VIEW IF EXISTS `$view_with_prefix`;\n";
 
 					$fields = '';
-					$rs = $this->iquery("SHOW COLUMNS FROM " . $view);
+					$rs = $this->query("SHOW COLUMNS FROM " . $view);
 					while($row = $this->fetch_assoc($rs)) {
 						$field = $row['Field'];
 						$type = $row['Type'];
@@ -244,7 +230,7 @@
 							where name like '%PREFIX%%'
 							and comment <> 'VIEW'";
 					$sql = str_replace('%PREFIX%', B_DB_PREFIX, $sql);
-					$rs = $this->iquery($sql);
+					$rs = $this->query($sql);
 					while($row = $this->fetch_assoc($rs)) {
 						$tables[] = $row['Name'];
 					}
@@ -253,21 +239,25 @@
 				foreach($tables as $table) {
 					$table_with_prefix = $table;
 					if($install == 'install') {
-						$table_with_prefix = preg_replace('/^' . B_PREFIX . '/', '%PREFIX%', $table);
+						$table_with_prefix = preg_replace('/^' . B_DB_PREFIX . '/', '%PREFIX%', $table);
 					}
 					$result.= "--\n";
 					$result.= "-- Definition of table `$table_with_prefix`\n";
 					$result.= "--\n\n";
 
-					$row = $this->fetch_row($this->iquery('SHOW CREATE TABLE ' . $table));
+					$row = $this->fetch_row($this->query('SHOW CREATE TABLE ' . $table));
 					$result.= "DROP TABLE IF EXISTS `$table_with_prefix`;\n";
+					if($install == 'install') {
+						$row[1] = preg_replace('/^CREATE TABLE `' . B_DB_PREFIX . '/',  'CREATE TABLE `%PREFIX%', $row[1]);
+					}
+
 					$result.= $row[1] . ";\n\n";
 
 					$result.= "--\n";
 					$result.= "-- Dumping data for table `$table_with_prefix`\n";
 					$result.= "--\n\n";
 
-					$rs = $this->iquery("select * from " . $table);
+					$rs = $this->query("select * from " . $table);
 					$fcnt = $this->num_fields($rs);
 
 					$field = array();
@@ -313,17 +303,17 @@
 				foreach($views as $view) {
 					$view_with_prefix = $view;
 					if($install == 'install') {
-						$view_with_prefix = preg_replace('/^' . B_PREFIX . '/', '%PREFIX%', $view);
+						$view_with_prefix = preg_replace('/^' . B_DB_PREFIX . '/', '%PREFIX%', $view);
 					}
 					$result.= "--\n";
 					$result.= "-- Definition of view `$view_with_prefix`\n";
 					$result.= "--\n\n";
 
-					$row = $this->fetch_row($this->iquery('SHOW CREATE TABLE ' . $view));
+					$row = $this->fetch_row($this->query('SHOW CREATE TABLE ' . $view));
 					$result.= "DROP TABLE IF EXISTS `$view_with_prefix`;\n";
 					$result.= "DROP VIEW IF EXISTS `$view_with_prefix`;\n";
 
-					$string = preg_replace('/DEFINER=`\w*`@`[A-Za-z0-9_%.]*`/', '', $row[1]);
+					$string = preg_replace('/DEFINER=`[A-Za-z0-9_\-%.]*`@`[A-Za-z0-9_\-%.]*`/', '', $row[1]);
 					$string = preg_replace('/ALGORITHM=\w*/', '', $string);
 					$string = preg_replace('/ SQL SECURITY DEFINER/', '', $string);
 					if($install == 'install') {

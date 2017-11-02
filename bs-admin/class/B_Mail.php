@@ -13,6 +13,10 @@
 		function __construct($config) {
 			$this->config = $config;
 			$this->elements = $config;
+			$this->boundary = rand(0, 9) . '-';
+			$this->boundary.= rand(1000000000, 9999999999) . '-';
+			$this->boundary.= rand(1000000000, 9999999999) . '=:';
+			$this->boundary.= rand(10000, 99999);
 		}
 
 		function setValue($values) {
@@ -54,35 +58,87 @@
 			if($this->elements['bcc']) {
 				$header.= 'Bcc:' . $this->elements['bcc'] . "\r\n";
 			}
+
 			$header.= 'From:' . $from . "\r\n";
 			$header.= 'Reply-To:' . $from . "\r\n";
-			$header.= 'X-Mailer:system' . "\r\n";
+			$header.= 'MIME-Version: 1.0' . "\r\n";
+
+			if($this->elements['html']) {
+				$header.= 'Content-Type: multipart/alternative;' . "\r\n";
+				$header.= '    boundary="' . $this->boundary . '"' . "\r\n";
+			}
 
 			$this->header = $header;
 		}
 
-		function send() {
+		function send($html_header_config=null) {
 			$ret = true;
 
-			if(!preg_match('/localhost/', B_HTTP_HOST)) {
-				$ret =  mb_send_mail($this->elements['to_addr']
-									,$this->elements['subject']
-									,$this->replaceLFcode($this->elements['body'])
-									,$this->replaceLFcode($this->header)
-									,$this->err_mail);
-			}
 			$this->mail_log = new B_Log(B_MAIL_LOG_FILE);
-			$this->mail_log->write(
-				'to_addr:' . $this->elements['to_addr'] . "\n" .
-				'from_addr:' . $this->elements['from_addr'] . "\n" .
-				'subject:' . $this->elements['subject'] . "\n" .
-				'body:' . $this->replaceLFcode($this->elements['body']) . "\n" .
-				'mail header:' . $this->replaceLFcode($this->header) . "\n" .
-				'mail header(decode):' . mb_decode_mimeheader($this->header) . "\n" .
-				'err_mail:' . $this->err_mail . "\n"
-			);
+
+			if(!preg_match('/localhost/', B_HTTP_HOST)) {
+				if($this->elements['html']) {
+					$ret = mail($this->elements['to_addr']
+							  , $this->replaceLFcode(mb_encode_mimeheader($this->elements['subject']))
+							  , $this->replaceLFcode($this->body($html_header_config))
+							  , $this->replaceLFcode($this->header)
+							  , $this->err_mail);
+
+					$this->mail_log->write(
+						'to_addr:' . $this->elements['to_addr'] . "\n" .
+						'from_addr:' . $this->elements['from_addr'] . "\n" .
+						'subject:' . $this->elements['subject'] . "\n" .
+						'body:' . $this->replaceLFcode($this->body($html_header_config)) . "\n" .
+						'mail header:' . $this->replaceLFcode($this->header) . "\n" .
+						'mail header(decode):' . mb_decode_mimeheader($this->header) . "\n" .
+						'err_mail:' . $this->err_mail . "\n"
+					);
+				}
+				else {
+					$ret =  mb_send_mail($this->elements['to_addr']
+										,$this->elements['subject']
+										,$this->replaceLFcode($this->elements['body'])
+										,$this->replaceLFcode($this->header)
+										,$this->err_mail);
+
+					$this->mail_log->write(
+						'to_addr:' . $this->elements['to_addr'] . "\n" .
+						'from_addr:' . $this->elements['from_addr'] . "\n" .
+						'subject:' . $this->elements['subject'] . "\n" .
+						'body:' . $this->replaceLFcode($this->elements['body']) . "\n" .
+						'mail header:' . $this->replaceLFcode($this->header) . "\n" .
+						'mail header(decode):' . mb_decode_mimeheader($this->header) . "\n" .
+						'err_mail:' . $this->err_mail . "\n"
+					);
+				}
+			}
+
 
 			return $ret;
+		}
+
+		function body($html_header_config=null) {
+			$body = 'MIME-Version: 1.0' . "\r\n";
+			$body.= 'Content-Type: multipart/alternative;' . "\r\n";
+			$body.= '    boundary="' . $this->boundary . '"' . "\r\n";
+			$body.= 'This is a multi-part message in MIME format.' . "\r\n";
+			$body.= '--' . $this->boundary . "\r\n";
+			$body.= 'Content-Type: text/plain; charset=UTF-8' . "\r\n";
+			$body.= 'Content-Transfer-Encoding: 8bit' . "\r\n";
+			$body.= "\r\n";
+			$body.= $this->elements['body'] . "\r\n";
+			$body.= "\r\n";
+			$body.= '--' . $this->boundary . "\r\n";
+			$body.= 'Content-Type: text/html; charset="UTF-8"' . "\r\n";
+			$body.= 'Content-Transfer-Encoding: 8bit' . "\r\n";
+			$body.= "\r\n";
+
+			$body.= str_replace('%BODY%', $this->elements['html'], $html_header_config) . "\r\n"; 
+
+			$body.= "\r\n";
+			$body.= '--' . $this->boundary . "--\r\n";
+
+			return $body;
 		}
 
 		function replaceLFcode($str) {

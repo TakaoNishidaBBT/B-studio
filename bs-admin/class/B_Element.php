@@ -962,7 +962,7 @@
 			
 			for($i=0 ; $i < $len ; $i++) {
 				$str = mb_substr($item, $i, 1);
-				if(!preg_match('/[a-zA-Z0-9 .,\"\'\/^]/',$str)){ // space is valid
+				if(!preg_match('/[a-zA-Z0-9 .,\"\'\/^]/',$str)) { // space is valid
 					return false;
 				}
 			}
@@ -1198,7 +1198,7 @@
 				'src="' . $this->src . '" ' .
 				'name="' . $this->name_prefix . $this->name . '" ' .
 				'id="' . $this->_gethtmlid() . '" ' .
-				'value="' . $value . '" ' .
+				'value="' . $value . '"' .
 				' />';
 
 			return $html;

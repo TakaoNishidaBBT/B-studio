@@ -16,12 +16,7 @@
 	require_once(B_DOC_ROOT . B_ADMIN_ROOT . 'class/B_Calendar.php');
 	require_once(B_DOC_ROOT . B_ADMIN_ROOT . 'class/B_Controller.php');
 	require_once(B_DOC_ROOT . B_ADMIN_ROOT . 'class/B_DataGrid.php');
-	if(class_exists('mysqli')) {
-		require_once(B_DOC_ROOT . B_ADMIN_ROOT . 'class/B_DBaccess_mysqli.php');
-	}
-	else {
-		require_once(B_DOC_ROOT . B_ADMIN_ROOT . 'class/B_DBaccess.php');
-	}
+	require_once(B_DOC_ROOT . B_ADMIN_ROOT . 'class/B_DBaccess.php');
 	require_once(B_DOC_ROOT . B_ADMIN_ROOT . 'class/B_Element.php');
 	require_once(B_DOC_ROOT . B_ADMIN_ROOT . 'class/B_FileNode.php');
 	require_once(B_DOC_ROOT . B_ADMIN_ROOT . 'class/B_HtmlHeader.php');
