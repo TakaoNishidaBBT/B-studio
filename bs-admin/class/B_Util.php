@@ -10,9 +10,9 @@
 	// 
 	// -------------------------------------------------------------------------
 	class B_Util {
-		public static function getRandomText($length){
+		public static function getRandomText($length) {
 			$base = 'abcdefghijkmnprstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ2345678';
-			for($i=0; $i < $length; $i++){
+			for($i=0; $i<$length; $i++) {
 				$pwd.= $base{mt_rand(0, strlen($base)-1)};
 			}
 			return $pwd;
@@ -77,17 +77,6 @@
 			return $str;
 		}
 
-		public static function isKeyExist($array) {
-			$i=0;
-			foreach($array as $key => $value) {
-				if($key !== $i) {
-					return true;
-				}
-				$i++;
-			}
-			return false;
-		}
-
 		public static function mb_convert_encoding($str, $to_encoding, $from_encoding=NULL) {
 			if(is_array($str)) {
 				foreach($str as $key => $value) {
@@ -100,13 +89,15 @@
 			return $str;
 		}
 
-		public static function mb_convert_encoding_array($array, $to_encoding, $from_encoding) {
-			if(!is_array($array)) return;
-
+		public static function isKeyExist($array) {
+			$i=0;
 			foreach($array as $key => $value) {
-				$ret[$key] = mb_convert_encoding($value, $to_encoding, $from_encoding);
+				if($key !== $i) {
+					return true;
+				}
+				$i++;
 			}
-			return $ret;
+			return false;
 		}
 
 		public static function pathinfo($path) {
@@ -160,7 +151,7 @@
 		public static function encodeNumericEntity($str) {
 			$convmap = array(0, 0x2FFFF, 0, 0xFFFF);
 
-			for($i=0; $i < mb_strlen($str); $i++) {
+			for($i=0; $i<mb_strlen($str); $i++) {
 				if(rand(0, 5)) {
 					$ret.= mb_encode_numericentity(mb_substr($str, $i, 1), $convmap, mb_internal_encoding());
 				}
@@ -178,7 +169,7 @@
 				$unit = $factor_array[$scale];
 			}
 			else {
-				for($unit=0, $size=$bytes; $size > 1024; $size=($size / 1024), $unit++);
+				for($unit=0, $size=$bytes; 1024 < $size; $size=($size / 1024), $unit++);
 				$factor_flip = array_flip($factor_array);
 				$scale = $factor_flip[$unit];
 			}
@@ -375,7 +366,7 @@
 				// set transparency
 				$trnprt_indx = imagecolortransparent($image);
 				if($trnprt_indx >= 0) {
-					$trnprt_color = @imagecolorsforindex($image, $trnprt_indx);
+					$trnprt_color = imagecolorsforindex($image, $trnprt_indx);
 					$trnprt_indx = imagecolorallocate($new_image, $trnprt_color['red'], $trnprt_color['green'], $trnprt_color['blue']);
 					imagefill($new_image, 0, 0, $trnprt_indx);
 					imagecolortransparent($new_image, $trnprt_indx);
@@ -527,25 +518,6 @@
 			}
 			fclose($fp);
 			return $res;
-		}
-
-		public static function print_r_xml($tag, $arr) {
-			if(is_numeric($tag)) {
-				$tag = 'array';
-			}
-			$output = '<' . $tag . '>';
-			foreach($arr as $key => $val) {
-				if(is_array($val)) {
-					$output.= B_Util::print_r_xml($key, $val);
-				}
-				else {
-					$output.= '<' . htmlspecialchars($key) . '>';
-					$output.= htmlspecialchars($val);
-					$output.= '</' . htmlspecialchars($key) . ">\n";
-				}
-			}
-			$output.= '</' . $tag . '>';
-			return $output;
 		}
 
 		public static function getDevice() {

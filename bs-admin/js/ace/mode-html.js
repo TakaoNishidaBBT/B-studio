@@ -1589,7 +1589,6 @@ function hasType(token, type) {
     return type.split('.').every(function(type){
         return (tokenTypes.indexOf(type) !== -1);
     });
-    return hasType;
 }
 
 var HtmlBehaviour = function () {
@@ -1647,7 +1646,6 @@ function hasType(token, type) {
     return type.split('.').every(function(type){
         return (tokenTypes.indexOf(type) !== -1);
     });
-    return hasType;
 }
 
 var XmlBehaviour = function () {

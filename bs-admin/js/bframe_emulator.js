@@ -94,17 +94,14 @@
 		}
 
 		function resize_smart_phone_vertical() {
-			resize(320, 480);
+			resize(320, 568);
 		}
 
 		function resize_smart_phone_horizontal() {
-			resize(480, 320);
+			resize(568, 320);
 		}
 
 		function resize(width, height) {
-			// consider scroll bar width (about 20px)
-			width += 20;
-
 			if(viewport_width == 'device-width') {
 				iframe.style.maxWidth = width + 'px';
 				iframe.style.maxHeight = height + 'px';
