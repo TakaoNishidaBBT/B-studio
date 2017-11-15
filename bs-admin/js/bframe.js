@@ -453,21 +453,21 @@
 		if(window.event) {
 			var x = window.event.clientX;
 			var y = window.event.clientY;
-			var sx = window.event.screenX;
-			var sy = window.event.screenY;
+			var sx = window.event.screenX / window.devicePixelRatio;
+			var sy = window.event.screenY / window.devicePixelRatio;
 		}
 		else {
 			if(event.pageX) {
 				var x = event.pageX;
 				var y = event.pageY;
-				var sx = event.screenX;
-				var sy = event.screenY;
+				var sx = event.screenX / window.devicePixelRatio;
+				var sy = event.screenY / window.devicePixelRatio;
 			}
 			else {
 				var x = event.screenX;
 				var y = event.screenY;
-				var sx = event.screenX;
-				var sy = event.screenY;
+				var sx = event.screenX / window.devicePixelRatio;
+				var sy = event.screenY / window.devicePixelRatio;
 			}
 		}
 
