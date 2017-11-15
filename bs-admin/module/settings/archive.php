@@ -7,6 +7,8 @@
 */
 	error_reporting(E_ALL & ~E_NOTICE & ~E_STRICT);
 
+	ini_set('memory_limit', '256M');
+
 	$_SERVER['SERVER_NAME'] = $argv[1];
 	$_SERVER['DOCUMENT_ROOT'] = $argv[2];
 	$file_path = $argv[3];
