@@ -288,7 +288,7 @@
 		this.position = function(p) {
 			left_pane.style.width = parseInt(p.left + left_pane.offsetWidth - element_position.left)+ 'px';
 			if(right_pane.tagName.toLowerCase() == 'iframe') {
-				right_pane.style.width = parseInt(total_width - p.left - splitbar_width) + 'px';
+				right_pane.style.width = parseInt(total_width - p.left - splitbar_width - 1) + 'px';
 			}
 		}
 
