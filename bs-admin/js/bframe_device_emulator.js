@@ -7,7 +7,7 @@
 	bframe.addEventListener(window, 'load' , deviceEmulator);
 
 	// -------------------------------------------------------------------------
-	// class bframe.emu
+	// deviceEmulator
 	// 
 	// -------------------------------------------------------------------------
 	function deviceEmulator() {
