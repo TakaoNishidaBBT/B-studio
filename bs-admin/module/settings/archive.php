@@ -22,8 +22,7 @@
 
 	// Connect to DB
 	$db = new B_DBaccess($archive);
-	$ret = $db->connect(B_DB_SRV, B_DB_USR, B_DB_PWD, B_DB_CHARSET);
-	$ret = $db->select_db(B_DB_NME);
+	$ret = $db->connect(B_DB_SRV, B_DB_USR, B_DB_PWD, B_DB_CHARSET, B_DB_NME);
 
 	// create archive file
 	$zip = new ZipArchive();

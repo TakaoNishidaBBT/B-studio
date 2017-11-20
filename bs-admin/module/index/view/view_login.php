@@ -4,8 +4,6 @@
 <meta charset="utf-8" />
 <link href="css/common.css" type="text/css" rel="stylesheet" media="all" />
 <link href="css/login.css" type="text/css" rel="stylesheet" media="all" />
-<script src="js/bframe.js" type="text/javascript"></script>
-<script src="js/bstudio.js" type="text/javascript"></script>
 <title><?php echo $this->title ?></title></head>
 <body>
 	<script type="text/javascript">if(window != top) top.location.href='.';</script>
@@ -36,5 +34,4 @@
 			</ul>
 		</form>
 	</div>
-
 </body>

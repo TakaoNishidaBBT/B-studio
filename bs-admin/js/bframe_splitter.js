@@ -4,12 +4,12 @@
  *
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
-	bframe.addEventListener (window, 'load' , bframeSplitterInit);
+	bframe.addEventListener(window, 'load', bframeSplitterInit);
 
 	function bframeSplitterInit(){
 		var div = document.getElementsByTagName('div');
 
-		for(var i=0; i<div.length; i++) {
+		for(var i=0; i < div.length; i++) {
 			if(bframe.checkClassName('bframe_splitter', div[i])) {
 				s = new bframe.splitter(div[i]);
 			}

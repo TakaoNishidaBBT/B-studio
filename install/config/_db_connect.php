@@ -9,4 +9,6 @@
 	define('B_DB_USR', '%B_DB_USR%');
 	define('B_DB_PWD', '%B_DB_PWD%');
 	define('B_DB_SRV', '%B_DB_SRV%');
+	define('B_DB_PREFIX', '%DB_PREFIX%');
 	define('B_DB_CHARSET', 'utf8');
+	define('B_DB_ENGINE', 'InnoDB');

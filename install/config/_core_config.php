@@ -48,9 +48,6 @@
 	// Directory for Admin Page
 	define('B_ADMIN_ROOT', B_CURRENT_ROOT . 'bs-admin/');
 
-	// DataBase Table Prefix
-	define('B_DB_PREFIX', '%DB_PREFIX%');
-
 	// This is Full URL for Top Page
 	define('B_SITE_ROOT', 'http://' . B_HTTP_HOST . B_CURRENT_ROOT);
 	define('B_SITE_ROOT_SSL', 'https://' . B_HTTP_HOST . B_CURRENT_ROOT);

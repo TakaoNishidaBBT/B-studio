@@ -5,6 +5,7 @@
 <meta name="terminal_id" content="<?php echo TERMINAL_ID ?>" />
 <meta name="source_module" content="index" />
 <meta name="source_page" content="index" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 <link href="css/common.css" rel="stylesheet" media="all" />
 <link href="css/menu.css" type="text/css" rel="stylesheet" media="all" />
 <link href="css/context_menu.css" type="text/css" rel="stylesheet" media="all" />
@@ -17,10 +18,9 @@
 <script src="js/bframe_context_menu.js" type="text/javascript"></script>
 <script src="js/bframe_menu.js" type="text/javascript"></script>
 <script src="js/bframe_adjustwindow.js" type="text/javascript"></script>
-<script src="js/bframe_effect.js" type="text/javascript"></script>
 <script src="js/bframe_modal_window.js" type="text/javascript"></script>
 <title><?php echo $this->title ?></title></head>
-<body onload="bframe.addEventListener(document, 'mousewheel', bframe.cancelEvent)">
+<body>
 	<script type="text/javascript">if(window != top) top.location.href='.'</script>
 	<div id="title-header">
 		<h1><?php echo $this->site_title ?></h1>

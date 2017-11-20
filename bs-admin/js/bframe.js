@@ -360,7 +360,7 @@
 		var hash = [];
 		var param = link.split('?')[1];
 		var parray = param.split('&');
-		for(var i=0;i<parray.length;i++){
+		for(var i=0;i<parray.length;i++) {
 			var n = parray[i].split('=');
 			hash[n[0]] = n[1];
 		}

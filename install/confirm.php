@@ -131,7 +131,6 @@
 			// Set up core_config(current_root)
 			$contents = file_get_contents('./config/_core_config.php');
 			$contents = str_replace('%CURRENT_ROOT%', ROOT_DIR, $contents);
-			$contents = str_replace('%DB_PREFIX%', $param['db_prefix'], $contents);
 			file_put_contents('../bs-admin/config/core_config.php', $contents);
 
 			// Set up db_connect(current_root)
@@ -140,6 +139,7 @@
 			$contents = str_replace('%B_DB_USR%', $param['db_usr'], $contents);
 			$contents = str_replace('%B_DB_PWD%', $param['db_pwd'], $contents);
 			$contents = str_replace('%B_DB_SRV%', $param['db_srv'], $contents);
+			$contents = str_replace('%DB_PREFIX%', $param['db_prefix'], $contents);
 			file_put_contents('../bs-admin/db/db_connect.php', $contents);
 		}
 		catch(Exception $e) {

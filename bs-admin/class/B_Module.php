@@ -16,8 +16,7 @@
 
 			// Connect to DB
 			$this->db = new B_DBaccess($this->archive);
-			$ret = $this->db->connect(B_DB_SRV, B_DB_USR, B_DB_PWD, B_DB_CHARSET);
-			$ret = $this->db->select_db(B_DB_NME);
+			$ret = $this->db->connect(B_DB_SRV, B_DB_USR, B_DB_PWD, B_DB_CHARSET, B_DB_NME);
 
 			$this->util = new B_Util();
 

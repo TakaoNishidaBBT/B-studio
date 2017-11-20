@@ -213,7 +213,7 @@
 				if(opened) hidePullDownMenu();
 				return;
 
-			case 38: //ª
+			case 38: //â†‘
 				var length = context_menu.getLength();
 				var index = context_menu.getRowIndex();
 				if(index <= 0) return;
@@ -225,7 +225,7 @@
 
 				break;
 
-			case 40: //«
+			case 40: //â†“
 				var length = context_menu.getLength();
 				var index = context_menu.getRowIndex();
 				if(index < 0) index = 0;

@@ -126,7 +126,7 @@
 		function setOnKeyDown() {
 			itemListonkeydown
 			var tr = target.getElementsByTagName('tr');
-			for(i=1; i < tr.length; i++){
+			for(i=1; i < tr.length; i++) {
 				var current_tr = tr[i];
 				for(var j=0; j < current_tr.cells.length; j++) {
 					var current_td = current_tr.cells[j];
@@ -428,7 +428,7 @@
 				}
 
 				for(i=cellIndex+1; i < tr.cells.length; i++) {
-					for(var j=0; j<tr.cells[i].childNodes.length; j++) {
+					for(var j=0; j < tr.cells[i].childNodes.length; j++) {
 						var item = tr.cells[i].childNodes[j];
 						if(item.tagName && item.tagName.toLowerCase() == 'input') {
 							item.focus();

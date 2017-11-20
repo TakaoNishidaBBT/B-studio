@@ -60,7 +60,10 @@
 			$status = false;
 
 			foreach($this->config as $key => $value) {
-				if($value[2] && isset($param[$key]) && $param[$key] != '') { // primary key
+				if($value[2] == '1' && isset($param[$key]) && $param[$key] != '') { // primary key
+					if(!isset($param[$key]) || $param[$key] == '') {
+						return false;
+					}
 					switch($value[0]) {	// type
 					case 'char':
 					case 'text':
@@ -212,16 +215,17 @@
 
 		function setInsertValues($key, $config, $param) {
 			if($config[3] && (!isset($param[$key]) || $param[$key] == '')) { // auto increment
+				$start_value = ($config[4]) ? $config[4] : 0;
 				switch($config[0]) { // data type
 				case 'char':
 				case 'text':
 				case 'mediumtext':
-					$sql = "lpad(cast((ifnull(max($key), 0) +1) as  char), $config[1], '0')";
+					$sql = "lpad(cast((ifnull(max($key), $start_value) +1) as  char), $config[1], '0')";
 					break;
 
 				case 'int':
 				case 'decimal':
-					$sql = "ifnull(max($key), 0)+1";
+					$sql = "ifnull(max($key), $start_value)+1";
 					break;
 				}
 				return $sql;
@@ -461,16 +465,17 @@
 		function setInsertValuesForLoad($key, $config, $param, &$index) {
 			$value = $param[$index];
 			if($config[3]) { // auto increment
+				$start_value = ($config[4]) ? $config[4] : 0;
 				switch($config[0]) { // data type
 				case 'char':
 				case 'text':
 				case 'mediumtext':
-					$sql = "lpad(cast((ifnull(max($key), 0) +1) as  char), $config[1], '0')";
+					$sql = "lpad(cast((ifnull(max($key), $start_value) +1) as  char), $config[1], '0')";
 					break;
 
 				case 'int':
 				case 'decimal':
-					$sql = "ifnull(max($key), 0)+1";
+					$sql = "ifnull(max($key), $start_value)+1";
 					break;
 				}
 			}
@@ -479,12 +484,12 @@
 				case 'char':
 				case 'text':
 				case 'mediumtext':
-					$sql = "'" . mysql_real_escape_string($value) . "'";
+					$sql = "'" . $this->db->real_escape_string($value) . "'";
 					break;
 
 				case 'int':
 				case 'decimal':
-					$sql = mysql_real_escape_string($value);
+					$sql = $this->db->real_escape_string($value);
 					break;
 
 				default:
@@ -516,7 +521,7 @@
 
 			if($primary) $primary = "primary key($primary) ";
 
-			$sql = "create table $this->prefix$this->table ($v, $primary) default charset=" . B_DB_CHARSET;
+			$sql = "create table $this->prefix$this->table ($v, $primary) default charset=" . B_DB_CHARSET . " engine=" . B_DB_ENGINE;
 			$ret = $this->db->query($sql);
 
 			return $ret;
