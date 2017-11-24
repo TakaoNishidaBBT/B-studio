@@ -9,6 +9,7 @@
 	function bframeSelectBoxInit() {
 		var sc = new bframe.selectbox_container();
 		var s = [];
+		var objects = document.querySelectorAll('select.bframe_selectbox');
 
 		for(var i=0, j=0; i < objects.length; i++) {
 			s[j++] = new bframe.selectbox(objects[i], sc);
