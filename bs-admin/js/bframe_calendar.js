@@ -9,7 +9,7 @@
 	function bframeCalendarInit() {
 		var cc = new bframe.calendar_container();
 		var c = [];
-		var objects = document.querySelectorAll('.bframe_calendar');
+		var objects = document.getElementsByClassName('bframe_calendar');
 
 		for(var i=0; i < objects.length; i++) {
 			c.push(new bframe.calendar(objects[i], cc));
