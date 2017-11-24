@@ -68,7 +68,7 @@ $list_header_config = array(
 				array(
 					'id'			=> 'search-button',
 					'name'			=> 'search-button',
-					'class'			=> 'B_Button',
+					'class'			=> 'B_Submit',
 					'start_html'	=> '<li>',
 					'end_html'		=> '</li>',
 					'special_html'	=> 'class="search-button" onclick="bframe.submit(\'header_form\', \'' . $this->module . '\', \'list\', \'select\')"',

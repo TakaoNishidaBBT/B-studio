@@ -126,7 +126,7 @@
 				$sql = "select id from %DB_PREFIX%user
 						where
 						user_id like '%KEYWORD%' or
-						name like '%KEYWORD%' or
+						user_name like '%KEYWORD%' or
 						notes like '%KEYWORD%'
 						group by user_id";
 

@@ -110,6 +110,10 @@
 				header('Content-type: image/svg+xml');
 				break;
 
+			case 'ico':
+				header('Content-type: image/x-icon');
+				break;
+
 			case 'html':
 				$contents = file_get_contents(B_RESOURCE_DIR . $info[$url]);
 				$encoding = mb_detect_encoding($contents, ${$g_data_set}['encoding']);
