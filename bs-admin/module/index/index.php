@@ -107,7 +107,6 @@
 			if(preg_match('/firefox/i', $_SERVER['HTTP_USER_AGENT'])) return true;
 			if(preg_match('/chrome/i', $_SERVER['HTTP_USER_AGENT'])) return true;
 			if(preg_match('/safari/i', $_SERVER['HTTP_USER_AGENT'])) return true;
-			if(preg_match('/msie 10/i', $_SERVER['HTTP_USER_AGENT'])) return true;
 			if(preg_match('/rv:11.0/i', $_SERVER['HTTP_USER_AGENT'])) return true;
 
 			return false;

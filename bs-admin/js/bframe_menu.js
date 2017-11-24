@@ -8,13 +8,11 @@
 
 	function bframeMenuInit(){
 		var mc = new bframe.menu_container();
-		var link = document.getElementsByTagName('a');
-		var m = new Array();
+		var m = [];
+		var objects = document.getElementsByClassName('bframe_menu');
 
-		for(var i=0, j=0; i < link.length; i++) {
-			if(bframe.checkClassName('bframe_menu', link[i])) {
-				m[j++] = new bframe.menu(link[i], mc);
-			}
+		for(var i=0, j=0; i < objects.length; i++) {
+			m[j++] = new bframe.menu(objects[i], mc);
 		}
 		mc.setMenus(m);
 

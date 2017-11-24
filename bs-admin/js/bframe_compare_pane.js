@@ -8,16 +8,6 @@
 
 	function bframeComparePaneInit(){
 		var pc = new bframe.compare_pane_container();
-		var div = document.getElementsByTagName('div');
-		var p = new Array();
-
-		for(var i=0, j=0; i<div.length; i++) {
-			if(bframe.checkClassName('bframe_compare_pane', div[i])) {
-				p[j++] = new bframe.compare_pane(pc, div[i], j);
-			}
-		}
-
-		pc.setPanes(p);
 	}
 
 	// -------------------------------------------------------------------------
@@ -109,23 +99,4 @@
 
 			location.href="index.php?" + param;
 		}
-	}
-
-	// -------------------------------------------------------------------------
-	// class bframe.compare_pane
-	// 
-	// -------------------------------------------------------------------------
-	bframe.compare_pane = function(container, target, index) {
-		var pc = container;
-		var self = this;
-		var target_id = bframe.getID(target);
-		var target_index = index;
-
-		var	response_wait = false;
-		var httpObj;
-
-		var ret = bframe.getPageInfo();
-		var terminal_id = ret.terminal_id;
-		var module = ret.source_module;
-		var page = ret.source_page;
 	}

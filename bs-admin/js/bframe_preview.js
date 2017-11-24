@@ -15,7 +15,7 @@
 					func = cb[i];
 					func();
 				}
-			}
+			};
 
 		return {
 			submit: function(fname, url, method, iframe_name) {

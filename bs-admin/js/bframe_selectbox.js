@@ -8,13 +8,10 @@
 
 	function bframeSelectBoxInit() {
 		var sc = new bframe.selectbox_container();
-		var select = document.getElementsByTagName('select');
-		var s = new Array();
+		var s = [];
 
-		for(var i=0, j=0; i < select.length; i++) {
-			if(bframe.checkClassName('bframe_selectbox', select[i])) {
-				s[j++] = new bframe.selectbox(select[i], sc);
-			}
+		for(var i=0, j=0; i < objects.length; i++) {
+			s[j++] = new bframe.selectbox(objects[i], sc);
 		}
 		sc.setElements(s);
 
@@ -22,13 +19,10 @@
 	}
 
 	function bframeSelectBoxAdd() {
-		var select = document.getElementsByTagName('select');
 		var s = new Array();
 
-		for(var i=0, j=0; i < select.length; i++) {
-			if(bframe.checkClassName('bframe_selectbox', select[i])) {
-				s[j++] = new bframe.selectbox(select[i], bframe.selectBoxContainer);
-			}
+		for(var i=0, j=0; i < objects.length; i++) {
+			s[j++] = new bframe.selectbox(objects[i], bframe.selectBoxContainer);
 		}
 		bframe.selectBoxContainer.setElements(s);
 	}

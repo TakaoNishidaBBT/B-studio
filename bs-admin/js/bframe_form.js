@@ -7,12 +7,10 @@
 	bframe.addEventListener(window, 'load' ,bframeFormInit);
 
 	function bframeFormInit() {
-		var table = document.getElementsByTagName('table');
+		var objects = document.querySelectorAll('table.bframe_form');
 
-		for(var i=0; i < table.length; i++) {
-			if(bframe.checkClassName('bframe_form', table[i])) {
-				var s = new bframe.form(table[i]);
-			}
+		for(var i=0; i < objects.length; i++) {
+			var s = new bframe.form(objects[i]);
 		}
 	}
 

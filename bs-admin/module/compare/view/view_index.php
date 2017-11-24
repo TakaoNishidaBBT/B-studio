@@ -15,7 +15,6 @@
 <script src="js/bframe_context_menu.js" type="text/javascript"></script>
 <script src="js/bframe_menu.js" type="text/javascript"></script>
 <script src="js/bframe_adjustwindow.js" type="text/javascript"></script>
-<script src="js/bframe_effect.js" type="text/javascript"></script>
 <script src="js/bframe_modal_window.js" type="text/javascript"></script>
 <title><?php echo $this->title ?></title></head>
 <body>

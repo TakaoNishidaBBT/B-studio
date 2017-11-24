@@ -7,12 +7,10 @@
 	bframe.addEventListener(window, 'load' , bframeTextEditorInit);
 
 	function bframeTextEditorInit(){
-		var ta = document.getElementsByTagName('textarea');
+		var objects = document.querySelectorAll('textarea.bframe_texteditor');
 
-		for(var i=0; i < ta.length; i++) {
-			if(window.getSelection && bframe.checkClassName('bframe_texteditor', ta[i])) {
-				var s = new bframe.texteditor(ta[i]);
-			}
+		for(var i=0; i < objects.length; i++) {
+			var s = new bframe.texteditor(objects[i]);
 		}
 	}
 

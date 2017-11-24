@@ -8,13 +8,11 @@
 
 	function bframeTabInit() {
 		var tc = new bframe.tab_container();
-		var a = document.getElementsByTagName('a');
-		var t = new Array();
+		var t = [];
+		var objects = document.getElementsByClassName('bframe_tab');
 
-		for(var i=0, j=0; i < a.length; i++) {
-			if(bframe.checkClassName('bframe_tab', a[i])) {
-				t[j++] = new bframe.tab(a[i], tc);
-			}
+		for(var i=0, j=0; i < objects.length; i++) {
+			t[j++] = new bframe.tab(objects[i], tc);
 		}
 
 		tc.setTabs(t);

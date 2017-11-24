@@ -69,7 +69,7 @@
 		public static $buffer;
 
 		public static function log() {
-			for($i=0 ; $i<func_num_args(); $i++) {
+			for($i=0; $i<func_num_args(); $i++) {
 				$param = func_get_arg($i);
 				$message[] = $param;
 			}

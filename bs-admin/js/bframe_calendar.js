@@ -8,24 +8,12 @@
 
 	function bframeCalendarInit() {
 		var cc = new bframe.calendar_container();
-		var a = document.getElementsByTagName('a');
-		var c = new Array();
-		var cnt=0;
+		var c = [];
+		var objects = document.querySelectorAll('.bframe_calendar');
 
-		for(var i=0; i<a.length; i++) {
-			if(bframe.checkClassName('bframe_calendar', a[i])) {
-				c[cnt++] = new bframe.calendar(a[i], cc);
-			}
+		for(var i=0; i < objects.length; i++) {
+			c.push(new bframe.calendar(objects[i], cc));
 		}
-
-		var input = document.getElementsByTagName('input');
-
-		for(i=0; i<input.length; i++) {
-			if(bframe.checkClassName('bframe_calendar', input[i])) {
-				c[cnt++] = new bframe.calendar(input[i], cc);
-			}
-		}
-
 		cc.setCalendars(c);
 
 		bframe.calendarContainer = cc;
@@ -43,7 +31,7 @@
 		}
 
 		this.closeAll = function() {
-			for(var i=0; i<calendars.length; i++) {
+			for(var i=0; i < calendars.length; i++) {
 				if(calendars[i].hide) {
 					calendars[i].hide();
 				}
@@ -168,9 +156,9 @@
 				link[0].onfocus = bframe.blur;
 				link[1].onfocus = bframe.blur;
 
-				for(var i=1; i<table.rows.length; i++) {
+				for(var i=1; i < table.rows.length; i++) {
 					var tr = table.rows[i];
-					for(var j=0; j<tr.cells.length; j++) {
+					for(var j=0; j < tr.cells.length; j++) {
 						if(tr.cells[j].innerHTML) {
 							tr.cells[j].style.cursor = 'pointer';
 							tr.cells[j].onclick = setDate;

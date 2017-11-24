@@ -7,10 +7,10 @@
 	bframe.addEventListener(window, 'load' , bframeSuggestInit);
 
 	function bframeSuggestInit() {
-		var input = document.getElementsByTagName('input');
+		var objects = document.getElementsByClassName('bframe_suggest');
 
-		for(var i=0; i < input.length; i++) {
-			var s = new bframe.suggest(input[i]);
+		for(var i=0; i < objects.length; i++) {
+			var s = new bframe.suggest(objects[i]);
 		}
 	}
 
@@ -19,9 +19,6 @@
 	// 
 	// -------------------------------------------------------------------------
 	bframe.suggest = function(target) {
-		if(!bframe.checkClassName('bframe_suggest', target)) {
-			return false;
-		}
 		var self = this;
 		var target_id = bframe.getID(target);
 

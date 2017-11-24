@@ -7,12 +7,10 @@
 	bframe.addEventListener(window, 'load', bframeTreeInit);
 
 	function bframeTreeInit() {
-		var div = document.getElementsByTagName('div');
+		var objects = document.getElementsByClassName('bframe_tree');
 
-		for(var i=0; i<div.length; i++) {
-			if(bframe.checkClassName('bframe_tree', div[i])) {
-				bframe_tree = new bframe.tree(div[i]);
-			}
+		for(var i=0; i < objects.length; i++) {
+			bframe_tree = new bframe.tree(objects[i]);
 		}
 	}
 

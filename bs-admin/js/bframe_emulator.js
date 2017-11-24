@@ -7,12 +7,10 @@
 	bframe.addEventListener(window, 'load' , bframeDeviceEmultorInit);
 
 	function bframeDeviceEmultorInit() {
-		var div = document.getElementsByTagName('div');
+		var objects = document.getElementsByClassName('bframe_emulator');
 
-		for(var i=0; i<div.length; i++) {
-			if(bframe.checkClassName('bframe_emulator', div[i])) {
-				bframeEmulator = new bframe.emulator(div[i]);
-			}
+		for(var i=0; i < objects.length; i++) {
+			bframeEmulator = new bframe.emulator(objects[i]);
 		}
 	}
 

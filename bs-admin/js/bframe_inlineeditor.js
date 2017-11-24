@@ -9,12 +9,10 @@
 	CKEDITOR.disableAutoInline = true;
 
 	function bframeInlineEditorInit() {
-		var div = document.getElementsByTagName('div');
+		var objects = document.getElementsByClassName('bframe_inlineeditor');
 
-		for(var i=0; i < div.length; i++) {
-			if(bframe.checkClassName('bframe_inlineeditor', div[i])) {
-				var s = new bframe.inlineeditor(div[i]);
-			}
+		for(var i=0; i < objects.length; i++) {
+			var s = new bframe.inlineeditor(objects[i]);
 		}
 	}
 

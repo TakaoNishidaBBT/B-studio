@@ -7,12 +7,10 @@
 	bframe.addEventListener(window, 'load' , bframeVisualEditorInit);
 
 	function bframeVisualEditorInit() {
-		var textarea = document.getElementsByTagName('textarea');
+		var objects = document.querySelectorAll('textarea.bframe_visualeditor');
 
-		for(var i=0; i < textarea.length; i++) {
-			if(bframe.checkClassName('bframe_visualeditor', textarea[i])) {
-				var s = new bframe.visualeditor(textarea[i]);
-			}
+		for(var i=0; i < objects.length; i++) {
+			var s = new bframe.visualeditor(objects[i]);
 		}
 	}
 

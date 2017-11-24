@@ -7,12 +7,10 @@
 	bframe.addEventListener(window, 'load' ,bframeGridInit);
 
 	function bframeGridInit(){
-		var table = document.getElementsByTagName('table');
+		var objects = document.querySelectorAll('table.bframe_grid');
 
-		for(var i=0; i < table.length; i++) {
-			if(bframe.checkClassName('bframe_grid', table[i])) {
-				var s = new bframe.grid(table[i]);
-			}
+		for(var i=0; i < objects.length; i++) {
+			var s = new bframe.grid(objects[i]);
 		}
 	}
 

@@ -7,12 +7,10 @@
 	bframe.addEventListener(window, 'load', bframeSplitterInit);
 
 	function bframeSplitterInit(){
-		var div = document.getElementsByTagName('div');
+		var objects = document.getElementsByClassName('bframe_splitter');
 
-		for(var i=0; i < div.length; i++) {
-			if(bframe.checkClassName('bframe_splitter', div[i])) {
-				s = new bframe.splitter(div[i]);
-			}
+		for(var i=0; i < objects.length; i++) {
+			s = new bframe.splitter(objects[i]);
 		}
 	}
 
@@ -259,25 +257,15 @@
 		var element_position;
 		var right_pane_width;
 
-		var iframe = document.getElementsByTagName('iframe');
-		setPane(iframe);
+		var objects = document.getElementsByClassName('bframe_splitter_pane');
 
-		if(!left_pane && !right_pane) {
-			var div = document.getElementsByTagName('div');
-			setPane(div);
-		}
-
-		function setPane(obj) {
-			for(var i=0; i<obj.length; i++) {
-				if(bframe.checkClassName('bframe_splitter_pane', obj[i])) {
-					if(!left_pane) {
-						left_pane = obj[i];
-					}
-					else {
-						right_pane = obj[i];
-						break;
-					}
-				}
+		for(var i=0; i < objects.length; i++) {
+			if(!left_pane) {
+				left_pane = objects[i];
+			}
+			else {
+				right_pane = objects[i];
+				break;
 			}
 		}
 

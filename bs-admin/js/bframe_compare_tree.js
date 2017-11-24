@@ -8,13 +8,11 @@
 
 	function bframeCompareTreeInit(){
 		var tc = new bframe.compare_tree_container();
-		var div = document.getElementsByTagName('div');
 		var t = new Array();
 
-		for(var i=0, j=0; i<div.length; i++) {
-			if(bframe.checkClassName('bframe_compare_tree', div[i])) {
-				t[j++] = new bframe.compare_tree(tc, div[i], j);
-			}
+		var objects = document.getElementsByClassName('bframe_compare_tree');
+		for(var i=0, j=0; i<objects.length; i++) {
+			t[j++] = new bframe.compare_tree(tc, objects[i], j);
 		}
 
 		tc.setTrees(t);

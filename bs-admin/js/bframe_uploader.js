@@ -7,12 +7,12 @@
 	bframe.addEventListener(window, 'load' , bframeUploaderInit);
 
 	function bframeUploaderInit(){
-		var input = document.getElementsByTagName('input');
+		var objects = document.querySelectorAll('input.bframe_uploader');
 
-		for(var i=0; i<input.length; i++) {
-			var type = input[i].getAttribute('type');
-			if(type && type.toLowerCase() == 'file' && bframe.checkClassName('bframe_uploader', input[i])) {
-				new bframe.uploader(input[i]);
+		for(var i=0; i < objects.length; i++) {
+			var type = objects[i].getAttribute('type');
+			if(type && type.toLowerCase() == 'file') {
+				new bframe.uploader(objects[i]);
 			}
 		}
 	}
