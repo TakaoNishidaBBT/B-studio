@@ -31,7 +31,8 @@
 				for($i=0; $i<func_num_args(); $i++) {
 					$param = func_get_arg($i);
 					if(is_array($param)) {
-						$param = print_r($param, true);
+						$param2 = $this->shortenText($param);
+						$param = print_r($param2, true);
 					}
 					if($message) {
 						$message.= ' ';
@@ -40,6 +41,19 @@
 				}
 				fwrite($this->fp, date('Y/m/d H:i:s') . ' ' . $message . "\n");
 			}
+		}
+
+		function shortenText($param) {
+			if(is_array($param)) {
+				foreach($param as $key => $value) {
+					$param2[$key] = $this->shortenText($value);
+				}
+				return $param2;
+			}
+			else if(mb_strlen($param, B_CHARSET) > 400) {
+				return mb_substr($param, 0, 100, B_CHARSET) . '...' .  mb_substr($param, -40, 40, B_CHARSET);
+			}
+			return $param;
 		}
 
 		function write_archive_log($message) {
