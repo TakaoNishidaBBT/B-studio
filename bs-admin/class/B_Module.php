@@ -105,7 +105,7 @@
 		}
 
 		function sendHttpHeader() {
-			header('Cache-Control: no-cache, must-revalidate');
+			header('Cache-Control: no-cache, no-store, must-revalidate');
 			switch($this->charset) {
 			case 'SJIS':
 				header('Content-Type: text/html; charset=Shift_JIS');

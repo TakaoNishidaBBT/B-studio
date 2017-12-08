@@ -42,8 +42,7 @@
 		function admin() {
 			if(!defined('TERMINAL_ID')) {
 				// Set TERMINAL_ID
-				$util = new B_Util();
-				define('TERMINAL_ID', $util->getRandomText(12));
+				define('TERMINAL_ID', $this->util->getRandomText(12));
 				$_SESSION['terminal_id'] = TERMINAL_ID;
 
 				// Set session for each TERMINAL_ID
