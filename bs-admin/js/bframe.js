@@ -397,6 +397,26 @@
 		return style;
 	}
 
+	bframe.getTransparent = function() {
+		var span = document.createElement('span');
+		document.body.appendChild(span);
+		var transparent = window.getComputedStyle(span).backgroundColor;
+		document.body.removeChild(span);
+
+		return transparent;
+	}
+
+	bframe.getBgColor = function(element) {
+		if(!bframe.transparent) bframe.transparent = bframe.getTransparent();
+
+		var bgColor = window.getComputedStyle(element).backgroundColor;
+		if(bgColor == bframe.transparent && element.parentNode) {
+			bgColor = bframe.getBgColor(element.parentNode);
+		}
+		
+		return bgColor;
+	}
+
 	bframe.getWindowSize = function() {
 		var w = top.document.documentElement.clientWidth  || top.document.body.clientWidth;
 		var h = top.document.documentElement.clientHeight || top.document.body.clientHeight;

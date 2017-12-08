@@ -186,8 +186,10 @@
 	}
 
 	bstudio.registerEditor = function(fname, module, page, method, mode, nocheck) {
-		bframe.ajaxSubmit.removeCallBackFunctionAfter(window.opener.bstudio.reloadTree);
-		bframe.ajaxSubmit.registerCallBackFunctionAfter(window.opener.bstudio.reloadTree);
+		if(window.opener) {
+			bframe.ajaxSubmit.removeCallBackFunctionAfter(window.opener.bstudio.reloadTree);
+			bframe.ajaxSubmit.registerCallBackFunctionAfter(window.opener.bstudio.reloadTree);
+		}
 		bframe.ajaxSubmit.submit(fname, module, page, method, mode, nocheck);
 	}
 
