@@ -258,6 +258,8 @@
 		}
 
 		public static function createthumbnail($src, &$dest, $max_size) {
+			ini_set('memory_limit', '256M');
+
 			$file_info = B_Util::pathinfo($src);
 			$file_extension = strtolower($file_info['extension']);
 
