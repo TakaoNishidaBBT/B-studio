@@ -117,9 +117,6 @@
 	define('B_FILE_INFO_THUMB_SEMAPHORE', B_CACHE_DIR . 'file_info_thumb_semaphore.txt');
 	define('B_LIMIT_FILE_INFO', B_CACHE_DIR . 'limit_info_c.txt');
 
-	// DB Encode
-	define('B_ENCODE', 'utf8');
-
 	// Charset
 	define('B_CHARSET', 'UTF-8');
 
