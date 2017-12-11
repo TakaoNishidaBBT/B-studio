@@ -20,6 +20,9 @@
 	// SSL for Admin Page
 	define('B_ADMIN_SSL', 'OFF');
 
+	//HTTP HOST
+	define('B_HTTP_HOST', $_SERVER['SERVER_NAME']);
+
 	// Session Name for Admin Page
 	define('B_ADMIN_SESSION_NAME', B_SITE_NAME . '-bs-admin');
 
@@ -30,9 +33,6 @@
 	else {
 		define('B_ADMIN_SESSION_SECURE', false);
 	}
-
-	//HTTP HOST
-	define('B_HTTP_HOST', $_SERVER['SERVER_NAME']);
 
 	//Document Root Directory
 	if(substr($_SERVER['DOCUMENT_ROOT'], -1) == '/') {
