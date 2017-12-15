@@ -721,18 +721,20 @@
 					break;
 
 				case 'emailMX':
-					if(substr(PHP_OS, 0, 3) === 'WIN') break;
-					if($config['delimiter']) {
-						$value_list = explode($config['delimiter'], $this->value);
-					}
-					else {
-						$value_list[0] = $this->value;
-					}
-					foreach($value_list as $value) {
-						if(!$this->checkEmailMX($value)) {
-							$err_obj = $this->searchElementByName('error_message');
-							if($err_obj) $err_obj->value = $config['error_message'];
-							return false;
+					if(isset($this->value) && $this->value != '') { // not required
+						if(substr(PHP_OS, 0, 3) === 'WIN') break;
+						if($config['delimiter']) {
+							$value_list = explode($config['delimiter'], $this->value);
+						}
+						else {
+							$value_list[0] = $this->value;
+						}
+						foreach($value_list as $value) {
+							if(!$this->checkEmailMX($value)) {
+								$err_obj = $this->searchElementByName('error_message');
+								if($err_obj) $err_obj->value = $config['error_message'];
+								return false;
+							}
 						}
 					}
 					break;
