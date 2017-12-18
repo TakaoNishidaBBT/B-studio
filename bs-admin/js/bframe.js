@@ -35,6 +35,13 @@
 		}
 	}
 
+	bframe.submitOnce = function(fname, module, page, method, mode, nocheck) {
+		if(bframe.response_wait) return;
+
+		bframe.submit(fname, module, page, method, mode, nocheck);
+		bframe.response_wait = true;
+	}
+
 	bframe.submit = function(fname, module, page, method, mode, nocheck) {
 		// set form object
 		var form = fname ? document.forms[fname] : document.forms[0];
