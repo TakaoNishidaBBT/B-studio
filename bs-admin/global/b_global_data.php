@@ -458,7 +458,7 @@
 		);
 
 	${$g_data_set}['table']['contact'] =
-		array(								// データ型  	   桁数		PK   AUTO-INCREMENT
+		array(							// Data Types			Length	PK		Auto-Increment
 			'contact_id'				=> array('char',	 	'5', 	'1', 	'1'),
 			'contact_category'			=> array('text', 		'',		'',		''),
 			'entry_datetime'			=> array('text', 		'',		'',		''),
@@ -497,7 +497,7 @@
 		);
 
 	${$g_data_set}['table']['mail_settings'] =
-		array(								// データ型  	   桁数		PK   AUTO-INCREMENT
+		array(							// Data Types			Length	PK		Auto-Increment
 			'mail_id'					=> array('char', 		'5', 	'1', 	'1'),
 			'mail_type'					=> array('text', 		'', 	'', 	''),
 			'mail_title'				=> array('text', 		'', 	'', 	''),

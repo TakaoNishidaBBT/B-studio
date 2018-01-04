@@ -193,27 +193,13 @@
 				return;
 			}
 
-			$this->contents_table = new B_Table($this->db, 'contents');
-			$this->contents_node_table = new B_Table($this->db, 'contents_node');
-			$this->template_table = new B_Table($this->db, 'template');
-			$this->template_node_table = new B_Table($this->db, 'template_node');
-			$this->widget_table = new B_Table($this->db, 'widget');
-			$this->widget_node_table = new B_Table($this->db, 'widget_node');
-			$this->resource_node_table = new B_Table($this->db, 'resource_node');
-
-			$ret = $this->table->deleteByPk($param);
-			$ret&= $this->contents_table->deleteByPk($param);
-			$ret&= $this->contents_node_table->deleteByPk($param);
-			$ret&= $this->template_table->deleteByPk($param);
-			$ret&= $this->template_node_table->deleteByPk($param);
-			$ret&= $this->widget_table->deleteByPk($param);
-			$ret&= $this->widget_node_table->deleteByPk($param);
-			$ret&= $this->resource_node_table->deleteByPk($param);
+			$ret = $this->deleteRecords($row['version_id']);
 
 			$param = $row;
 
 			if($ret) {
 				$this->db->commit();
+				$this->deleteResourceFiles();
 				$param['action_message'] = __('was deleted.');
 			}
 			else {
@@ -223,6 +209,68 @@
 			$this->result->setValue($param);
 
 			$this->setView('result_view');
+		}
+
+		function deleteRecords($version_id) {
+			// save resrouce_node file info
+			$sql = "select * from " . B_DB_PREFIX . "resource_node where version_id='$version_id'";
+			$rs = $this->db->query($sql);
+			while($row = $this->db->fetch_assoc($rs)) {
+				$this->delete_resource_files[] = $row;
+			}
+
+			try {
+				$this->deleteVersionRecords($version_id, 'contents_node');
+				$this->deleteVersionRecords($version_id, 'contents');
+				$this->deleteVersionRecords($version_id, 'template_node');
+				$this->deleteVersionRecords($version_id, 'template');
+				$this->deleteVersionRecords($version_id, 'widget_node');
+				$this->deleteVersionRecords($version_id, 'widget');
+				$this->deleteVersionRecords($version_id, 'resource_node');
+			}
+			catch(Exception $e) {
+				return false;
+			}
+
+			$param['version_id'] = $version_id;
+			return $this->table->deleteByPk($param);
+		}
+
+		function deleteVersionRecords($version_id, $table) {
+			$sql = "delete from " . B_DB_PREFIX . "$table where version_id='$version_id'";
+			$status = $this->db->query($sql);
+
+			if(!$status) {
+				throw new Exception(str_replace('%TABLE_NAME%', __('Faild to delete version records (%TABLE_NAME%)'), $table));
+			}
+		}
+
+		function deleteResourceFiles() {
+			foreach($this->delete_resource_files as $row) {
+				$info = pathinfo($row['node_name']);
+				$file_name = B_RESOURCE_DIR . $row['contents_id'] . '.' . strtolower($info['extension']);
+				switch($info['extension']) {
+				case 'avi':
+				case 'flv':
+				case 'mp4':
+				case 'mpg':
+				case 'mpeg':
+				case 'wmv':
+					$thumb_file_name = B_RESOURCE_DIR . B_THUMB_PREFIX . $row['contents_id'] . '.jpg';
+					break;
+
+				default:
+					$thumb_file_name = B_RESOURCE_DIR . B_THUMB_PREFIX . $row['contents_id'] . '.' . strtolower($info['extension']);
+					break;
+				}
+
+				if(file_exists($file_name)) {
+					unlink($file_name);
+				}
+				if(file_exists($thumb_file_name)) {
+					unlink($thumb_file_name);
+				}
+			}
 		}
 
 		function back() {

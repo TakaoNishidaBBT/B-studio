@@ -310,6 +310,9 @@
 										=> '即時反映',
 		'Scheduled to be published'		=> '予約登録',
 
+		'Faild to delete version records (%TABLE_NAME%)'
+										=> 'バージョンレコードの削除に失敗しました。(%TABLE_NAME%)',
+
 		// Compare
 		'Compare Versions Left: %LEFT_VERSION% &nbsp;Right: %RIGHT_VERSION%'
 										=> 'バージョン比較 Left: %LEFT_VERSION% Right: %RIGHT_VERSION%',

@@ -60,7 +60,7 @@
 			$status = false;
 
 			foreach($this->config as $key => $value) {
-				if($value[2] == '1' && isset($param[$key]) && $param[$key] != '') { // primary key
+				if($value[2] && isset($param[$key]) && $param[$key] != '') { // primary key
 					if(!isset($param[$key]) || $param[$key] == '') {
 						return false;
 					}
