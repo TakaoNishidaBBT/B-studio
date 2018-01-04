@@ -204,7 +204,7 @@
 			}
 			else {
 				$this->db->rollback();
-				$param['action_message'] = __('was faild to delete.');
+				$param['action_message'] = __('was failed to delete.');
 			}
 			$this->result->setValue($param);
 
@@ -241,7 +241,7 @@
 			$status = $this->db->query($sql);
 
 			if(!$status) {
-				throw new Exception(str_replace('%TABLE_NAME%', __('Faild to delete version records (%TABLE_NAME%)'), $table));
+				throw new Exception(str_replace('%TABLE_NAME%', __('Failed to delete version records (%TABLE_NAME%)'), $table));
 			}
 		}
 
