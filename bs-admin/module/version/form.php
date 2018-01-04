@@ -246,6 +246,8 @@
 		}
 
 		function deleteResourceFiles() {
+			if(!is_array($this->delete_resource_files)) return;
+
 			foreach($this->delete_resource_files as $row) {
 				$info = pathinfo($row['node_name']);
 				$file_name = B_RESOURCE_DIR . $row['contents_id'] . '.' . strtolower($info['extension']);
