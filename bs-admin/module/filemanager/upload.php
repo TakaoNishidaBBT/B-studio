@@ -39,7 +39,7 @@
 					throw new Exception(__('Multi-byte characters cannot be used'));
 				}
 				if(preg_match('/[\\\\:\/\*\?<>\|\s]/', $file['basename'])) {
-					throw new Exception(__('The following charcters cannot be used in file or folder names (\ / : * ? " < > | space)'));
+					throw new Exception(__('The following characters cannot be used in file or folder names (\ / : * ? " < > | space)'));
 				}
 				if($this->global_session[$this->session['relation']]['current_node'] != 'root') {
 					$path = $this->global_session[$this->session['relation']]['current_node'] . '/';

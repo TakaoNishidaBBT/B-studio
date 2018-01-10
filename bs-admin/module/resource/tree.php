@@ -592,7 +592,7 @@
 
 		function checkFileName($node_id, $file_name) {
 			if(preg_match('/[\\\\:\/\*\?\"\'<>\|\s]/', $file_name)) {
-				$this->message = __('The following charcters cannot be used in file or folder names (\ / : * ? " \' < > | space)');
+				$this->message = __('The following characters cannot be used in file or folder names (\ / : * ? " \' < > | space)');
 				return false;
 			}
 			if(strlen($file_name) != mb_strlen($file_name)) {

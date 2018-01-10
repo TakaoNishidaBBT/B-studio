@@ -329,7 +329,7 @@
 
 		function checkFileName($source, $dest, $file_name, $file_info) {
 			if(preg_match('/[\\\\:\/\*\?\"\'<>\|\s]/', $file_name)) {
-				$this->message = __('The following charcters cannot be used in file or folder names (\ / : * ? " \' < > | space)');
+				$this->message = __('The following characters cannot be used in file or folder names (\ / : * ? " \' < > | space)');
 				return false;
 			}
 			if(strlen($file_name) != mb_strlen($file_name)) {
