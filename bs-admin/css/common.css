@@ -44,7 +44,9 @@ input {
 	font-family: "ＭＳ Ｐゴシック","MS PGothic","Lucida Grande","Lucida Sans Unicode","Helvetica Neue","Hiragino Kaku Gothic Pro","ヒラギノ角ゴ Pro W3",Arial,Verdana,sans-serif;
 	font-size: 12px;
 }
-
+input::-moz-focus-inner {
+	border: 0;
+}
 ::selection,
 textarea::selection,
 input::selection {

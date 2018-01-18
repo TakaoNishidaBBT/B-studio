@@ -126,7 +126,7 @@ a.progressCancel:hover {
 #confirmDialog .box {
 	border: 1px solid #666;
 	padding: 4px 4px 25px 4px;
-	background: url(../images/common/warning.png) 80px 26px no-repeat #fff;
+	background: url(../images/common/warning.png) 80px 13px no-repeat #fff;
 	overflow: hidden;
 }
 #confirmDialog .container {
