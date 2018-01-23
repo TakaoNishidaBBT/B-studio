@@ -140,8 +140,8 @@
 					var height = size.height;
 				}
 				else {
-					var width = size.width > contents.offsetWidth ? size.width : contents.offsetWidth;
-					var height = size.height > contents.offsetHeight ? size.height : contents.offsetHeight;
+					var width = size.width < contents.offsetWidth ? size.width : contents.offsetWidth;
+					var height = size.height < contents.offsetHeight ? size.height : contents.offsetHeight;
 				}
 				element.style.width = width + 'px';
 				element.style.height = height + 'px';
