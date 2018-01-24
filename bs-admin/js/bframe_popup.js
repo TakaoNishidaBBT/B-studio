@@ -45,6 +45,38 @@
 			body.setBorder(value);
 		}
 
+		this.setMaxWidth = function(value) {
+			body.setMaxWidth(value);
+		}
+
+		this.getMaxWidth = function() {
+			return body.getMaxWidth();
+		}
+
+		this.setMinWidth = function(value) {
+			body.setMinWidth(value);
+		}
+
+		this.getMinWidth = function() {
+			return body.getMinWidth();
+		}
+
+		this.setMaxHeight = function(value) {
+			body.setMaxHeight(value);
+		}
+
+		this.getMaxHeight = function() {
+			return body.getMaxHeight();
+		}
+
+		this.setMinHeight = function(value) {
+			body.setMinHeight(value);
+		}
+
+		this.getMinHeight = function() {
+			return body.getMinHeight();
+		}
+
 		this.show = function(event) {
 			body.show();
 		}
@@ -95,6 +127,7 @@
 
 		function body(zindex, drop_shadow, transparent) {
 			var contents;
+			var maxWidth, maxHeight, minWidth, minHeight;
 
 			var element = document.createElement('div');
 			element.name = 'popup';
@@ -122,16 +155,9 @@
 
 			document.body.appendChild(element);
 
-			if(typeof document.body.style.maxHeight == 'undefined') {
-				var cv = new cover(zindex);
-			}
-
 			this.position = function(position) {
 				element.style.top = position.top + 'px';
 				element.style.left = position.left + 'px';
-				if(cv) {
-					cv.position(position);
-				}
 			}
 
 			this.size = function(size, force) {
@@ -142,17 +168,57 @@
 				else {
 					var width = size.width > contents.offsetWidth ? size.width : contents.offsetWidth;
 					var height = size.height > contents.offsetHeight ? size.height : contents.offsetHeight;
+					if(maxWidth && maxWidth < width) {
+						width = maxWidth;
+					}
+					if(maxHeight && maxHeight < height) {
+						height = maxHeight;
+					}
+					if(minWidth && minWidth > width) {
+						width = minWidth;
+					}
+					if(minHeight && minHeight > height) {
+						height = minHeight;
+					}
 				}
 				element.style.width = width + 'px';
 				element.style.height = height + 'px';
-				if(cv) {
-					s = {height:parseInt(size.height), width:parseInt(size.width)};
-					cv.size(s);
-				}
 			}
 
 			this.overflowY = function(value) {
 				element.style.overflowY = value;
+			}
+
+			this.setMaxWidth = function(value) {
+				maxWidth = value;
+			}
+
+			this.getMaxWidth = function() {
+				return maxWidth;
+			}
+
+			this.setMinWidth = function(value) {
+				minWidth = value;
+			}
+
+			this.getMinWidth = function() {
+				return minWidth;
+			}
+
+			this.setMaxHeight = function(value) {
+				maxHeight = value;
+			}
+
+			this.getMaxHeight = function() {
+				return maxHeight;
+			}
+
+			this.setMinHeight = function(value) {
+				minHeight = value;
+			}
+
+			this.getMinHeight = function() {
+				return minHeight;
 			}
 
 			this.setBorder = function(value) {
@@ -200,69 +266,19 @@
 			}
 
 			this.show = function() {
-				if(cv) cv.show();
-
 				element.style.visibility='visible';
 			}
 
 			this.hide = function() {
-				if(cv) cv.hide();
-
 				element.style.visibility='hidden';
 			}
 
 			this.cleanUp = function() {
 				bframe.removeElement(element);
-
-				if(cv) cv.cleanUp();
 			}
 
 			this.visibility = function() {
 				return element.style.visibility;
-			}
-		}
-
-		function cover(zindex) {
-			var element = document.createElement('iframe');
-
-			element.style.position = 'absolute';
-			element.style.overflow = 'hidden';
-			element.style.visibility = 'hidden';
-			element.style.padding = 0;
-			element.style.margin = 0;
-			element.style.zIndex = parseInt(zindex);
-			element.style.filter = 'alpha(opacity=0)'; 
-
-			element.style.top = 0;
-			element.style.left = 0;
-			element.style.width = 0;
-			element.style.height = 0;
-
-			element.frameBorder = 0;
-			element.src = 'javascript:false;';
-
-			document.body.appendChild(element);
-
-			this.position = function(position) {
-				element.style.top = position.top + 'px';
-				element.style.left = position.left + 'px';
-			}
-
-			this.size = function(size) {
-				element.style.width = size.width + 'px';
-				element.style.height = size.height + 'px';
-			}
-
-			this.show = function() {
-				element.style.visibility='visible';
-			}
-
-			this.hide = function() {
-				element.style.visibility='hidden';
-			}
-
-			this.cleanUp = function() {
-				bframe.removeElement(element);
 			}
 		}
 	}

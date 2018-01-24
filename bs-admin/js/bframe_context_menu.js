@@ -240,6 +240,38 @@
 			return element_width;
 		}
 
+		this.setMaxWidth = function(value) {
+			popup.setMaxWidth(value);
+		}
+
+		this.getMaxWidth = function() {
+			return popup.getMaxWidth();
+		}
+
+		this.setMinWidth = function(value) {
+			popup.setMinWidth(value);
+		}
+
+		this.getMinWidth = function() {
+			return popup.getMinWidth();
+		}
+
+		this.setMaxHeight = function(value) {
+			popup.setMaxHeight(value);
+		}
+
+		this.getMaxHeight = function() {
+			return popup.getMaxHeight();
+		}
+
+		this.setMinHeight = function(value) {
+			popup.setMinHeight(value);
+		}
+
+		this.getMinHeight = function() {
+			return popup.getMinHeight();
+		}
+
 		this.getRealWidth = function() {
 			return element_width > element.offsetWidth ? element_width :  element.offsetWidth;
 		}
