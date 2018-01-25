@@ -34,7 +34,6 @@
 
 		var event_mode = 'normal';
 
-		var max_height;
 		var element_width = 100;
 		var offsetHeight = 0;
 		var select_func;
@@ -278,10 +277,6 @@
 		
 		this.setOffsetHeight = function(height) {
 			offsetHeight = height;
-		}
-
-		this.setMaxHeight = function(height) {
-			max_height = height;
 		}
 
 		this.setBorder = function(value) {
@@ -582,6 +577,8 @@
 			self.hide();
 			filter();
 			reset();
+
+			var max_height = popup.getMaxHeight();
 
 			if(max_height && max_height < element.offsetHeight) {
 				size = {width:element_width, height:max_height};
