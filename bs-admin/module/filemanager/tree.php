@@ -620,13 +620,13 @@
 			// Send HTTP header
 			$this->sendHttpHeader();
 
-			$this->html_header->appendProperty('css', '<link href="css/filemanager_tree.css" type="text/css" rel="stylesheet" media="all" />');
-			$this->html_header->appendProperty('css', '<link href="css/filemanager.css" type="text/css" rel="stylesheet" media="all" />');
-			$this->html_header->appendProperty('css', '<link href="css/upload.css" type="text/css" rel="stylesheet" media="all" />');
-			$this->html_header->appendProperty('script', '<script src="js/bframe_tree.js" type="text/javascript"></script>');
-			$this->html_header->appendProperty('script', '<script src="js/bframe_dialog.js" type="text/javascript"></script>');
-			$this->html_header->appendProperty('script', '<script src="js/bframe_splitter.js" type="text/javascript"></script>');
-			$this->html_header->appendProperty('script', '<script src="js/bframe_progress_bar.js" type="text/javascript"></script>');
+			$this->html_header->appendProperty('css', '<link rel="stylesheet" href="css/filemanager_tree.css">');
+			$this->html_header->appendProperty('css', '<link rel="stylesheet" href="css/filemanager.css">');
+			$this->html_header->appendProperty('css', '<link rel="stylesheet" href="css/upload.css">');
+			$this->html_header->appendProperty('script', '<script src="js/bframe_tree.js"></script>');
+			$this->html_header->appendProperty('script', '<script src="js/bframe_dialog.js"></script>');
+			$this->html_header->appendProperty('script', '<script src="js/bframe_splitter.js"></script>');
+			$this->html_header->appendProperty('script', '<script src="js/bframe_progress_bar.js"></script>');
 
 			// Show HTML header
 			$this->showHtmlHeader();

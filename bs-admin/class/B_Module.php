@@ -106,19 +106,7 @@
 
 		function sendHttpHeader() {
 			header('Cache-Control: no-cache, no-store, must-revalidate');
-			switch($this->charset) {
-			case 'SJIS':
-				header('Content-Type: text/html; charset=Shift_JIS');
-				break;
-
-			case 'EUC':
-				header('Content-Type: text/html; charset=EUC-JP');
-				break;
-
-			case 'UTF-8':
-				header('Content-Type: text/html; charset=UTF-8');
-				break;
-			}
+			header('Content-Type: text/html; charset=UTF-8');
 		}
 
 		function showHtmlHeader() {

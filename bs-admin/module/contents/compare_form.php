@@ -295,20 +295,20 @@
 			// Send HTTP header
 			$this->sendHttpHeader();
 
-			$this->html_header->appendProperty('css', '<link href="css/contents_compare_form.css" type="text/css" rel="stylesheet" media="all" />');
-			$this->html_header->appendProperty('css', '<link href="css/texteditor.css" type="text/css" rel="stylesheet" media="all" />');
-			$this->html_header->appendProperty('css', '<link href="css/diff2html/diff2html.css" type="text/css" rel="stylesheet" media="all" />');
+			$this->html_header->appendProperty('css', '<link rel="stylesheet" href="css/contents_compare_form.css">');
+			$this->html_header->appendProperty('css', '<link rel="stylesheet" href="css/texteditor.css">');
+			$this->html_header->appendProperty('css', '<link rel="stylesheet" href="css/diff2html/diff2html.css">');
 
-			$this->html_header->appendProperty('script', '<script src="js/bframe_tab.js" type="text/javascript"></script>');
-			$this->html_header->appendProperty('script', '<script src="js/bframe_compare.js" type="text/javascript"></script>');
-			$this->html_header->appendProperty('script', '<script src="js/bframe_preview.js" type="text/javascript"></script>');
+			$this->html_header->appendProperty('script', '<script src="js/bframe_tab.js"></script>');
+			$this->html_header->appendProperty('script', '<script src="js/bframe_compare.js"></script>');
+			$this->html_header->appendProperty('script', '<script src="js/bframe_preview.js"></script>');
 
-			$this->html_header->appendProperty('script', '<script src="js/jquery/jquery.min.js" type="text/javascript"></script>');
-			$this->html_header->appendProperty('script', '<script src="js/diff2html/highlight.min.js" type="text/javascript"></script>');
-			$this->html_header->appendProperty('script', '<script src="js/diff2html/scala.min.js" type="text/javascript"></script>');
-			$this->html_header->appendProperty('script', '<script src="js/diff2html/difflib.js" type="text/javascript"></script>');
-			$this->html_header->appendProperty('script', '<script src="js/diff2html/diff2html.js" type="text/javascript"></script>');
-			$this->html_header->appendProperty('script', '<script src="js/diff2html/diff2html-ui.js" type="text/javascript"></script>');
+			$this->html_header->appendProperty('script', '<script src="js/jquery/jquery.min.js"></script>');
+			$this->html_header->appendProperty('script', '<script src="js/diff2html/highlight.min.js"></script>');
+			$this->html_header->appendProperty('script', '<script src="js/diff2html/scala.min.js"></script>');
+			$this->html_header->appendProperty('script', '<script src="js/diff2html/difflib.js"></script>');
+			$this->html_header->appendProperty('script', '<script src="js/diff2html/diff2html.js"></script>');
+			$this->html_header->appendProperty('script', '<script src="js/diff2html/diff2html-ui.js"></script>');
 
 			// Show HTML header
 			$this->showHtmlHeader();
@@ -320,7 +320,7 @@
 		function view_folder() {
 			$this->sendHttpHeader();
 
-			$this->html_header->appendProperty('css', '<link href="css/contents_form.css" type="text/css" rel="stylesheet" media="all" />');
+			$this->html_header->appendProperty('css', '<link rel="stylesheet" href="css/contents_form.css">');
 
 			$this->showHtmlHeader();
 

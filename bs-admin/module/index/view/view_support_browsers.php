@@ -1,14 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Pragma" content="no-cache" />
-<meta http-equiv="Cache-Control" content="no-cache" />
-<meta http-equiv="Expires" content="Thu, 01 Dec 1994 16:00:00 GMT" />
-<meta http-equiv="Content-Style-Type" content="text/css" />
-<meta http-equiv="Content-Script-Type" content="text/javascript" />
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link href="css/common.css" type="text/css" rel="stylesheet" media="all" />
-<link href="css/login.css" type="text/css" rel="stylesheet" media="all" />
+<meta charset="utf-8">
+<link rel="stylesheet" href="css/common.css">
+<link rel="stylesheet" href="css/login.css">
 <title><?php echo $this->title ?></title></head>
 <body>
 	<div id="title-header"><h1><?php echo $this->site_title; ?></h1></div>

@@ -10,20 +10,21 @@ $html_header_config = array(
 	'html'		=> '<html>',
 	'meta'		=>
 	array(
+		'<meta charset="UTF-8">',
 	),
 	'script'	=> 
 	array(
-		'<script src="js/bstudio.js" type="text/javascript"></script>',
-		'<script src="js/bframe.js" type="text/javascript"></script>',
-		'<script src="js/bframe_adjustwindow.js" type="text/javascript"></script>',
-		'<script src="js/bframe_ajax.js" type="text/javascript"></script>',
-		'<script src="js/bframe_context_menu.js" type="text/javascript"></script>',
-		'<script src="js/bframe_popup.js" type="text/javascript"></script>',
+		'<script src="js/bstudio.js"></script>',
+		'<script src="js/bframe.js"></script>',
+		'<script src="js/bframe_adjustwindow.js"></script>',
+		'<script src="js/bframe_ajax.js"></script>',
+		'<script src="js/bframe_context_menu.js"></script>',
+		'<script src="js/bframe_popup.js"></script>',
 	),
 	'css'		=>
 	array(
-		'<link href="css/common.css" type="text/css" rel="stylesheet" media="all" />',
-		'<link href="css/context_menu.css" type="text/css" rel="stylesheet" media="all" />',
+		'<link rel="stylesheet" href="css/common.css">',
+		'<link rel="stylesheet" href="css/context_menu.css">',
 	),
 	'title'		=> B_SYSTEM_NAME,
 );

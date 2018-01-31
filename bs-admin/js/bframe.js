@@ -192,7 +192,7 @@
 		ajaxResponse = function() {
 			var obj;
 
-			if(httpObj.readyState == 4 && httpObj.status == 200 && bframe.response_wait){
+			if(httpObj.readyState == 4 && httpObj.status == 200 && bframe.response_wait) {
 				try {
 					response = eval('('+httpObj.responseText+')');
 				}

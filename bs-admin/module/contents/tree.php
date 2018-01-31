@@ -36,8 +36,8 @@
 			// Send HTTP header
 			$this->sendHttpHeader();
 
-			$this->html_header->appendProperty('css', '<link href="css/contents_tree.css" type="text/css" rel="stylesheet" media="all" />');
-			$this->html_header->appendProperty('script', '<script src="js/bframe_tree.js" type="text/javascript"></script>');
+			$this->html_header->appendProperty('css', '<link rel="stylesheet" href="css/contents_tree.css">');
+			$this->html_header->appendProperty('script', '<script src="js/bframe_tree.js"></script>');
 
 			// Show HTML header
 			$this->showHtmlHeader();

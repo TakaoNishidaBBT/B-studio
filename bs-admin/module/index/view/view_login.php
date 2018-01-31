@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8" />
-<link href="css/common.css" type="text/css" rel="stylesheet" media="all" />
-<link href="css/login.css" type="text/css" rel="stylesheet" media="all" />
+<meta charset="utf-8">
+<link rel="stylesheet" href="css/common.css">
+<link rel="stylesheet" href="css/login.css">
 <title><?php echo $this->title ?></title></head>
 <body>
-	<script type="text/javascript">if(window != top) top.location.href='.';</script>
+	<script>if(window != top) top.location.href='.';</script>
 	<div id="title-header"><h1><?php echo $this->site_title; ?></h1></div>
 	<div class="login">
 		<form method="post" action="." autocomplete="off">

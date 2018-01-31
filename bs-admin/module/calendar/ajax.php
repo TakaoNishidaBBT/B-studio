@@ -50,15 +50,11 @@
 		}
 
 		function response() {
-			header('Content-Type: application/xml');
-			$html = '<div class="wrapper">' . $this->cal->getHtml() . '</div>';
+			$response['year'] = $this->year;
+			$response['month'] = $this->month;
+			$response['innerHTML'] = '<div class="wrapper">' . $this->cal->getHtml() . '</div>';
 
-			echo '<?xml version="1.0" encoding="' . B_CHARSET_XML_HEADER . '"?>';
-
-			echo '<response>' . "\n";
-			echo '	<year><![CDATA[' . $this->year . ']]></year>' . "\n";
-			echo '	<month><![CDATA[' . $this->month . ']]></month>' . "\n";
-			echo '	<innerHTML><![CDATA[' . $html . ']]></innerHTML>' . "\n";
-			echo '</response>';
+			header('Content-Type: application/x-javascript charset=utf-8');
+			echo json_encode($response);
 		}
 	}

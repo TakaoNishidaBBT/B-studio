@@ -1,27 +1,27 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8" />
-<meta name="terminal_id" content="<?php echo TERMINAL_ID ?>" />
-<meta name="source_module" content="index" />
-<meta name="source_page" content="index" />
-<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-<link href="css/common.css" rel="stylesheet" media="all" />
-<link href="css/menu.css" type="text/css" rel="stylesheet" media="all" />
-<link href="css/context_menu.css" type="text/css" rel="stylesheet" media="all" />
-<link href="css/modal_window.css" type="text/css" rel="stylesheet" media="all" />
-<link href="css/progress_bar.css" rel="stylesheet" media="all" />
-<script src="js/bframe.js" type="text/javascript"></script>
-<script src="js/bframe_ajax.js" type="text/javascript"></script>
-<script src="js/bframe_message.js" type="text/javascript"></script>
-<script src="js/bframe_popup.js" type="text/javascript"></script>
-<script src="js/bframe_context_menu.js" type="text/javascript"></script>
-<script src="js/bframe_menu.js" type="text/javascript"></script>
-<script src="js/bframe_adjustwindow.js" type="text/javascript"></script>
-<script src="js/bframe_modal_window.js" type="text/javascript"></script>
+<meta charset="utf-8">
+<meta name="terminal_id" content="<?php echo TERMINAL_ID ?>">
+<meta name="source_module" content="index">
+<meta name="source_page" content="index">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link rel="stylesheet" href="css/common.css">
+<link rel="stylesheet" href="css/menu.css">
+<link rel="stylesheet" href="css/context_menu.css">
+<link rel="stylesheet" href="css/modal_window.css">
+<link rel="stylesheet" href="css/progress_bar.css">
+<script src="js/bframe.js"></script>
+<script src="js/bframe_ajax.js"></script>
+<script src="js/bframe_message.js"></script>
+<script src="js/bframe_popup.js"></script>
+<script src="js/bframe_context_menu.js"></script>
+<script src="js/bframe_menu.js"></script>
+<script src="js/bframe_adjustwindow.js"></script>
+<script src="js/bframe_modal_window.js"></script>
 <title><?php echo $this->title ?></title></head>
 <body>
-	<script type="text/javascript">if(window != top) top.location.href='.'</script>
+	<script>if(window != top) top.location.href='.'</script>
 	<div id="title-header">
 		<h1><?php echo $this->site_title ?></h1>
 		<div class="login-user">

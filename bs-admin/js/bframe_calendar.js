@@ -81,7 +81,7 @@
 		}
 
 		function initResponse() {
-			if(httpObj.readyState == 4 && httpObj.status == 200 && response_wait){
+			if(httpObj.readyState == 4 && httpObj.status == 200 && response_wait) {
 				property = eval('('+httpObj.responseText+')');
 				size = {width:property.width, height:property.height};
 
@@ -139,12 +139,22 @@
 		}
 
 		function showResponse() {
-			if(httpObj.readyState == 4 && httpObj.status == 200 && response_wait){
-				xmlData = httpObj.responseXML;
-				year = xmlData.getElementsByTagName('year')[0].firstChild.nodeValue;
-				month = xmlData.getElementsByTagName('month')[0].firstChild.nodeValue;
+			if(httpObj.readyState == 4 && httpObj.status == 200 && response_wait) {
+				try {
+					response = eval('('+httpObj.responseText+')');
+				}
+				catch(e) {
+					var message = 'session timeout';
+					if(top.bframe.message) {
+						message = top.bframe.message.getProperty('session_time_out');
+					}
+					alert(message);
+					return;
+				}
+				year = response.year;
+				month = response.month;
 
-				popup.setPopUpContents(xmlData.getElementsByTagName('innerHTML')[0].firstChild.nodeValue);
+				popup.setPopUpContents(response.innerHTML);
 				popup.setPopUpPosition(position);
 				popup.setPopUpSize(size);
 

@@ -104,8 +104,8 @@
 			// Send HTTP header
 			$this->sendHttpHeader();
 
-			$this->html_header->appendProperty('css', '<link href="css/property.css" type="text/css" rel="stylesheet" media="all" />');
-			$this->html_header->appendProperty('script', '<script src="js/bframe_tab.js" type="text/javascript"></script>');
+			$this->html_header->appendProperty('css', '<link rel="stylesheet" href="css/property.css">');
+			$this->html_header->appendProperty('script', '<script src="js/bframe_tab.js"></script>');
 
 			// Show HTML header
 			$this->showHtmlHeader();

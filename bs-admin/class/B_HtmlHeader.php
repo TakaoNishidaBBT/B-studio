@@ -31,7 +31,7 @@
 		}
 
 		function appendMeta($name, $content) {
-			$str = '<meta name="' . $name . '" content="' . $content . '" />';
+			$str = '<meta name="' . $name . '" content="' . $content . '">';
 			$this->appendProperty('meta', $str);
 		}
 
@@ -52,31 +52,12 @@
 		}
 
 		function getHtml() {
-			switch($this->charset) {
-			case 'SJIS':
-				$this->appendProperty('meta', '<meta charset="SJIS" />');
-				break;
-
-			case 'EUC':
-				$this->appendProperty('meta', '<meta charset="EUC-JP" />');
-				break;
-
-			default:
-				$this->appendProperty('meta', '<meta charset="UTF-8" />');
-				break;
-			}
-
-			$html = '';
-
-			if(!(preg_match('/Windows/', $_SERVER['HTTP_USER_AGENT']) && preg_match('/MSIE 6/', $_SERVER['HTTP_USER_AGENT']))) {
-				$html.= $this->_outValue($this->declaration);
-			}
-
 			// set console log
 			if(console::$buffer) {
 				$this->appendProperty('script', console::$buffer);
 			}
 
+			$html = '';
 			$html.= $this->_outValue($this->doc_type);
 			$html.= $this->_outValue($this->html);
 			$html.= '<head>' . "\n";
