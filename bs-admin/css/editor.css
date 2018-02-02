@@ -1,22 +1,22 @@
 @charset "UTF-8";
 
 html, body {
-	background-color: #444;
+	background-color: #3a3a3a;
 	overflow: auto;
 }
 
-div#contents_container {
+div#contents_editor_container {
 	margin: 0;
 }
-div#contents {
+div#contents_editor {
 	background-color: #3a3a3a;
-	min-width: 900px;
 }
 div.main_container {
 	margin: 0 8px 0 0;
 	margin: 0;
 	padding: 0;
 	background-color: #555;
+	overflow: hidden;
 }
 
 /* tab control */
@@ -29,6 +29,7 @@ ul.tabcontrol {
 	border-bottom: 1px solid #444;
 	overflow: visible;
 	height: 28px;
+	min-width: 900px;
 }
 ul.tabcontrol li {
 	float: left;
@@ -59,6 +60,11 @@ ul.tabcontrol li.filename {
 	border-top: 1px solid #777;
 	border-right: 1px solid #3a3a3a;
 	border-bottom: 1px solid #555;
+	-moz-user-select: text;
+	-ms-user-select: text;
+	-webkit-user-select: text;
+	user-select: text;
+
 }
 ul.tabcontrol li.encoding {
 	border: none;
