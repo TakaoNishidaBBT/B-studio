@@ -195,8 +195,7 @@ array(
 			'end_html'		=> '</td>',
 			'element'		=>
 			array(
-				'name'			=> 'compare',
-				'id'			=> 'compare_enable',
+				'name'			=> 'compare_enable',
 				'class'			=> 'B_Link',
 				'link'			=> 'index.php',
 				'special_html'	=> 'class="compare-button" onclick="window.open(this.href); return false;"',
@@ -218,8 +217,7 @@ array(
 				)
 			),
 			array(
-				'name'			=> 'compare',
-				'id'			=> 'compare_disable',
+				'name'			=> 'compare_disable',
 				'class'			=> 'B_Link',
 				'special_html'	=> 'class="compare-button-disable" onclick="return false;"',
 				'display'		=> 'none',
@@ -235,8 +233,7 @@ array(
 			'end_html'		=> '</td>',
 			'element'		=>
 			array(
-				'name'			=> 'del',
-				'id'			=> 'del_enable',
+				'name'			=> 'del_enable',
 				'class'			=> 'B_Link',
 				'link'			=> 'index.php',
 				'special_html'	=> 'class="delete-button"',
@@ -260,8 +257,7 @@ array(
 				)
 			),
 			array(
-				'name'			=> 'del',
-				'id'			=> 'del_disable',
+				'name'			=> 'del_disable',
 				'class'			=> 'B_Link',
 				'special_html'	=> 'class="delete-button-disable" onclick="return false;"',
 				array(

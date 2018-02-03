@@ -285,7 +285,6 @@
 				$obj = $this->form->getElementByName('version_id_row');
 				$obj->display = 'none';
 			}
-
 			// Start buffering
 			ob_start();
 
@@ -297,8 +296,8 @@
 			// Send HTTP header
 			$this->sendHttpHeader();
 
-			$this->html_header->appendProperty('css', '<link href="css/version.css" type="text/css" rel="stylesheet" media="all" />');
-			$this->html_header->appendProperty('script', '<script src="js/bframe_edit_check.js" type="text/javascript"></script>');
+			$this->html_header->appendProperty('css', '<link rel="stylesheet" href="css/version.css">');
+			$this->html_header->appendProperty('script', '<script src="js/bframe_edit_check.js"></script>');
 
 			// Show HTML header
 			$this->showHtmlHeader();
@@ -319,7 +318,7 @@
 			// Send HTTP header
 			$this->sendHttpHeader();
 
-			$this->html_header->appendProperty('css', '<link href="css/version.css" type="text/css" rel="stylesheet" media="all" />');
+			$this->html_header->appendProperty('css', '<link rel="stylesheet" href="css/version.css">');
 
 			// Show HTML header
 			$this->showHtmlHeader();
@@ -340,7 +339,7 @@
 			// Send HTTP header
 			$this->sendHttpHeader();
 
-			$this->html_header->appendProperty('css', '<link href="css/version.css" type="text/css" rel="stylesheet" media="all" />');
+			$this->html_header->appendProperty('css', '<link rel="stylesheet" href="css/version.css">');
 
 			// Show HTML header
 			$this->showHtmlHeader();

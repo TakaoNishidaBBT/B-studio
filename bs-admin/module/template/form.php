@@ -230,19 +230,19 @@
 			// Send HTTP header
 			$this->sendHttpHeader();
 
-			$this->html_header->appendProperty('css', '<link href="css/template_form.css" type="text/css" rel="stylesheet" media="all" />');
-			$this->html_header->appendProperty('css', '<link href="css/texteditor.css" type="text/css" rel="stylesheet" media="all" />');
-			$this->html_header->appendProperty('script', '<script src="js/bframe_tab.js" type="text/javascript"></script>');
-			$this->html_header->appendProperty('script', '<script src="js/bframe_preview.js" type="text/javascript"></script>');
-			$this->html_header->appendProperty('script', '<script src="js/bframe_edit_check.js" type="text/javascript"></script>');
-			$this->html_header->appendProperty('script', '<script src="js/bframe_texteditor.js" type="text/javascript"></script>');
-			$this->html_header->appendProperty('script', '<script src="js/bframe_shortcut.js" type="text/javascript"></script>');
-			$this->html_header->appendProperty('script', '<script src="js/ace/ace.js" type="text/javascript"></script>');
-			$this->html_header->appendProperty('script', '<script src="js/ace/ext-split.js" type="text/javascript"></script>');
-			$this->html_header->appendProperty('script', '<script src="js/ace/theme-twilight.js" type="text/javascript"></script>');
-			$this->html_header->appendProperty('script', '<script src="js/ace/mode-html.js" type="text/javascript"></script>');
-			$this->html_header->appendProperty('script', '<script src="js/ace/mode-css.js" type="text/javascript"></script>');
-			$this->html_header->appendProperty('script', '<script src="js/ace/mode-php.js" type="text/javascript"></script>');
+			$this->html_header->appendProperty('css', '<link rel="stylesheet" href="css/template_form.css">');
+			$this->html_header->appendProperty('css', '<link rel="stylesheet" href="css/texteditor.css">');
+			$this->html_header->appendProperty('script', '<script src="js/bframe_tab.js"></script>');
+			$this->html_header->appendProperty('script', '<script src="js/bframe_preview.js"></script>');
+			$this->html_header->appendProperty('script', '<script src="js/bframe_edit_check.js"></script>');
+			$this->html_header->appendProperty('script', '<script src="js/bframe_texteditor.js"></script>');
+			$this->html_header->appendProperty('script', '<script src="js/bframe_shortcut.js"></script>');
+			$this->html_header->appendProperty('script', '<script src="js/ace/ace.js"></script>');
+			$this->html_header->appendProperty('script', '<script src="js/ace/ext-split.js"></script>');
+			$this->html_header->appendProperty('script', '<script src="js/ace/theme-twilight.js"></script>');
+			$this->html_header->appendProperty('script', '<script src="js/ace/mode-html.js"></script>');
+			$this->html_header->appendProperty('script', '<script src="js/ace/mode-css.js"></script>');
+			$this->html_header->appendProperty('script', '<script src="js/ace/mode-php.js"></script>');
 
 			// Show HTML header
 			$this->showHtmlHeader();
@@ -254,7 +254,7 @@
 		function view_folder() {
 			$this->sendHttpHeader();
 
-			$this->html_header->appendProperty('css', '<link href="css/template_form.css" type="text/css" rel="stylesheet" media="all" />');
+			$this->html_header->appendProperty('css', '<link rel="stylesheet" href="css/template_form.css">');
 
 			$this->showHtmlHeader();
 

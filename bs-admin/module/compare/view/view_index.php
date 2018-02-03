@@ -5,6 +5,7 @@
 <meta name="terminal_id" content="<?php echo TERMINAL_ID ?>">
 <meta name="source_module" content="compare">
 <meta name="source_page" content="index">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
 <link rel="stylesheet" href="css/common.css">
 <link rel="stylesheet" href="css/menu.css">
 <link rel="stylesheet" href="css/context_menu.css">
@@ -33,5 +34,5 @@
 		</div>
 	</div>
 	<?php echo $this->menu->gethtml(); ?>
-	<iframe id="main" class="bframe_adjustwindow" src="<?php echo $this->initial_page; ?>"></iframe>
+	<iframe id="main" name="main" class="bframe_adjustwindow" src="<?php echo $this->initial_page; ?>"></iframe>
 </body>

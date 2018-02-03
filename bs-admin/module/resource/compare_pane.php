@@ -383,9 +383,9 @@
 			// Send HTTP header
 			$this->sendHttpHeader();
 
-			$this->html_header->appendProperty('css', '<link href="css/resource_compare.css" type="text/css" rel="stylesheet" media="all" />');
-			$this->html_header->appendProperty('css', '<link href="css/resource_compare_tree.css" type="text/css" rel="stylesheet" media="all" />');
-			$this->html_header->appendProperty('script', '<script src="js/bframe_compare_pane.js" type="text/javascript"></script>');
+			$this->html_header->appendProperty('css', '<link rel="stylesheet" href="css/resource_compare.css" >');
+			$this->html_header->appendProperty('css', '<link rel="stylesheet" href="css/resource_compare_tree.css">');
+			$this->html_header->appendProperty('script', '<script src="js/bframe_compare_pane.js"></script>');
 
 			// Show HTML header
 			$this->showHtmlHeader();
@@ -397,7 +397,7 @@
 		function view_folder() {
 			$this->sendHttpHeader();
 
-			$this->html_header->appendProperty('css', '<link href="css/resource_compare.css" type="text/css" rel="stylesheet" media="all" />');
+			$this->html_header->appendProperty('css', '<link rel="stylesheet" href="css/resource_compare.css">');
 
 			$this->showHtmlHeader();
 

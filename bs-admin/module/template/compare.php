@@ -22,8 +22,8 @@
 			// HTTPヘッダー出力
 			$this->sendHttpHeader();
 
-			$this->html_header->appendProperty('css', '<link href="css/template.css" type="text/css" rel="stylesheet" media="all" />');
-			$this->html_header->appendProperty('script', '<script src="js/bframe_splitter.js" type="text/javascript"></script>');
+			$this->html_header->appendProperty('css', '<link rel="stylesheet" href="css/template.css">');
+			$this->html_header->appendProperty('script', '<script src="js/bframe_splitter.js"></script>');
 
 			// HTMLヘッダー出力
 			$this->showHtmlHeader();

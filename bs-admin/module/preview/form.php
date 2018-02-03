@@ -22,7 +22,7 @@
 			// Send HTTP header
 			$this->sendHttpHeader();
 
-			$this->html_header->appendProperty('css', '<link href="css/preview.css" type="text/css" rel="stylesheet" media="all" />');
+			$this->html_header->appendProperty('css', '<link rel="stylesheet" href="css/preview.css">');
 
 			// Show HTML header
 			$this->showHtmlHeader();

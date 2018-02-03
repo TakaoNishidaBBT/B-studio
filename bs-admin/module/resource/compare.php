@@ -30,8 +30,8 @@
 			// Send HTTP header
 			$this->sendHttpHeader();
 
-			$this->html_header->appendProperty('css', '<link href="css/resource.css" type="text/css" rel="stylesheet" media="all" />');
-			$this->html_header->appendProperty('script', '<script src="js/bframe_splitter.js" type="text/javascript"></script>');
+			$this->html_header->appendProperty('css', '<link rel="stylesheet" href="css/resource.css">');
+			$this->html_header->appendProperty('script', '<script src="js/bframe_splitter.js"></script>');
 
 			// Show HTML header
 			$this->showHtmlHeader();

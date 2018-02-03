@@ -6,7 +6,6 @@
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
 $list_header_config = array(
-	array('class' => 'B_Hidden', 'name' => 'default_row_per_page'),
 	array(
 		'name'			=> 'title',
 		'start_html'	=> '<h2 class="version">',

@@ -267,18 +267,18 @@
 				$publication_status = $row->getElementByName('publication_status');
 
 				if(!$reserved_version_id->checked && !$working_version_id->checked && $publication_status->value == '0') {
-					$obj = $row->getElementById('del_disable');
+					$obj = $row->getElementByName('del_disable');
 					$obj->display = 'none';
-					$obj = $row->getElementById('del_enable');
+					$obj = $row->getElementByName('del_enable');
 					$obj->display = 'block';
 				}
 			}
 
 			$obj = $row->getElementByName('version_id');
 			if($obj->value == '00001') {
-				$obj = $row->getElementById('compare_enable');
+				$obj = $row->getElementByName('compare_enable');
 				$obj->display = 'none';
-				$obj = $row->getElementById('compare_disable');
+				$obj = $row->getElementByName('compare_disable');
 				$obj->display = 'block';
 			}
 		}
@@ -295,9 +295,9 @@
 			// Send HTTP header
 			$this->sendHttpHeader();
 
-			$this->html_header->appendProperty('css', '<link href="css/version.css" type="text/css" rel="stylesheet" media="all" />');
-			$this->html_header->appendProperty('css', '<link href="css/selectbox_white.css" type="text/css" rel="stylesheet" media="all" />');
-			$this->html_header->appendProperty('script', '<script src="js/bframe_selectbox.js" type="text/javascript"></script>');
+			$this->html_header->appendProperty('css', '<link rel="stylesheet" href="css/version.css">');
+			$this->html_header->appendProperty('css', '<link rel="stylesheet" href="css/selectbox_white.css">');
+			$this->html_header->appendProperty('script', '<script src="js/bframe_selectbox.js"></script>');
 
 			// Show HTML header
 			$this->showHtmlHeader();
@@ -318,7 +318,7 @@
 			// Send HTTP header
 			$this->sendHttpHeader();
 
-			$this->html_header->appendProperty('css', '<link href="css/version.css" type="text/css" rel="stylesheet" media="all" />');
+			$this->html_header->appendProperty('css', '<link rel="stylesheet" href="css/version.css">');
 
 			// Show HTML header
 			$this->showHtmlHeader();
@@ -340,7 +340,7 @@
 			$this->sendHttpHeader();
 
 			// Set css and javascript
-			$this->html_header->appendProperty('css', '<link href="css/version.css" type="text/css" rel="stylesheet" media="all" />');
+			$this->html_header->appendProperty('css', '<link rel="stylesheet" href="css/version.css">');
 
 			// Show HTML header
 			$this->showHtmlHeader();

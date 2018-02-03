@@ -183,9 +183,9 @@
 			$this->sendHttpHeader();
 
 			// Set css and javascript
-			$this->html_header->appendProperty('css', '<link href="css/user.css" type="text/css" rel="stylesheet" media="all">');
-			$this->html_header->appendProperty('css', '<link href="css/selectbox_white.css" type="text/css" rel="stylesheet" media="all" />');
-			$this->html_header->appendProperty('script', '<script src="js/bframe_selectbox.js" type="text/javascript"></script>');
+			$this->html_header->appendProperty('css', '<link rel="stylesheet" href="css/user.css">');
+			$this->html_header->appendProperty('css', '<link rel="stylesheet" href="css/selectbox_white.css">');
+			$this->html_header->appendProperty('script', '<script src="js/bframe_selectbox.js"></script>');
 
 			// Show HTML header
 			$this->showHtmlHeader();

@@ -79,15 +79,15 @@
 			// Send HTTP header
 			$this->sendHttpHeader();
 
-			$this->html_header->appendProperty('css', '<link href="css/resource.css" type="text/css" rel="stylesheet" media="all" />');
-			$this->html_header->appendProperty('css', '<link href="css/resource_tree.css" type="text/css" rel="stylesheet" media="all" />');
-			$this->html_header->appendProperty('css', '<link href="css/upload.css" type="text/css" rel="stylesheet" media="all" />');
-			$this->html_header->appendProperty('css', '<link href="css/progress_bar.css" type="text/css" rel="stylesheet" media="all" />');
-			$this->html_header->appendProperty('script', '<script src="js/bframe_message.js" type="text/javascript"></script>');
-			$this->html_header->appendProperty('script', '<script src="js/bframe_tree.js" type="text/javascript"></script>');
-			$this->html_header->appendProperty('script', '<script src="js/bframe_dialog.js" type="text/javascript"></script>');
-			$this->html_header->appendProperty('script', '<script src="js/bframe_progress_bar.js" type="text/javascript"></script>');
-			$this->html_header->appendProperty('script', '<script src="js/bframe_splitter.js" type="text/javascript"></script>');
+			$this->html_header->appendProperty('css', '<link rel="stylesheet" href="css/resource.css">');
+			$this->html_header->appendProperty('css', '<link rel="stylesheet" href="css/resource_tree.css">');
+			$this->html_header->appendProperty('css', '<link rel="stylesheet" href="css/upload.css">');
+			$this->html_header->appendProperty('css', '<link rel="stylesheet" href="css/progress_bar.css">');
+			$this->html_header->appendProperty('script', '<script src="js/bframe_message.js"></script>');
+			$this->html_header->appendProperty('script', '<script src="js/bframe_tree.js"></script>');
+			$this->html_header->appendProperty('script', '<script src="js/bframe_dialog.js"></script>');
+			$this->html_header->appendProperty('script', '<script src="js/bframe_progress_bar.js"></script>');
+			$this->html_header->appendProperty('script', '<script src="js/bframe_splitter.js"></script>');
 
 			// Show HTML header
 			$this->showHtmlHeader();

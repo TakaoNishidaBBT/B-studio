@@ -47,8 +47,8 @@
 			// Send HTTP header
 			$this->sendHttpHeader();
 
-			$this->html_header->appendProperty('css', '<link href="css/resource_compare_tree.css" type="text/css" rel="stylesheet" media="all" />');
-			$this->html_header->appendProperty('script', '<script src="js/bframe_compare_tree.js" type="text/javascript"></script>');
+			$this->html_header->appendProperty('css', '<link rel="stylesheet" href="css/resource_compare_tree.css">');
+			$this->html_header->appendProperty('script', '<script src="js/bframe_compare_tree.js"></script>');
 
 			// Show HTML header
 			$this->showHtmlHeader();
