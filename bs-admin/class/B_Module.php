@@ -140,23 +140,18 @@
 				case 'B_Element':
 					$obj = $value->getElementById($this->request['id']);
 					if($obj) {
-						$data = $this->util->mb_convert_encoding($obj->script[$this->request['class']], 'UTF-8', B_MB_DETECT_ORDER);
-						$data = json_encode($data);
-						return $data;
+						return json_encode($obj->script[$this->request['class']]);
 					}
 					break;
 
 				case 'B_DataGrid':
 					if($value->id == $this->request['id']) {
-						$data = $this->util->mb_convert_encoding($value->script[$this->request['class']], 'UTF-8', B_MB_DETECT_ORDER);
-						$data = json_encode($data);
-						return $data;
+						return json_encode($value->script[$this->request['class']]);
 					}
 
 					$obj = $value->getElementByNameFromRowInstance($this->request['id']);
 					if($obj) {
-						$data = json_encode($obj->script[$this->request['class']]);
-						return $data;
+						return json_encode($obj->script[$this->request['class']]);
 					}
 					break;
 
@@ -164,16 +159,13 @@
 				case 'B_VNode':
 				case 'B_FileNode':
 					if($value->id == $this->request['id']) {
-						$data = $this->util->mb_convert_encoding($value->script[$this->request['class']], 'UTF-8', B_MB_DETECT_ORDER);
-						$data = json_encode($data);
-						return $data;
+						return json_encode($value->script[$this->request['class']]);
 					}
 					break;
 
 				default:
 					$vars = get_object_vars($value);
-					$data = $this->_initScript($vars);
-					if($data) {
+					if($data = $this->_initScript($vars)) {
 						return $data;
 					}
 					break;
