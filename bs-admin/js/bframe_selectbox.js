@@ -69,6 +69,7 @@
 		var selectbox_container = sc;
 
 		var context_menu;
+		var context_menu_parent;
 		var context_menu_frame = window;
 		var context_menu_frame_offset;
 		var context_menu_width = 100;
@@ -76,6 +77,7 @@
 		var focused;
 		var padding_left, padding_right;
 		var border_left_width, border_right_width;
+		var max_height = '500';
 
 		this.hidePullDownMenu = hidePullDownMenu;
 		this.reload = init;
@@ -98,6 +100,7 @@
 			bframe.addEventListenerAllFrames(top, 'load', hidePullDownMenuAllFrames);
 			bframe.addEventListenerAllFrames(top, 'mousedown', hidePullDownMenu);
 			bframe.addEventListenerAllFrames(top, 'keydown', keydown);
+			bframe.addEventListener(top, 'resize', hidePullDownMenu);
 		}
 
 		function hidePullDownMenuAllFrames(event) {
@@ -147,6 +150,16 @@
 			bframe.addEventListener(selectbox, 'focus', onfocus);
 			bframe.addEventListener(selectbox, 'blur', onblur);
 			bframe.addEventListener(selectbox, 'mousedown', showContextMenu);
+
+			context_menu_parent = context_menu.getElement().parentNode;
+
+			// set class name
+			var className = target.className.split(' ');
+			for(var i=0; i < className.length; i++) {
+				if(className[i] != 'bframe_selectbox') {
+					context_menu.addClassName(className[i]);
+				}
+			}
 		}
 
 		function onfocus(event) {
@@ -175,21 +188,25 @@
 			position.left += context_menu_frame_offset.left;
 			position.top += context_menu_frame_offset.top + window.pageYOffset;
 			context_menu.positionAbsolute(position);
+
+			var height = window.innerHeight - position.top - 2;
+			if(max_height < height) height = max_height;
+			context_menu.setMaxHeight(height);
+
 			context_menu.show();
 			context_menu.select(target.selectedIndex);
-			bframe.addEventListener(document, 'mousewheel', bframe.cancelEvent);
-			selectbox.className+= ' opened';
+			selectbox.classList.add('opened');
 			opened = true;
 			selectbox.focus();
 			return false;
 		}
 
 		function hidePullDownMenu(event) {
-			if(document.detachEvent) {
-				document.detachEvent('onmousewheel', bframe.cancelEvent);
+			if(event) {
+				if(context_menu_parent === bframe.getEventSrcElement(event)) return;
 			}
 			context_menu.hide();
-			selectbox.className = selectbox.className.replace(' opened', '');
+			selectbox.classList.remove('opened');
 			opened = false;
 		}
 

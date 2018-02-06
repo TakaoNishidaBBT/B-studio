@@ -19,6 +19,7 @@
 
 		var self = this;
 		var popup;
+		var popup_element;
 		var row_index = -1;
 		var element;
 
@@ -31,8 +32,6 @@
 
 		var confirm_message_index = new Array();
 		var confirm_message = new Array();
-
-		var event_mode = 'normal';
 
 		var element_width = 100;
 		var offsetHeight = 0;
@@ -60,6 +59,7 @@
 
 			if(!popup) {
 				popup = new bframe.popup(frame, zindex, true);
+				popup_element = popup.getContents();
 			}
 		}
 
@@ -299,6 +299,10 @@
 
 		this.setFunc = function(index, func) {
 			element.rows[index].onmouseup = func;
+		}
+
+		this.addClassName = function(value) {
+			element.classList.add(value);
 		}
 
 		function setValue() {
@@ -591,8 +595,8 @@
 			popup.size(size);
 
 			if(!parent_menu && popup.visibility() != 'visible') {
-				bframe.addEventListenerAllFrames(top, 'DOMMouseScroll', bframe.cancelEvent);
-				bframe.addEventListenerAllFrames(top, 'mousewheel', bframe.cancelEvent);
+				bframe.addEventListenerAllFrames(top, 'wheel', stopWheelEvent);
+				bframe.addEventListener(popup_element, 'wheel', activateWheelEvent);
 			}
 			popup.show();
 			opened = true;
@@ -606,12 +610,21 @@
 				submenu_open_index = -1;
 			}
 			if(!parent_menu && popup.visibility() == 'visible') {
-				bframe.removeEventListenerAllFrames(top, 'DOMMouseScroll', bframe.cancelEvent);
-				bframe.removeEventListenerAllFrames(top, 'mousewheel', bframe.cancelEvent);
+				bframe.removeEventListenerAllFrames(top, 'wheel', stopWheelEvent);
+				bframe.removeEventListener(popup_element, 'wheel', activateWheelEvent);
 			}
 			popup.hide();
 			self.clearTimer();
 			opened = false;
+		}
+
+		function stopWheelEvent(event) {
+			event.stopPropagation();
+			event.preventDefault();
+		}
+
+		function activateWheelEvent(event) {
+			event.stopPropagation();
 		}
 
 		this.opened = function() {
@@ -723,3 +736,4 @@
 			return false;
 		}
 	}
+
