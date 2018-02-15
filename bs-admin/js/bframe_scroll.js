@@ -233,6 +233,8 @@
 		}
 
 		function onScroll(event) {
+			if(self.clientHeight >= self.scrollHeight) return;
+
 			// set scroll bar top
 			var bartop = self.scrollTop + Math.round(barScrollHeight * self.scrollTop / scrollHeight) + padding;
 			bar.style.top = bartop + 'px';
@@ -372,16 +374,11 @@
 		function stop() {
 			bar.style.transition = 'opacity 0.4s ease-out';
 
-			if(self.clientHeight >= self.scrollHeight) {
-				bar.style.opacity = '0';
+			if(self.clientHeight < self.scrollHeight && isMouseOver) {
+				bar.style.opacity = '0.2';
 			}
 			else {
-				if(isMouseOver) {
-					bar.style.opacity = '0.2';
-				}
-				else {
-					bar.style.opacity = '0';
-				}
+				bar.style.opacity = '0';
 			}
 			moving = false;
 		}
