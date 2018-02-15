@@ -46,9 +46,12 @@ div.list-header {
 }
 div.contents {
 	margin: 0 auto;
-	padding: 40px 0 60px;
+	padding: 0;
 	overflow: auto;
 	box-sizing: border-box;
+}
+div.inner-contents {
+	padding: 40px 0 60px;
 }
 div.version-info {
 	line-height: 30px;
