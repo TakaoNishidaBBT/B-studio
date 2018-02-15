@@ -63,7 +63,7 @@
 
 		self.style.overflow = 'hidden';
 		self.style.overflowY = 'hidden';
-		self.style.box-sizing = 'border-box';
+		self.style.boxSizing = 'border-box';
 
 		if(bframe.getStyle(self).position.toLowerCase() == 'static') {
 			self.style.position = 'relative';
