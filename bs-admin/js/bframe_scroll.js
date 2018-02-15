@@ -59,6 +59,7 @@
 			}
 		}
 		else {
+			return;
 			bouncescroll = true;
 		}
 

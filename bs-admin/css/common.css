@@ -441,12 +441,14 @@ div#main {
 	padding: 20px;
 	overflow: auto;
 	height: 100%;
+	box-sizing: border-box;
 }
 
 /* list main */
 div#list-main {
 	padding: 20px 0 0 8px;
 	overflow: auto;
+	box-sizing: border-box;
 }
 div.list-container {
 	margin-bottom: 30px;

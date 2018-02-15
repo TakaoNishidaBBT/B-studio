@@ -45,7 +45,9 @@ div.list-header {
 	padding: 0;
 }
 div.contents {
-	margin: 40px auto 60px;
+	margin: 0 auto;
+	padding: 40px 0 60px;
+	overflow: auto;
 }
 div.version-info {
 	line-height: 30px;
