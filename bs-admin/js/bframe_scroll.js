@@ -65,12 +65,13 @@
 		self.style.overflow = 'hidden';
 		self.style.overflowY = 'hidden';
 		self.style.boxSizing = 'border-box';
-		paddingTop = self.style.paddingTop;
-		paddingBottom = self.style.paddingBottom;
 
-		if(bframe.getStyle(self).position.toLowerCase() == 'static') {
+		var style = bframe.getStyle(self);
+		if(style.position.toLowerCase() == 'static') {
 			self.style.position = 'relative';
 		}
+		paddingTop = style.paddingTop.substring(0, style.paddingTop.length-2);
+		paddingBottom = style.paddingBottom.substring(0, style.paddingBottom.length-2);
 
 		barHeight = Math.round(self.clientHeight * self.clientHeight / self.scrollHeight);
 		barScrollHeight = self.clientHeight - barHeight;
@@ -289,10 +290,10 @@
 			// set scroll bar height (for bounce scroll)
 			if(bouncescroll) {
 				if(self.scrollTop === 0) {
-					self.style.paddingTop = paddingTop + Math.round(speed * -1 / 2) + 'px';
+					self.style.paddingTop = parseInt(paddingTop) + Math.round(speed * -1 / 2) + 'px';
 				}
 				if(self.scrollTop >= scrollHeight) {
-					self.style.paddingBottom = paddingBottom + Math.floor(speed * 1 / 2) + 'px';
+					self.style.paddingBottom = parseInt(paddingBottom) + Math.floor(speed * 1 / 2) + 'px';
 					self.scrollTop = scrollHeight + speed;
 				}
 			}
