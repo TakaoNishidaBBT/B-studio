@@ -48,6 +48,7 @@ div.contents {
 	margin: 0 auto;
 	padding: 40px 0 60px;
 	overflow: auto;
+	box-sizing: border-box;
 }
 div.version-info {
 	line-height: 30px;
