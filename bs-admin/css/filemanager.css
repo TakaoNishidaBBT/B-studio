@@ -85,6 +85,7 @@ div#bframe_pane {
 	margin: 0;
 	padding: 30px 0 0 30px;
 	height: 100%;
+	box-sizing: border-box;
 }
 div#bframe_pane ul {
 	margin: 0;

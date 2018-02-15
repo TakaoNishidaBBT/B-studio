@@ -47,7 +47,7 @@
 		var draggStartScrollTop;
 		var isMouseOver;
 
-		var bouncescroll = false;
+		var bouncescroll;
 
 		if(os == 'windows') {
 			if(mode == 'ace') {
@@ -57,9 +57,13 @@
 				wheel_ratio = 14;
 			}
 		}
+		else {
+			bouncescroll = true;
+		}
 
 		self.style.overflow = 'hidden';
 		self.style.overflowY = 'hidden';
+		self.style.box-sizing = 'border-box';
 
 		if(bframe.getStyle(self).position.toLowerCase() == 'static') {
 			self.style.position = 'relative';
@@ -244,14 +248,22 @@
 		function onFrameWheel(event) {
 			var obj = bframe.getEventSrcElement(event);
 			var html = bframe.searchParentByTagName(obj, 'html');
+			var body = bframe.searchParentByTagName(obj, 'body');
 
 			if(!html) return;
 
 			var scrollHeight = html.scrollHeight - html.clientHeight;
 			var direction = event.deltaY > 0 ? 'down' : 'up';
 
-			if((direction == 'up' && html.scrollTop == 0) || (direction == 'down' && html.scrollTop >= scrollHeight)) {
-				onWheel(event);
+			if(os == 'windows') {
+				if((direction == 'up' && html.scrollTop == 0) || (direction == 'down' && html.scrollTop >= scrollHeight)) {
+					onWheel(event);
+				}
+			}
+			else {
+				if((direction == 'up' && body.scrollTop == 0) || (direction == 'down' && body.scrollTop >= scrollHeight)) {
+					onWheel(event);
+				}
 			}
 		}
 
@@ -282,10 +294,10 @@
 				}
 			}
 
-			if(direction == 'up' && self.scrollTop === 0) {
+			if(!moving && direction == 'up' && self.scrollTop === 0) {
 				return;
 			}
-			if(direction == 'down' && self.scrollTop >= scrollHeight) {
+			if(!moving && direction == 'down' && self.scrollTop >= scrollHeight) {
 				return;
 			}
 

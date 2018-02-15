@@ -21,7 +21,7 @@
 			<li id="display_thumbnail" class="view thumbnail"><a href="#" title="thumbnail view"><img src="images/common/view_thumbnail.png" alt="view list" /></a></li>
 		</ul>
 		<div class="pane_container">
-			<div id="bframe_pane" class="bframe_pane bframe_adjustparent bframe_scroll" data-param="margin:64,mode:resource"></div>
+			<div id="bframe_pane" class="bframe_pane bframe_adjustparent bframe_scroll" data-param="margin:34,mode:resource"></div>
 		</div>
 	</div>
 	<div class="footer"></div>
