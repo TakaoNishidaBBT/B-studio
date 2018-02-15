@@ -677,6 +677,14 @@
 
 	}
 
+	bframe.isVisible = function(obj) {
+		var visibility = document.defaultView.getComputedStyle(obj, null).visibility;
+		if(visibility == 'hidden') {
+			return false;
+		}
+		return true;
+	}
+
 	bframe.getFileName = function(url) {
 		file_name = url.substring(url.lastIndexOf('/')+1, url.length);
 		return file_name;
@@ -944,6 +952,16 @@
 			return 'tab';
 		}else{
 			return 'pc';
+		}
+	}
+
+	bframe.getOS = function() {
+		var ua = navigator.userAgent.toLowerCase();
+		if(ua.indexOf('win') > 0) {
+			return 'windows';
+		}
+		if(ua.indexOf('mac') > 0) {
+			return 'mac';
 		}
 	}
 

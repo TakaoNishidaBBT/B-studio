@@ -260,6 +260,40 @@ line：14218
 	};
 
 
+14. スクロールバーをbframe_scrollに変更
+	11939行目　background-color: #141414　を追加
+
+.ace_scrollbar {\
+position: absolute;\
+overflow: hidden;\
+overflow-y: auto;\
+right: 0;\
+top: 0;\
+bottom: 0;\
+background-color: #141414;\
+}\
+
+	14562行目
+
+	this.setVisible(false);
+	this.element.style.overflowY = "scroll";
+	
+	event.addListener(this.element, "scroll", this.onScrollV.bind(this));
+
+	// 2018/02/07 updated by T.Nishida
+	if(bframe.scroll) new bframe.scroll(this.element, 'ace');
+};
+
+
+	14630行目
+
+	this.setInnerHeight = function(height) {
+		this.inner.style.height = height + "px";
+
+		// 2018/02/07 updated by T.Nishida
+		bframe.fireEvent(this.element, 'resize')
+	};
+
 
 ■CKEditor
 

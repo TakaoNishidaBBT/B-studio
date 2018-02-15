@@ -5,7 +5,7 @@
 		<div id="control">
 			<?php echo $this->control->getHtml(); ?>
 		</div>
-		<div id="main" class="bframe_adjustparent" data-param="margin:120">
+		<div id="main" class="bframe_adjustparent bframe_scroll" data-param="margin:108">
 			<?php 
 				if($this->action_message) {
 					echo '<p class="error-message">' . $this->action_message . '</p>' . "\n";

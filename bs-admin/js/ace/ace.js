@@ -11942,6 +11942,7 @@ overflow-y: auto;\
 right: 0;\
 top: 0;\
 bottom: 0;\
+background-color: #141414;\
 }\
 .ace_scrollbar-inner {\
 position: absolute;\
@@ -14556,6 +14557,9 @@ var ScrollBarV = function(parent, renderer) {
 	this.element.style.overflowY = "scroll";
 	
 	event.addListener(this.element, "scroll", this.onScrollV.bind(this));
+
+	// 2018/02/07 updated by T.Nishida
+	if(bframe.scroll) new bframe.scroll(this.element, 'ace');
 };
 
 var ScrollBarH = function(parent, renderer) {
@@ -14621,6 +14625,9 @@ var ScrollBarH = function(parent, renderer) {
 	};
 	this.setInnerHeight = function(height) {
 		this.inner.style.height = height + "px";
+
+		// 2018/02/07 updated by T.Nishida
+		bframe.fireEvent(this.element, 'resize')
 	};
 	
 	this.setInnerWidth = function(width) {

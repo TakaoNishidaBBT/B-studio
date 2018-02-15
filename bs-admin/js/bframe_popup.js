@@ -127,6 +127,7 @@
 
 		function body(zindex, drop_shadow, transparent) {
 			var contents;
+			var scroll;
 			var maxWidth, maxHeight, minWidth, minHeight;
 
 			var element = document.createElement('div');
@@ -134,8 +135,8 @@
 			element.className = 'popup';
 			element.style.display = 'table-cell';
 			element.style.position = 'absolute';
-			element.style.overflowX = 'visible';
-			element.style.overflowY = 'visible';
+			element.style.overflowX = 'auto';
+			element.style.overflowY = 'auto';
 			element.style.visibility = 'hidden';
 			element.style.padding = 0;
 			element.style.margin = 0;
@@ -158,6 +159,10 @@
 			this.position = function(position) {
 				element.style.top = position.top + 'px';
 				element.style.left = position.left + 'px';
+			}
+
+			if(bframe.scroll) {
+				scroll = new bframe.scroll(element);
 			}
 
 			this.size = function(size, force) {
@@ -267,6 +272,7 @@
 
 			this.show = function() {
 				element.style.visibility='visible';
+				bframe.fireEvent(element, 'resize')
 			}
 
 			this.hide = function() {
@@ -279,6 +285,10 @@
 
 			this.visibility = function() {
 				return element.style.visibility;
+			}
+
+			this.addClass = function(value) {
+				element.classList.add(value);
 			}
 		}
 	}

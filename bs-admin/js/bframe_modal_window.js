@@ -398,3 +398,37 @@
 			}
 		}
 	}
+
+	// -------------------------------------------------------------------------
+	// class bframe.modalWindowEventHandler
+	// 
+	// -------------------------------------------------------------------------
+	bframe.modalWindowEventHandler = function() {
+		var cba = [];
+		var cbd = [];
+
+		this.registerActivateCallBackFunction = function(func) {
+			cba.push(func);
+		}
+		function activateExecuteCallBack() {
+			for(var i=0; i < cba.length; i++) {
+				func = cba[i];
+				func();
+			}
+		}
+		this.activateExecuteCallBack = activateExecuteCallBack;
+
+		this.registerDeactivateCallBackFunction = function(func) {
+			cbd.push(func);
+		}
+		function deactivateExecuteCallBack() {
+			for(var i=0; i < cbd.length; i++) {
+				func = cbd[i];
+				func();
+			}
+		}
+		this.deactivateExecuteCallBack = deactivateExecuteCallBack;
+	}
+	if(!bframe.modalWindow_eventHandler) {
+		bframe.modalWindow_eventHandler = new bframe.modalWindowEventHandler;
+	}

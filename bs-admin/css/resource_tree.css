@@ -84,6 +84,11 @@ div.bframe_tree a:hover {
 }
 
 /* pane thumb */
+div.thumbs {
+	overflow: hidden;
+	padding: 0;
+	margin: 0;
+}
 div.thumbs li.tree-list div.tree {
 	margin: 0;
 	border-left: 1px solid transparent;

@@ -83,7 +83,7 @@ $form_config = array(
 		),
 		array(
 			'name'			=> 'settings_form',
-			'start_html'	=> '<div id="settings" class="bframe_adjustparent" data-param="margin:25" style="display:none">',
+			'start_html'	=> '<div id="settings" class="bframe_adjustparent bframe_scroll" data-param="margin:25" style="display:none">',
 			'end_html'		=> '</div>',
 		),
 		array(

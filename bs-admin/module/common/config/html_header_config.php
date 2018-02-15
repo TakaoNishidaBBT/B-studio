@@ -21,6 +21,7 @@ $html_header_config = array(
 		'<script src="js/bframe_ajax.js"></script>',
 		'<script src="js/bframe_context_menu.js"></script>',
 		'<script src="js/bframe_popup.js"></script>',
+		'<script src="js/bframe_scroll.js"></script>',
 	),
 	'css'		=>
 	array(

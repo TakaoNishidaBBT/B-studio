@@ -4,7 +4,7 @@
  *
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
-	bframe.addEventListener(window, 'load' , bframeVisualEditorInit);
+	bframe.addEventListener(window, 'load', bframeVisualEditorInit);
 
 	function bframeVisualEditorInit() {
 		var objects = document.querySelectorAll('textarea.bframe_visualeditor');
@@ -156,14 +156,14 @@
 				editor = CKEDITOR.appendTo(parent.id, {
 					height: h,
 					on : {
-						instanceReady : function( ev ) {
+						instanceReady : function(ev) {
 							var tag_group1 = new Array('h1', 'h2', 'h3', 'h4', 'h5', 'div', 'p', 'ul', 'ol', 'dl', 'dt', 'dd', 'li'
 													, 'section', 'nav', 'article', 'aside', 'header', 'footer', 'figure', 'figcaption'
 													, 'embed', 'video', 'canvas', 'audio', 'source');
 							var tag_group2 = new Array('span', 'a', 'img', 'td', 'time', 'mark');
 							var tag_group3 = new Array('tr');
 
-							for(var i=0; i<tag_group1.length; i++) {
+							for(var i=0; i < tag_group1.length; i++) {
 								this.dataProcessor.writer.setRules( tag_group1[i], {
 									indent : true,
 									breakBeforeOpen : true,
@@ -172,7 +172,7 @@
 									breakAfterClose : true
 								});
 							}
-							for(var i=0; i<tag_group2.length; i++) {
+							for(var i=0; i < tag_group2.length; i++) {
 								this.dataProcessor.writer.setRules( tag_group2[i], {
 									indent : true,
 									breakBeforeOpen : false,
@@ -181,7 +181,7 @@
 									breakAfterClose : false
 								});
 							}
-							for(var i=0; i<tag_group3.length; i++) {
+							for(var i=0; i < tag_group3.length; i++) {
 								this.dataProcessor.writer.setRules( tag_group3[i], {
 									indent : true,
 									breakBeforeOpen : true,
@@ -190,13 +190,13 @@
 									breakAfterClose : false
 								});
 							}
-							this.dataProcessor.writer.setRules( 'comment', {
+							this.dataProcessor.writer.setRules('comment', {
 								indent : true,
 								breakAfterClose : true
 							});
 
 							// for sychronization
-							bframe.addEventListener(target, 'change' ,applyValueToEditor);
+							bframe.addEventListener(target, 'change', applyValueToEditor);
 
 							// for submit
 							if(bframe.ajaxSubmit) {
@@ -209,6 +209,10 @@
 								bframe.editCheck_handler.registerResetCallBackFunction(resetDirtyCallback);
 							}
 						},
+
+						mode : function(ev) {
+							bframe.fireEvent(window, 'resize');
+						},
 					}
 				});
 			}
@@ -216,14 +220,14 @@
 				editor = CKEDITOR.replace(target.id, {
 					height: h,
 					on : {
-						instanceReady : function( ev ) {
+						instanceReady : function(ev) {
 							var tag_group1 = new Array('h1', 'h2', 'h3', 'h4', 'h5', 'div', 'p', 'ul', 'ol', 'dl', 'dt', 'dd', 'li'
 													, 'section', 'nav', 'article', 'aside', 'header', 'footer', 'figure', 'figcaption'
 													, 'embed', 'video', 'canvas', 'audio', 'source');
 							var tag_group2 = new Array('span', 'a', 'img', 'td', 'time', 'mark');
 							var tag_group3 = new Array('tr');
 
-							for(var i=0; i<tag_group1.length; i++) {
+							for(var i=0; i < tag_group1.length; i++) {
 								this.dataProcessor.writer.setRules( tag_group1[i], {
 									indent : true,
 									breakBeforeOpen : true,
@@ -232,7 +236,7 @@
 									breakAfterClose : true
 								});
 							}
-							for(var i=0; i<tag_group2.length; i++) {
+							for(var i=0; i < tag_group2.length; i++) {
 								this.dataProcessor.writer.setRules( tag_group2[i], {
 									indent : true,
 									breakBeforeOpen : false,
@@ -241,7 +245,7 @@
 									breakAfterClose : false
 								});
 							}
-							for(var i=0; i<tag_group3.length; i++) {
+							for(var i=0; i < tag_group3.length; i++) {
 								this.dataProcessor.writer.setRules( tag_group3[i], {
 									indent : true,
 									breakBeforeOpen : true,
@@ -250,13 +254,13 @@
 									breakAfterClose : false
 								});
 							}
-							this.dataProcessor.writer.setRules( 'comment', {
+							this.dataProcessor.writer.setRules('comment', {
 								indent : true,
 								breakAfterClose : true
 							});
 
 							// for sychronization
-							bframe.addEventListener(target, 'change' ,applyValueToEditor);
+							bframe.addEventListener(target, 'change', applyValueToEditor);
 
 							// for submit
 							if(bframe.ajaxSubmit) {
@@ -268,6 +272,12 @@
 								bframe.editCheck_handler.registerCallBackFunction(editCheckCallback);
 								bframe.editCheck_handler.registerResetCallBackFunction(resetDirtyCallback);
 							}
+
+							bframe.fireEvent(window, 'resize');
+						},
+
+						mode : function(ev) {
+							bframe.fireEvent(window, 'resize');
 						},
 					}
 				});

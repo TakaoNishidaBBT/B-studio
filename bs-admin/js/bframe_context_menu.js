@@ -586,15 +586,14 @@
 
 			if(max_height && max_height < element.offsetHeight) {
 				size = {width:element_width, height:max_height};
-				popup.overflowY('scroll');
 			}
 			else {
 				size = {width:element_width, height:element.offsetHeight};
-				popup.overflowY('hidden');
 			}
 			popup.size(size);
 
 			if(!parent_menu && popup.visibility() != 'visible') {
+				bframe.stopWheelEvent = true;	// stop bframe_scroll
 				bframe.addEventListenerAllFrames(top, 'wheel', stopWheelEvent);
 				bframe.addEventListener(popup_element, 'wheel', activateWheelEvent);
 			}
@@ -610,6 +609,7 @@
 				submenu_open_index = -1;
 			}
 			if(!parent_menu && popup.visibility() == 'visible') {
+				bframe.stopWheelEvent = false;	// release bframe_scroll
 				bframe.removeEventListenerAllFrames(top, 'wheel', stopWheelEvent);
 				bframe.removeEventListener(popup_element, 'wheel', activateWheelEvent);
 			}

@@ -67,6 +67,7 @@
 		var clipboard = {};
 
 		var pane;
+		var pane_div;
 		var pane_ul;
 		var pane_table;
 		var pane_tbody;
@@ -687,33 +688,35 @@
 				}
 
 				// remove tree
-				if(target.hasChildNodes()) {
-					target.removeChild(target.firstChild);
+				if(root_ul && root_ul.parentNode == target) {
+					target.removeChild(root_ul);
+					root_ul = '';
 				}
 
 				// remove pane
-				if(pane && pane.hasChildNodes()) {
-					pane.removeChild(pane.firstChild);
+				if(pane && pane_div && pane_div.parentNode == pane) {
+					pane.removeChild(pane_div);
+					pane_div = '';
 					pane_ul = '';
 					pane_tbody = '';
 				}
 
 				// create root tree
-				var ul = document.createElement('ul');
-				target.appendChild(ul);
-				ul.className = 'root';
+				root_ul = document.createElement('ul');
+				root_ul.className = 'root';
+				target.appendChild(root_ul);
 
 				if(property.root_name) {
 					node_info[0].node_name = property.root_name;
 				}
-				_showNode(ul, node_info[0]);
+				_showNode(root_ul, node_info[0]);
 
 				// create trash tree
 				if(node_info[1]) {
 					if(property.trash_name) {
 						node_info[1].node_name = property.trash_name;
 					}
-					_showNode(ul, node_info[1], true);
+					_showNode(root_ul, node_info[1], true);
 				}
 
 				// set selected node
@@ -775,6 +778,8 @@
 				}
 
 				scrollToLatest();
+
+				bframe.fireEvent(window, 'resize');
 			}
 		}
 
@@ -799,8 +804,8 @@
 			// create pane
 			if(pane && current_node.id() && node_info.node_id == current_node.id().substr(1)) {
 				// create div
-				var div = document.createElement('div');
-				pane.appendChild(div);
+				pane_div = document.createElement('div');
+				pane.appendChild(pane_div);
 
 				// sort mode
 				if(node_info.children && property.sort == 'auto') {
@@ -809,9 +814,9 @@
 
 				if(display_mode == 'detail') {
 					// detail mode
-					div.className = 'detail';
+					pane_div.className = 'detail';
 					pane_table = document.createElement('table');
-					div.appendChild(pane_table);
+					pane_div.appendChild(pane_table);
 
 					pane_tbody = document.createElement('tbody');
 					pane_table.appendChild(pane_tbody);
@@ -834,11 +839,11 @@
 				}
 				else {
 					// thumb nail mode
-					div.className = 'thumbs';
+					pane_div.className = 'thumbs';
 					pane_ul = document.createElement('ul');
 					pane_ul.id = 'uu' + node_info.node_id;
 					pane_ul.name = 'nodes';
-					div.appendChild(pane_ul);
+					pane_div.appendChild(pane_ul);
 
 					if(node_info.children) {
 						for(var i=0; i < node_info.children.length; i++) {
@@ -887,6 +892,8 @@
 				var icon = document.getElementById('i' + node_id);
 				icon.src = property.icon[node_type.value].src;
 			}
+
+			bframe.fireEvent(window, 'resize');
 		}
 
 		function closeNodeResponse() {
@@ -1199,25 +1206,25 @@
 		function scroll(obj) {
 			if(!pane) return;
 			if(!obj) return;
-
 			var pos = bframe.getElementPosition(obj);
 			var position = {top:pos.top, bottom:pos.top+obj.offsetHeight};
 			var viewport = {top:0, bottom:pane.offsetHeight};
 
-			if(!pane_offset) {
-				if(display_mode == 'detail') {
-					pane_offset = pane_table.offsetTop + pane_tbody.childNodes[1].offsetTop;
-				}
-				else {
-					pane_offset = pane_ul.childNodes[0].offsetTop;
-				}
+			if(display_mode == 'detail') {
+				var pane_pos = bframe.getElementPosition(pane);
+				pane_offset = pane_pos.top + pane_table.offsetTop + pane_tbody.childNodes[1].offsetTop;
+			}
+			else {
+				pane_offset = pane_div.offsetTop + pane_ul.childNodes[0].offsetTop;
+				var pane_pos = bframe.getElementPosition(pane);
+				pane_offset = pane_pos.top + pane_ul.childNodes[0].offsetTop;
 			}
 
 			if(position.bottom > viewport.bottom) {
 				pane.scrollTop = pane.scrollTop+position.bottom-viewport.bottom;
 			}
 			if(position.top < pane_offset) {
-				pane.scrollTop = pane.scrollTop+position.top - pane_offset - 10;
+				pane.scrollTop = pane.scrollTop+position.top - pane_offset;
 			}
 		}
 
@@ -2787,6 +2794,7 @@
 					confirm(0);
 				}
 				event.preventDefault();
+				bframe.fireEvent(window, 'resize');
 			}
 
 			function confirm(index) {
@@ -2794,6 +2802,9 @@
 				if(!info) {
 					overlay.style.width = 0;
 					overlay.style.height = 0;
+
+					bframe.fireEvent(window, 'resize');
+
 					return;
 				}
 
@@ -2977,7 +2988,6 @@
 			function cancelUpload() {
 				upload_queue[index].progress.setCancelled();
 				upload_queue[index].progress.setStatus('Cancelled.');
-
 			}
 
 			function showZipConfirmDialog(msg, funcExtract, funcExtractAll, funcNoExtract, cancel) {
@@ -3244,6 +3254,7 @@
 					var obj = bframe.getEventSrcElement(event);
 					if(obj && obj.parentNode) {
 						obj.parentNode.removeChild(obj);
+						bframe.fireEvent(window, 'resize');
 					}
 				}
 
