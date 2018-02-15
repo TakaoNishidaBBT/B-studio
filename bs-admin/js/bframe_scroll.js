@@ -145,10 +145,15 @@
 
 			self.scrollTop = 0;
 			bar.style.top = 0;
-			bar.style.height =0;
+			bar.style.height = 0;
 			barConainer.style.top = 0;
 			barConainer.style.height = 0;
 			barConainer.style.display = 'none';
+
+			if(self.clientHeight >= self.scrollHeight) {
+				bar.style.opacity = '0';
+				barConainer.style.opacity = '0';
+			}
 
 			// set barHeight
 			barHeight = Math.round(self.clientHeight * self.clientHeight / self.scrollHeight);
@@ -366,11 +371,17 @@
 
 		function stop() {
 			bar.style.transition = 'opacity 0.4s ease-out';
-			if(isMouseOver) {
-				bar.style.opacity = '0.2';
+
+			if(self.clientHeight >= self.scrollHeight) {
+				bar.style.opacity = '0';
 			}
 			else {
-				bar.style.opacity = '0';
+				if(isMouseOver) {
+					bar.style.opacity = '0.2';
+				}
+				else {
+					bar.style.opacity = '0';
+				}
 			}
 			moving = false;
 		}
