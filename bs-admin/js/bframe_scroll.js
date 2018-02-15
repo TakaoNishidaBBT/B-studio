@@ -32,6 +32,7 @@
 		var barScrollHeight;
 		var scrollHeight;
 		var padding = 2;
+		var paddingTop, paddingBottom;
 		var bgColor;
 		var timer;
 		var moving;
@@ -64,6 +65,8 @@
 		self.style.overflow = 'hidden';
 		self.style.overflowY = 'hidden';
 		self.style.boxSizing = 'border-box';
+		paddingTop = self.style.paddingTop;
+		paddingBottom = self.style.paddingBottom;
 
 		if(bframe.getStyle(self).position.toLowerCase() == 'static') {
 			self.style.position = 'relative';
@@ -286,10 +289,10 @@
 			// set scroll bar height (for bounce scroll)
 			if(bouncescroll) {
 				if(self.scrollTop === 0) {
-					self.style.paddingTop = Math.round(speed * -1 / 2) + 'px';
+					self.style.paddingTop = paddingTop + Math.round(speed * -1 / 2) + 'px';
 				}
 				if(self.scrollTop >= scrollHeight) {
-					self.style.paddingBottom = Math.floor(speed * 1 / 2) + 'px';
+					self.style.paddingBottom = paddingBottom + Math.floor(speed * 1 / 2) + 'px';
 					self.scrollTop = scrollHeight + speed;
 				}
 			}
