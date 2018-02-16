@@ -279,6 +279,10 @@
 						mode : function(ev) {
 							bframe.fireEvent(window, 'resize');
 						},
+
+						resize : function(ev) {
+							bframe.fireEvent(window, 'resize');
+						},
 					}
 				});
 			}
