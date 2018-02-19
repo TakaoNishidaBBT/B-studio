@@ -593,9 +593,8 @@
 			popup.size(size);
 
 			if(!parent_menu && popup.visibility() != 'visible') {
-				bframe.stopWheelEvent = true;	// stop bframe_scroll
-				bframe.addEventListenerAllFrames(top, 'wheel', stopWheelEvent);
-				bframe.addEventListener(popup_element, 'wheel', activateWheelEvent);
+				bframe.stopWheelEvent = true;				// stop bframe_scroll
+				bframe.activeWheelElement = popup_element;	// set active wheel element
 			}
 			popup.show();
 			opened = true;
@@ -609,22 +608,12 @@
 				submenu_open_index = -1;
 			}
 			if(!parent_menu && popup.visibility() == 'visible') {
-				bframe.stopWheelEvent = false;	// release bframe_scroll
-				bframe.removeEventListenerAllFrames(top, 'wheel', stopWheelEvent);
-				bframe.removeEventListener(popup_element, 'wheel', activateWheelEvent);
+				bframe.stopWheelEvent = false;		// release bframe_scroll
+				bframe.activeWheelElement = '';		// reset active wheel element
 			}
 			popup.hide();
 			self.clearTimer();
 			opened = false;
-		}
-
-		function stopWheelEvent(event) {
-			event.stopPropagation();
-			event.preventDefault();
-		}
-
-		function activateWheelEvent(event) {
-			event.stopPropagation();
 		}
 
 		this.opened = function() {

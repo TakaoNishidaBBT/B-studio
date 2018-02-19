@@ -259,8 +259,8 @@
 
 		function onFrameWheel(event) {
 			var obj = bframe.getEventSrcElement(event);
-			var html = bframe.searchParentByTagName(obj, 'html');
 			var body = bframe.searchParentByTagName(obj, 'body');
+			var html = bframe.searchParentByTagName(body, 'html');
 
 			if(!html) return;
 
@@ -280,7 +280,11 @@
 		}
 
 		function onWheel(event) {
-			if(bframe.stopWheelEvent) return;
+			if(bframe.stopWheelEvent) {
+				var obj = bframe.getEventSrcElement(event);
+				if(!bframe.isChild(bframe.activeWheelElement, obj)) return;
+			}
+
 			if(self.clientHeight >= self.scrollHeight) return;
 
 			// Look for lowest delta to normalize the delta values
