@@ -9,8 +9,10 @@
 		function __construct() {
 			parent::__construct(__FILE__);
 
-			require_once('./config/form_config.php');
-			$this->form = new B_Element($form_config);
+			require_once('./config/editor_config.php');
+			require_once('./config/settings_config.php');
+			$this->settings = new B_Element($settings_config);
+			$this->editor = new B_Element($editor_config);
 			$this->result = new B_Element($result_config);
 			$this->result_control = new B_Element($result_control_config);
 
@@ -32,7 +34,7 @@
 				$this->control = new B_Element($this->delete_control_config);
 				$row = $this->main_table->selectByPk($this->request);
 				$this->setThumnail($row['title_img_file']);
-				$this->form->setValue($row);
+				$this->settings->setValue($row);
 				$this->display_mode = 'confirm';
 				break;
 
@@ -52,7 +54,8 @@
 					$row=$this->db->fetch_assoc($rs);
 
 					$this->setThumnail($row['title_img_file']);
-					$this->form->setValue($row);
+					$this->editor->setValue($row);
+					$this->settings->setValue($row);
 				}
 				break;
 			}
@@ -61,38 +64,42 @@
 		function confirm() {
 			$this->setThumnail($this->post['title_img_file']);
 
-			$this->form->setValue($this->request);
+			$this->editor->setValue($this->request);
+			$this->settings->setValue($this->request);
 
 			if($this->post['external_link'] && !$this->post['url']) {
-				$obj = $this->form->getElementByName('url');
+				$obj = $this->settings->getElementByName('url');
 				$obj->status = false;
 			}
 
-			if(!$this->form->validate()) {
+
+			$ret = $this->settings->validate();
+			$ret &= $this->editor->validate();
+			if(!$ret) {
 				$this->control = new B_Element($this->input_control_config);
 				return;
 			}
 
-
 			if($this->post['description_flag'] == '1') {
-				$obj = $this->form->getElementByName('external_link_row');
+				$obj = $this->settings->getElementByName('external_link_row');
 				$obj->display = 'none';
 			}
 			else {
-				$obj = $this->form->getElementByName('contents_row');
+				$obj = $this->settings->getElementByName('contents_row');
 				$obj->display = 'none';
 
 				if(!$this->post['external_link']) {
-					$obj = $this->form->getElementByName('external_link_none');
+					$obj = $this->settings->getElementByName('external_link_none');
 					$obj->display = '';
-					$obj = $this->form->getElementByName('url');
+					$obj = $this->settings->getElementByName('url');
 					$obj->display = 'none';
-					$obj = $this->form->getElementByName('external_window');
+					$obj = $this->settings->getElementByName('external_window');
 					$obj->display = 'none';
 				}
 			}
 
-			$this->form->getValue($param);
+			$this->editor->getValue($param);
+			$this->settings->getValue($param);
 			$this->session['request'] = $param;
 
 			$this->control = new B_Element($this->confirm_control_config);
@@ -109,7 +116,7 @@
 			$file_info = pathinfo($img_path);
 			$thumnail_path = $this->util->getPath(B_UPLOAD_URL, $this->util->getPath($file_info['dirname'], B_THUMB_PREFIX . $file_info['basename']));
 			$html = '<img src="' . $thumnail_path . '" alt="" />';
-			$obj = $this->form->getElementByName('title_img');
+			$obj = $this->settings->getElementByName('title_img');
 			$obj->value = $html;
 		}
 
@@ -172,7 +179,8 @@
 		}
 
 		function back() {
-			$this->form->setValue($this->session['request']);
+			$this->settings->setValue($this->session['request']);
+			$this->editor->setValue($this->session['request']);
 			$this->setThumnail($this->session['request']['title_img_file']);
 
 			$this->control = new B_Element($this->input_control_config);
@@ -180,10 +188,10 @@
 
 		function view() {
 			if($this->session['mode'] == 'insert') {
-				$obj = $this->form->getElementByName('article_id_row');
+				$obj = $this->settings->getElementByName('article_id_row');
 				$obj->display = 'none';
 			}
-			$this->form->setFilterValue($this->filter);
+			$this->settings->setFilterValue($this->filter);
 
 			// Start buffering
 			ob_start();

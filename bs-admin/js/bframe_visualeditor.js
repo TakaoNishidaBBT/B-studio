@@ -21,12 +21,29 @@
 	bframe.visualeditor = function(target) {
 		var self = this;
 		var editor;
-		var param = target.getAttribute('bframe_visualeditor_param');
+		var param = target.getAttribute('data-param');
 		var updating_flag;
+		var cke_controll;
+		var cke_controll_position;
+		var cke_controll_style;
+		var cke_controll_style_width;
+		var cke_contents;
+		var cke_footer;
+		var scroller;
+		var scroller_position;
+		var parent;
 
 		if(param) {
-			var id = bframe.getParam('parent', param);
-			var parent = document.getElementById(id);
+			var parent_id = bframe.getParam('parent', param);
+			if(parent_id) parent = document.getElementById(parent_id);
+			var scroller_id = bframe.getParam('scroller', param);
+			if(scroller_id) scroller = document.getElementById(scroller_id);
+			if(scroller) {
+				bframe.addEventListener(scroller, 'scroll', onScroll);
+				if(bframe.resize_handler) {
+					bframe.resize_handler.registerCallBackFunction(onResize);
+				}
+			}
 		}
 
 		setUpCKEditor();
@@ -50,6 +67,10 @@
 			var visual_editor_language = document.getElementById('visual_editor_language');
 			CKEDITOR.config.language = visual_editor_language.value;
 			CKEDITOR.config.autoParagraph = false;
+
+			CKEDITOR.config.extraPlugins = 'autogrow';
+			CKEDITOR.config.autoGrow_onStartup = true;
+			CKEDITOR.config.autoGrow_minHeight = 360;
 
 			// for HTML5 tags(cancel Automatic ACF Mode)
 			CKEDITOR.config.allowedContent = true;
@@ -274,6 +295,7 @@
 							}
 
 							bframe.fireEvent(window, 'resize');
+							onScroll();
 						},
 
 						mode : function(ev) {
@@ -288,6 +310,61 @@
 			}
 
 			bframe.addEventListener(window, 'unload', cleanUp);
+		}
+
+		function onScroll() {
+			if(!cke_controll) {
+				cke_controll = document.getElementById('cke_1_top');
+				cke_controll_position = bframe.getElementPosition(cke_controll);
+				cke_controll_style = bframe.getStyle(cke_controll);
+				cke_controll_style_width = cke_controll_style.width;
+
+				scroller_position = bframe.getElementPosition(scroller);
+
+				cke_contents = document.getElementById('cke_1_contents');
+				cke_contents_position = bframe.getElementPosition(cke_contents);
+
+				cke_footer = document.getElementById('cke_1_bottom');
+				cke_footer.style.position = 'fixed';
+				cke_footer.style.width = cke_controll_style_width;
+				cke_footer.style.top = (scroller_position.top + scroller.clientHeight - cke_footer.clientHeight) - 2 + 'px';
+			}
+
+			if(cke_controll_position.top - scroller_position.top < scroller.scrollTop) {
+				cke_controll.style.position = 'fixed';
+				cke_controll.style.top = scroller_position.top + 'px';
+				cke_contents.style.marginTop = cke_controll.clientHeight + 'px';
+				cke_controll_style = bframe.getStyle(cke_controll);
+				cke_controll.style.width = cke_controll_style_width;
+			}
+			else {
+				cke_controll.style.position = 'static';
+				cke_contents.style.marginTop = 0;
+				cke_controll.style.width = '';
+			}
+		}
+
+		function onResize() {
+			if(!cke_controll) return;
+			var position = cke_controll.style.position;
+
+			// reset to static
+			cke_controll.style.position = 'static';
+			cke_controll.style.width = '';
+
+			// get style and reset width
+			cke_controll_style = bframe.getStyle(cke_controll);
+			cke_controll_style_width = cke_controll_style.width;
+			cke_controll.style.width = cke_controll_style_width;
+
+			// restore original position
+			cke_controll.style.position = position;
+
+			// set footer style
+			cke_footer = document.getElementById('cke_1_bottom');
+			cke_footer.style.position = 'fixed';
+			cke_footer.style.width = cke_controll_style_width;
+			cke_footer.style.top = (scroller_position.top + scroller.clientHeight - cke_footer.clientHeight) - 2 + 'px';
 		}
 
 		function onblurEditor() {

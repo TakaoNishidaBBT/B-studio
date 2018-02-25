@@ -59,7 +59,7 @@
 			}
 		}
 		else {
-			return;
+//			return;
 			bouncescroll = true;
 		}
 
@@ -198,7 +198,9 @@
 
 			// set event handler to child frames
 			for(var i=0; i < window.frames.length; i++) {
-				bframe.addEventListenerAllFrames(window.frames[i], 'wheel', onFrameWheel);
+				if(bframe.isChild(window.frames[i], self)) {
+					bframe.addEventListenerAllFrames(window.frames[i], 'wheel', onFrameWheel);
+				}
 			}
 
 			// detect scrollable object and set event handler
