@@ -518,8 +518,7 @@
 						where del_flag = '1'
 					)";
 
-			$ret = $this->db->query($sql);
-			return $ret;
+			return $this->db->query($sql);
 		}
 
 		function saveName() {

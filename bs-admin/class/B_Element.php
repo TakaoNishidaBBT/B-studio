@@ -1163,10 +1163,16 @@
 			if($this->zero_suppress && is_numeric($this->value) && $this->value == 0) {
 				$value = '';
 			}
+			if($this->type) {
+				$type = $this->type;
+			}
+			else {
+				$type = 'text';
+			}
 			$html.= 
 				'<input ' .
 				$this->special_html . $disabled . ' ' .
-				'type="text" ' .
+				'type="' . $type . '" ' .
 				'name="' . $this->name_prefix . $this->name . '" ' .
 				'id="' . $this->_gethtmlid() . '" ' .
 				'value="' . $value . '"' .
