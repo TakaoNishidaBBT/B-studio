@@ -329,15 +329,23 @@
 				cke_footer.style.width = cke_controll_style_width;
 				cke_footer.style.top = (scroller_position.top + scroller.clientHeight - cke_footer.clientHeight) - 2 + 'px';
 			}
-
 			if(cke_controll_position.top - scroller_position.top < scroller.scrollTop) {
+				if(cke_controll.style.position == 'fixed') return;
+
+				// save scrollTop
+				var scrollTop = scroller.scrollTop;
+
 				cke_controll.style.position = 'fixed';
 				cke_controll.style.top = scroller_position.top + 'px';
 				cke_contents.style.marginTop = cke_controll.clientHeight + 'px';
 				cke_controll_style = bframe.getStyle(cke_controll);
 				cke_controll.style.width = cke_controll_style_width;
+
+				// restore scrollTop
+				scroller.scrollTop = scrollTop
 			}
 			else {
+				if(cke_controll.style.position == 'static') return;
 				cke_controll.style.position = 'static';
 				cke_contents.style.marginTop = 0;
 				cke_controll.style.width = '';
