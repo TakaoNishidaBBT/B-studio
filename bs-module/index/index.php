@@ -89,7 +89,7 @@
 
 				if($this->contents['css']) {
 					$this->html_header->appendProperty('css',
-						'<link rel="stylesheet" href="C' . $this->contents_node['contents_id'] . '.css" type="text/css" media="all" />');
+						'<link rel="stylesheet" href="C' . $this->contents_node['contents_id'] . '.css">');
 				}
 
 				$this->setTitle(htmlspecialchars($this->contents['title'], ENT_QUOTES, B_CHARSET));
@@ -270,7 +270,7 @@
 			for($i=0; $i < count($this->templates); $i++) {
 				if($this->templates[$i]['css']) {
 					$this->html_header->appendProperty('css',
-						'<link rel="stylesheet" href="T' . $this->templates[$i]['contents_id'] . '.css" type="text/css" media="all" />');
+						'<link rel="stylesheet" href="T' . $this->templates[$i]['contents_id'] . '.css">');
 				}
 			}
 		}
@@ -387,9 +387,9 @@
 				$this->html_header->appendMeta('visual_editor_templates', B_CONTENTS_INLINE_TEMPLATES);
 			}
 
-			$this->html_header->appendProperty('script', '<script src="' . B_ADMIN_ROOT . 'js/bframe.js" type="text/javascript"></script>');
-			$this->html_header->appendProperty('script', '<script src="' . B_ADMIN_ROOT . 'js/ckeditor/ckeditor.js" type="text/javascript"></script>');
-			$this->html_header->appendProperty('script', '<script src="' . B_ADMIN_ROOT . 'js/bframe_inlineeditor.js" type="text/javascript"></script>');
+			$this->html_header->appendProperty('script', '<script src="' . B_ADMIN_ROOT . 'js/bframe.js"></script>');
+			$this->html_header->appendProperty('script', '<script src="' . B_ADMIN_ROOT . 'js/ckeditor/ckeditor.js"></script>');
+			$this->html_header->appendProperty('script', '<script src="' . B_ADMIN_ROOT . 'js/bframe_inlineeditor.js"></script>');
 
 			$this->setTitle(htmlspecialchars($this->contents['title'], ENT_QUOTES, B_CHARSET));
 
@@ -447,8 +447,8 @@
 				$this->html_header->appendMeta('description', $this->contents['description']);
 			}
 
-			$this->html_header->appendProperty('script', '<script src="bs-admin/js/bframe.js" type="text/javascript"></script>');
-			$this->html_header->appendProperty('script', '<script src="bs-admin/js/bframe_device_emulator.js" type="text/javascript"></script>');
+			$this->html_header->appendProperty('script', '<script src="bs-admin/js/bframe.js"></script>');
+			$this->html_header->appendProperty('script', '<script src="bs-admin/js/bframe_device_emulator.js"></script>');
 			$this->view_file = './view/view_index.php';
 
 			ini_set('display_errors','On');
@@ -552,7 +552,7 @@
 
 			if($__row['css']) {
 				$this->html_header->appendProperty('css',
-					'<link rel="stylesheet" href="W' . $__row['contents_id'] . '.css" type="text/css" media="all" />');
+					'<link rel="stylesheet" href="W' . $__row['contents_id'] . '.css">');
 			}
 
 			widgetExec($this->view_mode, './view/view_widget.php', $__row, $this->url, $this->breadcrumbs);
