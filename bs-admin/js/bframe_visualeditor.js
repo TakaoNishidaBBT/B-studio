@@ -86,8 +86,8 @@
 				var h = target.style.height;
 			}
 
-			CKEDITOR.config.coreStyles_bold = {element : 'span', attributes : {'style' : 'font-weight:bold' }};
-			CKEDITOR.config.coreStyles_italic = {element : 'span', attributes : {'style' : 'font-style:italic' }};
+			CKEDITOR.config.coreStyles_bold = {element : 'span', attributes : {'style' : 'font-weight:bold'}};
+			CKEDITOR.config.coreStyles_italic = {element : 'span', attributes : {'style' : 'font-style:italic'}};
 
 			// protect php
 			CKEDITOR.config.protectedSource.push( /<\?[\s\S]*?\?>/g );
@@ -327,9 +327,7 @@
 				cke_footer = document.getElementById('cke_1_bottom');
 				cke_footer.style.position = 'fixed';
 				cke_footer.style.width = cke_controll_style_width;
-				cke_footer.style.top = (scroller_position.top + scroller.clientHeight - cke_footer.clientHeight) - 2 + 'px';
-
-				cke_contents.style.marginBottom = cke_footer.clientHeight + 10 + 'px';
+				cke_footer.style.bottom = '0';
 			}
 			if(cke_controll_position.top - scroller_position.top < scroller.scrollTop) {
 				if(cke_controll.style.position == 'fixed') return;
@@ -374,7 +372,7 @@
 			cke_footer = document.getElementById('cke_1_bottom');
 			cke_footer.style.position = 'fixed';
 			cke_footer.style.width = cke_controll_style_width;
-			cke_footer.style.top = (scroller_position.top + scroller.clientHeight - cke_footer.clientHeight) - 2 + 'px';
+			cke_footer.style.bottom = '0';
 
 			setTimeout(function(){editor.execCommand('autogrow');}, 100);
 		}

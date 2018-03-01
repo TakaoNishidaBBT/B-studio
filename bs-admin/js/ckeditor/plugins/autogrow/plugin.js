@@ -131,11 +131,19 @@
 
 		function resizeEditor() {
 			if ( editor.mode == 'source' ) {
-				var source = editor.ui.space( 'contents' ).find('.cke_source');
-				if(source) {
+				var contents = editor.ui.space( 'contents' );
+				var source = contents.find('.cke_source');
+				if(contents && source) {
 					var height = source.$[0].style.height;
 					source.$[0].style.height = '1px';
-					editor.resize( editor.container.getStyle( 'width' ), source.$[0].scrollHeight, true );
+
+					var currentHeight = contents.$.clientHeight;
+					newHeight = source.$[0].scrollHeight;
+
+					if ( newHeight != currentHeight && lastHeight != newHeight ) {
+						editor.resize( editor.container.getStyle( 'width' ), newHeight, true );
+						lastHeight = newHeight;
+					}
 					source.$[0].style.height = height;
 				}
 				return;
@@ -156,6 +164,7 @@
 
 			// https://dev.ckeditor.com/ticket/10196 Do not resize editor if new height is equal
 			// to the one set by previous resizeEditor() call.
+console.log('newHeight', newHeight, currentHeight, lastHeight);
 			if ( newHeight != currentHeight && lastHeight != newHeight ) {
 				newHeight = editor.fire( 'autoGrow', { currentHeight: currentHeight, newHeight: newHeight } ).newHeight;
 				editor.resize( editor.container.getStyle( 'width' ), newHeight, true );

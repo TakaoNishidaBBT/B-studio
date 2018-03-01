@@ -263,6 +263,28 @@
 			onWheel(event);
 		}
 
+		function _onFrameWheel(event) {
+			var obj = bframe.getEventSrcElement(event);
+			var body = bframe.searchParentByTagName(obj, 'body');
+			var html = bframe.searchParentByTagName(body, 'html');
+
+			if(!html) return;
+
+			var scrollHeight = html.scrollHeight - html.clientHeight;
+			var direction = event.deltaY > 0 ? 'down' : 'up';
+
+			if(os == 'windows') {
+				if((direction == 'up' && html.scrollTop == 0) || (direction == 'down' && html.scrollTop >= scrollHeight)) {
+					onWheel(event);
+				}
+			}
+			else {
+				if((direction == 'up' && body.scrollTop == 0) || (direction == 'down' && body.scrollTop >= scrollHeight)) {
+					onWheel(event);
+				}
+			}
+		}
+
 		function onWheel(event) {
 			if(bframe.stopWheelEvent) {
 				var obj = bframe.getEventSrcElement(event);
