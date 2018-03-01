@@ -40,7 +40,7 @@
 
 		editor.addCommand( 'autogrow', {
 			exec: resizeEditor,
-			modes: { wysiwyg: 1 },
+			modes: { wysiwyg: 1, source: 1 },
 			readOnly: 1,
 			canUndo: false,
 			editorFocus: false
@@ -130,6 +130,17 @@
 		}
 
 		function resizeEditor() {
+			if ( editor.mode == 'source' ) {
+				var source = editor.ui.space( 'contents' ).find('.cke_source');
+				if(source) {
+					var height = source.$[0].style.height;
+					source.$[0].style.height = '1px';
+					editor.resize( editor.container.getStyle( 'width' ), source.$[0].scrollHeight, true );
+					source.$[0].style.height = height;
+				}
+				return;
+			}
+
 			// Hide scroll because we won't need it at all.
 			// Thanks to that we'll need only one resizeEditor() call per change.
 			if ( maxHeightIsUnlimited )

@@ -42,13 +42,6 @@ $editor_config = array(
 				'start_html'	=> '<td>',
 				'end_html'		=> '</td>',
 				array(
-					'name'					=> 'permalink',
-					'class'					=> 'B_Link',
-					'specialchars'			=> 'none',
-					'special_html'			=> 'class="permalink"',
-					'value'					=> '<img alt="Permalink" src="images/common/icon_link.svg" />',
-				),				
-				array(
 					'name'					=> 'title',
 					'class'					=> 'B_TextArea',
 					'special_html'			=> 'class="textarea title ime_on" maxlength="100" placeholder="Title"',
@@ -79,9 +72,13 @@ $editor_config = array(
 				'start_html'	=> '<td>',
 				'end_html'		=> '</td>',
 				array(
-					'name'			=> 'contents',
-					'class'			=> 'B_TextArea',
-					'special_html'	=> 'class="textarea bframe_visualeditor" data-param="scroller:content"',
+					'start_html'	=> '<div class="contents">',
+					'end_html'		=> '</div>',
+					array(
+						'name'			=> 'contents',
+						'class'			=> 'B_TextArea',
+						'special_html'	=> 'class="textarea bframe_visualeditor _bframe_inlineeditor" data-param="scroller:content" style="height:1000px"',
+					),
 				),
 			),
 		),

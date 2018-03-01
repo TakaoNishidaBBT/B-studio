@@ -328,6 +328,8 @@
 				cke_footer.style.position = 'fixed';
 				cke_footer.style.width = cke_controll_style_width;
 				cke_footer.style.top = (scroller_position.top + scroller.clientHeight - cke_footer.clientHeight) - 2 + 'px';
+
+				cke_contents.style.marginBottom = cke_footer.clientHeight + 10 + 'px';
 			}
 			if(cke_controll_position.top - scroller_position.top < scroller.scrollTop) {
 				if(cke_controll.style.position == 'fixed') return;
@@ -373,6 +375,8 @@
 			cke_footer.style.position = 'fixed';
 			cke_footer.style.width = cke_controll_style_width;
 			cke_footer.style.top = (scroller_position.top + scroller.clientHeight - cke_footer.clientHeight) - 2 + 'px';
+
+			setTimeout(function(){editor.execCommand('autogrow');}, 100);
 		}
 
 		function onblurEditor() {

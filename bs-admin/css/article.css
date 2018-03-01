@@ -123,7 +123,7 @@ table.settings td textarea {
 table.settings td .title {
 	font-weight: bold;
 }
-table.settings th .date {
+table.settings .date {
 	width: 85px;
 	margin-right: 2px;
 	text-align: center;

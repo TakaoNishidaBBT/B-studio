@@ -8,7 +8,6 @@
 
 	function bframeScrollInit() {
 		var objects = document.getElementsByClassName('bframe_scroll');
-
 		for(var i=0; i < objects.length; i++) {
 			var param = objects[i].getAttribute('data-param');
 			if(param) var mode = bframe.getParam('mode', param);
@@ -195,11 +194,12 @@
 
 			var bartop = self.scrollTop + Math.round(barScrollHeight * self.scrollTop / scrollHeight) + padding;
 			bar.style.top = bartop + 'px';
-
 			// set event handler to child frames
-			for(var i=0; i < window.frames.length; i++) {
-				if(bframe.isChild(window.frames[i], self)) {
-					bframe.addEventListenerAllFrames(window.frames[i], 'wheel', onFrameWheel);
+
+			var iframes = document.getElementsByTagName('iframe');
+			for(var i=0; i < iframes.length; i++) {
+				if(bframe.isChild(self, iframes[i])) {
+					bframe.addEventListenerAllFrames(iframes[i], 'wheel', onFrameWheel);
 				}
 			}
 
@@ -260,25 +260,7 @@
 		}
 
 		function onFrameWheel(event) {
-			var obj = bframe.getEventSrcElement(event);
-			var body = bframe.searchParentByTagName(obj, 'body');
-			var html = bframe.searchParentByTagName(body, 'html');
-
-			if(!html) return;
-
-			var scrollHeight = html.scrollHeight - html.clientHeight;
-			var direction = event.deltaY > 0 ? 'down' : 'up';
-
-			if(os == 'windows') {
-				if((direction == 'up' && html.scrollTop == 0) || (direction == 'down' && html.scrollTop >= scrollHeight)) {
-					onWheel(event);
-				}
-			}
-			else {
-				if((direction == 'up' && body.scrollTop == 0) || (direction == 'down' && body.scrollTop >= scrollHeight)) {
-					onWheel(event);
-				}
-			}
+			onWheel(event);
 		}
 
 		function onWheel(event) {
@@ -390,7 +372,6 @@
 		}
 
 		function animate(timing, callback, duration) {
-
 			let start = performance.now();
 
 			requestAnimationFrame(function animate(time) {
