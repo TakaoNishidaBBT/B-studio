@@ -41,7 +41,7 @@
 			if(scroller) {
 				bframe.addEventListener(scroller, 'scroll', onScroll);
 				if(bframe.resize_handler) {
-					bframe.resize_handler.registerCallBackFunction(onResize);
+					bframe.resize_handler.registerCallBackFunction(onWindowResize);
 				}
 			}
 		}
@@ -60,7 +60,7 @@
 			,['TextColor','BGColor']
 			,['ShowBlocks']
 			,['Find','Replace']
-			,['Source','Preview','Maximize','Templates']
+			,['Source','Preview','Templates']
 			];
 
 			// language
@@ -312,6 +312,17 @@
 			bframe.addEventListener(window, 'unload', cleanUp);
 		}
 
+		editor.on('afterCommandExec', handleAfterCommandExec);
+
+		function handleAfterCommandExec(event) {
+			var commandName = event.data.name;
+			switch(commandName) {
+			case'showblocks':
+				onWindowResize();
+				break;
+			}
+		}
+
 		function onScroll() {
 			if(!cke_controll) {
 				cke_controll = document.getElementById('cke_1_top');
@@ -352,6 +363,11 @@
 			}
 		}
 
+		function onWindowResize() {
+			onResize();
+			setTimeout(function(){editor.execCommand('autogrow');}, 100);
+		}
+
 		function onResize() {
 			if(!cke_controll) return;
 			var position = cke_controll.style.position;
@@ -373,8 +389,6 @@
 			cke_footer.style.position = 'fixed';
 			cke_footer.style.width = cke_controll_style_width;
 			cke_footer.style.bottom = '0';
-
-			setTimeout(function(){editor.execCommand('autogrow');}, 100);
 		}
 
 		function onblurEditor() {

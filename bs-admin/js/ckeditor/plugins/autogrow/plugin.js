@@ -164,7 +164,6 @@
 
 			// https://dev.ckeditor.com/ticket/10196 Do not resize editor if new height is equal
 			// to the one set by previous resizeEditor() call.
-console.log('newHeight', newHeight, currentHeight, lastHeight);
 			if ( newHeight != currentHeight && lastHeight != newHeight ) {
 				newHeight = editor.fire( 'autoGrow', { currentHeight: currentHeight, newHeight: newHeight } ).newHeight;
 				editor.resize( editor.container.getStyle( 'width' ), newHeight, true );
