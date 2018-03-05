@@ -2978,6 +2978,7 @@
 			}
 
 			function cancelAll() {
+				_cancel();
 				for(; upload_queue[index]; index++) {
 					cancelUpload();
 				}
@@ -2988,6 +2989,26 @@
 			function cancelUpload() {
 				upload_queue[index].progress.setCancelled();
 				upload_queue[index].progress.setStatus('Cancelled.');
+			}
+
+			function _cancel() {
+				httpObj = new XMLHttpRequest();
+				httpObj.onreadystatechange = cancelResult;
+
+				var form_data = new FormData();
+
+				form_data.append('terminal_id', terminal_id);
+				form_data.append('module', module);
+				form_data.append('page', page);
+				form_data.append('method', 'cancel');
+				form_data.append('mode', mode);
+
+				httpObj.open('POST','index.php');
+				httpObj.send(form_data);
+			}
+
+			function cancelResult() {
+				return;
 			}
 
 			function showZipConfirmDialog(msg, funcExtract, funcExtractAll, funcNoExtract, cancel) {

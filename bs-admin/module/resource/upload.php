@@ -237,6 +237,15 @@
 			exit;
 		}
 
+		function cancel() {
+			// kick refresh-cache process
+			$this->refreshCache();
+
+			$response['status'] = true;
+			header('Content-Type: application/x-javascript charset=utf-8');
+			echo json_encode($response);
+		}
+
 		function checkZipFile($zip_file) {
 			$zip = new ZipArchive();
 			$zip->open($zip_file);
