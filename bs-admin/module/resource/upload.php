@@ -121,7 +121,7 @@
 						chmod($this->dir, 0777);
 					}
 					else {
-						throw new Exception(__('Faild to create directory'));
+						throw new Exception(__('Failed to create directory'));
 					}
 				}
 
