@@ -316,6 +316,7 @@
 			'external_link'				=> array('char', 		'1', 	'', 	''),
 			'external_window'			=> array('char', 		'1', 	'', 	''),
 			'url'						=> array('text', 		'', 	'', 	''),
+			'permalink'					=> array('text', 		'', 	'', 	''),
 			'contents'					=> array('text', 		'', 	'', 	''),
 			'del_flag'					=> array('char', 		'1', 	'', 	''),
 			'folder_id'					=> array('text', 		'', 	'', 	''),

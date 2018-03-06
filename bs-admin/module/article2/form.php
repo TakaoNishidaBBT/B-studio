@@ -140,7 +140,7 @@
 			}
 			else {
 				$this->db->rollback();
-				$param['action_message'] = __('was faild to saved.');
+				$param['action_message'] = __('was failed to saved.');
 			}
 			$this->result->setValue($param);
 
@@ -164,7 +164,7 @@
 			}
 			else {
 				$this->db->rollback();
-				$param['action_message'] = __('was faild to delete.');
+				$param['action_message'] = __('was failed to delete.');
 			}
 			$this->result->setValue($param);
 

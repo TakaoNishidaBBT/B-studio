@@ -23,6 +23,42 @@ $settings_config = array(
 		),
 	),
 
+	// permalink
+	array(
+		'name'			=> 'permalink_row',
+		'start_html'	=> '<tr>',
+		'end_html'		=> '</tr>',
+		array(
+			'start_html'		=> '<td class="publication">',
+			'end_html'			=> '</td>',
+			array(
+				'start_html'		=> '<span class="title">',
+				'end_html'			=> '</span>',
+				'value'				=> __('Permalink'),
+			),
+			array(
+				'name'				=> 'permalink',
+				'class'				=> 'B_InputText',
+				'special_html'		=> 'class="textbox permalink ime_off"',
+				'validate'			=>
+				array(
+					array(
+						'type' 			=> 'callback',
+						'obj'			=> $this,
+						'method'		=> '_validate_callback',
+						'error_message'	=> __('This permalink is already in use'),
+					),
+				),
+			),
+			array(
+				'name'			=> 'error_message',
+				'class'			=> 'B_ErrMsg',
+				'start_html'	=> '<p class="error-message">',
+				'end_html'		=> '</p>',
+			),
+		),
+	),
+
 	// Publication date
 	array(
 		'error_group'	=> true,

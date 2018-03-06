@@ -109,6 +109,17 @@
 			$this->filter = 'confirm';
 		}
 
+		function _validate_callback($param) {
+			$article_id = $this->request['article_id'];
+			$sql = "select count(*) cnt from " . B_DB_PREFIX . "article where permalink = binary '" . $param['value'] . "' and article_id <> '$article_id'";
+			$rs = $this->db->query($sql);
+			$row = $this->db->fetch_assoc($rs);
+			if($row['cnt'] == 0) {
+				return true;
+			}
+			return false;
+		}
+
 		function setThumnail($img_path) {
 			if(!$img_path) return;
 			if(!file_exists(B_UPLOAD_DIR . $img_path)) return;
@@ -132,7 +143,11 @@
 				$param['update_user'] = $this->user_id;
 				$param['update_datetime'] = time();
 				$ret = $this->main_table->selectInsert($param);
+
 				$param['article_id'] = $this->main_table->selectMaxValue('article_id');
+				$param['permalink'] = $param['article_id'];
+				$ret = $this->main_table->update($param);
+
 				$param['action_message'] = __('was saved.');
 			}
 			else {
@@ -147,7 +162,7 @@
 			}
 			else {
 				$this->db->rollback();
-				$param['action_message'] = __('was faild to saved.');
+				$param['action_message'] = __('was failed to saved.');
 			}
 			$this->result->setValue($param);
 
@@ -171,7 +186,7 @@
 			}
 			else {
 				$this->db->rollback();
-				$param['action_message'] = __('was faild to delete.');
+				$param['action_message'] = __('was failed to delete.');
 			}
 			$this->result->setValue($param);
 
@@ -189,6 +204,8 @@
 		function view() {
 			if($this->session['mode'] == 'insert') {
 				$obj = $this->settings->getElementByName('article_id_row');
+				$obj->display = 'none';
+				$obj = $this->settings->getElementByName('permalink_row');
 				$obj->display = 'none';
 			}
 			$this->settings->setFilterValue($this->filter);
