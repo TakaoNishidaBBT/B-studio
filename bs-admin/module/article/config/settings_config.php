@@ -445,6 +445,51 @@ $input_control_config = array(
 			),
 		),
 	),
+
+	array(
+		'name'				=> 'register_button',
+		'start_html'		=> '<li class="register">',
+		'end_html'			=> '</li>',
+		array(
+			'start_html'	=> '<div class="input-container">',
+			'end_html'		=> '</div>',
+			array(
+				'name'			=> 'register',
+				'start_html'	=> '<span id="register" class="register-button" onclick="bframe.ajaxSubmit.submit(\'F1\', \'' . $this->module . '\', \'form\', \'register\', \'confirm\', true)">',
+				'end_html'		=> '</span>',
+				'value'			=> '<img src="images/common/save.png" alt="Save" />' . __('Save'),
+			),
+		),
+		array(
+			'start_html'	=> '<div class="message-container">',
+			'end_html'		=> '</div>',
+			array(
+				'start_html'	=> '<span id="message">',
+				'end_html'		=> '</span>',
+			),
+		),
+	),
+/*
+	array(
+		'name'			=> 'register',
+		'start_html'	=> '<li>',
+		'end_html'		=> '</li>',
+		array(
+			'start_html'	=> '<span class="right-button" onclick="bframe.submit(\'F1\', \'' . $this->module . '\', \'form\', \'register\', \'\')">',
+			'end_html'		=> '</span>',
+			array(
+				'start_html'	=> '<span class="text">',
+				'end_html'		=> '</span>',
+				'value'			=> __('Save'),
+			),
+			array(
+				'start_html'	=> '<span class="img-cover">',
+				'end_html'		=> '</span>',
+				'value'			=> '<img src="images/common/right_arrow.png" alt="right arow" />',
+			),
+		),
+	),
+/*
 	array(
 		'name'			=> 'confirm',
 		'start_html'	=> '<li>',
@@ -464,6 +509,7 @@ $input_control_config = array(
 			),
 		),
 	),
+*/
 );
 
 // Confirm control

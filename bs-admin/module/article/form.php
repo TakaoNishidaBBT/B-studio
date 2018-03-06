@@ -132,7 +132,56 @@
 		}
 
 		function register() {
-			$param = $this->session['request'];
+			try {
+				$this->editor->setValue($this->request);
+				$this->settings->setValue($this->request);
+
+				if($this->post['external_link'] && !$this->post['url']) {
+					$obj = $this->settings->getElementByName('url');
+					$obj->status = false;
+				}
+
+
+				$ret = $this->settings->validate();
+				$ret &= $this->editor->validate();
+
+				if($ret) {
+					if($this->_register()) {
+						$this->message = 'registered';
+						$this->status = true;
+					}
+				}
+				else {
+					$this->message = 'validation error';
+					$title = $this->editor->getElementById('title-container');
+					$response['innerHTML'] = array(
+						'settings'			=> $this->settings->getHtml(),
+						'title-container'	=> $title->getHtml(),
+					);
+				}
+			}
+			catch(Exception $e) {
+				$this->status = false;
+				$this->mode = 'alert';
+				$this->message = $e->getMessage();
+			}
+
+			$response['status'] = $this->status;
+			$response['mode'] = $this->mode;
+			$response['message_obj'] = 'message';
+			$response['message'] = $this->message;
+			if($this->status && $this->mode != 'confirm') {
+				$response['values'] = array('article_id' => $article_id, 'update_datetime' => time());
+			}
+
+			header('Content-Type: application/x-javascript charset=utf-8');
+			echo json_encode($response);
+			exit;
+		}
+
+		function _register() {
+			$this->editor->getValue($param);
+			$this->settings->getValue($param);
 			$param['del_flag'] = '0';
 			$param['article_date_u'] = strtotime($param['article_date_t']);
 
@@ -162,11 +211,9 @@
 			}
 			else {
 				$this->db->rollback();
-				$param['action_message'] = __('was failed to saved.');
+				$this->message = __('was failed to saved.');
 			}
-			$this->result->setValue($param);
-
-			$this->setView('resultView');
+			return $ret;
 		}
 
 		function delete() {

@@ -14,7 +14,7 @@ html, body {
 body {
 	margin: 0;
 	padding: 0;
-	font-family: "ＭＳ Ｐゴシック","MS PGothic","Lucida Grande","Lucida Sans Unicode","Helvetica Neue","Hiragino Kaku Gothic Pro","ヒラギノ角ゴ Pro W3",Arial,Verdana,sans-serif;
+	font-family: "MS PGothic","Lucida Grande","Lucida Sans Unicode","Helvetica Neue","Hiragino Kaku Gothic Pro",Arial,Verdana,sans-serif;
 	font-size: 12px;
 	text-align: left;
 	background-color: #555;
@@ -32,7 +32,7 @@ iframe#main {
 }
 textarea {
 	width: 99%;
-	font-family: "ＭＳ Ｐゴシック","MS PGothic","Lucida Grande","Lucida Sans Unicode","Helvetica Neue","Hiragino Kaku Gothic Pro","ヒラギノ角ゴ Pro W3",Arial,Verdana,sans-serif;
+	font-family: "MS PGothic","Lucida Grande","Lucida Sans Unicode","Helvetica Neue","Hiragino Kaku Gothic Pro",Arial,Verdana,sans-serif;
 	font-size: 12px;
 }
 pre {
@@ -41,7 +41,7 @@ pre {
 	overflow: auto;
 }
 input {
-	font-family: "ＭＳ Ｐゴシック","MS PGothic","Lucida Grande","Lucida Sans Unicode","Helvetica Neue","Hiragino Kaku Gothic Pro","ヒラギノ角ゴ Pro W3",Arial,Verdana,sans-serif;
+	font-family: "MS PGothic","Lucida Grande","Lucida Sans Unicode","Helvetica Neue","Hiragino Kaku Gothic Pro",Arial,Verdana,sans-serif;
 	font-size: 12px;
 }
 input::-moz-focus-inner {

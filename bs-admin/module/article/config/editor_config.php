@@ -42,22 +42,27 @@ $editor_config = array(
 				'start_html'	=> '<td>',
 				'end_html'		=> '</td>',
 				array(
-					'name'					=> 'title',
-					'class'					=> 'B_TextArea',
-					'special_html'			=> 'class="textarea title ime_on" maxlength="100" placeholder="Title"',
-					'validate'				=>
+					'id'			=> 'title-container',
+					'start_html'	=> '<div id="title-container">',
+					'end_html'		=> '</div>',
 					array(
+						'name'					=> 'title',
+						'class'					=> 'B_TextArea',
+						'special_html'			=> 'class="textarea title ime_on" maxlength="300" placeholder="Title"',
+						'validate'				=>
 						array(
-							'type' 			=> 'required',
-							'error_message'	=> __('Please enter title'),
+							array(
+								'type' 			=> 'required',
+								'error_message'	=> __('Please enter title'),
+							),
 						),
 					),
-				),
-				array(
-					'name'					=> 'error_message',
-					'class'					=> 'B_ErrMsg',
-					'start_html'			=> '<p class="error-message">',
-					'end_html'				=> '</p>',
+					array(
+						'name'					=> 'error_message',
+						'class'					=> 'B_ErrMsg',
+						'start_html'			=> '<p class="error-message">',
+						'end_html'				=> '</p>',
+					),
 				),
 			),
 		),

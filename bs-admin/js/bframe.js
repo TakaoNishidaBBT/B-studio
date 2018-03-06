@@ -194,6 +194,7 @@
 
 			if(httpObj.readyState == 4 && httpObj.status == 200 && bframe.response_wait) {
 				try {
+					bframe.response_wait = false;
 					response = eval('('+httpObj.responseText+')');
 				}
 				catch(e) {
@@ -215,6 +216,20 @@
 					alert(response.message);
 					return;
 				}
+				if(response.values) {
+					for(var obj_id in response.values) {
+						if(obj = document.getElementById(obj_id)) {
+							obj.value = response.values[obj_id];
+						}
+					}
+				}
+				if(response.innerHTML) {
+					for(var obj_id in response.innerHTML) {
+						if(obj = document.getElementById(obj_id)) {
+							obj.innerHTML = response.innerHTML[obj_id];
+						}
+					}
+				}
 				if(response.message && response.message_obj) {
 					if(obj = document.getElementById(response.message_obj)) {
 						if(response.status) {
@@ -230,18 +245,10 @@
 						}
 					}
 				}
-				if(response.values) {
-					for(var obj_id in response.values) {
-						if(obj = document.getElementById(obj_id)) {
-							obj.value = response.values[obj_id];
-						}
-					}
-				}
 
 				// execute callback function
 				AjaxSubmitExecuteCallBackAfter(response);
 
-				bframe.response_wait = false;
 				if(bframe.editCheck_handler) {
 					bframe.editCheck_handler.resetEditFlag();
 				}

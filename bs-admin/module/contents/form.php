@@ -94,6 +94,7 @@
 		function register() {
 			try {
 				$this->form->setValue($this->post);
+				$this->time = time();
 
 				if($this->post['contents_id']) {
 					$contents_id = $this->post['contents_id'];
@@ -138,7 +139,7 @@
 			$response['message_obj'] = 'message';
 			$response['message'] = $this->message;
 			if($this->status && $this->mode != 'confirm') {
-				$response['values'] = array('contents_id' => $contents_id, 'update_datetime' => time());
+				$response['values'] = array('contents_id' => $contents_id, 'update_datetime' => $this->time);
 			}
 
 			header('Content-Type: application/x-javascript charset=utf-8');
@@ -154,7 +155,7 @@
 
 			$contents_data['contents_id'] = $contents_id;
 			$contents_data['update_user'] = $user_id;
-			$contents_data['update_datetime'] = time();
+			$contents_data['update_datetime'] = $this->time;
 			$contents_data['version_id'] = $this->version['working_version_id'];
 			$contents_data['revision_id'] = $this->version['revision_id'];
 
@@ -179,9 +180,9 @@
 			$this->form->getValue($contents_data);
 
 			$contents_data['create_user'] = $user_id;
-			$contents_data['create_datetime'] = time();
+			$contents_data['create_datetime'] = $this->time;
 			$contents_data['update_user'] = $user_id;
-			$contents_data['update_datetime'] = time();
+			$contents_data['update_datetime'] = $this->time;
 			$contents_data['del_flag'] = '0';
 			$contents_data['version_id'] = $this->version['working_version_id'];
 			$contents_data['revision_id'] = $this->version['revision_id'];
@@ -208,9 +209,9 @@
 			$this->form->getValue($contents_data);
 
 			$contents_data['create_user'] = $user_id;
-			$contents_data['create_datetime'] = time();
+			$contents_data['create_datetime'] = $this->time;
 			$contents_data['update_user'] = $user_id;
-			$contents_data['update_datetime'] = time();
+			$contents_data['update_datetime'] = $this->time;
 			$contents_data['del_flag'] = '0';
 			$contents_data['version_id'] = $this->version['working_version_id'];
 			$contents_data['revision_id'] = $this->version['revision_id'];
