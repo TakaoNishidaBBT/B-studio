@@ -21,8 +21,6 @@
 			$this->input_control_config = $input_control_config;
 			$this->confirm_control_config = $confirm_control_config;
 			$this->delete_control_config = $delete_control_config;
-
-			$this->filter = 'select';
 		}
 
 		function select() {
@@ -30,12 +28,13 @@
 
 			switch($this->request['mode']) {
 			case 'delete':
-				$this->filter = 'delete';
 				$this->control = new B_Element($this->delete_control_config);
 				$row = $this->main_table->selectByPk($this->request);
 				$this->setThumnail($row['title_img_file']);
 				$this->settings->setValue($row);
-				$this->display_mode = 'confirm';
+				$this->editor->setValue($row);
+				$obj = $this->editor->getElementByName('readOnly');
+				$obj->value = 'true';
 				break;
 
 			default:
@@ -59,54 +58,7 @@
 				}
 				break;
 			}
-		}
-
-		function confirm() {
-			$this->setThumnail($this->post['title_img_file']);
-
-			$this->editor->setValue($this->request);
-			$this->settings->setValue($this->request);
-
-			if($this->post['external_link'] && !$this->post['url']) {
-				$obj = $this->settings->getElementByName('url');
-				$obj->status = false;
-			}
-
-
-			$ret = $this->settings->validate();
-			$ret &= $this->editor->validate();
-			if(!$ret) {
-				$this->control = new B_Element($this->input_control_config);
-				return;
-			}
-
-			if($this->post['description_flag'] == '1') {
-				$obj = $this->settings->getElementByName('external_link_row');
-				$obj->display = 'none';
-			}
-			else {
-				$obj = $this->settings->getElementByName('contents_row');
-				$obj->display = 'none';
-
-				if(!$this->post['external_link']) {
-					$obj = $this->settings->getElementByName('external_link_none');
-					$obj->display = '';
-					$obj = $this->settings->getElementByName('url');
-					$obj->display = 'none';
-					$obj = $this->settings->getElementByName('external_window');
-					$obj->display = 'none';
-				}
-			}
-
-			$this->editor->getValue($param);
-			$this->settings->getValue($param);
-			$this->session['request'] = $param;
-
-			$this->control = new B_Element($this->confirm_control_config);
-
-			// Set display mode
-			$this->display_mode = 'confirm';
-			$this->filter = 'confirm';
+			$this->settings->setFilterValue($this->session['mode']);
 		}
 
 		function _validate_callback($param) {
@@ -133,6 +85,9 @@
 
 		function register() {
 			try {
+				$article_id = $this->request['article_id'];
+				$this->settings->setFilterValue($this->session['mode']);
+
 				$this->editor->setValue($this->request);
 				$this->settings->setValue($this->request);
 
@@ -147,12 +102,12 @@
 
 				if($ret) {
 					if($this->_register()) {
-						$this->message = 'registered';
+						$this->message = __('Saved');
 						$this->status = true;
 					}
 				}
 				else {
-					$this->message = 'validation error';
+					$this->message = __('This is an error in your entry');
 					$title = $this->editor->getElementById('title-container');
 					$response['innerHTML'] = array(
 						'settings'			=> $this->settings->getHtml(),
@@ -196,14 +151,11 @@
 				$param['article_id'] = $this->main_table->selectMaxValue('article_id');
 				$param['permalink'] = $param['article_id'];
 				$ret = $this->main_table->update($param);
-
-				$param['action_message'] = __('was saved.');
 			}
 			else {
 				$param['update_user'] = $this->user_id;
 				$param['update_datetime'] = time();
 				$ret = $this->main_table->update($param);
-				$param['action_message'] = __('was saved.');
 			}
 
 			if($ret) {
@@ -211,7 +163,6 @@
 			}
 			else {
 				$this->db->rollback();
-				$this->message = __('was failed to saved.');
 			}
 			return $ret;
 		}
@@ -249,14 +200,6 @@
 		}
 
 		function view() {
-			if($this->session['mode'] == 'insert') {
-				$obj = $this->settings->getElementByName('article_id_row');
-				$obj->display = 'none';
-				$obj = $this->settings->getElementByName('permalink_row');
-				$obj->display = 'none';
-			}
-			$this->settings->setFilterValue($this->filter);
-
 			// Start buffering
 			ob_start();
 

@@ -21,6 +21,22 @@ div.list-header {
 	background-color: #ececec;
 }
 
+/* #control */
+div#control {
+	position: relative;
+	height: 35px;
+	text-align: center;
+}
+div#control ul {
+	position: absolute;
+	top: 0;
+	left: 20px;
+}
+div#control #message {
+	line-height: 35px;
+	font-weight: bold;
+}
+
 /* buttons */
 input.register-button {
 	padding: 2px 4px;
@@ -81,34 +97,37 @@ div#main {
 }
 
 /* settings table */
-table.settings {
+dl.settings {
 	width: 300px;
 }
-table.settings th,
-table.settings td {
-	display: block;
+dl.settings dt,
+dl.settings dd {
 	color: #f0f0f0;
 	padding: 4px 0;
+	margin: 0;
 }
-table.settings th {
+dl.settings dd {
+	padding-left: 8px;
+}
+dl.settings dt {
 	margin-top: 10px;
 	font-weight: bold;
 }
-table.settings span.title {
+dl.settings span.title {
 	border-left: 3px solid #666;
 	padding-left: 4px;
 	line-height: 20px;
 }
-table.settings td {
+dl.settings td {
 	min-height: 25px;
 	padding-left: 6px;
 }
-table.settings td.id,
-table.settings td.publication {
+dl.settings td.id,
+dl.settings td.publication {
 	padding-left: 0;
 }
-table.settings textarea,
-table.settings input {
+dl.settings textarea,
+dl.settings input {
 	background-color: #111;
 	color: #ccc;
 	border-top: 1px solid #444;
@@ -116,29 +135,43 @@ table.settings input {
 	border-right: 1px solid #666;
 	border-bottom: 1px solid #666;
 }
-table.settings td textarea {
+dl.settings dd textarea {
 	width: 98%;
 	height: 48px;
 }
-table.settings td .title {
+dl.settings dd .title {
 	font-weight: bold;
 }
-table.settings .date {
+dl.settings .date {
 	width: 85px;
 	margin-right: 2px;
 	text-align: center;
 }
-table.settings .permalink {
+dl.settings .permalink {
 	width: 210px;
 }
-table.settings td.external-link {
-	padding-left: 8px;
+dl.settings #category_name {
+	width: 180px;
 }
-table.settings td.external-link .url {
-	text-align: right;
+dl.settings dt.display-detail {
+	padding-bottom: 0;
+	padding-left: 0;
 }
-table.settings td.external-link .url input {
+dl.settings dd.external-link {
+	padding-top: 0;
+	padding-left: 12px;
+}
+dl.settings dd.external-link.disabled {
+	color: #888;
+}
+dl.settings dd.external-link div {
+	padding: 4px 0;
+}
+dl.settings dd.external-link .url input {
 	width: 236px;
+}
+dl.settings dd.external-link #external_window {
+	margin-left: 0;
 }
 
 /* editor table */
@@ -154,12 +187,20 @@ table.editor .permalink {
 table.editor .permalink img {
 	vertical-align: top;
 }
+table.editor #title-container {
+	font-size: 30px;
+}
 table.editor .title {
 	display: inline-block;
 	border: none;
 	font-size: 30px;
+	border: 1px solid #f7f7f7;
+	box-sizing: border-box;
+	width: 100%;
 }
-
+table.editor .title:focus {
+	border: 1px solid #b7b7f7;
+}
 /* table.img-item */
 table.img-item {
 	display: table;
@@ -169,7 +210,7 @@ table.img-item td {
 	display: table-cell;
 	border: none;
 }
-table.settings img {
+dl.settings img {
 	vertical-align: middle;
 }
 table.img-item td#title_img {
@@ -182,12 +223,14 @@ table.img-item td#title_img {
 table.img-item td.buttons {
 	padding-left: 4px;
 }
-table.settings input.radio {
+dl.settings input.radio {
 	margin-right: 4px;
+	vertical-align: -2px;
 }
-table.settings input.radio:not(:first-child) {
+dl.settings input.radio:not(:first-child) {
 	margin-left: 10px;
 }
-table.settings input.checkbox {
+dl.settings input.checkbox {
 	margin-right: 8px;
+	vertical-align: -2px;
 }

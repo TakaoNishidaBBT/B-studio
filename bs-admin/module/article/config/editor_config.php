@@ -7,6 +7,7 @@
 */
 $editor_config = array(
 	array('class' => 'B_Hidden', 'name' => 'baseHref', 'value' => B_SITE_BASE),
+	array('class' => 'B_Hidden', 'name' => 'readOnly', 'value' => ''),
 	array('class' => 'B_Hidden', 'name' => 'visual_editor_language', 'value' => $_SESSION['language']),
 	array('class' => 'B_Hidden', 'name' => 'visual_editor_body_class', 'value' => 'contents'),
 	array('class' => 'B_Hidden', 'name' => 'visual_editor_styles', 'value' => 'default:' . B_CURRENT_ROOT . 'visualeditor/article1/styles/styles.js'),
@@ -48,7 +49,7 @@ $editor_config = array(
 					array(
 						'name'					=> 'title',
 						'class'					=> 'B_TextArea',
-						'special_html'			=> 'class="textarea title ime_on" maxlength="300" placeholder="Title"',
+						'special_html'			=> 'class="textarea title ime_on bframe_scroll" maxlength="300" placeholder="Title"',
 						'validate'				=>
 						array(
 							array(

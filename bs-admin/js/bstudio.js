@@ -198,38 +198,41 @@
 		description_flag_2 = document.getElementById(flag2);
 		if(description_flag_1 && description_flag_2) {
 			if(description_flag_1.checked == true) {
-				bstudio.articleDetailControl(description_flag_1, 'external_link', 'url', 'external_window');
+				bstudio.articleDetailControl(description_flag_1, 'external', 'external_link', 'url', 'external_window');
 			}
 			else {
-				bstudio.articleDetailControl(description_flag_2, 'external_link', 'url', 'external_window');
+				bstudio.articleDetailControl(description_flag_2, 'external', 'external_link', 'url', 'external_window');
 			}
 		}
 	}
 
-	bstudio.articleDetailControl = function(me, external_link_id, external_url_id, external_window_id) {
-		external_link = document.getElementById(external_link_id);
-		external_url = document.getElementById(external_url_id);
-		external_window = document.getElementById(external_window_id);
+	bstudio.articleDetailControl = function(me, external_id, external_link_id, external_url_id, external_window_id) {
+		var external = document.getElementById(external_id);
+		var external_link = document.getElementById(external_link_id);
+		var external_url = document.getElementById(external_url_id);
+		var external_window = document.getElementById(external_window_id);
 		if(me.value=='1') {
+			external.classList.add('disabled');
 			if(external_link) {
-				external_link.disabled=true;
+				external_link.disabled='disabled';
 			}
 			if(external_url) {
-				external_url.disabled=true;
+				external_url.disabled='disabled';
 			}
 			if(external_window) {
-				external_window.disabled=true;
+				external_window.disabled='disabled';
 			}
 		}
 		if(me.value=='2') {
+			external.classList.remove('disabled');
 			if(external_link) {
-				external_link.disabled=false;
+				external_link.disabled='';
 			}
 			if(external_url) {
-				external_url.disabled=false;
+				external_url.disabled='';
 			}
 			if(external_window) {
-				external_window.disabled=false;
+				external_window.disabled='';
 			}
 		}
 	}

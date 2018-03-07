@@ -151,6 +151,7 @@ $list_config = array(
 					'module'		=> $this->module, 
 					'page'			=> 'form', 
 					'method'		=> 'select',
+					'mode'			=> 'select',
 				),
 				'param'		=>
 				array(

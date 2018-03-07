@@ -173,6 +173,12 @@
 				CKEDITOR.config.baseHref = baseHref.value;
 			}
 
+			// readOnly
+			var readOnly = document.getElementById('readOnly');
+			if(readOnly) {
+				CKEDITOR.config.readOnly = readOnly.value;
+			}
+
 			if(parent) {
 				editor = CKEDITOR.appendTo(parent.id, {
 					height: h,

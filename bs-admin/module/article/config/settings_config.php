@@ -7,30 +7,28 @@
 */
 $settings_config = array(
 	// Table
-	'start_html'	=> '<table class="settings"><tbody>',
-	'end_html'		=> '</tbody></table>',
+	'start_html'	=> '<dl class="settings">',
+	'end_html'		=> '</dl>',
 
 	// ID
 	array(
 		'name'			=> 'article_id_row',
-		'start_html'	=> '<tr>',
-		'end_html'		=> '</tr>',
+		'filter'		=> '!insert',
 		array(
 			'name'			=> 'article_id',
 			'class'			=> 'B_Text',
-			'start_html'	=> '<td class="id"><span class="title">ID : </span>',
-			'end_html'		=> '</th>',
+			'start_html'	=> '<dt class="id"><span class="title">ID : </span>',
+			'end_html'		=> '</dt>',
 		),
 	),
 
 	// permalink
 	array(
 		'name'			=> 'permalink_row',
-		'start_html'	=> '<tr>',
-		'end_html'		=> '</tr>',
+		'filter'		=> '!insert',
 		array(
-			'start_html'		=> '<td class="publication">',
-			'end_html'			=> '</td>',
+			'start_html'		=> '<dt class="publication">',
+			'end_html'			=> '</dt>',
 			array(
 				'start_html'		=> '<span class="title">',
 				'end_html'			=> '</span>',
@@ -62,11 +60,9 @@ $settings_config = array(
 	// Publication date
 	array(
 		'error_group'	=> true,
-		'start_html'	=> '<tr>',
-		'end_html'		=> '</tr>',
 		array(
-			'start_html'		=> '<td class="publication">',
-			'end_html'			=> '</td>',
+			'start_html'		=> '<dt class="publication">',
+			'end_html'			=> '</dt>',
 			array(
 				'start_html'		=> '<span class="title">',
 				'end_html'			=> '</span>',
@@ -123,11 +119,9 @@ $settings_config = array(
 	// Status
 	array(
 		'error_group'	=> true,
-		'start_html'	=> '<tr>',
-		'end_html'		=> '</tr>',
 		array(
-			'start_html'	=> '<th>',
-			'end_html'		=> '</th>',
+			'start_html'	=> '<dt>',
+			'end_html'		=> '</dt>',
 			array(
 				'start_html'	=> '<span class="title">',
 				'end_html'		=> '</span>',
@@ -135,8 +129,8 @@ $settings_config = array(
 			),
 		),
 		array(
-			'start_html'	=> '<td>',
-			'end_html'		=> '</td>',
+			'start_html'	=> '<dd>',
+			'end_html'		=> '</dd>',
 			array(
 				'name'			=> 'publication',
 				'class'			=> 'B_RadioContainer',
@@ -153,11 +147,9 @@ $settings_config = array(
 	// Category
 	array(
 		'error_group'	=> true,
-		'start_html'	=> '<tr>',
-		'end_html'		=> '</tr>',
 		array(
-			'start_html'	=> '<th>',
-			'end_html'		=> '</th>',
+			'start_html'	=> '<dt>',
+			'end_html'		=> '</dt>',
 			array(
 				'start_html'	=> '<span class="title">',
 				'end_html'		=> '</span>',
@@ -165,8 +157,8 @@ $settings_config = array(
 			),
 		),
 		array(
-			'start_html'		=> '<td>',
-			'end_html'			=> '</td>',
+			'start_html'		=> '<dd>',
+			'end_html'			=> '</dd>',
 			array(
 				'name'				=> 'category_name',
 				'class'				=> 'B_InputText',
@@ -207,11 +199,9 @@ $settings_config = array(
 	// Title image
 	array(
 		'error_group'	=> true,
-		'start_html'	=> '<tr>',
-		'end_html'		=> '</tr>',
 		array(
-			'start_html'			=> '<th>',
-			'end_html'				=> '</th>',
+			'start_html'	=> '<dt>',
+			'end_html'		=> '</dt>',
 			array(
 				'start_html'	=> '<span class="title">',
 				'end_html'		=> '</span>',
@@ -219,8 +209,8 @@ $settings_config = array(
 			),
 		),
 		array(
-			'start_html'	=> '<td>',
-			'end_html'		=> '</td>',
+			'start_html'	=> '<dd>',
+			'end_html'		=> '</dd>',
 			array(
 				'start_html'	=> '<table class="img-item">',
 				'end_html'		=> '</table>',
@@ -276,20 +266,14 @@ $settings_config = array(
 	// Display detail
 	array(
 		'error_group'	=> true,
-		'start_html'	=> '<tr>',
-		'end_html'		=> '</tr>',
 		array(
-			'start_html'	=> '<th>',
-			'end_html'		=> '</th>',
+			'start_html'	=> '<dt class="display-detail">',
+			'end_html'		=> '</dt>',
 			array(
 				'start_html'	=> '<span class="title">',
 				'end_html'		=> '</span>',
 				'value'			=> __('Display detail'),
 			),
-		),
-		array(
-			'start_html'	=> '<td>',
-			'end_html'		=> '</td>',
 			array(
 				'name'			=> 'description_flag',
 				'class'			=> 'B_RadioContainer',
@@ -297,7 +281,7 @@ $settings_config = array(
 				'value'			=> '1',
 				'item'			=>
 				array(
-					'special_html'	=> ' class=radio onclick="bstudio.articleDetailControl(this, \'external_link\', \'url\', \'external_window\')"',
+					'special_html'	=> ' class=radio onclick="bstudio.articleDetailControl(this, \'external\', \'external_link\', \'url\', \'external_window\')"',
 				),
 			),
 		),
@@ -307,11 +291,9 @@ $settings_config = array(
 	array(
 		'error_group'	=> true,
 		'name'			=> 'external_link_row',
-		'start_html'	=> '<tr>',
-		'end_html'		=> '</tr>',
 		array(
-			'start_html'	=> '<td class="external-link">',
-			'end_html'		=> '</td>',
+			'start_html'	=> '<dd id="external" class="external-link">',
+			'end_html'		=> '</dd>',
 			array(
 				'start_html'	=> '<div>',
 				'end_html'		=> '</div>',
@@ -374,11 +356,9 @@ $settings_config = array(
 	// keywords
 	array(
 		'error_group'	=> true,
-		'start_html'	=> '<tr>',
-		'end_html'		=> '</tr>',
 		array(
-			'start_html'	=> '<th>',
-			'end_html'		=> '</th>',
+			'start_html'	=> '<dt>',
+			'end_html'		=> '</dt>',
 			array(
 				'start_html'	=> '<span class="title">',
 				'end_html'		=> '</span>',
@@ -386,12 +366,12 @@ $settings_config = array(
 			),
 		),
 		array(
-			'start_html'	=> '<td>',
-			'end_html'		=> '</td>',
+			'start_html'	=> '<dd>',
+			'end_html'		=> '</dd>',
 			array(
 				'name'				=> 'keywords',
 				'class'				=> 'B_TextArea',
-				'special_html'		=> 'class="textarea title ime_on" maxlength="100"',
+				'special_html'		=> 'class="textarea ime_on" maxlength="100"',
 			),
 		),
 	),
@@ -399,11 +379,9 @@ $settings_config = array(
 	// description
 	array(
 		'error_group'	=> true,
-		'start_html'	=> '<tr>',
-		'end_html'		=> '</tr>',
 		array(
-			'start_html'	=> '<th>',
-			'end_html'		=> '</th>',
+			'start_html'	=> '<dt>',
+			'end_html'		=> '</dt>',
 			array(
 				'start_html'	=> '<span class="title">',
 				'end_html'		=> '</span>',
@@ -411,12 +389,12 @@ $settings_config = array(
 			),
 		),
 		array(
-			'start_html'	=> '<td>',
-			'end_html'		=> '</td>',
+			'start_html'	=> '<dd>',
+			'end_html'		=> '</dd>',
 			array(
 				'name'				=> 'description',
 				'class'				=> 'B_TextArea',
-				'special_html'		=> 'class="textarea title ime_on" maxlength="100"',
+				'special_html'		=> 'class="textarea ime_on" maxlength="100"',
 			),
 		),
 	),
@@ -424,92 +402,56 @@ $settings_config = array(
 
 // Control
 $input_control_config = array(
-	'start_html'	=> '<ul>',
-	'end_html'		=> '</ul>',
 	array(
-		'name'			=> 'back',
-		'start_html'	=> '<li>',
-		'end_html'		=> '</li>',
+		'start_html'	=> '<ul>',
+		'end_html'		=> '</ul>',
 		array(
-			'start_html'	=> '<span class="left-button" onclick="bframe.submit(\'F1\', \'' . $this->module . '\', \'list\', \'back\', \'\')">',
+			'name'			=> 'back',
+			'start_html'	=> '<li>',
+			'end_html'		=> '</li>',
+			array(
+				'start_html'	=> '<span class="left-button" onclick="bframe.submit(\'F1\', \'' . $this->module . '\', \'list\', \'back\', \'\')">',
+				'end_html'		=> '</span>',
+				array(
+					'start_html'	=> '<span class="img-cover">',
+					'end_html'		=> '</span>',
+					'value'			=> '<img src="images/common/left_arrow.png" alt="left arow" />',
+				),
+				array(
+					'start_html'	=> '<span class="text">',
+					'end_html'		=> '</span>',
+					'value'			=> __('Back'),
+				),
+			),
+		),
+		array(
+			'name'			=> 'register',
+			'start_html'	=> '<li>',
+			'end_html'		=> '</li>',
+			array(
+				'start_html'	=> '<span class="right-button" onclick="bframe.ajaxSubmit.submit(\'F1\', \'' . $this->module . '\', \'form\', \'register\', \'confirm\', true)">',
+				'end_html'		=> '</span>',
+				array(
+					'start_html'	=> '<span class="text">',
+					'end_html'		=> '</span>',
+					'value'			=> __('Save'),
+				),
+				array(
+					'start_html'	=> '<span class="img-cover">',
+					'end_html'		=> '</span>',
+					'value'			=> '<img src="images/common/right_arrow.png" alt="right arow" />',
+				),
+			),
+		),
+	),
+	array(
+		'start_html'	=> '<div class="message-container">',
+		'end_html'		=> '</div>',
+		array(
+			'start_html'	=> '<span id="message">',
 			'end_html'		=> '</span>',
-			array(
-				'start_html'	=> '<span class="img-cover">',
-				'end_html'		=> '</span>',
-				'value'			=> '<img src="images/common/left_arrow.png" alt="left arow" />',
-			),
-			array(
-				'start_html'	=> '<span class="text">',
-				'end_html'		=> '</span>',
-				'value'			=> __('Back'),
-			),
 		),
 	),
-
-	array(
-		'name'				=> 'register_button',
-		'start_html'		=> '<li class="register">',
-		'end_html'			=> '</li>',
-		array(
-			'start_html'	=> '<div class="input-container">',
-			'end_html'		=> '</div>',
-			array(
-				'name'			=> 'register',
-				'start_html'	=> '<span id="register" class="register-button" onclick="bframe.ajaxSubmit.submit(\'F1\', \'' . $this->module . '\', \'form\', \'register\', \'confirm\', true)">',
-				'end_html'		=> '</span>',
-				'value'			=> '<img src="images/common/save.png" alt="Save" />' . __('Save'),
-			),
-		),
-		array(
-			'start_html'	=> '<div class="message-container">',
-			'end_html'		=> '</div>',
-			array(
-				'start_html'	=> '<span id="message">',
-				'end_html'		=> '</span>',
-			),
-		),
-	),
-/*
-	array(
-		'name'			=> 'register',
-		'start_html'	=> '<li>',
-		'end_html'		=> '</li>',
-		array(
-			'start_html'	=> '<span class="right-button" onclick="bframe.submit(\'F1\', \'' . $this->module . '\', \'form\', \'register\', \'\')">',
-			'end_html'		=> '</span>',
-			array(
-				'start_html'	=> '<span class="text">',
-				'end_html'		=> '</span>',
-				'value'			=> __('Save'),
-			),
-			array(
-				'start_html'	=> '<span class="img-cover">',
-				'end_html'		=> '</span>',
-				'value'			=> '<img src="images/common/right_arrow.png" alt="right arow" />',
-			),
-		),
-	),
-/*
-	array(
-		'name'			=> 'confirm',
-		'start_html'	=> '<li>',
-		'end_html'		=> '</li>',
-		array(
-			'start_html'	=> '<span class="right-button" onclick="bframe.submit(\'F1\', \'' . $this->module . '\', \'form\', \'confirm\', \'\', true)">',
-			'end_html'		=> '</span>',
-			array(
-				'start_html'	=> '<span class="text">',
-				'end_html'		=> '</span>',
-				'value'			=> __('Confirm'),
-			),
-			array(
-				'start_html'	=> '<span class="img-cover">',
-				'end_html'		=> '</span>',
-				'value'			=> '<img src="images/common/right_arrow.png" alt="right arow" />',
-			),
-		),
-	),
-*/
 );
 
 // Confirm control
