@@ -49,7 +49,7 @@ $editor_config = array(
 					array(
 						'name'					=> 'title',
 						'class'					=> 'B_TextArea',
-						'special_html'			=> 'class="textarea title ime_on bframe_scroll" maxlength="300" placeholder="Title"',
+						'special_html'			=> 'class="textarea title ime_on bframe_textarea" maxlength="300" placeholder="Title"',
 						'validate'				=>
 						array(
 							array(
@@ -83,7 +83,7 @@ $editor_config = array(
 					array(
 						'name'			=> 'contents',
 						'class'			=> 'B_TextArea',
-						'special_html'	=> 'class="textarea bframe_visualeditor _bframe_inlineeditor" data-param="scroller:content" style="height:1000px"',
+						'special_html'	=> 'class="textarea bframe_visualeditor" data-param="scroller:content" style="height:1000px"',
 					),
 				),
 			),

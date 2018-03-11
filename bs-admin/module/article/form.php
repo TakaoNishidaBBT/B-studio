@@ -217,6 +217,7 @@
 			$this->html_header->appendProperty('script', '<script src="js/ckeditor/ckeditor.js"></script>');
 			$this->html_header->appendProperty('script', '<script src="js/bframe_visualeditor.js"></script>');
 			$this->html_header->appendProperty('script', '<script src="js/bframe_calendar.js"></script>');
+			$this->html_header->appendProperty('script', '<script src="js/bframe_textarea.js"></script>');
 
 			// Show HTML header
 			$this->showHtmlHeader();

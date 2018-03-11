@@ -376,11 +376,16 @@
 
 		function onResize() {
 			if(!cke_controll) return;
+
 			var position = cke_controll.style.position;
 
 			// reset to static
 			cke_controll.style.position = 'static';
 			cke_controll.style.width = '';
+
+			// set position
+			cke_controll_position = bframe.getElementPosition(cke_controll);
+			cke_controll_position.top += scroller.scrollTop;
 
 			// get style and reset width
 			cke_controll_style = bframe.getStyle(cke_controll);
@@ -391,10 +396,7 @@
 			cke_controll.style.position = position;
 
 			// set footer style
-			cke_footer = document.getElementById('cke_1_bottom');
-			cke_footer.style.position = 'fixed';
 			cke_footer.style.width = cke_controll_style_width;
-			cke_footer.style.bottom = '0';
 		}
 
 		function onblurEditor() {

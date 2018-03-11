@@ -191,13 +191,15 @@ table.editor #title-container {
 	font-size: 30px;
 }
 table.editor .title {
-	display: inline-block;
-	border: none;
 	font-size: 30px;
 	border: 1px solid #f7f7f7;
 	box-sizing: border-box;
 	width: 100%;
 }
+table.editor .title::placeholder {
+	color: #f00;
+}
+
 table.editor .title:focus {
 	border: 1px solid #b7b7f7;
 }

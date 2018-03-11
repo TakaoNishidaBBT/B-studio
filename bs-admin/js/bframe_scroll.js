@@ -33,8 +33,8 @@
 		var padding = 2;
 		var paddingTop, paddingBottom;
 		var bgColor;
-		var timer;
-		var moving;
+		var timer, childNodesScrollTimer;
+		var moving, childNodesMoving;
 		var speed;
 		var wheel_ratio = 1;
 		var momentam = 100;
@@ -143,6 +143,8 @@
 			var currentScrollTop = self.scrollTop;
 
 			self.scrollTop = 0;
+			self.style.paddingBottom = 0;
+
 			bar.style.top = 0;
 			bar.style.height = 0;
 			barConainer.style.top = 0;
@@ -162,6 +164,7 @@
 
 			barScrollHeight = self.clientHeight - barHeight;
 			scrollHeight = self.scrollHeight - self.clientHeight;
+
 			barConainer.style.height = self.clientHeight + 'px';
 			bar.style.height = barHeight - padding*2 + 'px';
 			var hoverObj = document.querySelectorAll('.bframe_scroll:hover');
@@ -206,6 +209,7 @@
 			// detect scrollable object and set event handler
 			detectScrollableObject(self, _callback);
 		}
+		this.onResize = onResize;
 
 		function detectScrollableObject(node, callback) {
 			if(!node || !node.childNodes) return false;
@@ -251,12 +255,20 @@
 			var scrollHeight = this.scrollHeight - this.clientHeight;
 			var direction = event.deltaY > 0 ? 'down' : 'up';
 
-			if((direction == 'up' && this.scrollTop == 0) || (direction == 'down' && this.scrollTop >= scrollHeight)) {
+			if(!childNodesMoving &&
+				((direction == 'up' && this.scrollTop == 0) || (direction == 'down' && this.scrollTop >= scrollHeight))) {
 				onWheel(event);
 			}
 			else {
 				event.stopPropagation();
+				clearTimeout(childNodesScrollTimer);
+				childNodesScrollTimer = setTimeout(onChildNodesScrollStop, 500);
+				childNodesMoving = true;
 			}
+		}
+
+		function onChildNodesScrollStop() {
+			childNodesMoving = false;
 		}
 
 		function onFrameWheel(event) {
@@ -315,7 +327,6 @@
 					self.scrollTop = scrollHeight + speed;
 				}
 			}
-
 			if(!moving && direction == 'up' && self.scrollTop === 0) {
 				return;
 			}

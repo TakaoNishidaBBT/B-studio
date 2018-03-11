@@ -371,7 +371,7 @@ $settings_config = array(
 			array(
 				'name'				=> 'keywords',
 				'class'				=> 'B_TextArea',
-				'special_html'		=> 'class="textarea ime_on" maxlength="100"',
+				'special_html'		=> 'class="textarea ime_on bframe_textarea" maxlength="100"',
 			),
 		),
 	),
@@ -394,7 +394,7 @@ $settings_config = array(
 			array(
 				'name'				=> 'description',
 				'class'				=> 'B_TextArea',
-				'special_html'		=> 'class="textarea ime_on" maxlength="100"',
+				'special_html'		=> 'class="textarea ime_on bframe_textarea" maxlength="100"',
 			),
 		),
 	),
