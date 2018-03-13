@@ -64,7 +64,6 @@
 
 		self.style.overflow = 'hidden';
 		self.style.overflowY = 'hidden';
-		self.style.boxSizing = 'border-box';
 
 		var style = bframe.getStyle(self);
 		if(style.position.toLowerCase() == 'static') {
@@ -96,8 +95,16 @@
 		bar.style.borderRadius = '4px';
 		bar.style.boxSizing = 'border-box';
 
-		self.appendChild(barConainer);
-		self.appendChild(bar);
+		if(mode == 'textarea') {
+			self.parentNode.appendChild(barConainer);
+			self.parentNode.appendChild(bar);
+			bouncescroll = false;
+		}
+		else {
+			self.style.boxSizing = 'border-box';
+			self.appendChild(barConainer);
+			self.appendChild(bar);
+		}
 
 		bframe.addEventListener(bar, 'mousedown' , onMouseDown);
 		bframe.addEventListener(window, 'mousemove' , onMouseMove);
@@ -242,7 +249,12 @@
 			if(self.clientHeight >= self.scrollHeight) return;
 
 			// set scroll bar top
-			var bartop = self.scrollTop + Math.round(barScrollHeight * self.scrollTop / scrollHeight) + padding;
+			if(mode == 'textarea') {
+				var bartop = Math.round(barScrollHeight * self.scrollTop / scrollHeight) + padding;
+			}
+			else {
+				var bartop = self.scrollTop + Math.round(barScrollHeight * self.scrollTop / scrollHeight) + padding;
+			}
 			bar.style.top = bartop + 'px';
 			bar.style.transition = '';
 			bar.style.opacity = '0.6';
@@ -298,6 +310,15 @@
 		}
 
 		function onWheel(event) {
+			var barContainerTop;
+
+			if(mode == 'textarea') {
+				barContainerTop = 0;
+			}
+			else {
+				barContainerTop = self.scrollTop;
+			}
+
 			if(bframe.stopWheelEvent) {
 				var obj = bframe.getEventSrcElement(event);
 				if(!bframe.isChild(bframe.activeWheelElement, obj)) return;
@@ -315,7 +336,7 @@
 
 			speed = deltaY * wheel_ratio;
 			self.scrollTop += speed;
-			barConainer.style.top = self.scrollTop + 'px';
+			barConainer.style.top = barContainerTop + 'px';
 
 			// set scroll bar height (for bounce scroll)
 			if(bouncescroll) {
@@ -338,7 +359,7 @@
 			event.preventDefault();
 
 			// set scroll bar top
-			var bartop = self.scrollTop + Math.round(barScrollHeight * self.scrollTop / scrollHeight) + padding;
+			var bartop = barContainerTop + Math.round(barScrollHeight * self.scrollTop / scrollHeight) + padding;
 			bar.style.top = bartop + 'px';
 			bar.style.transition = '';
 			bar.style.opacity = '0.6';
@@ -349,7 +370,7 @@
 					bar.style.height = barHeight - Math.floor(speed * -1 / 10) - padding*2 + 'px';
 				}
 				else if(bartop + barHeight >= self.scrollTop + self.clientHeight) {
-					bar.style.height = self.scrollTop + self.clientHeight - bartop - padding + 'px';
+					bar.style.height = barContainerTop + self.clientHeight - bartop - padding + 'px';
 				}
 				else {
 					bar.style.height = barHeight - padding*2 + 'px';
@@ -371,10 +392,10 @@
 							self.scrollTop = startScrollTop - Math.round(progress * momentam);
 						}
 						if(self.scrollTop >= scrollHeight) self.scrollTop = scrollHeight;
-						barConainer.style.top = self.scrollTop + 'px';
+						barConainer.style.top = barContainerTop + 'px';
 
 						// set scroll bar top
-						var bartop = self.scrollTop + Math.round(barScrollHeight * self.scrollTop / scrollHeight) + padding;
+						var bartop = barContainerTop + Math.round(barScrollHeight * self.scrollTop / scrollHeight) + padding;
 						bar.style.top = bartop + 'px';
 						if(progress >= 1) {
 							clearTimeout(timer);

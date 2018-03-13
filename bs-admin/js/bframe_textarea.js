@@ -18,9 +18,8 @@
 	// class bframe.textarea
 	// 
 	// -------------------------------------------------------------------------
-	bframe.textarea = function(_target) {
-		var self = this;
-		var target = _target;
+	bframe.textarea = function(target) {
+		var self = target;
 		var container;
 		var textarea;
 		var placeholder;
@@ -37,60 +36,14 @@
 		container = document.createElement('div');
 		container.style.position = 'relative';
 		container.style.boxSizing = 'border-box';
+		container.style.overflow = 'hidden';
+		container.style.width = self.offsetWidth + 'px';
+		container.style.height = self.offsetHeight + 'px';
 
-		target.parentNode.insertBefore(container, target);
-		var container_position = bframe.getElementPosition(container);
+		self.style.resize = 'none';
 
-		// placeholder
-		placeholder = target.cloneNode(true);
-
-		//textarea
-		textarea = document.createElement('pre');
-
-		var style = bframe.getStyle(target);
-		for(var i=0; i < style.length; i++) {
-			var property = style[i];
-			var value = style.getPropertyValue(property);
-			switch(property) {
-			case '-webkit-user-modify':
-				continue;
-
-			default:
-				textarea.style.setProperty(property, value);
-				placeholder.style.setProperty(property, value);
-				break;
-			}
-		}
-		textarea.style.boxSizing = 'border-box';
-		textarea.style.resize = 'none';
-		textarea.style.overflow = 'hidden';
-		textarea.style.display = 'block';
-		textarea.style.zIndex = '2';
-		textarea.style.backgroundColor = 'transparent';
-		textarea.contentEditable = true;
-
-		container.appendChild(textarea);
-
-		container.style.width = textarea.style.width;
-		container.style.height = textarea.style.height;
-
-		target.style.display = 'none';
-
-		placeholder.style.position = 'absolute';
-		placeholder.style.top = '0';
-		placeholder.style.zIndex = '1';
-
-		container.appendChild(placeholder);
-
-		if(target.innerHTML) {
-			textarea.innerHTML = target.innerHTML;
-		}
-		else {
-//			if(target.placeholder) {
-//				placeholder.placeholder = target.placeholder;
-//			}
-			textarea.innerHTML = '<br />';
-		}
+		self.parentNode.insertBefore(container, self);
+		container.appendChild(self);
 
 		// resizer
 		resizer = document.createElement('img');
@@ -104,21 +57,15 @@
 
 		createOverlay();
 
-		scroll = new bframe.scroll(textarea);
+		scroll = new bframe.scroll(self, 'textarea');
 
-		bframe.addEventListener(textarea, 'keyup' , onKeyup);
 		bframe.addEventListener(resizer, 'mousedown' , onMouseDown);
 		bframe.addEventListener(window, 'mousemove' , onMouseMove);
 		bframe.addEventListener(window, 'mouseup' , onMouseUp);
 
-		function onKeyup(event) {
-			target.innerHTML = textarea.innerText;
-			scroll.onResize();
-		}
-
 		function onMouseDown(event) {
 			draggStartMousePosition = bframe.getMousePosition(event);
-			draggStartElementPosition = bframe.getElementPosition(textarea);
+			draggStartElementPosition = bframe.getElementPosition(self);
 
 			var wsize = bframe.getWindowSize();
 
@@ -143,8 +90,8 @@
 
 			container.style.width = width + 'px';
 			container.style.height = height + 'px';
-			textarea.style.width = width + 'px';
-			textarea.style.height = height + 'px';
+			self.style.width = width + 'px';
+			self.style.height = height + 'px';
 		}
 
 		function onMouseUp(event) {
@@ -152,8 +99,8 @@
 
 			overlay.style.width = 0;
 			overlay.style.height = 0;
-			overlay.style.cursor = 'pointer';
-			resizer.style.cursor = 'pointer';
+			overlay.style.cursor = 'auto';
+			resizer.style.cursor = 'auto';
 
 			dragging = false;
 
