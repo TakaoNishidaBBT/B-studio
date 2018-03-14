@@ -81,7 +81,7 @@ $settings_config = array(
 				),
 			),
 			array(
-				'filter'			=> 'select',
+				'filter'			=> 'select/insert',
 				'id'				=> 'schedule_calendar1',
 				'class'				=> 'B_Link',
 				'special_html'		=> 'class="bframe_calendar settings-button" title="' . __('Calendar') . '"',
@@ -169,7 +169,7 @@ $settings_config = array(
 				'name'				=> 'category_id',
 			),
 			array(
-				'filter'			=> 'select',
+				'filter'			=> 'select/insert',
 				'name'				=> 'open_category',
 				'class'				=> 'B_Link',
 				'link'				=> 'index.php',
@@ -223,7 +223,7 @@ $settings_config = array(
 						'end_html'		=> '</td>',
 					),
 					array(
-						'filter'		=> 'select',
+						'filter'		=> 'select/insert',
 						'start_html'	=> '<td class="buttons">',
 						'end_html'		=> '</td>',
 						array(

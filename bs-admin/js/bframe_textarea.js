@@ -37,7 +37,7 @@
 		container.style.position = 'relative';
 		container.style.boxSizing = 'border-box';
 		container.style.overflow = 'hidden';
-		container.style.width = self.offsetWidth + 'px';
+		container.style.maxWidth = self.offsetWidth + 'px';
 		container.style.height = self.offsetHeight + 'px';
 
 		self.style.resize = 'none';
@@ -93,10 +93,15 @@
 			var height = draggStartElementPosition.height + mpos.y - draggStartMousePosition.y;
 			if(width < minWidth) width = minWidth;
 			if(height < minHeight) height = minHeight;
-
+/*
 			container.style.width = width + 'px';
 			container.style.height = height + 'px';
 			self.style.width = width + 'px';
+			self.style.height = height + 'px';
+*/
+			container.style.maxWidth = width + 'px';
+			container.style.height = height + 'px';
+			self.style.maxWidth = width + 'px';
 			self.style.height = height + 'px';
 		}
 

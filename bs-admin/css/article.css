@@ -187,7 +187,7 @@ table.editor .permalink {
 table.editor .permalink img {
 	vertical-align: top;
 }
-table.editor #title-container {
+table.editor #title-container .title {
 	font-size: 30px;
 }
 table.editor .title {
