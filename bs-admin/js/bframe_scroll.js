@@ -502,7 +502,12 @@
 			mpos = bframe.getMousePosition(event);
 			self.scrollTop = draggStartScrollTop + (mpos.y - draggStartMousePosition.y) * Math.round(scrollHeight / barScrollHeight);
 			barConainer.style.top = self.scrollTop + 'px';
-			var bartop = self.scrollTop + Math.round(barScrollHeight * self.scrollTop / scrollHeight) + padding;
+			if(mode == 'textarea') {
+				var bartop = Math.round(barScrollHeight * self.scrollTop / scrollHeight) + padding;
+			}
+			else {
+				var bartop = self.scrollTop + Math.round(barScrollHeight * self.scrollTop / scrollHeight) + padding;
+			}
 			bar.style.top = bartop + 'px';
 			bar.style.opacity = '0.6';
 		}

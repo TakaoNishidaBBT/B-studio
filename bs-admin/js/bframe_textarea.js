@@ -49,6 +49,7 @@
 		resizer = document.createElement('img');
 		resizer.src = 'images/common/resizer.png';
 		resizer.style.position = 'absolute';
+		resizer.style.zIndex = '999999';
 		resizer.style.right = 0;
 		resizer.style.bottom = 0;
 		resizer.style.cursor = 'nwse-resize';
@@ -59,9 +60,14 @@
 
 		scroll = new bframe.scroll(self, 'textarea');
 
-		bframe.addEventListener(resizer, 'mousedown' , onMouseDown);
-		bframe.addEventListener(window, 'mousemove' , onMouseMove);
-		bframe.addEventListener(window, 'mouseup' , onMouseUp);
+		bframe.addEventListener(self, 'keyup', onKeyUp);
+		bframe.addEventListener(resizer, 'mousedown', onMouseDown);
+		bframe.addEventListener(window, 'mousemove', onMouseMove);
+		bframe.addEventListener(window, 'mouseup', onMouseUp);
+
+		function onKeyUp(event) {
+			scroll.onResize();
+		}
 
 		function onMouseDown(event) {
 			draggStartMousePosition = bframe.getMousePosition(event);
