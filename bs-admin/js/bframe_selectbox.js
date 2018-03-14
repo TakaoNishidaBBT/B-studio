@@ -11,8 +11,8 @@
 		var s = [];
 		var objects = document.querySelectorAll('select.bframe_selectbox');
 
-		for(var i=0, j=0; i < objects.length; i++) {
-			s[j++] = new bframe.selectbox(objects[i], sc);
+		for(var i=0; i < objects.length; i++) {
+			s[i] = new bframe.selectbox(objects[i], sc);
 		}
 		sc.setElements(s);
 

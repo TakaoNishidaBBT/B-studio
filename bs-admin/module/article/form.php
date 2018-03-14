@@ -108,11 +108,7 @@
 				}
 				else {
 					$this->message = __('This is an error in your entry');
-					$title = $this->editor->getElementById('title-container');
-					$response['innerHTML'] = array(
-						'settings'			=> $this->settings->getHtml(),
-						'title-container'	=> $title->getHtml(),
-					);
+					$this->status = false;
 				}
 			}
 			catch(Exception $e) {
@@ -120,6 +116,12 @@
 				$this->mode = 'alert';
 				$this->message = $e->getMessage();
 			}
+
+			$title = $this->editor->getElementById('title-container');
+			$response['innerHTML'] = array(
+				'settings'			=> $this->settings->getHtml(),
+				'title-container'	=> $title->getHtml(),
+			);
 
 			$response['status'] = $this->status;
 			$response['mode'] = $this->mode;
