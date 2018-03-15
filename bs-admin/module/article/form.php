@@ -78,7 +78,7 @@
 
 			$file_info = pathinfo($img_path);
 			$thumnail_path = $this->util->getPath(B_UPLOAD_URL, $this->util->getPath($file_info['dirname'], B_THUMB_PREFIX . $file_info['basename']));
-			$html = '<img src="' . $thumnail_path . '" alt="" />';
+			$html = '<img src="' . $thumnail_path . '" alt="title image" />';
 			$obj = $this->settings->getElementByName('title_img');
 			$obj->value = $html;
 		}
@@ -117,6 +117,7 @@
 				$this->message = $e->getMessage();
 			}
 
+			$this->setThumnail($this->request['title_img_file']);
 			$title = $this->editor->getElementById('title-container');
 			$response['innerHTML'] = array(
 				'settings'			=> $this->settings->getHtml(),

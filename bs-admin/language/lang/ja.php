@@ -193,6 +193,7 @@
 		'category'						=> 'カテゴリ',
 		'Date'							=> '日付',
 		'Date: '						=> '日付：',
+		'Permalink'						=> 'パーマリンク',
 		'Title: '						=> 'タイトル：',
 		'Published/Preview/Closed'		=> '公開／プレビュー／非公開',
 		'Published'						=> '公開',
