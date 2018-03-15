@@ -392,10 +392,16 @@
 							self.scrollTop = startScrollTop - Math.round(progress * momentam);
 						}
 						if(self.scrollTop >= scrollHeight) self.scrollTop = scrollHeight;
-						barConainer.style.top = barContainerTop + 'px';
+						if(mode == 'textarea') {
+							barConainer.style.top = 0;
+							var bartop = Math.round(barScrollHeight * self.scrollTop / scrollHeight) + padding;
+						}
+						else {
+							barConainer.style.top = self.scrollTop + 'px';
+							var bartop = self.scrollTop + Math.round(barScrollHeight * self.scrollTop / scrollHeight) + padding;
+						}
 
 						// set scroll bar top
-						var bartop = barContainerTop + Math.round(barScrollHeight * self.scrollTop / scrollHeight) + padding;
 						bar.style.top = bartop + 'px';
 						if(progress >= 1) {
 							clearTimeout(timer);

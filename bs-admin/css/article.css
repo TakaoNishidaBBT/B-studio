@@ -187,14 +187,12 @@ table.editor .permalink {
 table.editor .permalink img {
 	vertical-align: top;
 }
-table.editor #title-container .title {
-	font-size: 30px;
-}
 table.editor .title {
 	font-size: 30px;
 	border: 1px solid #f7f7f7;
 	box-sizing: border-box;
 	width: 100%;
+	height: 64px;
 }
 table.editor .title::placeholder {
 	color: #f00;
