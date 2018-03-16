@@ -426,6 +426,8 @@
 
 		var bgColor = window.getComputedStyle(element).backgroundColor;
 		if(bgColor == bframe.transparent && element.parentNode) {
+			if(element == document.body) return #fff;
+
 			bgColor = bframe.getBgColor(element.parentNode);
 		}
 		
