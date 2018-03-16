@@ -63,6 +63,8 @@
 
 		function _validate_callback($param) {
 			$article_id = $this->request['article_id'];
+			if(!$article_id) return true;
+
 			$sql = "select count(*) cnt from " . B_DB_PREFIX . "article where permalink = binary '" . $param['value'] . "' and article_id <> '$article_id'";
 			$rs = $this->db->query($sql);
 			$row = $this->db->fetch_assoc($rs);

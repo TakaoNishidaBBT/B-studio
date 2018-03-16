@@ -65,6 +65,18 @@
 		bframe.addEventListener(window, 'mousemove', onMouseMove);
 		bframe.addEventListener(window, 'mouseup', onMouseUp);
 
+		var style = bframe.getStyle(self);
+
+		container.style.marginTop = style.marginTop;
+		container.style.marginRight = style.marginRight;
+		container.style.marginBottom = style.marginBottom;
+		container.style.marginLeft = style.marginLeft;
+
+		self.style.marginTop = '0';
+		self.style.marginRight = '0';
+		self.style.marginBottom = '0';
+		self.style.marginLeft = '0';
+
 		function onKeyUp(event) {
 			scroll.onResize();
 		}
