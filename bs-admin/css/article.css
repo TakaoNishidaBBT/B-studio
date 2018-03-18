@@ -197,7 +197,7 @@ table.editor .title {
 	padding: 4px 6px;
 }
 table.editor .title::placeholder {
-	color: #f00;
+	color: #bbb;
 }
 
 table.editor .title:focus {
@@ -235,4 +235,10 @@ dl.settings input.radio:not(:first-child) {
 dl.settings input.checkbox {
 	margin-right: 8px;
 	vertical-align: -2px;
+}
+.wrap {
+	padding: 20px;
+}
+span.title-result {
+	margin-left: 20px;
 }

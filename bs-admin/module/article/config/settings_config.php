@@ -569,35 +569,31 @@ $result_control_config = array(
 
 // Result
 $result_config = array(
+	'start_html'	=> '<p>',
+	'end_html'		=> '</p>',
 	array(
-		'start_html'	=> '<form name="F1" method="post" action="index.php">',
-		'end_html'		=> '</form>',
-		array(
-			'start_html'	=> '<p>',
-			'end_html'		=> '</p>',
-			array(
-				array(
-					'value'					=> __('Date: '),
-				),
-				array(
-					'name'					=> 'article_date_t',
-					'class'					=> 'B_Text',
-					'start_html'			=> '<span class="bold">',
-					'end_html'				=> '</span>',
-				),
-				array(
-					'value'					=> __('Title: '),
-				),
-				array(
-					'name'					=> 'title',
-					'class'					=> 'B_Text',
-					'start_html'			=> '<span class="bold">',
-					'end_html'				=> '</span>',
-				),
-				array(
-					'name'					=> 'action_message',
-				),
-			),
-		),
+		'start_html'	=> '<span class="date-result">',
+		'end_html'		=> '</span>',
+		'value'			=> __('Date: '),
+	),
+	array(
+		'name'			=> 'article_date_t',
+		'class'			=> 'B_Text',
+		'start_html'	=> '<span class="bold">',
+		'end_html'		=> '</span>',
+	),
+	array(
+		'start_html'	=> '<span class="title-result">',
+		'end_html'		=> '</span>',
+		'value'			=> __('Title: '),
+	),
+	array(
+		'name'			=> 'title',
+		'class'			=> 'B_Text',
+		'start_html'	=> '<span class="bold">',
+		'end_html'		=> '</span>',
+	),
+	array(
+		'name'			=> 'action_message',
 	),
 );

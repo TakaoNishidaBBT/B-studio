@@ -49,7 +49,7 @@ $editor_config = array(
 					array(
 						'name'					=> 'title',
 						'class'					=> 'B_TextArea',
-						'special_html'			=> 'class="textarea title ime_on bframe_textarea" maxlength="300" placeholder="Title"',
+						'special_html'			=> 'class="textarea title ime_on bframe_textarea" maxlength="300" placeholder="' . __('Title') . '"',
 						'validate'				=>
 						array(
 							array(
