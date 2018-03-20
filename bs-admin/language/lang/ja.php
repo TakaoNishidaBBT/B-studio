@@ -217,6 +217,8 @@
 		'newCategory'					=> '新しいカテゴリ',
 		'newFolder'						=> '新しいフォルダ',
 		'This is an error in your entry'=> '入力内容に誤りがあります。',
+		'This permalink is already in use'
+										=> 'そのパーマリンクは既に使用されています',
 
 		// Category
 		'Double-click to set'			=> 'カテゴリ名をダブルクリックすると設定されます',

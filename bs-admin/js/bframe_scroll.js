@@ -58,7 +58,7 @@
 			}
 		}
 		else {
-//			return;
+			if(mode == 'ace') return;
 			bouncescroll = true;
 		}
 

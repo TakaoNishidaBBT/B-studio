@@ -566,6 +566,7 @@
 
 				case 'callback':
 					$param = $config['param'];
+					$param['obj'] = $this;
 					$param['value'] = $this->value;
 					$obj = $config['obj'];
 					$method = $config['method'];

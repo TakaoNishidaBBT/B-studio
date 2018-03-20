@@ -65,13 +65,27 @@
 			$article_id = $this->request['article_id'];
 			if(!$article_id) return true;
 
-			$sql = "select count(*) cnt from " . B_DB_PREFIX . "article where permalink = binary '" . $param['value'] . "' and article_id <> '$article_id'";
+			$obj = $param['obj'];
+			$permalink = $org = $obj->value;
+
+			$suffix = 2;
+			while($this->checkPermalink($article_id, $permalink)) {
+				$permalink = $org . '-' . $suffix++;
+			}
+			$obj->value = $permalink;
+
+			return true;
+		}
+
+		function checkPermalink($article_id, $permalink) {
+			$article_id = $this->db->real_escape_string($article_id);
+			$permalink = $this->db->real_escape_string($permalink);
+
+			$sql = "select count(*) cnt from " . B_DB_PREFIX . "article where permalink = binary '$permalink' and article_id <> '$article_id'";
 			$rs = $this->db->query($sql);
 			$row = $this->db->fetch_assoc($rs);
-			if($row['cnt'] == 0) {
-				return true;
-			}
-			return false;
+
+			return $row['cnt'];
 		}
 
 		function setThumnail($img_path) {

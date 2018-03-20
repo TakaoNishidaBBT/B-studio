@@ -242,3 +242,11 @@ dl.settings input.checkbox {
 span.title-result {
 	margin-left: 20px;
 }
+
+/* error-message */
+dl.settings .error-message {
+	font-weight: bold;
+}
+dl.settings dd .error-message {
+	margin-left: -12px;
+}
