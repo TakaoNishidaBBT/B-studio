@@ -227,7 +227,6 @@ table.img-item td.buttons {
 }
 dl.settings input.radio {
 	margin-right: 4px;
-	vertical-align: -2px;
 }
 dl.settings input.radio:not(:first-child) {
 	margin-left: 10px;
