@@ -105,12 +105,7 @@
 			var height = draggStartElementPosition.height + mpos.y - draggStartMousePosition.y;
 			if(width < minWidth) width = minWidth;
 			if(height < minHeight) height = minHeight;
-/*
-			container.style.width = width + 'px';
-			container.style.height = height + 'px';
-			self.style.width = width + 'px';
-			self.style.height = height + 'px';
-*/
+
 			container.style.maxWidth = width + 'px';
 			container.style.height = height + 'px';
 			self.style.maxWidth = width + 'px';

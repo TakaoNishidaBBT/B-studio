@@ -81,7 +81,6 @@ div#main {
 	padding: 0;
 	overflow: hidden;
 }
-
 #settings {
 	float: left;
 	width: 320px;
@@ -203,6 +202,7 @@ table.editor .title::placeholder {
 table.editor .title:focus {
 	border: 1px solid #b7b7f7;
 }
+
 /* table.img-item */
 table.img-item {
 	display: table;
