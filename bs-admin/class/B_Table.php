@@ -394,23 +394,12 @@
 			return $sql;
 		}
 
-		function load($file_name, $delimiter, $title, $convert_kana, $status_file, $log) {
+		function load($file_name, $delimiter, $title, $convert_kana, $log) {
 			$fp = fopen($file_name, 'r');
 			if(!$fp) return;
 
-			for($i=0 ; !feof($fp) ; $i++) {
-		        $buf = fgetcsv($fp, 10000, $delimiter);
-			}
-
-			$count = $i;
-			rewind($fp);
-
-			$fp_status = fopen($status_file, 'w');
-			if(!$fp_status) return;
-
-			for($i=0, $percentage=0 ; !feof($fp) ; $i++) {
-		        $line = fgets($fp, 10000);
-				$buf = explode($delimiter, $line);
+			for($i=0; !feof($fp); $i++) {
+				$buf = B_Util::fgetcsv($fp, 10000, $delimiter, '"');
 
 				// delete CRLF from end of record
 				$buf[count($buf)-1] = trim($buf[count($buf)-1]);
@@ -419,34 +408,16 @@
 					continue;
 				}
 
-				for($j=0 ; $j<count($buf) ; $j++) {
+				for($j=0; $j<count($buf); $j++) {
 					$buf[$j] = mb_convert_encoding($buf[$j], B_CHARSET, 'sjis-win');
 					if($convert_kana) {
 						$buf[$j] = mb_convert_kana($buf[$j], 'KV', B_CHARSET);
 					}
 				}
-				$ret = $this->selectInsertForLoad($buf);
-				if(!$ret) {
-					fclose($fp_status);
-					unlink($status_file);
-					return $ret;
+				if(!$this->selectInsertForLoad($buf)) {
+					return false;
 				}
-				if($percentage < floor($i/$count * 100)) {
-					$percentage = floor($i/$count * 100);
-
-					flock($fp_status, LOCK_EX);
-					rewind($fp_status);
-					ftruncate($fp_status, 0);
-					fwrite($fp_status, $percentage);
-					fflush($fp_status);
-					flock($fp_status, LOCK_UN);
-				}
-		    }
-			flock($fp_status, LOCK_EX);
-			rewind($fp_status);
-			ftruncate($fp_status, 0);
-			fwrite($fp_status, '100');
-			fclose($fp_status);
+			}
 			return true;
 		}
 
