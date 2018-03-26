@@ -34,7 +34,7 @@ $list_header_config = array(
 						'class'					=> 'B_InputText',
 						'special_html'			=> 'style="position:absolute;visibility:hidden;"',
 					),
-				),	
+				),
 				array(
 					'start_html'			=> '<li>',
 					'end_html'				=> '</li>',

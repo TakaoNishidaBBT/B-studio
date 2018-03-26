@@ -9,8 +9,10 @@
 		function __construct() {
 			parent::__construct(__FILE__);
 
-			require_once('./config/form_config.php');
-			$this->form = new B_Element($form_config);
+			require_once('./config/editor_config.php');
+			require_once('./config/settings_config.php');
+			$this->settings = new B_Element($settings_config);
+			$this->editor = new B_Element($editor_config);
 			$this->result = new B_Element($result_config);
 			$this->result_control = new B_Element($result_control_config);
 
@@ -19,8 +21,6 @@
 			$this->input_control_config = $input_control_config;
 			$this->confirm_control_config = $confirm_control_config;
 			$this->delete_control_config = $delete_control_config;
-
-			$this->filter = 'select';
 		}
 
 		function select() {
@@ -28,12 +28,13 @@
 
 			switch($this->request['mode']) {
 			case 'delete':
-				$this->filter = 'delete';
 				$this->control = new B_Element($this->delete_control_config);
 				$row = $this->main_table->selectByPk($this->request);
 				$this->setThumnail($row['title_img_file']);
-				$this->form->setValue($row);
-				$this->display_mode = 'confirm';
+				$this->settings->setValue($row);
+				$this->editor->setValue($row);
+				$obj = $this->editor->getElementByName('readOnly');
+				$obj->value = 'true';
 				break;
 
 			default:
@@ -52,54 +53,39 @@
 					$row=$this->db->fetch_assoc($rs);
 
 					$this->setThumnail($row['title_img_file']);
-					$this->form->setValue($row);
+					$this->editor->setValue($row);
+					$this->settings->setValue($row);
 				}
 				break;
 			}
+			$this->settings->setFilterValue($this->session['mode']);
 		}
 
-		function confirm() {
-			$this->setThumnail($this->post['title_img_file']);
+		function _validate_callback($param) {
+			$article_id = $this->request['article_id'];
+			if(!$article_id) return true;
 
-			$this->form->setValue($this->request);
+			$obj = $param['obj'];
+			$permalink = $org = $obj->value;
 
-			if($this->post['external_link'] && !$this->post['url']) {
-				$obj = $this->form->getElementByName('url');
-				$obj->status = false;
+			$suffix = 2;
+			while($this->checkPermalink($article_id, $permalink)) {
+				$permalink = $org . '-' . $suffix++;
 			}
+			$obj->value = $permalink;
 
-			if(!$this->form->validate()) {
-				$this->control = new B_Element($this->input_control_config);
-				return;
-			}
+			return true;
+		}
 
+		function checkPermalink($article_id, $permalink) {
+			$article_id = $this->db->real_escape_string($article_id);
+			$permalink = $this->db->real_escape_string($permalink);
 
-			if($this->post['description_flag'] == '1') {
-				$obj = $this->form->getElementByName('external_link_row');
-				$obj->display = 'none';
-			}
-			else {
-				$obj = $this->form->getElementByName('contents_row');
-				$obj->display = 'none';
+			$sql = "select count(*) cnt from " . B_DB_PREFIX . "article3 where permalink = binary '$permalink' and article_id <> '$article_id'";
+			$rs = $this->db->query($sql);
+			$row = $this->db->fetch_assoc($rs);
 
-				if(!$this->post['external_link']) {
-					$obj = $this->form->getElementByName('external_link_none');
-					$obj->display = '';
-					$obj = $this->form->getElementByName('url');
-					$obj->display = 'none';
-					$obj = $this->form->getElementByName('external_window');
-					$obj->display = 'none';
-				}
-			}
-
-			$this->form->getValue($param);
-			$this->session['request'] = $param;
-
-			$this->control = new B_Element($this->confirm_control_config);
-
-			// Set display mode
-			$this->display_mode = 'confirm';
-			$this->filter = 'confirm';
+			return $row['cnt'];
 		}
 
 		function setThumnail($img_path) {
@@ -108,13 +94,68 @@
 
 			$file_info = pathinfo($img_path);
 			$thumnail_path = $this->util->getPath(B_UPLOAD_URL, $this->util->getPath($file_info['dirname'], B_THUMB_PREFIX . $file_info['basename']));
-			$html = '<img src="' . $thumnail_path . '" alt="" />';
-			$obj = $this->form->getElementByName('title_img');
+			$html = '<img src="' . $thumnail_path . '" alt="title image" />';
+			$obj = $this->settings->getElementByName('title_img');
 			$obj->value = $html;
 		}
 
 		function register() {
-			$param = $this->session['request'];
+			try {
+				$article_id = $this->request['article_id'];
+				$this->settings->setFilterValue($this->session['mode']);
+
+				$this->editor->setValue($this->request);
+				$this->settings->setValue($this->request);
+
+				if($this->post['external_link'] && !$this->post['url']) {
+					$obj = $this->settings->getElementByName('url');
+					$obj->status = false;
+				}
+
+
+				$ret = $this->settings->validate();
+				$ret &= $this->editor->validate();
+
+				if($ret) {
+					if($this->_register()) {
+						$this->message = __('Saved');
+						$this->status = true;
+					}
+				}
+				else {
+					$this->message = __('This is an error in your entry');
+					$this->status = false;
+				}
+			}
+			catch(Exception $e) {
+				$this->status = false;
+				$this->mode = 'alert';
+				$this->message = $e->getMessage();
+			}
+
+			$this->setThumnail($this->request['title_img_file']);
+			$title = $this->editor->getElementById('title-container');
+			$response['innerHTML'] = array(
+				'settings'			=> $this->settings->getHtml(),
+				'title-container'	=> $title->getHtml(),
+			);
+
+			$response['status'] = $this->status;
+			$response['mode'] = $this->mode;
+			$response['message_obj'] = 'message';
+			$response['message'] = $this->message;
+			if($this->status && $this->mode != 'confirm') {
+				$response['values'] = array('article_id' => $article_id, 'update_datetime' => time());
+			}
+
+			header('Content-Type: application/x-javascript charset=utf-8');
+			echo json_encode($response);
+			exit;
+		}
+
+		function _register() {
+			$this->editor->getValue($param);
+			$this->settings->getValue($param);
 			$param['del_flag'] = '0';
 			$param['article_date_u'] = strtotime($param['article_date_t']);
 
@@ -125,14 +166,15 @@
 				$param['update_user'] = $this->user_id;
 				$param['update_datetime'] = time();
 				$ret = $this->main_table->selectInsert($param);
+
 				$param['article_id'] = $this->main_table->selectMaxValue('article_id');
-				$param['action_message'] = __('was saved.');
+				$param['permalink'] = $param['article_id'];
+				$ret = $this->main_table->update($param);
 			}
 			else {
 				$param['update_user'] = $this->user_id;
 				$param['update_datetime'] = time();
 				$ret = $this->main_table->update($param);
-				$param['action_message'] = __('was saved.');
 			}
 
 			if($ret) {
@@ -140,11 +182,8 @@
 			}
 			else {
 				$this->db->rollback();
-				$param['action_message'] = __('was failed to saved.');
 			}
-			$this->result->setValue($param);
-
-			$this->setView('resultView');
+			return $ret;
 		}
 
 		function delete() {
@@ -172,19 +211,14 @@
 		}
 
 		function back() {
-			$this->form->setValue($this->session['request']);
+			$this->settings->setValue($this->session['request']);
+			$this->editor->setValue($this->session['request']);
 			$this->setThumnail($this->session['request']['title_img_file']);
 
 			$this->control = new B_Element($this->input_control_config);
 		}
 
 		function view() {
-			if($this->session['mode'] == 'insert') {
-				$obj = $this->form->getElementByName('article_id_row');
-				$obj->display = 'none';
-			}
-			$this->form->setFilterValue($this->filter);
-
 			// Start buffering
 			ob_start();
 
@@ -202,6 +236,7 @@
 			$this->html_header->appendProperty('script', '<script src="js/ckeditor/ckeditor.js"></script>');
 			$this->html_header->appendProperty('script', '<script src="js/bframe_visualeditor.js"></script>');
 			$this->html_header->appendProperty('script', '<script src="js/bframe_calendar.js"></script>');
+			$this->html_header->appendProperty('script', '<script src="js/bframe_textarea.js"></script>');
 
 			// Show HTML header
 			$this->showHtmlHeader();

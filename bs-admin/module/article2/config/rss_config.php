@@ -116,7 +116,7 @@ array(
 	'start_html'	=> '<rdf:Seq>',
 	'end_html'		=> '</rdf:Seq>',
 
-	'select_sql'	=> "select * from " . BC_DB_PREFIX . "v_article where publication = '1' ",
+	'select_sql'	=> "select * from " . BC_DB_PREFIX . "v_article2 where publication = '1' ",
 	'row'		=>
 	array(
 		array(

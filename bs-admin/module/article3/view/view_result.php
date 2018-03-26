@@ -6,7 +6,9 @@
 		</div>
 
 		<div id="main">
-			<?php echo $this->result->getHtml(); ?>
+			<div class="wrap">
+				<?php echo $this->result->getHtml(); ?>
+			</div>
 		</div>
 	</form>
 </body>

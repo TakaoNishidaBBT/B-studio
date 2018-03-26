@@ -54,6 +54,17 @@ $list_config = array(
 			'param'			=> '&amp;module=' . $this->module . '&amp;page=list&amp;method=sort&amp;sort_key=article_date',
 		),
 		array(
+			'name'			=> 'permalink',
+			'class'			=> 'B_Link',
+			'start_html'	=> '<th class="sortable" style="width:100px">',
+			'end_html'		=> '</th>',
+			'value'			=> __('Permalink'),
+			'link'			=> DISPATCH_URL,
+			'cond_html'		=> 'class="current-key"',
+			'sort_key'		=> 'permalink',
+			'param'			=> '&amp;module=' . $this->module . '&amp;page=list&amp;method=sort&amp;sort_key=permalink',
+		),
+		array(
 			'name'			=> 'category',
 			'class'			=> 'B_Link',
 			'start_html'	=> '<th class="sortable" style="width:100px">',
@@ -88,12 +99,12 @@ $list_config = array(
 			'param'			=> '&amp;module=' . $this->module . '&amp;page=list&amp;method=sort&amp;sort_key=publication',
 		),
 		array(
-			'start_html'	=> '<th class="center" style="width:40px" nowrap>',
+			'start_html'	=> '<th class="center" style="width:40px">',
 			'end_html'		=> '</th>',
 			'value'			=> __('Edit'),
 		),
 		array(
-			'start_html'	=> '<th class="center" style="width:40px" nowrap>',
+			'start_html'	=> '<th class="center" style="width:40px">',
 			'end_html'		=> '</th>',
 			'value'			=> __('Delete'),
 		),
@@ -113,6 +124,11 @@ $list_config = array(
 		),
 		array(
 			'name'			=> 'article_date_t',
+			'start_html'	=> '<td class="left">',
+			'end_html'		=> '</td>',
+		),
+		array(
+			'name'			=> 'permalink',
 			'start_html'	=> '<td class="left">',
 			'end_html'		=> '</td>',
 		),
@@ -151,6 +167,7 @@ $list_config = array(
 					'module'		=> $this->module, 
 					'page'			=> 'form', 
 					'method'		=> 'select',
+					'mode'			=> 'select',
 				),
 				'param'		=>
 				array(

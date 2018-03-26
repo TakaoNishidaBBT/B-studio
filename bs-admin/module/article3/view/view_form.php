@@ -10,9 +10,14 @@
 				echo '<span class="error-message">' . $this->action_message . '</span>' . "\n";
 			}
 		?>
-		<div id="main" class="bframe_adjustparent bframe_scroll" data-param="margin:68">
-			<?php echo $this->form->getHtml($this->display_mode); ?>
+		<div id="main" class="bframe_adjustparent" data-param="margin:68">
+			<div id="settings" class="bframe_adjustparent bframe_scroll">
+				<?php echo $this->settings->getHtml($this->display_mode); ?>
+			</div>
+			<div id="content" class="bframe_adjustparent bframe_scroll" data-param="margin:30">
+				<?php echo $this->editor->getHtml($this->display_mode); ?>
+			</div>
 		</div>
-		<?php echo $this->form->getHiddenHtml(); ?>
+		<?php echo $this->settings->getHiddenHtml(); ?>
 	</form>
 </body>
