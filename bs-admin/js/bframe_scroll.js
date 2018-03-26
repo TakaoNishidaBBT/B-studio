@@ -338,7 +338,7 @@
 			self.scrollTop += speed;
 			barConainer.style.top = barContainerTop + 'px';
 
-			// set scroll bar height (for bounce scroll)
+			// set padding (for bounce scroll)
 			if(bouncescroll) {
 				if(self.scrollTop === 0) {
 					self.style.paddingTop = parseInt(paddingTop) + Math.round(speed * -1 / 2) + 'px';
