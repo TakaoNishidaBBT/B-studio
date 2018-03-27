@@ -493,6 +493,14 @@ table.list th.sortable {
 	background: url(../images/common/sort.png) no-repeat 97% center #3c3c3c;
 	padding-right: 20px;
 }
+table.list th.sortable.asc {
+	background: url(../images/common/sort_asc_b.png) no-repeat 97% center #3c3c3c;
+	padding-right: 20px;
+}
+table.list th.sortable.desc {
+	background: url(../images/common/sort_desc_b.png) no-repeat 97% center #3c3c3c;
+	padding-right: 20px;
+}
 table.list th.center {
 	text-align: center;
 }

@@ -44,6 +44,10 @@
 			$this->sort_key = $sort_key;
 		}
 
+		function setSortOrder($sort_order) {
+			$this->sort_order = $sort_order;
+		}
+
 		function setSqlWhere($sql_string) {
 			$this->sql_where = $sql_string;
 		}
@@ -352,6 +356,12 @@
 				$obj = $this->header->getElementByFieldName('sort_key', $this->sort_key);
 				if($obj) {
 					$obj->special_html.= ' ' . $obj->cond_html;
+					if(strtolower(trim($this->sort_order)) == 'asc' && $obj->start_html_asc) {
+						$obj->start_html = $obj->start_html_asc;
+					}
+					if(strtolower(trim($this->sort_order)) == 'desc' && $obj->start_html_desc) {
+						$obj->start_html = $obj->start_html_desc;
+					}
 				}
 			}
 

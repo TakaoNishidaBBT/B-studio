@@ -138,9 +138,11 @@
 			$this->dg->setSqlWhere($this->sql_where);
 
 			if($this->sort_key) {
+				$this->dg->setSortKey($this->sort_key);
+				$this->dg->setSortOrder($this->order);
+
 				$sql_order_by = ' order by ' . $this->sort_key;
 				$sql_order_by.= $this->order;
-				$this->dg->setSortKey($this->sort_key);
 				$this->dg->setSqlOrderBy($sql_order_by);
 			}
 			$this->dg->setRowPerPage($this->row_per_page);
