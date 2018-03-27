@@ -20,6 +20,10 @@ $settings_config = array(
 			'start_html'	=> '<dt class="id"><span class="title">ID : </span>',
 			'end_html'		=> '</dt>',
 		),
+		array(
+			'name'			=> 'article_id',
+			'class'			=> 'B_Hidden',
+		),
 	),
 
 	// permalink
