@@ -102,7 +102,6 @@
 		function register() {
 			try {
 				$article_id = $this->request['article_id'];
-				$this->settings->setFilterValue($this->session['mode']);
 
 				$this->editor->setValue($this->request);
 				$this->settings->setValue($this->request);
@@ -120,6 +119,7 @@
 					if($this->_register()) {
 						$this->message = __('Saved');
 						$this->status = true;
+						$this->session['mode'] = 'select';
 					}
 				}
 				else {
@@ -134,6 +134,8 @@
 			}
 
 			$this->setThumnail($this->request['title_img_file']);
+			$this->settings->setFilterValue($this->session['mode']);
+
 			$title = $this->editor->getElementById('title-container');
 			$response['innerHTML'] = array(
 				'settings'			=> $this->settings->getHtml(),
@@ -170,6 +172,8 @@
 				$param['article_id'] = $this->main_table->selectMaxValue('article_id');
 				$param['permalink'] = $param['article_id'];
 				$ret = $this->main_table->update($param);
+
+				$this->settings->setValue($param);
 			}
 			else {
 				$param['update_user'] = $this->user_id;

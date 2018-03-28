@@ -18,6 +18,5 @@
 				<?php echo $this->editor->getHtml($this->display_mode); ?>
 			</div>
 		</div>
-		<?php echo $this->settings->getHiddenHtml(); ?>
 	</form>
 </body>
