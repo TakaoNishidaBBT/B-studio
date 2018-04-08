@@ -210,7 +210,10 @@
 		'After turninng external link on, please enter URL'
 										=> '「外部リンクあり」を選択した場合は、URLを入力してください',
 		'Open link in new window'		=> '別ウインドウ',
-		'Details'						=> '詳細',
+		'Content1'						=> '詳細1',
+		'Content2'						=> '詳細2',
+		'Content3'						=> '詳細3',
+		'Content4'						=> '詳細4',
 		'Are you sure you want to delete?'
 										=> '削除します。よろしいですか',
 		'Properties'					=> 'プロパティー',

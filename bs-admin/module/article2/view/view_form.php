@@ -15,7 +15,10 @@
 				<?php echo $this->settings->getHtml($this->display_mode); ?>
 			</div>
 			<div id="content" class="bframe_adjustparent bframe_scroll" data-param="margin:30">
-				<?php echo $this->editor->getHtml($this->display_mode); ?>
+				<?php
+					echo $this->tab_control->getHtml();
+					echo $this->editor->getHtml($this->display_mode);
+				?>
 			</div>
 		</div>
 	</form>

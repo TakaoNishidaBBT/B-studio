@@ -68,11 +68,11 @@ $editor_config = array(
 			),
 		),
 
-		// Details
+		// Content1
 		array(
 			'error_group'	=> true,
 			'name'			=> 'contents_row',
-			'start_html'	=> '<tr>',
+			'start_html'	=> '<tr id="content1_index">',
 			'end_html'		=> '</tr>',
 			array(
 				'start_html'	=> '<td>',
@@ -81,12 +81,117 @@ $editor_config = array(
 					'start_html'	=> '<div class="contents">',
 					'end_html'		=> '</div>',
 					array(
-						'name'			=> 'contents',
+						'name'			=> 'content1',
 						'class'			=> 'B_TextArea',
-						'special_html'	=> 'class="textarea bframe_visualeditor" data-param="scroller:content" style="height:1000px"',
+						'special_html'	=> 'class="textarea bframe_visualeditor" data-param="container:content1_index,scroller:content"',
 					),
 				),
 			),
 		),
+
+		// Content2
+		array(
+			'error_group'	=> true,
+			'name'			=> 'contents_row',
+			'start_html'	=> '<tr id="content2_index" style="display:none">',
+			'end_html'		=> '</tr>',
+			array(
+				'start_html'	=> '<td>',
+				'end_html'		=> '</td>',
+				array(
+					'start_html'	=> '<div class="contents">',
+					'end_html'		=> '</div>',
+					array(
+						'name'			=> 'content2',
+						'class'			=> 'B_TextArea',
+						'special_html'	=> 'class="textarea bframe_visualeditor" data-param="container:content2_index,scroller:content"',
+					),
+				),
+			),
+		),
+
+		// Content3
+		array(
+			'error_group'	=> true,
+			'name'			=> 'contents_row',
+			'start_html'	=> '<tr id="content3_index" style="display:none">',
+			'end_html'		=> '</tr>',
+			array(
+				'start_html'	=> '<td>',
+				'end_html'		=> '</td>',
+				array(
+					'start_html'	=> '<div class="contents">',
+					'end_html'		=> '</div>',
+					array(
+						'name'			=> 'content3',
+						'class'			=> 'B_TextArea',
+						'special_html'	=> 'class="textarea bframe_visualeditor" data-param="container:content3_index,scroller:content"',
+					),
+				),
+			),
+		),
+
+		// Content4
+		array(
+			'error_group'	=> true,
+			'name'			=> 'contents_row',
+			'start_html'	=> '<tr id="content4_index" style="display:none">',
+			'end_html'		=> '</tr>',
+			array(
+				'start_html'	=> '<td>',
+				'end_html'		=> '</td>',
+				array(
+					'start_html'	=> '<div class="contents">',
+					'end_html'		=> '</div>',
+					array(
+						'name'			=> 'content4',
+						'class'			=> 'B_TextArea',
+						'special_html'	=> 'class="textarea bframe_visualeditor" data-param="container:content4_index,scroller:content"',
+					),
+				),
+			),
+		),
+	),
+);
+
+//tab control
+$tab_control_config = array(
+	'start_html'	=> '<ul class="tabcontrol">',
+	'end_html'		=> '</ul>',
+	array(
+		'name'				=> 'content1_index',
+		'class'				=> 'B_Link',
+		'start_html'		=> '<li>',
+		'end_html'			=> '</li>',
+		'link'				=> 'content1_index',
+		'special_html'		=> 'class="bframe_tab"',
+		'value'				=> __('Content1'),
+	),
+	array(
+		'name'				=> 'content2_index',
+		'class'				=> 'B_Link',
+		'start_html'		=> '<li>',
+		'end_html'			=> '</li>',
+		'link'				=> 'content2_index',
+		'special_html'		=> 'class="bframe_tab"',
+		'value'				=> __('Content2'),
+	),
+	array(
+		'name'				=> 'content3_index',
+		'class'				=> 'B_Link',
+		'start_html'		=> '<li>',
+		'end_html'			=> '</li>',
+		'link'				=> 'content3_index',
+		'special_html'		=> 'class="bframe_tab"',
+		'value'				=> __('Content3'),
+	),
+	array(
+		'name'				=> 'content4_index',
+		'class'				=> 'B_Link',
+		'start_html'		=> '<li>',
+		'end_html'			=> '</li>',
+		'link'				=> 'content4_index',
+		'special_html'		=> 'class="bframe_tab"',
+		'value'				=> __('Content4'),
 	),
 );

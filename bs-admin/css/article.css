@@ -174,9 +174,62 @@ dl.settings dd.external-link #external_window {
 	margin-left: 0;
 }
 
+/* tab tabcontrol */
+ul.tabcontrol {
+	display: flex;
+	flex-direction: row-reverse;
+	transform: rotate(-90deg);
+	transform-origin: left top;
+	position: fixed;
+	top: 600px;
+	left: 362px;
+	width: 320px;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	z-index: 100;
+}
+ul.tabcontrol li {
+	width: 50%;
+	padding: 0;
+	border-top: 1px solid #eee;
+	border-left: 1px solid #eee;
+}
+ul.tabcontrol li:first-child {
+	border-right: 1px solid #eee;
+}
+ul.tabcontrol li.selected {
+	border-top: 1px solid #ccc;
+	border-right: 1px solid #ccc;
+	border-left: 1px solid #ccc;
+	border-bottom: 1px solid #fff;
+}
+.cke_contents {
+	border-left: 1px solid #ccc !important;
+	min-height: 370px;
+}
+ul.tabcontrol li a {
+	display: block;
+	text-align: center;
+	vertical-align: middle;
+	text-decoration: none;
+	width: 100%;
+	line-height: 30px;
+	color: #aaa;
+}
+ul.tabcontrol li a:hover {
+	color: #f60;
+}
+ul.tabcontrol li.selected a {
+	color: #000;
+}
+ul.tabcontrol li.selected a:hover {
+	cursor: default;
+}
+
 /* editor table */
 table.editor {
-	margin: 0 auto;
+	margin: 0 auto 0 50px;
 	width: 90%;
 }
 table.editor .permalink {

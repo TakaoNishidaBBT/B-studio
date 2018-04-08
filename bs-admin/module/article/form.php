@@ -12,6 +12,7 @@
 			require_once('./config/editor_config.php');
 			require_once('./config/settings_config.php');
 			$this->settings = new B_Element($settings_config);
+			$this->tab_control = new B_Element($tab_control_config);
 			$this->editor = new B_Element($editor_config);
 			$this->result = new B_Element($result_config);
 			$this->result_control = new B_Element($result_control_config);
@@ -236,6 +237,7 @@
 
 			$this->html_header->appendProperty('css', '<link rel="stylesheet" href="css/article.css">');
 			$this->html_header->appendProperty('css', '<link rel="stylesheet" href="css/calendar.css">');
+			$this->html_header->appendProperty('script', '<script src="js/bframe_tab.js"></script>');
 			$this->html_header->appendProperty('script', '<script src="js/bframe_edit_check.js"></script>');
 			$this->html_header->appendProperty('script', '<script src="js/ckeditor/ckeditor.js"></script>');
 			$this->html_header->appendProperty('script', '<script src="js/bframe_visualeditor.js"></script>');

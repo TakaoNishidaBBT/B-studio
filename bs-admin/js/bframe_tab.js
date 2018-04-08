@@ -83,7 +83,15 @@
 		}
 
 		this.show = function() {
-			target.style.display = 'block';
+			switch(target.tagName.toLowerCase()) {
+			case 'tr':
+				target.style.display = 'table-row';
+				break;
+
+			default:
+				target.style.display = 'block';
+			}
+
 			bframe.appendClass('selected', self);
 			bframe.appendClass('selected', p);
 			bframe.fireEvent(target, 'focus');

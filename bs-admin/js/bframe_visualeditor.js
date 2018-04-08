@@ -32,14 +32,25 @@
 		var cke_controll_style;
 		var cke_controll_style_width;
 		var cke_contents;
-		var cke_footer;
+		var cke_bottom;
 		var scroller;
 		var scroller_position;
 		var parent;
+		var container;
 
 		if(param) {
+			// parent
 			var parent_id = bframe.getParam('parent', param);
 			if(parent_id) parent = document.getElementById(parent_id);
+
+			// container
+			var container_id = bframe.getParam('container', param);
+			if(container_id) container = document.getElementById(container_id);
+			if(container) {
+				bframe.addEventListener(container, 'focus', onFocus);
+			}
+
+			// scroller
 			var scroller_id = bframe.getParam('scroller', param);
 			if(scroller_id) scroller = document.getElementById(scroller_id);
 			if(scroller) {
@@ -335,20 +346,22 @@
 
 		function onScroll() {
 			if(!cke_controll) {
-				cke_controll = document.getElementById('cke_1_top');
+				var container = editor.container.$;
+
+				cke_controll = bframe.searchNodeByClassName(container, 'cke_top');
 				cke_controll_position = bframe.getElementPosition(cke_controll);
 				cke_controll_style = bframe.getStyle(cke_controll);
 				cke_controll_style_width = cke_controll_style.width;
 
 				scroller_position = bframe.getElementPosition(scroller);
 
-				cke_contents = document.getElementById('cke_1_contents');
+				cke_contents = bframe.searchNodeByClassName(container, 'cke_contents');
 				cke_contents_position = bframe.getElementPosition(cke_contents);
 
-				cke_footer = document.getElementById('cke_1_bottom');
-				cke_footer.style.position = 'fixed';
-				cke_footer.style.width = cke_controll_style_width;
-				cke_footer.style.bottom = '0';
+				cke_bottom = bframe.searchNodeByClassName(container, 'cke_bottom');
+				cke_bottom.style.position = 'fixed';
+				cke_bottom.style.width = cke_controll_style_width;
+				cke_bottom.style.bottom = '0';
 			}
 			if(cke_controll_position.top - scroller_position.top < scroller.scrollTop) {
 				if(cke_controll.style.position == 'fixed') return;
@@ -393,6 +406,7 @@
 
 			// get style and reset width
 			cke_controll_style = bframe.getStyle(cke_controll);
+
 			cke_controll_style_width = cke_controll_style.width;
 			cke_controll.style.width = cke_controll_style_width;
 
@@ -400,7 +414,13 @@
 			cke_controll.style.position = position;
 
 			// set footer style
-			cke_footer.style.width = cke_controll_style_width;
+			cke_bottom.style.width = cke_controll_style_width;
+		}
+
+		function onFocus() {
+			cke_controll = '';
+			onScroll();
+			bframe.fireEvent(window, 'resize');
 		}
 
 		function onblurEditor() {
