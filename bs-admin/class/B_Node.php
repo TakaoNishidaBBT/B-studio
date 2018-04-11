@@ -471,7 +471,16 @@
 
 			$this->cloneNode($this->node_id);
 
+			$destination_node = $this->selectNode($destination_node_id);
+			$this->updatePath($destination_node);
+
 			$param['parent_node'] = $destination_node_id;
+			if($destination_node_id == 'root') {
+				$param['path'] = '/';
+			}
+			else {
+				$param['path'] = $destination_node['path'] . $destination_node['node_id'] . '/';
+			}
 			$param['node_id'] = $this->node_id;
 			if(!$disp_seq) $disp_seq = $this->getMaxDispSeq($destination_node_id);
 			$param['disp_seq'] = $disp_seq;
@@ -481,6 +490,23 @@
 			$param['revision_id'] = $this->revision;
 
 			return $this->tbl_node->update($param);
+		}
+
+		function updatePath($destination_node) {
+			if($destination_node) {
+				$to = $destination_node['path'] . $destination_node['node_id'] . '/' . $this->node_id . '/';
+			}
+			else {
+				$to = '/' . $this->node_id . '/'; 	
+			}
+			$from = $this->path . $this->node_id . '/';
+			$path = $this->path . $this->node_id . '/';
+
+			$sql = "update %TABLE% set path = replace(path, '$from', '$to')
+					where path = '$path'";
+			$sql = str_replace('%TABLE%', B_DB_PREFIX . $this->table, $sql);
+
+			$rs = $this->db->query($sql);
 		}
 
 		function delete($callback=null) {
@@ -533,6 +559,12 @@
 			$default_node_name = $this->script['bframe_tree']['icon'];
 			$new_node_name = $this->getNewNodeName($this->node_id, $default_node_name[$node_type]['new'], 'insert');
 			$param['parent_node'] = $this->node_id;
+			if($this->node_id == 'root') {
+				$param['path'] = '/';
+			}
+			else {
+				$param['path'] = $this->path . $this->node_id . '/';
+			}
 			$param['node_type'] = $node_type;
 			$param['node_class'] = $node_class;
 			$param['node_name'] = $new_node_name;

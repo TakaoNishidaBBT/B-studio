@@ -336,6 +336,7 @@
 		array(							// Data Types			Length	PK		Auto-Increment
 			'node_id'					=> array('char', 		'10', 	'1', 	'1'),
 			'parent_node'				=> array('char', 		'10', 	'', 	''),
+			'path'						=> array('text', 		'', 	'', 	''),
 			'node_type'					=> array('char', 		'10', 	'', 	''),
 			'node_class'				=> array('char', 		'10', 	'', 	''),
 			'node_name'					=> array('text', 		'', 	'', 	''),
