@@ -1,6 +1,7 @@
 create or replace view %DB_PREFIX%v_preview_article as
 select 	  a.*
 		, concat(a.article_date_u, a.article_id) article_date
+		, b.path
 		, b.node_name category
 		, b.color color
 		, b.background_color background_color

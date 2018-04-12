@@ -342,8 +342,20 @@
 			return $path;
 		}
 
-		function arias($destination_node_id, $user_id) {
+		function arias($destination_node_id, $user_id, &$new_node_id, $callback=null) {
 			if(!$this->node_id) return;
+
+			// if destination node is my child
+			if($this->isMyChild($destination_node_id)) {
+				$this->error_no = 1;
+				return false;
+			}
+
+			$arias_node_name = $this->getNewNodeName($destination_node_id, $this->node_name, 'arias');
+
+			if($callback) {
+				if(!$ret = $this->callBack($callback)) return $ret;
+			}
 
 			if($this->property) {
 				foreach($this->property as $key => $value) {
@@ -351,14 +363,23 @@
 				}
 			}
 
-			$node_name = $this->getNewNodeName($destination_node_id, $this->node_name, 'arias');
+			// update path of related records
+			$destination_node = $this->selectNode($destination_node_id);
+			$this->updatePath($destination_node);
+
+			if($destination_node_id == 'root') {
+				$param['path'] = '/';
+			}
+			else {
+				$param['path'] = $destination_node['path'] . $destination_node['node_id'] . '/';
+			}
 
 			$param['node_id'] = '';
 			$param['parent_node'] = $destination_node_id;
 			$param['disp_seq'] = $this->getMaxDispSeq($destination_node_id);
 			$param['node_type'] = 'arias';
 			$param['node_class'] = $this->node_class;
-			$param['node_name'] = $node_name;
+			$param['node_name'] = $arias_node_name;
 			$param['contents_id'] = $this->contents_id;
 			$param['del_flag'] = '0';
 			$param['create_datetime'] = time();
@@ -372,6 +393,8 @@
 			if(!$ret) return $ret;
 
 			$node_id = $this->tbl_node->selectMaxValue('node_id');
+			$new_node_id[] = $node_id;
+
 			if(count($this->node)) {
 				foreach(array_keys($this->node) as $key) {
 					$ret = $this->node[$key]->arias($node_id, $user_id);
@@ -391,7 +414,7 @@
 				return false;
 			}
 
-			$this->copy_node_name = $this->getNewNodeName($destination_node_id, $this->node_name, 'copy');
+			$copy_node_name = $this->getNewNodeName($destination_node_id, $this->node_name, 'copy');
 
 			if($callback) {
 				if(!$ret = $this->callBack($callback)) return $ret;
@@ -403,12 +426,23 @@
 				}
 			}
 
+			// update path of related records
+			$destination_node = $this->selectNode($destination_node_id);
+			$this->updatePath($destination_node);
+
+			if($destination_node_id == 'root') {
+				$param['path'] = '/';
+			}
+			else {
+				$param['path'] = $destination_node['path'] . $destination_node['node_id'] . '/';
+			}
+
 			$param['node_id'] = '';
 			$param['parent_node'] = $destination_node_id;
 			$param['disp_seq'] = $this->getMaxDispSeq($destination_node_id);
 			$param['node_type'] = $this->node_type;
 			$param['node_class'] = $this->node_class;
-			$param['node_name'] = $this->copy_node_name;
+			$param['node_name'] = $copy_node_name;
 			$param['contents_id'] = $this->new_contents_id;
 			$param['del_flag'] = '0';
 			$param['create_datetime'] = time();
@@ -471,16 +505,18 @@
 
 			$this->cloneNode($this->node_id);
 
+			// update path of related records
 			$destination_node = $this->selectNode($destination_node_id);
 			$this->updatePath($destination_node);
 
-			$param['parent_node'] = $destination_node_id;
 			if($destination_node_id == 'root') {
 				$param['path'] = '/';
 			}
 			else {
 				$param['path'] = $destination_node['path'] . $destination_node['node_id'] . '/';
 			}
+
+			$param['parent_node'] = $destination_node_id;
 			$param['node_id'] = $this->node_id;
 			if(!$disp_seq) $disp_seq = $this->getMaxDispSeq($destination_node_id);
 			$param['disp_seq'] = $disp_seq;

@@ -104,6 +104,7 @@
 			'revision_id'				=> array('char', 		'2', 	'3', 	''),
 			'node_id'					=> array('char', 		'10', 	'1', 	'1'),
 			'parent_node'				=> array('char', 		'10', 	'', 	''),
+			'path'						=> array('text', 		'', 	'', 	''),
 			'node_type'					=> array('char', 		'10', 	'', 	''),
 			'node_class'				=> array('char', 		'10', 	'', 	''),
 			'node_name'					=> array('text', 		'', 	'', 	''),
@@ -153,6 +154,7 @@
 			'revision_id'				=> array('char', 		'2', 	'3', 	''),
 			'node_id'					=> array('char', 		'10', 	'1', 	'1'),
 			'parent_node'				=> array('char', 		'10', 	'', 	''),
+			'path'						=> array('text', 		'', 	'', 	''),
 			'node_type'					=> array('char', 		'10', 	'', 	''),
 			'node_class'				=> array('char', 		'10', 	'', 	''),
 			'node_name'					=> array('text', 		'', 	'', 	''),
@@ -189,12 +191,51 @@
 			'update_datetime'			=> array('text', 		'', 	'',		''),
 		);
 
+	${$g_data_set}['table']['resource_node'] =
+		array(							// Data Types			Length	PK		Auto-Increment
+			'version_id'				=> array('char',	 	'5', 	'2', 	''),
+			'revision_id'				=> array('char', 		'2', 	'3', 	''),
+			'node_id'					=> array('char', 		'10', 	'1', 	'1'),
+			'parent_node'				=> array('char', 		'10', 	'', 	''),
+			'path'						=> array('text', 		'', 	'', 	''),
+			'node_type'					=> array('char', 		'10', 	'', 	''),
+			'node_class'				=> array('char', 		'10', 	'', 	''),
+			'node_name'					=> array('text', 		'', 	'', 	''),
+			'file_size'					=> array('int', 		'', 	'', 	''),
+			'human_file_size'			=> array('text', 		'', 	'', 	''),
+			'image_size'				=> array('int', 		'', 	'', 	''),
+			'human_image_size'			=> array('text', 		'', 	'', 	''),
+			'contents_id'				=> array('char', 		'19', 	'', 	''),
+			'disp_seq'					=> array('int', 		'', 	'', 	''),
+			'del_flag'					=> array('char', 		'1', 	'', 	''),
+			'create_user'				=> array('text', 		'', 	'',		''),
+			'create_datetime'			=> array('text', 		'', 	'',		''),
+			'update_user'				=> array('text', 		'', 	'',		''),
+			'update_datetime'			=> array('text', 		'', 	'',		''),
+		);
+
+	${$g_data_set}['table']['settings'] =
+		array(							// Data Types			Length	PK		Auto-Increment
+			'id'						=> array('char',	 	'5', 	'1', 	'1'),
+			'site_title'				=> array('text', 		'', 	'', 	''),
+			'admin_site_title'			=> array('text', 		'', 	'', 	''),
+			'notes'						=> array('text', 		'', 	'', 	''),
+			'reserve1'					=> array('text', 		'', 	'', 	''),
+			'reserve2'					=> array('text', 		'', 	'', 	''),
+			'reserve3'					=> array('text', 		'', 	'', 	''),
+			'create_user'				=> array('text', 		'', 	'',		''),
+			'create_datetime'			=> array('text', 		'', 	'',		''),
+			'update_user'				=> array('text', 		'', 	'',		''),
+			'update_datetime'			=> array('text', 		'', 	'',		''),
+		);
+
 	${$g_data_set}['table']['widget_node'] =
 		array(							// Data Types			Length	PK		Auto-Increment
 			'version_id'				=> array('char',	 	'5', 	'2', 	''),
 			'revision_id'				=> array('char', 		'2', 	'3', 	''),
 			'node_id'					=> array('char', 		'10', 	'1', 	'1'),
 			'parent_node'				=> array('char', 		'10', 	'', 	''),
+			'path'						=> array('text', 		'', 	'', 	''),
 			'node_type'					=> array('char', 		'10', 	'', 	''),
 			'node_class'				=> array('char', 		'10', 	'', 	''),
 			'node_name'					=> array('text', 		'', 	'', 	''),
@@ -218,43 +259,6 @@
 			'css'						=> array('mediumtext', 	'', 	'', 	''),
 			'php'						=> array('mediumtext', 	'', 	'', 	''),
 			'del_flag'					=> array('char', 		'1', 	'', 	''),
-			'reserve1'					=> array('text', 		'', 	'', 	''),
-			'reserve2'					=> array('text', 		'', 	'', 	''),
-			'reserve3'					=> array('text', 		'', 	'', 	''),
-			'create_user'				=> array('text', 		'', 	'',		''),
-			'create_datetime'			=> array('text', 		'', 	'',		''),
-			'update_user'				=> array('text', 		'', 	'',		''),
-			'update_datetime'			=> array('text', 		'', 	'',		''),
-		);
-
-	${$g_data_set}['table']['resource_node'] =
-		array(							// Data Types			Length	PK		Auto-Increment
-			'version_id'				=> array('char',	 	'5', 	'2', 	''),
-			'revision_id'				=> array('char', 		'2', 	'3', 	''),
-			'node_id'					=> array('char', 		'10', 	'1', 	'1'),
-			'parent_node'				=> array('char', 		'10', 	'', 	''),
-			'node_type'					=> array('char', 		'10', 	'', 	''),
-			'node_class'				=> array('char', 		'10', 	'', 	''),
-			'node_name'					=> array('text', 		'', 	'', 	''),
-			'file_size'					=> array('int', 		'', 	'', 	''),
-			'human_file_size'			=> array('text', 		'', 	'', 	''),
-			'image_size'				=> array('int', 		'', 	'', 	''),
-			'human_image_size'			=> array('text', 		'', 	'', 	''),
-			'contents_id'				=> array('char', 		'19', 	'', 	''),
-			'disp_seq'					=> array('int', 		'', 	'', 	''),
-			'del_flag'					=> array('char', 		'1', 	'', 	''),
-			'create_user'				=> array('text', 		'', 	'',		''),
-			'create_datetime'			=> array('text', 		'', 	'',		''),
-			'update_user'				=> array('text', 		'', 	'',		''),
-			'update_datetime'			=> array('text', 		'', 	'',		''),
-		);
-
-	${$g_data_set}['table']['settings'] =
-		array(							// Data Types			Length	PK		Auto-Increment
-			'id'						=> array('char',	 	'5', 	'1', 	'1'),
-			'site_title'				=> array('text', 		'', 	'', 	''),
-			'admin_site_title'			=> array('text', 		'', 	'', 	''),
-			'notes'						=> array('text', 		'', 	'', 	''),
 			'reserve1'					=> array('text', 		'', 	'', 	''),
 			'reserve2'					=> array('text', 		'', 	'', 	''),
 			'reserve3'					=> array('text', 		'', 	'', 	''),
@@ -386,6 +390,7 @@
 		array(							// Data Types			Length	PK		Auto-Increment
 			'node_id'					=> array('char',	 	'10', 	'1', 	'1'),
 			'parent_node'				=> array('char', 		'10', 	'', 	''),
+			'path'						=> array('text', 		'', 	'', 	''),
 			'node_type'					=> array('char', 		'10', 	'', 	''),
 			'node_class'				=> array('char', 		'10', 	'', 	''),
 			'node_name'					=> array('text', 		'', 	'', 	''),
@@ -435,6 +440,7 @@
 		array(							// Data Types			Length	PK		Auto-Increment
 			'node_id'					=> array('char',	 	'10', 	'1', 	'1'),
 			'parent_node'				=> array('char', 		'10', 	'', 	''),
+			'path'						=> array('text', 		'', 	'', 	''),
 			'node_type'					=> array('char', 		'10', 	'', 	''),
 			'node_class'				=> array('char', 		'10', 	'', 	''),
 			'node_name'					=> array('text', 		'', 	'', 	''),
