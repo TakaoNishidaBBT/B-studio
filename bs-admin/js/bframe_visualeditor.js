@@ -37,6 +37,7 @@
 		var scroller_position;
 		var parent;
 		var container;
+		var visual_editor_body_class;
 
 		if(param) {
 			// parent
@@ -59,6 +60,9 @@
 					bframe.resize_handler.registerCallBackFunction(onWindowResize);
 				}
 			}
+
+			// body class
+			var visual_editor_body_class = bframe.getParam('bodyclass', param);
 		}
 
 		setUpCKEditor();
@@ -111,12 +115,6 @@
 			var root_dir = document.getElementById('root_dir');
 			if(root_dir) {
 				CKEDITOR.config.root_dir =  root_dir.value;
-			}
-
-			// body class
-			var visual_editor_body_class = document.getElementById('visual_editor_body_class');
-			if(visual_editor_body_class) {
-				CKEDITOR.config.bodyClass =  visual_editor_body_class.value;
 			}
 
 			// filebrowser
@@ -314,6 +312,10 @@
 								bframe.editCheck_handler.registerCallBackFunction(editCheckCallback);
 								bframe.editCheck_handler.registerResetCallBackFunction(resetDirtyCallback);
 							}
+
+							// body class
+							var body = ev.editor.document.getBody();
+							body.addClass(visual_editor_body_class);
 
 							bframe.fireEvent(window, 'resize');
 							onScroll();

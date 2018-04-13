@@ -9,7 +9,6 @@ $editor_config = array(
 	array('class' => 'B_Hidden', 'name' => 'baseHref', 'value' => B_SITE_BASE),
 	array('class' => 'B_Hidden', 'name' => 'readOnly', 'value' => ''),
 	array('class' => 'B_Hidden', 'name' => 'visual_editor_language', 'value' => $_SESSION['language']),
-	array('class' => 'B_Hidden', 'name' => 'visual_editor_body_class', 'value' => 'contents'),
 	array('class' => 'B_Hidden', 'name' => 'visual_editor_styles', 'value' => 'default:' . B_CURRENT_ROOT . 'visualeditor/article3/styles/styles.js'),
 	array('class' => 'B_Hidden', 'name' => 'visual_editor_css',	'value' => B_CURRENT_ROOT . 'visualeditor/article3/css/default.css'),
 	array('class' => 'B_Hidden', 'name' => 'visual_editor_templates', 'value' => B_CURRENT_ROOT . 'visualeditor/article3/templates/default.js'),
@@ -83,7 +82,7 @@ $editor_config = array(
 					array(
 						'name'			=> 'content1',
 						'class'			=> 'B_TextArea',
-						'special_html'	=> 'class="textarea bframe_visualeditor" data-param="container:content1_index,scroller:content"',
+						'special_html'	=> 'class="textarea bframe_visualeditor" data-param="container:content1_index,scroller:content,bodyclass:content1"',
 					),
 				),
 			),
@@ -104,7 +103,7 @@ $editor_config = array(
 					array(
 						'name'			=> 'content2',
 						'class'			=> 'B_TextArea',
-						'special_html'	=> 'class="textarea bframe_visualeditor" data-param="container:content2_index,scroller:content"',
+						'special_html'	=> 'class="textarea bframe_visualeditor" data-param="container:content2_index,scroller:content,bodyclass:content2"',
 					),
 				),
 			),
@@ -125,7 +124,7 @@ $editor_config = array(
 					array(
 						'name'			=> 'content3',
 						'class'			=> 'B_TextArea',
-						'special_html'	=> 'class="textarea bframe_visualeditor" data-param="container:content3_index,scroller:content"',
+						'special_html'	=> 'class="textarea bframe_visualeditor" data-param="container:content3_index,scroller:content,bodyclass:content3"',
 					),
 				),
 			),
@@ -146,7 +145,7 @@ $editor_config = array(
 					array(
 						'name'			=> 'content4',
 						'class'			=> 'B_TextArea',
-						'special_html'	=> 'class="textarea bframe_visualeditor" data-param="container:content4_index,scroller:content"',
+						'special_html'	=> 'class="textarea bframe_visualeditor" data-param="container:content4_index,scroller:content,bodyclass:content4"',
 					),
 				),
 			),
