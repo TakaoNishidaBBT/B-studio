@@ -377,7 +377,7 @@
 
 			$param['node_id'] = '';
 			$param['parent_node'] = $destination_node_id;
-			$param['disp_seq'] = $this->getMaxDispSeq($destination_node_id);
+			$param['disp_seq'] = $this->getMaxDispSeq($destination_node_id, $destination_node['disp_seq']);
 			$param['node_type'] = 'arias';
 			$param['node_class'] = $this->node_class;
 			$param['node_name'] = $arias_node_name;
@@ -440,7 +440,7 @@
 
 			$param['node_id'] = '';
 			$param['parent_node'] = $destination_node_id;
-			$param['disp_seq'] = $this->getMaxDispSeq($destination_node_id);
+			$param['disp_seq'] = $this->getMaxDispSeq($destination_node_id, $destination_node['disp_seq']);
 			$param['node_type'] = $this->node_type;
 			$param['node_class'] = $this->node_class;
 			$param['node_name'] = $copy_node_name;
@@ -519,7 +519,7 @@
 
 			$param['parent_node'] = $destination_node_id;
 			$param['node_id'] = $this->node_id;
-			if(!$disp_seq) $disp_seq = $this->getMaxDispSeq($destination_node_id);
+			if(!$disp_seq) $disp_seq = $this->getMaxDispSeq($destination_node_id, $destination_node['disp_seq']);
 			$param['disp_seq'] = $disp_seq;
 			$param['update_user'] = $user_id;
 			$param['update_datetime'] = time();
@@ -605,7 +605,7 @@
 			$param['node_type'] = $node_type;
 			$param['node_class'] = $node_class;
 			$param['node_name'] = $new_node_name;
-			$param['disp_seq'] = $this->getMaxDispSeq($this->node_id);
+			$param['disp_seq'] = $this->getMaxDispSeq($this->node_id, $this->disp_seq);
 			$param['del_flag'] = '0';
 			$param['create_datetime'] = time();
 			$param['create_user'] = $user_id;
@@ -722,7 +722,7 @@
 
 				$param['node_id'] = $request['node_list'][$i];
 				$param['parent_node'] = $this->node_id;
-				$param['disp_seq'] = $i;
+				$param['disp_seq'] = $this->disp_seq . '/' . str_pad($i+1, 4, '0', STR_PAD_LEFT);
 				$param['update_user'] = $user_id;
 				$param['update_datetime'] = time();
 				$param['version_id'] = $this->version;
@@ -769,15 +769,17 @@
 			return $this->tbl_node->update($param);
 		}
 
-		function getMaxDispSeq($parent_node_id) {
-			$sql = "select ifnull(max(disp_seq)+1, 0) disp_seq from %VIEW% where parent_node='%PARENT_NODE%'";
+		function getMaxDispSeq($parent_node_id, $parent_disp_seq) {
+//			$sql = "select ifnull(max(disp_seq)+1, 0) disp_seq from %VIEW% where parent_node='%PARENT_NODE%'";
+			$sql = "select lpad(cast((ifnull(max(right(disp_seq, 4)), 0) +1) as  char), 4, '0') disp_seq from %VIEW% where parent_node='%PARENT_NODE%'";
+
 			$sql = str_replace('%VIEW%', B_DB_PREFIX . $this->view, $sql);
 			$sql = str_replace('%PARENT_NODE%', $this->db->real_escape_string($parent_node_id), $sql);
 
 			$rs = $this->db->query($sql);
 			$row = $this->db->fetch_assoc($rs);
 
-			return $row['disp_seq'];
+			return $parent_disp_seq . '/' . $row['disp_seq'];
 		}
 
 		function checkDuplicateByName($node_id, $node_name) {
