@@ -19,14 +19,14 @@
 
 			// Category list
 			$this->category_list = $this->getCategoryList();
-			$obj = $this->header->getElementByName('category_id');
+			$obj = $this->header->getElementByName('category');
 			if($obj) {
 				$obj->setProperty('data_set_value', $this->category_list);
 			}
 		}
 
 		function getCategoryList() {
-			// Create category_id list
+			// Create category list
 			$root_node = new B_Node($this->db
 									, B_CATEGORY2_TABLE
 									, B_CATEGORY2_VIEW
@@ -107,7 +107,7 @@
 		function setRequest() {
 			$this->_setRequest('page_no');
 			$this->_setRequest('keyword');
-			$this->_setRequest('category_id');
+			$this->_setRequest('category');
 			$this->_setRequest('row_per_page');
 			return;
 		}
@@ -116,7 +116,7 @@
 			$this->default_row_per_page = 20;
 
 			$this->_setProperty('keyword', '');
-			$this->_setProperty('category_id', '');
+			$this->_setProperty('category', '');
 
 			$this->_setProperty('page_no', 1);
 			$this->_setProperty('row_per_page', $this->default_row_per_page);
@@ -154,44 +154,28 @@
 		function setSqlWhere() {
 			if($this->keyword) {
 				$keyword = $this->db->real_escape_string_for_like($this->keyword);
-
-				$sql = "select article_id from %DB_PREFIX%v_admin_article2
-						where article_id like '%KEYWORD%' or title like '%KEYWORD%' or description like '%KEYWORD%'
-						group by article_id";
-
-				$sql = str_replace('%DB_PREFIX%', B_DB_PREFIX, $sql);
-				$sql = str_replace('%KEYWORD%', "%" . $this->db->real_escape_string_for_like($this->keyword) . "%", $sql);
-
-				$rs = $this->db->query($sql);
-				for($i=0 ; $row = $this->db->fetch_assoc($rs) ; $i++) {
-					if($sql_where_tmp) {
-						$sql_where_tmp.= ",";
-					}
-					$sql_where_tmp.= "'" . $row['article_id'] . "'";
-				}
-				$sql_where_tmp.= ")";
-
-				if($i) {
-					$sql_where.= "and article_id in (";
-					$sql_where.= $sql_where_tmp;
-				}
-				else {
-					$sql_where.= " and 0=1 ";
-				}
+				$sql_where.= " and (article_id like '%KEYWORD%' or category like '%KEYWORD%' or permalink like '%KEYWORD%' or article_date_t like '%KEYWORD%' or title like '%KEYWORD%' or url like '%KEYWORD%' or keywords like '%KEYWORD%' or description like '%KEYWORD%' or content1 like '%KEYWORD%' or content2 like '%KEYWORD%' or content3 like '%KEYWORD%' or content4 like '%KEYWORD%') ";
+				$sql_where = str_replace('%KEYWORD%', "%" . $this->db->real_escape_string_for_like($this->keyword) . "%", $sql_where);
 
 				$select_message.= __('Keyword: ') . ' <em>' . htmlspecialchars($this->keyword, ENT_QUOTES) . '</em>　';
 			}
-			if($this->category_id) {
-				$sql_where.= " and category_id = '%CATEGORY_ID%' ";
-				$sql_where = str_replace('%CATEGORY_ID%', $this->category_id, $sql_where);
-				$select_message.= __('Category: ') . '<em>' . htmlspecialchars(str_replace('&emsp;', '', $this->category_list[$this->category_id]), ENT_QUOTES, B_CHARSET) . '</em>&nbsp;&nbsp;';
+			if($this->category) {
+				$c = explode(',', $this->db->real_escape_string($this->category));
+				$category_id = $c[0];
+				$category_path = $c[1] . $c[0] . '/%';
+
+				$sql_where.= " and (category_id = '%CATEGORY_ID%' or path like '%CATEGORY_PATH%') ";
+				$sql_where = str_replace('%CATEGORY_ID%', $category_id, $sql_where);
+				$sql_where = str_replace('%CATEGORY_PATH%', $category_path, $sql_where);
+
+				$select_message.= __('Category: ') . '<em>' . htmlspecialchars(str_replace('&emsp;', '', $this->category_list[$this->category]), ENT_QUOTES, B_CHARSET) . '</em>&nbsp;&nbsp;';
 			}
 
 			if($select_message) {
 				$select_message = '<p class="condition"><span class="bold">' . __('Search conditions') . '&nbsp;</span>' . $select_message . '</p>';
 			}
 
-			$this->sql_where = $sql_where . $sql_where_invalid;
+			$this->sql_where = $sql_where;
 			$this->select_message = $select_message;
 		}
 

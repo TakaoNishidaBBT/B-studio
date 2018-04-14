@@ -125,32 +125,8 @@
 
 		function setSqlWhere() {
 			if($this->keyword) {
-				$sql = "select id from %DB_PREFIX%user
-						where
-						user_id like '%KEYWORD%' or
-						user_name like '%KEYWORD%' or
-						notes like '%KEYWORD%'
-						group by user_id";
-
-				$sql = str_replace("%DB_PREFIX%", B_DB_PREFIX, $sql);
-				$sql = str_replace("%KEYWORD%", "%" . $this->db->real_escape_string_for_like($this->keyword) . "%", $sql);
-
-				$rs = $this->db->query($sql);
-				for($i=0 ; $row = $this->db->fetch_assoc($rs) ; $i++) {
-					if($sql_where_tmp) {
-						$sql_where_tmp.= ",";
-					}
-					$sql_where_tmp.= "'" . $row['id'] . "'";
-				}
-				$sql_where_tmp.= ")";
-
-				if($i) {
-					$sql_where.= "and id in (";
-					$sql_where.= $sql_where_tmp;
-				}
-				else {
-					$sql_where.= " and 0=1 ";
-				}
+				$sql_where.= " and (user_id like '%KEYWORD%' or user_name like '%KEYWORD%' or notes like '%KEYWORD%') ";
+				$sql_where = str_replace("%KEYWORD%", "%" . $this->db->real_escape_string_for_like($this->keyword) . "%", $sql_where);
 
 				$select_message.= __('Keyword: ') . ' <em>' . htmlspecialchars($this->keyword, ENT_QUOTES) . '</em>　';
 			}
@@ -159,7 +135,7 @@
 				$select_message = '<p class="condition"><span class="bold">' . __('Search conditions') . '&nbsp;</span>' . $select_message . '</p>';
 			}
 
-			$this->sql_where = $sql_where . $sql_where_invalid;
+			$this->sql_where = $sql_where;
 			$this->select_message = $select_message;
 		}
 

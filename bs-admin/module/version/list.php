@@ -114,30 +114,8 @@
 
 		function setSqlWhere() {
 			if($this->keyword) {
-				$keyword = $this->db->real_escape_string_for_like($this->keyword);
-
-				$sql = "select version_id from %DB_PREFIX%version
-						where version like '%KEYWORD%' or notes like '%KEYWORD%'";
-
-				$sql = str_replace("%DB_PREFIX%", B_DB_PREFIX, $sql);
-				$sql = str_replace("%KEYWORD%", "%" . $keyword . "%", $sql);
-
-				$rs = $this->db->query($sql);
-				for($i=0 ; $row = $this->db->fetch_assoc($rs) ; $i++) {
-					if($sql_where_tmp) {
-						$sql_where_tmp.= ",";
-					}
-					$sql_where_tmp.= "'" . $row['version_id'] . "'";
-				}
-				$sql_where_tmp.= ")";
-
-				if($i) {
-					$sql_where.= "and version_id in (";
-					$sql_where.= $sql_where_tmp;
-				}
-				else {
-					$sql_where.= " and 0=1 ";
-				}
+				$sql_where.= " and (version_id like '%KEYWORD%' or publication_datetime_t like '%KEYWORD%' or version like '%KEYWORD%' or notes like '%KEYWORD%') ";
+				$sql_where = str_replace("%KEYWORD%", "%" . $this->db->real_escape_string_for_like($this->keyword) . "%", $sql_where);
 
 				$select_message.= __('Keyword: ') . ' <em>' . htmlspecialchars($this->keyword, ENT_QUOTES) . '</em>　';
 			}
@@ -146,7 +124,7 @@
 				$select_message = '<p class="condition"><strong>' . __('Search conditions') . '&nbsp;</strong>' . $select_message . '</p>';
 			}
 
-			$this->sql_where = $sql_where . $sql_where_invalid;
+			$this->sql_where = $sql_where;
 			$this->select_message = $select_message;
 			return;
 		}

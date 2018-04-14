@@ -39,12 +39,12 @@ $list_header_config = array(
 					'start_html'			=> '<li>',
 					'end_html'				=> '</li>',
 					array(
-						'start_html'			=> '<label for="category_id">',
+						'start_html'			=> '<label for="category">',
 						'end_html'				=> '</label>',
 						'value'					=> __('Category'),
 					),
 					array(
-						'name'					=> 'category_id',
+						'name'					=> 'category',
 						'class'					=> 'B_SelectBox',
 						'special_html'			=> 'class="bframe_selectbox"',
 					),

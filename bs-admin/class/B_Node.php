@@ -311,7 +311,8 @@
 
 			if($this->node_id != 'root') {
 				for($i=1, $indent=''; $i<$this->level; $i++) $indent.= '&emsp;';	// indent
-				$list[$this->node_id] = $indent . mb_convert_encoding($this->node_name, 'UTF-8', B_MB_DETECT_ORDER);
+				$key = $this->node_id . ',' . $this->path; 
+				$list[$key] = $indent . mb_convert_encoding($this->node_name, 'UTF-8', B_MB_DETECT_ORDER);
 			}
 			if(is_array($this->node)) {
 				foreach(array_keys($this->node) as $key) {
