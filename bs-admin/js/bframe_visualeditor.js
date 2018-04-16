@@ -62,7 +62,7 @@
 			}
 
 			// body class
-			var visual_editor_body_class = bframe.getParam('bodyclass', param);
+			visual_editor_body_class = bframe.getParam('bodyclass', param);
 		}
 
 		setUpCKEditor();
@@ -248,6 +248,10 @@
 								bframe.editCheck_handler.registerCallBackFunction(editCheckCallback);
 								bframe.editCheck_handler.registerResetCallBackFunction(resetDirtyCallback);
 							}
+
+							// body class
+							var body = ev.editor.document.getBody();
+							body.addClass(visual_editor_body_class);
 						},
 
 						mode : function(ev) {
