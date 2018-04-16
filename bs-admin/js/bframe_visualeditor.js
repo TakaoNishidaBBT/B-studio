@@ -317,10 +317,6 @@
 								bframe.editCheck_handler.registerResetCallBackFunction(resetDirtyCallback);
 							}
 
-							// body class
-							var body = ev.editor.document.getBody();
-							body.addClass(visual_editor_body_class);
-
 							bframe.fireEvent(window, 'resize');
 							onScroll();
 						},
@@ -332,6 +328,12 @@
 						resize : function(ev) {
 							bframe.fireEvent(window, 'resize');
 						},
+
+						contentDom : function(ev) {
+							// body class
+							var body = ev.editor.document.getBody();
+							body.addClass(visual_editor_body_class);
+						},						
 					}
 				});
 			}
