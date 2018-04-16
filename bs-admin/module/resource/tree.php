@@ -632,7 +632,7 @@
 									, $this->version['revision_id']
 									, $this->request['parent_node_id']
 									, null
-									, 1
+									, 'all'
 									, null);
 
 					// start transaction

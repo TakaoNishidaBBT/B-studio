@@ -3,6 +3,7 @@ select 	  a.*
 		, concat(a.article_date_u, a.article_id) article_date
 		, b.path
 		, b.node_name category
+		, b.disp_seq
 		, b.color color
 		, b.background_color background_color
 		, b.icon_file icon_file

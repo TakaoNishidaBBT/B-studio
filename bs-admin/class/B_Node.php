@@ -133,6 +133,16 @@
 			return $rs;
 		}
 
+		function getChildNode($node_id) {
+			if(is_array($this->node)) {
+				foreach(array_keys($this->node) as $key) {
+					if($node_id == $this->node[$key]->node_id) {
+						return $this->node[$key];
+					}
+				}
+			}
+		}
+
 		function getSubFolderCount($node_id) {
 			$node_id = $this->db->real_escape_string($node_id);
 			$sql = "select count(*) cnt from %VIEW% ";
@@ -718,20 +728,38 @@
 
 			// update
 			for($i=0; $i<count($request['node_list']); $i++) {
-				$this->cloneNode($request['node_list'][$i]);
-
-				$param['node_id'] = $request['node_list'][$i];
-				$param['parent_node'] = $this->node_id;
-				$param['disp_seq'] = $this->disp_seq . '/' . str_pad($i+1, 4, '0', STR_PAD_LEFT);
-				$param['update_user'] = $user_id;
-				$param['update_datetime'] = time();
-				$param['version_id'] = $this->version;
-				$param['revision_id'] = $this->revision;
-
-				$ret = $this->tbl_node->update($param);
-				if(!$ret) return $ret;
+				$child = $this->getChildNode($request['node_list'][$i]);
+				if($child) {
+					$child->_updateDispSeq($user_id, str_pad($i+1, 4, '0', STR_PAD_LEFT));
+				}
 			}
 			return true;
+		}
+
+		function _updateDispSeq($use_id, $disp_seq=0) {
+			$this->cloneNode($this->node_id);
+
+			$param['node_id'] = $this->node_id;
+			$param['version_id'] = $this->version;
+			$param['revision_id'] = $this->revision;
+			$param['update_user'] = $user_id;
+			$param['update_datetime'] = time();
+
+			if($disp_seq) {
+				$this->disp_seq = $this->parent->disp_seq . '/' . $disp_seq;
+			}
+			else {
+				$this->disp_seq = $this->parent->disp_seq . '/' . substr($this->disp_seq, -4);
+			}
+			$param['disp_seq'] = $this->disp_seq;
+
+			$this->tbl_node->update($param);
+
+			if(is_array($this->node)) {
+				foreach(array_keys($this->node) as $key) {
+					$this->node[$key]->_updateDispSeq($user_id);
+				}
+			}
 		}
 
 		function saveName($node_name, $user_id, $option=null) {

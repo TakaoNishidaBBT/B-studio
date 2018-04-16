@@ -314,7 +314,7 @@
 									, $this->version['revision_id']
 									, $this->request['parent_node_id']
 									, null
-									, 1
+									, 'all'
 									, $this->session['open_nodes']);
 
 					// start transaction
