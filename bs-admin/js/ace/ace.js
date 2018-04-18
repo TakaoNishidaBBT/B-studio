@@ -11404,7 +11404,7 @@ exports.commands = [{
 	readOnly: true
 }, {
 	name: "findnext2",
-	bindKey: bindKey("F3", "Command-G"),
+	bindKey: bindKey("F3", "F3"),
 	exec: function(editor) { editor.findNext(); },
 	readOnly: true
 }, {
@@ -11414,7 +11414,7 @@ exports.commands = [{
 	readOnly: true
 }, {
 	name: "findprevious2",
-	bindKey: bindKey("Shift-F3", "Command-Shift-G"),
+	bindKey: bindKey("Shift-F3", "Shift-F3"),
 	exec: function(editor) { editor.findPrevious(); },
 	readOnly: true
 }, {
