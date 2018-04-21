@@ -53,8 +53,8 @@
 			CKEDITOR.config.language = language;
 			CKEDITOR.config.autoParagraph = false;
 
-			CKEDITOR.config.coreStyles_bold = {element : 'span', attributes : {'style' : 'font-weight:bold' }};
-			CKEDITOR.config.coreStyles_italic = {element : 'span', attributes : {'style' : 'font-style:italic' }};
+			CKEDITOR.config.coreStyles_bold = {element: 'span', attributes: {'style': 'font-weight:bold' }};
+			CKEDITOR.config.coreStyles_italic = {element: 'span', attributes: {'style': 'font-style:italic' }};
 
 			// for HTML5 tags(cancel Automatic ACF Mode)
 			CKEDITOR.config.allowedContent = true;
@@ -67,8 +67,8 @@
 			CKEDITOR.config.shiftEnterMode = 1;
 			CKEDITOR.config.templates_replaceContent = false;
 
-			CKEDITOR.config.protectedSource.push( /<\?[\s\S]*?\?>/g );
-			CKEDITOR.config.protectedSource.push( /<body[\s\S]*?>/g );
+			CKEDITOR.config.protectedSource.push(/<\?[\s\S]*?\?>/g);
+			CKEDITOR.config.protectedSource.push(/<body[\s\S]*?>/g);
 
 			if(filebrowser) {
 				CKEDITOR.config.filebrowserBrowseUrl = filebrowser;
@@ -114,8 +114,8 @@
 			self.contentEditable = true;
 
 			editor = CKEDITOR.inline(target, {
-				on : {
-					instanceReady : function( ev ) {
+				on: {
+					instanceReady: function(ev) {
 						var tag_group1 = new Array('h1', 'h2', 'h3', 'h4', 'h5', 'div', 'p', 'ul', 'ol', 'dl', 'dt', 'dd', 'li'
 													, 'section', 'nav', 'article', 'aside', 'header', 'footer', 'figure', 'figcaption'
 													, 'embed', 'video', 'canvas', 'audio', 'source');
@@ -123,35 +123,35 @@
 						var tag_group3 = new Array('tr');
 
 						for(var i=0; i<tag_group1.length; i++) {
-							this.dataProcessor.writer.setRules( tag_group1[i], {
-								indent : true,
-								breakBeforeOpen : true,
-								breakAfterOpen : true,
-								breakBeforeClose : true,
-								breakAfterClose : true
+							this.dataProcessor.writer.setRules(tag_group1[i], {
+								indent: true,
+								breakBeforeOpen: true,
+								breakAfterOpen: true,
+								breakBeforeClose: true,
+								breakAfterClose: true
 							});
 						}
 						for(var i=0; i<tag_group2.length; i++) {
-							this.dataProcessor.writer.setRules( tag_group2[i], {
-								indent : true,
-								breakBeforeOpen : false,
-								breakAfterOpen : false,
-								breakBeforeClose : false,
-								breakAfterClose : false
+							this.dataProcessor.writer.setRules(tag_group2[i], {
+								indent: true,
+								breakBeforeOpen: false,
+								breakAfterOpen: false,
+								breakBeforeClose: false,
+								breakAfterClose: false
 							});
 						}
 						for(var i=0; i<tag_group3.length; i++) {
-							this.dataProcessor.writer.setRules( tag_group3[i], {
-								indent : true,
-								breakBeforeOpen : true,
-								breakAfterOpen : true,
-								breakBeforeClose : true,
-								breakAfterClose : false
+							this.dataProcessor.writer.setRules(tag_group3[i], {
+								indent: true,
+								breakBeforeOpen: true,
+								breakAfterOpen: true,
+								breakBeforeClose: true,
+								breakAfterClose: false
 							});
 						}
-						this.dataProcessor.writer.setRules( 'comment', {
-							indent : true,
-							breakAfterClose : true
+						this.dataProcessor.writer.setRules('comment', {
+							indent: true,
+							breakAfterClose: true
 						});
 
 						// for submit

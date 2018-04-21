@@ -105,11 +105,11 @@
 				var h = target.style.height;
 			}
 
-			CKEDITOR.config.coreStyles_bold = {element : 'span', attributes : {'style' : 'font-weight:bold'}};
-			CKEDITOR.config.coreStyles_italic = {element : 'span', attributes : {'style' : 'font-style:italic'}};
+			CKEDITOR.config.coreStyles_bold = {element: 'span', attributes: {'style': 'font-weight:bold'}};
+			CKEDITOR.config.coreStyles_italic = {element: 'span', attributes: {'style': 'font-style:italic'}};
 
 			// protect php
-			CKEDITOR.config.protectedSource.push( /<\?[\s\S]*?\?>/g );
+			CKEDITOR.config.protectedSource.push(/<\?[\s\S]*?\?>/g);
 
 			// root dir
 			var root_dir = document.getElementById('root_dir');
@@ -195,8 +195,8 @@
 			if(parent) {
 				editor = CKEDITOR.appendTo(parent.id, {
 					height: h,
-					on : {
-						instanceReady : function(ev) {
+					on: {
+						instanceReady: function(ev) {
 							var tag_group1 = new Array('h1', 'h2', 'h3', 'h4', 'h5', 'div', 'p', 'ul', 'ol', 'dl', 'dt', 'dd', 'li'
 													, 'section', 'nav', 'article', 'aside', 'header', 'footer', 'figure', 'figcaption'
 													, 'embed', 'video', 'canvas', 'audio', 'source');
@@ -204,35 +204,35 @@
 							var tag_group3 = new Array('tr');
 
 							for(var i=0; i < tag_group1.length; i++) {
-								this.dataProcessor.writer.setRules( tag_group1[i], {
-									indent : true,
-									breakBeforeOpen : true,
-									breakAfterOpen : true,
-									breakBeforeClose : true,
-									breakAfterClose : true
+								this.dataProcessor.writer.setRules(tag_group1[i], {
+									indent: true,
+									breakBeforeOpen: true,
+									breakAfterOpen: true,
+									breakBeforeClose: true,
+									breakAfterClose: true
 								});
 							}
 							for(var i=0; i < tag_group2.length; i++) {
-								this.dataProcessor.writer.setRules( tag_group2[i], {
-									indent : true,
-									breakBeforeOpen : false,
-									breakAfterOpen : false,
-									breakBeforeClose : false,
-									breakAfterClose : false
+								this.dataProcessor.writer.setRules(tag_group2[i], {
+									indent: true,
+									breakBeforeOpen: false,
+									breakAfterOpen: false,
+									breakBeforeClose: false,
+									breakAfterClose: false
 								});
 							}
 							for(var i=0; i < tag_group3.length; i++) {
-								this.dataProcessor.writer.setRules( tag_group3[i], {
-									indent : true,
-									breakBeforeOpen : true,
-									breakAfterOpen : true,
-									breakBeforeClose : true,
-									breakAfterClose : false
+								this.dataProcessor.writer.setRules(tag_group3[i], {
+									indent: true,
+									breakBeforeOpen: true,
+									breakAfterOpen: true,
+									breakBeforeClose: true,
+									breakAfterClose: false
 								});
 							}
 							this.dataProcessor.writer.setRules('comment', {
-								indent : true,
-								breakAfterClose : true
+								indent: true,
+								breakAfterClose: true
 							});
 
 							// for sychronization
@@ -254,7 +254,7 @@
 							body.addClass(visual_editor_body_class);
 						},
 
-						mode : function(ev) {
+						mode: function(ev) {
 							bframe.fireEvent(window, 'resize');
 						},
 					}
@@ -263,8 +263,8 @@
 			else {
 				editor = CKEDITOR.replace(target.id, {
 					height: h,
-					on : {
-						instanceReady : function(ev) {
+					on: {
+						instanceReady: function(ev) {
 							var tag_group1 = new Array('h1', 'h2', 'h3', 'h4', 'h5', 'div', 'p', 'ul', 'ol', 'dl', 'dt', 'dd', 'li'
 													, 'section', 'nav', 'article', 'aside', 'header', 'footer', 'figure', 'figcaption'
 													, 'embed', 'video', 'canvas', 'audio', 'source');
@@ -272,35 +272,35 @@
 							var tag_group3 = new Array('tr');
 
 							for(var i=0; i < tag_group1.length; i++) {
-								this.dataProcessor.writer.setRules( tag_group1[i], {
-									indent : true,
-									breakBeforeOpen : true,
-									breakAfterOpen : true,
-									breakBeforeClose : true,
-									breakAfterClose : true
+								this.dataProcessor.writer.setRules(tag_group1[i], {
+									indent: true,
+									breakBeforeOpen: true,
+									breakAfterOpen: true,
+									breakBeforeClose: true,
+									breakAfterClose: true
 								});
 							}
 							for(var i=0; i < tag_group2.length; i++) {
-								this.dataProcessor.writer.setRules( tag_group2[i], {
-									indent : true,
-									breakBeforeOpen : false,
-									breakAfterOpen : false,
-									breakBeforeClose : false,
-									breakAfterClose : false
+								this.dataProcessor.writer.setRules(tag_group2[i], {
+									indent: true,
+									breakBeforeOpen: false,
+									breakAfterOpen: false,
+									breakBeforeClose: false,
+									breakAfterClose: false
 								});
 							}
 							for(var i=0; i < tag_group3.length; i++) {
-								this.dataProcessor.writer.setRules( tag_group3[i], {
-									indent : true,
-									breakBeforeOpen : true,
-									breakAfterOpen : true,
-									breakBeforeClose : true,
-									breakAfterClose : false
+								this.dataProcessor.writer.setRules(tag_group3[i], {
+									indent: true,
+									breakBeforeOpen: true,
+									breakAfterOpen: true,
+									breakBeforeClose: true,
+									breakAfterClose: false
 								});
 							}
 							this.dataProcessor.writer.setRules('comment', {
-								indent : true,
-								breakAfterClose : true
+								indent: true,
+								breakAfterClose: true
 							});
 
 							// for sychronization
@@ -321,15 +321,15 @@
 							onScroll();
 						},
 
-						mode : function(ev) {
+						mode: function(ev) {
 							bframe.fireEvent(window, 'resize');
 						},
 
-						resize : function(ev) {
+						resize: function(ev) {
 							bframe.fireEvent(window, 'resize');
 						},
 
-						contentDom : function(ev) {
+						contentDom: function(ev) {
 							// body class
 							var body = ev.editor.document.getBody();
 							body.addClass(visual_editor_body_class);
