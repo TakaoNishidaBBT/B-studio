@@ -23,11 +23,11 @@
 	bframe.inlineeditor = function(target) {
 		var self = target;
 		var editor;
-		var param = target.getAttribute('bframe_inlineeditor_param');
-
+		var param = target.getAttribute('data-param');
 		if(param) {
 			var filebrowser = bframe.getParam('filebrowser', param);
 			var language = bframe.getParam('language', param);
+			var templates = bframe.getParam('templates', param);
 		}
 
 		setUpCKEditor();
@@ -67,12 +67,25 @@
 			CKEDITOR.config.shiftEnterMode = 1;
 			CKEDITOR.config.templates_replaceContent = false;
 
+			// protect source
 			CKEDITOR.config.protectedSource.push(/<\?[\s\S]*?\?>/g);
 			CKEDITOR.config.protectedSource.push(/<body[\s\S]*?>/g);
 
+			// filebrowser
 			if(filebrowser) {
 				CKEDITOR.config.filebrowserBrowseUrl = filebrowser;
 				CKEDITOR.config.filebrowserUploadUrl = filebrowser;
+			}
+
+			// templates
+			if(templates) {
+				CKEDITOR.config.templates_files = [templates];
+			}
+			CKEDITOR.config.templates_replaceContent = false;
+
+			var base = document.getElementsByTagName('base');
+			if(base) {
+				CKEDITOR.config.baseHref = base[0].getAttribute('href');
 			}
 
 			// empty tag 0: remain 1:remove

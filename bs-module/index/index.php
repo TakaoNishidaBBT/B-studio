@@ -371,8 +371,12 @@
 				$this->start_html.= $this->templates[$i]['start_html'];
 				$this->end_html = $this->templates[$i]['end_html'] . $this->end_html;
 			}
+			$inline_param = 'filebrowser:bs-admin/index.php?terminal_id=' . $this->post['terminal_id'] . '&amp;module=resource&amp;page=popup';
+			$inline_param.= ',language:' . $admin_language;
+			$inline_param.= ',templates:' . B_CURRENT_ROOT . 'inlineeditor/templates/default.js';
 
-			$this->innerHTML = '<div id="inline_editor" class="bframe_inlineeditor" bframe_inlineeditor_param="filebrowser:bs-admin/index.php?terminal_id=' . $this->post['terminal_id'] . '&amp;module=resource&amp;page=popup,language:' . $admin_language . '" style="outline:none">' . $this->contents['html1'] . '</div>';
+			$this->innerHTML = '<div id="inline_editor" class="bframe_inlineeditor" data-param="' . $inline_param . '"';
+			$this->innerHTML.= ' style="outline:none">' . $this->contents['html1'] . '</div>';
 			$this->setTemplateExternalCss();
 			$this->setTemplateCssLink();
 			$this->setCss($this->contents['external_css']);
