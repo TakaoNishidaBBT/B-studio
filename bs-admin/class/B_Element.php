@@ -1656,7 +1656,7 @@
 				$html.= ' ' . $this->special_html;
 
 				if($this->disabled) {
-					$html.= ' disabled="true"';
+					$html.= ' disabled="disabled"';
 				}
 				if($this->checked) {
 					$html.= ' checked="checked"';

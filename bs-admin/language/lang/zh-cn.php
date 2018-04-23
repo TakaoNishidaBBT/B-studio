@@ -193,9 +193,11 @@
 		'category'						=> '分类',
 		'Date'							=> '日期',
 		'Date: '						=> '日期：',
+		'Permalink'						=> 'Permalink',
 		'Title: '						=> '标题：',
 		'Published/Preview/Closed'		=> '发布／预览／关闭',
 		'Published'						=> '发布',
+		'Private'						=> 'Private',
 		'Closed'						=> '关闭',
 		'Publication date'				=> '发布日期',
 		'Please enter publication date'	=> '请输入发布日期',
@@ -208,12 +210,18 @@
 		'After turninng external link on, please enter URL'
 										=> '外部链接如选择「有」请输入URL链接',
 		'Open link in new window'		=> '在新窗口中打开',
-		'Details'						=> '详细',
+		'Content1'						=> '详细1',
+		'Content2'						=> '详细2',
+		'Content3'						=> '详细3',
+		'Content4'						=> '详细4',
 		'Are you sure you want to delete?'
 										=> '确实删除吗？',
 		'Properties'					=> '属性',
 		'newCategory'					=> '新建分类',
 		'newFolder'						=> '新建文件夹',
+		'This is an error in your entry'=> '输入内容有误。',
+		'This permalink is already in use'
+										=> '该用户permalink已登录',
 
 		// Category
 		'Double-click to set'			=> '双击分类名设置',
@@ -254,6 +262,7 @@
 		'Please use server browser'		=> '请使用服务器浏览器',
 		'An error has occurred'			=> '发生错误',
 		'The name could not be changed'	=> '无法更改文件名',
+		'Folder is not allowed'			=> 'Folder is not allowed',
 
 		// Version
 		'Keyword'						=> '关键字',
@@ -307,6 +316,8 @@
 		'Changes will be reflected immediately'	
 										=> '立即公布',
 		'Scheduled to be published'		=> '预约公布',
+		'Failed to delete version records (%TABLE_NAME%)'
+										=> 'Failed to delete version records (%TABLE_NAME%)',
 
 		// Compare
 		'Compare Versions Left: %LEFT_VERSION% &nbsp;Right: %RIGHT_VERSION%'
@@ -389,10 +400,17 @@
 		'Please set session.save_path'	=> '请设定 session.save_path 项目。',
 		'Please enable MySQL library'	=> '请启用 MySQL 数据库。',
 		'Please enable GD library'		=> '请启用 GD 图形库。',
+		'Please enable exif library'	=> '请启用 exif 图形库。',
+		'Please enable SimpleXML library'
+										=> '请启用 SimpleXML 图形库。',
 		'ZipArchive is necessary'		=> '安装需要 ZipArchive类。',
 
 		' : write permission granted. '	=> ' : 已授权文本写入权限。',
 		' : write permission not set. '	=> ' : 没有授权文本写入权限。',
+		' : execute permission granted. '
+										=> ' : execute permission granted. ',
+		' : execute permission not set. '
+										=> ' : execute permission not set. ',
 
 		'Able to connect to DB but failed to select schema.'
 										=> '成功连接至数据库，但没有找到指定构架',

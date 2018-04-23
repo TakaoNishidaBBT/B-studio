@@ -53,9 +53,10 @@
 					$rs=$this->db->query($sql);
 					$row=$this->db->fetch_assoc($rs);
 
-					$this->setThumnail($row['title_img_file']);
 					$this->editor->setValue($row);
 					$this->settings->setValue($row);
+					$this->setThumnail($row['title_img_file']);
+					$this->setDetailStatus();
 				}
 				break;
 			}
@@ -100,6 +101,21 @@
 			$obj->value = $html;
 		}
 
+		function setDetailStatus() {
+			$obj = $this->settings->getElementByName('description_flag');
+			if($obj->value == '1') {
+				$obj = $this->settings->getElementByName('external_link_container');
+				$obj->start_html = $obj->start_html_d;
+
+				$obj = $this->settings->getElementByName('external_link');
+				$obj->disabled = true;
+				$obj = $this->settings->getElementByName('url');
+				$obj->disabled = true;
+				$obj = $this->settings->getElementByName('external_window');
+				$obj->disabled = true;
+			}
+		}
+
 		function register() {
 			try {
 				$article_id = $this->request['article_id'];
@@ -136,10 +152,11 @@
 
 			$this->setThumnail($this->request['title_img_file']);
 			$this->settings->setFilterValue($this->session['mode']);
+			$this->setDetailStatus();
 
 			$title = $this->editor->getElementById('title-container');
 			$response['innerHTML'] = array(
-				'settings'			=> $this->settings->getHtml(),
+				'settings-inner'	=> $this->settings->getHtml(),
 				'title-container'	=> $title->getHtml(),
 			);
 

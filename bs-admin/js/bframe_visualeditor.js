@@ -7,9 +7,6 @@
 	bframe.addEventListener(window, 'load', bframeVisualEditorInit);
 
 	function bframeVisualEditorInit() {
-		if(bframe.visualeditor_inialized) return;
-
-		bframe.visualeditor_inialized = true;
 		var v = [];
 		var objects = document.querySelectorAll('textarea.bframe_visualeditor');
 

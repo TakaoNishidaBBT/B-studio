@@ -229,7 +229,7 @@
 							obj.innerHTML = response.innerHTML[obj_id];
 						}
 					}
-					bframe.fireEvent(window, 'load');
+					bframe.fireEvent(window, 'resize');
 				}
 				if(response.message && response.message_obj) {
 					if(obj = document.getElementById(response.message_obj)) {
