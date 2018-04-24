@@ -12,6 +12,10 @@
 	// class bstudio
 	// 
 	// -------------------------------------------------------------------------
+	bstudio.activateCalendar = function(target_id) {
+		bframe.calendarContainer.activate(target_id);
+	}
+
 	bstudio.activateModalWindow = function(a, w, h, func) {
 		var p = 'width:' + w + ',height:' + h;
 		a.setAttribute('data-param', p);

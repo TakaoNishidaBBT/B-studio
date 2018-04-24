@@ -84,9 +84,13 @@ div#main {
 #settings {
 	float: left;
 	width: 320px;
-	padding: 10px 12px 10px 8px;
+	padding: 0;
 	overflow: auto;
 	background-color: #333;
+}
+#settings-inner {
+	padding: 10px 12px 10px 8px;
+	box-sizing: border-box;
 }
 #content {
 	margin-left: 320px;

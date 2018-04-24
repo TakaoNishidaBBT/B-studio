@@ -151,8 +151,8 @@
 			}
 
 			$this->setThumnail($this->request['title_img_file']);
-			$this->settings->setFilterValue($this->session['mode']);
 			$this->setDetailStatus();
+			$this->settings->setFilterValue($this->session['mode']);
 
 			$title = $this->editor->getElementById('title-container');
 			$response['innerHTML'] = array(

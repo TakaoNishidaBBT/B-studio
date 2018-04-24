@@ -37,6 +37,14 @@
 				}
 			}
 		}
+
+		this.activate = function(target_id) {
+			for(var i=0; i < calendars.length; i++) {
+				if(calendars[i].getTargetId() == target_id) {
+					calendars[i].show(target_id);
+				}
+			}
+		}
 	}
 
 	// -------------------------------------------------------------------------
@@ -66,7 +74,6 @@
 
 		var date_input;
 
-		bframe.addEventListener(target, 'click' , show);
 		bframe.addEventListenerAllFrames(top, 'click', hide);
 
 		init();
@@ -93,15 +100,19 @@
 			}
 		}
 
+		function getTargetId() {
+			return target.id;
+		}
+		this.getTargetId = getTargetId;
+
 		function hide() {
 			popup.hidePopUp();
 		}
 		this.hide = hide;
 
-		function show(event) {
+		function show() {
 			if(popup.isOpen()) {
 				hide();
-				bframe.stopPropagation(event);
 				return false;
 			}
 			var param;
@@ -111,6 +122,7 @@
 			day = 0;
 			mode = '';
 
+			date_input = document.getElementById(property.target);
 			if(date_input.value) {
 				var date = date_input.value.split('/');
 				year = date[0];
@@ -126,9 +138,9 @@
 			eventHandler(httpObj, property.ajax.module, property.ajax.file, property.ajax.method, 'POST', param);
 			response_wait = true;
 
-			bframe.stopPropagation(event);
 			bframe.fireEvent(document, 'click');
 
+			target = document.getElementById(target.id);
 			position = bframe.getElementPosition(target);
 			position.left += position.width;
 			if(property.offsetLeft) {
@@ -137,6 +149,7 @@
 
 			return false;
 		}
+		this.show = show;
 
 		function showResponse() {
 			if(httpObj.readyState == 4 && httpObj.status == 200 && response_wait) {

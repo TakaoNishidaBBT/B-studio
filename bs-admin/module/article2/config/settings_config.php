@@ -88,7 +88,7 @@ $settings_config = array(
 				'filter'			=> 'select/insert',
 				'id'				=> 'schedule_calendar1',
 				'class'				=> 'B_Link',
-				'special_html'		=> 'class="bframe_calendar settings-button" title="' . __('Calendar') . '"',
+				'special_html'		=> 'class="bframe_calendar settings-button" title="' . __('Calendar') . '" onclick="bstudio.activateCalendar(\'schedule_calendar1\'); return false;" ',
 				'script'			=>
 				array(
 					'bframe_calendar'	=>
@@ -248,7 +248,7 @@ $settings_config = array(
 							'value'			=> '<img alt="Select image" src="images/common/gear_white.png" />',
 						),
 						array(
-							'filter'			=> 'select',
+							'filter'			=> 'select/insert',
 							'class'				=> 'B_Link',
 							'link'				=> '#',
 							'special_html'		=> 'title="' . __('Clear') . '" class="clear-button" onclick="bstudio.clearIMG(\'title_img\', \'title_img_file\'); return false;"',
@@ -294,9 +294,10 @@ $settings_config = array(
 	// External link
 	array(
 		'error_group'	=> true,
-		'name'			=> 'external_link_row',
 		array(
+			'name'			=> 'external_link_container',
 			'start_html'	=> '<dd id="external" class="external-link">',
+			'start_html_d'	=> '<dd id="external" class="external-link disabled">',
 			'end_html'		=> '</dd>',
 			array(
 				'start_html'	=> '<div>',
