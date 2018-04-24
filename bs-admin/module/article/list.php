@@ -88,8 +88,8 @@
 					$this->session['order'] = ' asc';
 				}
 			}
-			$this->setProperty();
 
+			$this->setProperty();
 			$this->setHeader();
 			$this->setSqlWhere();
 			$this->setData();

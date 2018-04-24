@@ -294,9 +294,10 @@ $settings_config = array(
 	// External link
 	array(
 		'error_group'	=> true,
-		'name'			=> 'external_link_row',
 		array(
+			'name'			=> 'external_link_container',
 			'start_html'	=> '<dd id="external" class="external-link">',
+			'start_html_d'	=> '<dd id="external" class="external-link disabled">',
 			'end_html'		=> '</dd>',
 			array(
 				'start_html'	=> '<div>',
