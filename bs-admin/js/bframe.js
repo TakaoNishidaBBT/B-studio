@@ -229,7 +229,6 @@
 							obj.innerHTML = response.innerHTML[obj_id];
 						}
 					}
-					bframe.fireEvent(window, 'resize');
 				}
 				if(response.message && response.message_obj) {
 					if(obj = document.getElementById(response.message_obj)) {
@@ -242,7 +241,6 @@
 							obj.className = 'error-message';
 							obj.innerHTML = response.message;
 							obj.outerHTML = obj.outerHTML;
-							return;
 						}
 					}
 				}
@@ -250,7 +248,7 @@
 				// execute callback function
 				AjaxSubmitExecuteCallBackAfter(response);
 
-				if(bframe.editCheck_handler) {
+				if(bframe.editCheck_handler && response.status) {
 					bframe.editCheck_handler.resetEditFlag();
 				}
 			}

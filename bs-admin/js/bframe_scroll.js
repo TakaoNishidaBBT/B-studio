@@ -145,6 +145,9 @@
 		if(bframe.resize_handler) {
 			bframe.resize_handler.registerCallBackFunction(onResize);
 		}
+		if(bframe.ajaxSubmit) {
+			bframe.ajaxSubmit.registerCallBackFunctionAfter(onResize);
+		}
 
 		function onResize() {
 			var currentScrollTop = self.scrollTop;
@@ -204,8 +207,8 @@
 
 			var bartop = self.scrollTop + Math.round(barScrollHeight * self.scrollTop / scrollHeight) + padding;
 			bar.style.top = bartop + 'px';
-			// set event handler to child frames
 
+			// set event handler to child frames
 			var iframes = document.getElementsByTagName('iframe');
 			for(var i=0; i < iframes.length; i++) {
 				if(bframe.isChild(self, iframes[i])) {

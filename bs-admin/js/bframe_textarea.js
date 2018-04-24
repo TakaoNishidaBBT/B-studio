@@ -5,6 +5,9 @@
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
 	bframe.addEventListener(window, 'load' , bframeTextareaInit);
+	if(bframe.ajaxSubmit) {
+		bframe.ajaxSubmit.registerCallBackFunctionAfter(bframeTextareaInit);
+	}
 
 	function bframeTextareaInit() {
 		var objects = document.querySelectorAll('textarea.bframe_textarea');

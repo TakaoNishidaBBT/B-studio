@@ -57,6 +57,9 @@
 					bframe.resize_handler.registerCallBackFunction(onWindowResize);
 				}
 			}
+			if(bframe.ajaxSubmit) {
+				bframe.ajaxSubmit.registerCallBackFunctionAfter(onWindowResize);
+			}
 
 			// body class
 			visual_editor_body_class = bframe.getParam('bodyclass', param);
