@@ -234,7 +234,7 @@ $settings_config = array(
 							'name'			=> 'open_filelist',
 							'class'			=> 'B_Link',
 							'link'			=> 'index.php',
-							'special_html'	=> 'title="' . __('Image selection') . '" class="settings-button" onclick="bstudio.activateModalWindow(this, 1000, 500); return false;"',
+							'special_html'	=> 'title="' . __('Image selection') . '" class="settings-button" onclick="bstudio.activateModalWindow(this, 1100, 500); return false;"',
 							'fixedparam'	=>
 							array(
 								'terminal_id'	=> TERMINAL_ID,
