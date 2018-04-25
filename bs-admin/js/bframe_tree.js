@@ -3977,7 +3977,7 @@
 
 			if(property.selectable == 'true') {
 				if(node_type.value != 'folder' && node.id.substr(1) != 'root' && node.id.substr(1) != 'trash') {
-					if(current_node.id() && current_node.place() == 'tree' && e.ctrlKey) {
+					if(current_node.id() && current_node.place() == 'tree' && (e.ctrlKey || e.metaKey)) {
 						addCurrentObject(node.id);
 					}
 					else {

@@ -7,7 +7,7 @@
 */
 $tree_config = array(
 	'id'			=> 'tree',
-	'start_html'	=> '<div id="tree" class="bframe_tree bframe_adjustparent select_category" data-param="margin:24" unselectable="on">',
+	'start_html'	=> '<div id="tree" class="bframe_tree bframe_adjustparent select_category bframe_scroll" data-param="margin:6" unselectable="on">',
 	'end_html'		=> '</div>',
 	'script'		=>
 	array(
@@ -16,6 +16,7 @@ $tree_config = array(
 			'module'		=> $this->module,
 			'file'			=> 'tree',
 			'editable'		=> 'true',
+			'selectable'	=> 'true',
 			'sort'			=> 'manual',
 			'root_name'		=> __('Category'),
 			'method'		=>
