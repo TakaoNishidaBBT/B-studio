@@ -207,7 +207,7 @@
 
 			if(date_input.value != year+'/'+month+'/'+day) {
 				date_input.value = year+'/'+month+'/'+day;
-				bframe.fireEvent(target, 'change');
+				bframe.fireEvent(date_input, 'change');
 			}
 
 			hide();
