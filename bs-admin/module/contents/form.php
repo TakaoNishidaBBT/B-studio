@@ -45,23 +45,7 @@
 			$sql = str_replace('%VIEW%', B_DB_PREFIX . B_WORKING_CONTENTS_NODE_VIEW, $sql);
 			$rs = $this->db->query($sql);
 			$row = $this->db->fetch_assoc($rs);
-			$row['path'] = $this->getPath($row);
 			return $row;
-		}
-
-		function getPath($row) {
-			if($row['parent_node'] && $row['parent_node'] != 'root') {
-				$sql = "select * from %VIEW% where node_id='%NODE_ID%'";
-				$sql = str_replace('%VIEW%', B_DB_PREFIX . B_WORKING_CONTENTS_NODE_VIEW, $sql);
-				$sql = str_replace('%NODE_ID%', $row['parent_node'], $sql);
-				$rs = $this->db->query($sql);
-				$row = $this->db->fetch_assoc($rs);
-				$path = $this->getPath($row);
-				if($row['node_type'] == 'folder') {
-					$path.= $row['node_name'] . '/';
-				}
-			}
-			return $path;
 		}
 
 		function _select($node_info) {
