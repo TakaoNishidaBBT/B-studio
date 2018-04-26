@@ -95,7 +95,7 @@
 			bframe.appendClass('selected', self);
 			bframe.appendClass('selected', p);
 			bframe.fireEvent(target, 'focus');
-			bframe.fireEvent(target, 'resize');
+			bframe.fireEvent(window, 'resize');
 			visible = true;
 		}
 

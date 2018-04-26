@@ -685,12 +685,19 @@
 
 	}
 
-	bframe.isVisible = function(obj) {
-		var visibility = document.defaultView.getComputedStyle(obj, null).visibility;
-		if(visibility == 'hidden') {
-			return false;
+	bframe.isVisible = function(element) {
+		var style = document.defaultView.getComputedStyle(element, null);
+		var visibility = false;
+
+		if(style.visibility == 'visible' && style.display != 'none') {
+			if(element == document.body) return true;
+
+			visibility = true;
+			if(element.parentNode) {
+				visibility = bframe.isVisible(element.parentNode);
+			}
 		}
-		return true;
+		return visibility;
 	}
 
 	bframe.getFileName = function(url) {

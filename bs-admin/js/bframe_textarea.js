@@ -34,14 +34,19 @@
 		var scroll;
 		var minWidth = 50;
 		var minHeight = 30;
+		var setMaxSize;
 
 		//container
 		container = document.createElement('div');
 		container.style.position = 'relative';
 		container.style.boxSizing = 'border-box';
 		container.style.overflow = 'hidden';
-		container.style.maxWidth = self.offsetWidth + 'px';
-		container.style.height = self.offsetHeight + 'px';
+
+		if(bframe.isVisible(self)) {
+			container.style.maxWidth = self.offsetWidth + 'px';
+			container.style.height = self.offsetHeight + 'px';
+			setMaxSize = true;
+		}
 
 		self.style.resize = 'none';
 
@@ -67,6 +72,7 @@
 		bframe.addEventListener(resizer, 'mousedown', onMouseDown);
 		bframe.addEventListener(window, 'mousemove', onMouseMove);
 		bframe.addEventListener(window, 'mouseup', onMouseUp);
+		bframe.addEventListener(window, 'resize', onResize);
 
 		var style = bframe.getStyle(self);
 
@@ -79,6 +85,15 @@
 		self.style.marginRight = '0';
 		self.style.marginBottom = '0';
 		self.style.marginLeft = '0';
+
+		function onResize(event) {
+			if(bframe.isVisible(self) && !setMaxSize) {
+console.log('self.offsetWidth', self.offsetWidth);
+				container.style.maxWidth = self.offsetWidth + 'px';
+				container.style.height = self.offsetHeight + 'px';
+				setMaxSize = true;
+			}
+		}
 
 		function onKeyUp(event) {
 			scroll.onResize();
