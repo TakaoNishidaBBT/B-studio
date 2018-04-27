@@ -40,11 +40,20 @@
 		container = document.createElement('div');
 		container.style.position = 'relative';
 		container.style.boxSizing = 'border-box';
+		container.style.padding = '1px';
 		container.style.overflow = 'hidden';
 
 		if(bframe.isVisible(self)) {
-			container.style.maxWidth = self.offsetWidth + 'px';
-			container.style.height = self.offsetHeight + 'px';
+			var offsetWidth = self.offsetWidth;
+			var offsetHeight = self.offsetHeight;
+
+			container.style.maxWidth = offsetWidth + 'px';
+			container.style.height = offsetHeight + 'px';
+
+			self.style.maxWidth = offsetWidth - 2 + 'px';
+			self.style.width = '100%';
+			self.style.height = offsetHeight - 2 + 'px';
+
 			setMaxSize = true;
 		}
 
@@ -58,8 +67,8 @@
 		resizer.src = 'images/common/resizer.png';
 		resizer.style.position = 'absolute';
 		resizer.style.zIndex = '999999';
-		resizer.style.right = 0;
-		resizer.style.bottom = 0;
+		resizer.style.right = '2px';
+		resizer.style.bottom = '2px';
 		resizer.style.cursor = 'nwse-resize';
 
 		container.appendChild(resizer);
@@ -85,12 +94,20 @@
 		self.style.marginRight = '0';
 		self.style.marginBottom = '0';
 		self.style.marginLeft = '0';
+		self.style.boxSizing = 'border-box';
 
 		function onResize(event) {
 			if(bframe.isVisible(self) && !setMaxSize) {
-console.log('self.offsetWidth', self.offsetWidth);
-				container.style.maxWidth = self.offsetWidth + 'px';
-				container.style.height = self.offsetHeight + 'px';
+				var offsetWidth = self.offsetWidth;
+				var offsetHeight = self.offsetHeight;
+
+				container.style.maxWidth = offsetWidth + 'px';
+				container.style.height = offsetHeight + 'px';
+
+				self.style.maxWidth = offsetWidth - 2 + 'px';
+				self.style.width = '100%';
+				self.style.height = offsetHeight - 2 + 'px';
+
 				setMaxSize = true;
 			}
 		}
@@ -124,10 +141,11 @@ console.log('self.offsetWidth', self.offsetWidth);
 			if(width < minWidth) width = minWidth;
 			if(height < minHeight) height = minHeight;
 
+			self.style.maxWidth = width - 2 + 'px';
+			self.style.height = height - 2 + 'px';
+
 			container.style.maxWidth = width + 'px';
 			container.style.height = height + 'px';
-			self.style.maxWidth = width + 'px';
-			self.style.height = height + 'px';
 		}
 
 		function onMouseUp(event) {

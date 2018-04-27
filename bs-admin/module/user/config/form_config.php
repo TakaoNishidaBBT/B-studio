@@ -282,7 +282,7 @@ $form_config = array(
 				array(
 					'name'				=> 'notes',
 					'class'				=> 'B_TextArea',
-					'special_html'		=> 'class="textarea" cols="78" rows="5"',
+					'special_html'		=> 'class="textarea bframe_textarea" cols="78" rows="5"',
 				),
 			),
 		),

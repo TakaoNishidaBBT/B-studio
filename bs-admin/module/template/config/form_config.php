@@ -209,7 +209,7 @@ $settings_form_config = array(
 				array(
 					'class'					=> 'B_TextArea',
 					'name'					=> 'external_css',
-					'special_html'			=> 'class="external_css ime-off"',
+					'special_html'			=> 'class="external_css bframe_textarea ime-off"',
 				),
 			),
 		),
@@ -229,7 +229,7 @@ $settings_form_config = array(
 				array(
 					'class'					=> 'B_TextArea',
 					'name'					=> 'external_js',
-					'special_html'			=> 'class="external_js ime-off"',
+					'special_html'			=> 'class="external_js bframe_textarea ime-off"',
 				),
 			),
 		),
@@ -249,7 +249,7 @@ $settings_form_config = array(
 				array(
 					'class'					=> 'B_TextArea',
 					'name'					=> 'header_element',
-					'special_html'			=> 'class="header_element"',
+					'special_html'			=> 'class="header_element bframe_textarea"',
 				),
 			),
 		),

@@ -264,9 +264,9 @@ table.form td input {
 	border-bottom: 1px solid #666;
 }
 table.form td textarea {
-	height: 60px;
+	height: 100px;
 	padding: 5px;
-	width: 98%;
+	width: 100%;
 }
 table.form td input {
 	height: 22px;

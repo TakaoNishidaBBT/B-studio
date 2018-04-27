@@ -167,7 +167,7 @@ $form_config = array(
 				'class'			=> 'B_TextArea',
 				'start_html'	=> '<td>',
 				'end_html'		=> '</td>',
-				'special_html'	=> 'class="textarea" rows="5"',
+				'special_html'	=> 'class="textarea bframe_textarea" rows="5"',
 			),
 		),
 	),
