@@ -690,7 +690,7 @@
 		var visibility = false;
 
 		if(style.visibility == 'visible' && style.display != 'none') {
-			if(element == document.body) return true;
+			if(element.tagName.toLowerCase() == 'body') return true;
 
 			visibility = true;
 			if(element.parentNode) {
