@@ -374,9 +374,8 @@
 				}
 			}
 
-			// update path of related records
+			// get destination node record
 			$destination_node = $this->selectNode($destination_node_id);
-			$this->updatePath($destination_node);
 
 			if($destination_node_id == 'root') {
 				$param['path'] = '/';
@@ -437,9 +436,8 @@
 				}
 			}
 
-			// update path of related records
+			// get destination node record
 			$destination_node = $this->selectNode($destination_node_id);
-			$this->updatePath($destination_node);
 
 			if($destination_node_id == 'root') {
 				$param['path'] = '/';
@@ -516,15 +514,24 @@
 
 			$this->cloneNode($this->node_id);
 
-			// update path of related records
+			// get destination node record
 			$destination_node = $this->selectNode($destination_node_id);
-			$this->updatePath($destination_node);
 
-			if($destination_node_id == 'root') {
+			// update path of related records
+			$this->updatePath($destination_node_id, $destination_node);
+
+			switch($destination_node_id) {
+			case 'root':
 				$param['path'] = '/';
-			}
-			else {
+				break;
+
+			case 'trash':
+				$param['path'] = '/trash/';
+				break;
+			
+			default:
 				$param['path'] = $destination_node['path'] . $destination_node['node_id'] . '/';
+				break;
 			}
 
 			$param['parent_node'] = $destination_node_id;
@@ -539,18 +546,26 @@
 			return $this->tbl_node->update($param);
 		}
 
-		function updatePath($destination_node) {
-			if($destination_node) {
-				$to = $destination_node['path'] . $destination_node['node_id'] . '/' . $this->node_id . '/';
-			}
-			else {
+		function updatePath($destination_node_id, $destination_node) {
+			switch($destination_node_id) {
+			case 'root':
 				$to = '/' . $this->node_id . '/'; 	
+				break;
+
+			case 'trash':
+				$to = '/trash/' . $this->node_id . '/'; 	
+				break;
+			
+			default:
+				$to = $destination_node['path'] . $destination_node['node_id'] . '/' . $this->node_id . '/';
+				break;
 			}
+
 			$from = $this->path . $this->node_id . '/';
-			$path = $this->path . $this->node_id . '/';
+			$path = $this->path . $this->node_id . '/%';
 
 			$sql = "update %TABLE% set path = replace(path, '$from', '$to')
-					where path = '$path'";
+					where path like '$path'";
 			$sql = str_replace('%TABLE%', B_DB_PREFIX . $this->table, $sql);
 
 			$rs = $this->db->query($sql);
@@ -798,7 +813,6 @@
 		}
 
 		function getMaxDispSeq($parent_node_id, $parent_disp_seq) {
-//			$sql = "select ifnull(max(disp_seq)+1, 0) disp_seq from %VIEW% where parent_node='%PARENT_NODE%'";
 			$sql = "select lpad(cast((ifnull(max(right(disp_seq, 4)), 0) +1) as  char), 4, '0') disp_seq from %VIEW% where parent_node='%PARENT_NODE%'";
 
 			$sql = str_replace('%VIEW%', B_DB_PREFIX . $this->view, $sql);
@@ -965,14 +979,9 @@
 		}
 
 		function getRoots($node_id) {
-			$i=0;
-			$this->roots[$i++] = $node_id;
-
-			for($id = $node_id; $row = $this->selectNode($id); $id = $row['parent_node']) {
-				$this->roots[$i++] = $row['parent_node'];
-			}
-
-			return $this->roots;
+			$row = $this->selectNode($node_id);
+			$roots = explode('/', $row['path']);
+			return $roots;
 		}
 
 		function callBack($call_back) {
