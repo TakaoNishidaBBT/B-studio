@@ -52,6 +52,10 @@
 			return $this->db->fetch_assoc($rs);
 		}
 
+		function isColumnExist($column) {
+			array_key_exists($colmun, $this->config);
+		}
+
 		function getSelectSql() {
 			return "select * from $this->prefix$this->table";
 		}
