@@ -517,9 +517,6 @@
 			// get destination node record
 			$destination_node = $this->selectNode($destination_node_id);
 
-			// update path of related records
-			$this->updatePath($destination_node_id, $destination_node);
-
 			switch($destination_node_id) {
 			case 'root':
 				$param['path'] = '/';
@@ -536,14 +533,23 @@
 
 			$param['parent_node'] = $destination_node_id;
 			$param['node_id'] = $this->node_id;
-			if(!$disp_seq) $disp_seq = $this->getMaxDispSeq($destination_node_id, $destination_node['disp_seq']);
-			$param['disp_seq'] = $disp_seq;
+			if(!$disp_seq) $this->disp_seq = $this->getMaxDispSeq($destination_node_id, $destination_node['disp_seq']);
+			$param['disp_seq'] = $this->disp_seq;
 			$param['update_user'] = $user_id;
 			$param['update_datetime'] = time();
 			$param['version_id'] = $this->version;
 			$param['revision_id'] = $this->revision;
 
-			return $this->tbl_node->update($param);
+			$this->tbl_node->update($param);
+
+			// update path of related records
+			$this->updatePath($destination_node_id, $destination_node);
+
+			for($i=0; $i < count($this->node); $i++) {
+				$this->node[$i]->_updateDispSeq($user_id, str_pad($i+1, 4, '0', STR_PAD_LEFT));
+			}
+
+			return true;
 		}
 
 		function updatePath($destination_node_id, $destination_node) {
@@ -560,7 +566,6 @@
 				$to = $destination_node['path'] . $destination_node['node_id'] . '/' . $this->node_id . '/';
 				break;
 			}
-
 			$from = $this->path . $this->node_id . '/';
 			$path = $this->path . $this->node_id . '/%';
 
@@ -771,7 +776,7 @@
 			return true;
 		}
 
-		function _updateDispSeq($use_id, $disp_seq=0) {
+		function _updateDispSeq($user_id, $disp_seq=0) {
 			$this->cloneNode($this->node_id);
 
 			$param['node_id'] = $this->node_id;
@@ -841,6 +846,9 @@
 			$rs = $this->db->query($sql);
 			$row = $this->db->fetch_assoc($rs);
 
+			if($parent_node_id == 'trash') {
+				return '/trash/' . $row['disp_seq'];
+			}
 			return $parent_disp_seq . '/' . $row['disp_seq'];
 		}
 
