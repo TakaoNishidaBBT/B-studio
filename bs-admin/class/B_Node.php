@@ -564,9 +564,18 @@
 			$from = $this->path . $this->node_id . '/';
 			$path = $this->path . $this->node_id . '/%';
 
-			$sql = "update %TABLE% set path = replace(path, '$from', '$to')
-					where path like '$path'";
+			$sql = "select * from %TABLE% where path like '$path'";
 			$sql = str_replace('%TABLE%', B_DB_PREFIX . $this->table, $sql);
+			$rs = $this->db->query($sql);
+			while($row = $this->db->fetch_assoc($rs)) {
+				$this->cloneNode($row['node_id']);
+			}
+
+			$sql = "update %TABLE% set path = replace(path, '$from', '$to')
+					where version_id='%VERSION_ID%' and revision_id='%REVISION_ID%' and path like '$path'";
+			$sql = str_replace('%TABLE%', B_DB_PREFIX . $this->table, $sql);
+			$sql = str_replace('%VERSION_ID%', $this->version, $sql);
+			$sql = str_replace('%REVISION_ID%', $this->revision, $sql);
 
 			$rs = $this->db->query($sql);
 		}
