@@ -149,6 +149,11 @@ $menu_config = array(
 								'func'		=> 'openUrl',
 							),
 							array(
+								'menu'		=> __('Mail Settings'),
+								'param'		=> DISPATCH_URL . '&module=mail_settings&page=list&method=init,main',
+								'func'		=> 'openUrl',
+							),
+							array(
 								'menu'		=> __('Users'),
 								'param'		=> DISPATCH_URL . '&module=user&page=list&method=init,main',
 								'func'		=> 'openUrl',
