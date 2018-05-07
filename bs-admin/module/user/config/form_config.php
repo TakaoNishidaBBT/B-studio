@@ -405,7 +405,7 @@ $delete_control_config = array(
 		'start_html'	=> '<li>',
 		'end_html'		=> '</li>',
 		array(
-			'start_html'	=> '<span class="right-button" onclick="return bframe.confirmSubmit(\'このレコードを削除します。\n\nよろしいですか？\', \'F1\', \'' . $this->module . '\', \'form\', \'register\', \'delete\')">',
+			'start_html'	=> '<span class="right-button" onclick="return bframe.confirmSubmit(\'' . __('Are you sure you want to delete?') . '\', \'F1\', \'' . $this->module . '\', \'form\', \'register\', \'delete\')">',
 			'end_html'		=> '</span>',
 			array(
 				'start_html'	=> '<span class="text">',
