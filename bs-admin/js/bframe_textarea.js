@@ -13,6 +13,7 @@
 		var objects = document.querySelectorAll('textarea.bframe_textarea');
 
 		for(var i=0, j=0; i < objects.length; i++) {
+			if(objects[i].getAttribute('data-bframe-textarea')) continue;
 			var t = new bframe.textarea(objects[i]);
 		}
 	}
@@ -95,6 +96,8 @@
 		self.style.marginBottom = '0';
 		self.style.marginLeft = '0';
 		self.style.boxSizing = 'border-box';
+
+		self.setAttribute('data-bframe-textarea', true);
 
 		function onResize(event) {
 			if(bframe.isVisible(self) && !setMaxSize) {
