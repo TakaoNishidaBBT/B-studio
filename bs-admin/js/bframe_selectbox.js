@@ -15,6 +15,7 @@
 		var objects = document.querySelectorAll('select.bframe_selectbox');
 
 		for(var i=0; i < objects.length; i++) {
+			if(objects[i].getAttribute('data-bframe-selectbox')) continue;
 			s[i] = new bframe.selectbox(objects[i], sc);
 		}
 		sc.setElements(s);
@@ -84,6 +85,7 @@
 
 		this.hidePullDownMenu = hidePullDownMenu;
 		this.reload = init;
+		target.setAttribute('data-bframe-selectbox', true);
 
 		function init() {
 			setContextMenu();
@@ -116,8 +118,16 @@
 
 			selectbox = document.createElement('a');
 			selectbox.className = 'selectbox';
+			if(target.classList.contains('white')) {
+				selectbox.classList.add('white');
+			}
 			selectbox.style.width = '99999px';
-			selectbox.innerHTML = target.options[target.selectedIndex].text;
+			if(target.selectedIndex == -1) {
+				selectbox.innerHTML = '&nbsp';
+			}
+			else {
+				selectbox.innerHTML = target.options[target.selectedIndex].text;
+			}
 			target.parentNode.insertBefore(selectbox, target);
 			selectbox.tabIndex = target.tabIndex;
 
@@ -138,16 +148,13 @@
 			}
 
 			context_menu.createElementFromObject(options, self);
-			context_menu.setElementClassName('selectbox');
+			var context_menu_class = 'selectbox';
+			if(target.classList.contains('white')) {
+				context_menu_class += ' white';
+			}
+			context_menu.setElementClassName(context_menu_class);
 			context_menu.setOffsetHeight(selectbox.offsetHeight-1);
-			padding_left = window.getComputedStyle(selectbox, null).getPropertyValue('padding-left').replace('px', '');
-			padding_right = window.getComputedStyle(selectbox, null).getPropertyValue('padding-right').replace('px', '');
-			border_left_width = window.getComputedStyle(selectbox, null).getPropertyValue('border-left-width').replace('px', '');
-			border_right_width = window.getComputedStyle(selectbox, null).getPropertyValue('border-right-width').replace('px', '');
-
-			var padding = parseInt(padding_left) + parseInt(padding_right);
-			var border = parseInt(border_left_width) + parseInt(border_right_width);
-			selectbox.style.width = (context_menu.getRealWidth() - (padding + border)) + 'px';
+			selectbox.style.width = (context_menu.getRealWidth()) + 'px';
 
 			bframe.addEventListener(target, 'change', onchange);
 			bframe.addEventListener(selectbox, 'focus', onfocus);

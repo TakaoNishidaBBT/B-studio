@@ -290,6 +290,43 @@ $settings_config = array(
 	),
 );
 
+//Copy Control
+$copy_control_config = array(
+	'start_html'	=> '<form name="copy_form" method="post" action="index.php">',
+	'end_html'		=> '</form>',
+	array(
+		'start_html'	=> '<ul class="copy">',
+		'end_html'		=> '</ul>',
+		array(
+			'start_html'	=> '<li>',
+			'end_html'		=> '</li>',
+			array(
+				'start_html'	=> '<span>',
+				'end_html'		=> '</span>',
+				'value'			=> 'No.',
+			),
+			array(
+				'class'			=> 'B_SelectBox',
+				'name'			=> 'mail_list',
+				'special_html'	=> 'class="bframe_selectbox white"',
+			),
+			array(
+				'name'			=> 'dummy',
+				'class'			=> 'B_InputText',
+				'special_html'	=> 'class="dummy"',
+			),
+		),
+		array(
+			'name'			=> 'copy',
+			'class'			=> 'B_Submit',
+			'start_html'	=> '<li>',
+			'end_html'		=> '</li>',
+			'special_html'	=> 'class="copy-button" onClick="bframe.submit(\'copy_form\', \'' . $this->module . '\', \'form\', \'copy\', \'insert\', true)"',
+			'value'			=> __('Copy'),
+		),
+	),
+);
+
 // Control
 $input_control_config = array(
 	array(
@@ -344,7 +381,7 @@ $input_control_config = array(
 	),
 );
 
-// Confirm control
+// Confirm Control
 $confirm_control_config = array(
 	'start_html'	=> '<ul>',
 	'end_html'		=> '</ul>',
@@ -388,7 +425,7 @@ $confirm_control_config = array(
 	),
 );
 
-// Delete control
+// Delete Control
 $delete_control_config = array(
 	'start_html'	=> '<ul>',
 	'end_html'		=> '</ul>',
@@ -432,7 +469,7 @@ $delete_control_config = array(
 	),
 );
 
-// Result control
+// Result Control
 $result_control_config = array(
 	'start_html'	=> '<ul>',
 	'end_html'		=> '</ul>',

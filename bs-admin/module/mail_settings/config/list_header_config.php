@@ -49,7 +49,7 @@ $header_config = array(
 						'class'					=> 'B_SelectBox',
 						'name'					=> 'row_per_page',
 						'data_set'				=> 'row_per_page',
-						'special_html'			=> 'class="bframe_selectbox"',
+						'special_html'			=> 'class="bframe_selectbox white"',
 					),
 				),
 				array(

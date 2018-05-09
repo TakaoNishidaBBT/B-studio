@@ -9,6 +9,7 @@ a:visited.selectbox,
 a:link.selectbox,
 a:active.selectbox {
 	display: inline-block;
+	box-sizing: border-box;
 	margin: 0;
 	padding-left: 10px;
 	line-height: 24px;
@@ -50,7 +51,7 @@ table.selectbox {
 	border: 1px solid #ccc;
 }
 table.selectbox td {
-	padding: 2px 6px;
+	padding: 2px 16px 2px 2px;
 	line-height: 18px;
 	height: 22px;
 	border-top: 1px solid #fff;

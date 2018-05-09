@@ -1,12 +1,15 @@
 @charset "UTF-8";
 
+/* black style */
 a.selectbox,
 a:visited.selectbox,
 a:link.selectbox,
 a:active.selectbox {
 	display: inline-block;
+	box-sizing: border-box;
 	margin: 0;
 	padding-left: 10px;
+	padding-right: 10px;
 	line-height: 24px;
 	background-color: #666;
 	border-top: 1px solid #666;
@@ -54,7 +57,7 @@ table.selectbox {
 	border: 1px solid #777;
 }
 table.selectbox td {
-	padding: 2px 6px;
+	padding: 2px 18px 2px 2px;
 	line-height: 18px;
 	height: 22px;
 	border-top: 1px solid #777;
@@ -82,6 +85,88 @@ table.selectbox td img {
 	vertical-align: -30%;
 }
 table.selectbox td span {
+	margin: 0;
+	padding: 0 6px;
+	vertical-align: middle;
+}
+
+/* white style */
+a.selectbox.white,
+a:visited.selectbox.white,
+a:link.selectbox.white,
+a:active.selectbox.white {
+	display: inline-block;
+	box-sizing: border-box;
+	margin: 0;
+	padding-left: 10px;
+	line-height: 24px;
+	width: 100px;
+	border: 1px solid #ccc;
+	color: #000;
+	text-decoration: none;
+	text-shadow: none;
+	cursor: pointer;
+	background-image: url(../images/common/select_down_gray.png), url(../images/common/select_down_black.png), url(../images/common/select_up_black.png);
+	background-repeat: no-repeat, no-repeat, no-repeat;
+	background-position: center right 4px, center right 4px, center right 4px;
+	background-size: 16px, 0, 0;
+	background-color: #fff;
+}
+a.selectbox.white:focus {
+	background: url(../images/common/select_down_black.png) center right 4px no-repeat #fff;
+}
+a.opened.white:focus {
+	background: url(../images/common/select_up_black.png) center right 4px no-repeat #fff;
+}
+
+
+a:hover.selectbox.white {
+	-webkit-user-select: none;
+}
+a.selectbox.white img {
+	vertical-align: -4px;
+	margin-right: 6px;
+}
+
+table.selectbox.white {
+	width: 100%;
+	margin: 0;
+	padding: 3px 4px;
+	background-color: #fff;
+	color: #000;
+	border-collapse: separate;
+	border-spacing: 0;
+	border: 1px solid #ccc;
+}
+table.selectbox.white td {
+	padding: 2px 16px 2px 2px;
+	line-height: 18px;
+	height: 22px;
+	border-top: 1px solid #fff;
+	border-bottom: 1px solid #fff;
+	font-weight: normal;
+	color: #333;
+	background: url(../images/common/popup_menu_back.png) repeat-x;
+	vertical-align: middle;
+}
+table.selectbox.white td.selected {
+	background-position: 0 -30px;
+	border-top: 1px solid #28abfb;
+	border-bottom: 1px solid #208ed8;
+	color: #fff;
+}
+table.selectbox.white td.disabled {
+	color: #ccc;
+}
+table.selectbox.white td.disabled img {
+	display: none;
+}
+table.selectbox.white td img {
+	margin: 0 2px 0 0;
+	vertical-align: middle;
+	vertical-align: -30%;
+}
+table.selectbox.white td span {
 	margin: 0;
 	padding: 0 6px;
 	vertical-align: middle;

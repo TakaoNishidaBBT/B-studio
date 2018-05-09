@@ -19,6 +19,7 @@
 
 			$this->main_table = new B_Table($this->db, 'mail_settings');
 
+			$this->copy_control_config = $copy_control_config;
 			$this->input_control_config = $input_control_config;
 			$this->confirm_control_config = $confirm_control_config;
 			$this->delete_control_config = $delete_control_config;
@@ -35,6 +36,10 @@
 				$this->editor->setValue($row);
 				break;
 
+			case 'insert':
+				$this->copy_control = new B_Element($this->copy_control_config);
+				$this->setCopyMailList();
+
 			default:
 				$this->control = new B_Element($this->input_control_config);
 				if($this->request['mail_id']) {
@@ -44,6 +49,34 @@
 				}
 				break;
 			}
+			$this->settings->setFilterValue($this->session['mode']);
+		}
+
+		function setCopyMailList($value = null) {
+			$sql = "select * from " . B_DB_PREFIX . "mail_settings where del_flag='0' order by mail_id";
+			$rs = $this->db->query($sql);
+			while($row = $this->db->fetch_assoc($rs)) {
+				$param[$row['mail_id']] = $row['mail_title'];
+			}
+			$obj = $this->copy_control->getElementByName('mail_list');
+			$obj->bindDataSet($param);
+			$obj->value = $value;
+		}
+
+		function copy() {
+//			$this->setMailTypeList();
+			if($this->post['mail_list']) {
+				$param['mail_id'] = $this->post['mail_list'];
+				$row = $this->main_table->selectByPk($param);
+				unset($row['mail_id']);
+				unset($row['mail_type']);
+
+				$this->editor->setValue($row);
+				$this->settings->setValue($row);
+			}
+			$this->copy_control = new B_Element($this->copy_control_config);
+			$this->setCopyMailList($this->post['mail_list']);
+			$this->control = new B_Element($this->input_control_config);
 			$this->settings->setFilterValue($this->session['mode']);
 		}
 
