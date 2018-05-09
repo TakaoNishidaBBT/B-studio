@@ -164,9 +164,9 @@ $settings_config = array(
 			'start_html'		=> '<dd>',
 			'end_html'			=> '</dd>',
 			array(
-				'name'				=> 'category_name',
+				'name'				=> 'category',
 				'class'				=> 'B_InputText',
-				'special_html'		=> 'class="textbox" readonly="readonly"',
+				'special_html'		=> 'class="textbox category" readonly="readonly"',
 			),
 			array(
 				'class'				=> 'B_Hidden',

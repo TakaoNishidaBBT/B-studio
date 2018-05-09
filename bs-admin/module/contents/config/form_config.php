@@ -230,7 +230,7 @@ $settings_form_config = array(
 				'start_html'		=> '<td>',
 				'end_html'			=> '</td>',
 				array(
-					'name'				=> 'template_name',
+					'name'				=> 'template',
 					'class'				=> 'B_InputText',
 					'special_html'		=> 'class="template ime-off" readonly="readonly"',
 				),

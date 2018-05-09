@@ -159,7 +159,7 @@ dl.settings .date {
 dl.settings .permalink {
 	width: 200px;
 }
-dl.settings #category_name {
+dl.settings .category {
 	width: 180px;
 }
 dl.settings dt.display-detail {

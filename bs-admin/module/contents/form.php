@@ -51,7 +51,7 @@
 		function _select($node_info) {
 			if($node_info['contents_id']) {
 				$sql = "select a.*
-							  ,b.node_name template_name
+							  ,b.node_name template
 						from   %CONTENTS_VIEW% a
 						left join %TEMPLATE_NODE_VIEW% b
 						on a.template_id = b.node_id

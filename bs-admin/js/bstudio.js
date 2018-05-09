@@ -90,13 +90,13 @@
 
 	bstudio.setTemplate = function(node_id, node_value) {
 		if(node_id == 'root') return;
-		bstudio.insertValue(window.frameElement.opener, 'template_id', node_id, 'template_name', node_value);
+		bstudio.insertValue(window.frameElement.opener, 'template_id', node_id, 'template', node_value);
 		window.frameElement.deactivate();
 	}
 
 	bstudio.setCategory = function(node_id, node_value) {
 		if(node_id == 'root') return;
-		bstudio.insertValue(window.frameElement.opener, 'category_id', node_id, 'category_name', node_value);
+		bstudio.insertValue(window.frameElement.opener, 'category_id', node_id, 'category', node_value);
 		window.frameElement.deactivate();
 	}
 
