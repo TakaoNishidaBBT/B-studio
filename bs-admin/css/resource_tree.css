@@ -48,6 +48,14 @@ div.bframe_tree li.tree-list span.cut img {
 div.bframe_tree li.tree-list div.selected {
 	border-top: 1px dotted #f00;
 }
+div.bframe_tree li.tree-list .img-border {
+	position: relative;
+}
+div.bframe_tree li.tree-list .img-border .node-status {
+	position: absolute;
+	top: 0;
+	left: 0;
+}
 div.bframe_tree li.tree-list img {
 	vertical-align: -30%;
 	margin-right: 2px;
@@ -95,6 +103,7 @@ div.thumbs li.tree-list div.tree {
 	width: 120px;
 }
 div.thumbs li.tree-list div.tree a {
+	position: relative;
 	display: block;
 	width: 110px;
 }
@@ -145,6 +154,33 @@ div.thumbs li.tree-list {
 }
 div.thumbs div {
 	text-align: center;
+}
+div.thumbs .img-border {
+	position: relative;
+}
+div.thumbs .img-border .node-status {
+	position: absolute;
+	bottom: 7px;
+	left: 7px;
+}
+div.thumbs .private-mode {
+	position: absolute;
+	display: block;
+	top: 1px;
+	left: 1px;
+	width: 108px;
+	height: 108px;
+	background-color: #444;
+	opacity: 0.3;
+	border: none;
+}
+div.thumbs .private-mode .private-msg {
+	display: block;
+	margin-top: 36px;
+	color: #fff;
+}
+div.thumbs .private-mode .private-img {
+	margin-top: 2px;
 }
 div.thumbs img {
 	margin: 0;
@@ -272,6 +308,12 @@ div.detail table td span.cut img {
 div.detail table td span.img-border {
 	display: inline-block;
 	padding: 2px 0;
+	position: relative;
+}
+div.detail table td span.img-border .node-status {
+	position: absolute;
+	bottom: 4px;
+	left: 0;
 }
 div.detail table td span.node-name {
 	display: inline;

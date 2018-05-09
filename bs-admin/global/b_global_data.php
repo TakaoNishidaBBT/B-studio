@@ -98,6 +98,12 @@
 				'3'		=> __('Another user has updated this record'),
 		);
 
+	${$g_data_set}['mail_type_settings'] =
+		array(
+				'contact_reply'		=> 'Contact Auto Reply',
+				'contact_notice'	=> 'Contact Notice',
+		);
+
 	${$g_data_set}['table']['contents_node'] =
 		array(							// Data Types			Length	PK		Auto-Increment
 			'version_id'				=> array('char', 		'5', 	'2', 	''),
@@ -201,6 +207,7 @@
 			'node_type'					=> array('char', 		'10', 	'', 	''),
 			'node_class'				=> array('char', 		'10', 	'', 	''),
 			'node_name'					=> array('text', 		'', 	'', 	''),
+			'node_status'				=> array('char', 		'1', 	'', 	''),
 			'file_size'					=> array('int', 		'', 	'', 	''),
 			'human_file_size'			=> array('text', 		'', 	'', 	''),
 			'image_size'				=> array('int', 		'', 	'', 	''),
@@ -277,7 +284,8 @@
 			'publication_status'		=> array('char', 		'1', 	'', 	''),
 			'version'					=> array('text', 		'', 	'', 	''),
 			'notes'						=> array('text', 		'', 	'', 	''),
-			'cache'						=> array('mediumtext', 	'', 	'', 	''),
+			'cache_w'					=> array('mediumtext', 	'', 	'', 	''),
+			'cache_c'					=> array('mediumtext', 	'', 	'', 	''),
 			'del_flag'					=> array('char', 		'1', 	'', 	''),
 			'reserve1'					=> array('text', 		'', 	'', 	''),
 			'reserve2'					=> array('text', 		'', 	'', 	''),

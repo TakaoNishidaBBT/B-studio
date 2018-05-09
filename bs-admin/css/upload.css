@@ -162,13 +162,13 @@ a.progressCancel:hover {
 }
 
 /* fade in */
-.pre-fadein {
+.bframe_pane .pre-fadein {
 	opacity: 0;
 }
-.fadein {
+.bframe_pane .fadein {
 	opacity: 0;
 }
-.fadein {
+.bframe_pane .fadein {
 	animation-name: fadein;
 	animation-duration: 2s;
 	animation-fill-mode: forwards;
@@ -186,7 +186,7 @@ a.progressCancel:hover {
 }
 
 /* fade out */
-.fadeout {
+.bframe_pane .fadeout {
 	animation-name: fadeout;
 	animation-duration: 2s;
 	animation-fill-mode: forwards;
@@ -194,7 +194,7 @@ a.progressCancel:hover {
 	-webkit-animation-duration: 2s;
 	-webkit-animation-fill-mode: forwards;
 }
-.fadeout2 {
+.bframe_pane .fadeout2 {
 	animation-name: fadeout;
 	animation-duration: 0.3s;
 	animation-fill-mode: forwards;

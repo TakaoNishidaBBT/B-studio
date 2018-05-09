@@ -209,10 +209,10 @@
 
 			// create cache from DB
 			$row = $this->getCacheFromDB('working_version_id');
-			$this->replaceCacheFile(B_FILE_INFO_W, B_FILE_INFO_SEMAPHORE_W, $row['cache']);
+			$this->replaceCacheFile(B_FILE_INFO_W, B_FILE_INFO_SEMAPHORE_W, $row['cache_w']);
 
 			$row = $this->getCacheFromDB('current_version_id');
-			$this->replaceCacheFile(B_FILE_INFO_C, B_FILE_INFO_SEMAPHORE_C, $row['cache']);
+			$this->replaceCacheFile(B_FILE_INFO_C, B_FILE_INFO_SEMAPHORE_C, $row['cache_c']);
 
 			$this->createLimitFile(B_LIMIT_FILE_INFO, $row['publication_datetime_u']);
 

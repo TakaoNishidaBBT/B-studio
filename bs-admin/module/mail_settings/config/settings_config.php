@@ -28,13 +28,12 @@ $settings_config = array(
 
 	// Mail Type
 	array(
-		'name'			=> 'permalink_row',
-		'filter'		=> '!insert',
+		'error_group'	=> true,
 		array(
 			'start_html'		=> '<dt class="publication">',
 			'end_html'			=> '</dt>',
 			array(
-				'start_html'		=> '<span class="title">',
+				'start_html'		=> '<span class="title mail-type">',
 				'end_html'			=> '</span>',
 				'value'				=> __('Mail Type'),
 			),
@@ -79,7 +78,7 @@ $settings_config = array(
 			array(
 				'name'				=> 'mail_title',
 				'class'				=> 'B_InputText',
-				'special_html'		=> 'class="textbox mail-name ime_off"',
+				'special_html'		=> 'class="textbox mail-title ime_off"',
 				'validate'			=>
 				array(
 					array(
@@ -115,7 +114,7 @@ $settings_config = array(
 			array(
 				'name'			=> 'from_addr',
 				'class'			=> 'B_InputText',
-				'special_html'	=> 'class="textbox mail-name ime_off"',
+				'special_html'	=> 'class="textbox from-addr ime_off"',
 				'validate'		=>
 				array(
 					array(
@@ -181,7 +180,7 @@ $settings_config = array(
 			array(
 				'name'				=> 'from_name',
 				'class'				=> 'B_InputText',
-				'special_html'		=> 'class="textbox"',
+				'special_html'		=> 'class="textbox from-name"',
 				'validate'			=>
 				array(
 					array(
@@ -217,7 +216,7 @@ $settings_config = array(
 			array(
 				'name'				=> 'bcc',
 				'class'				=> 'B_InputText',
-				'special_html'		=> 'class="textbox"',
+				'special_html'		=> 'class="textbox bcc"',
 			),
 			array(
 				'name'					=> 'error_message',

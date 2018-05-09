@@ -5,6 +5,9 @@
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
 	bframe.addEventListener(window, 'load' , bframeSelectBoxInit);
+	if(bframe.ajaxSubmit) {
+		bframe.ajaxSubmit.registerCallBackFunctionAfter(bframeSelectBoxInit);
+	}
 
 	function bframeSelectBoxInit() {
 		var sc = new bframe.selectbox_container();

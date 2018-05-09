@@ -18,6 +18,7 @@ $tree_config = array(
 			'editable'		=> 'true',
 			'sort'			=> 'auto',
 			'root_name'		=> 'root',
+			'trash_name'	=> 'trash box',
 			'root_path'		=> B_CURRENT_ROOT,
 			'root_url'		=> '',
 			'trash_path'	=> B_TRASH_PATH,
@@ -25,7 +26,6 @@ $tree_config = array(
 			'thumb_prefix'	=> B_THUMB_PREFIX,
 			'target'		=> $this->target,
 			'target_id'		=> $this->target_id,
-			'trash_name'	=> 'trash box',
 			'method'		=>
 			array(
 				'getNodeList'	=> 'getNodeList',
@@ -71,6 +71,13 @@ $tree_config = array(
 				'preview'		=>
 				array(
 					'url'		=> DISPATCH_URL . '&module=' . $this->module . '&page=tree&method=preview',
+				),
+				'open_property'	=>
+				array(
+					'url'		=> DISPATCH_URL . '&module=' . $this->module . '&page=property&method=select',
+					'params'	=> 'width:360,height:200',
+					'title'		=> __('Properties'),
+					'func'		=> 'reloadTree',
 				),
 			),
 			'key'			=>
@@ -150,6 +157,7 @@ $tree_config = array(
 				'folder'		=> array('src' => './images/folders/folder.png', 'new' => 'newFolder'),
 				'folder_open'	=> array('src' => './images/folders/folder_open.png'),
 				'file'			=> array('src' => './images/folders/file_icon.png', 'new' => 'newFile.txt', 'ime' => 'true'),
+				'status9'		=> array('src' => './images/folders/private.png'),
 				'pane'		=>
 				array(
 					'folder'	=> array('src' => './images/folders/folder_big.png'),
@@ -158,6 +166,7 @@ $tree_config = array(
 					'pdf'		=> array('src' => './images/folders/file_icon_big.png'),
 					'css'		=> array('src' => './images/folders/file_icon_big.png'),
 					'misc'		=> array('src' => './images/folders/file_icon_big.png'),
+					'status9'	=> array('src' => './images/folders/private.svg'),
 				),
 				'detail'	=>
 				array(
@@ -230,6 +239,10 @@ $tree_config = array(
 				array(
 					'menu'		=> __('Preview'),
 					'func'		=> 'preview',
+				),
+				array(
+					'menu'		=> __('Properties'),
+					'func'		=> 'open_property',
 				),
 			),
 			'trash_context_menu'	=>

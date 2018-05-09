@@ -64,13 +64,14 @@ table.form th {
 table.form th.sub {
 	border-bottom: 1px solid #d8e0ef;
 }
-.mail-name,
-.mail-from,
 .mail-title,
+.from-addr,
+.from-name,
 .mail-body,
-.mail_mark,
+.bcc,
 pre {
 	font-family: "Meiryo","Hiragino Kaku Gothic Pro";
+	width: 90%;
 }
 .mail-body {
 	font-size: 12px;
@@ -241,36 +242,8 @@ dl.settings dd textarea {
 dl.settings dd .title {
 	font-weight: bold;
 }
-dl.settings .date {
-	width: 85px;
-	margin-right: 2px;
-	text-align: center;
-}
-dl.settings .permalink {
-	width: 200px;
-}
-dl.settings #category_name {
-	width: 180px;
-}
-dl.settings dt.display-detail {
-	padding-bottom: 0;
-	padding-left: 0;
-}
-dl.settings dd.external-link {
-	padding-top: 0;
-	padding-left: 12px;
-}
-dl.settings dd.external-link.disabled {
-	color: #888;
-}
-dl.settings dd.external-link div {
-	padding: 4px 0;
-}
-dl.settings dd.external-link .url input {
-	width: 236px;
-}
-dl.settings dd.external-link #external_window {
-	margin-left: 0;
+dl.settings dt .mail-type {
+	margin-right: 10px;
 }
 
 /* tab tabcontrol */
@@ -350,9 +323,36 @@ table.editor .title {
 table.editor .title::placeholder {
 	color: #bbb;
 }
-
 table.editor .title:focus {
 	border: 1px solid #b7b7f7;
+}
+table.editor .subject {
+	font-size: 20px;
+	padding: 8px;
+	box-sizing: border-box;
+	width: 100%;
+	border: 1px solid #ccc;
+}
+table.editor .mail-body {
+	width: 100%;
+	min-height: 445px;
+	box-sizing: border-box;
+	padding: 8px;
+	border-top: 1px solid #ccc;
+	border-right: 1px solid #ccc;
+	border-left: 1px solid #ccc;
+	border-bottom: none;
+}
+table.editor .mail-footer {
+	height: 50px;
+	position: fixed;
+	bottom: 0;
+	width: 300px;
+}
+table.editor .bframe-contenteditor-footer {
+	height: 35px;
+	border-top: 1px solid #ccc;
+	background-color: #fff;
 }
 
 /* table.img-item */
@@ -400,10 +400,4 @@ dl.settings .error-message {
 }
 dl.settings dd .error-message {
 	margin-left: -12px;
-}
-
-table.editor .mail-body {
-	min-height: 300px;
-	border-left: 1px solid #ccc;
-	padding: 10px;
 }

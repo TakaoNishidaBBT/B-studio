@@ -933,14 +933,16 @@
 			return $size + $this->file_size;
 		}
 
-		function serialize(&$data, $path='') {
+		function serialize($mode, &$data, $path='') {
+			if($mode == 'c' && $this->node_status == '9') return;
+
 			if($path) $path.= '/';
 			$mypath = $path . $this->node_name;
 
 			if(is_array($this->node)) {
 				$data[$mypath] = '';
 				foreach(array_keys($this->node) as $key) {
-					$this->node[$key]->serialize($data, $mypath);
+					$this->node[$key]->serialize($mode, $data, $mypath);
 				}
 			}
 			else if($this->parent && $this->node_type != 'folder') {
@@ -1010,6 +1012,15 @@
 			$row = $this->selectNode($node_id);
 			$roots = explode('/', $row['path']);
 			return $roots;
+		}
+
+		function getStatus($node_id) {
+			$roots = $this->getRoots($node_id);
+			$roots[] = $node_id;
+			foreach($roots as $node_id) {
+				$row = $this->selectNode($node_id);
+				if($row['node_status']) return $row['node_status'];
+			}
 		}
 
 		function callBack($call_back) {

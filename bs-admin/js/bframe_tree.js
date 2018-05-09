@@ -1692,6 +1692,10 @@
 								openPreview();
 								break;
 
+							case 'insertResourceFile':
+								insertResourceFile(node_id);
+								break;
+
 							default:
 								download();
 								break;
@@ -1746,7 +1750,7 @@
 					img_size = image_size_obj.value;
 				}
 				var path = document.getElementById('p' + node_id).value;
-				bstudio.insertIMG(property.root_path, path, img_size, property.target, property.target_id);
+				bstudio.insertResourceIMG(property.root_path, path, img_size, property.target, property.target_id);
 			}
 		}
 
@@ -3652,11 +3656,28 @@
 				}
 			}
 			if(config.node_status) {
-				var node_status_img = document.createElement('img');
-				node_status_img.id = 'is' + node_id;
-				node_status_img.className = 'node-status';
-				node_status_img.src = property.icon['status' + config.node_status].src;
-				img_span.appendChild(node_status_img);
+				if(place == 'pane') {
+					var private = document.createElement('span');
+					private.className = 'private-mode';
+					a.appendChild(private);
+
+					var private_message = document.createElement('span');
+					private_message.className = 'private-msg';
+					private_message.innerHTML = 'Private Mode';
+					private.appendChild(private_message);
+
+					var node_status_img = document.createElement('img');
+					node_status_img.className = 'private-img';
+					node_status_img.src = property.icon.pane['status' + config.node_status].src;
+					private.appendChild(node_status_img);
+				}
+				else {
+					var node_status_img = document.createElement('img');
+					node_status_img.id = 'is' + node_id;
+					node_status_img.className = 'node-status';
+					node_status_img.src = property.icon['status' + config.node_status].src;
+					img_span.appendChild(node_status_img);
+				}
 			}
 
 			span = document.createElement('span');
@@ -3829,6 +3850,13 @@
 				}
 			}
 			img_span.appendChild(obj_img);
+			if(config.node_status) {
+				var node_status_img = document.createElement('img');
+				node_status_img.id = 'is' + node_id;
+				node_status_img.className = 'node-status';
+				node_status_img.src = property.icon['status' + config.node_status].src;
+				img_span.appendChild(node_status_img);
+			}
 
 			a.onclick = selectObjectNode;
 			if(config.node_class == 'folder') {

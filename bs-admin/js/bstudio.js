@@ -58,6 +58,36 @@
 		}
 	}
 
+	bstudio.insertResourceIMG = function(dir, file_path, img_size, img_obj_id, hidden_obj_id, width, height) {
+		window.frameElement.opener.bstudio._insertResourceIMG(dir, file_path, img_size, img_obj_id, hidden_obj_id, width, height);
+		window.frameElement.deactivate();
+
+		return false;
+	}
+
+	bstudio._insertResourceIMG = function(dir, file_path, img_size, img_obj_id, hidden_obj_id, w, h) {
+		var hidden_target = document.getElementById(hidden_obj_id);
+		if(hidden_target) {
+			// set hidden target value (real value)
+			hidden_target.value = file_path;
+			bframe.fireEvent(hidden_target, 'change');
+		}
+
+		var target = document.getElementById(img_obj_id);
+		if(target) {
+			// set imag to a target child
+			var image = target.getElementsByTagName('img');
+			if(image.length) {
+				var img = image[0];
+			}
+			else {
+				var img = document.createElement('img');
+			}
+			img.src = dir + file_path;
+			target.appendChild(img);
+		}
+	}
+
 	bstudio.setTemplate = function(node_id, node_value) {
 		if(node_id == 'root') return;
 		bstudio.insertValue(window.frameElement.opener, 'template_id', node_id, 'template_name', node_value);

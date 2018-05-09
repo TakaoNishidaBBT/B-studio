@@ -30,13 +30,17 @@
 
 	// create serialized resource cache data
 	$node = new B_Node($db, B_RESOURCE_NODE_TABLE, B_WORKING_RESOURCE_NODE_VIEW, null, null, 'root', null, 'all', null);
-	$node->serialize($data);
-	$serialized_string = serialize($data);
+	$node->serialize('w', $data_w);
+	$serialized_string_w = serialize($data_w);
+
+	$node->serialize('c', $data_c);
+	$serialized_string_c = serialize($data_c);
 
 	// register cache data to version table
 	$table = new B_Table($db, 'version');
 	$param['version_id'] = $row['working_version_id'];
-	$param['cache'] = $serialized_string;
+	$param['cache_w'] = $serialized_string_w;
+	$param['cache_c'] = $serialized_string_c;
 	$ret = $table->update($param);
 
 	// end of transaction
@@ -53,14 +57,13 @@
 
 	// overwrite serialized data to working version cache file
 	$fp = fopen(B_FILE_INFO_W, 'w');
-	fwrite($fp, $serialized_string);
+	fwrite($fp, $serialized_string_w);
 	fclose($fp);
 
 	// if current_version is the same as working_version
 	if($row['current_version_id'] == $row['working_version_id']) {
 		// overwrite serialized data to current version cache file
 		$fp = fopen(B_FILE_INFO_C, 'w');
-		fwrite($fp, $serialized_string);
+		fwrite($fp, $serialized_string_c);
 		fclose($fp);
 	}
-

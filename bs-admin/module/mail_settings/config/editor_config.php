@@ -47,13 +47,13 @@ $editor_config = array(
 					'end_html'		=> '</div>',
 					array(
 						'name'					=> 'subject',
-						'class'					=> 'B_TextArea',
-						'special_html'			=> 'class="textarea title ime_on bframe_textarea" maxlength="300" placeholder="' . __('Subject') . '"',
+						'class'					=> 'B_InputText',
+						'special_html'			=> 'class="subject" maxlength="300" placeholder="' . __('Subject') . '"',
 						'validate'				=>
 						array(
 							array(
 								'type' 			=> 'required',
-								'error_message'	=> __('Please enter title'),
+								'error_message'	=> __('Please enter subject'),
 							),
 						),
 					),
@@ -77,10 +77,12 @@ $editor_config = array(
 				'start_html'	=> '<td>',
 				'end_html'		=> '</td>',
 				array(
-					'start_html'	=> '<div class="mail-body" contenteditable="true">',
+					'start_html'	=> '<div class="contents">',
 					'end_html'		=> '</div>',
 					array(
 						'name'			=> 'body',
+						'class'			=> 'B_TextArea',
+						'special_html'	=> 'class="mail-body bframe_contenteditor" data-param="autogrow:true"',
 					),
 				),
 			),

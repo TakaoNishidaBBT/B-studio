@@ -113,6 +113,17 @@
 			$status = true;
 
 			try {
+				$node = new B_Node($this->db
+								 , B_RESOURCE_NODE_TABLE
+								 , B_WORKING_RESOURCE_NODE_VIEW
+								 , $this->version['working_version_id']
+								 , $this->version['revision_id']
+								 , null
+								 , null
+								 , 0
+								 , null);
+				$current_node_status = $node->getStatus($this->current_folder);
+
 				// Get file info
 				$file = B_Util::pathinfo($_FILES['Filedata']['name']);
 
@@ -189,7 +200,7 @@
 												, false
 												, 'auto');
 							$path = $node->getParentPath();
-							$response['node_info'][] = $node->getNodeList('', '', B_RESOURCE_DIR, $path);
+							$response['node_info'][] = $node->getNodeList('', '', B_RESOURCE_DIR, $path, $current_node_status);
 						}
 					}
 
@@ -214,7 +225,7 @@
 										, false
 										, 'auto');
 					$path = $node->getParentPath();
-					$response['node_info'][] = $node->getNodeList('', '', B_RESOURCE_DIR, $path);
+					$response['node_info'][] = $node->getNodeList('', '', B_RESOURCE_DIR, $path, $current_node_status);
 
 					// last upload file
 					if($this->post['last_file'] == 'true') {
