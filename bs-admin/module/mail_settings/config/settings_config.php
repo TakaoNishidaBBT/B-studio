@@ -198,6 +198,68 @@ $settings_config = array(
 		),
 	),
 
+	// To Address
+	array(
+		'error_group'	=> true,
+		array(
+			'start_html'	=> '<dt>',
+			'end_html'		=> '</dt>',
+			array(
+				'start_html'	=> '<span class="title">',
+				'end_html'		=> '</span>',
+				'value'			=> __('To Address'),
+			),
+		),
+		array(
+			'start_html'	=> '<dd>',
+			'end_html'		=> '</dd>',
+			array(
+				'name'			=> 'to_addr',
+				'class'			=> 'B_InputText',
+				'special_html'	=> 'class="textbox from-addr ime_off"',
+				'validate'		=>
+				array(
+					array(
+						'type' 			=> 'pattern',
+						'pattern'		=> '^[0-9a-zA-Z_\.-]+@[0-9A-Za-z][0-9a-zA-Z_\.-]+\.[A-Za-z]+$',
+						'error_message'	=> __('There is an error in the entry format'),
+					),
+					array(
+						'type' 			=> 'denaial_pattern',
+						'pattern'		=> '\.\.',
+						'error_message'	=> __('There is an error in the entry format'),
+					),
+					array(
+						'type' 			=> 'denaial_pattern',
+						'pattern'		=> '^\.',
+						'error_message'	=> __('There is an error in the entry format'),
+					),
+					array(
+						'type' 			=> 'denaial_pattern',
+						'pattern'		=> '\.@',
+						'error_message'	=> __('There is an error in the entry format'),
+					),
+					array(
+						'type' 			=> 'emailMX',
+						'error_message'	=> __('Please enter a valid email address'),
+					),
+					array(
+						'type' 			=> 'callback',
+						'obj'			=> $this,
+						'method'		=> '_formAddressCheckCallBack',
+						'error_message'	=> __('Please enter From Address'),
+					),
+				),
+			),
+			array(
+				'name'			=> 'error_message',
+				'class'			=> 'B_ErrMsg',
+				'start_html'	=> '<p class="error-message">',
+				'end_html'		=> '</p>',
+			),
+		),
+	),
+
 	// BCC
 	array(
 		'error_group'	=> true,
