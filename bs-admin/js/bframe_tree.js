@@ -734,6 +734,14 @@
 					selected_node.set(current_node.id());
 				}
 
+				if(response.current_nodes) {
+					// set plural current nodes
+					var nodes = response.current_nodes.split(',');
+					for(var i=0 ; i<nodes.length ; i++) {
+						current_node.add(nodes[i]);
+					}
+				}
+
 				// reload and set color
 				selected_node.reload();
 				selected_node.setColor('selected');
