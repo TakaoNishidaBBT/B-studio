@@ -35,9 +35,10 @@ $settings_config = array(
 			array(
 				'start_html'		=> '<span class="title mail-type">',
 				'end_html'			=> '</span>',
-				'value'				=> __('Mail Type'),
+				'value'				=> __('Mail Type : '),
 			),
 			array(
+				'filter'			=> 'insert',
 				'name'				=> 'mail_type',
 				'class'				=> 'B_SelectBox',
 				'data_set'			=> array('mail_type_settings_default', 'mail_type_settings'),
@@ -50,6 +51,17 @@ $settings_config = array(
 						'error_message'	=> __('Please select Mail Type'),
 					),
 				),
+			),
+			array(
+				'filter'		=> 'update/delete',
+				'name'			=> 'mail_type',
+				'class'			=> 'B_SelectedText',
+				'data_set'		=> 'mail_type_settings',
+			),
+			array(
+				'filter'		=> 'update/delete',
+				'name'			=> 'mail_type',
+				'class'			=> 'B_Hidden',
 			),
 			array(
 				'name'			=> 'error_message',
@@ -292,37 +304,41 @@ $settings_config = array(
 
 //Copy Control
 $copy_control_config = array(
-	'start_html'	=> '<form name="copy_form" method="post" action="index.php">',
-	'end_html'		=> '</form>',
+	'start_html'	=> '<div id="copy-control">',
+	'end_html'		=> '</div>',
 	array(
-		'start_html'	=> '<ul class="copy">',
-		'end_html'		=> '</ul>',
+		'start_html'	=> '<form name="copy_form" method="post" action="index.php">',
+		'end_html'		=> '</form>',
 		array(
-			'start_html'	=> '<li>',
-			'end_html'		=> '</li>',
+			'start_html'	=> '<ul class="copy">',
+			'end_html'		=> '</ul>',
 			array(
-				'start_html'	=> '<span>',
-				'end_html'		=> '</span>',
-				'value'			=> 'No.',
+				'start_html'	=> '<li>',
+				'end_html'		=> '</li>',
+				array(
+					'start_html'	=> '<span>',
+					'end_html'		=> '</span>',
+					'value'			=> 'No.',
+				),
+				array(
+					'class'			=> 'B_SelectBox',
+					'name'			=> 'mail_list',
+					'special_html'	=> 'class="bframe_selectbox white"',
+				),
+				array(
+					'name'			=> 'dummy',
+					'class'			=> 'B_InputText',
+					'special_html'	=> 'class="dummy"',
+				),
 			),
 			array(
-				'class'			=> 'B_SelectBox',
-				'name'			=> 'mail_list',
-				'special_html'	=> 'class="bframe_selectbox white"',
+				'name'			=> 'copy',
+				'class'			=> 'B_Submit',
+				'start_html'	=> '<li>',
+				'end_html'		=> '</li>',
+				'special_html'	=> 'class="copy-button" onClick="bframe.submit(\'copy_form\', \'' . $this->module . '\', \'form\', \'copy\', \'insert\', true)"',
+				'value'			=> __('Copy'),
 			),
-			array(
-				'name'			=> 'dummy',
-				'class'			=> 'B_InputText',
-				'special_html'	=> 'class="dummy"',
-			),
-		),
-		array(
-			'name'			=> 'copy',
-			'class'			=> 'B_Submit',
-			'start_html'	=> '<li>',
-			'end_html'		=> '</li>',
-			'special_html'	=> 'class="copy-button" onClick="bframe.submit(\'copy_form\', \'' . $this->module . '\', \'form\', \'copy\', \'insert\', true)"',
-			'value'			=> __('Copy'),
 		),
 	),
 );
@@ -499,28 +515,31 @@ $result_config = array(
 	'start_html'	=> '<p>',
 	'end_html'		=> '</p>',
 	array(
-		'start_html'	=> '<span class="date-result">',
+		'start_html'	=> '<span class="type-result">',
 		'end_html'		=> '</span>',
-		'value'			=> __('Date: '),
+		'value'			=> __('Mail Type : '),
 	),
 	array(
-		'name'			=> 'article_date_t',
-		'class'			=> 'B_Text',
+		'name'			=> 'mail_type',
+		'class'			=> 'B_SelectedText',
+		'data_set'		=> 'mail_type_settings',
 		'start_html'	=> '<span class="bold">',
 		'end_html'		=> '</span>',
 	),
 	array(
 		'start_html'	=> '<span class="title-result">',
 		'end_html'		=> '</span>',
-		'value'			=> __('Title: '),
+		'value'			=> __('Title : '),
 	),
 	array(
-		'name'			=> 'title',
+		'name'			=> 'mail_title',
 		'class'			=> 'B_Text',
 		'start_html'	=> '<span class="bold">',
 		'end_html'		=> '</span>',
 	),
 	array(
+		'start_html'	=> '<span class="action-message">',
+		'end_html'		=> '</span>',
 		'name'			=> 'action_message',
 	),
 );

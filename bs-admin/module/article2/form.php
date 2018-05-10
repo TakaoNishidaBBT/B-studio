@@ -131,7 +131,7 @@
 					if($this->_register()) {
 						$this->message = __('Saved');
 						$this->status = true;
-						$this->session['mode'] = 'select';
+						$this->session['mode'] = 'update';
 					}
 				}
 				else {

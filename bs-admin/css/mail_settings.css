@@ -391,7 +391,10 @@ dl.settings input.checkbox {
 	padding: 20px;
 }
 span.title-result {
-	margin-left: 20px;
+	margin-left: 6px;
+}
+span.action-message {
+	margin-left: 6px;
 }
 
 /* error-message */

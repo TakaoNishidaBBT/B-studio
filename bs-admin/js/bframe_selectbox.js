@@ -49,7 +49,7 @@
 
 		this.closeAll = function() {
 			for(var i=0; i < elements.length; i++) {
-				if(elements[i].hidePullDownMenu) {
+				if(elements[i] && elements[i].hidePullDownMenu) {
 					elements[i].hidePullDownMenu();
 				}
 			}
@@ -57,7 +57,7 @@
 
 		this.reload = function() {
 			for(var i=0; i < elements.length; i++) {
-				elements[i].reload();
+				if(elements[i]) elements[i].reload();
 			}
 		}
 	}

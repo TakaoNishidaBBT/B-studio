@@ -38,6 +38,7 @@
 
 			case 'insert':
 				$this->copy_control = new B_Element($this->copy_control_config);
+				$this->setMailTypeList();
 				$this->setCopyMailList();
 
 			default:
@@ -52,6 +53,34 @@
 			$this->settings->setFilterValue($this->session['mode']);
 		}
 
+		function setMailTypeList() {
+			// auto reply mail is allowed to save only one record.
+			$sql = "select * from " . B_DB_PREFIX . "mail_settings where mail_type in ('contact_reply', 'contact_notice')";
+			$rs = $this->db->query($sql);
+
+			while($row[] = $this->db->fetch_assoc($rs));
+			if($row) {
+				$obj = $this->settings->getElementByName('mail_type');
+				foreach($obj->data_set_value as $key => $value) {
+					if($this->_callback($key, $row)) {
+						$items[$key] = $value;
+					}
+				}
+				$obj->data_set_value = $items;
+			}
+		}
+
+		function _callback($key, $row) {
+			if(!$key) return true;
+
+			foreach($row as $value) {
+				if($key == $value['mail_type']) {
+					return false;
+				}
+			}
+			return true;
+		}
+
 		function setCopyMailList($value = null) {
 			$sql = "select * from " . B_DB_PREFIX . "mail_settings where del_flag='0' order by mail_id";
 			$rs = $this->db->query($sql);
@@ -64,7 +93,7 @@
 		}
 
 		function copy() {
-//			$this->setMailTypeList();
+			$this->setMailTypeList();
 			if($this->post['mail_list']) {
 				$param['mail_id'] = $this->post['mail_list'];
 				$row = $this->main_table->selectByPk($param);
@@ -92,7 +121,6 @@
 					$obj->status = false;
 				}
 
-
 				$ret = $this->settings->validate();
 				$ret &= $this->editor->validate();
 
@@ -100,7 +128,7 @@
 					if($this->_register()) {
 						$this->message = __('Saved');
 						$this->status = true;
-						$this->session['mode'] = 'select';
+						$this->session['mode'] = 'update';
 					}
 				}
 				else {
@@ -113,6 +141,7 @@
 				$this->mode = 'alert';
 				$this->message = $e->getMessage();
 			}
+			$this->setMailTypeList();
 
 			$this->settings->setFilterValue($this->session['mode']);
 
@@ -121,6 +150,10 @@
 				'settings-inner'	=> $this->settings->getHtml(),
 				'title-container'	=> $title->getHtml(),
 			);
+
+			if($this->status) {
+				$response['innerHTML']['copy-control'] = '';
+			}
 
 			$response['status'] = $this->status;
 			$response['mode'] = $this->mode;
@@ -167,15 +200,10 @@
 		}
 
 		function delete() {
-			$param = $this->post;
-			$param['del_flag'] = '1';
-			$param['update_user'] = $this->user_id;
-			$param['update_datetime'] = time();
-
 			$this->db->begin();
-			$ret = $this->main_table->update($param);
-			$row = $this->main_table->selectByPk($this->post);
-			$param = $row;
+
+			$param = $this->post;
+			$ret = $this->main_table->deleteByPk($param);
 
 			if($ret) {
 				$this->db->commit();
