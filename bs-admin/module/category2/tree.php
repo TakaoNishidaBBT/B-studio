@@ -10,7 +10,7 @@
 			parent::__construct(__FILE__);
 
 			if(array_key_exists('category_id', $this->request)) {
-				$this->openCurrenNode($this->request['category_id']);
+				$this->openCurrentNode($this->request['category_id']);
 				$this->session['current_node'] = $this->request['category_id'];
 			}
 			require_once('./config/tree_config.php');
@@ -28,7 +28,7 @@
 			$this->tree->setConfig($this->tree_config);
 		}
 
-		function openCurrenNode($node_id) {
+		function openCurrentNode($node_id) {
 			$sql_org = "select parent_node from %VIEW% where node_id='%NODE_ID%'";
 			$sql_org = str_replace('%VIEW%', B_DB_PREFIX . B_CATEGORY2_TABLE, $sql_org);
 
