@@ -46,7 +46,7 @@ $form_config = array(
 				'start_html'		=> '<td>',
 				'end_html'			=> '</td>',
 				'value'				=> LANG,
-				'special_html'		=> 'class="bframe_selectbox"',
+				'special_html'		=> 'class="bframe_selectbox white"',
 			),
 		),
 

@@ -55,7 +55,7 @@ $list_header_config = array(
 					array(
 						'name'					=> 'row_per_page',
 						'class'					=> 'B_SelectBox',
-						'special_html'			=> 'class="bframe_selectbox"',
+						'special_html'			=> 'class="bframe_selectbox white"',
 						'data_set'				=> 'row_per_page',
 					),
 				),

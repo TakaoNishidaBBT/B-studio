@@ -201,7 +201,7 @@ $form_config = array(
 				'start_html'			=> '<td>',
 				'end_html'				=> '</td>',
 				'data_set'				=> 'user_auth',
-				'special_html'			=> 'class="bframe_selectbox"',
+				'special_html'			=> 'class="bframe_selectbox white"',
 				'validate'				=>
 				array(
 					array(
@@ -241,7 +241,7 @@ $form_config = array(
 				'start_html'			=> '<td>',
 				'end_html'				=> '</td>',
 				'data_set'				=> 'user_status',
-				'special_html'			=> 'class="bframe_selectbox"',
+				'special_html'			=> 'class="bframe_selectbox white"',
 			),
 		),
 
@@ -261,7 +261,7 @@ $form_config = array(
 				'start_html'		=> '<td>',
 				'end_html'			=> '</td>',
 				'value'				=> LANG,
-				'special_html'		=> 'class="bframe_selectbox"',
+				'special_html'		=> 'class="bframe_selectbox white"',
 			),
 		),
 

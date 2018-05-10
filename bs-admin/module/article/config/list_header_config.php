@@ -46,7 +46,7 @@ $list_header_config = array(
 					array(
 						'name'					=> 'category',
 						'class'					=> 'B_SelectBox',
-						'special_html'			=> 'class="bframe_selectbox"',
+						'special_html'			=> 'class="bframe_selectbox white"',
 					),
 				),
 				array(
@@ -61,7 +61,7 @@ $list_header_config = array(
 						'name'					=> 'row_per_page',
 						'class'					=> 'B_SelectBox',
 						'data_set'				=> 'row_per_page',
-						'special_html'			=> 'class="bframe_selectbox"',
+						'special_html'			=> 'class="bframe_selectbox white"',
 					),
 				),
 				array(
