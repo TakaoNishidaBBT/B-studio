@@ -333,7 +333,7 @@
 							// body class
 							var body = ev.editor.document.getBody();
 							body.addClass(visual_editor_body_class);
-						},						
+						},
 					}
 				});
 			}

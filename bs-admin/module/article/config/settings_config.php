@@ -173,7 +173,7 @@ $settings_config = array(
 				'name'				=> 'category_id',
 			),
 			array(
-				'filter'			=> 'select/insert',
+				'filter'			=> 'update/insert',
 				'name'				=> 'open_category',
 				'class'				=> 'B_Link',
 				'link'				=> 'index.php',
@@ -189,7 +189,7 @@ $settings_config = array(
 				),
 			),
 			array(
-				'filter'			=> 'select',
+				'filter'			=> 'update',
 				'class'				=> 'B_Link',
 				'link'				=> '#',
 				'special_html'		=> 'title="' . __('Clear') . '" class="clear-button" onclick="bstudio.clearText(\'category_id\', \'category_name\'); return false;"',
