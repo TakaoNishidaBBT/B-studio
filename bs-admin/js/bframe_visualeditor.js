@@ -144,6 +144,24 @@
 			// format tags
 			CKEDITOR.config.format_tags = 'p;h1;h2;h3;h4;h5;h6;pre;address;div';
 
+			// for magicline plugin
+			CKEDITOR.config.magicline_everywhere = {
+				table: 1,
+				hr: 1,
+				h1: 1,
+				h2: 1,
+				h3: 1,
+				h4: 1,
+				h5: 1,
+				h6: 1,
+				div: 1,
+				ul: 1,
+				ol: 1,
+				dl: 1,
+				form: 1,
+				blockquote: 1
+			}
+
 			// empty tag 0: remain 1:remove
 			CKEDITOR.dtd.$removeEmpty = {
 				abbr: 0,
