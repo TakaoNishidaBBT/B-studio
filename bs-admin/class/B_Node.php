@@ -125,7 +125,7 @@
 				$sql.= " order by disp_seq";
 			}
 			else {
-				$sql.= " order by node_name";
+				$sql.= " order by binary node_name";
 			}
 			$sql = str_replace('%VIEW%', B_DB_PREFIX . $this->view, $sql);
 			$rs = $this->db->query($sql);
