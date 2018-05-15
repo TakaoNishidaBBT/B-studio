@@ -177,7 +177,7 @@ $settings_config = array(
 				'name'				=> 'open_category',
 				'class'				=> 'B_Link',
 				'link'				=> 'index.php',
-				'special_html'		=> 'title="' . __('Category') . '" class="settings-button" onclick="top.bframe.modalWindow.activate(this, window, \'category_id\'); return false;" data-param="width:350,height:400"',
+				'special_html'		=> 'title="' . __('Category') . '" class="settings-button" onclick="top.bframe.modalWindow.activate(this, window); return false;" data-param="width:350,height:400"',
 				'fixedparam'		=>
 				array(
 					'terminal_id'		=> TERMINAL_ID,
