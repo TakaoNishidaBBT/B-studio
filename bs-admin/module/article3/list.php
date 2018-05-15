@@ -34,8 +34,8 @@
 									, $this->version['revision_id']
 									, 'root'
 									, null
-									, all
-									, $this->session['open_nodes']
+									, 'all'
+									, null
 									, true);
 			$list[''] = '  --  ';
 			$list+= $root_node->getSelectNodeList();
