@@ -26,6 +26,7 @@
 	if($session['terminal_id'] && $session['user_id']) {
 		$admin_mode = true;
 		$admin_language = $session['language'];
+		$file_type = 'w';
 		$file_info = B_FILE_INFO_W;
 		$semaphore = B_FILE_INFO_SEMAPHORE_W;
 		$node_view = B_WORKING_RESOURCE_NODE_VIEW;
@@ -35,6 +36,7 @@
 		define('B_ARTICLE_VIEW3', B_DB_PREFIX . 'v_preview_article3');
 	}
 	else {
+		$file_type = 'c';
 		$file_info = B_FILE_INFO_C;
 		$semaphore = B_FILE_INFO_SEMAPHORE_C;
 		$node_view = B_CURRENT_RESOURCE_NODE_VIEW;
@@ -58,7 +60,7 @@
 
 	// If cache file not exists
 	if(!file_exists($file_info) || !filesize($file_info)) {
-		createCacheFile($file_info, $semaphore, $remove_file_info, $node_view);
+		createCacheFile($file_type, $file_info, $semaphore, $remove_file_info, $node_view);
 	}
 
 	if(file_exists($file_info)) {
@@ -193,13 +195,13 @@
 
 		// write serialized data into cache file
 		$fp = fopen(B_FILE_INFO_C, 'w');
-		fwrite($fp, $row['cache']);
+		fwrite($fp, $row['cache_c']);
 		fclose($fp);
 
 		return;
 	}
 
-	function createCacheFile($file_info, $semaphore, $file_remove_info, $node_view) {
+	function createCacheFile($file_type, $file_info, $semaphore, $file_remove_info, $node_view) {
 		if(file_exists($semaphore)) return;
 
 		// open and lock semaphore
@@ -215,7 +217,7 @@
 
 		// create serialized resource cache file
 		$root = new B_Node($db, B_RESOURCE_NODE_TABLE, $node_view, null, null, 'root', null, 'all', null);
-		$root->serialize($data);
+		$root->serialize($file_type, $data);
 
 		// write serialized data into cache file
 		$fp = fopen($file_info, 'w');
