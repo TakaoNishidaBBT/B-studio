@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <link rel="stylesheet" href="css/install.css" type="text/css" media="all" />
-<link rel="stylesheet" href="../bs-admin/css/selectbox_white.css" type="text/css" media="all" />
+<link rel="stylesheet" href="../bs-admin/css/selectbox.css" type="text/css" media="all" />
 <script src="../bs-admin/js/bframe.js" type="text/javascript"></script>
 <script src="../bs-admin/js/bframe_context_menu.js" type="text/javascript"></script>
 <script src="../bs-admin/js/bframe_popup.js" type="text/javascript"></script>

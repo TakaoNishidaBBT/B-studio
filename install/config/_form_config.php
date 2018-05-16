@@ -24,7 +24,7 @@ $select_language_config = array(
 		'data_set'		=> $language,
 		'local'			=> true,
 		'value'			=> 'en',
-		'special_html'	=> 'class="bframe_selectbox" onchange=submit()',
+		'special_html'	=> 'class="bframe_selectbox white" onchange=submit()',
 	),
 );
 
