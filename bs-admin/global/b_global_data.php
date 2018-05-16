@@ -100,8 +100,8 @@
 
 	${$g_data_set}['mail_type_settings'] =
 		array(
-				'contact_reply'		=> 'Contact Auto Reply',
-				'contact_notice'	=> 'Contact Notice',
+				'contact_reply'		=> __('Contact Auto Reply'),
+				'contact_notice'	=> __('Contact Notice'),
 		);
 
 	${$g_data_set}['table']['contents_node'] =

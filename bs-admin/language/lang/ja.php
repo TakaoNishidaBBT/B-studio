@@ -132,6 +132,7 @@
 		'File Manager'					=> 'ファイル管理',
 		'Basic Settings'				=> '基本設定',
 		'Versions'						=> 'バージョン管理',
+		'Mail Settings'					=> 'メール設定',
 		'Users'							=> 'ユーザ管理',
 		'Site Admin'					=> 'サイト管理者設定',
 		'Open another admin page'		=> '管理画面をもう一枚開きます',
@@ -375,6 +376,27 @@
 		'Back to basic settings'		=> '基本設定に戻る',
 		'Basic settings: Saved'			=> '基本設定：保存しました。',
 		'Basic settings: Failed'		=> '基本設定：保存に失敗しました。',
+
+		// Mail settings
+		'Subject'						=> '件名',
+		'Mail Type'						=> 'メール種別',
+		'Mail Type : '					=> 'メール種別 : ',
+		'Mail Title'					=> 'メール名称',
+		'Title : '						=> 'メール名称 : ',
+		'From Address'					=> 'Fromアドレス',
+		'From Name'						=> 'From名称',
+		'To Address'					=> 'Toアドレス',
+		'Please select Mail Type'		=> 'Toアドレス',
+		'Please enter Mail Title'		=> 'メール種別を選択してください',
+		'There is an error in the entry format'
+										=> 'メールアドレスの形式に誤りがあります',
+		'Please enter a valid email address'
+										=> 'メールアドレスが間違っている可能性があります',
+		'Please enter From Address'		=> 'Fromアドレスを入力してください',
+		'Please enter From Name'		=> 'From名称を入力してください',
+		'Please enter subject'			=> '件名を入力してください',
+		'Contact Auto Reply'			=> '問い合わせ自動応答メール',
+		'Contact Notice'				=> '問い合わせ通知メール',
 
 		// Install
 		'Select language: '				=> '言語を選択してください：',

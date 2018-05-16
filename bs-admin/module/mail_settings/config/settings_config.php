@@ -131,7 +131,7 @@ $settings_config = array(
 				array(
 					array(
 						'type' 			=> 'required',
-						'error_message'	=> __('Please enter From Adress'),
+						'error_message'	=> __('Please enter From Address'),
 					),
 					array(
 						'type' 			=> 'pattern',
