@@ -334,8 +334,6 @@
 
 		function getPath() {
 			$parent_path = $this->getParentPath();
-			if($parent_path) $$parent_path.= '/';
-
 			return $parent_path . $this->node_name;
 		}
 
