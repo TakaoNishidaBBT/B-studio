@@ -26,7 +26,7 @@
 	if($session['terminal_id'] && $session['user_id']) {
 		$admin_mode = true;
 		$admin_language = $session['language'];
-		$file_type = 'w';
+		$version = 'w';
 		$file_info = B_FILE_INFO_W;
 		$semaphore = B_FILE_INFO_SEMAPHORE_W;
 		$node_view = B_WORKING_RESOURCE_NODE_VIEW;
@@ -36,7 +36,7 @@
 		define('B_ARTICLE_VIEW3', B_DB_PREFIX . 'v_preview_article3');
 	}
 	else {
-		$file_type = 'c';
+		$version = 'c';
 		$file_info = B_FILE_INFO_C;
 		$semaphore = B_FILE_INFO_SEMAPHORE_C;
 		$node_view = B_CURRENT_RESOURCE_NODE_VIEW;
@@ -60,7 +60,7 @@
 
 	// If cache file not exists
 	if(!file_exists($file_info) || !filesize($file_info)) {
-		createCacheFile($file_type, $file_info, $semaphore, $remove_file_info, $node_view);
+		createCacheFile($version, $file_info, $semaphore, $remove_file_info, $node_view);
 	}
 
 	if(file_exists($file_info)) {
@@ -177,51 +177,27 @@
 	require_once('./bs-controller/controller.php');
 
 	function replaceCacheFile() {
-		require_once('./bs-admin/config/config.php');
-
-		$archive = new B_Log(B_ARCHIVE_LOG_FILE);
-
-		$db = new B_DBaccess($archive);
-		$ret = $db->connect(B_DB_SRV, B_DB_USR, B_DB_PWD, B_DB_CHARSET);
-		$ret = $db->select_db(B_DB_NME);
-
-		$version_table = B_DB_PREFIX . B_VERSION_TABLE;
-		$current_version = B_DB_PREFIX . B_CURRENT_VERSION_VIEW;
-		$sql = "select a.* from $version_table a, $current_version b
-				where a.version_id = b.current_version_id";
-
-		$rs = $db->query($sql);
-		$row = $db->fetch_assoc($rs);
+		$serialized_string = getCacheFromDB('c');
 
 		// write serialized data into cache file
 		$fp = fopen(B_FILE_INFO_C, 'w');
-		fwrite($fp, $row['cache_c']);
+		fwrite($fp, $serialized_string);
 		fclose($fp);
 
 		return;
 	}
 
-	function createCacheFile($file_type, $file_info, $semaphore, $file_remove_info, $node_view) {
+	function createCacheFile($version, $file_info, $semaphore, $file_remove_info, $node_view) {
 		if(file_exists($semaphore)) return;
 
 		// open and lock semaphore
 		if(!$fp_semaphore = fopen($semaphore, 'x')) return;
 
-		require_once('./bs-admin/config/config.php');
-
-		$archive = new B_Log(B_ARCHIVE_LOG_FILE);
-
-		$db = new B_DBaccess($archive);
-		$ret = $db->connect(B_DB_SRV, B_DB_USR, B_DB_PWD, B_DB_CHARSET);
-		$ret = $db->select_db(B_DB_NME);
-
-		// create serialized resource cache file
-		$root = new B_Node($db, B_RESOURCE_NODE_TABLE, $node_view, null, null, 'root', null, 'all', null);
-		$root->serialize($file_type, $data);
+		$serialized_string = getCacheFromDB($version);
 
 		// write serialized data into cache file
 		$fp = fopen($file_info, 'w');
-		fwrite($fp, serialize($data));
+		fwrite($fp, $serialized_string);
 		fclose($fp);
 
 		// close and unlink semaphore
@@ -229,4 +205,37 @@
 		if(file_exists($semaphore)) unlink($semaphore);
 
 		return;
+	}
+
+	function getCacheFromDB($version) {
+		require_once('./bs-admin/config/config.php');
+
+		$archive = new B_Log(B_ARCHIVE_LOG_FILE);
+
+		$db = new B_DBaccess($archive);
+		$ret = $db->connect(B_DB_SRV, B_DB_USR, B_DB_PWD, B_DB_CHARSET);
+		$ret = $db->select_db(B_DB_NME);
+
+		// get cache from DB
+		switch($version) {
+		case 'w':
+			$version_field = 'working_version_id';
+			$cache_field = 'cache_w';
+			break;
+
+		case 'c':
+			$version_field = 'current_version_id';
+			$cache_field = 'cache_c';
+			break;
+		}
+
+		$version_table = B_DB_PREFIX . B_VERSION_TABLE;
+		$current_version = B_DB_PREFIX . B_CURRENT_VERSION_VIEW;
+		$sql = "select * from $version_table a, $current_version b
+				where a.version_id = b.{$version_field}";
+
+		$rs = $db->query($sql);
+		$row = $db->fetch_assoc($rs);
+
+		return $row[$cache_field];
 	}

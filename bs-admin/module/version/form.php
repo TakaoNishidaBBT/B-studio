@@ -122,7 +122,8 @@
 
 				$ret = $this->table->update($update_param);
 
-				$param['cache'] = $row['cache'];
+				$param['cache_c'] = $row['cache_c'];
+				$param['cache_w'] = $row['cache_w'];
 				$param['private_revision_id'] = '00';
 				$param['create_user'] = $this->user_id;
 				$param['create_datetime'] = time();
@@ -140,7 +141,7 @@
 						$this->createLimitFile(B_LIMIT_FILE_INFO, $row['publication_datetime_u']);
 						if(file_exists(B_FILE_INFO_C)) {
 							$row = $this->getCacheFromDB('current_version_id');
-							$this->replaceCacheFile(B_FILE_INFO_C, B_FILE_INFO_SEMAPHORE_C, $row['cache']);
+							$this->replaceCacheFile(B_FILE_INFO_C, B_FILE_INFO_SEMAPHORE_C, $row['cache_c']);
 						}
 					}
 				}
