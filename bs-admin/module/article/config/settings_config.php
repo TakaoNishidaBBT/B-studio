@@ -227,7 +227,7 @@ $settings_config = array(
 						'end_html'		=> '</td>',
 					),
 					array(
-						'filter'		=> 'select/insert',
+						'filter'		=> 'update/insert',
 						'start_html'	=> '<td class="buttons">',
 						'end_html'		=> '</td>',
 						array(
@@ -248,7 +248,7 @@ $settings_config = array(
 							'value'			=> '<img alt="Select image" src="images/common/gear_white.png" />',
 						),
 						array(
-							'filter'			=> 'select/insert',
+							'filter'			=> 'update/insert',
 							'class'				=> 'B_Link',
 							'link'				=> '#',
 							'special_html'		=> 'title="' . __('Clear') . '" class="clear-button" onclick="bstudio.clearIMG(\'title_img\', \'title_img_file\'); return false;"',
