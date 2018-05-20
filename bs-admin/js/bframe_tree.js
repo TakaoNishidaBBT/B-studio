@@ -3667,7 +3667,7 @@
 				if(place == 'pane') {
 					var private = document.createElement('span');
 					private.className = 'private-mode';
-					a.appendChild(private);
+					img_span.appendChild(private);
 
 					var private_message = document.createElement('span');
 					private_message.className = 'private-msg';
