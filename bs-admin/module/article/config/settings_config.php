@@ -85,7 +85,7 @@ $settings_config = array(
 				),
 			),
 			array(
-				'filter'			=> 'select/insert',
+				'filter'			=> 'update/insert',
 				'id'				=> 'schedule_calendar1',
 				'class'				=> 'B_Link',
 				'special_html'		=> 'class="bframe_calendar settings-button" title="' . __('Calendar') . '" onclick="bstudio.activateCalendar(\'schedule_calendar1\'); return false;" ',
