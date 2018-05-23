@@ -143,11 +143,11 @@
 					// Continue whether a client disconnect or not
 					ignore_user_abort(true);
 
-					// Check zip file inside
-					$this->checkZipFile($_FILES['Filedata']['tmp_name']);
-
 					$zip_file = B_RESOURCE_WORK_DIR . $file['basename'];
 					if($status = $this->_move_uploaded_file($_FILES['Filedata']['tmp_name'], $zip_file)) {
+						// Check zip file inside
+						$this->checkZipFile($zip_file);
+
 						usleep(300000);
 
 						// send progress
