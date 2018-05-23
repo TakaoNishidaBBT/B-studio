@@ -99,22 +99,26 @@
 		}
 
 		function update($param) {
-			if(!is_array($param)) return false;
-			foreach($param as $key => $value) {
-				if(!isset($this->config[$key])) continue;
-				if($this->config[$key][2]) continue; // pk
+			try {
+				if(!is_array($param)) return false;
+				foreach($param as $key => $value) {
+					if(!isset($this->config[$key])) continue;
+					if($this->config[$key][2]) continue; // pk
 
-				if(isset($v)) $v.= ',';
-				$v.= $this->setUpdateVlues($key, $value);
-			}
+					if(isset($v)) $v.= ',';
+					$v.= $this->setUpdateVlues($key, $value);
+				}
 
-			$ret = $this->getWhereSqlByPk($param, $sql_where);
-			if($ret) {
-				$sql = "update $this->prefix$this->table set $v $sql_where";
-				$rs = $this->db->query($sql);
-				return $rs;
+				$ret = $this->getWhereSqlByPk($param, $sql_where);
+				if($ret) {
+					$sql = "update $this->prefix$this->table set $v $sql_where";
+					$ret = $this->db->query($sql);
+				}
 			}
-			return false;
+			catch (Exception $e) {
+				return false;
+			}
+			return $ret;
 		}
 
 		function setUpdateVlues($key, $value) {
@@ -158,35 +162,47 @@
 		}
 
 		function insert($param) {
-			foreach($this->config as $key => $config) {
-				if(isset($v)) $v.= ",";
-				$v.= $this->setInsertValues($key, $config, $param);
+			try {
+				foreach($this->config as $key => $config) {
+					if(isset($v)) $v.= ",";
+					$v.= $this->setInsertValues($key, $config, $param);
+				}
+				$sql = "insert into $this->prefix$this->table values($v)";
+				$ret = $this->db->query($sql);
 			}
-			$sql = "insert into $this->prefix$this->table values($v)";
-			$ret = $this->db->query($sql);
-
+			catch (Exception $e) {
+				return false;
+			}
 			return $ret;
 		}
 
 		function selectInsert($param, $sql_where='') {
-			foreach($this->config as $key => $config) {
-				if(isset($v)) $v.= ',';
-				$v.= $this->setInsertValues($key, $config, $param);
+			try {
+				foreach($this->config as $key => $config) {
+					if(isset($v)) $v.= ',';
+					$v.= $this->setInsertValues($key, $config, $param);
+				}
+				$sql = "insert into $this->prefix$this->table select $v from $this->prefix$this->table $sql_where";
+				$ret = $this->db->query($sql);
 			}
-			$sql = "insert into $this->prefix$this->table select $v from $this->prefix$this->table $sql_where";
-			$ret = $this->db->query($sql);
-
+			catch (Exception $e) {
+				return false;
+			}
 			return $ret;
 		}
 
 		function selectInsertFromDifferntTable($param, $from, $sql_where='') {
-			foreach($this->config as $key => $config) {
-				if(isset($v)) $v.= ',';
-				$v.= $this->setInsertValues($key, $config, $param);
+			try {
+				foreach($this->config as $key => $config) {
+					if(isset($v)) $v.= ',';
+					$v.= $this->setInsertValues($key, $config, $param);
+				}
+				$sql = "insert into $this->prefix$this->table select $v from $this->prefix$from $sql_where";
+				$ret = $this->db->query($sql);
 			}
-			$sql = "insert into $this->prefix$this->table select $v from $this->prefix$from $sql_where";
-			$ret = $this->db->query($sql);
-
+			catch (Exception $e) {
+				return false;
+			}
 			return $ret;
 		}
 
@@ -201,19 +217,23 @@
 		}
 
 		function deleteInsert($param) {
-			// delete
-			$ret = $this->deleteByPk($param);
+			try {
+				// delete
+				$ret = $this->deleteByPk($param);
 
-			if($ret) {
-				// insert
-				foreach($this->config as $key => $config) {
-					if(isset($v)) $v.= ',';
-					$v.= $this->setInsertValues($key, $config, $param);
+				if($ret) {
+					// insert
+					foreach($this->config as $key => $config) {
+						if(isset($v)) $v.= ',';
+						$v.= $this->setInsertValues($key, $config, $param);
+					}
+					$sql = "insert into $this->prefix$this->table values($v)";
+					$ret = $this->db->query($sql);
 				}
-				$sql = "insert into $this->prefix$this->table values($v)";
-				$ret = $this->db->query($sql);
 			}
-
+			catch (Exception $e) {
+				return false;
+			}
 			return $ret;
 		}
 
@@ -290,13 +310,19 @@
 		}
 
 		function deleteByPk($param) {
-			if(!isset($this->config)) return;
+			try {
+				if(!isset($this->config)) return;
 
-			$ret = $this->getWhereSqlByPk($param, $sql_where);
-			if(!$ret) return false;
+				$ret = $this->getWhereSqlByPk($param, $sql_where);
+				if(!$ret) return false;
 
-			$sql = "delete from $this->prefix$this->table $sql_where";
-			return $this->db->query($sql);
+				$sql = "delete from $this->prefix$this->table $sql_where";
+				$ret = $this->db->query($sql);
+			}
+			catch (Exception $e) {
+				return false;
+			}
+			return $ret;
 		}
 
 		function selectMaxValue($field,  $sql_where='') {
@@ -332,13 +358,17 @@
 		}
 
 		function copy($param, $from, $sql_where='') {
-			foreach($this->config as $key => $config) {
-				if(isset($v)) $v.= ',';
-				$v.= $this->setCopyValues($key, $config, $param);
+			try {
+				foreach($this->config as $key => $config) {
+					if(isset($v)) $v.= ',';
+					$v.= $this->setCopyValues($key, $config, $param);
+				}
+				$sql = "insert into $this->prefix$this->table select $v from $this->prefix$from $sql_where";
+				$ret = $this->db->query($sql);
 			}
-			$sql = "insert into $this->prefix$this->table select $v from $this->prefix$from $sql_where";
-			$ret = $this->db->query($sql);
-
+			catch (Exception $e) {
+				return false;
+			}
 			return $ret;
 		}
 
@@ -426,14 +456,18 @@
 		}
 
 		function selectInsertForLoad($param, $sql_where='') {
-			$i=0;
-			foreach($this->config as $key => $config) {
-				if(isset($v)) $v.= ',';
-				$v.= $this->setInsertValuesForLoad($key, $config, $param, $i);
+			try {
+				$i=0;
+				foreach($this->config as $key => $config) {
+					if(isset($v)) $v.= ',';
+					$v.= $this->setInsertValuesForLoad($key, $config, $param, $i);
+				}
+				$sql = "insert into $this->prefix$this->table select $v from $this->prefix$this->table $sql_where";
+				$ret = $this->db->query($sql);
 			}
-			$sql = "insert into $this->prefix$this->table select $v from $this->prefix$this->table $sql_where";
-			$ret = $this->db->query($sql);
-
+			catch (Exception $e) {
+				return false;
+			}
 			return $ret;
 		}
 
@@ -476,29 +510,33 @@
 		}
 
 		function create() {
-			foreach($this->config as $key => $config) {
-				// column
-				if(isset($v)) $v.= ',';
-				$v.= $this->setCreateColumn($key, $config);
+			try {
+				foreach($this->config as $key => $config) {
+					// column
+					if(isset($v)) $v.= ',';
+					$v.= $this->setCreateColumn($key, $config);
 
-				// primary key
-				if($config[2]) {
-					$primary_array[$config[2]] = $key;
+					// primary key
+					if($config[2]) {
+						$primary_array[$config[2]] = $key;
+					}
 				}
-			}
-			if(is_array($primary_array)) {
-				ksort($primary_array);
-				foreach($primary_array as $value) {
-					if($primary) $primary.=',';
-					$primary.= $value;
+				if(is_array($primary_array)) {
+					ksort($primary_array);
+					foreach($primary_array as $value) {
+						if($primary) $primary.=',';
+						$primary.= $value;
+					}
 				}
+
+				if($primary) $primary = "primary key($primary) ";
+
+				$sql = "create table $this->prefix$this->table ($v, $primary) default charset=" . B_DB_CHARSET . " engine=" . B_DB_ENGINE;
+				$ret = $this->db->query($sql);
 			}
-
-			if($primary) $primary = "primary key($primary) ";
-
-			$sql = "create table $this->prefix$this->table ($v, $primary) default charset=" . B_DB_CHARSET . " engine=" . B_DB_ENGINE;
-			$ret = $this->db->query($sql);
-
+			catch (Exception $e) {
+				return false;
+			}
 			return $ret;
 		}
 
@@ -522,37 +560,41 @@
 		}
 
 		function alterTable() {
-			// create tmporary table as backup
-			$tmp = 'tmp_' . time();
-			$sql = "create table $tmp as select * from $this->prefix$this->table";
-			$ret = $this->db->query($sql);
+			try {
+				// create tmporary table as backup
+				$tmp = 'tmp_' . time();
+				$sql = "create table $tmp as select * from $this->prefix$this->table";
+				$ret = $this->db->query($sql);
 
-			// drop table
-			$sql = "drop table $this->prefix$this->table";
-			$ret = $this->db->query($sql);
+				// drop table
+				$sql = "drop table $this->prefix$this->table";
+				$ret = $this->db->query($sql);
 
-			// create new table
-			$this->create();
+				// create new table
+				$this->create();
 
-			// insert backup records
-			$sql = "show columns from $tmp";
-			$rs = $this->db->query($sql);
-		    while($row = mysql_fetch_assoc($rs)) {
-				$column[$row['Field']] = $row;
+				// insert backup records
+				$sql = "show columns from $tmp";
+				$rs = $this->db->query($sql);
+			    while($row = mysql_fetch_assoc($rs)) {
+					$column[$row['Field']] = $row;
+				}
+				foreach($this->config as $key => $config) {
+					// column
+					if(isset($v)) $v.= ',';
+					$v.= $column[$key] ? $key : '';
+				}
+
+				$sql = "insert into $this->prefix$this->table select $v from $tmp";
+				$ret = $this->db->query($sql);
+
+				// drop temporary table
+				$sql = "drop table $tmp";
+				$ret = $this->db->query($sql);
 			}
-			foreach($this->config as $key => $config) {
-				// column
-				if(isset($v)) $v.= ',';
-				$v.= $column[$key] ? $key : '';
+			catch (Exception $e) {
+				return false;
 			}
-
-			$sql = "insert into $this->prefix$this->table select $v from $tmp";
-			$ret = $this->db->query($sql);
-
-			// drop temporary table
-			$sql = "drop table $tmp";
-			$ret = $this->db->query($sql);
-
 			return $ret;
 		}
 	}
