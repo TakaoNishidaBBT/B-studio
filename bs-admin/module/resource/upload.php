@@ -279,10 +279,17 @@
 			// except file or folder (stop walking)
 			if(array_key_exists($node->file_name, $this->except)) return false;
 
-			$ret = $this->_register_archive($node, $node_id, $contents_id);
-			if($ret) {
-				$node->db_node_id = $node_id;
+			if(!$this->_register_archive($node, $node_id, $contents_id)) {
+				$response['status'] = $false;
+				$response['message'] = 'DB error';
+				$this->sendChunk(',' . json_encode($response));
+				$this->sendChunk();	// terminate
+
+				exit;
 			}
+
+			$node->db_node_id = $node_id;
+
 			if($node->node_type != 'folder') {
 				$file = B_Util::pathinfo($node->path);
 				if(rename(B_RESOURCE_EXTRACT_DIR . $node->path, $this->dir . $contents_id . '.' . $file['extension'])) {
@@ -339,7 +346,9 @@
 		}
 
 		function register($file) {
-			$this->_register($file['basename'], $node_id, $contents_id);
+			if(!$this->_register($file['basename'], $node_id, $contents_id)) {
+				throw new Exception(__('DB error'));
+			}
 
 			if($this->_move_uploaded_file($_FILES['Filedata']['tmp_name'], $this->dir . $contents_id . '.' . $file['extension'])) {
 				chmod($this->dir . $contents_id . '.' . $file['extension'], 0777);
