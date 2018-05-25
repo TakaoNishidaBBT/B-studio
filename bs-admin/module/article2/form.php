@@ -133,6 +133,10 @@
 						$this->status = true;
 						$this->session['mode'] = 'update';
 					}
+					else {
+						$this->message = __('DB error');
+						$this->status = false;
+					}
 				}
 				else {
 					$this->message = __('This is an error in your entry');
@@ -181,12 +185,13 @@
 				$param['update_user'] = $this->user_id;
 				$param['update_datetime'] = time();
 				$ret = $this->main_table->selectInsert($param);
+				if($ret) {
+					$param['article_id'] = $this->main_table->selectMaxValue('article_id');
+					$param['permalink'] = $param['article_id'];
+					$ret = $this->main_table->update($param);
 
-				$param['article_id'] = $this->main_table->selectMaxValue('article_id');
-				$param['permalink'] = $param['article_id'];
-				$ret = $this->main_table->update($param);
-
-				$this->settings->setValue($param);
+					$this->settings->setValue($param);
+				}
 			}
 			else {
 				$param['update_user'] = $this->user_id;
