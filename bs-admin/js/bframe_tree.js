@@ -42,7 +42,6 @@
 		var current_node = new currentNodeControl();
 		var selected_node = new currentNodeControl();
 		var current_edit_node;
-		var eventSrcObject;
 		var eventPlace;
 		var new_node;
 
@@ -376,8 +375,9 @@
 		}
 
 		function showContextMenu(event) {
+			eventPlace = '';
 			if(context_menu.getLength() > 0 && !response_wait) {
-				eventSrcObject = bframe.getEventSrcElement(event);
+				var eventSrcObject = bframe.getEventSrcElement(event);
 				if(eventSrcObject == pane || eventSrcObject.parentNode == pane) {
 					eventPlace = 'pane';
 					selected_node.set(current_node.id());
