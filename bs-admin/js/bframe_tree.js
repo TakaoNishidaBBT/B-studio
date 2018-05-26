@@ -43,6 +43,7 @@
 		var selected_node = new currentNodeControl();
 		var current_edit_node;
 		var eventSrcObject;
+		var eventPlace;
 		var new_node;
 
 		var drag_control;
@@ -378,6 +379,7 @@
 			if(context_menu.getLength() > 0 && !response_wait) {
 				eventSrcObject = bframe.getEventSrcElement(event);
 				if(eventSrcObject == pane || eventSrcObject.parentNode == pane) {
+					eventPlace = 'pane';
 					selected_node.set(current_node.id());
 					selected_node.setColor('selected');
 					current_node.setColor('current');
@@ -524,7 +526,7 @@
 			if(selected_node.place() == 'pane') {
 				context_menu.disableElement('createNode');
 			}
-			if(eventSrcObject == pane) {
+			if(eventPlace == 'pane') {
 				context_menu.disableElement('cutNode');
 				context_menu.disableElement('copyNode');
 				context_menu.disableElement('deleteNode');
@@ -867,7 +869,7 @@
 
 		function setNewNode(node_info) {
 			if(node_info['new_node']) {
-				if(eventSrcObject == pane) {
+				if(eventPlace == 'pane') {
 					selected_node.set('p'+node_info.node_id);
 				}
 				else {
