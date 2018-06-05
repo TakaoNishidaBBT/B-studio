@@ -255,7 +255,7 @@ $settings_form_config = array(
 				array(
 					'class'				=> 'B_Link',
 					'link'				=> '#',
-					'special_html'		=> 'title="' . __('Clear') . '" class="clear-button" onclick="bstudio.clearText(\'template_name\', \'template_id\'); return false;" ',
+					'special_html'		=> 'title="' . __('Clear') . '" class="clear-button" onclick="bstudio.clearText(\'template\', \'template_id\'); return false;" ',
 					'specialchars'		=> 'none',
 					'value'				=> '<img alt="' . __('Clear') . '" src="images/common/clear_gray.png" />',
 				),
