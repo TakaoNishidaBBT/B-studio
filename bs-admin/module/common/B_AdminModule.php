@@ -120,7 +120,6 @@
 			$fp = fopen(B_FILE_INFO_THUMB, 'w');
 			fwrite($fp, serialize($data));
 			fclose($fp);
-			chmod(B_FILE_INFO_THUMB, 0777);
 
 			// close and unlock semaphore
 			fclose($fp_semaphore);
