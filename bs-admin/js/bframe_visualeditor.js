@@ -345,6 +345,7 @@
 							if(editor.mode == 'source') {
 								cke_source = bframe.searchNodeByClassName(container, 'cke_source');
 								cke_contents_height = cke_contents.style.height;
+								cke_contents.style.height = 0;
 								cke_contents.style.height = cke_source.scrollHeight + 'px';
 
 								// for autogrow
