@@ -388,7 +388,30 @@
 		}
 
 		function autogrowSource(event) {
-			cke_contents.style.height = cke_source.scrollHeight + 'px';
+			if(cke_contents.style.height != cke_source.scrollHeight + 'px') {
+				// grow
+				cke_contents.style.height = cke_source.scrollHeight + 'px';
+				bframe.fireEvent(window, 'resize');
+			}
+			else {
+				// same or shrink
+				var lineHeight = Number(cke_source.style.lineHeight.split('px')[0]);
+				lineHeight = lineHeight ? lineHeight : '15';
+				var height = Number(cke_contents.style.height.split('px')[0]);
+				var initialHeight = height;
+
+				while(true) {
+					height -= lineHeight;
+					cke_contents.style.height = height + 'px'; 
+					if(height < cke_source.scrollHeight) {
+						if(cke_source.scrollHeight < initialHeight) {
+							bframe.fireEvent(window, 'resize');
+						}
+						cke_contents.style.height = cke_source.scrollHeight + 'px';
+						break;
+					}
+	    		}
+			}
 		}
 
 		function onScroll() {
