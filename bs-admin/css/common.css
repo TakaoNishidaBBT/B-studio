@@ -295,6 +295,27 @@ input.insert-button:hover {
 	border-bottom: 1px solid #0f42c0;
 	background-color: #0f42c8;
 }
+input.default-button {
+	padding: 5px 0;
+	line-height: 17px;
+	border-top: 1px solid #4B7EAB;
+	border-right: 1px solid #5F81B4;
+	border-bottom: 1px solid #5F81B4;
+	border-left: 1px solid #4B7EAB;
+	background-color: #4074A6;
+	color: #fff;
+	width: 100px;
+	overflow: visible;
+	vertical-align: middle;
+	cursor: pointer;
+}
+input.default-button:hover {
+	border-top: 1px solid #578AB7;
+	border-left: 1px solid #578AB7;
+	border-right: 1px solid #698BBE;
+	border-bottom: 1px solid #698BBE;
+	background-color: #5589BB;
+}
 input.delete-button {
 	padding: 2px 4px;
 	border-top: 1px solid #eee;

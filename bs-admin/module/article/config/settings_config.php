@@ -85,7 +85,7 @@ $settings_config = array(
 				),
 			),
 			array(
-				'filter'			=> 'update/insert',
+				'filter'			=> 'update/insert/default',
 				'id'				=> 'schedule_calendar1',
 				'class'				=> 'B_Link',
 				'special_html'		=> 'class="bframe_calendar settings-button" title="' . __('Calendar') . '" onclick="bstudio.activateCalendar(\'schedule_calendar1\'); return false;" ',
@@ -173,7 +173,7 @@ $settings_config = array(
 				'name'				=> 'category_id',
 			),
 			array(
-				'filter'			=> 'update/insert',
+				'filter'			=> 'update/insert/default',
 				'name'				=> 'open_category',
 				'class'				=> 'B_Link',
 				'link'				=> 'index.php',
@@ -189,10 +189,10 @@ $settings_config = array(
 				),
 			),
 			array(
-				'filter'			=> 'update',
+				'filter'			=> 'update/insert/default',
 				'class'				=> 'B_Link',
 				'link'				=> '#',
-				'special_html'		=> 'title="' . __('Clear') . '" class="clear-button" onclick="bstudio.clearText(\'category_id\', \'category_name\'); return false;"',
+				'special_html'		=> 'title="' . __('Clear') . '" class="clear-button" onclick="bstudio.clearText(\'category_id\', \'category\'); return false;"',
 				'specialchars'		=> 'none',
 				'value'				=> '<img alt="Clear" src="images/common/clear_white.png" />',
 			),
@@ -227,7 +227,7 @@ $settings_config = array(
 						'end_html'		=> '</td>',
 					),
 					array(
-						'filter'		=> 'update/insert',
+						'filter'		=> 'update/insert/default',
 						'start_html'	=> '<td class="buttons">',
 						'end_html'		=> '</td>',
 						array(
@@ -248,7 +248,7 @@ $settings_config = array(
 							'value'			=> '<img alt="Select image" src="images/common/gear_white.png" />',
 						),
 						array(
-							'filter'			=> 'update/insert',
+							'filter'			=> 'update/insert/default',
 							'class'				=> 'B_Link',
 							'link'				=> '#',
 							'special_html'		=> 'title="' . __('Clear') . '" class="clear-button" onclick="bstudio.clearIMG(\'title_img\', \'title_img_file\'); return false;"',

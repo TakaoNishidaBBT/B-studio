@@ -42,20 +42,51 @@
 				$this->control = new B_Element($this->input_control_config);
 				if($this->request['article_id']) {
 					$article_id = $this->db->real_escape_string($this->request['article_id']);
-					$sql = "select * from " . B_DB_PREFIX . "v_admin_article3
-							where article_id = '$article_id'";
-
-					$rs=$this->db->query($sql);
-					$row=$this->db->fetch_assoc($rs);
-
-					$this->editor->setValue($row);
-					$this->settings->setValue($row);
-					$this->setThumnail($row['title_img_file']);
-					$this->setDetailStatus();
 				}
+				else {
+					$article_id = '0000000000';
+				}
+
+				$sql = "select * from " . B_DB_PREFIX . "article3 where article_id = '$article_id'";
+
+				$rs=$this->db->query($sql);
+				$row=$this->db->fetch_assoc($rs);
+				if(!$row) $row['article_id'] = '0000000000';
+
+				$this->category = $this->getCategory();
+				$row['category'] = $this->getCategoryName($this->category, $row['category_id']);
+				$this->editor->setValue($row);
+				$this->settings->setValue($row);
+				$this->setThumnail($row['title_img_file']);
+				$this->setDetailStatus();
+
 				break;
 			}
 			$this->settings->setFilterValue($this->session['mode']);
+		}
+
+		function getCategoryName($category, $category_id) {
+			$id_array = explode(',', $category_id);
+			if(is_array($id_array)) {
+				foreach($id_array as $id) {
+					if(!$category[$id]) {
+						continue;
+					}
+					if($name) $name.= ' / ';
+					$name.= $category[$id];
+				}
+				return $name;
+			}
+		}
+
+		function getCategory() {
+			$sql = "select * from " . B_DB_PREFIX . "v_category2 where parent_node = 'root' order by disp_seq";
+			$rs = $this->db->query($sql);
+			while($row = $this->db->fetch_assoc($rs)) {
+				$name = $row['node_name'];
+				$data[$row['node_id']] = $name;
+			}
+			return $data;
 		}
 
 		function _validate_callback($param) {
@@ -113,6 +144,7 @@
 
 		function register() {
 			try {
+				$ret = true;
 				$article_id = $this->request['article_id'];
 
 				$this->editor->setValue($this->request);
@@ -123,9 +155,10 @@
 					$obj->status = false;
 				}
 
-
-				$ret = $this->settings->validate();
-				$ret &= $this->editor->validate();
+				if($article_id != '0000000000') {
+					$ret = $this->settings->validate();
+					$ret &= $this->editor->validate();
+				}
 
 				if($ret) {
 					if($this->_register()) {
@@ -196,7 +229,10 @@
 			else {
 				$param['update_user'] = $this->user_id;
 				$param['update_datetime'] = time();
-				$ret = $this->main_table->update($param);
+				if($param['article_id'] == '0000000000') {
+					$param['del_flag'] = '1';
+				}
+				$ret = $this->main_table->upsert($param);
 			}
 
 			if($ret) {
