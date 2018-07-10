@@ -37,6 +37,7 @@
 		var parent;
 		var container;
 		var visual_editor_body_class;
+		var autogrow_resize_flag;
 
 		if(param) {
 			// parent
@@ -361,7 +362,12 @@
 						},
 
 						resize: function(ev) {
-							bframe.fireEvent(window, 'resize');
+							if(autogrow_resize_flag) {
+								autogrow_resize_flag = false;
+							}
+							else {
+								bframe.fireEvent(window, 'resize');
+							}
 						},
 
 						contentDom: function(ev) {
@@ -458,6 +464,7 @@
 
 		function onWindowResize() {
 			onResize();
+			autogrow_resize_flag = true;
 			setTimeout(function(){editor.execCommand('autogrow');}, 100);
 		}
 
