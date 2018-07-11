@@ -37,7 +37,6 @@
 		var parent;
 		var container;
 		var visual_editor_body_class;
-		var editor_resize_flag;
 
 		if(param) {
 			// parent
@@ -362,7 +361,6 @@
 						},
 
 						resize: function(ev) {
-							editor_resize_flag = true;
 							bframe.fireEvent(window, 'resize');
 						},
 
@@ -459,14 +457,7 @@
 		}
 
 		function onWindowResize() {
-			if(editor_resize_flag) {
-				editor_resize_flag = false;
-			}
-			else {
-				onResize();
-				autogrow_resize_flag = true;
-				setTimeout(function(){editor.execCommand('autogrow');}, 100);
-			}
+			onResize();
 		}
 
 		function onResize() {
@@ -498,7 +489,7 @@
 		function onFocus() {
 			cke_controll = '';
 			onScroll();
-			bframe.fireEvent(window, 'resize');
+			setTimeout(function(){editor.execCommand('autogrow');}, 100);
 		}
 
 		function onblurEditor() {
