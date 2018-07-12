@@ -19,6 +19,7 @@
 
 			$this->main_table = new B_Table($this->db, 'article');
 
+			$this->copy_control_config = $copy_control_config;
 			$this->input_control_config = $input_control_config;
 			$this->confirm_control_config = $confirm_control_config;
 			$this->delete_control_config = $delete_control_config;
@@ -45,6 +46,7 @@
 				}
 				else {
 					$article_id = '0000000000';
+					$this->copy_control = new B_Element($this->copy_control_config);
 				}
 
 				$sql = "select * from " . B_DB_PREFIX . "article where article_id = '$article_id'";
@@ -62,6 +64,27 @@
 
 				break;
 			}
+			$this->settings->setFilterValue($this->session['mode']);
+		}
+
+		function copy() {
+			if($this->post['source_id'] && is_numeric($this->post['source_id'])) {
+				$sql = "select * from " . B_DB_PREFIX . "article where article_id = %id%";
+				$sql = str_replace('%id%', $this->post['source_id'] , $sql);
+				$rs = $this->db->query($sql);
+				$row = $this->db->fetch_assoc($rs);
+
+				$this->category = $this->getCategory();
+				$row['category'] = $this->getCategoryName($this->category, $row['category_id']);
+
+				$row['permalink'] = '';
+				$this->editor->setValue($row);
+				$this->settings->setValue($row);
+				$this->setThumnail($row['title_img_file']);
+				$this->setDetailStatus();
+			}
+			$this->control = new B_Element($this->input_control_config);
+			$this->copy_control = new B_Element($this->copy_control_config);
 			$this->settings->setFilterValue($this->session['mode']);
 		}
 

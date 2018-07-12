@@ -369,6 +369,14 @@ background-color: #141414;\
 //		span: P,
 		span: F,
 
+4. AutoGrow
+編集なしでsourceエディタから切り替えた場合、scroll barが表示されない件を修正
+
+137行目	
+// updated by T.Nishida 2018.06.21 
+//			if ( newHeight != currentHeight && lastHeight != newHeight ) {
+			if ( newHeight != currentHeight ) {
+
 
 ■CKEditorのビルド
 	1.ソースをダウンロードし、その配下にdevディレクトリを作成

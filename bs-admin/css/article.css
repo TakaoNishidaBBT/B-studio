@@ -21,6 +21,44 @@ div.list-header {
 	background-color: #ececec;
 }
 
+/* copy */
+ul.copy {
+	margin: 0;
+	padding: 0 120px 0 0;
+	float: right;
+	list-style-type: none;
+	background-color: #ececec;
+}
+ul.copy li {
+	display: inline;
+	margin: 0 4px;
+}
+ul.copy li span {
+	vertical-align: -2px;
+}
+ul.copy li input.number {
+	width: 50px;
+	height: 22px;
+}
+ul.copy li input.dummy {
+	display: none;
+}
+ul.copy li input.copy-button {
+	display: inline-block;
+	text-align: left;
+	vertical-align: middle;
+	height: 35px;
+	padding-left: 44px;
+	width: 100px;
+	border: none;
+	cursor: pointer;
+	background: url(../images/common/copy.png) no-repeat 27px 50%;
+}
+ul.copy li input.copy-button:hover {
+	color: #fff;
+	background: url(../images/common/copy_white.png) no-repeat 27px 50% #0689de;
+}
+
 /* #control */
 div#control {
 	position: relative;
