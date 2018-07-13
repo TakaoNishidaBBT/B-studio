@@ -112,6 +112,14 @@ $settings_config = array(
 				),
 			),
 			array(
+				'filter'			=> 'update/insert/default',
+				'class'				=> 'B_Link',
+				'link'				=> '#',
+				'special_html'		=> 'title="' . __('Clear') . '" class="clear-button" onclick="bstudio.clearText(\'article_date_t\'); return false;"',
+				'specialchars'		=> 'none',
+				'value'				=> '<img alt="Clear" src="images/common/clear_white.png" />',
+			),
+			array(
 				'name'			=> 'error_message',
 				'class'			=> 'B_ErrMsg',
 				'start_html'	=> '<p class="error-message">',
@@ -196,7 +204,6 @@ $settings_config = array(
 				'specialchars'		=> 'none',
 				'value'				=> '<img alt="Clear" src="images/common/clear_white.png" />',
 			),
-
 		),
 	),
 

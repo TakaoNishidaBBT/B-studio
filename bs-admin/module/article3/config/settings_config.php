@@ -112,6 +112,14 @@ $settings_config = array(
 				),
 			),
 			array(
+				'filter'			=> 'update/insert/default',
+				'class'				=> 'B_Link',
+				'link'				=> '#',
+				'special_html'		=> 'title="' . __('Clear') . '" class="clear-button" onclick="bstudio.clearText(\'article_date_t\'); return false;"',
+				'specialchars'		=> 'none',
+				'value'				=> '<img alt="Clear" src="images/common/clear_white.png" />',
+			),
+			array(
 				'name'			=> 'error_message',
 				'class'			=> 'B_ErrMsg',
 				'start_html'	=> '<p class="error-message">',
@@ -400,6 +408,47 @@ $settings_config = array(
 				'name'				=> 'description',
 				'class'				=> 'B_TextArea',
 				'special_html'		=> 'class="textarea ime_on bframe_textarea" maxlength="100"',
+			),
+		),
+	),
+);
+
+//Copy Control
+$copy_control_config = array(
+	'start_html'	=> '<div id="copy-control">',
+	'end_html'		=> '</div>',
+	array(
+		'start_html'	=> '<form name="copy_form" method="post" action="index.php">',
+		'end_html'		=> '</form>',
+		array(
+			'start_html'	=> '<ul class="copy">',
+			'end_html'		=> '</ul>',
+			array(
+				'start_html'	=> '<li>',
+				'end_html'		=> '</li>',
+				array(
+					'start_html'	=> '<span>',
+					'end_html'		=> '</span>',
+					'value'			=> 'No.',
+				),
+				array(
+					'class'			=> 'B_InputText',
+					'name'			=> 'source_id',
+					'special_html'	=> 'class="textbox number ime_off" maxlength="10"',
+				),
+				array(
+					'name'			=> 'dummy',
+					'class'			=> 'B_InputText',
+					'special_html'	=> 'class="dummy"',
+				),
+			),
+			array(
+				'name'			=> 'copy',
+				'class'			=> 'B_Submit',
+				'start_html'	=> '<li>',
+				'end_html'		=> '</li>',
+				'special_html'	=> 'class="copy-button" onClick="bframe.submit(\'copy_form\', \'' . $this->module . '\', \'form\', \'copy\', \'insert\', true)"',
+				'value'			=> __('Copy'),
 			),
 		),
 	),
