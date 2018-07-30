@@ -13,7 +13,7 @@
 <body>
 	<h1>Install B-studio</h1>
 
-	<form method="post" action="index.php">
+	<form method="post" action=".">
 		<div id="select-language">
 			<?php echo $select_language->getHtml(); ?>
 			<input name="action" value="select-language" type="hidden" />
@@ -26,7 +26,7 @@
 		}
 	?>
 
-	<form method="post" action="index.php">
+	<form method="post" action=".">
 		<p>Setting up MySQL DataBase and Site admin configurations.</p>
 
 		<h2>MySQL</h2>

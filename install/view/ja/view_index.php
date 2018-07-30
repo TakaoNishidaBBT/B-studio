@@ -20,14 +20,14 @@
 		}
 	?>
 
-	<form method="post" action="index.php">
+	<form method="post" action=".">
 		<div id="select-language">
 			<?php echo $select_language->getHtml(); ?>
 			<input name="action" value="select-language" type="hidden" />
 		</div>
 	</form>
 
-	<form method="post" action="index.php">
+	<form method="post" action=".">
 
 		<p>MySQLテーブルのセットアップと、サイト管理者の情報を設定します。</p>
 
@@ -57,7 +57,7 @@
 
 		<h2>htaccess</h2>
 
-		<p>Bstudioのルートディレクトリに作成されるhtaccessファイル</p>
+		<p>B-studioのルートディレクトリに作成されるhtaccessファイル</p>
 		<fieldset>
 			<legend>htaccess</legend>
 			<?php echo $root_htaccess->getHtml(); ?>

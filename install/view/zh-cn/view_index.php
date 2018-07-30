@@ -20,14 +20,14 @@
 		}
 	?>
 
-	<form method="post" action="index.php">
+	<form method="post" action=".">
 		<div id="select-language">
 			<?php echo $select_language->getHtml(); ?>
 			<input name="action" value="select-language" type="hidden" />
 		</div>
 	</form>
 
-	<form method="post" action="index.php">
+	<form method="post" action=".">
 
 		<p>创建MySQL表以及设置网站管理员信息。</p>
 
