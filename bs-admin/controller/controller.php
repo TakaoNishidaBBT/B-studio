@@ -22,10 +22,6 @@
 			throw new Exception();
 		}
 
-		// Set TERMINAL_ID
-		define('TERMINAL_ID', $_REQUEST['terminal_id']);
-		define('DISPATCH_URL', 'index.php?terminal_id=' . TERMINAL_ID);
-
 		$module_dir = 'module/';
 		$page = $_REQUEST['page'] . '.php';
 		$dir = $module_dir . $_REQUEST['module'];

@@ -40,15 +40,8 @@
 		}
 
 		function admin() {
-			if(!defined('TERMINAL_ID')) {
-				// Set TERMINAL_ID
-				define('TERMINAL_ID', $this->util->getRandomText(12));
-				$_SESSION['terminal_id'] = TERMINAL_ID;
-
-				// Set session for each TERMINAL_ID
-				$_SESSION[TERMINAL_ID] = array();
-			}
-			define('DISPATCH_URL', 'index.php?terminal_id=' . TERMINAL_ID);
+			// Set session for each TERMINAL_ID
+			$_SESSION[TERMINAL_ID] = array();
 
 			// bframe_message
 			$this->bframe_message = new B_Element($this->bframe_message_config, $this->user_auth);
