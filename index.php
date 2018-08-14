@@ -92,7 +92,7 @@
 				break;
 
 			case 'js':
-				header('Content-type: text/javascript; charset=' . B_CHARSET);
+				header('Content-type: application/javascript');
 				break;
 
 			case 'gif':
