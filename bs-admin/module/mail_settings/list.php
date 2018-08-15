@@ -23,7 +23,7 @@
 		}
 
 		function init() {
-			$this->session = '';
+			$this->session = array();
 
 			$this->setProperty();
 			$this->setHeader();

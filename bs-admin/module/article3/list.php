@@ -47,7 +47,7 @@
 		}
 
 		function init() {
-			$this->session = '';
+			$this->session = array();
 
 			$this->setRequest();
 			$this->setProperty();

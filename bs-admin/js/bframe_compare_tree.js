@@ -571,7 +571,6 @@
 					var icon = config.node_type;
 				}
 			}
-console.log('icon', icon);
 			obj_img.src = property.icon[icon].src;
 
 			span = document.createElement('span');
