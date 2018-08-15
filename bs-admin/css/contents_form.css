@@ -156,6 +156,7 @@ div.editor_container {
 }
 div#preview {
 	background-color: #232323;
+	background-color: #fff;
 	text-align: center;
 }
 iframe#inline_frame,

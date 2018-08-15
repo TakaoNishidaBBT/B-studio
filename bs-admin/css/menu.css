@@ -45,6 +45,9 @@ dl.login-user dt {
 	padding: 0;
 	display: inline;
 }
+dl.login-user dt img {
+	vertical-align: text-bottom;
+}
 dl.login-user dd {
 	margin: 0;
 	padding: 0;

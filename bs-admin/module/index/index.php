@@ -41,6 +41,7 @@
 
 		function admin() {
 			// Set session for each TERMINAL_ID
+			$_SESSION['terminal_id'] = TERMINAL_ID;
 			$_SESSION[TERMINAL_ID] = array();
 
 			// bframe_message

@@ -26,7 +26,7 @@
 			<ul>
 				<li>
 					<dl class="login-user">
-						<dt><?php echo __('User:'); ?></dt>
+						<dt><img src="images/menu/user.png" alt="User" /></dt>
 						<dd><strong><?php echo $this->user_name ?></strong></dd>
 					</dl>
 				</li>
