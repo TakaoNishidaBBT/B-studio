@@ -87,12 +87,12 @@
 				header('Content-type: application/x-shockwave-flash');
 				break;
 
-			case 'css':
-				header('Content-Type: text/css; charset=' . B_CHARSET);
-				break;
-
 			case 'js':
 				header('Content-type: application/javascript');
+				break;
+
+			case 'css':
+				header('Content-Type: text/css; charset=' . B_CHARSET);
 				break;
 
 			case 'gif':

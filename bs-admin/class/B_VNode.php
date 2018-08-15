@@ -130,47 +130,47 @@
 			if(is_array($this->node)) {
 				foreach(array_keys($this->node) as $key) {
 					$ret = $this->node[$key]->compare($version_right, $left, $right);
-					if(!$this->node_status && $ret) {
-						$this->node_status = 'diff_child';
+					if(!$this->node_diff_status && $ret) {
+						$this->node_diff_status = 'diff_child';
 					}
 				}
 			}
-			return $this->node_status;
+			return $this->node_diff_status;
 		}
 
 		function setNodeStatus($version_right, $left, $right) {
 			if($this->version == $version_right) {
 				if(!$right[$this->node_id]) return false;
 				if($this->node_name != $left[$this->node_id]['node_name']) {
-					$this->node_status = 'diff';
+					$this->node_diff_status = 'diff';
 					return true;
 				}
 				if($this->contents_id != $left[$this->node_id]['contents_id']) {
-					$this->node_status = 'diff';
+					$this->node_diff_status = 'diff';
 					return true;
 				}
 				if($this->parent && $this->parent->node_id != $left[$this->node_id]['parent_node']) {
-					$this->node_status = 'diff';
+					$this->node_diff_status = 'diff';
 					return true;
 				}
 			}
 			else {
 				if(!$left[$this->node_id]) return false;
 				if($this->node_name != $right[$this->node_id]['node_name']) {
-					$this->node_status = 'diff';
+					$this->node_diff_status = 'diff';
 					return true;
 				}
 				if($this->contents_id != $right[$this->node_id]['contents_id']) {
-					$this->node_status = 'diff';
+					$this->node_diff_status = 'diff';
 					return true;
 				}
 				if($this->parent && $this->parent->node_id != $right[$this->node_id]['parent_node']) {
-					$this->node_status = 'diff';
+					$this->node_diff_status = 'diff';
 					return true;
 				}
 			}
 			if($right[$this->node_id]['updated_contents']) {
-				$this->node_status = 'diff';
+				$this->node_diff_status = 'diff';
 				return true;
 			}
 			return false;
@@ -194,7 +194,7 @@
 			$list['node_class'] = $this->node_class;
 			$list['node_name'] = mb_convert_encoding($this->node_name, 'UTF-8', B_MB_DETECT_ORDER);
 			$list['contents_id'] = $this->contents_id;
-			$list['node_status'] = $this->node_status;
+			$list['node_diff_status'] = $this->node_diff_status;
 			$list['node_count'] = $this->node_count;
 			$list['folder_count'] = $this->folder_count;
 			$list['create_datetime_u'] = $this->create_datetime;

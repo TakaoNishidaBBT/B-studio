@@ -254,11 +254,11 @@
 				}
 			}
 			var obj_img = document.getElementById(target_index + 'i' + node_id);
-			var node_status = document.getElementById(target_index + 'ns' + node_id);
+			var node_diff_status = document.getElementById(target_index + 'ns' + node_id);
 			var node_type = document.getElementById(target_index + 'nt' + node_id);
 			if(node_type.value == 'folder') {
-				if(node_type.value != 'root' && node_type.value != 'trash' && node_status.value) {
-					var icon = node_type.value + '_open_' + node_status.value;
+				if(node_type.value != 'root' && node_type.value != 'trash' && node_diff_status.value) {
+					var icon = node_type.value + '_open_' + node_diff_status.value;
 				}
 				else {
 					var icon = node_type.value + '_open';
@@ -289,10 +289,10 @@
 				}
 			}
 			var obj_img = document.getElementById(target_index + 'i' + node_id);
-			var node_status = document.getElementById(target_index + 'ns' + node_id);
+			var node_diff_status = document.getElementById(target_index + 'ns' + node_id);
 			var node_type = document.getElementById(target_index + 'nt' + node_id);
-			if(node_type.value != 'root' && node_type.value != 'trash' && (node_type.value == 'folder' || node_type.value == 'template') && node_status.value) {
-				var icon = node_type.value + '_' + node_status.value;
+			if(node_type.value != 'root' && node_type.value != 'trash' && (node_type.value == 'folder' || node_type.value == 'template') && node_diff_status.value) {
+				var icon = node_type.value + '_' + node_diff_status.value;
 			}
 			else {
 				var icon = node_type.value;
@@ -555,12 +555,12 @@
 			obj_img = document.createElement('img');
 			obj_img.id = target_index + 'i' + node_id;
 			img_span.appendChild(obj_img);
-			if(config.node_type != 'root' && config.node_type != 'trash' && config.node_status) {
+			if(config.node_type != 'root' && config.node_type != 'trash' && config.node_diff_status) {
 				if(config.node_type == 'folder' && config.children && config.opened) {
-					var icon = config.node_type + '_open_' + config.node_status;
+					var icon = config.node_type + '_open_' + config.node_diff_status;
 				}
 				else {
-					var icon = config.node_type + '_' + config.node_status;
+					var icon = config.node_type + '_' + config.node_diff_status;
 				}
 			}
 			else {
@@ -571,6 +571,7 @@
 					var icon = config.node_type;
 				}
 			}
+console.log('icon', icon);
 			obj_img.src = property.icon[icon].src;
 
 			span = document.createElement('span');
@@ -582,7 +583,7 @@
 			input.type = 'hidden';
 			input.id = target_index + 'ns' + node_id;
 			input.name = 'node_type';
-			input.value = config.node_status;
+			input.value = config.node_diff_status;
 			a.appendChild(input);
 
 			input = document.createElement('input');
