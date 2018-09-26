@@ -140,15 +140,16 @@
 									from " . B_DB_PREFIX . B_TEMPLATE_NODE_TABLE . " a
 										," . B_DB_PREFIX . "version b
 									where a.version_id = b.version_id
-									and contents_id in (
+									and (contents_id in (
 										select a.contents_id
 										from " . B_DB_PREFIX . B_TEMPLATE_TABLE . " a
 										," . B_DB_PREFIX . "version b
-										where a.version_id = b.version_id and a.version_id = '$version_right'
-										or (a.version_id = b.version_id and a.revision_id = b.private_revision_id and a.version_id = $version_left)
+										where a.version_id = b.version_id
+										and (a.version_id = '$version_right'
+										or (a.version_id = '$version_left' and a.revision_id = b.private_revision_id))
 									)
-									or (a.version_id = b.version_id and a.version_id = '$version_right')
-									or (a.version_id = b.version_id and a.revision_id = b.private_revision_id and a.version_id = $version_left)
+									or a.version_id = '$version_right'
+									or (a.version_id = '$version_left' and a.revision_id = b.private_revision_id))
 									group by node_id
 								) b
 							where a.node_id = b.node_id
