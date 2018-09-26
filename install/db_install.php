@@ -13,6 +13,7 @@
 		function install() {
 			try {
 				$this->createTables();
+				$this->createIndexes();
 				$this->createViews();
 				$this->insertVersion();
 				$this->insertCurrentVersion();
@@ -25,6 +26,14 @@
 			}
 
 			return true;
+		}
+
+		function createIndexes() {
+			$this->createIndex('./sql/cre_index.sql');
+		}
+
+		function createIndex($file_name) {
+			$this->db->import($file_name);
 		}
 
 		function createTables() {

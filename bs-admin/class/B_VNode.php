@@ -106,6 +106,44 @@
 			return $rs;
 		}
 
+		function getSubFolderCount($node_id) {
+			$node_id = $this->db->real_escape_string($node_id);
+			$sql = "select count(*) cnt from %VIEW% ";
+
+			if($node_id) {
+				$sql.= "where parent_node = '$node_id'";
+			}
+			else {
+				// get root node
+				$sql.= "where parent_node is null";
+			}
+			$sql.= " and node_type = 'folder' and del_flag='0'";
+			$sql = str_replace('%VIEW%', B_DB_PREFIX . $this->view, $sql);
+			$rs = $this->db->query($sql);
+			$row = $this->db->fetch_assoc($rs);
+
+			return $row['cnt'];
+		}
+
+		function getSubNodeCount($node_id) {
+			$node_id = $this->db->real_escape_string($node_id);
+			$sql = "select count(*) cnt from %VIEW% ";
+
+			if($node_id) {
+				$sql.= "where parent_node = '$node_id'";
+			}
+			else {
+				// get root node
+				$sql.= "where parent_node is null";
+			}
+			$sql.= " and del_flag='0'";
+			$sql = str_replace('%VIEW%', B_DB_PREFIX . $this->view, $sql);
+			$rs = $this->db->query($sql);
+			$row = $this->db->fetch_assoc($rs);
+
+			return $row['cnt'];
+		}
+
 		function setConfig($config) {
 			foreach($config as $key => $value) {
 				$this->$key = $value;

@@ -1,4 +1,4 @@
-create or replace view  %DB_PREFIX%v_w_widget as
+create or replace view %DB_PREFIX%v_w_widget as
 select *
 from %DB_PREFIX%widget a
 where concat(a.version_id, a.revision_id) = (

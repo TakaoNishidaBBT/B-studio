@@ -1,4 +1,4 @@
-create or replace view  %DB_PREFIX%v_w_form as
+create or replace view %DB_PREFIX%v_w_form as
 select *
 from %DB_PREFIX%form a
 where concat(a.version_id, a.revision_id) = (

@@ -1,4 +1,4 @@
-create or replace view  %DB_PREFIX%v_compare_resource_node as
+create or replace view %DB_PREFIX%v_compare_resource_node as
 select *
 from %DB_PREFIX%resource_node a
 where concat(a.version_id, a.revision_id) = (

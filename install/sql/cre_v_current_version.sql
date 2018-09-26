@@ -1,4 +1,4 @@
-create or replace view  %DB_PREFIX%v_current_version as
+create or replace view %DB_PREFIX%v_current_version as
 select b.version_id reserved_version_id
     ,b.publication_datetime_u
     ,if(c.version_id, c.version_id, d.version_id) current_version_id

@@ -154,25 +154,29 @@
 
 			$sql = "select a.*, a.contents_id updated_contents, c.cnt
 					from " . B_DB_PREFIX . B_CONTENTS_NODE_TABLE . " a
-					,(select max(concat(version_id, revision_id)) version, node_id, count(*) cnt from " . B_DB_PREFIX . B_CONTENTS_NODE_TABLE . "
-						where node_id in(
-							select node_id
+						,(
+							select max(concat(a.version_id, a.revision_id)) version, a.node_id, count(*) cnt
 							from " . B_DB_PREFIX . B_CONTENTS_NODE_TABLE . " a
-								," . B_DB_PREFIX . "version b
-							where contents_id in (
-								select a.contents_id
-								from " . B_DB_PREFIX . B_CONTENTS_TABLE . " a
-								," . B_DB_PREFIX . "version b
-								where a.version_id = '$version_right'
-								or (a.version_id = $version_left and a.version_id = b.version_id and a.revision_id = b.private_revision_id)
-							)
-							or a.version_id = '$version_right'
-							or (a.version_id = $version_left and a.version_id = b.version_id and a.revision_id = b.private_revision_id)
-							group by node_id
-						)
-						and version_id < '$version_right'
-						group by node_id
-					) c
+								,(
+									select node_id
+									from " . B_DB_PREFIX . B_CONTENTS_NODE_TABLE . " a
+										," . B_DB_PREFIX . "version b
+									where a.version_id = b.version_id
+									and contents_id in (
+										select a.contents_id
+										from " . B_DB_PREFIX . B_CONTENTS_TABLE . " a
+										," . B_DB_PREFIX . "version b
+										where (a.version_id = b.version_id and a.version_id = '$version_right')
+										or (a.version_id = b.version_id and a.revision_id = b.private_revision_id and a.version_id = $version_left)
+									)
+									or (a.version_id = b.version_id and a.version_id = '$version_right')
+									or (a.version_id = b.version_id and a.revision_id = b.private_revision_id and a.version_id = $version_left)
+									group by a.node_id
+								) b
+							where a.node_id = b.node_id
+							and version_id < '$version_right'
+							group by a.node_id
+						) c
 					where concat(a.version_id, a.revision_id) = c.version
 					and a.node_id = c.node_id";
 
@@ -183,21 +187,24 @@
 
 			$sql = "select a.*, a.contents_id updated_contents, c.cnt
 					from " . B_DB_PREFIX . B_CONTENTS_NODE_TABLE . " a
-					,(select max(concat(version_id, revision_id)) version, node_id, count(*) cnt from " . B_DB_PREFIX . B_CONTENTS_NODE_TABLE . "
-						where node_id in(
-							select node_id
-							from " . B_DB_PREFIX . B_CONTENTS_NODE_TABLE . " a
-							where contents_id in (
-								select a.contents_id
-								from " . B_DB_PREFIX . B_CONTENTS_TABLE . " a
-								where a.version_id = '$version_right'
-							)
-							or a.version_id = '$version_right'
-							group by node_id
-						)
-						and version_id <= '$version_right'
-						group by node_id
-					) c
+						,(
+							select max(concat(a.version_id, a.revision_id)) version, a.node_id, count(*) cnt
+						  	from " . B_DB_PREFIX . B_CONTENTS_NODE_TABLE . " a,
+								(
+									select node_id
+									from " . B_DB_PREFIX . B_CONTENTS_NODE_TABLE . "
+									where contents_id in (
+										select contents_id
+										from " . B_DB_PREFIX . B_CONTENTS_TABLE . "
+										where version_id = '$version_right'
+									)
+									or version_id = '$version_right'
+									group by node_id
+								) b
+							where a.node_id = b.node_id
+							and version_id <= '$version_right'
+							group by a.node_id
+						) c
 					where concat(a.version_id, a.revision_id) = c.version
 					and a.node_id = c.node_id";
 

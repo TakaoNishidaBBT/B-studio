@@ -1,4 +1,4 @@
-create or replace view  %DB_PREFIX%v_w_contents as
+create or replace view %DB_PREFIX%v_w_contents as
 select *
 from %DB_PREFIX%contents a
 where concat(a.version_id, a.revision_id) = (

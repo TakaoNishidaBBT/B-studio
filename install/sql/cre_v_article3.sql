@@ -1,4 +1,4 @@
-create or replace view  %DB_PREFIX%v_article3 as
+create or replace view %DB_PREFIX%v_article3 as
 select 	  a.*
 		, concat(a.article_date_u, a.article_id) article_date
 		, b.path
