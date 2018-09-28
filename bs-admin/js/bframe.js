@@ -370,7 +370,7 @@
 
 	bframe.getLinkParam = function(link) {
 		if(link.split('?').length < 2) return;
-		var hash = [];
+		var hash = {};
 		var param = link.split('?')[1];
 		var parray = param.split('&');
 		for(var i=0;i<parray.length;i++) {
