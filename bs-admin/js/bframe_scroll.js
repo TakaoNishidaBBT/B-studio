@@ -25,7 +25,7 @@
 
 		var wrapper;
 		var bar;
-		var barConainer;
+		var barContainer;
 		var barHeight;
 		var minBarHeight = 30;
 		var barScrollHeight;
@@ -71,20 +71,22 @@
 		}
 		paddingTop = style.paddingTop.substring(0, style.paddingTop.length-2);
 		paddingBottom = style.paddingBottom.substring(0, style.paddingBottom.length-2);
-
 		barHeight = Math.round(self.clientHeight * self.clientHeight / self.scrollHeight);
 		barScrollHeight = self.clientHeight - barHeight;
 		scrollHeight = self.scrollHeight - self.clientHeight;
-		barConainer = document.createElement('div');
-		barConainer.style.position = 'absolute';
-		barConainer.style.width = '11px';
-		barConainer.style.height = self.clientHeight + 'px';
-		barConainer.style.right = '0';
-		barConainer.style.top = '0';
-		barConainer.style.opacity = '0';
-		barConainer.style.borderRadius = '6px';
-		barConainer.style.boxSizing = 'border-box';
 
+		// barContainer
+		barContainer = document.createElement('div');
+		barContainer.style.position = 'absolute';
+		barContainer.style.width = '11px';
+		barContainer.style.height = self.clientHeight + 'px';
+		barContainer.style.right = '0';
+		barContainer.style.top = '0';
+		barContainer.style.opacity = '0';
+		barContainer.style.borderRadius = '6px';
+		barContainer.style.boxSizing = 'border-box';
+
+		// bar
 		bar = document.createElement('span');
 		bar.style.position = 'absolute';
 		bar.style.width = '8px';
@@ -96,13 +98,13 @@
 		bar.style.boxSizing = 'border-box';
 
 		if(mode == 'textarea') {
-			self.parentNode.appendChild(barConainer);
+			self.parentNode.appendChild(barContainer);
 			self.parentNode.appendChild(bar);
 			bouncescroll = false;
 		}
 		else {
 			self.style.boxSizing = 'border-box';
-			self.appendChild(barConainer);
+			self.appendChild(barContainer);
 			self.appendChild(bar);
 		}
 
@@ -122,8 +124,8 @@
 		bframe.addEventListener(self, 'resize', onResize);
 		bframe.addEventListener(self, 'scroll', onScroll);
 		bframe.addEventListener(bar, 'mouseover', onContainerMouseover);
-		bframe.addEventListener(barConainer, 'mouseover', onContainerMouseover);
-		bframe.addEventListener(barConainer, 'mouseout', onContainerMouseout);
+		bframe.addEventListener(barContainer, 'mouseover', onContainerMouseover);
+		bframe.addEventListener(barContainer, 'mouseout', onContainerMouseout);
 
 		if(mode == 'ace') {
 			bframe.addEventListener(self.parentNode, 'wheel', onWheel);
@@ -157,13 +159,13 @@
 
 			bar.style.top = 0;
 			bar.style.height = 0;
-			barConainer.style.top = 0;
-			barConainer.style.height = 0;
-			barConainer.style.display = 'none';
+			barContainer.style.top = 0;
+			barContainer.style.height = 0;
+			barContainer.style.display = 'none';
 
 			if(self.clientHeight >= self.scrollHeight) {
 				bar.style.opacity = '0';
-				barConainer.style.opacity = '0';
+				barContainer.style.opacity = '0';
 			}
 
 			// set barHeight
@@ -175,7 +177,7 @@
 			barScrollHeight = self.clientHeight - barHeight;
 			scrollHeight = self.scrollHeight - self.clientHeight;
 
-			barConainer.style.height = self.clientHeight + 'px';
+			barContainer.style.height = self.clientHeight + 'px';
 			bar.style.height = barHeight - padding*2 + 'px';
 			var hoverObj = document.querySelectorAll('.bframe_scroll:hover');
 			for(var i=0; i < hoverObj.length; i++) {
@@ -189,12 +191,12 @@
 				if(luminance(bgColor) < 120) {
 					bar.style.backgroundColor = '#fff';
 					bar.style.border = '1px solid #aaa';
-					barConainer.style.backgroundColor = '#555';
+					barContainer.style.backgroundColor = '#555';
 				}
 				else {
 					bar.style.backgroundColor = '#000';
 					bar.style.border = '1px solid #aaa';
-					barConainer.style.backgroundColor = '#ddd';
+					barContainer.style.backgroundColor = '#ddd';
 				}
 			}
 
@@ -339,7 +341,7 @@
 
 			speed = deltaY * wheel_ratio;
 			self.scrollTop += speed;
-			barConainer.style.top = barContainerTop + 'px';
+			barContainer.style.top = barContainerTop + 'px';
 
 			// set padding (for bounce scroll)
 			if(bouncescroll) {
@@ -396,11 +398,11 @@
 						}
 						if(self.scrollTop >= scrollHeight) self.scrollTop = scrollHeight;
 						if(mode == 'textarea') {
-							barConainer.style.top = 0;
+							barContainer.style.top = 0;
 							var bartop = Math.round(barScrollHeight * self.scrollTop / scrollHeight) + padding;
 						}
 						else {
-							barConainer.style.top = self.scrollTop + 'px';
+							barContainer.style.top = self.scrollTop + 'px';
 							var bartop = self.scrollTop + Math.round(barScrollHeight * self.scrollTop / scrollHeight) + padding;
 						}
 
@@ -470,8 +472,8 @@
 
 			bar.style.transition = 'opacity 0.4s ease-out';
 			bar.style.opacity = '0';
-			barConainer.style.transition = 'opacity 0.2s ease-out';
-			barConainer.style.opacity = '0';
+			barContainer.style.transition = 'opacity 0.2s ease-out';
+			barContainer.style.opacity = '0';
 		}
 
 		function onContainerMouseover(event) {
@@ -479,8 +481,8 @@
 
 			if(self.clientHeight >= self.scrollHeight) return;
 
-			barConainer.style.transition = 'opacity 0.2s ease-out';
-			barConainer.style.opacity = '0.7';
+			barContainer.style.transition = 'opacity 0.2s ease-out';
+			barContainer.style.opacity = '0.7';
 			bar.style.opacity = '0.6';
 
 			event.stopPropagation();
@@ -490,8 +492,8 @@
 			if(dragging) return;
 			if(self.clientHeight >= self.scrollHeight) return;
 
-			barConainer.style.transition = 'opacity 0.2s ease-out';
-			barConainer.style.opacity = '0';
+			barContainer.style.transition = 'opacity 0.2s ease-out';
+			barContainer.style.opacity = '0';
 		}
 
 		function onMouseDown(event) {
@@ -510,7 +512,7 @@
 
 			mpos = bframe.getMousePosition(event);
 			self.scrollTop = draggStartScrollTop + (mpos.y - draggStartMousePosition.y) * Math.round(scrollHeight / barScrollHeight);
-			barConainer.style.top = self.scrollTop + 'px';
+			barContainer.style.top = self.scrollTop + 'px';
 			if(mode == 'textarea') {
 				var bartop = Math.round(barScrollHeight * self.scrollTop / scrollHeight) + padding;
 			}
@@ -533,7 +535,7 @@
 			else {
 				bar.style.opacity = '0';
 			}
-			barConainer.style.opacity = '0';
+			barContainer.style.opacity = '0';
 		}
 
 		function rgba(color) {
