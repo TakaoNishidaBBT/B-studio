@@ -86,9 +86,9 @@ $list_config = array(
 		array(
 			'name'				=> 'title',
 			'class'				=> 'B_Link',
-			'start_html'		=> '<th class="sortable" style="width:260px">',
-			'start_html_asc'	=> '<th class="sortable asc" style="width:260px">',
-			'start_html_desc'	=> '<th class="sortable desc" style="width:260px">',
+			'start_html'		=> '<th class="sortable" style="width:400px">',
+			'start_html_asc'	=> '<th class="sortable asc" style="width:400px">',
+			'start_html_desc'	=> '<th class="sortable desc" style="width:400px">',
 			'end_html'			=> '</th>',
 			'value'				=> __('Title'),
 			'link'				=> DISPATCH_URL,
@@ -153,8 +153,6 @@ $list_config = array(
 			'name'			=> 'title',
 			'start_html'	=> '<td class="left">',
 			'end_html'		=> '</td>',
-			'shorten_text'	=> '100',
-			'trimmarker'	=> '…',
 			'strip_tags'	=> true,
 		),
 		array(

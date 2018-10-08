@@ -135,8 +135,8 @@
 			element.className = 'popup';
 			element.style.display = 'table-cell';
 			element.style.position = 'absolute';
-			element.style.overflowX = 'auto';
-			element.style.overflowY = 'auto';
+			element.style.overflowX = 'hidden';
+			element.style.overflowY = 'hidden';
 			element.style.visibility = 'hidden';
 			element.style.padding = 0;
 			element.style.margin = 0;
@@ -271,6 +271,8 @@
 			}
 
 			this.show = function() {
+				element.style.overflowX = 'auto';
+				element.style.overflowY = 'auto';
 				element.style.visibility='visible';
 				bframe.fireEvent(element, 'resize')
 			}

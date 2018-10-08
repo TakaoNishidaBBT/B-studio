@@ -154,7 +154,7 @@
 			}
 			context_menu.setElementClassName(context_menu_class);
 			context_menu.setOffsetHeight(selectbox.offsetHeight-1);
-			selectbox.style.width = (context_menu.getRealWidth()) + 'px';
+			selectbox.style.maxWidth = (context_menu.getRealWidth()) + 'px';
 
 			bframe.addEventListener(target, 'change', onchange);
 			bframe.addEventListener(selectbox, 'focus', onfocus);

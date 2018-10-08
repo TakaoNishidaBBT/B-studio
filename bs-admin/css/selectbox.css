@@ -1,5 +1,12 @@
 @charset "UTF-8";
 
+select {
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+	max-width: 200px;
+}
+
 /* black style */
 a.selectbox,
 a:visited.selectbox,
@@ -67,6 +74,11 @@ table.selectbox td {
 	color: #fff;
 	background: url(../images/common/popup_menu_back_gray.png) repeat-x;
 	vertical-align: middle;
+
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+	max-width: 200px;
 }
 table.selectbox td.selected {
 	background-position: 0 -30px;
@@ -112,6 +124,11 @@ a:active.selectbox.white {
 	background-position: center right 4px, center right 4px, center right 4px;
 	background-size: 16px, 0, 0;
 	background-color: #fff;
+
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+	max-width: 200px;
 }
 a.selectbox.white:focus {
 	background: url(../images/common/select_down_black.png) center right 4px no-repeat #fff;
@@ -149,6 +166,11 @@ table.selectbox.white td {
 	color: #333;
 	background: url(../images/common/popup_menu_back.png) repeat-x;
 	vertical-align: middle;
+
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+	max-width: 200px;
 }
 table.selectbox.white td.selected {
 	background-position: 0 -30px;
