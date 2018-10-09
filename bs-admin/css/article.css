@@ -20,12 +20,7 @@ div.list-header {
 	height: 52px;
 	background-color: #ececec;
 }
-table.list td {
-	text-overflow: ellipsis;
-	overflow: hidden;
-	white-space: nowrap;
-	max-width: 100px;
-}
+
 /* copy */
 ul.copy {
 	margin: 0;

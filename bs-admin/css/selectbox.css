@@ -33,6 +33,12 @@ a:active.selectbox {
 	background-size: 16px, 0;
 	background-color: #666;
 	outline: none;
+	vertical-align: middle;
+
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+	max-width: 200px;
 }
 a.opened {
 	background-image: url(../images/common/select_up.png);
@@ -124,6 +130,7 @@ a:active.selectbox.white {
 	background-position: center right 4px, center right 4px, center right 4px;
 	background-size: 16px, 0, 0;
 	background-color: #fff;
+	vertical-align: middle;
 
 	text-overflow: ellipsis;
 	overflow: hidden;

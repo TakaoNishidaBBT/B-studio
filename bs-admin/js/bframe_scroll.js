@@ -63,7 +63,6 @@
 		}
 
 		self.style.overflow = 'hidden';
-		self.style.overflowY = 'hidden';
 
 		var style = bframe.getStyle(self);
 		if(style.position.toLowerCase() == 'static') {

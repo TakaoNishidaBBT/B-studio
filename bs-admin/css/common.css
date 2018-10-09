@@ -535,6 +535,11 @@ table.list td {
 	line-height: 22px;
 	overflow: hidden;
 	vertical-align: middle;
+
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+	max-width: 80px;
 }
 table.list td img {
 	vertical-align: middle;
