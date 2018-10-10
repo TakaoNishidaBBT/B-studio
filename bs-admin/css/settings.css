@@ -29,6 +29,7 @@ span.download-button {
 	background-color: #205380;
 	color: #fff;
 	cursor: pointer;
+	white-space: nowrap;
 }
 span.download-button:hover {
 	background-color: #306390;
