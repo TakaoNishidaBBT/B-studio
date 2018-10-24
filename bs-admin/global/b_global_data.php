@@ -7,101 +7,101 @@
 */
 	${$g_data_set}['language'] =
 		array(
-				'en'	=> __('English'),
-				'ja'	=> __('Japanese'),
-				'zh-cn'	=> __('Chinese'),
+			'en'	=> __('English'),
+			'ja'	=> __('Japanese'),
+			'zh-cn'	=> __('Chinese'),
 		);
 
 	${$g_data_set}['row_per_page'] =
 		array(
-				'1'		=> __('1 line'),
-				'10'	=> __('10 lines'),
-				'20'	=> __('20 lines'),
-				'50'	=> __('50 lines'),
-				'100'	=> __('100 lines'),
+			'1'		=> __('1 line'),
+			'10'	=> __('10 lines'),
+			'20'	=> __('20 lines'),
+			'50'	=> __('50 lines'),
+			'100'	=> __('100 lines'),
 		);
 
 	${$g_data_set}['user_auth'] =
 		array(
-				'admin'		=> __('Admin'),
-				'editor'	=> __('Editor'),
-				'preview'	=> __('Preview'),
+			'admin'		=> __('Admin'),
+			'editor'	=> __('Editor'),
+			'preview'	=> __('Preview'),
 		);
 
 	${$g_data_set}['user_status'] =
 		array(
-				'1'		=> __('Enabled'),
-				'9'		=> __('Disabled'),
+			'1'		=> __('Enabled'),
+			'9'		=> __('Disabled'),
 		);
 
 	${$g_data_set}['record_status_list'] =
 		array(
-				''		=> '',
-				'0'		=> '',
-				'1'		=> '<img src="images/common/square.png" alt="publicationed" />',
+			''		=> '',
+			'0'		=> '',
+			'1'		=> '<img src="images/common/square.png" alt="publicationed" />',
 		);
 
 	${$g_data_set}['publication_status'] =
 		array(
-				''		=> '',
-				'0'		=> '',
-				'1'		=> '<img src="images/common/square.png" alt="publicationed" />',
-				'2'		=> '<img src="images/common/star.png" alt="reserved" />',
+			''		=> '',
+			'0'		=> '',
+			'1'		=> '<img src="images/common/square.png" alt="publicationed" />',
+			'2'		=> '<img src="images/common/star.png" alt="reserved" />',
 		);
 
 	${$g_data_set}['publication'] =
 		array(
-				'1'		=> __('Published'),
-				'2'		=> __('Preview'),
-				'3'		=> __('Closed'),
+			'1'		=> __('Published'),
+			'2'		=> __('Preview'),
+			'3'		=> __('Closed'),
 		);
 
 	${$g_data_set}['node_status'] =
 		array(
-				''		=> __('Published'),
-				'9'		=> __('Private'),
+			''		=> __('Published'),
+			'9'		=> __('Private'),
 		);
 
 	${$g_data_set}['description_flag'] =
 		array(
-				'1'		=> __('On'),
-				'2'		=> __('Off'),
+			'1'		=> __('On'),
+			'2'		=> __('Off'),
 		);
 
 	${$g_data_set}['external_link'] =
 		array(
-				''		=> __('Off'),
-				'1'		=> __('On'),
+			''		=> __('Off'),
+			'1'		=> __('On'),
 		);
 
 	${$g_data_set}['datetime_error_message'] =
 		array(
-				'1'		=> __(' (out of range)'),
-				'2'		=> __(' (invalid time)'),
-				'3'		=> __(' (invalid date)'),
-				'4'		=> __(' (format error)'),
+			'1'		=> __(' (out of range)'),
+			'2'		=> __(' (invalid time)'),
+			'3'		=> __(' (invalid date)'),
+			'4'		=> __(' (format error)'),
 		);
 
 	${$g_data_set}['node_error'] =
 		array(
-				'0'		=> __('DB error'),
-				'1'		=> __('The destination folder is a subfolder of the selected folder'),
-				'2'		=> __('The number of nodes are different. Please sort in the right pane.'),
-				'3'		=> __('Another user has updated this record'),
+			'0'		=> __('DB error'),
+			'1'		=> __('The destination folder is a subfolder of the selected folder'),
+			'2'		=> __('The number of nodes are different. Please sort in the right pane.'),
+			'3'		=> __('Another user has updated this record'),
 		);
 
 	${$g_data_set}['template_node_error'] =
 		array(
-				'0'		=> __('DB error'),
-				'1'		=> __('The destination template is a subtemplate of the selecter template'),
-				'2'		=> __('The number of nodes are different'),
-				'3'		=> __('Another user has updated this record'),
+			'0'		=> __('DB error'),
+			'1'		=> __('The destination template is a subtemplate of the selecter template'),
+			'2'		=> __('The number of nodes are different'),
+			'3'		=> __('Another user has updated this record'),
 		);
 
 	${$g_data_set}['mail_type_settings'] =
 		array(
-				'contact_reply'		=> __('Contact Auto Reply'),
-				'contact_notice'	=> __('Contact Notice'),
+			'contact_reply'		=> __('Contact Auto Reply'),
+			'contact_notice'	=> __('Contact Notice'),
 		);
 
 	${$g_data_set}['table']['contents_node'] =
