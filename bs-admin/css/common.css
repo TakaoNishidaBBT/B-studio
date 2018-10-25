@@ -531,7 +531,6 @@ table.list td {
 	border-bottom: 1px solid #ddd;
 	text-align: left;
 	color: #444;
-	white-space: nowrap;
 	line-height: 22px;
 	overflow: hidden;
 	vertical-align: middle;
