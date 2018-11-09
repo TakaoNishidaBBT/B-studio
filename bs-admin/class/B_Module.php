@@ -42,17 +42,7 @@
 		}
 
 		function getModuleName() {
-			$dir = dirname($this->file_path);
-			if(PHP_OS == 'WINNT' || PHP_OS == 'WIN32') {
-				$i = strrpos($dir, '\\');
-			}
-			else {
-				$i = strrpos($dir, '/');
-			}
-			if($i) {
-				$dir_name = substr($dir, $i+1);
-			}
-			return $dir_name;
+			return basename(dirname($this->file_path));
 		}
 
 		function getPageName() {
