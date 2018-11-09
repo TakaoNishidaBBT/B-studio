@@ -19,7 +19,7 @@ $editor_config = array(
 		'class'			=> 'B_Link',
 		'link'			=> 'index.php',
 		'value'			=> __('File manager'),
-		'attr'	=> 'style="display:none"',
+		'attr'			=> 'style="display:none"',
 		'fixedparam'	=>
 		array(
 			'terminal_id'	=> TERMINAL_ID,
@@ -46,10 +46,10 @@ $editor_config = array(
 					'start_html'	=> '<div id="title-container">',
 					'end_html'		=> '</div>',
 					array(
-						'name'					=> 'subject',
-						'class'					=> 'B_InputText',
+						'name'			=> 'subject',
+						'class'			=> 'B_InputText',
 						'attr'			=> 'class="subject" maxlength="300" placeholder="' . __('Subject') . '"',
-						'validate'				=>
+						'validate'		=>
 						array(
 							array(
 								'type' 			=> 'required',
@@ -58,10 +58,10 @@ $editor_config = array(
 						),
 					),
 					array(
-						'name'					=> 'error_message',
-						'class'					=> 'B_ErrMsg',
-						'start_html'			=> '<p class="error-message">',
-						'end_html'				=> '</p>',
+						'name'			=> 'error_message',
+						'class'			=> 'B_ErrMsg',
+						'start_html'	=> '<p class="error-message">',
+						'end_html'		=> '</p>',
 					),
 				),
 			),
@@ -82,7 +82,7 @@ $editor_config = array(
 					array(
 						'name'			=> 'body',
 						'class'			=> 'B_TextArea',
-						'attr'	=> 'class="mail-body bframe_contenteditor" data-param="autogrow:true"',
+						'attr'			=> 'class="mail-body bframe_contenteditor" data-param="autogrow:true"',
 					),
 				),
 			),
@@ -103,7 +103,7 @@ $editor_config = array(
 					array(
 						'name'			=> 'html',
 						'class'			=> 'B_TextArea',
-						'attr'	=> 'class="textarea bframe_visualeditor" data-param="container:htmleditor_index,scroller:content"',
+						'attr'			=> 'class="textarea bframe_visualeditor" data-param="container:htmleditor_index,scroller:content"',
 					),
 				),
 			),
@@ -116,21 +116,21 @@ $tab_control_config = array(
 	'start_html'	=> '<ul class="tabcontrol">',
 	'end_html'		=> '</ul>',
 	array(
-		'name'				=> 'texteditor_index',
-		'class'				=> 'B_Link',
-		'start_html'		=> '<li>',
-		'end_html'			=> '</li>',
-		'link'				=> 'texteditor_index',
-		'attr'		=> 'class="bframe_tab"',
-		'value'				=> __('Text'),
+		'name'			=> 'texteditor_index',
+		'class'			=> 'B_Link',
+		'start_html'	=> '<li>',
+		'end_html'		=> '</li>',
+		'link'			=> 'texteditor_index',
+		'attr'			=> 'class="bframe_tab"',
+		'value'			=> __('Text'),
 	),
 	array(
-		'name'				=> 'htmleditor_index',
-		'class'				=> 'B_Link',
-		'start_html'		=> '<li>',
-		'end_html'			=> '</li>',
-		'link'				=> 'htmleditor_index',
-		'attr'		=> 'class="bframe_tab"',
-		'value'				=> __('HTML'),
+		'name'			=> 'htmleditor_index',
+		'class'			=> 'B_Link',
+		'start_html'	=> '<li>',
+		'end_html'		=> '</li>',
+		'link'			=> 'htmleditor_index',
+		'attr'			=> 'class="bframe_tab"',
+		'value'			=> __('HTML'),
 	),
 );

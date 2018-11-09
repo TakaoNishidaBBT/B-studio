@@ -8,12 +8,6 @@
 	require_once('./config/config.php');
 	require_once('./module/common/B_AdminModule.php');
 
-	// Start session
-	$ses = new B_Session;
-	$ses->start('nocache', B_ADMIN_SESSION_NAME, B_CURRENT_ROOT, B_ADMIN_SESSION_SECURE);
-
-	require_once('./language/language.php');
-
 	$controller = new B_Controller;
 	$auth = new B_AdminAuth;
 

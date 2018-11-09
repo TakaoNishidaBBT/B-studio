@@ -74,12 +74,12 @@ $form_config = array(
 				'start_html'	=> '<td>',
 				'end_html'		=> '</td>',
 				array(
-					'name'				=> 'publication_datetime_t',
-					'class'				=> 'B_InputText',
-					'attr'		=> 'class="textbox ime_off"',
-					'format'			=> 'Y/m/d H:i',
-					'data_set'			=> 'datetime_error_message',
-					'validate'			=>
+					'name'			=> 'publication_datetime_t',
+					'class'			=> 'B_InputText',
+					'attr'			=> 'class="textbox ime_off"',
+					'format'		=> 'Y/m/d H:i',
+					'data_set'		=> 'datetime_error_message',
+					'validate'		=>
 					array(
 						array(
 							'type' 			=> 'text_datetime',
@@ -117,25 +117,25 @@ $form_config = array(
 			'start_html'	=> '<tr>',
 			'end_html'		=> '</tr>',
 			array(
-				'start_html'			=> '<th>',
-				'end_html'				=> '</th>',
-				'invalid_start_html'	=> '<th class="error">',
+				'start_html'		=> '<th>',
+				'end_html'			=> '</th>',
+				'invalid_start_html'=> '<th class="error">',
 				array(
-					'value'				=> __('Version name'),
+					'value'			=> __('Version name'),
 				),
 				array(
-					'class'				=> 'B_Guidance',
-					'value'				=> '<span class="require">' . __('*') . '</span>',
+					'class'			=> 'B_Guidance',
+					'value'			=> '<span class="require">' . __('*') . '</span>',
 				),				
 			),
 			array(
 				'start_html'	=> '<td>',
 				'end_html'		=> '</td>',
 				array(
-					'name'				=> 'version',
-					'class'				=> 'B_InputText',
-					'attr'		=> 'class="textbox ime_on" maxlength="100"',
-					'validate'			=>
+					'name'			=> 'version',
+					'class'			=> 'B_InputText',
+					'attr'			=> 'class="textbox ime_on" maxlength="100"',
+					'validate'		=>
 					array(
 						array(
 							'type' 			=> 'required',
@@ -144,10 +144,10 @@ $form_config = array(
 					),
 				),
 				array(
-					'name'				=> 'error_message',
-					'class'				=> 'B_ErrMsg',
-					'start_html'		=> '<span class="error-message">',
-					'end_html'			=> '</span>',
+					'name'			=> 'error_message',
+					'class'			=> 'B_ErrMsg',
+					'start_html'	=> '<span class="error-message">',
+					'end_html'		=> '</span>',
 				),
 			),
 		),
@@ -167,7 +167,7 @@ $form_config = array(
 				'class'			=> 'B_TextArea',
 				'start_html'	=> '<td>',
 				'end_html'		=> '</td>',
-				'attr'	=> 'class="textarea bframe_textarea" rows="5"',
+				'attr'			=> 'class="textarea bframe_textarea" rows="5"',
 			),
 		),
 	),

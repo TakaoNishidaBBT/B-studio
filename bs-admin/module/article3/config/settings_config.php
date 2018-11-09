@@ -31,17 +31,17 @@ $settings_config = array(
 		'name'			=> 'permalink_row',
 		'filter'		=> '!insert',
 		array(
-			'start_html'		=> '<dt class="publication">',
-			'end_html'			=> '</dt>',
+			'start_html'	=> '<dt class="publication">',
+			'end_html'		=> '</dt>',
 			array(
-				'start_html'		=> '<span class="title">',
-				'end_html'			=> '</span>',
-				'value'				=> __('Permalink'),
+				'start_html'	=> '<span class="title">',
+				'end_html'		=> '</span>',
+				'value'			=> __('Permalink'),
 			),
 			array(
-				'name'				=> 'permalink',
-				'class'				=> 'B_InputText',
-				'attr'		=> 'class="textbox permalink ime_off"',
+				'name'			=> 'permalink',
+				'class'			=> 'B_InputText',
+				'attr'			=> 'class="textbox permalink ime_off"',
 				'validate'			=>
 				array(
 					array(
@@ -65,17 +65,17 @@ $settings_config = array(
 	array(
 		'error_group'	=> true,
 		array(
-			'start_html'		=> '<dt class="publication">',
-			'end_html'			=> '</dt>',
+			'start_html'	=> '<dt class="publication">',
+			'end_html'		=> '</dt>',
 			array(
-				'start_html'		=> '<span class="title">',
-				'end_html'			=> '</span>',
-				'value'				=> __('Publication date'),
+				'start_html'	=> '<span class="title">',
+				'end_html'		=> '</span>',
+				'value'			=> __('Publication date'),
 			),
 			array(
-				'name'				=> 'article_date_t',
-				'class'				=> 'B_InputText',
-				'attr'		=> 'class="textbox date ime_off" readonly="readonly"',
+				'name'			=> 'article_date_t',
+				'class'			=> 'B_InputText',
+				'attr'			=> 'class="textbox date ime_off" readonly="readonly"',
 				'validate'			=>
 				array(
 					array(
@@ -85,11 +85,11 @@ $settings_config = array(
 				),
 			),
 			array(
-				'filter'			=> 'update/insert/default',
-				'id'				=> 'schedule_calendar1',
-				'class'				=> 'B_Link',
-				'attr'		=> 'class="bframe_calendar settings-button" title="' . __('Calendar') . '" onclick="bstudio.activateCalendar(\'schedule_calendar1\'); return false;" ',
-				'script'			=>
+				'filter'		=> 'update/insert/default',
+				'id'			=> 'schedule_calendar1',
+				'class'			=> 'B_Link',
+				'attr'			=> 'class="bframe_calendar settings-button" title="' . __('Calendar') . '" onclick="bstudio.activateCalendar(\'schedule_calendar1\'); return false;" ',
+				'script'		=>
 				array(
 					'bframe_calendar'	=>
 					array(
@@ -112,12 +112,12 @@ $settings_config = array(
 				),
 			),
 			array(
-				'filter'			=> 'update/insert/default',
-				'class'				=> 'B_Link',
-				'link'				=> '#',
-				'attr'		=> 'title="' . __('Clear') . '" class="clear-button" onclick="bstudio.clearText(\'article_date_t\'); return false;"',
-				'specialchars'		=> 'none',
-				'value'				=> '<img alt="Clear" src="images/common/clear_white.png" />',
+				'filter'		=> 'update/insert/default',
+				'class'			=> 'B_Link',
+				'link'			=> '#',
+				'attr'			=> 'title="' . __('Clear') . '" class="clear-button" onclick="bstudio.clearText(\'article_date_t\'); return false;"',
+				'specialchars'	=> 'none',
+				'value'			=> '<img alt="Clear" src="images/common/clear_white.png" />',
 			),
 			array(
 				'name'			=> 'error_message',
@@ -150,7 +150,7 @@ $settings_config = array(
 				'value'			=> '1',
 				'item'			=>
 				array(
-					'attr'		=> ' class=radio',
+					'attr'			=> ' class=radio',
 				),
 			),
 		),
@@ -169,40 +169,40 @@ $settings_config = array(
 			),
 		),
 		array(
-			'start_html'		=> '<dd>',
-			'end_html'			=> '</dd>',
+			'start_html'	=> '<dd>',
+			'end_html'		=> '</dd>',
 			array(
-				'name'				=> 'category',
-				'class'				=> 'B_InputText',
-				'attr'		=> 'class="textbox category" readonly="readonly"',
+				'name'			=> 'category',
+				'class'			=> 'B_InputText',
+				'attr'			=> 'class="textbox category" readonly="readonly"',
 			),
 			array(
-				'class'				=> 'B_Hidden',
-				'name'				=> 'category_id',
+				'class'			=> 'B_Hidden',
+				'name'			=> 'category_id',
 			),
 			array(
-				'filter'			=> 'update/insert/default',
-				'name'				=> 'open_category',
-				'class'				=> 'B_Link',
-				'link'				=> 'index.php',
-				'attr'		=> 'title="' . __('Category') . '" class="settings-button" onclick="top.bframe.modalWindow.activate(this, window, \'category_id\'); return false;" data-param="width:350,height:400"',
-				'fixedparam'		=>
+				'filter'		=> 'update/insert/default',
+				'name'			=> 'open_category',
+				'class'			=> 'B_Link',
+				'link'			=> 'index.php',
+				'attr'			=> 'title="' . __('Category') . '" class="settings-button" onclick="top.bframe.modalWindow.activate(this, window, \'category_id\'); return false;" data-param="width:350,height:400"',
+				'fixedparam'	=>
 				array(
-					'terminal_id'		=> TERMINAL_ID,
-					'module'			=> 'category3', 
-					'page'				=> 'tree',
+					'terminal_id'	=> TERMINAL_ID,
+					'module'		=> 'category3', 
+					'page'			=> 'tree',
 				),
 				array(
 					'value'			=> '<img alt="Category" src="images/common/gear_white.png" />',
 				),
 			),
 			array(
-				'filter'			=> 'update/insert/default',
-				'class'				=> 'B_Link',
-				'link'				=> '#',
-				'attr'		=> 'title="' . __('Clear') . '" class="clear-button" onclick="bstudio.clearText(\'category_id\', \'category\'); return false;"',
-				'specialchars'		=> 'none',
-				'value'				=> '<img alt="Clear" src="images/common/clear_white.png" />',
+				'filter'		=> 'update/insert/default',
+				'class'			=> 'B_Link',
+				'link'			=> '#',
+				'attr'			=> 'title="' . __('Clear') . '" class="clear-button" onclick="bstudio.clearText(\'category_id\', \'category\'); return false;"',
+				'specialchars'	=> 'none',
+				'value'			=> '<img alt="Clear" src="images/common/clear_white.png" />',
 			),
 
 		),
@@ -242,7 +242,7 @@ $settings_config = array(
 							'name'			=> 'open_filelist',
 							'class'			=> 'B_Link',
 							'link'			=> 'index.php',
-							'attr'	=> 'title="' . __('Image selection') . '" class="settings-button" onclick="bstudio.activateModalWindow(this, 1100, 500); return false;"',
+							'attr'			=> 'title="' . __('Image selection') . '" class="settings-button" onclick="bstudio.activateModalWindow(this, 1100, 500); return false;"',
 							'fixedparam'	=>
 							array(
 								'terminal_id'	=> TERMINAL_ID,
@@ -259,7 +259,7 @@ $settings_config = array(
 							'filter'			=> 'update/insert/default',
 							'class'				=> 'B_Link',
 							'link'				=> '#',
-							'attr'		=> 'title="' . __('Clear') . '" class="clear-button" onclick="bstudio.clearIMG(\'title_img\', \'title_img_file\'); return false;"',
+							'attr'				=> 'title="' . __('Clear') . '" class="clear-button" onclick="bstudio.clearIMG(\'title_img\', \'title_img_file\'); return false;"',
 							'specialchars'		=> 'none',
 							'value'				=> '<img alt="Clear" src="images/common/clear_white.png" />',
 						),
@@ -293,7 +293,7 @@ $settings_config = array(
 				'value'			=> '1',
 				'item'			=>
 				array(
-					'attr'	=> ' class=radio onclick="bstudio.articleDetailControl(this, \'external\', \'external_link\', \'url\', \'external_window\')"',
+					'attr'			=> ' class=radio onclick="bstudio.articleDetailControl(this, \'external\', \'external_link\', \'url\', \'external_window\')"',
 				),
 			),
 		),
@@ -319,7 +319,7 @@ $settings_config = array(
 					'label'			=> __('On'),
 					'value'			=> '1',
 					'fixed'			=> true,
-					'attr'	=> ' class="checkbox"',
+					'attr'			=> ' class="checkbox"',
 				),
 				array(
 					'display'		=> 'none',
@@ -334,7 +334,7 @@ $settings_config = array(
 					'name'			=> 'url',
 					'class'			=> 'B_InputText',
 					'start_html'	=> 'URL： ',
-					'attr'	=> 'class="textbox ime_off" maxlength="500"',
+					'attr'			=> 'class="textbox ime_off" maxlength="500"',
 					'status'		=> true,
 					'validate'		=>
 					array(
@@ -354,7 +354,7 @@ $settings_config = array(
 					'label'			=> __('Open link in new window'),
 					'value'			=> '1',
 					'fixed'			=> true,
-					'attr'	=> ' class="checkbox"',
+					'attr'			=> ' class="checkbox"',
 				),
 			),
 			array(
@@ -382,9 +382,9 @@ $settings_config = array(
 			'start_html'	=> '<dd>',
 			'end_html'		=> '</dd>',
 			array(
-				'name'				=> 'keywords',
-				'class'				=> 'B_TextArea',
-				'attr'		=> 'class="textarea ime_on bframe_textarea" maxlength="100"',
+				'name'			=> 'keywords',
+				'class'			=> 'B_TextArea',
+				'attr'			=> 'class="textarea ime_on bframe_textarea" maxlength="100"',
 			),
 		),
 	),
@@ -405,9 +405,9 @@ $settings_config = array(
 			'start_html'	=> '<dd>',
 			'end_html'		=> '</dd>',
 			array(
-				'name'				=> 'description',
-				'class'				=> 'B_TextArea',
-				'attr'		=> 'class="textarea ime_on bframe_textarea" maxlength="100"',
+				'name'			=> 'description',
+				'class'			=> 'B_TextArea',
+				'attr'			=> 'class="textarea ime_on bframe_textarea" maxlength="100"',
 			),
 		),
 	),
@@ -434,12 +434,12 @@ $copy_control_config = array(
 				array(
 					'class'			=> 'B_InputText',
 					'name'			=> 'source_id',
-					'attr'	=> 'class="textbox number ime_off" maxlength="10"',
+					'attr'			=> 'class="textbox number ime_off" maxlength="10"',
 				),
 				array(
 					'name'			=> 'dummy',
 					'class'			=> 'B_InputText',
-					'attr'	=> 'class="dummy"',
+					'attr'			=> 'class="dummy"',
 				),
 			),
 			array(
@@ -447,7 +447,7 @@ $copy_control_config = array(
 				'class'			=> 'B_Submit',
 				'start_html'	=> '<li>',
 				'end_html'		=> '</li>',
-				'attr'	=> 'class="copy-button" onClick="bframe.submit(\'copy_form\', \'' . $this->module . '\', \'form\', \'copy\', \'insert\', true)"',
+				'attr'			=> 'class="copy-button" onClick="bframe.submit(\'copy_form\', \'' . $this->module . '\', \'form\', \'copy\', \'insert\', true)"',
 				'value'			=> __('Copy'),
 			),
 		),

@@ -38,26 +38,26 @@ $form_config = array(
 			'start_html'	=> '<tr>',
 			'end_html'		=> '</tr>',
 			array(
-				'start_html'			=> '<th>',
-				'end_html'				=> '</th>',
-				'invalid_start_html'	=> '<th class="error">',
+				'start_html'		=> '<th>',
+				'end_html'			=> '</th>',
+				'invalid_start_html'=> '<th class="error">',
 				array(
-					'value'					=> __('User ID'),
+					'value'			=> __('User ID'),
 				),
 				array(
-					'class'				=> 'B_Guidance',
-					'value'				=> '<span class="require">' . __('*') . '</span>',
+					'class'			=> 'B_Guidance',
+					'value'			=> '<span class="require">' . __('*') . '</span>',
 				),
 			),
 			array(
-				'start_html'			=> '<td>',
-				'end_html'				=> '</td>',
+				'start_html'	=> '<td>',
+				'end_html'		=> '</td>',
 				array(
-					'config_filter'			=> 'insert',
-					'name'					=> 'user_id',
-					'class'					=> 'B_InputText',
-					'attr'			=> 'class="textbox ime_off" maxlength="10" ',
-					'validate'				=>
+					'config_filter'		=> 'insert',
+					'name'				=> 'user_id',
+					'class'				=> 'B_InputText',
+					'attr'				=> 'class="textbox ime_off" maxlength="10" ',
+					'validate'			=>
 					array(
 						array(
 							'type' 			=> 'required',
@@ -83,15 +83,15 @@ $form_config = array(
 					),
 				),
 				array(
-					'config_filter'			=> 'update/delete',
-					'class'					=> 'B_Text',
-					'name'					=> 'user_id',
+					'config_filter'		=> 'update/delete',
+					'class'				=> 'B_Text',
+					'name'				=> 'user_id',
 				),
 				array(
-					'name'					=> 'error_message',
-					'class'					=> 'B_ErrMsg',
-					'start_html'			=> '<span class="error-message">',
-					'end_html'				=> '</span>',
+					'name'				=> 'error_message',
+					'class'				=> 'B_ErrMsg',
+					'start_html'		=> '<span class="error-message">',
+					'end_html'			=> '</span>',
 				),
 			),
 		),
@@ -102,25 +102,25 @@ $form_config = array(
 			'start_html'	=> '<tr>',
 			'end_html'		=> '</tr>',
 			array(
-				'start_html'			=> '<th>',
-				'invalid_start_html'	=> '<th class="error">',
-				'end_html'				=> '</th>',
+				'start_html'		=> '<th>',
+				'invalid_start_html'=> '<th class="error">',
+				'end_html'			=> '</th>',
 				array(
-					'value'					=> __('Password'),
+					'value'			=> __('Password'),
 				),
 				array(
-					'class'				=> 'B_Guidance',
-					'value'				=> '<span class="require">' . __('*') . '</span>',
+					'class'		=> 'B_Guidance',
+					'value'		=> '<span class="require">' . __('*') . '</span>',
 				),
 			),
 			array(
-				'start_html'			=> '<td>',
-				'end_html'				=> '</td>',
+				'start_html'	=> '<td>',
+				'end_html'		=> '</td>',
 				array(
-					'name'					=> 'pwd',
-					'class'					=> 'B_InputText',
+					'name'			=> 'pwd',
+					'class'			=> 'B_InputText',
 					'attr'			=> 'class="textbox ime_off" maxlength="100" ',
-					'validate'				=>
+					'validate'		=>
 					array(
 						array(
 							'type' 			=> 'required',
@@ -129,10 +129,10 @@ $form_config = array(
 					),
 				),
 				array(
-					'name'					=> 'error_message',
-					'class'					=> 'B_ErrMsg',
-					'start_html'			=> '<span class="error-message">',
-					'end_html'				=> '</span>',
+					'name'			=> 'error_message',
+					'class'			=> 'B_ErrMsg',
+					'start_html'	=> '<span class="error-message">',
+					'end_html'		=> '</span>',
 				),
 			),
 		),
@@ -143,25 +143,25 @@ $form_config = array(
 			'start_html'	=> '<tr>',
 			'end_html'		=> '</tr>',
 			array(
-				'start_html'			=> '<th>',
-				'invalid_start_html'	=> '<th class="error">',
-				'end_html'				=> '</th>',
+				'start_html'		=> '<th>',
+				'invalid_start_html'=> '<th class="error">',
+				'end_html'			=> '</th>',
 				array(
-					'value'				=> __('Name'),
+					'value'			=> __('Name'),
 				),
 				array(
-					'class'				=> 'B_Guidance',
-					'value'				=> '<span class="require">' . __('*') . '</span>',
+					'class'			=> 'B_Guidance',
+					'value'			=> '<span class="require">' . __('*') . '</span>',
 				),
 			),
 			array(
 				'start_html'	=> '<td>',
 				'end_html'		=> '</td>',
 				array(
-					'name'					=> 'user_name',
-					'class'					=> 'B_InputText',
+					'name'			=> 'user_name',
+					'class'			=> 'B_InputText',
 					'attr'			=> 'class="textbox" maxlength="100" ',
-					'validate'				=>
+					'validate'		=>
 					array(
 						array(
 							'type' 			=> 'required',
@@ -170,10 +170,10 @@ $form_config = array(
 					),
 				),
 				array(
-					'name'					=> 'error_message',
-					'class'					=> 'B_ErrMsg',
-					'start_html'			=> '<span class="error-message">',
-					'end_html'				=> '</span>',
+					'name'			=> 'error_message',
+					'class'			=> 'B_ErrMsg',
+					'start_html'	=> '<span class="error-message">',
+					'end_html'		=> '</span>',
 				),
 			),
 		),
@@ -184,25 +184,25 @@ $form_config = array(
 			'start_html'	=> '<tr>',
 			'end_html'		=> '</tr>',
 			array(
-				'start_html'			=> '<th>',
-				'invalid_start_html'	=> '<th class="error">',
-				'end_html'				=> '</th>',
+				'start_html'		=> '<th>',
+				'invalid_start_html'=> '<th class="error">',
+				'end_html'			=> '</th>',
 				array(
-					'value'					=> __('User type'),
+					'value'			=> __('User type'),
 				),
 				array(
-					'class'				=> 'B_Guidance',
-					'value'				=> '<span class="require">' . __('*') . '</span>',
+					'class'			=> 'B_Guidance',
+					'value'			=> '<span class="require">' . __('*') . '</span>',
 				),
 			),
 			array(
-				'name'					=> 'user_auth',
-				'class'					=> 'B_SelectBox',
-				'start_html'			=> '<td>',
-				'end_html'				=> '</td>',
-				'data_set'				=> 'user_auth',
-				'attr'			=> 'class="bframe_selectbox white"',
-				'validate'				=>
+				'name'				=> 'user_auth',
+				'class'				=> 'B_SelectBox',
+				'start_html'		=> '<td>',
+				'end_html'			=> '</td>',
+				'data_set'			=> 'user_auth',
+				'attr'				=> 'class="bframe_selectbox white"',
+				'validate'			=>
 				array(
 					array(
 						'type' 			=> 'required',
@@ -210,10 +210,10 @@ $form_config = array(
 					),
 				),
 				array(
-					'name'					=> 'error_message',
-					'class'					=> 'B_ErrMsg',
-					'start_html'			=> '<span class="error-message">',
-					'end_html'				=> '</span>',
+					'name'				=> 'error_message',
+					'class'				=> 'B_ErrMsg',
+					'start_html'		=> '<span class="error-message">',
+					'end_html'			=> '</span>',
 				),
 			),
 		),
@@ -224,24 +224,24 @@ $form_config = array(
 			'start_html'	=> '<tr>',
 			'end_html'		=> '</tr>',
 			array(
-				'start_html'			=> '<th>',
-				'invalid_start_html'	=> '<th class="error">',
-				'end_html'				=> '</th>',
+				'start_html'		=> '<th>',
+				'invalid_start_html'=> '<th class="error">',
+				'end_html'			=> '</th>',
 				array(
-					'value'					=> __('Status'),
+					'value'			=> __('Status'),
 				),
 				array(
-					'class'				=> 'B_Guidance',
-					'value'				=> '<span class="require">' . __('*') . '</span>',
+					'class'			=> 'B_Guidance',
+					'value'			=> '<span class="require">' . __('*') . '</span>',
 				),
 			),
 			array(
-				'name'					=> 'user_status',
-				'class'					=> 'B_SelectBox',
-				'start_html'			=> '<td>',
-				'end_html'				=> '</td>',
-				'data_set'				=> 'user_status',
-				'attr'			=> 'class="bframe_selectbox white"',
+				'name'				=> 'user_status',
+				'class'				=> 'B_SelectBox',
+				'start_html'		=> '<td>',
+				'end_html'			=> '</td>',
+				'data_set'			=> 'user_status',
+				'attr'				=> 'class="bframe_selectbox white"',
 			),
 		),
 
@@ -250,18 +250,18 @@ $form_config = array(
 			'start_html'	=> '<tr>',
 			'end_html'		=> '</tr>',
 			array(
-				'start_html'		=> '<th>',
-				'end_html'			=> '</th>',
-				'value'				=> __('Language'),
+				'start_html'	=> '<th>',
+				'end_html'		=> '</th>',
+				'value'			=> __('Language'),
 			),
 			array(
-				'class'				=> 'B_SelectBox',
-				'name'				=> 'language',
-				'data_set'			=> 'language',
-				'start_html'		=> '<td>',
-				'end_html'			=> '</td>',
-				'value'				=> LANG,
-				'attr'		=> 'class="bframe_selectbox white"',
+				'class'			=> 'B_SelectBox',
+				'name'			=> 'language',
+				'data_set'		=> 'language',
+				'start_html'	=> '<td>',
+				'end_html'		=> '</td>',
+				'value'			=> LANG,
+				'attr'			=> 'class="bframe_selectbox white"',
 			),
 		),
 
@@ -271,17 +271,17 @@ $form_config = array(
 			'start_html'	=> '<tr>',
 			'end_html'		=> '</tr>',
 			array(
-				'start_html'			=> '<th>',
-				'invalid_start_html'	=> '<th class="error">',
-				'end_html'				=> '</th>',
-				'value'					=> __('Notes'),
+				'start_html'		=> '<th>',
+				'invalid_start_html'=> '<th class="error">',
+				'end_html'			=> '</th>',
+				'value'				=> __('Notes'),
 			),
 			array(
 				'start_html'	=> '<td>',
 				'end_html'		=> '</td>',
 				array(
-					'name'				=> 'notes',
-					'class'				=> 'B_TextArea',
+					'name'		=> 'notes',
+					'class'		=> 'B_TextArea',
 					'attr'		=> 'class="textarea bframe_textarea" cols="78" rows="5"',
 				),
 			),

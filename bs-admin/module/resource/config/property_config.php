@@ -27,13 +27,13 @@ $tab_control_config = array(
 	'start_html'	=> '<ul class="tabcontrol">',
 	'end_html'		=> '</ul>',
 	array(
-		'name'				=> 'config_index',
-		'class'				=> 'B_Link',
-		'start_html'		=> '<li>',
-		'end_html'			=> '</li>',
-		'link'				=> 'property1',
-		'value'				=> __('Settings'),
-		'attr'		=> 'class="bframe_tab"',
+		'name'			=> 'config_index',
+		'class'			=> 'B_Link',
+		'start_html'	=> '<li>',
+		'end_html'		=> '</li>',
+		'link'			=> 'property1',
+		'value'			=> __('Settings'),
+		'attr'			=> 'class="bframe_tab"',
 	),
 );
 $config_form_config = array(
@@ -77,7 +77,7 @@ $config_form_config = array(
 							'value'			=> '1',
 							'item'			=>
 							array(
-								'attr'		=> ' class=radio',
+								'attr'			=> ' class=radio',
 							),
 						),
 					),

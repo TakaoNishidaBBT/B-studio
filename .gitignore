@@ -13,7 +13,6 @@
 # git update-index --skip-worktree bs-admin-files/thumbs/.gitkeep
 # git update-index --skip-worktree bs-admin/.htaccess
 # git update-index --skip-worktree bs-admin/.htpassword
-# git update-index --skip-worktree bs-admin/config/core_config.php
 # git update-index --skip-worktree bs-admin/config/lang_config.php
 # git update-index --skip-worktree bs-admin/db/db_connect.php
 # git update-index --skip-worktree bs-admin/user/users.php

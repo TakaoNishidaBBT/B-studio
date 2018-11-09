@@ -10,14 +10,6 @@
 	// 
 	// -------------------------------------------------------------------------
 	class B_Util {
-		public static function getRandomText($length) {
-			$base = 'abcdefghijkmnprstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ2345678';
-			for($i=0; $i<$length; $i++) {
-				$pwd.= $base{mt_rand(0, strlen($base)-1)};
-			}
-			return $pwd;
-		}
-
 		public static function removeComma($value) {
 			return str_replace(',', '', $value);
 		}

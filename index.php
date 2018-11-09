@@ -7,10 +7,8 @@
 */
 	error_reporting(E_ALL & ~E_NOTICE & ~E_STRICT);
 
-	require_once('./bs-admin/config/core_config.php');
-	require_once(B_DOC_ROOT . B_ADMIN_ROOT . 'class/B_Util.php');
-	require_once(B_DOC_ROOT . B_ADMIN_ROOT . 'class/B_Session.php');
-	$ses = new B_Session;
+	require_once('bs-admin/global/b_global_function.php');
+	require_once('bs-admin/config/config.php');
 
 	$file = B_Util::pathinfo($_REQUEST['url']);
 
@@ -21,8 +19,10 @@
 	$url = urldecode($url);
 	$_REQUEST['url'] = $url;
 
-	// Not start session. Just read the session valiable for check admin mode or not.
+	// Not start session. Just read the session variable for check admin mode or not.
+	$ses = new B_Session;
 	$session = $ses->read(B_ADMIN_SESSION_NAME);
+
 	if($session['terminal_id'] && $session['user_id']) {
 		$admin_mode = true;
 		$admin_language = $session['language'];

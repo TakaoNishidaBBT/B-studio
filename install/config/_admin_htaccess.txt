@@ -1,5 +1,8 @@
 RewriteEngine off
 
+#RewriteCond %{HTTPS} off
+#RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [R,L]
+
 AuthType Basic
 AuthName "Limited Room"
 AuthUserFile %AUTH_USER_FILE%

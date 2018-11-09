@@ -85,7 +85,7 @@ array(
 			'end_html'		=> '</th>',
 			'class'			=> 'B_Link',
 			'link'			=> '',
-			'attr'	=> 'onclick="return false"',
+			'attr'			=> 'onclick="return false"',
 			'title'			=> __('Status ■:Published  ★:Scheduled to be published'),
 			'value'			=> __('Status'),
 		),
@@ -122,7 +122,7 @@ array(
 			'end_html'		=> '</td>',
 			'class'			=> 'B_Radio',
 			'name'			=> 'reserved_version_id',
-			'attr'	=> 'class="radio"',
+			'attr'			=> 'class="radio"',
 			'value_index'	=> 'version_id',
 		),
 		array(
@@ -130,7 +130,7 @@ array(
 			'end_html'		=> '</td>',
 			'class'			=> 'B_Radio',
 			'name'			=> 'working_version_id',
-			'attr'	=> 'class="radio"',
+			'attr'			=> 'class="radio"',
 			'value_index'	=> 'version_id',
 		),
 		array(
@@ -170,7 +170,7 @@ array(
 				'name'			=> 'edit',
 				'class'			=> 'B_Link',
 				'link'			=> 'index.php',
-				'attr'	=> 'class="edit-button"',
+				'attr'			=> 'class="edit-button"',
 				'fixedparam'	=>
 				array(
 					'terminal_id'	=> TERMINAL_ID,
@@ -198,10 +198,10 @@ array(
 				'name'			=> 'compare_enable',
 				'class'			=> 'B_Link',
 				'link'			=> 'index.php',
-				'attr'	=> 'class="compare-button" onclick="window.open(this.href); return false;"',
+				'attr'			=> 'class="compare-button" onclick="window.open(this.href); return false;"',
 				'fixedparam'	=>
 				array(
-					'terminal_id'	=> $this->util->getRandomText(12),
+					'terminal_id'	=> __getRandomText(12),
 					'module'		=> 'compare', 
 					'page'			=> 'index', 
 					'method'		=> 'init',
@@ -219,7 +219,7 @@ array(
 			array(
 				'name'			=> 'compare_disable',
 				'class'			=> 'B_Link',
-				'attr'	=> 'class="compare-button-disable" onclick="return false;"',
+				'attr'			=> 'class="compare-button-disable" onclick="return false;"',
 				'display'		=> 'none',
 				array(
 					'value'			=> __('Compare'),
@@ -236,7 +236,7 @@ array(
 				'name'			=> 'del_enable',
 				'class'			=> 'B_Link',
 				'link'			=> 'index.php',
-				'attr'	=> 'class="delete-button"',
+				'attr'			=> 'class="delete-button"',
 				'display'		=> 'none',
 				'fixedparam'	=>
 				array(
@@ -259,7 +259,7 @@ array(
 			array(
 				'name'			=> 'del_disable',
 				'class'			=> 'B_Link',
-				'attr'	=> 'class="delete-button-disable" onclick="return false;"',
+				'attr'			=> 'class="delete-button-disable" onclick="return false;"',
 				array(
 					'value'			=> __('Delete'),
 					'start_html'	=> '<span>',
@@ -295,7 +295,7 @@ $version_control_confirm_config = array(
 			'end_html'		=> '</li>',
 			'class'			=> 'B_Button',
 			'name'			=> 'back',
-			'attr'	=> 'class="back-button" onclick="bframe.submit(\'F1\', \'' . $this->module . '\', \'list\', \'back\', \'\', true)"',
+			'attr'			=> 'class="back-button" onclick="bframe.submit(\'F1\', \'' . $this->module . '\', \'list\', \'back\', \'\', true)"',
 			'value'			=> __('Back'),
 		),
 		array(
@@ -303,7 +303,7 @@ $version_control_confirm_config = array(
 			'end_html'		=> '</li>',
 			'class'			=> 'B_Button',
 			'name'			=> 'attendance',
-			'attr'	=> 'class="register-button" onclick="bframe.submit(\'F1\', \'' . $this->module . '\', \'list\', \'register\', \'\', true)"',
+			'attr'			=> 'class="register-button" onclick="bframe.submit(\'F1\', \'' . $this->module . '\', \'list\', \'register\', \'\', true)"',
 			'value'			=> __('Submit'),
 		),
 	),
@@ -319,7 +319,7 @@ $version_control_result_config = array(
 			'end_html'		=> '</li>',
 			'class'			=> 'B_Button',
 			'name'			=> 'backToList',
-			'attr'	=> 'class="back-button" onclick="bframe.submit(\'F1\', \'' . $this->module . '\', \'list\', \'back\', \'\')" ',
+			'attr'			=> 'class="back-button" onclick="bframe.submit(\'F1\', \'' . $this->module . '\', \'list\', \'back\', \'\')" ',
 			'value'			=> __('Back to list'),
 		),
 	),

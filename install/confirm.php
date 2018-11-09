@@ -9,20 +9,20 @@
 	ini_set('display_errors', 'On');
 	set_error_handler('exception_error_handler');
 
+	require_once('../bs-admin/global/b_global_function.php');
+
 	// CHARSET
 	define('B_CHARSET', 'UTF-8');
 	mb_internal_encoding(B_CHARSET);
 
 	// Start session
-	require_once('../bs-admin/class/B_Session.php');
-	$info = pathinfo($_SERVER['SCRIPT_NAME']);
-	define('SESSION_DIR', $info['dirname']);
+	define('SESSION_DIR', dirname($_SERVER['SCRIPT_NAME']));
 
 	$ses = new B_Session;
 	$ses->start('nocache', 'bs-install', SESSION_DIR);
 
 	// Define directories
-	$root_dir = dirname($info['dirname']);
+	$root_dir = dirname(SESSION_DIR);
 	if(substr($root_dir, -1) == '/') {
 		$root_dir = substr($root_dir, 0, -1);
 	}
@@ -30,8 +30,6 @@
 	if(substr($doc_root, -1) == '/') {
 		$doc_root = substr($doc_root, 0, -1);
 	}
-	define('B_HTTP_HOST', $_SERVER['SERVER_NAME']);
-	define('SESSION_DIR', $info['dirname']);
 	define('ROOT_DIR', $root_dir . '/');
 	define('DOC_ROOT', $doc_root);
 	define('B_DOC_ROOT', $doc_root);
@@ -41,8 +39,9 @@
 	// Language file
 	require_once('../bs-admin/language/language.php');
 
+	// form
 	require_once('config/_form_config.php');
-	require_once('../bs-admin/class/B_Element.php');
+
 	$db_install_form = new B_Element($db_install_form_config);
 	$admin_basic_auth_form = new B_Element($admin_basic_auth_config);
 	$admin_user_form = new B_Element($admin_user_form_config);
@@ -127,11 +126,6 @@
 			$contents = file_get_contents('./config/_lang_config.php');
 			$contents = str_replace('%LANGUAGE%', $_SESSION['language'], $contents);
 			file_put_contents('../bs-admin/config/lang_config.php', $contents);
-
-			// Set up core_config(current_root)
-			$contents = file_get_contents('./config/_core_config.php');
-			$contents = str_replace('%CURRENT_ROOT%', ROOT_DIR, $contents);
-			file_put_contents('../bs-admin/config/core_config.php', $contents);
 
 			// Set up db_connect(current_root)
 			$contents = file_get_contents('./config/_db_connect.php');

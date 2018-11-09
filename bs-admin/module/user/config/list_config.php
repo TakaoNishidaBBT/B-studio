@@ -177,7 +177,7 @@ array(
 				'name'			=> 'edit',
 				'class'			=> 'B_Link',
 				'link'			=> 'index.php',
-				'attr'	=> 'class="edit-button"',
+				'attr'			=> 'class="edit-button"',
 				'fixedparam'	=>
 				array(
 					'terminal_id'	=> TERMINAL_ID,
@@ -205,7 +205,7 @@ array(
 				'name'			=> 'delete',
 				'class'			=> 'B_Link',
 				'link'			=> 'index.php',
-				'attr'	=> 'class="delete-button"',
+				'attr'			=> 'class="delete-button"',
 				'fixedparam'	=>
 				array(
 					'terminal_id'	=> TERMINAL_ID,

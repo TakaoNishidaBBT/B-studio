@@ -49,10 +49,10 @@ $form_config = array(
 				'start_html'    => '<td>',
 				'end_html'	    => '</td>',
 				array(
-					'name'					=> 'admin_user_name',
-					'class'					=> 'B_InputText',
+					'name'			=> 'admin_user_name',
+					'class'			=> 'B_InputText',
 					'attr'			=> 'class="textbox" maxlength="100" ',
-					'validate'				=>
+					'validate'		=>
 					array(
 						array(
 							'type' 			=> 'required',
@@ -61,10 +61,10 @@ $form_config = array(
 					),
 				),
 				array(
-					'name'					=> 'error_message',
-					'class'					=> 'B_ErrMsg',
-					'start_html'			=> '<span class="error-message">',
-					'end_html'				=> '</span>',
+					'name'			=> 'error_message',
+					'class'			=> 'B_ErrMsg',
+					'start_html'	=> '<span class="error-message">',
+					'end_html'		=> '</span>',
 				),
 			),
 		),
@@ -75,25 +75,25 @@ $form_config = array(
 			'start_html'	=> '<tr>',
 			'end_html'		=> '</tr>',
 			array(
-				'start_html'			=> '<th>',
-				'end_html'				=> '</th>',
-				'invalid_start_html'	=> '<th class="error">',
+				'start_html'		=> '<th>',
+				'end_html'			=> '</th>',
+				'invalid_start_html'=> '<th class="error">',
 				array(
-					'value'					=> __('Login ID'),
+					'value'			=> __('Login ID'),
 				),
 				array(
-					'class'				=> 'B_Guidance',
-					'value'				=> '<span class="require">' . __('*') . '</span>',
+					'class'			=> 'B_Guidance',
+					'value'			=> '<span class="require">' . __('*') . '</span>',
 				),				
 			),
 			array(
 				'start_html'	=> '<td>',
 				'end_html'		=> '</td>',
 				array(
-					'name'					=> 'admin_user_id',
-					'class'					=> 'B_InputText',
+					'name'			=> 'admin_user_id',
+					'class'			=> 'B_InputText',
 					'attr'			=> 'class="textbox ime-off" maxlength="100" ',
-					'validate'				=>
+					'validate'		=>
 					array(
 						array(
 							'type' 			=> 'required',
@@ -113,10 +113,10 @@ $form_config = array(
 					),
 				),
 				array(
-					'name'					=> 'error_message',
-					'class'					=> 'B_ErrMsg',
-					'start_html'			=> '<span class="error-message">',
-					'end_html'				=> '</span>',
+					'name'			=> 'error_message',
+					'class'			=> 'B_ErrMsg',
+					'start_html'	=> '<span class="error-message">',
+					'end_html'		=> '</span>',
 				),
 			),
 		),
@@ -126,18 +126,18 @@ $form_config = array(
 			'start_html'	=> '<tr>',
 			'end_html'		=> '</tr>',
 			array(
-				'start_html'		=> '<th>',
-				'end_html'			=> '</th>',
-				'value'				=> __('Language'),
+				'start_html'	=> '<th>',
+				'end_html'		=> '</th>',
+				'value'			=> __('Language'),
 			),
 			array(
-				'class'				=> 'B_SelectBox',
-				'name'				=> 'language',
-				'data_set'			=> 'language',
-				'start_html'		=> '<td>',
-				'end_html'			=> '</td>',
-				'value'				=> LANG,
-				'attr'		=> 'class="bframe_selectbox white"',
+				'class'			=> 'B_SelectBox',
+				'name'			=> 'language',
+				'data_set'		=> 'language',
+				'start_html'	=> '<td>',
+				'end_html'		=> '</td>',
+				'value'			=> LANG,
+				'attr'			=> 'class="bframe_selectbox white"',
 			),
 	    ),
 
@@ -147,20 +147,20 @@ $form_config = array(
 			'start_html'	=> '<tr>',
 			'end_html'		=> '</tr>',
 			array(
-				'start_html'			=> '<th>',
-				'end_html'				=> '</th>',
-				'invalid_start_html'	=> '<th class="error">',
-				'value'					=> __('Password'),
+				'start_html'		=> '<th>',
+				'end_html'			=> '</th>',
+				'invalid_start_html'=> '<th class="error">',
+				'value'				=> __('Password'),
 			),
 			array(
 				'start_html'	=> '<td>',
 				'end_html'		=> '</td>',
 				array(
-					'name'					=> 'admin_user_pwd',
-					'class'					=> 'B_Password',
-					'attr'			=> 'class="textbox ime-off" maxlength="100" autocomplete="off" ',
-					'confirm_message'		=> __('(set password)'),
-					'validate'				=>
+					'name'				=> 'admin_user_pwd',
+					'class'				=> 'B_Password',
+					'attr'				=> 'class="textbox ime-off" maxlength="100" autocomplete="off" ',
+					'confirm_message'	=> __('(set password)'),
+					'validate'			=>
 					array(
 						array(
 							'type' 			=> 'pattern',
@@ -170,16 +170,16 @@ $form_config = array(
 					),
 				),
 				array(
-					'start_html'			=> '<span class="notice">',
-					'end_html'				=> '</span>',
-					'class'					=> 'B_Guidance',
-					'value'					=> __('If you would like to change your password, please enter new password here. If not, please leave this field blank.'),
+					'start_html'	=> '<span class="notice">',
+					'end_html'		=> '</span>',
+					'class'			=> 'B_Guidance',
+					'value'			=> __('If you would like to change your password, please enter new password here. If not, please leave this field blank.'),
 				),
 				array(
-					'name'					=> 'error_message',
-					'class'					=> 'B_ErrMsg',
-					'start_html'			=> '<p class="error-message">',
-					'end_html'				=> '</p>',
+					'name'			=> 'error_message',
+					'class'			=> 'B_ErrMsg',
+					'start_html'	=> '<p class="error-message">',
+					'end_html'		=> '</p>',
 				),
 			),
 		),
@@ -191,19 +191,19 @@ $form_config = array(
 			'end_html'		=> '</tr>',
 			'confirm_mode'	=> 'none',
 			array(
-				'start_html'			=> '<th>',
-				'end_html'				=> '</th>',
-				'invalid_start_html'	=> '<th class="error">',
-				'value'					=> __('Password (Re-entry)'),
+				'start_html'		=> '<th>',
+				'end_html'			=> '</th>',
+				'invalid_start_html'=> '<th class="error">',
+				'value'				=> __('Password (Re-entry)'),
 			),
 			array(
 				'start_html'	=> '<td>',
 				'end_html'		=> '</td>',
 				array(
-					'name'					=> 'admin_user_pwd2',
-					'class'					=> 'B_Password',
+					'name'			=> 'admin_user_pwd2',
+					'class'			=> 'B_Password',
 					'attr'			=> 'class="textbox ime-off" maxlength="100" autocomplete="off" ',
-					'validate'				=>
+					'validate'		=>
 					array(
 						array(
 							'type' 			=> 'match',
@@ -213,16 +213,16 @@ $form_config = array(
 					),
 				),
 				array(
-					'start_html'			=> '<span class="notice">',
-					'end_html'				=> '</span>',
-					'class'					=> 'B_Guidance',
-					'value'					=> __('For confirmation, please re-enter password'),
+					'start_html'	=> '<span class="notice">',
+					'end_html'		=> '</span>',
+					'class'			=> 'B_Guidance',
+					'value'			=> __('For confirmation, please re-enter password'),
 				),
 				array(
-					'name'					=> 'error_message',
-					'class'					=> 'B_ErrMsg',
-					'start_html'			=> '<p class="error-message">',
-					'end_html'				=> '</p>',
+					'name'			=> 'error_message',
+					'class'			=> 'B_ErrMsg',
+					'start_html'	=> '<p class="error-message">',
+					'end_html'		=> '</p>',
 				),
 			),
 		),

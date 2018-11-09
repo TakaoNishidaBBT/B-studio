@@ -50,7 +50,7 @@ $menu_config = array(
 			'end_html'		=> '</li>',
 			array(
 				'class'			=> 'B_Link',
-				'attr'	=> 'class="bframe_menu"',
+				'attr'			=> 'class="bframe_menu"',
 				'id'			=> 'resource',
 				'value'			=> '<img src="images/menu/resource.png" alt="Resources"/>' . __('Resources'),
 				'specialchars'	=> 'none',

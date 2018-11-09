@@ -7,14 +7,6 @@
 */
 	class index_index extends B_AdminModule {
 		function __construct() {
-			if(B_ADMIN_SSL == 'ON' && !preg_match('/localhost/', B_HTTP_HOST)) {
-				if(empty($_SERVER['HTTPS']) === true || $_SERVER['HTTPS'] !== 'on') {
-					// Redirect to https
-					$path = B_SITE_ROOT_SSL . 'bs-admin/';
-					header("Location:$path");
-					exit;
-				}
-			}
 			parent::__construct(__FILE__);
 
 			$this->site_settings_table = new B_Table($this->db, 'settings');
