@@ -103,7 +103,7 @@
 			}
 
 			$obj = $this->header->getElementByName('row_per_page');
-			$obj->special_html.= ' data-default="' . $this->default_row_per_page . '"';
+			$obj->attr.= ' data-default="' . $this->default_row_per_page . '"';
 		}
 
 		function setData() {

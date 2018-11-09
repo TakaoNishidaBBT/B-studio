@@ -26,7 +26,7 @@ $form_config = array(
 				'name'				=> 'admin_site_title',
 				'start_html'		=> '<td>',
 				'end_html'			=> '</td>',
-				'special_html'		=> 'class="textbox ime_on" size="100" maxlength="100" ',
+				'attr'		=> 'class="textbox ime_on" size="100" maxlength="100" ',
 			),
 		),
 
@@ -46,7 +46,7 @@ $form_config = array(
 				'start_html'		=> '<td>',
 				'end_html'			=> '</td>',
 				'value'				=> LANG,
-				'special_html'		=> 'class="bframe_selectbox white"',
+				'attr'		=> 'class="bframe_selectbox white"',
 			),
 		),
 

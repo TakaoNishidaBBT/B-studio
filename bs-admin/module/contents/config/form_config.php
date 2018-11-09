@@ -20,14 +20,14 @@ $form_config = array(
 			array(
 				'name'				=> 'html1',
 				'class'				=> 'B_TextArea',
-				'special_html'		=> 'class="textarea bframe_adjustparent bframe_texteditor" data-param="margin:32" style="width:100%"',
+				'attr'		=> 'class="textarea bframe_adjustparent bframe_texteditor" data-param="margin:32" style="width:100%"',
 				'no_trim'			=> true,
 			),
 			array(
 				'class'				=> 'B_Link',
 				'link'				=> 'index.php',
 				'value'				=> __('Widgets'),
-				'special_html'		=> 'class="open_widgetmanager" title="' . __('Widgets') . '" style="display:none"',
+				'attr'		=> 'class="open_widgetmanager" title="' . __('Widgets') . '" style="display:none"',
 				'fixedparam'		=>
 				array(
 					'terminal_id'	=> TERMINAL_ID,
@@ -52,7 +52,7 @@ $form_config = array(
 				'id'				=> 'css_editor',
 				'name'				=> 'css',
 				'class'				=> 'B_TextArea',
-				'special_html'		=> 'class="textarea bframe_adjustparent bframe_texteditor" data-param="margin:32" data-syntax="css" style="width:100%"',
+				'attr'		=> 'class="textarea bframe_adjustparent bframe_texteditor" data-param="margin:32" data-syntax="css" style="width:100%"',
 				'no_trim'			=> true,
 			),
 		),
@@ -63,7 +63,7 @@ $form_config = array(
 				'id'				=> 'php_editor',
 				'name'				=> 'php',
 				'class'				=> 'B_TextArea',
-				'special_html'		=> 'class="textarea bframe_adjustparent bframe_texteditor" data-param="margin:32" data-syntax="php" style="width:100%"',
+				'attr'		=> 'class="textarea bframe_adjustparent bframe_texteditor" data-param="margin:32" data-syntax="php" style="width:100%"',
 				'no_trim'			=> true,
 			),
 			array(
@@ -71,7 +71,7 @@ $form_config = array(
 				'class'				=> 'B_Link',
 				'link'				=> 'index.php',
 				'value'				=> __('Widgets'),
-				'special_html'		=> 'title="' . __('Widgets') . '" style="display:none"',
+				'attr'		=> 'title="' . __('Widgets') . '" style="display:none"',
 				'fixedparam'		=>
 				array(
 					'terminal_id'	=> TERMINAL_ID,
@@ -115,7 +115,7 @@ $tab_control_config = array(
 		'start_html'		=> '<li>',
 		'end_html'			=> '</li>',
 		'link'				=> 'html',
-		'special_html'		=> 'class="bframe_tab" onclick="bframe.inline.blur()"',
+		'attr'		=> 'class="bframe_tab" onclick="bframe.inline.blur()"',
 		'value'				=> __('HTML'),
 	),
 	array(
@@ -124,7 +124,7 @@ $tab_control_config = array(
 		'start_html'		=> '<li>',
 		'end_html'			=> '</li>',
 		'link'				=> 'visual',
-		'special_html'		=> 'class="bframe_tab" onclick="bframe.inline.submit(\'F1\', \'' . B_SITE_BASE . 'index.php' . '\', \'inline\', \'inline_frame\'); return false;"',
+		'attr'		=> 'class="bframe_tab" onclick="bframe.inline.submit(\'F1\', \'' . B_SITE_BASE . 'index.php' . '\', \'inline\', \'inline_frame\'); return false;"',
 		'value'				=> __('Visual'),
 	),
 	array(
@@ -134,7 +134,7 @@ $tab_control_config = array(
 		'end_html'			=> '</li>',
 		'link'				=> 'css',
 		'value'				=> __('CSS'),
-		'special_html'		=> 'class="bframe_tab"',
+		'attr'		=> 'class="bframe_tab"',
 	),
 	array(
 		'name'				=> 'php_editor_index',
@@ -143,7 +143,7 @@ $tab_control_config = array(
 		'end_html'			=> '</li>',
 		'link'				=> 'php',
 		'value'				=> __('PHP'),
-		'special_html'		=> 'class="bframe_tab"',
+		'attr'		=> 'class="bframe_tab"',
 	),
 	array(
 		'name'				=> 'settings_index',
@@ -152,7 +152,7 @@ $tab_control_config = array(
 		'end_html'			=> '</li>',
 		'link'				=> 'settings',
 		'value'				=> __('Settings'),
-		'special_html'		=> 'class="bframe_tab"',
+		'attr'		=> 'class="bframe_tab"',
 	),
 	array(
 		'name'				=> 'preview_index',
@@ -161,7 +161,7 @@ $tab_control_config = array(
 		'end_html'			=> '</li>',
 		'link'				=> 'preview',
 		'value'				=> __('Preview'),
-		'special_html'		=> 'class="bframe_tab" onclick="bframe.preview.submit(\'F1\', \'' . B_SITE_BASE . 'index.php' . '\', \'preview\', \'preview_frame\'); return false;"',
+		'attr'		=> 'class="bframe_tab" onclick="bframe.preview.submit(\'F1\', \'' . B_SITE_BASE . 'index.php' . '\', \'preview\', \'preview_frame\'); return false;"',
 	),
 	array(
 		'name'				=> 'register_button',
@@ -212,7 +212,7 @@ $settings_form_config = array(
 				array(
 					'name'					=> 'title',
 					'class'					=> 'B_InputText',
-					'special_html'			=> 'class="title bframe_textarea"',
+					'attr'			=> 'class="title bframe_textarea"',
 					'no_trim'				=> true,
 				),
 			),
@@ -232,7 +232,7 @@ $settings_form_config = array(
 				array(
 					'name'				=> 'template',
 					'class'				=> 'B_InputText',
-					'special_html'		=> 'class="template ime-off" readonly="readonly"',
+					'attr'		=> 'class="template ime-off" readonly="readonly"',
 				),
 				array(
 					'class'				=> 'B_Hidden',
@@ -242,7 +242,7 @@ $settings_form_config = array(
 					'name'				=> 'open_template',
 					'class'				=> 'B_Link',
 					'link'				=> 'index.php',
-					'special_html'		=> 'title="' . __('Template') . '" class="settings-button" onclick="top.bframe.modalWindow.activate(this, window, \'template_id\'); return false;" data-param="width:350,height:400"',
+					'attr'		=> 'title="' . __('Template') . '" class="settings-button" onclick="top.bframe.modalWindow.activate(this, window, \'template_id\'); return false;" data-param="width:350,height:400"',
 					'fixedparam'		=>
 					array(
 						'terminal_id'		=> TERMINAL_ID,
@@ -255,7 +255,7 @@ $settings_form_config = array(
 				array(
 					'class'				=> 'B_Link',
 					'link'				=> '#',
-					'special_html'		=> 'title="' . __('Clear') . '" class="clear-button" onclick="bstudio.clearText(\'template\', \'template_id\'); return false;" ',
+					'attr'		=> 'title="' . __('Clear') . '" class="clear-button" onclick="bstudio.clearText(\'template\', \'template_id\'); return false;" ',
 					'specialchars'		=> 'none',
 					'value'				=> '<img alt="' . __('Clear') . '" src="images/common/clear_gray.png" />',
 				),
@@ -279,7 +279,7 @@ $settings_form_config = array(
 				array(
 					'name'					=> 'breadcrumbs',
 					'class'					=> 'B_InputText',
-					'special_html'			=> 'class="breadcrumbs bframe_textarea" ',
+					'attr'			=> 'class="breadcrumbs bframe_textarea" ',
 					'no_trim'				=> true,
 				),
 			),
@@ -299,7 +299,7 @@ $settings_form_config = array(
 				array(
 					'name'					=> 'keywords',
 					'class'					=> 'B_TextArea',
-					'special_html'			=> 'class="keywords bframe_textarea"',
+					'attr'			=> 'class="keywords bframe_textarea"',
 				),
 			),
 		),
@@ -318,7 +318,7 @@ $settings_form_config = array(
 				array(
 					'name'					=> 'description',
 					'class'					=> 'B_TextArea',
-					'special_html'			=> 'class="description bframe_textarea"',
+					'attr'			=> 'class="description bframe_textarea"',
 				),
 			),
 		),
@@ -337,7 +337,7 @@ $settings_form_config = array(
 				array(
 					'name'					=> 'external_css',
 					'class'					=> 'B_TextArea',
-					'special_html'			=> 'class="external_css bframe_textarea"',
+					'attr'			=> 'class="external_css bframe_textarea"',
 				),
 			),
 		),
@@ -356,7 +356,7 @@ $settings_form_config = array(
 				array(
 					'name'					=> 'external_js',
 					'class'					=> 'B_TextArea',
-					'special_html'			=> 'class="external_js bframe_textarea"',
+					'attr'			=> 'class="external_js bframe_textarea"',
 				),
 			),
 		),
@@ -375,7 +375,7 @@ $settings_form_config = array(
 				array(
 					'class'					=> 'B_TextArea',
 					'name'					=> 'header_element',
-					'special_html'			=> 'class="header_element bframe_textarea"',
+					'attr'			=> 'class="header_element bframe_textarea"',
 				),
 			),
 		),

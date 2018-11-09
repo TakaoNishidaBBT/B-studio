@@ -23,12 +23,12 @@ $form_config = array(
 				array(
 					'name'				=> 'html_left',
 					'class'				=> 'B_Hidden',
-					'special_html'		=> 'class="bframe_compare_left"',
+					'attr'		=> 'class="bframe_compare_left"',
 				),
 				array(
 					'name'				=> 'html_right',
 					'class'				=> 'B_Hidden',
-					'special_html'		=> 'class="bframe_compare_right"',
+					'attr'		=> 'class="bframe_compare_right"',
 				),
 				array(
 					'start_html'		=> '<div id="compare_html_display_field" class="bframe_compare_display_field" style="height: 100%">',
@@ -45,12 +45,12 @@ $form_config = array(
 				array(
 					'name'				=> 'css_left',
 					'class'				=> 'B_Hidden',
-					'special_html'		=> 'class="bframe_compare_left"',
+					'attr'		=> 'class="bframe_compare_left"',
 				),
 				array(
 					'name'				=> 'css_right',
 					'class'				=> 'B_Hidden',
-					'special_html'		=> 'class="bframe_compare_right"',
+					'attr'		=> 'class="bframe_compare_right"',
 				),
 				array(
 					'start_html'		=> '<div id="compare_css_display_field" class="bframe_compare_display_field" style="height: 100%">',
@@ -67,12 +67,12 @@ $form_config = array(
 				array(
 					'name'				=> 'php_left',
 					'class'				=> 'B_Hidden',
-					'special_html'		=> 'class="bframe_compare_left"',
+					'attr'		=> 'class="bframe_compare_left"',
 				),
 				array(
 					'name'				=> 'php_right',
 					'class'				=> 'B_Hidden',
-					'special_html'		=> 'class="bframe_compare_right"',
+					'attr'		=> 'class="bframe_compare_right"',
 				),
 				array(
 					'start_html'		=> '<div id="compare_php_display_field" class="bframe_compare_display_field" style="height: 100%">',
@@ -93,7 +93,7 @@ $tab_control_config = array(
 		'start_html'		=> '<li>',
 		'end_html'			=> '</li>',
 		'link'				=> 'html',
-		'special_html'		=> 'class="bframe_tab"',
+		'attr'		=> 'class="bframe_tab"',
 		'value'				=> 'HTML',
 	),
 	array(
@@ -103,7 +103,7 @@ $tab_control_config = array(
 		'end_html'			=> '</li>',
 		'link'				=> 'css',
 		'value'				=> 'CSS',
-		'special_html'		=> 'class="bframe_tab"',
+		'attr'		=> 'class="bframe_tab"',
 	),
 	array(
 		'name'				=> 'php_editor_index',
@@ -112,7 +112,7 @@ $tab_control_config = array(
 		'end_html'			=> '</li>',
 		'link'				=> 'php',
 		'value'				=> 'PHP',
-		'special_html'		=> 'class="bframe_tab"',
+		'attr'		=> 'class="bframe_tab"',
 	),
 	array(
 		'start_html'		=> '<li class="view-mode">',

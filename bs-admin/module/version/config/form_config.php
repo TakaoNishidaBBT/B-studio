@@ -76,7 +76,7 @@ $form_config = array(
 				array(
 					'name'				=> 'publication_datetime_t',
 					'class'				=> 'B_InputText',
-					'special_html'		=> 'class="textbox ime_off"',
+					'attr'		=> 'class="textbox ime_off"',
 					'format'			=> 'Y/m/d H:i',
 					'data_set'			=> 'datetime_error_message',
 					'validate'			=>
@@ -134,7 +134,7 @@ $form_config = array(
 				array(
 					'name'				=> 'version',
 					'class'				=> 'B_InputText',
-					'special_html'		=> 'class="textbox ime_on" maxlength="100"',
+					'attr'		=> 'class="textbox ime_on" maxlength="100"',
 					'validate'			=>
 					array(
 						array(
@@ -167,7 +167,7 @@ $form_config = array(
 				'class'			=> 'B_TextArea',
 				'start_html'	=> '<td>',
 				'end_html'		=> '</td>',
-				'special_html'	=> 'class="textarea bframe_textarea" rows="5"',
+				'attr'	=> 'class="textarea bframe_textarea" rows="5"',
 			),
 		),
 	),

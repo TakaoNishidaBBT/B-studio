@@ -24,7 +24,7 @@ $select_language_config = array(
 		'data_set'		=> $language,
 		'local'			=> true,
 		'value'			=> 'en',
-		'special_html'	=> 'class="bframe_selectbox white" onchange=submit()',
+		'attr'	=> 'class="bframe_selectbox white" onchange=submit()',
 	),
 );
 
@@ -51,7 +51,7 @@ $db_install_form_config = array(
 				array(
 					'name'					=> 'db_srv',
 					'class'					=> 'B_InputText',
-					'special_html'			=> 'class="textbox ime-off" size="40" maxlength="100" ',
+					'attr'			=> 'class="textbox ime-off" size="40" maxlength="100" ',
 					'status'				=> true,
 					'validate'				=>
 					array(
@@ -91,7 +91,7 @@ $db_install_form_config = array(
 				array(
 					'name'					=> 'db_usr',
 					'class'					=> 'B_InputText',
-					'special_html'			=> 'class="textbox ime-off" size="40" maxlength="100" ',
+					'attr'			=> 'class="textbox ime-off" size="40" maxlength="100" ',
 					'status'				=> true,
 					'validate'				=>
 					array(
@@ -131,7 +131,7 @@ $db_install_form_config = array(
 				array(
 					'name'					=> 'db_pwd',
 					'class'					=> 'B_InputText',
-					'special_html'			=> 'class="textbox ime-off" size="40" maxlength="100" ',
+					'attr'			=> 'class="textbox ime-off" size="40" maxlength="100" ',
 					'status'				=> true,
 					'validate'				=>
 					array(
@@ -171,7 +171,7 @@ $db_install_form_config = array(
 				array(
 					'name'					=> 'db_nme',
 					'class'					=> 'B_InputText',
-					'special_html'			=> 'class="textbox ime-off" size="40" maxlength="100" ',
+					'attr'			=> 'class="textbox ime-off" size="40" maxlength="100" ',
 					'status'				=> true,
 					'validate'				=>
 					array(
@@ -211,7 +211,7 @@ $db_install_form_config = array(
 				array(
 					'name'					=> 'db_prefix',
 					'class'					=> 'B_InputText',
-					'special_html'			=> 'class="textbox prefix ime-off" maxlength="100" ',
+					'attr'			=> 'class="textbox prefix ime-off" maxlength="100" ',
 					'value'					=> 'bs_',
 					'validate'				=>
 					array(
@@ -260,7 +260,7 @@ $admin_basic_auth_config = array(
 				array(
 					'name'					=> 'basic_auth_id',
 					'class'					=> 'B_InputText',
-					'special_html'			=> 'class="textbox ime-off" size="40" maxlength="100" ',
+					'attr'			=> 'class="textbox ime-off" size="40" maxlength="100" ',
 					'validate'				=>
 					array(
 						array(
@@ -300,7 +300,7 @@ $admin_basic_auth_config = array(
 				array(
 					'name'					=> 'basic_auth_pwd',
 					'class'					=> 'B_Password',
-					'special_html'			=> 'class="textbox ime-off" size="40" maxlength="100" ',
+					'attr'			=> 'class="textbox ime-off" size="40" maxlength="100" ',
 					'confirm_message'		=> __('(Set password)'),
 					'validate'				=>
 					array(
@@ -342,7 +342,7 @@ $admin_basic_auth_config = array(
 				array(
 					'name'					=> 'basic_auth_pwd2',
 					'class'					=> 'B_Password',
-					'special_html'			=> 'class="textbox ime-off" size="40" maxlength="100" ',
+					'attr'			=> 'class="textbox ime-off" size="40" maxlength="100" ',
 					'validate'				=>
 					array(
 						array(
@@ -390,7 +390,7 @@ $admin_user_form_config = array(
 				array(
 					'name'					=> 'admin_user_name',
 					'class'					=> 'B_InputText',
-					'special_html'			=> 'class="textbox" size="40" maxlength="100" ',
+					'attr'			=> 'class="textbox" size="40" maxlength="100" ',
 					'validate'				=>
 					array(
 						array(
@@ -425,7 +425,7 @@ $admin_user_form_config = array(
 				array(
 					'name'					=> 'admin_user_id',
 					'class'					=> 'B_InputText',
-					'special_html'			=> 'class="textbox ime-off" size="40" maxlength="100" ',
+					'attr'			=> 'class="textbox ime-off" size="40" maxlength="100" ',
 					'validate'				=>
 					array(
 						array(
@@ -465,7 +465,7 @@ $admin_user_form_config = array(
 				array(
 					'name'					=> 'admin_user_pwd',
 					'class'					=> 'B_Password',
-					'special_html'			=> 'class="textbox ime-off" size="40" maxlength="100" ',
+					'attr'			=> 'class="textbox ime-off" size="40" maxlength="100" ',
 					'confirm_message'		=> __('(Set password)'),
 					'validate'				=>
 					array(
@@ -507,7 +507,7 @@ $admin_user_form_config = array(
 				array(
 					'name'					=> 'admin_user_pwd2',
 					'class'					=> 'B_Password',
-					'special_html'			=> 'class="textbox ime-off" size="40" maxlength="100" ',
+					'attr'			=> 'class="textbox ime-off" size="40" maxlength="100" ',
 					'validate'				=>
 					array(
 						array(
@@ -536,6 +536,6 @@ $root_htaccess_config = array(
 	array(
 		'name'			=> 'htaccess',
 		'class'			=> 'B_TextArea',
-		'special_html'	=> 'class="htaccess"',
+		'attr'	=> 'class="htaccess"',
 	),
 );

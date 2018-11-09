@@ -19,7 +19,7 @@ $editor_config = array(
 		'class'			=> 'B_Link',
 		'link'			=> 'index.php',
 		'value'			=> __('File manager'),
-		'special_html'	=> 'style="display:none"',
+		'attr'	=> 'style="display:none"',
 		'fixedparam'	=>
 		array(
 			'terminal_id'	=> TERMINAL_ID,
@@ -48,7 +48,7 @@ $editor_config = array(
 					array(
 						'name'					=> 'subject',
 						'class'					=> 'B_InputText',
-						'special_html'			=> 'class="subject" maxlength="300" placeholder="' . __('Subject') . '"',
+						'attr'			=> 'class="subject" maxlength="300" placeholder="' . __('Subject') . '"',
 						'validate'				=>
 						array(
 							array(
@@ -82,7 +82,7 @@ $editor_config = array(
 					array(
 						'name'			=> 'body',
 						'class'			=> 'B_TextArea',
-						'special_html'	=> 'class="mail-body bframe_contenteditor" data-param="autogrow:true"',
+						'attr'	=> 'class="mail-body bframe_contenteditor" data-param="autogrow:true"',
 					),
 				),
 			),
@@ -103,7 +103,7 @@ $editor_config = array(
 					array(
 						'name'			=> 'html',
 						'class'			=> 'B_TextArea',
-						'special_html'	=> 'class="textarea bframe_visualeditor" data-param="container:htmleditor_index,scroller:content"',
+						'attr'	=> 'class="textarea bframe_visualeditor" data-param="container:htmleditor_index,scroller:content"',
 					),
 				),
 			),
@@ -121,7 +121,7 @@ $tab_control_config = array(
 		'start_html'		=> '<li>',
 		'end_html'			=> '</li>',
 		'link'				=> 'texteditor_index',
-		'special_html'		=> 'class="bframe_tab"',
+		'attr'		=> 'class="bframe_tab"',
 		'value'				=> __('Text'),
 	),
 	array(
@@ -130,7 +130,7 @@ $tab_control_config = array(
 		'start_html'		=> '<li>',
 		'end_html'			=> '</li>',
 		'link'				=> 'htmleditor_index',
-		'special_html'		=> 'class="bframe_tab"',
+		'attr'		=> 'class="bframe_tab"',
 		'value'				=> __('HTML'),
 	),
 );

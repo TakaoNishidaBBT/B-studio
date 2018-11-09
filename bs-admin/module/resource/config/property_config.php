@@ -33,7 +33,7 @@ $tab_control_config = array(
 		'end_html'			=> '</li>',
 		'link'				=> 'property1',
 		'value'				=> __('Settings'),
-		'special_html'		=> 'class="bframe_tab"',
+		'attr'		=> 'class="bframe_tab"',
 	),
 );
 $config_form_config = array(
@@ -77,7 +77,7 @@ $config_form_config = array(
 							'value'			=> '1',
 							'item'			=>
 							array(
-								'special_html'		=> ' class=radio',
+								'attr'		=> ' class=radio',
 							),
 						),
 					),

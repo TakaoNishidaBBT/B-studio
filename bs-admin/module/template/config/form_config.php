@@ -21,14 +21,14 @@ $form_config = array(
 				array(
 					'name'				=> 'start_html',
 					'class'				=> 'B_TextArea',
-					'special_html'		=> 'class="bframe_texteditor" data-param="margin:32"',
+					'attr'		=> 'class="bframe_texteditor" data-param="margin:32"',
 					'no_trim'			=> true,
 				),
 				array(
 					'class'				=> 'B_Link',
 					'link'				=> 'index.php',
 					'value'				=> __('Widgets'),
-					'special_html'		=> 'class="open_widgetmanager" title="' . __('Widgets') . '" style="display:none"',
+					'attr'		=> 'class="open_widgetmanager" title="' . __('Widgets') . '" style="display:none"',
 					'fixedparam'		=>
 					array(
 						'terminal_id'	=> TERMINAL_ID,
@@ -44,14 +44,14 @@ $form_config = array(
 				array(
 					'name'				=> 'end_html',
 					'class'				=> 'B_TextArea',
-					'special_html'		=> 'class="bframe_texteditor" data-param="margin:32"',
+					'attr'		=> 'class="bframe_texteditor" data-param="margin:32"',
 					'no_trim'			=> true,
 				),
 				array(
 					'class'				=> 'B_Link',
 					'link'				=> 'index.php',
 					'value'				=> __('Widgets'),
-					'special_html'		=> 'class="open_widgetmanager" title="' . __('Widgets') . '" style="display:none"',
+					'attr'		=> 'class="open_widgetmanager" title="' . __('Widgets') . '" style="display:none"',
 					'fixedparam'		=>
 					array(
 						'terminal_id'	=> TERMINAL_ID,
@@ -69,7 +69,7 @@ $form_config = array(
 				'id'				=> 'css_editor',
 				'name'				=> 'css',
 				'class'				=> 'B_TextArea',
-				'special_html'		=> 'class="textarea bframe_adjustparent bframe_texteditor" data-param="margin:32" data-syntax="css" style="width:100%"',
+				'attr'		=> 'class="textarea bframe_adjustparent bframe_texteditor" data-param="margin:32" data-syntax="css" style="width:100%"',
 				'no_trim'			=> true,
 			),
 		),
@@ -80,7 +80,7 @@ $form_config = array(
 				'id'				=> 'php_editor',
 				'name'				=> 'php',
 				'class'				=> 'B_TextArea',
-				'special_html'		=> 'class="textarea bframe_adjustparent bframe_texteditor" data-param="margin:32" data-syntax="php" style="width:100%"',
+				'attr'		=> 'class="textarea bframe_adjustparent bframe_texteditor" data-param="margin:32" data-syntax="php" style="width:100%"',
 				'no_trim'			=> true,
 			),
 			array(
@@ -88,7 +88,7 @@ $form_config = array(
 				'class'				=> 'B_Link',
 				'link'				=> 'index.php',
 				'value'				=> __('Widgets'),
-				'special_html'		=> 'title="' . __('Widgets') . '" style="display:none"',
+				'attr'		=> 'title="' . __('Widgets') . '" style="display:none"',
 				'fixedparam'		=>
 				array(
 					'terminal_id'	=> TERMINAL_ID,
@@ -125,7 +125,7 @@ $tab_control_config = array(
 		'end_html'			=> '</li>',
 		'link'				=> 'html',
 		'value'				=> __('HTML'),
-		'special_html'		=> 'class="bframe_tab"',
+		'attr'		=> 'class="bframe_tab"',
 	),
 	array(
 		'name'				=> 'css_editor_index',
@@ -134,7 +134,7 @@ $tab_control_config = array(
 		'end_html'			=> '</li>',
 		'link'				=> 'css',
 		'value'				=> __('CSS'),
-		'special_html'		=> 'class="bframe_tab"',
+		'attr'		=> 'class="bframe_tab"',
 	),
 	array(
 		'name'				=> 'php_editor_index',
@@ -143,7 +143,7 @@ $tab_control_config = array(
 		'end_html'			=> '</li>',
 		'link'				=> 'php',
 		'value'				=> __('PHP'),
-		'special_html'		=> 'class="bframe_tab"',
+		'attr'		=> 'class="bframe_tab"',
 	),
 	array(
 		'name'				=> 'settings_index',
@@ -152,7 +152,7 @@ $tab_control_config = array(
 		'end_html'			=> '</li>',
 		'link'				=> 'settings',
 		'value'				=> __('Settings'),
-		'special_html'		=> 'class="bframe_tab"',
+		'attr'		=> 'class="bframe_tab"',
 	),
 	array(
 		'name'				=> 'preview_index',
@@ -161,7 +161,7 @@ $tab_control_config = array(
 		'end_html'			=> '</li>',
 		'link'				=> 'preview',
 		'value'				=> __('Preview'),
-		'special_html'		=> 'class="bframe_tab" onclick="bframe.preview.submit(\'F1\', \'' . B_SITE_BASE . 'index.php' . '\', \'template_preview\', \'preview_frame\'); return false;"',
+		'attr'		=> 'class="bframe_tab" onclick="bframe.preview.submit(\'F1\', \'' . B_SITE_BASE . 'index.php' . '\', \'template_preview\', \'preview_frame\'); return false;"',
 	),
 	array(
 		'name'				=> 'register_button',
@@ -209,7 +209,7 @@ $settings_form_config = array(
 				array(
 					'class'					=> 'B_TextArea',
 					'name'					=> 'external_css',
-					'special_html'			=> 'class="external_css bframe_textarea ime-off"',
+					'attr'			=> 'class="external_css bframe_textarea ime-off"',
 				),
 			),
 		),
@@ -229,7 +229,7 @@ $settings_form_config = array(
 				array(
 					'class'					=> 'B_TextArea',
 					'name'					=> 'external_js',
-					'special_html'			=> 'class="external_js bframe_textarea ime-off"',
+					'attr'			=> 'class="external_js bframe_textarea ime-off"',
 				),
 			),
 		),
@@ -249,7 +249,7 @@ $settings_form_config = array(
 				array(
 					'class'					=> 'B_TextArea',
 					'name'					=> 'header_element',
-					'special_html'			=> 'class="header_element bframe_textarea"',
+					'attr'			=> 'class="header_element bframe_textarea"',
 				),
 			),
 		),

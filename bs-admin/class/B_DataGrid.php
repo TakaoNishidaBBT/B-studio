@@ -355,7 +355,7 @@
 			if($this->sort_key) {
 				$obj = $this->header->getElementByFieldName('sort_key', $this->sort_key);
 				if($obj) {
-					$obj->special_html.= ' ' . $obj->cond_html;
+					$obj->attr.= ' ' . $obj->cond_html;
 					if(strtolower(trim($this->sort_order)) == 'asc' && $obj->start_html_asc) {
 						$obj->start_html = $obj->start_html_asc;
 					}

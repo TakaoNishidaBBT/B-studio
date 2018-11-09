@@ -23,12 +23,12 @@ $form_config = array(
 				array(
 					'name'				=> 'html_left',
 					'class'				=> 'B_Hidden',
-					'special_html'		=> 'class="bframe_compare_left"',
+					'attr'		=> 'class="bframe_compare_left"',
 				),
 				array(
 					'name'				=> 'html_right',
 					'class'				=> 'B_Hidden',
-					'special_html'		=> 'class="bframe_compare_right"',
+					'attr'		=> 'class="bframe_compare_right"',
 				),
 				array(
 					'start_html'		=> '<div id="compare_html_display_field" class="bframe_compare_display_field" style="height: 100%">',
@@ -45,12 +45,12 @@ $form_config = array(
 				array(
 					'name'				=> 'css_left',
 					'class'				=> 'B_Hidden',
-					'special_html'		=> 'class="textarea bframe_compare_left"',
+					'attr'		=> 'class="textarea bframe_compare_left"',
 				),
 				array(
 					'name'				=> 'css_right',
 					'class'				=> 'B_Hidden',
-					'special_html'		=> 'class="textarea bframe_compare_right"',
+					'attr'		=> 'class="textarea bframe_compare_right"',
 				),
 				array(
 					'start_html'		=> '<div id="compare_css_display_field" class="bframe_compare_display_field" style="height: 100%">',
@@ -67,12 +67,12 @@ $form_config = array(
 				array(
 					'name'				=> 'php_left',
 					'class'				=> 'B_Hidden',
-					'special_html'		=> 'class="textarea bframe_compare_left"',
+					'attr'		=> 'class="textarea bframe_compare_left"',
 				),
 				array(
 					'name'				=> 'php_right',
 					'class'				=> 'B_Hidden',
-					'special_html'		=> 'class="textarea bframe_compare_right"',
+					'attr'		=> 'class="textarea bframe_compare_right"',
 				),
 				array(
 					'start_html'		=> '<div id="compare_php_display_field" class="bframe_compare_display_field" style="height: 100%">',
@@ -100,7 +100,7 @@ $tab_control_config = array(
 		'start_html'		=> '<li>',
 		'end_html'			=> '</li>',
 		'link'				=> 'html',
-		'special_html'		=> 'class="bframe_tab"',
+		'attr'		=> 'class="bframe_tab"',
 		'value'				=> __('HTML'),
 	),
 	array(
@@ -110,7 +110,7 @@ $tab_control_config = array(
 		'end_html'			=> '</li>',
 		'link'				=> 'css',
 		'value'				=> __('CSS'),
-		'special_html'		=> 'class="bframe_tab"',
+		'attr'		=> 'class="bframe_tab"',
 	),
 	array(
 		'name'				=> 'php_editor_index',
@@ -119,7 +119,7 @@ $tab_control_config = array(
 		'end_html'			=> '</li>',
 		'link'				=> 'php',
 		'value'				=> __('PHP'),
-		'special_html'		=> 'class="bframe_tab"',
+		'attr'		=> 'class="bframe_tab"',
 	),
 	array(
 		'name'				=> 'config_index',
@@ -128,7 +128,7 @@ $tab_control_config = array(
 		'end_html'			=> '</li>',
 		'link'				=> 'config',
 		'value'				=> __('Settings'),
-		'special_html'		=> 'class="bframe_tab"',
+		'attr'		=> 'class="bframe_tab"',
 	),
 	array(
 		'start_html'		=> '<li class="view-mode">',
@@ -183,7 +183,7 @@ $config_form_config = array(
 				array(
 					'name'					=> 'title_left',
 					'class'					=> 'B_InputText',
-					'special_html'			=> 'class="title ime-on" maxlength="100" readonly="readonly"',
+					'attr'			=> 'class="title ime-on" maxlength="100" readonly="readonly"',
 					'validate'				=>
 					array(
 						array(
@@ -199,7 +199,7 @@ $config_form_config = array(
 				array(
 					'name'					=> 'title_right',
 					'class'					=> 'B_InputText',
-					'special_html'			=> 'class="title ime-on" maxlength="100" readonly="readonly"',
+					'attr'			=> 'class="title ime-on" maxlength="100" readonly="readonly"',
 				),
 			),
 		),
@@ -223,7 +223,7 @@ $config_form_config = array(
 				array(
 					'name'					=> 'bread_crumb_name_left',
 					'class'					=> 'B_InputText',
-					'special_html'			=> 'class="bread_crumb ime-on" maxlength="100" ',
+					'attr'			=> 'class="bread_crumb ime-on" maxlength="100" ',
 					'validate'				=>
 					array(
 						array(
@@ -239,7 +239,7 @@ $config_form_config = array(
 				array(
 					'name'					=> 'bread_crumb_name_right',
 					'class'					=> 'B_InputText',
-					'special_html'			=> 'class="bread_crumb ime-on" maxlength="100" ',
+					'attr'			=> 'class="bread_crumb ime-on" maxlength="100" ',
 				),
 			),
 		),
@@ -260,7 +260,7 @@ $config_form_config = array(
 				array(
 					'name'				=> 'template_name_left',
 					'class'				=> 'B_InputText',
-					'special_html'		=> 'class="template ime-off" readonly="readonly"',
+					'attr'		=> 'class="template ime-off" readonly="readonly"',
 					'validate'				=>
 					array(
 						array(
@@ -276,7 +276,7 @@ $config_form_config = array(
 				array(
 					'name'				=> 'template_name_right',
 					'class'				=> 'B_InputText',
-					'special_html'		=> 'class="template ime-off" readonly="readonly"',
+					'attr'		=> 'class="template ime-off" readonly="readonly"',
 				),
 			),
 		),
@@ -297,7 +297,7 @@ $config_form_config = array(
 				array(
 					'name'					=> 'keywords_left',
 					'class'					=> 'B_TextArea',
-					'special_html'			=> 'class="keywords ime-on"',
+					'attr'			=> 'class="keywords ime-on"',
 					'validate'				=>
 					array(
 						array(
@@ -313,7 +313,7 @@ $config_form_config = array(
 				array(
 					'name'					=> 'keywords_right',
 					'class'					=> 'B_TextArea',
-					'special_html'			=> 'class="keywords ime-on"',
+					'attr'			=> 'class="keywords ime-on"',
 				),
 			),
 		),
@@ -334,7 +334,7 @@ $config_form_config = array(
 				array(
 					'name'					=> 'description_left',
 					'class'					=> 'B_TextArea',
-					'special_html'			=> 'class="description ime-on"',
+					'attr'			=> 'class="description ime-on"',
 					'validate'				=>
 					array(
 						array(
@@ -350,7 +350,7 @@ $config_form_config = array(
 				array(
 					'name'					=> 'description_right',
 					'class'					=> 'B_TextArea',
-					'special_html'			=> 'class="description ime-on"',
+					'attr'			=> 'class="description ime-on"',
 				),
 			),
 		),
@@ -371,7 +371,7 @@ $config_form_config = array(
 				array(
 					'name'					=> 'external_css_left',
 					'class'					=> 'B_TextArea',
-					'special_html'			=> 'class="external_css ime-off"',
+					'attr'			=> 'class="external_css ime-off"',
 					'validate'				=>
 					array(
 						array(
@@ -387,7 +387,7 @@ $config_form_config = array(
 				array(
 					'name'					=> 'external_css_right',
 					'class'					=> 'B_TextArea',
-					'special_html'			=> 'class="external_css ime-off"',
+					'attr'			=> 'class="external_css ime-off"',
 				),
 			),
 		),
@@ -408,7 +408,7 @@ $config_form_config = array(
 				array(
 					'name'					=> 'external_js_left',
 					'class'					=> 'B_TextArea',
-					'special_html'			=> 'class="external_js ime-off"',
+					'attr'			=> 'class="external_js ime-off"',
 					'validate'				=>
 					array(
 						array(
@@ -424,7 +424,7 @@ $config_form_config = array(
 				array(
 					'name'					=> 'external_js_right',
 					'class'					=> 'B_TextArea',
-					'special_html'			=> 'class="external_js ime-off"',
+					'attr'			=> 'class="external_js ime-off"',
 				),
 			),
 		),
@@ -445,7 +445,7 @@ $config_form_config = array(
 				array(
 					'class'					=> 'B_TextArea',
 					'name'					=> 'header_element_left',
-					'special_html'			=> 'class="header_element"',
+					'attr'			=> 'class="header_element"',
 					'validate'				=>
 					array(
 						array(
@@ -461,7 +461,7 @@ $config_form_config = array(
 				array(
 					'class'					=> 'B_TextArea',
 					'name'					=> 'header_element_right',
-					'special_html'			=> 'class="header_element"',
+					'attr'			=> 'class="header_element"',
 				),
 			),
 		),

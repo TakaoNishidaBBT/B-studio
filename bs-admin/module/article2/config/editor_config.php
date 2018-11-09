@@ -19,7 +19,7 @@ $editor_config = array(
 		'class'			=> 'B_Link',
 		'link'			=> 'index.php',
 		'value'			=> __('File manager'),
-		'special_html'	=> 'style="display:none"',
+		'attr'	=> 'style="display:none"',
 		'fixedparam'	=>
 		array(
 			'terminal_id'	=> TERMINAL_ID,
@@ -48,7 +48,7 @@ $editor_config = array(
 					array(
 						'name'					=> 'title',
 						'class'					=> 'B_TextArea',
-						'special_html'			=> 'class="textarea title ime_on bframe_textarea" maxlength="300" placeholder="' . __('Title') . '"',
+						'attr'			=> 'class="textarea title ime_on bframe_textarea" maxlength="300" placeholder="' . __('Title') . '"',
 						'validate'				=>
 						array(
 							array(
@@ -82,7 +82,7 @@ $editor_config = array(
 					array(
 						'name'			=> 'content1',
 						'class'			=> 'B_TextArea',
-						'special_html'	=> 'class="textarea bframe_visualeditor" data-param="container:content1_index,scroller:content,bodyclass:content1"',
+						'attr'	=> 'class="textarea bframe_visualeditor" data-param="container:content1_index,scroller:content,bodyclass:content1"',
 					),
 				),
 			),
@@ -103,7 +103,7 @@ $editor_config = array(
 					array(
 						'name'			=> 'content2',
 						'class'			=> 'B_TextArea',
-						'special_html'	=> 'class="textarea bframe_visualeditor" data-param="container:content2_index,scroller:content,bodyclass:content2"',
+						'attr'	=> 'class="textarea bframe_visualeditor" data-param="container:content2_index,scroller:content,bodyclass:content2"',
 					),
 				),
 			),
@@ -124,7 +124,7 @@ $editor_config = array(
 					array(
 						'name'			=> 'content3',
 						'class'			=> 'B_TextArea',
-						'special_html'	=> 'class="textarea bframe_visualeditor" data-param="container:content3_index,scroller:content,bodyclass:content3"',
+						'attr'	=> 'class="textarea bframe_visualeditor" data-param="container:content3_index,scroller:content,bodyclass:content3"',
 					),
 				),
 			),
@@ -145,7 +145,7 @@ $editor_config = array(
 					array(
 						'name'			=> 'content4',
 						'class'			=> 'B_TextArea',
-						'special_html'	=> 'class="textarea bframe_visualeditor" data-param="container:content4_index,scroller:content,bodyclass:content4"',
+						'attr'	=> 'class="textarea bframe_visualeditor" data-param="container:content4_index,scroller:content,bodyclass:content4"',
 					),
 				),
 			),
@@ -163,7 +163,7 @@ $tab_control_config = array(
 		'start_html'		=> '<li>',
 		'end_html'			=> '</li>',
 		'link'				=> 'content1_index',
-		'special_html'		=> 'class="bframe_tab"',
+		'attr'		=> 'class="bframe_tab"',
 		'value'				=> __('Content1'),
 	),
 	array(
@@ -172,7 +172,7 @@ $tab_control_config = array(
 		'start_html'		=> '<li>',
 		'end_html'			=> '</li>',
 		'link'				=> 'content2_index',
-		'special_html'		=> 'class="bframe_tab"',
+		'attr'		=> 'class="bframe_tab"',
 		'value'				=> __('Content2'),
 	),
 	array(
@@ -181,7 +181,7 @@ $tab_control_config = array(
 		'start_html'		=> '<li>',
 		'end_html'			=> '</li>',
 		'link'				=> 'content3_index',
-		'special_html'		=> 'class="bframe_tab"',
+		'attr'		=> 'class="bframe_tab"',
 		'value'				=> __('Content3'),
 	),
 	array(
@@ -190,7 +190,7 @@ $tab_control_config = array(
 		'start_html'		=> '<li>',
 		'end_html'			=> '</li>',
 		'link'				=> 'content4_index',
-		'special_html'		=> 'class="bframe_tab"',
+		'attr'		=> 'class="bframe_tab"',
 		'value'				=> __('Content4'),
 	),
 );

@@ -1069,7 +1069,7 @@
 					'name="' . $this->name . '" ' .
 					'id="' . $this->_gethtmlid() . '" ' .
 					'value="' . htmlspecialchars($this->value, ENT_QUOTES, B_CHARSET) . '" ' .
-					$this->special_html .
+					$this->attr .
 					' />' . "\n";
 		}
 	}
@@ -1086,7 +1086,7 @@
 			else {
 				return 
 					'<textarea ' .
-					$this->special_html . ' ' .
+					$this->attr . ' ' .
 					'id="' . $this->_gethtmlid() . '" ' .
 					'name="' . $this->name_prefix . $this->name . '" ' .
 					$this->html .'>' . "\n" .
@@ -1126,7 +1126,7 @@
 					'name="' . $this->name_prefix . $this->name . '" ' .
 					'id="' . $this->_gethtmlid() . '" ' .
 					'value="' . $value . '" ' .
-					$this->special_html .
+					$this->attr .
 					' />' . "\n";
 		}
 	}
@@ -1172,7 +1172,7 @@
 			}
 			$html.= 
 				'<input ' .
-				$this->special_html . $disabled . ' ' .
+				$this->attr . $disabled . ' ' .
 				'type="' . $type . '" ' .
 				'name="' . $this->name_prefix . $this->name . '" ' .
 				'id="' . $this->_gethtmlid() . '" ' .
@@ -1202,7 +1202,7 @@
 			}
 			$html.= 
 				'<input ' .
-				$this->special_html . $disabled . ' ' .
+				$this->attr . $disabled . ' ' .
 				'type="image" ' .
 				'src="' . $this->src . '" ' .
 				'name="' . $this->name_prefix . $this->name . '" ' .
@@ -1231,7 +1231,7 @@
 				'data-rel="' . $this->name_prefix . $this->name . '" ' .
 				'data-value="' . $this->value . '" ' .
 				$confirm . ' ' .
-				$this->special_html . ' ' .
+				$this->attr . ' ' .
 				' />';
 
 			return $html;
@@ -1257,7 +1257,7 @@
 				'name="' . $this->name_prefix . $this->name . '" ' .
 				'id="' . $this->_gethtmlid() . '" ' .
 				'value="' . $this->value . '" ' .
-				$this->special_html .
+				$this->attr .
 				$disabled .
 				' />';
 		}
@@ -1280,7 +1280,7 @@
 
 			$html = 
 				'<input ' .
-				$this->special_html . ' ' .
+				$this->attr . ' ' .
 				'type="password" ' .
 				'name="' . $this->name_prefix . $this->name . '" ' .
 				'id="' . $this->_gethtmlid() . '" ' .
@@ -1299,7 +1299,7 @@
 		function getElementsHtml($mode=null) {
 			return 
 				'<input ' .
-				$this->special_html . ' ' .
+				$this->attr . ' ' .
 				'type="submit" ' .
 				'name="' . $this->name_prefix . $this->name . '" ' .
 				'id="' . $this->_gethtmlid() . '" ' .
@@ -1316,7 +1316,7 @@
 		function getElementsHtml($mode=null) {
 			return 
 				'<input ' .
-				$this->special_html . ' ' .
+				$this->attr . ' ' .
 				'type="reset" ' .
 				'name="' . $this->name_prefix . $this->name . '" ' .
 				'id="' . $this->_gethtmlid() . '" ' .
@@ -1339,7 +1339,7 @@
 							'name="' . $this->name_prefix . $this->name . '[]" ' .
 							'id="' . $this->_gethtmlid() . '[]" ' .
 							'value="' . htmlspecialchars($value2, ENT_QUOTES, B_CHARSET) . '" ' .
-							$this->special_html .
+							$this->attr .
 							' />' . "\n";
 				}
 			}
@@ -1354,7 +1354,7 @@
 					'name="' . $this->name_prefix . $name . '" ' .
 					'id="' . $this->_gethtmlid() . '" ' .
 					'value="' . htmlspecialchars($this->value, ENT_QUOTES, B_CHARSET) . '" ' .
-					$this->special_html .
+					$this->attr .
 					' />' . "\n";
 			}
 
@@ -1382,7 +1382,7 @@
 			else {
 				$html = 
 					'<select ' .
-					$this->special_html . ' ' .
+					$this->attr . ' ' .
 					'name="' . $this->name_prefix . $this->name . '" ' .
 					'id="' . $this->_gethtmlid() . '">' . "\n";
 
@@ -1464,7 +1464,7 @@
 					'name="' . $this->name_prefix . $this->name . '" ' .
 					'id="' . $this->_gethtmlid() . '" ' .
 					'value="' . htmlspecialchars($this->value, ENT_QUOTES, B_CHARSET) . '" ' .
-					$this->special_html .
+					$this->attr .
 					' />' . "\n";
 		}
 	}
@@ -1484,7 +1484,7 @@
 			else {
 				$id = $this->_gethtmlid();
 				$html.= 
-					'<input ' .	$this->special_html . ' ' .
+					'<input ' .	$this->attr . ' ' .
 					'type="text" ' .
 					'name="' . $this->name_prefix . $this->name . '" ' .
 					'id="' . $id . '" ' .
@@ -1653,7 +1653,7 @@
 				}
 
 				$html.= '<input type="checkbox" name="' . $name . '" id="' . $id . '" value="' . $this->value . '"';
-				$html.= ' ' . $this->special_html;
+				$html.= ' ' . $this->attr;
 
 				if($this->disabled) {
 					$html.= ' disabled="disabled"';
@@ -1839,8 +1839,8 @@
 					$id.= '[' . $this->index . ']';
 				}
 				$html.= '<input type="radio" name="' . $name . '" id="' . $id . '" value="' . $this->value . '"';
-				if($this->special_html) {
-					$html.= ' ' . $this->special_html;
+				if($this->attr) {
+					$html.= ' ' . $this->attr;
 				}
 				if($this->disabled) {
 					$html.= ' disabled';
@@ -1945,9 +1945,9 @@
 			if($this->title) {
 				$this->element_start_html.= ' title="' . $this->title . '"';
 			}
-			if($this->special_html) $this->special_html = ' ' . $this->special_html;
+			if($this->attr) $this->attr = ' ' . $this->attr;
 
-			return $this->start_html . $this->element_start_html . $this->special_html . $this->event . '>';
+			return $this->start_html . $this->element_start_html . $this->attr . $this->event . '>';
 		}
 
 		function getEndHtml($mode=null) {
@@ -2111,7 +2111,7 @@
 					'name="' . $this->name_prefix . $this->name . '" ' .
 					'id="' . $this->_gethtmlid() . '" ' .
 					'value="' . htmlspecialchars($this->value, ENT_QUOTES, B_CHARSET) . '" ' .
-					$this->special_html .
+					$this->attr .
 					' />' . "\n";
 		}
 	}
@@ -2147,7 +2147,7 @@
 
 			$this->start_html = 
 				'<' . $this->tag . ' ' .
-				$this->special_html .
+				$this->attr .
 				$this->rowspan .
 				$this->colspan .
 				'>';
@@ -2156,7 +2156,7 @@
 		function getStartHtml($mode=null) {
 			return
 				'<' . $this->tag . ' ' .
-				$this->special_html .
+				$this->attr .
 				$this->rowspan .
 				$this->colspan .
 				'>';
@@ -2194,8 +2194,8 @@
 		}
 
 		function getStartHtml($mode=null) {
-			if($this->special_html) {
-				$special_html = ' ' . $this->special_html;
+			if($this->attr) {
+				$attr = ' ' . $this->attr;
 			}
 			if($this->name) {
 				$name = ' name="' . $this->name_prefix . $this->name . '"';
@@ -2203,7 +2203,7 @@
 			if($this->id) {
 				$id = ' id="' . $this->id . '"';
 			}
-			return '<' . $this->tag . $special_html . $name . $id . '>';
+			return '<' . $this->tag . $attr . $name . $id . '>';
 		}
 
 		function getEndHtml($mode=null) {
@@ -2229,7 +2229,7 @@
 			return
 				'<iframe' . $id . $name .
 				' src="' . $this->src . '"' .
-				$this->special_html .
+				$this->attr .
 				'>';
 		}
 
@@ -2259,7 +2259,7 @@
 				'<img ' .
 				'src="' . $src . '" ' .
 				'alt="' . $this->alt . '" ' .
-				$this->special_html .
+				$this->attr .
 				' />' . "\n";
 		}
 	}

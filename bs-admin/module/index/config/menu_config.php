@@ -50,7 +50,7 @@ $menu_config = array(
 			'end_html'		=> '</li>',
 			array(
 				'class'			=> 'B_Link',
-				'special_html'	=> 'class="bframe_menu"',
+				'attr'	=> 'class="bframe_menu"',
 				'id'			=> 'resource',
 				'value'			=> '<img src="images/menu/resource.png" alt="resources"/>' . __('Resources'),
 				'specialchars'	=> 'none',
@@ -84,7 +84,7 @@ $menu_config = array(
 			'end_html'		=> '</li>',
 			array(
 				'class'			=> 'B_Link',
-				'special_html'	=> 'class="bframe_menu"',
+				'attr'	=> 'class="bframe_menu"',
 				'id'			=> 'post_menu',
 				'value'			=> '<img src="images/menu/article.png" alt="posts"/>' . __('Posts'),
 				'specialchars'	=> 'none',
@@ -128,7 +128,7 @@ $menu_config = array(
 			'end_html'		=> '</li>',
 			array(
 				'class'			=> 'B_Link',
-				'special_html'	=> 'class="bframe_menu"',
+				'attr'	=> 'class="bframe_menu"',
 				'id'			=> 'setting_menu',
 				'value'			=> '<img src="images/menu/settings.png" alt="settings"/>' . __('Settings'),
 				'specialchars'	=> 'none',
@@ -177,7 +177,7 @@ $menu_config = array(
 			'end_html'		=> '</li>',
 			array(
 				'class'			=> 'B_Link',
-				'special_html'	=> 'class="bframe_menu"',
+				'attr'	=> 'class="bframe_menu"',
 				'id'			=> 'setting_menu',
 				'value'			=> '<img src="images/menu/settings.png" alt="settings"/>' . __('Settings'),
 				'specialchars'	=> 'none',
@@ -216,7 +216,7 @@ $menu_config = array(
 			'end_html'		=> '</li>',
 			array(
 				'class'			=> 'B_Link',
-				'special_html'	=> 'class="bframe_menu"',
+				'attr'	=> 'class="bframe_menu"',
 				'id'			=> 'setting_menu',
 				'value'			=> '<img src="images/menu/settings.png" alt="settings"/>' . __('Settings'),
 				'specialchars'	=> 'none',

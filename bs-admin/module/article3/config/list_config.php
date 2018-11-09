@@ -172,7 +172,7 @@ $list_config = array(
 				'name'			=> 'edit',
 				'class'			=> 'B_Link',
 				'link'			=> 'index.php',
-				'special_html'	=> 'class="edit-button"',
+				'attr'	=> 'class="edit-button"',
 				'fixedparam'	=>
 				array(
 					'terminal_id'	=> TERMINAL_ID,
@@ -200,7 +200,7 @@ $list_config = array(
 				'name'			=> 'delete',
 				'class'			=> 'B_Link',
 				'link'			=> 'index.php',
-				'special_html'	=> 'class="delete-button"',
+				'attr'	=> 'class="delete-button"',
 				'fixedparam'	=>
 				array(
 					'terminal_id'	=> TERMINAL_ID,

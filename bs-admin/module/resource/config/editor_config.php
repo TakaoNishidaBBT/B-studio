@@ -19,7 +19,7 @@ $editor_config = array(
 			array(
 				'name'				=> 'contents',
 				'class'				=> 'B_TextArea',
-				'special_html'		=> 'class="textarea bframe_adjustparent bframe_texteditor" data-param="margin:32" %SYNTAX% style="width:100%"',
+				'attr'		=> 'class="textarea bframe_adjustparent bframe_texteditor" data-param="margin:32" %SYNTAX% style="width:100%"',
 				'no_trim'			=> true,
 			),
 		),
@@ -34,7 +34,7 @@ $tab_control_config = array(
 		'name'				=> 'text_editor_index',
 		'start_html'		=> '<li class="filename">',
 		'end_html'			=> '</li>',
-		'special_html'		=> 'class="bframe_tab"',
+		'attr'		=> 'class="bframe_tab"',
 	),
 	array(
 		'start_html'		=> '<li class="encoding">',
@@ -42,7 +42,7 @@ $tab_control_config = array(
 		'name'				=> 'encoding',
 		'class'				=> 'B_SelectBox',
 		'data_set'			=> 'encoding',
-		'special_html'		=> 'class="bframe_selectbox"',
+		'attr'		=> 'class="bframe_selectbox"',
 	),
 	array(
 		'start_html'		=> '<li class="register">',

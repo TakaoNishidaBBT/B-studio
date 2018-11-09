@@ -56,7 +56,7 @@ $form_config = array(
 					'config_filter'			=> 'insert',
 					'name'					=> 'user_id',
 					'class'					=> 'B_InputText',
-					'special_html'			=> 'class="textbox ime_off" maxlength="10" ',
+					'attr'			=> 'class="textbox ime_off" maxlength="10" ',
 					'validate'				=>
 					array(
 						array(
@@ -119,7 +119,7 @@ $form_config = array(
 				array(
 					'name'					=> 'pwd',
 					'class'					=> 'B_InputText',
-					'special_html'			=> 'class="textbox ime_off" maxlength="100" ',
+					'attr'			=> 'class="textbox ime_off" maxlength="100" ',
 					'validate'				=>
 					array(
 						array(
@@ -160,7 +160,7 @@ $form_config = array(
 				array(
 					'name'					=> 'user_name',
 					'class'					=> 'B_InputText',
-					'special_html'			=> 'class="textbox" maxlength="100" ',
+					'attr'			=> 'class="textbox" maxlength="100" ',
 					'validate'				=>
 					array(
 						array(
@@ -201,7 +201,7 @@ $form_config = array(
 				'start_html'			=> '<td>',
 				'end_html'				=> '</td>',
 				'data_set'				=> 'user_auth',
-				'special_html'			=> 'class="bframe_selectbox white"',
+				'attr'			=> 'class="bframe_selectbox white"',
 				'validate'				=>
 				array(
 					array(
@@ -241,7 +241,7 @@ $form_config = array(
 				'start_html'			=> '<td>',
 				'end_html'				=> '</td>',
 				'data_set'				=> 'user_status',
-				'special_html'			=> 'class="bframe_selectbox white"',
+				'attr'			=> 'class="bframe_selectbox white"',
 			),
 		),
 
@@ -261,7 +261,7 @@ $form_config = array(
 				'start_html'		=> '<td>',
 				'end_html'			=> '</td>',
 				'value'				=> LANG,
-				'special_html'		=> 'class="bframe_selectbox white"',
+				'attr'		=> 'class="bframe_selectbox white"',
 			),
 		),
 
@@ -282,7 +282,7 @@ $form_config = array(
 				array(
 					'name'				=> 'notes',
 					'class'				=> 'B_TextArea',
-					'special_html'		=> 'class="textarea bframe_textarea" cols="78" rows="5"',
+					'attr'		=> 'class="textarea bframe_textarea" cols="78" rows="5"',
 				),
 			),
 		),

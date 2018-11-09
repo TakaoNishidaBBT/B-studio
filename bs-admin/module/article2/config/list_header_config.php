@@ -26,13 +26,13 @@ $list_header_config = array(
 					array(
 						'name'					=> 'keyword',
 						'class'					=> 'B_InputText',
-						'special_html'			=> 'class="textbox" maxlength="100" size="20"',
+						'attr'			=> 'class="textbox" maxlength="100" size="20"',
 					),
 					array(
 						// for IE
 						'name'					=> 'dummy',
 						'class'					=> 'B_InputText',
-						'special_html'			=> 'style="position:absolute;visibility:hidden;"',
+						'attr'			=> 'style="position:absolute;visibility:hidden;"',
 					),
 				),
 				array(
@@ -46,7 +46,7 @@ $list_header_config = array(
 					array(
 						'name'					=> 'category',
 						'class'					=> 'B_SelectBox',
-						'special_html'			=> 'class="bframe_selectbox white"',
+						'attr'			=> 'class="bframe_selectbox white"',
 					),
 				),
 				array(
@@ -61,7 +61,7 @@ $list_header_config = array(
 						'name'					=> 'row_per_page',
 						'class'					=> 'B_SelectBox',
 						'data_set'				=> 'row_per_page',
-						'special_html'			=> 'class="bframe_selectbox white"',
+						'attr'			=> 'class="bframe_selectbox white"',
 					),
 				),
 				array(
@@ -70,7 +70,7 @@ $list_header_config = array(
 					'class'			=> 'B_Submit',
 					'start_html'	=> '<li>',
 					'end_html'		=> '</li>',
-					'special_html'	=> 'class="search-button" onclick="bframe.submit(\'header_form\', \'' . $this->module . '\', \'list\', \'select\')"',
+					'attr'	=> 'class="search-button" onclick="bframe.submit(\'header_form\', \'' . $this->module . '\', \'list\', \'select\')"',
 					'value'			=> __('Search'),
 				),
 				array(
@@ -79,7 +79,7 @@ $list_header_config = array(
 					'class'			=> 'B_Button',
 					'start_html'	=> '<li>',
 					'end_html'		=> '</li>',
-					'special_html'	=> 'class="button" onclick="bstudio.clearForm(\'header_form\')"',
+					'attr'	=> 'class="button" onclick="bstudio.clearForm(\'header_form\')"',
 					'value'			=> __('Clear'),
 				),
 				array(
@@ -89,7 +89,7 @@ $list_header_config = array(
 					'start_html'	=> '<li class="insert">',
 					'end_html'		=> '</li>',
 					'name'			=> 'insert',
-					'special_html'	=> 'class="insert-button" onclick="bframe.submit(\'header_form\', \'' . $this->module . '\', \'form\', \'select\', \'insert\')"',
+					'attr'	=> 'class="insert-button" onclick="bframe.submit(\'header_form\', \'' . $this->module . '\', \'form\', \'select\', \'insert\')"',
 					'value'			=> __('New '),
 				),
 				array(
@@ -100,7 +100,7 @@ $list_header_config = array(
 					'start_html'	=> '<li class="insert">',
 					'end_html'		=> '</li>',
 					'name'			=> 'default',
-					'special_html'	=> 'class="default-button" onclick="bframe.submit(\'header_form\', \'' . $this->module . '\', \'form\', \'select\', \'default\')"',
+					'attr'	=> 'class="default-button" onclick="bframe.submit(\'header_form\', \'' . $this->module . '\', \'form\', \'select\', \'default\')"',
 					'value'			=> __('Default'),
 				),
 			),

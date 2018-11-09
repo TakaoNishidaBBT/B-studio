@@ -33,7 +33,7 @@ $tab_control_config = array(
 		'end_html'			=> '</li>',
 		'link'				=> 'property1',
 		'value'				=> __('Settings'),
-		'special_html'		=> 'class="bframe_tab"',
+		'attr'		=> 'class="bframe_tab"',
 	),
 );
 $config_form_config = array(
@@ -73,7 +73,7 @@ $config_form_config = array(
 						array(
 							'name'				=> 'color',
 							'class'				=> 'B_InputText',
-							'special_html'		=> 'class="color ime-off"',
+							'attr'		=> 'class="color ime-off"',
 						),
 					),
 				),
@@ -95,7 +95,7 @@ $config_form_config = array(
 						array(
 							'name'				=> 'background_color',
 							'class'				=> 'B_InputText',
-							'special_html'		=> 'class="background-color ime-off"',
+							'attr'		=> 'class="background-color ime-off"',
 						),
 					),
 				),
@@ -130,7 +130,7 @@ $config_form_config = array(
 										'name'			=> 'open_filelist',
 										'class'			=> 'B_Link',
 										'link'			=> 'index.php',
-										'special_html'	=> 'title="' . __('Image selection') . '" class="settings-button" onclick="bstudio.activateModalWindow(this, 850, 500); return false;"',
+										'attr'	=> 'title="' . __('Image selection') . '" class="settings-button" onclick="bstudio.activateModalWindow(this, 850, 500); return false;"',
 										'fixedparam'	=>
 										array(
 											'terminal_id'	=> TERMINAL_ID,
@@ -148,7 +148,7 @@ $config_form_config = array(
 									array(
 										'class'				=> 'B_Link',
 										'link'				=> '#',
-										'special_html'		=> 'title="' . __('Clear') . '" class="clear-button" onclick="bstudio.clearIMG(\'icon\', \'icon_file\'); return false;"',
+										'attr'		=> 'title="' . __('Clear') . '" class="clear-button" onclick="bstudio.clearIMG(\'icon\', \'icon_file\'); return false;"',
 										'specialchars'		=> 'none',
 										'value'				=> '<img alt="Clear" src="images/common/clear.png" />',
 									),

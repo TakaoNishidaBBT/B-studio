@@ -43,7 +43,7 @@ $settings_config = array(
 				'class'				=> 'B_SelectBox',
 				'data_set'			=> array('mail_type_settings_default', 'mail_type_settings'),
 				'confirm_data_set'	=> 'mail_type_settings',
-				'special_html'		=> 'class="bframe_selectbox"',
+				'attr'		=> 'class="bframe_selectbox"',
 				'validate'			=>
 				array(
 					array(
@@ -90,7 +90,7 @@ $settings_config = array(
 			array(
 				'name'				=> 'mail_title',
 				'class'				=> 'B_InputText',
-				'special_html'		=> 'class="textbox mail-title ime_off"',
+				'attr'		=> 'class="textbox mail-title ime_off"',
 				'validate'			=>
 				array(
 					array(
@@ -126,7 +126,7 @@ $settings_config = array(
 			array(
 				'name'			=> 'from_addr',
 				'class'			=> 'B_InputText',
-				'special_html'	=> 'class="textbox from-addr ime_off"',
+				'attr'	=> 'class="textbox from-addr ime_off"',
 				'validate'		=>
 				array(
 					array(
@@ -192,7 +192,7 @@ $settings_config = array(
 			array(
 				'name'				=> 'from_name',
 				'class'				=> 'B_InputText',
-				'special_html'		=> 'class="textbox from-name"',
+				'attr'		=> 'class="textbox from-name"',
 				'validate'			=>
 				array(
 					array(
@@ -228,7 +228,7 @@ $settings_config = array(
 			array(
 				'name'			=> 'to_addr',
 				'class'			=> 'B_InputText',
-				'special_html'	=> 'class="textbox from-addr ime_off"',
+				'attr'	=> 'class="textbox from-addr ime_off"',
 				'validate'		=>
 				array(
 					array(
@@ -290,7 +290,7 @@ $settings_config = array(
 			array(
 				'name'				=> 'bcc',
 				'class'				=> 'B_InputText',
-				'special_html'		=> 'class="textbox bcc"',
+				'attr'		=> 'class="textbox bcc"',
 			),
 			array(
 				'name'					=> 'error_message',
@@ -323,12 +323,12 @@ $copy_control_config = array(
 				array(
 					'class'			=> 'B_SelectBox',
 					'name'			=> 'mail_list',
-					'special_html'	=> 'class="bframe_selectbox white"',
+					'attr'	=> 'class="bframe_selectbox white"',
 				),
 				array(
 					'name'			=> 'dummy',
 					'class'			=> 'B_InputText',
-					'special_html'	=> 'class="dummy"',
+					'attr'	=> 'class="dummy"',
 				),
 			),
 			array(
@@ -336,7 +336,7 @@ $copy_control_config = array(
 				'class'			=> 'B_Submit',
 				'start_html'	=> '<li>',
 				'end_html'		=> '</li>',
-				'special_html'	=> 'class="copy-button" onClick="bframe.submit(\'copy_form\', \'' . $this->module . '\', \'form\', \'copy\', \'insert\', true)"',
+				'attr'	=> 'class="copy-button" onClick="bframe.submit(\'copy_form\', \'' . $this->module . '\', \'form\', \'copy\', \'insert\', true)"',
 				'value'			=> __('Copy'),
 			),
 		),

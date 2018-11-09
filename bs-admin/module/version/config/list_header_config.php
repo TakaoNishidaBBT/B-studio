@@ -39,13 +39,13 @@ $list_header_config = array(
 					array(
 						'class'					=> 'B_InputText',
 						'name'					=> 'keyword',
-						'special_html'			=> 'class="textbox" maxlength="100" size="20"',
+						'attr'			=> 'class="textbox" maxlength="100" size="20"',
 					),
 					array(
 						// For IE
 						'class'					=> 'B_InputText',
 						'name'					=> 'dummy',
-						'special_html'			=> 'style="position:absolute;visibility:hidden;"',
+						'attr'			=> 'style="position:absolute;visibility:hidden;"',
 					),
 				),	
 				array(
@@ -61,7 +61,7 @@ $list_header_config = array(
 						'class'					=> 'B_SelectBox',
 						'name'					=> 'row_per_page',
 						'data_set'				=> 'row_per_page',
-						'special_html'			=> 'class="bframe_selectbox white"',
+						'attr'			=> 'class="bframe_selectbox white"',
 					),
 				),
 				array(
@@ -70,7 +70,7 @@ $list_header_config = array(
 					'class'			=> 'B_Submit',
 					'start_html'	=> '<li>',
 					'end_html'		=> '</li>',
-					'special_html'	=> 'class="search-button" onclick="bframe.submit(\'header_form\', \'' . $this->module . '\', \'list\', \'select\')"',
+					'attr'	=> 'class="search-button" onclick="bframe.submit(\'header_form\', \'' . $this->module . '\', \'list\', \'select\')"',
 					'value'			=> __('Search'),
 				),
 				array(
@@ -79,7 +79,7 @@ $list_header_config = array(
 					'class'			=> 'B_Button',
 					'start_html'	=> '<li>',
 					'end_html'		=> '</li>',
-					'special_html'	=> 'class="button" onclick="bstudio.clearForm(\'header_form\')"',
+					'attr'	=> 'class="button" onclick="bstudio.clearForm(\'header_form\')"',
 					'value'			=> __('Clear'),
 				),
 				array(
@@ -89,7 +89,7 @@ $list_header_config = array(
 					'start_html'	=> '<li class="insert">',
 					'end_html'		=> '</li>',
 					'name'			=> 'insert',
-					'special_html'	=> 'class="insert-button" onclick="bframe.submit(\'header_form\', \'' . $this->module . '\', \'form\', \'select\', \'insert\')"',
+					'attr'	=> 'class="insert-button" onclick="bframe.submit(\'header_form\', \'' . $this->module . '\', \'form\', \'select\', \'insert\')"',
 					'value'			=> __('New '),
 				),
 			),
