@@ -14,7 +14,7 @@
 	// Charset for Header
 	define('B_CHARSET_HEADER', 'UTF-8');
 
-	// Charset for xml header
+	// Charset for XML Header
 	define('B_CHARSET_XML_HEADER', 'UTF-8');
 
 	//HTTP HOST
@@ -48,7 +48,7 @@
 	// Admin Session Name
 	define('B_ADMIN_SESSION_NAME', B_SITE_NAME . '-admin-session');
 
-	// This is Full URL for Top Page
+	// URL of Top Page
 	define('B_SITE_ROOT', 'http://' . B_HTTP_HOST . B_CURRENT_ROOT);
 	define('B_SITE_ROOT_SSL', 'https://' . B_HTTP_HOST . B_CURRENT_ROOT);
 
@@ -61,7 +61,7 @@
 	}
 
 	// Log Files
-	// Archive Log File
+	// DB Archive Log File
 	define('B_ARCHIVE_LOG_FILE', B_ADMIN_DIR . 'archive/archive.log');
 
 	// Access Log File
@@ -73,7 +73,7 @@
 	// Log File
 	define('B_LOG_FILE', B_ADMIN_DIR . 'log/log.txt');
 
-	// Language files Directory
+	// Language Files Directory
 	define('B_LNGUAGE_DIR', B_ADMIN_DIR . 'language/');
 
 	// DataBase Connect File
@@ -204,7 +204,7 @@
 	$g_data_set = 'b_global_data';
 	require_once(B_ADMIN_DIR . 'global/' . $g_data_set . '.php');
 
-	// Built-in user File
+	// Built-in User File
 	require_once(B_ADMIN_DIR . 'user/users.php');
 
 	// PHP Display Errors
