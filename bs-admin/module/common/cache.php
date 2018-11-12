@@ -11,8 +11,8 @@
 	$_SERVER['DOCUMENT_ROOT'] = $argv[2];
 	$_SERVER['HTTPS'] = $argv[3];
 
+	require_once('../../global/b_global_function.php');
 	require_once('../../config/config.php');
-	require_once('../../language/language.php');
 
 	$archive = new B_Log(B_ARCHIVE_LOG_FILE);
 	$log = new B_Log(B_LOG_FILE);
