@@ -39,9 +39,8 @@ array(
 
 	'tbody'	=>
 	array(
-		'start_html'		=> '<tbody>',
-		'start_html_sort'	=> '<tbody>',
-		'end_html'			=> '</tbody>',
+		'start_html'	=> '<tbody>',
+		'end_html'		=> '</tbody>',
 	),
 
 	'header'	=>
