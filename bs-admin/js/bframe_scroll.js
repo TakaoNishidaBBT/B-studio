@@ -351,6 +351,12 @@
 					self.style.paddingBottom = parseInt(paddingBottom) + Math.floor(speed * 1 / 2) + 'px';
 					self.scrollTop = scrollHeight + speed;
 				}
+				if(moving && direction == 'down') {
+					self.style.paddingTop = '0';
+				}
+				if(moving && direction == 'up') {
+					self.style.paddingBottom = '0';
+				}
 			}
 			if(!moving && direction == 'up' && self.scrollTop === 0) {
 				return;

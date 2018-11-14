@@ -510,7 +510,7 @@ table.list th {
 	border-left: 1px solid #606060;
 
 	position: sticky;
-	position: webkit-sticky;
+	position: -webkit-sticky;
 	top: 0;
 }
 table.list th.sortable {
