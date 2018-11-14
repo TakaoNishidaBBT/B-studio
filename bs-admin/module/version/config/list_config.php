@@ -7,7 +7,7 @@
 */
 $list_config = 
 array(
-	'start_html'	=> '<table class="list">',
+	'start_html'	=> '<table class="list bframe_elastic">',
 	'end_html'		=> '</table>',
 
 	'select_sql'	=> "select 	 a.version_id
@@ -50,32 +50,32 @@ array(
 		'class'			=> 'B_Row',
 		array(
 			'name'			=> 'reserved_version_id',
-			'start_html'	=> '<th class="center" style="width:35px" >',
-			'end_html'		=> '</th>',
+			'start_html'	=> '<th class="center" style="width:35px" ><span>',
+			'end_html'		=> '</span></th>',
 			'value'			=> __('Publish'),
 		),
 		array(
 			'name'			=> 'working_version_id',
-			'start_html'	=> '<th class="center" style="width:35px" >',
-			'end_html'		=> '</th>',
+			'start_html'	=> '<th class="center" style="width:35px"><span>',
+			'end_html'		=> '</span></th>',
 			'value'			=> __('Working'),
 		),
 		array(
 			'name'			=> 'version_id',
-			'start_html'	=> '<th class="center">',
-			'end_html'		=> '</th>',
+			'start_html'	=> '<th class="center"><span>',
+			'end_html'		=> '</span></th>',
 			'value'			=> __('ID'),
 		),
 		array(
 			'name'			=> 'publication_date',
-			'start_html'	=> '<th class="center">',
-			'end_html'		=> '</th>',
+			'start_html'	=> '<th class="center"><span>',
+			'end_html'		=> '</span></th>',
 			'value'			=> __('Publish date/time'),
 		),
 		array(
 			'name'			=> 'version',
-			'start_html'	=> '<th class="center">',
-			'end_html'		=> '</th>',
+			'start_html'	=> '<th class="center"><span>',
+			'end_html'		=> '</span></th>',
 			'value'			=> __('Version'),
 		),
 		array(
@@ -90,23 +90,23 @@ array(
 		),
 		array(
 			'name'			=> 'notes',
-			'start_html'	=> '<th class="center">',
-			'end_html'		=> '</th>',
+			'start_html'	=> '<th class="center" style="width:250px"><span>',
+			'end_html'		=> '</span></th>',
 			'value'			=> __('Notes'),
 		),
 		array(
-			'start_html'	=> '<th class="center" style="width:40px">',
-			'end_html'		=> '</th>',
+			'start_html'	=> '<th class="center" style="width:70px"><span>',
+			'end_html'		=> '</span></th>',
 			'value'			=> __('Edit'),
 		),
 		array(
-			'start_html'	=> '<th class="center" style="width:40px">',
-			'end_html'		=> '</th>',
+			'start_html'	=> '<th class="center" style="width:70px"><span>',
+			'end_html'		=> '</span></th>',
 			'value'			=> __('Compare'),
 		),
 		array(
-			'start_html'	=> '<th class="center" style="width:40px">',
-			'end_html'		=> '</th>',
+			'start_html'	=> '<th class="center" style="width:70px"><span>',
+			'end_html'		=> '</span></th>',
 			'value'			=> __('Delete'),
 		),
 	),
@@ -159,7 +159,6 @@ array(
 			'class'			=> 'B_Text',
 			'start_html'	=> '<td class="left">',
 			'end_html'		=> '</td>',
-			'shorten_text'	=> '50',
 		),
 		array(
 			'start_html'	=> '<td>',

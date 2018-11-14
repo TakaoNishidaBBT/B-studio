@@ -7,7 +7,7 @@
 */
 $list_config = 
 array(
-	'start_html'	=> '<table class="list" id="entry_list">',
+	'start_html'	=> '<table class="list bframe_elastic" id="entry_list">',
 	'end_html'		=> '</table>',
 
 	'select_sql'	=> "select   id
@@ -67,9 +67,9 @@ array(
 		),
 		array(
 			'name'				=> 'user_auth',
-			'start_html'		=> '<th class="sortable" style="width:60px">',
-			'start_html_asc'	=> '<th class="sortable asc" style="width:60px">',
-			'start_html_desc'	=> '<th class="sortable desc" style="width:60px">',
+			'start_html'		=> '<th class="sortable" style="width:90px">',
+			'start_html_asc'	=> '<th class="sortable asc" style="width:90px">',
+			'start_html_desc'	=> '<th class="sortable desc" style="width:90px">',
 			'end_html'			=> '</th>',
 			'value'				=> __('User type'),
 			'class'				=> 'B_Link',
@@ -80,9 +80,9 @@ array(
 		),
 		array(
 			'name'				=> 'user_status',
-			'start_html'		=> '<th class="sortable" style="width:60px">',
-			'start_html_asc'	=> '<th class="sortable asc" style="width:60px">',
-			'start_html_desc'	=> '<th class="sortable desc" style="width:60px">',
+			'start_html'		=> '<th class="sortable" style="width:80px">',
+			'start_html_asc'	=> '<th class="sortable asc" style="width:80px">',
+			'start_html_desc'	=> '<th class="sortable desc" style="width:80px">',
 			'end_html'			=> '</th>',
 			'value'				=> __('Status'),
 			'class'				=> 'B_Link',
@@ -93,9 +93,9 @@ array(
 		),
 		array(
 			'name'				=> 'language',
-			'start_html'		=> '<th class="sortable" style="width:60px">',
-			'start_html_asc'	=> '<th class="sortable asc" style="width:60px">',
-			'start_html_desc'	=> '<th class="sortable desc" style="width:60px">',
+			'start_html'		=> '<th class="sortable" style="width:100px">',
+			'start_html_asc'	=> '<th class="sortable asc" style="width:100px">',
+			'start_html_desc'	=> '<th class="sortable desc" style="width:100px">',
 			'end_html'			=> '</th>',
 			'value'				=> __('Language'),
 			'class'				=> 'B_Link',
@@ -106,18 +106,25 @@ array(
 		),
 		array(
 			'name'				=> 'notes',
-			'start_html'		=> '<th class="center">',
+			'start_html'		=> '<th class="sortable" style="width:250px">',
+			'start_html_asc'	=> '<th class="sortable asc" style="width:250px">',
+			'start_html_desc'	=> '<th class="sortable desc" style="width:250px">',
 			'end_html'			=> '</th>',
 			'value'				=> __('Notes'),
+			'class'				=> 'B_Link',
+			'link'				=> DISPATCH_URL,
+			'cond_html'			=> 'class="current-key"',
+			'sort_key'			=> 'notes',
+			'param'				=> '&amp;module=' . $this->module . '&amp;page=list&amp;method=sort&amp;sort_key=notes',
 		),
 		array(
-			'start_html'		=> '<th class="center" style="width:40px">',
-			'end_html'			=> '</th>',
+			'start_html'		=> '<th class="center" style="width:60px"><span>',
+			'end_html'			=> '</span></th>',
 			'value'				=> __('Edit'),
 		),
 		array(
-			'start_html'		=> '<th class="center" style="width:40px">',
-			'end_html'			=> '</th>',
+			'start_html'		=> '<th class="center" style="width:60px"><span>',
+			'end_html'			=> '</span></th>',
 			'value'				=> __('Delete'),
 		),
 	),

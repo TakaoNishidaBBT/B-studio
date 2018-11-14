@@ -6,7 +6,7 @@
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
 $list_config = array(
-	'start_html'	=> '<table class="list">',
+	'start_html'	=> '<table class="list bframe_elastic">',
 	'end_html'		=> '</table>',
 
 	'select_sql'	=> "select * from " . B_DB_PREFIX . "mail_settings where del_flag='0' ",
@@ -83,13 +83,13 @@ $list_config = array(
 			'param'				=> '&amp;module=' . $this->module . '&amp;page=list&amp;method=sort&amp;sort_key=subject',
 		),
 		array(
-			'start_html'		=> '<th>',
-			'end_html'			=> '</th>',
+			'start_html'		=> '<th class="center" style="width:60px"><span>',
+			'end_html'			=> '</span></th>',
 			'value'				=> __('Edit'),
 		),
 		array(
-			'start_html'		=> '<th>',
-			'end_html'			=> '</th>',
+			'start_html'		=> '<th class="center" style="width:60px"><span>',
+			'end_html'			=> '</span></th>',
 			'value'				=> __('Delete'),
 		),
 	),

@@ -467,12 +467,12 @@ div#main {
 
 /* list main */
 div#list-main {
-	padding: 20px 0 0 8px;
+	padding: 0;
 	overflow: auto;
 	box-sizing: border-box;
 }
 div.list-container {
-	margin-bottom: 30px;
+	margin: 20px 8px 30px 8px;
 }
 
 /* condition */
@@ -495,12 +495,12 @@ ul.search li {
 
 /* table.list */
 table.list {
-	margin: 0 5px 10px 0;
+	margin-bottom: 10px;
 	border-collapse: separate;
 	border-spacing: 0;
 }
 table.list th {
-	padding: 6px 10px;
+	padding: 0;
 	line-height: 16px;
 	font-weight: normal;
 	color: #fff;
@@ -508,19 +508,33 @@ table.list th {
 	white-space: nowrap;
 	background-color: #3c3c3c;
 	border-left: 1px solid #606060;
-	overflow: hidden;
+
+	position: sticky;
+	position: webkit-sticky;
+	top: 0;
 }
 table.list th.sortable {
-	background: url(../images/common/sort.png) no-repeat 97% center #3c3c3c;
-	padding-right: 20px;
+	background: url(../images/common/sort.png) no-repeat right 2px center #3c3c3c;
 }
 table.list th.sortable.asc {
-	background: url(../images/common/sort_asc_b.png) no-repeat 97% center #3c3c3c;
-	padding-right: 20px;
+	background: url(../images/common/sort_asc_b.png) no-repeat right 2px center #3c3c3c;
 }
 table.list th.sortable.desc {
-	background: url(../images/common/sort_desc_b.png) no-repeat 97% center #3c3c3c;
-	padding-right: 20px;
+	background: url(../images/common/sort_desc_b.png) no-repeat right 2px center #3c3c3c;
+}
+table.list th:first-child {
+	border-left: 1px solid #4e4e4e;
+}
+table.list th span {
+	padding: 6px 10px;
+}
+table.list th a {
+	display: block;
+	width: 100%;
+	height: 100%;
+	text-decoration: none;
+	padding: 6px 10px;
+	box-sizing: border-box;
 }
 table.list th.center {
 	text-align: center;
@@ -534,11 +548,6 @@ table.list td {
 	line-height: 22px;
 	overflow: hidden;
 	vertical-align: middle;
-
-	text-overflow: ellipsis;
-	overflow: hidden;
-	white-space: nowrap;
-	max-width: 80px;
 }
 table.list td img {
 	vertical-align: middle;
@@ -596,15 +605,6 @@ table.list td a.compare-button-disable {
 
 table.list td a img {
 	vertical-align: -2px;
-}
-table.list th:first-child {
-	border-left: 1px solid #4e4e4e;
-}
-table.list th a {
-	text-decoration: none;
-	display: block;
-	margin: -10em;
-	padding: 10em;
 }
 table.list td:first-child {
 	border-left: 1px solid #ddd;
@@ -681,6 +681,18 @@ table.list th a.current-key:hover {
 }
 table.list .no-display {
 	display:none;
+}
+
+/* elastic table */
+table.list.bframe_elastic td {
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+	max-width: 100px;
+}
+table.list.bframe_elastic td.no-elastic {
+	overflow: visible;
+	max-width: initial;
 }
 
 /* table.form */

@@ -113,6 +113,8 @@
 			// protect php
 			CKEDITOR.config.protectedSource.push(/<\?[\s\S]*?\?>/g);
 
+			// disable resize editor
+			CKEDITOR.config.resize_enabled = false;
 			// root dir
 			var root_dir = document.getElementById('root_dir');
 			if(root_dir) {
