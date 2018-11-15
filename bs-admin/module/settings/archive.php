@@ -14,8 +14,8 @@
 	$file_path = $argv[3];
 	$mode = $argv[4];
 
+	require_once('../../global/b_global_function.php');
 	require_once('../../config/config.php');
-	require_once('../../language/language.php');
 
 	$archive = new B_Log(B_ARCHIVE_LOG_FILE);
 	$log = new B_Log(B_LOG_FILE);

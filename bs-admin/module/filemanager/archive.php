@@ -12,6 +12,7 @@
 	$dir = $argv[3];
 	$file_path = $argv[4];
 
+	require_once('../../global/b_global_function.php');
 	require_once('../../config/config.php');
 
 	// create archive file

@@ -9,11 +9,8 @@
 	ini_set('display_errors', 'On');
 	set_error_handler('exception_error_handler');
 
+	// Global function
 	require_once('../bs-admin/global/b_global_function.php');
-
-	// CHARSET
-	define('B_CHARSET', 'UTF-8');
-	mb_internal_encoding(B_CHARSET);
 
 	// Start session
 	define('SESSION_DIR', dirname($_SERVER['SCRIPT_NAME']));
@@ -21,25 +18,10 @@
 	$ses = new B_Session;
 	$ses->start('nocache', 'bs-install', SESSION_DIR);
 
-	// Define directories
-	$root_dir = dirname(SESSION_DIR);
-	if(substr($root_dir, -1) == '/') {
-		$root_dir = substr($root_dir, 0, -1);
-	}
-	$doc_root = $_SERVER['DOCUMENT_ROOT'];
-	if(substr($doc_root, -1) == '/') {
-		$doc_root = substr($doc_root, 0, -1);
-	}
-	define('ROOT_DIR', $root_dir . '/');
-	define('DOC_ROOT', $doc_root);
-	define('B_DOC_ROOT', $doc_root);
-	define('B_ADMIN_ROOT', ROOT_DIR . 'bs-admin/');
-	define('B_LNGUAGE_DIR', B_DOC_ROOT . B_ADMIN_ROOT . 'language/');
+	// Config
+	require_once('../bs-admin/config/config.php');
 
-	// Language file
-	require_once('../bs-admin/language/language.php');
-
-	// form
+	// Form config
 	require_once('config/_form_config.php');
 
 	$db_install_form = new B_Element($db_install_form_config);
@@ -106,7 +88,7 @@
 
 			// Set up bs-admin htaccess basic authentication
 			$contents = file_get_contents('./config/_admin_htaccess.txt');
-			$contents = str_replace('%AUTH_USER_FILE%', DOC_ROOT . ROOT_DIR . 'bs-admin/.htpassword', $contents);
+			$contents = str_replace('%AUTH_USER_FILE%', B_CURRENT_DIR . 'bs-admin/.htpassword', $contents);
 			file_put_contents('../bs-admin/.htaccess', $contents);
 			file_put_contents('../bs-admin-files/.htaccess', $contents);
 

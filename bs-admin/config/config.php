@@ -39,6 +39,7 @@
 
 	// Current Root Directory (Top Directory of This System)
 	define('B_CURRENT_ROOT', $current_path . '/');
+	define('B_CURRENT_DIR', B_DOC_ROOT . B_CURRENT_ROOT);
 
 	// Directory for Admin Page
 	define('B_ADMIN', $admin . '/');

@@ -9,31 +9,14 @@
 	ini_set('display_errors', 'On');
 	set_error_handler('exception_error_handler');
 
+	// Global Function
 	require_once('../bs-admin/global/b_global_function.php');
 
-	// CHARSET
-	define('B_CHARSET', 'UTF-8');
-
-	// Start session
+	// Start Session
 	define('SESSION_DIR', dirname($_SERVER['SCRIPT_NAME']));
 
 	$ses = new B_Session;
 	$ses->start('nocache', 'bs-install', SESSION_DIR);
-
-	// Define directories
-	$root_dir = dirname(SESSION_DIR);
-	if(substr($root_dir, -1) == '/') {
-		$root_dir = substr($root_dir, 0, -1);
-	}
-	$doc_root = $_SERVER['DOCUMENT_ROOT'];
-	if(substr($doc_root, -1) == '/') {
-		$doc_root = substr($doc_root, 0, -1);
-	}
-	define('ROOT_DIR', $root_dir . '/');
-	define('DOC_ROOT', $doc_root);
-	define('B_DOC_ROOT', $doc_root);
-	define('B_ADMIN_ROOT', ROOT_DIR . 'bs-admin/');
-	define('B_LNGUAGE_DIR', B_DOC_ROOT . B_ADMIN_ROOT . 'language/');
 
 	// Set $_SESSION['language']
 	define('LANG', 'en');
@@ -41,22 +24,10 @@
 
 	if($_POST['action'] == 'select-language' && function_exists('mb_internal_encoding')) {
 		$_SESSION['language'] = $_POST['language'];
-		$_SESSION['install_confirm'] = false;
 	}
 
-	// Language file
-	require_once('../bs-admin/language/language.php');
-
-	// ffmpeg
-	if(substr(PHP_OS, 0, 3) === 'WIN') {
-		define('FFMPEG', 'ffmpeg_for_windows.exe');
-	}
-	else if(substr(PHP_OS, 0, 5) === 'Linux') {
-		define('FFMPEG', 'ffmpeg_for_linux');
-	}
-	else {
-		define('FFMPEG', 'ffmpeg_for_mac');
-	}
+	// Config
+	require_once('../bs-admin/config/config.php');
 
 	// Confirm timezone
 	date('Ymd');
@@ -141,29 +112,29 @@
 	function setHtaccess($root_htaccess) {
 		// Set up htaccess
 		$contents = file_get_contents('./config/_htaccess.txt');
-		$contents = str_replace('%REWRITE_BASE%', ROOT_DIR, $contents);
+		$contents = str_replace('%REWRITE_BASE%', B_CURRENT_ROOT, $contents);
 		$param['htaccess'].= $contents;
 		$root_htaccess->setValue($param);
 	}
 
 	function confirmPermission(&$message) {
-		$status  = checkWritePermission(DOC_ROOT . ROOT_DIR . '.htaccess', $message);
-		$status &= checkWritePermission(DOC_ROOT . ROOT_DIR . 'bs-admin/.htaccess', $message);
-		$status &= checkWritePermission(DOC_ROOT . ROOT_DIR . 'bs-admin/.htpassword', $message);
-		$status &= checkWritePermission(DOC_ROOT . ROOT_DIR . 'bs-admin/archive', $message);
-		$status &= checkWritePermission(DOC_ROOT . ROOT_DIR . 'bs-admin/cache', $message);
-		$status &= checkWritePermission(DOC_ROOT . ROOT_DIR . 'bs-admin/config/core_config.php', $message);
-		$status &= checkWritePermission(DOC_ROOT . ROOT_DIR . 'bs-admin/config/lang_config.php', $message);
-		$status &= checkWritePermission(DOC_ROOT . ROOT_DIR . 'bs-admin/db/db_connect.php', $message);
-		$status &= checkWritePermission(DOC_ROOT . ROOT_DIR . 'bs-admin/download', $message);
-		$status &= checkWritePermission(DOC_ROOT . ROOT_DIR . 'bs-admin/log', $message);
-		$status &= checkWritePermission(DOC_ROOT . ROOT_DIR . 'bs-admin/user/users.php', $message);
-		$status &= checkWritePermission(DOC_ROOT . ROOT_DIR . 'bs-admin-files', $message);
-		$status &= checkWritePermission(DOC_ROOT . ROOT_DIR . 'bs-admin-files/.htaccess', $message);
-		$status &= checkWritePermission(DOC_ROOT . ROOT_DIR . 'bs-admin-files/files', $message);
-		$status &= checkWritePermission(DOC_ROOT . ROOT_DIR . 'bs-admin-files/thumbs', $message);
-		$status &= checkWritePermission(DOC_ROOT . ROOT_DIR . 'files', $message);
-		$status &= checkExecutePermission(DOC_ROOT . ROOT_DIR . 'bs-admin/class/ffmpeg/' . FFMPEG, $message);
+		$status  = checkWritePermission(B_CURRENT_DIR . '.htaccess', $message);
+		$status &= checkWritePermission(B_CURRENT_DIR . 'bs-admin/.htaccess', $message);
+		$status &= checkWritePermission(B_CURRENT_DIR . 'bs-admin/.htpassword', $message);
+		$status &= checkWritePermission(B_CURRENT_DIR . 'bs-admin/archive', $message);
+		$status &= checkWritePermission(B_CURRENT_DIR . 'bs-admin/cache', $message);
+		$status &= checkWritePermission(B_CURRENT_DIR . 'bs-admin/config/core_config.php', $message);
+		$status &= checkWritePermission(B_CURRENT_DIR . 'bs-admin/config/lang_config.php', $message);
+		$status &= checkWritePermission(B_CURRENT_DIR . 'bs-admin/db/db_connect.php', $message);
+		$status &= checkWritePermission(B_CURRENT_DIR . 'bs-admin/download', $message);
+		$status &= checkWritePermission(B_CURRENT_DIR . 'bs-admin/log', $message);
+		$status &= checkWritePermission(B_CURRENT_DIR . 'bs-admin/user/users.php', $message);
+		$status &= checkWritePermission(B_CURRENT_DIR . 'bs-admin-files', $message);
+		$status &= checkWritePermission(B_CURRENT_DIR . 'bs-admin-files/.htaccess', $message);
+		$status &= checkWritePermission(B_CURRENT_DIR . 'bs-admin-files/files', $message);
+		$status &= checkWritePermission(B_CURRENT_DIR . 'bs-admin-files/thumbs', $message);
+		$status &= checkWritePermission(B_CURRENT_DIR . 'files', $message);
+		$status &= checkExecutePermission(FFMPEG, $message);
 		return $status;
 	}
 

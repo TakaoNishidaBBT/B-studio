@@ -13,8 +13,8 @@
 	$revision_id = $argv[4];
 	$file_path = $argv[5];
 
+	require_once('../../global/b_global_function.php');
 	require_once('../../config/config.php');
-	require_once('../../language/language.php');
 
 	$archive = new B_Log(B_ARCHIVE_LOG_FILE);
 	$log = new B_Log(B_LOG_FILE);
