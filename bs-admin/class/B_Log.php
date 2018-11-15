@@ -23,7 +23,7 @@
 				$this->file_name = $path . $prefix . '_' . $file;
 			}
 
-			$this->fp = fopen($this->file_name, 'at+');
+			$this->fp = fopen($this->file_name, 'a+');
 		}
 
 		function write() {
