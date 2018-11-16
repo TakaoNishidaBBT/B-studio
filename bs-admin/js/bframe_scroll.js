@@ -62,12 +62,10 @@
 			bouncescroll = true;
 		}
 
-		self.style.overflow = 'hidden';
+		self.style.overflowY = 'hidden';
 
 		var style = bframe.getStyle(self);
-		if(style.position.toLowerCase() == 'static') {
-			self.style.position = 'relative';
-		}
+
 		paddingTop = style.paddingTop.substring(0, style.paddingTop.length-2);
 		paddingBottom = style.paddingBottom.substring(0, style.paddingBottom.length-2);
 		barHeight = Math.round(self.clientHeight * self.clientHeight / self.scrollHeight);
@@ -76,14 +74,17 @@
 
 		// barContainer
 		barContainer = document.createElement('div');
+		barContainer.className = 'ba-container';
 		barContainer.style.position = 'absolute';
 		barContainer.style.width = '11px';
 		barContainer.style.height = self.clientHeight + 'px';
 		barContainer.style.right = '0';
 		barContainer.style.top = '0';
 		barContainer.style.opacity = '0';
+		barContainer.style.opacity = '1';
 		barContainer.style.borderRadius = '6px';
 		barContainer.style.boxSizing = 'border-box';
+		barContainer.style.zIndex = '9999';
 
 		// bar
 		bar = document.createElement('span');
@@ -95,17 +96,44 @@
 		bar.style.top = '0';
 		bar.style.borderRadius = '4px';
 		bar.style.boxSizing = 'border-box';
+		bar.style.zIndex = '99999';
+		bar.style.pointerEvents = 'auto';
 
-		if(mode == 'textarea') {
-			self.parentNode.appendChild(barContainer);
-			self.parentNode.appendChild(bar);
-			bouncescroll = false;
+		// set parent positio to relative
+		var parentStyle = bframe.getStyle(self.parentNode);
+		if(parentStyle.position.toLowerCase() == 'static') {
+			self.parentNode.style.position = 'relative';
+		}
+
+		// wrapper
+		wrapper = document.createElement('div');
+
+		wrapper.className = 'wrapper';
+		wrapper.style.position = 'absolute';
+
+		if(style.position.toLowerCase() == 'absolute' || style.position.toLowerCase() == 'fixed') {
+			wrapper.style.top = style.top;
+			wrapper.style.right = style.right;
+			wrapper.style.bottom = style.bottom;
+			wrapper.style.left = style.left;
 		}
 		else {
-			self.style.boxSizing = 'border-box';
-			self.appendChild(barContainer);
-			self.appendChild(bar);
+			wrapper.style.top = self.offsetTop + 'px';
+			wrapper.style.left = self.offsetLeft + 'px';
 		}
+		wrapper.style.width = self.clientWidth + 'px';
+		wrapper.style.height = self.clientHeight + 'px';
+		wrapper.style.backgroundColor = 'transparent';
+		wrapper.style.border = 'none';
+		wrapper.style.opacity = '1';
+		wrapper.style.zIndex = '999';
+		wrapper.style.boxSizing = 'border-box';
+		wrapper.style.pointerEvents = 'none';
+
+		self.parentNode.appendChild(wrapper);
+
+		wrapper.appendChild(barContainer);
+		wrapper.appendChild(bar);
 
 		bframe.addEventListener(bar, 'mousedown' , onMouseDown);
 		bframe.addEventListener(window, 'mousemove' , onMouseMove);
@@ -121,7 +149,7 @@
 		bframe.addEventListener(self, 'mouseover', onMouseover);
 		bframe.addEventListener(self, 'mouseout', onMouseout);
 		bframe.addEventListener(self, 'resize', onResize);
-		bframe.addEventListener(self, 'scroll', onScroll);
+//		bframe.addEventListener(self, 'scroll', onScroll);
 		bframe.addEventListener(bar, 'mouseover', onContainerMouseover);
 		bframe.addEventListener(barContainer, 'mouseover', onContainerMouseover);
 		bframe.addEventListener(barContainer, 'mouseout', onContainerMouseout);
@@ -152,6 +180,9 @@
 
 		function onResize() {
 			var currentScrollTop = self.scrollTop;
+
+			wrapper.style.width = self.clientWidth + 'px';
+			wrapper.style.height = self.clientHeight + 'px';
 
 			self.scrollTop = 0;
 			self.style.paddingBottom = 0;
@@ -206,7 +237,7 @@
 				self.scrollTop = currentScrollTop;
 			}
 
-			var bartop = self.scrollTop + Math.round(barScrollHeight * self.scrollTop / scrollHeight) + padding;
+			var bartop = Math.round(barScrollHeight * self.scrollTop / scrollHeight) + padding;
 			bar.style.top = bartop + 'px';
 
 			// set event handler to child frames
@@ -253,12 +284,7 @@
 			if(self.clientHeight >= self.scrollHeight) return;
 
 			// set scroll bar top
-			if(mode == 'textarea') {
-				var bartop = Math.round(barScrollHeight * self.scrollTop / scrollHeight) + padding;
-			}
-			else {
-				var bartop = self.scrollTop + Math.round(barScrollHeight * self.scrollTop / scrollHeight) + padding;
-			}
+			var bartop = Math.round(barScrollHeight * self.scrollTop / scrollHeight) + padding;
 			bar.style.top = bartop + 'px';
 			bar.style.transition = '';
 			bar.style.opacity = '0.6';
@@ -314,15 +340,6 @@
 		}
 
 		function onWheel(event) {
-			var barContainerTop;
-
-			if(mode == 'textarea') {
-				barContainerTop = 0;
-			}
-			else {
-				barContainerTop = self.scrollTop;
-			}
-
 			if(bframe.stopWheelEvent) {
 				var obj = bframe.getEventSrcElement(event);
 				if(!bframe.isChild(bframe.activeWheelElement, obj)) return;
@@ -340,7 +357,6 @@
 
 			speed = deltaY * wheel_ratio;
 			self.scrollTop += speed;
-			barContainer.style.top = barContainerTop + 'px';
 
 			// set padding (for bounce scroll)
 			if(bouncescroll) {
@@ -369,7 +385,8 @@
 			event.preventDefault();
 
 			// set scroll bar top
-			var bartop = barContainerTop + Math.round(barScrollHeight * self.scrollTop / scrollHeight) + padding;
+			var bartop = Math.round(barScrollHeight * self.scrollTop / scrollHeight) + padding;
+
 			bar.style.top = bartop + 'px';
 			bar.style.transition = '';
 			bar.style.opacity = '0.6';
@@ -380,7 +397,7 @@
 					bar.style.height = barHeight - Math.floor(speed * -1 / 10) - padding*2 + 'px';
 				}
 				else if(bartop + barHeight >= self.scrollTop + self.clientHeight) {
-					bar.style.height = barContainerTop + self.clientHeight - bartop - padding + 'px';
+					bar.style.height = self.clientHeight - bartop - padding + 'px';
 				}
 				else {
 					bar.style.height = barHeight - padding*2 + 'px';
@@ -402,14 +419,8 @@
 							self.scrollTop = startScrollTop - Math.round(progress * momentam);
 						}
 						if(self.scrollTop >= scrollHeight) self.scrollTop = scrollHeight;
-						if(mode == 'textarea') {
-							barContainer.style.top = 0;
-							var bartop = Math.round(barScrollHeight * self.scrollTop / scrollHeight) + padding;
-						}
-						else {
-							barContainer.style.top = self.scrollTop + 'px';
-							var bartop = self.scrollTop + Math.round(barScrollHeight * self.scrollTop / scrollHeight) + padding;
-						}
+
+						var bartop = Math.round(barScrollHeight * self.scrollTop / scrollHeight) + padding;
 
 						// set scroll bar top
 						bar.style.top = bartop + 'px';
@@ -517,13 +528,8 @@
 
 			mpos = bframe.getMousePosition(event);
 			self.scrollTop = draggStartScrollTop + (mpos.y - draggStartMousePosition.y) * Math.round(scrollHeight / barScrollHeight);
-			barContainer.style.top = self.scrollTop + 'px';
-			if(mode == 'textarea') {
-				var bartop = Math.round(barScrollHeight * self.scrollTop / scrollHeight) + padding;
-			}
-			else {
-				var bartop = self.scrollTop + Math.round(barScrollHeight * self.scrollTop / scrollHeight) + padding;
-			}
+			var bartop = Math.round(barScrollHeight * self.scrollTop / scrollHeight) + padding;
+
 			bar.style.top = bartop + 'px';
 			bar.style.opacity = '0.6';
 		}

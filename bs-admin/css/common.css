@@ -509,8 +509,9 @@ table.list th {
 	background-color: #3c3c3c;
 	border-left: 1px solid #606060;
 
+	position: relative;	/* for IE */
+	position: -webkit-sticky; /* for safari */
 	position: sticky;
-	position: -webkit-sticky;
 	top: 0;
 }
 table.list th.sortable {
@@ -692,6 +693,7 @@ table.list.bframe_elastic td {
 }
 table.list.bframe_elastic td.no-elastic {
 	overflow: visible;
+	max-width: none;
 	max-width: initial;
 }
 

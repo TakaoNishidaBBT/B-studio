@@ -73,11 +73,9 @@
 			var start_table_width = table.clientWidth;
 
 			for(let i=1; i < table.rows.length; i++) {
-				var clientWidth = table.rows[i].cells[th.cellIndex].clientWidth;
 				var scrollWidth = table.rows[i].cells[th.cellIndex].scrollWidth;
 				maxWidth = maxWidth > table.rows[i].cells[th.cellIndex].scrollWidth ? maxWidth : table.rows[i].cells[th.cellIndex].scrollWidth;
 			}
-
 			if(start_width < maxWidth) {
 				th.style.width = maxWidth + padding + 'px';
 				table.style.width = start_table_width + maxWidth - start_width + padding + 'px';
@@ -180,7 +178,6 @@
 				var m = bframe.getMousePosition(event);
 				th.style.width = parseInt(start_width + m.screenX - start_x) + 'px';
 				table.style.width = parseInt(start_table_width + m.screenX - start_x) + 'px';
-console.log(m.screenX - start_x, start_width, th.style.width, start_table_width, table.style.width);
 			}
 		}
 	}
