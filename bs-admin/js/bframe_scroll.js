@@ -396,7 +396,7 @@
 				if(self.scrollTop === 0) {
 					bar.style.height = barHeight - Math.floor(speed * -1 / 10) - padding*2 + 'px';
 				}
-				else if(bartop + barHeight >= self.scrollTop + self.clientHeight) {
+				else if(bartop + barHeight >= self.clientHeight) {
 					bar.style.height = self.clientHeight - bartop - padding + 'px';
 				}
 				else {

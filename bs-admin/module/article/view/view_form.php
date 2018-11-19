@@ -19,9 +19,7 @@
 		?>
 		<div id="main" class="bframe_adjustparent" data-param="margin:68">
 			<div id="settings" class="bframe_scroll" style="height:100%">
-				<div id="settings-inner" style="height:100%">
-					<?php echo $this->settings->getHtml($this->display_mode); ?>
-				</div>
+				<?php echo $this->settings->getHtml($this->display_mode); ?>
 			</div>
 			<div id="content" class="bframe_adjustparent bframe_scroll" data-param="margin:30">
 				<?php
