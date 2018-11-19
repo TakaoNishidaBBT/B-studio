@@ -26,7 +26,7 @@
 	if(substr($doc_root, -1) != '/') {
 		$doc_root.= '/';
 	}
-	$current_path = str_replace(strtolower($doc_root), '', strtolower($current_dir));
+	$current_path = str_replace(strtolower($doc_root), '', strstr(strtolower($current_dir), strtolower($doc_root)));
 	$current = basename($current_dir);
 
 	if(empty($_SERVER['HTTPS']) === true || $_SERVER['HTTPS'] !== 'on') {

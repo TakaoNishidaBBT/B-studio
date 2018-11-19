@@ -31,7 +31,7 @@
 	$admin_dir = dirname(str_replace('\\' , '/', __DIR__));
 	$admin = basename($admin_dir);
 	$current_dir = dirname($admin_dir);
-	$current_path = str_replace(strtolower(B_DOC_ROOT), '', strtolower($current_dir));
+	$current_path = str_replace(strtolower(B_DOC_ROOT), '', strstr(strtolower($current_dir), strtolower(B_DOC_ROOT)));
 	$site_name = basename($current_path);
 
 	// Site Name
