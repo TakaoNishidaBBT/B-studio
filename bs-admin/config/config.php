@@ -21,17 +21,16 @@
 	define('B_HTTP_HOST', $_SERVER['SERVER_NAME']);
 
 	//Document Root Directory
-	if(substr($_SERVER['DOCUMENT_ROOT'], -1) == '/') {
-		define('B_DOC_ROOT', substr($_SERVER['DOCUMENT_ROOT'], 0, -1));
+	$doc_root = str_replace('\\' , '/', realpath($_SERVER['DOCUMENT_ROOT']));
+	if(substr($doc_root, -1) == '/') {
+		$doc_root = substr($doc_root, 0, -1);
 	}
-	else {
-		define('B_DOC_ROOT', $_SERVER['DOCUMENT_ROOT']);
-	}
+	define('B_DOC_ROOT', $doc_root);
 
 	$admin_dir = dirname(str_replace('\\' , '/', __DIR__));
 	$admin = basename($admin_dir);
 	$current_dir = dirname($admin_dir);
-	$current_path = str_replace(strtolower(B_DOC_ROOT), '', strstr(strtolower($current_dir), strtolower(B_DOC_ROOT)));
+	$current_path = str_replace(strtolower(B_DOC_ROOT), '', strtolower($current_dir));
 	$site_name = basename($current_path);
 
 	// Site Name

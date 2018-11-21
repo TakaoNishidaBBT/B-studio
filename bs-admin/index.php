@@ -22,11 +22,11 @@
 
 	// Set directory information
 	$current_dir = dirname(str_replace('\\' , '/', __DIR__));
-	$doc_root = $_SERVER['DOCUMENT_ROOT'];
+	$doc_root = str_replace('\\' , '/', realpath($_SERVER['DOCUMENT_ROOT']));
 	if(substr($doc_root, -1) != '/') {
 		$doc_root.= '/';
 	}
-	$current_path = str_replace(strtolower($doc_root), '', strstr(strtolower($current_dir), strtolower($doc_root)));
+	$current_path = str_replace(strtolower($doc_root), '', strtolower($current_dir));
 	$current = basename($current_dir);
 
 	if(empty($_SERVER['HTTPS']) === true || $_SERVER['HTTPS'] !== 'on') {
