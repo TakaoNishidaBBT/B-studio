@@ -43,7 +43,7 @@ $settings_config = array(
 				'class'				=> 'B_SelectBox',
 				'data_set'			=> array('mail_type_settings_default', 'mail_type_settings'),
 				'confirm_data_set'	=> 'mail_type_settings',
-				'attr'		=> 'class="bframe_selectbox"',
+				'attr'				=> 'class="bframe_selectbox"',
 				'validate'			=>
 				array(
 					array(
@@ -88,10 +88,10 @@ $settings_config = array(
 			'start_html'	=> '<dd>',
 			'end_html'		=> '</dd>',
 			array(
-				'name'				=> 'mail_title',
-				'class'				=> 'B_InputText',
-				'attr'		=> 'class="textbox mail-title ime_off"',
-				'validate'			=>
+				'name'			=> 'mail_title',
+				'class'			=> 'B_InputText',
+				'attr'			=> 'class="textbox mail-title ime_off"',
+				'validate'		=>
 				array(
 					array(
 						'type' 			=> 'required',
@@ -126,7 +126,7 @@ $settings_config = array(
 			array(
 				'name'			=> 'from_addr',
 				'class'			=> 'B_InputText',
-				'attr'	=> 'class="textbox from-addr ime_off"',
+				'attr'			=> 'class="textbox from-addr ime_off"',
 				'validate'		=>
 				array(
 					array(
@@ -187,13 +187,13 @@ $settings_config = array(
 			),
 		),
 		array(
-			'start_html'		=> '<dd>',
-			'end_html'			=> '</dd>',
+			'start_html'	=> '<dd>',
+			'end_html'		=> '</dd>',
 			array(
-				'name'				=> 'from_name',
-				'class'				=> 'B_InputText',
-				'attr'		=> 'class="textbox from-name"',
-				'validate'			=>
+				'name'			=> 'from_name',
+				'class'			=> 'B_InputText',
+				'attr'			=> 'class="textbox from-name"',
+				'validate'		=>
 				array(
 					array(
 						'type' 			=> 'required',
@@ -202,10 +202,10 @@ $settings_config = array(
 				),
 			),
 			array(
-				'name'					=> 'error_message',
-				'class'					=> 'B_ErrMsg',
-				'start_html'			=> '<span class="error-message">',
-				'end_html'				=> '</span>',
+				'name'			=> 'error_message',
+				'class'			=> 'B_ErrMsg',
+				'start_html'	=> '<span class="error-message">',
+				'end_html'		=> '</span>',
 			),
 		),
 	),
@@ -228,7 +228,7 @@ $settings_config = array(
 			array(
 				'name'			=> 'to_addr',
 				'class'			=> 'B_InputText',
-				'attr'	=> 'class="textbox from-addr ime_off"',
+				'attr'			=> 'class="textbox from-addr ime_off"',
 				'validate'		=>
 				array(
 					array(
@@ -285,18 +285,18 @@ $settings_config = array(
 			),
 		),
 		array(
-			'start_html'		=> '<dd>',
-			'end_html'			=> '</dd>',
+			'start_html'	=> '<dd>',
+			'end_html'		=> '</dd>',
 			array(
-				'name'				=> 'bcc',
-				'class'				=> 'B_InputText',
-				'attr'		=> 'class="textbox bcc"',
+				'name'			=> 'bcc',
+				'class'			=> 'B_InputText',
+				'attr'			=> 'class="textbox bcc"',
 			),
 			array(
-				'name'					=> 'error_message',
-				'class'					=> 'B_ErrMsg',
-				'start_html'			=> '<span class="error-message">',
-				'end_html'				=> '</span>',
+				'name'			=> 'error_message',
+				'class'			=> 'B_ErrMsg',
+				'start_html'	=> '<span class="error-message">',
+				'end_html'		=> '</span>',
 			),
 		),
 	),
@@ -323,12 +323,12 @@ $copy_control_config = array(
 				array(
 					'class'			=> 'B_SelectBox',
 					'name'			=> 'mail_list',
-					'attr'	=> 'class="bframe_selectbox white"',
+					'attr'			=> 'class="bframe_selectbox white"',
 				),
 				array(
 					'name'			=> 'dummy',
 					'class'			=> 'B_InputText',
-					'attr'	=> 'class="dummy"',
+					'attr'			=> 'class="dummy"',
 				),
 			),
 			array(
@@ -336,7 +336,7 @@ $copy_control_config = array(
 				'class'			=> 'B_Submit',
 				'start_html'	=> '<li>',
 				'end_html'		=> '</li>',
-				'attr'	=> 'class="copy-button" onClick="bframe.submit(\'copy_form\', \'' . $this->module . '\', \'form\', \'copy\', \'insert\', true)"',
+				'attr'			=> 'class="copy-button" onClick="bframe.submit(\'copy_form\', \'' . $this->module . '\', \'form\', \'copy\', \'insert\', true)"',
 				'value'			=> __('Copy'),
 			),
 		),

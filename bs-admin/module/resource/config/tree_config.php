@@ -56,19 +56,19 @@ $tree_config = array(
 			),
 			'relation'	=>
 			array(
-				'pane'			=>
+				'pane'		=>
 				array(
 					'id'		=> 'bframe_pane',
 				),
-				'insertFile'	=>
+				'insertFile'=>
 				array(
 					'node_type'	=> 'file',
 				),
-				'download'		=>
+				'download'	=>
 				array(
 					'url'		=> DISPATCH_URL . '&module=' . $this->module . '&page=tree&method=download',
 				),
-				'preview'		=>
+				'preview'	=>
 				array(
 					'url'		=> DISPATCH_URL . '&module=' . $this->module . '&page=tree&method=preview',
 				),
@@ -80,11 +80,11 @@ $tree_config = array(
 					'func'		=> 'reloadTree',
 				),
 			),
-			'key'			=>
+			'key'		=>
 			array(
 				'delete'	=> true,
 			),
-			'editor'		=>
+			'editor'	=>
 			array(
 				'module'		=> $this->module,
 				'file'			=> 'editor',
@@ -92,7 +92,7 @@ $tree_config = array(
 				'width'			=> '1000',
 				'height'		=> '600',
 			),
-			'upload'		=>
+			'upload'	=>
 			array(
 				'button'		=> 'upload_button',
 				'file'			=> 'upload_file',

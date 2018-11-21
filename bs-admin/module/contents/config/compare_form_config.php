@@ -413,7 +413,7 @@ $config_form_config = array(
 					array(
 						array(
 							'type' 		=> 'match',
-							'target'		=> 'external_js_right',
+							'target'	=> 'external_js_right',
 						),
 					),
 				),

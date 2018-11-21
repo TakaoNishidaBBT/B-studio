@@ -199,11 +199,11 @@ $display_mode_config = array(
 				array(
 					'id'		=> 'display_thumbnail',
 				),
-				'detail'		=>
+				'detail'	=>
 				array(
 					'id'		=> 'display_detail',
 				),
-				'default'		=> $this->session['display_mode'],
+				'default'	=> $this->session['display_mode'],
 			),
 		),
 	),

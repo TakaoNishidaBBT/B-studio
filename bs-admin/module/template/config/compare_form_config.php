@@ -99,7 +99,7 @@ $form_config = array(
 			'start_html'	=> '<div id="config" class="bframe_adjustparent" data-param="margin:30" style="display:none">',
 			'end_html'		=> '</div>',
 			array(
-				'name'				=> 'config_form',
+				'name'			=> 'config_form',
 			),
 		),
 	),
@@ -455,8 +455,8 @@ $config_form_config = array(
 				'value'				=> 'ヘッダー要素',
 			),
 			array(
-				'start_html'		=> '<td>',
-				'end_html'			=> '</td>',
+				'start_html'	=> '<td>',
+				'end_html'		=> '</td>',
 				array(
 					'class'			=> 'B_TextArea',
 					'name'			=> 'header_element_left',

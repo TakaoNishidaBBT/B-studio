@@ -16,7 +16,7 @@ $form_config = array(
 			'start_html'	=> '<div id="config" class="bframe_adjustparent" data-param="margin:16">',
 			'end_html'		=> '</div>',
 			array(
-				'name'				=> 'config_form',
+				'name'			=> 'config_form',
 			),
 		),
 	),
@@ -27,13 +27,13 @@ $tab_control_config = array(
 	'start_html'	=> '<ul class="tabcontrol">',
 	'end_html'		=> '</ul>',
 	array(
-		'name'				=> 'config_index',
-		'class'				=> 'B_Link',
-		'start_html'		=> '<li>',
-		'end_html'			=> '</li>',
-		'link'				=> 'property1',
-		'value'				=> __('Settings'),
-		'attr'		=> 'class="bframe_tab"',
+		'name'			=> 'config_index',
+		'class'			=> 'B_Link',
+		'start_html'	=> '<li>',
+		'end_html'		=> '</li>',
+		'link'			=> 'property1',
+		'value'			=> __('Settings'),
+		'attr'			=> 'class="bframe_tab"',
 	),
 );
 $config_form_config = array(
@@ -61,15 +61,15 @@ $config_form_config = array(
 					'start_html'	=> '<tr>',
 					'end_html'		=> '</tr>',
 					array(
-						'start_html'		=> '<th>',
-						'end_html'			=> '</th>',
+						'start_html'	=> '<th>',
+						'end_html'		=> '</th>',
 						array(
 							'value'			=> __('Status'),
 						),
 					),
 					array(
-						'start_html'		=> '<td>',
-						'end_html'			=> '</td>',
+						'start_html'	=> '<td>',
+						'end_html'		=> '</td>',
 						array(
 							'name'			=> 'node_status',
 							'class'			=> 'B_RadioContainer',
@@ -77,7 +77,7 @@ $config_form_config = array(
 							'value'			=> '1',
 							'item'			=>
 							array(
-								'attr'		=> ' class=radio',
+								'attr'			=> ' class=radio',
 							),
 						),
 					),

@@ -16,7 +16,7 @@ $form_config = array(
 			'start_html'	=> '<div id="config" class="bframe_adjustparent" data-param="margin:16">',
 			'end_html'		=> '</div>',
 			array(
-				'name'				=> 'config_form',
+				'name'			=> 'config_form',
 			),
 		),
 	),
@@ -61,15 +61,15 @@ $config_form_config = array(
 					'start_html'	=> '<tr>',
 					'end_html'		=> '</tr>',
 					array(
-						'start_html'		=> '<th>',
-						'end_html'			=> '</th>',
+						'start_html'	=> '<th>',
+						'end_html'		=> '</th>',
 						array(
 							'value'			=> __('Status'),
 						),
 					),
 					array(
-						'start_html'		=> '<td>',
-						'end_html'			=> '</td>',
+						'start_html'	=> '<td>',
+						'end_html'		=> '</td>',
 						array(
 							'name'			=> 'node_status',
 							'class'			=> 'B_RadioContainer',

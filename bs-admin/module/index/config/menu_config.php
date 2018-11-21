@@ -50,15 +50,15 @@ $menu_config = array(
 			'end_html'		=> '</li>',
 			array(
 				'class'			=> 'B_Link',
-				'attr'	=> 'class="bframe_menu"',
+				'attr'			=> 'class="bframe_menu"',
 				'id'			=> 'resource',
 				'value'			=> '<img src="images/menu/resource.png" alt="resources"/>' . __('Resources'),
 				'specialchars'	=> 'none',
 				'script'		=>
 				array(
-					'bframe_menu'			=>
+					'bframe_menu'	=>
 					array(
-						'context_menu'		=>
+						'context_menu'	=>
 						array(
 							array(
 								'menu'		=> __('Resource Manager'),
@@ -84,15 +84,15 @@ $menu_config = array(
 			'end_html'		=> '</li>',
 			array(
 				'class'			=> 'B_Link',
-				'attr'	=> 'class="bframe_menu"',
+				'attr'			=> 'class="bframe_menu"',
 				'id'			=> 'post_menu',
 				'value'			=> '<img src="images/menu/article.png" alt="posts"/>' . __('Posts'),
 				'specialchars'	=> 'none',
 				'script'		=>
 				array(
-					'bframe_menu'			=>
+					'bframe_menu'	=>
 					array(
-						'context_menu'		=>
+						'context_menu'	=>
 						array(
 							array(
 								'menu'		=> __('Article'),
@@ -128,15 +128,15 @@ $menu_config = array(
 			'end_html'		=> '</li>',
 			array(
 				'class'			=> 'B_Link',
-				'attr'	=> 'class="bframe_menu"',
+				'attr'			=> 'class="bframe_menu"',
 				'id'			=> 'setting_menu',
 				'value'			=> '<img src="images/menu/settings.png" alt="settings"/>' . __('Settings'),
 				'specialchars'	=> 'none',
 				'script'		=>
 				array(
-					'bframe_menu'			=>
+					'bframe_menu'	=>
 					array(
-						'context_menu'		=>
+						'context_menu'	=>
 						array(
 							array(
 								'menu'		=> __('Basic Settings'),
@@ -177,15 +177,15 @@ $menu_config = array(
 			'end_html'		=> '</li>',
 			array(
 				'class'			=> 'B_Link',
-				'attr'	=> 'class="bframe_menu"',
+				'attr'			=> 'class="bframe_menu"',
 				'id'			=> 'setting_menu',
 				'value'			=> '<img src="images/menu/settings.png" alt="settings"/>' . __('Settings'),
 				'specialchars'	=> 'none',
 				'script'		=>
 				array(
-					'bframe_menu'			=>
+					'bframe_menu'	=>
 					array(
-						'context_menu'		=>
+						'context_menu'	=>
 						array(
 							array(
 								'menu'		=> __('Basic Settings'),
@@ -216,15 +216,15 @@ $menu_config = array(
 			'end_html'		=> '</li>',
 			array(
 				'class'			=> 'B_Link',
-				'attr'	=> 'class="bframe_menu"',
+				'attr'			=> 'class="bframe_menu"',
 				'id'			=> 'setting_menu',
 				'value'			=> '<img src="images/menu/settings.png" alt="settings"/>' . __('Settings'),
 				'specialchars'	=> 'none',
 				'script'		=>
 				array(
-					'bframe_menu'			=>
+					'bframe_menu'	=>
 					array(
-						'context_menu'		=>
+						'context_menu'	=>
 						array(
 							array(
 								'menu'		=> __('Basic Settings'),
