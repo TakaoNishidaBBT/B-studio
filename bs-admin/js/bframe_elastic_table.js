@@ -178,6 +178,8 @@
 				var m = bframe.getMousePosition(event);
 				th.style.width = parseInt(start_width + m.screenX - start_x) + 'px';
 				table.style.width = parseInt(start_table_width + m.screenX - start_x) + 'px';
+
+				bframe.fireEvent(window, 'resize');
 			}
 		}
 	}

@@ -24,25 +24,26 @@
 		var self = target;
 
 		var wrapper;
-		var bar;
-		var barContainer;
-		var barHeight;
+		var barX, barY;
+		var barContainerX, barContainerY;
+		var barWidth, barHeight;
 		var minBarHeight = 30;
-		var barScrollHeight;
-		var scrollHeight;
+		var minBarWidth = 30;
+		var barScrollWidth, barScrollHeight;
+		var scrollWidth, scrollHeight;
 		var padding = 2;
-		var paddingTop, paddingBottom;
+		var paddingTop, paddingRight, paddingBottom, paddingLeft;
 		var bgColor;
-		var timer, childNodesScrollTimer;
-		var moving, childNodesMoving;
+		var timerX, timerY, childNodesScrollTimer;
+		var movingX, movingY, childNodesMoving;
 		var speed;
 		var wheel_ratio = 1;
 		var momentam = 100;
-		var lowestDeltaY;
-		var startScrollTop;
+		var lowestDeltaX, lowestDeltaY;
+		var startScrollLeft, startScrollTop;
 		var os = bframe.getOS();
 
-		var dragging;
+		var draggingX, draggingY;
 		var draggStartMousePosition;
 		var draggStartScrollTop;
 		var isMouseOver;
@@ -62,42 +63,76 @@
 			bouncescroll = true;
 		}
 
-		self.style.overflowY = 'hidden';
+		self.style.overflow = 'hidden';
+		self.style.boxSizing = 'border-box';
 
 		var style = bframe.getStyle(self);
 
-		paddingTop = style.paddingTop.substring(0, style.paddingTop.length-2);
-		paddingBottom = style.paddingBottom.substring(0, style.paddingBottom.length-2);
+		// vertical
+		paddingTop = parseInt(style.paddingTop);
+		paddingBottom = parseInt(style.paddingBottom);
 		barHeight = Math.round(self.clientHeight * self.clientHeight / self.scrollHeight);
 		barScrollHeight = self.clientHeight - barHeight;
 		scrollHeight = self.scrollHeight - self.clientHeight;
 
-		// barContainer
-		barContainer = document.createElement('div');
-		barContainer.className = 'ba-container';
-		barContainer.style.position = 'absolute';
-		barContainer.style.width = '11px';
-		barContainer.style.height = self.clientHeight + 'px';
-		barContainer.style.right = '0';
-		barContainer.style.top = '0';
-		barContainer.style.opacity = '0';
-		barContainer.style.opacity = '1';
-		barContainer.style.borderRadius = '6px';
-		barContainer.style.boxSizing = 'border-box';
-		barContainer.style.zIndex = '9999';
+		// horizontal
+		paddingLeft = parseInt(style.paddingLeft);
+		paddingRight = parseInt(style.paddingBottom);
+		barWidth = Math.round(self.clientWidth * self.clientWidth / self.scrollWidth);
+		barScrollWidth = self.clientWidth - barWidth;
+		scrollWidth = self.scrollWidth - self.clientWidth;
 
-		// bar
-		bar = document.createElement('span');
-		bar.style.position = 'absolute';
-		bar.style.width = '8px';
-		bar.style.height = barHeight - padding*2 + 'px';
-		bar.style.opacity = '0';
-		bar.style.right = '1px';
-		bar.style.top = '0';
-		bar.style.borderRadius = '4px';
-		bar.style.boxSizing = 'border-box';
-		bar.style.zIndex = '99999';
-		bar.style.pointerEvents = 'auto';
+		// barContainerY
+		barContainerY = document.createElement('div');
+		barContainerY.className = 'ba-container';
+		barContainerY.style.position = 'absolute';
+		barContainerY.style.width = '11px';
+		barContainerY.style.height = self.clientHeight + 'px';
+		barContainerY.style.right = '0';
+		barContainerY.style.top = '0';
+		barContainerY.style.opacity = '0';
+		barContainerY.style.borderRadius = '6px';
+		barContainerY.style.boxSizing = 'border-box';
+		barContainerY.style.zIndex = '9999';
+
+		// barY
+		barY = document.createElement('span');
+		barY.style.position = 'absolute';
+		barY.style.width = '8px';
+		barY.style.height = barHeight - padding*2 + 'px';
+		barY.style.opacity = '0';
+		barY.style.right = '1px';
+		barY.style.top = '0';
+		barY.style.borderRadius = '4px';
+		barY.style.boxSizing = 'border-box';
+		barY.style.zIndex = '99999';
+		barY.style.pointerEvents = 'auto';
+
+		// barContainerX
+		barContainerX = document.createElement('div');
+		barContainerX.className = 'ba-container';
+		barContainerX.style.position = 'absolute';
+		barContainerX.style.height = '11px';
+		barContainerX.style.width = self.clientWidth + 'px';
+		barContainerX.style.left = '0';
+		barContainerX.style.bottom = '0';
+		barContainerX.style.opacity = '0';
+		barContainerX.style.borderRadius = '6px';
+		barContainerX.style.boxSizing = 'border-box';
+		barContainerX.style.zIndex = '9999';
+
+		// barX
+		barX = document.createElement('span');
+		barX.style.position = 'absolute';
+		barX.style.height = '8px';
+		barX.style.width = barWidth - padding*2 + 'px';
+		barX.style.opacity = '0';
+		barX.style.bottom = '1px';
+		barX.style.left = '0';
+		barX.style.borderRadius = '4px';
+		barX.style.boxSizing = 'border-box';
+		barX.style.zIndex = '99999';
+		barX.style.pointerEvents = 'auto';
 
 		// set parent positio to relative
 		var parentStyle = bframe.getStyle(self.parentNode);
@@ -132,27 +167,41 @@
 
 		self.parentNode.appendChild(wrapper);
 
-		wrapper.appendChild(barContainer);
-		wrapper.appendChild(bar);
+		wrapper.appendChild(barContainerY);
+		wrapper.appendChild(barY);
 
-		bframe.addEventListener(bar, 'mousedown' , onMouseDown);
-		bframe.addEventListener(window, 'mousemove' , onMouseMove);
-		bframe.addEventListener(window, 'mouseup' , onMouseUp);
+		wrapper.appendChild(barContainerX);
+		wrapper.appendChild(barX);
+
+		bframe.addEventListener(barY, 'mousedown' , onMouseDownY);
+		bframe.addEventListener(window, 'mousemove' , onMouseMoveY);
+		bframe.addEventListener(window, 'mouseup' , onMouseUpY);
+
+		bframe.addEventListener(barX, 'mousedown' , onMouseDownX);
+		bframe.addEventListener(window, 'mousemove' , onMouseMoveX);
+		bframe.addEventListener(window, 'mouseup' , onMouseUpX);
 
 		if(self == document.body) {
-			bframe.addEventListener(window, 'wheel', onWheel);
+			bframe.addEventListener(window, 'wheel', onWheelX);
+			bframe.addEventListener(window, 'wheel', onWheelY);
 		}
 		else {
-			bframe.addEventListener(self, 'wheel', onWheel);
+			bframe.addEventListener(self, 'wheel', onWheelX);
+			bframe.addEventListener(self, 'wheel', onWheelY);
 		}
 
 		bframe.addEventListener(self, 'mouseover', onMouseover);
 		bframe.addEventListener(self, 'mouseout', onMouseout);
 		bframe.addEventListener(self, 'resize', onResize);
 //		bframe.addEventListener(self, 'scroll', onScroll);
-		bframe.addEventListener(bar, 'mouseover', onContainerMouseover);
-		bframe.addEventListener(barContainer, 'mouseover', onContainerMouseover);
-		bframe.addEventListener(barContainer, 'mouseout', onContainerMouseout);
+
+		bframe.addEventListener(barY, 'mouseover', onContainerMouseoverY);
+		bframe.addEventListener(barContainerY, 'mouseover', onContainerMouseoverY);
+		bframe.addEventListener(barContainerY, 'mouseout', onContainerMouseoutY);
+
+		bframe.addEventListener(barX, 'mouseover', onContainerMouseoverX);
+		bframe.addEventListener(barContainerX, 'mouseover', onContainerMouseoverX);
+		bframe.addEventListener(barContainerX, 'mouseout', onContainerMouseoutX);
 
 		if(mode == 'ace') {
 			bframe.addEventListener(self.parentNode, 'wheel', onWheel);
@@ -162,7 +211,7 @@
 		}
 
 		var bartop = self.scrollTop + Math.round(barScrollHeight * self.scrollTop / scrollHeight) + padding;
-		bar.style.top = bartop + 'px';
+		barY.style.top = bartop + 'px';
 
 		var hoverObj = document.querySelectorAll('.bframe_scroll:hover');
 		for(var i=0; i < hoverObj.length; i++) {
@@ -178,24 +227,28 @@
 			bframe.ajaxSubmit.registerCallBackFunctionAfter(onResize);
 		}
 
+		onResize();
+
 		function onResize() {
 			var currentScrollTop = self.scrollTop;
+			var currentScrollLeft = self.scrollLeft;
 
 			wrapper.style.width = self.clientWidth + 'px';
 			wrapper.style.height = self.clientHeight + 'px';
 
+			// vertical
 			self.scrollTop = 0;
 			self.style.paddingBottom = 0;
 
-			bar.style.top = 0;
-			bar.style.height = 0;
-			barContainer.style.top = 0;
-			barContainer.style.height = 0;
-			barContainer.style.display = 'none';
+			barY.style.top = 0;
+			barY.style.height = 0;
+			barContainerY.style.top = 0;
+			barContainerY.style.height = 0;
+			barContainerY.style.display = 'none';
 
 			if(self.clientHeight >= self.scrollHeight) {
-				bar.style.opacity = '0';
-				barContainer.style.opacity = '0';
+				barY.style.opacity = '0';
+				barContainerY.style.opacity = '0';
 			}
 
 			// set barHeight
@@ -207,8 +260,36 @@
 			barScrollHeight = self.clientHeight - barHeight;
 			scrollHeight = self.scrollHeight - self.clientHeight;
 
-			barContainer.style.height = self.clientHeight + 'px';
-			bar.style.height = barHeight - padding*2 + 'px';
+			barContainerY.style.height = self.clientHeight + 'px';
+			barY.style.height = barHeight - padding*2 + 'px';
+
+			// horizontal
+			self.scrollLeft = 0;
+			self.style.paddingRight = 0;
+
+			barX.style.left = 0;
+			barX.style.width = 0;
+			barContainerX.style.left = 0;
+			barContainerX.style.width = 0;
+			barContainerX.style.display = 'none';
+
+			if(self.clientWidth >= self.scrollWidth) {
+				barX.style.opacity = '0';
+				barContainerX.style.opacity = '0';
+			}
+
+			// set width
+			barWidth = Math.round(self.clientWidth * self.clientWidth / self.scrollWidth);
+			barWidth = !barWidth ? 1 : barWidth;
+			barWidth = barWidth < minBarWidth ? minBarWidth : barWidth;
+			barWidth = self.clientWidth < minBarWidth ? self.clientWidth / 2 : barWidth;
+
+			barScrollWidth = self.clientWidth - barWidth;
+			scrollWidth = self.scrollWidth - self.clientWidth;
+
+			barContainerX.style.width = self.clientWidth + 'px';
+			barX.style.width = barWidth - padding*2 + 'px';
+
 			var hoverObj = document.querySelectorAll('.bframe_scroll:hover');
 			for(var i=0; i < hoverObj.length; i++) {
 				if(hoverObj[i] == self) {
@@ -219,14 +300,22 @@
 			if(!bgColor && bframe.isVisible(self)) {
 				bgColor = rgba(bframe.getBgColor(self));
 				if(luminance(bgColor) < 120) {
-					bar.style.backgroundColor = '#fff';
-					bar.style.border = '1px solid #aaa';
-					barContainer.style.backgroundColor = '#555';
+					barY.style.backgroundColor = '#fff';
+					barY.style.border = '1px solid #aaa';
+					barContainerY.style.backgroundColor = '#555';
+
+					barX.style.backgroundColor = '#fff';
+					barX.style.border = '1px solid #aaa';
+					barContainerX.style.backgroundColor = '#555';
 				}
 				else {
-					bar.style.backgroundColor = '#000';
-					bar.style.border = '1px solid #aaa';
-					barContainer.style.backgroundColor = '#ddd';
+					barY.style.backgroundColor = '#000';
+					barY.style.border = '1px solid #aaa';
+					barContainerY.style.backgroundColor = '#ddd';
+
+					barX.style.backgroundColor = '#000';
+					barX.style.border = '1px solid #aaa';
+					barContainerX.style.backgroundColor = '#ddd';
 				}
 			}
 
@@ -237,8 +326,18 @@
 				self.scrollTop = currentScrollTop;
 			}
 
+			if(currentScrollLeft > scrollWidth) {
+				self.scrollLeft = scrollWidth;
+			}
+			else {
+				self.scrollLeft = currentScrollLeft;
+			}
+
 			var bartop = Math.round(barScrollHeight * self.scrollTop / scrollHeight) + padding;
-			bar.style.top = bartop + 'px';
+			barY.style.top = bartop + 'px';
+
+			var barleft = Math.round(barScrollWidth * self.scrollLeft / scrollWidth) + padding;
+			barX.style.left = barleft + 'px';
 
 			// set event handler to child frames
 			var iframes = document.getElementsByTagName('iframe');
@@ -261,12 +360,13 @@
 				if(child.clientHeight && child.clientHeight != child.scrollHeight) {
 					var style = bframe.getStyle(child);
 					if(child.tagName.toLowerCase() == 'textarea') {
-						if(style.overflow != 'hidden' && style.overflowY != 'hidden') {
+						if(style.overflow != 'hidden' && (style.overflowY != 'hidden' || style.overflowX != 'hidden')) {
 							callback(child);
 						}
 					}
 					else if(style.overflow == 'scroll' || style.overflow == 'auto' ||
-						style.overflowY == 'scroll' || style.overflowY == 'auto') {
+						style.overflowY == 'scroll' || style.overflowY == 'auto'  ||
+						style.overflowX == 'scroll' || style.overflowX == 'auto') {
 						callback(child);
 					}
 				}
@@ -285,9 +385,9 @@
 
 			// set scroll bar top
 			var bartop = Math.round(barScrollHeight * self.scrollTop / scrollHeight) + padding;
-			bar.style.top = bartop + 'px';
-			bar.style.transition = '';
-			bar.style.opacity = '0.6';
+			barY.style.top = bartop + 'px';
+			barY.style.transition = '';
+			barY.style.opacity = '0.6';
 
 			clearTimeout(timer);
 			timer = setTimeout(stop, 500);
@@ -339,7 +439,111 @@
 			}
 		}
 
-		function onWheel(event) {
+		function onWheelX(event) {
+			if(bframe.stopWheelEvent) {
+				var obj = bframe.getEventSrcElement(event);
+				if(!bframe.isChild(bframe.activeWheelElement, obj)) return;
+			}
+
+			if(self.clientWidth >= self.scrollWidth) return;
+
+			// Look for lowest delta to normalize the delta values
+			var deltaX = event.deltaX;
+			var absDeltaX = Math.abs(event.deltaX);
+			if(!lowestDeltaX || absDeltaX < lowestDeltaX) lowestDeltaX = absDeltaX;
+			var fn = event.deltaX > 0 ? 'floor' : 'ceil';
+			var directionX = event.deltaX > 0 ? 'right' : event.deltaX == 0 ? '' : 'left';
+
+			if(lowestDeltaX !== 0) deltaX = Math[fn](event.deltaX / lowestDeltaX);
+
+			speedX = deltaX * wheel_ratio;
+			self.scrollLeft += speedX;
+
+			// set padding (for bounce scroll)
+			if(bouncescroll) {
+				if(self.scrollLeft === 0) {
+					self.style.paddingLeft = paddingLeft + Math.round(speedX * -1 / 2) + 'px';
+				}
+				if(self.scrollLeft >= scrollWidth) {
+					self.style.paddingRight = paddingRight + Math.floor(speedX * 1 / 2) + 'px';
+					self.scrollLeft = scrollWidth + speedX;
+				}
+				if(movingX && directionX == 'right') {
+					self.style.paddingLeft = paddingLeft;
+				}
+				if(movingX && directionX == 'left') {
+					self.style.paddingRight = paddingRight;
+				}
+			}
+
+			if(!movingX && directionX == '') {
+				return;
+			}
+			if(!movingX && directionX == 'left' && self.scrollLeft === 0) {
+				return;
+			}
+			if(!movingX && directionX == 'right' && self.scrollLeft >= scrollWidth) {
+				return;
+			}
+
+			event.stopPropagation();
+			event.preventDefault();
+
+			// set scroll bar left
+			var barleft = Math.round(barScrollWidth * self.scrollLeft / scrollWidth) + padding;
+console.log('barleft', barleft, self.scrollLeft);
+			barX.style.left = barleft + 'px';
+			barX.style.transition = '';
+			barX.style.opacity = '0.6';
+
+			// set scroll bar height (for bounce scroll)
+			if(bouncescroll) {
+				if(self.scrollLeft === 0) {
+					barX.style.width = barWidth - Math.floor(speedX * -1 / 10) - padding*2 + 'px';
+				}
+				else if(barleft + barWidth >= self.clientWidth) {
+					barX.style.width = self.clientWidth - barleft - padding + 'px';
+				}
+				else {
+					barX.style.width = barWidth - padding*2 + 'px';
+				}
+			}
+
+			if(os != 'mac' && mode != 'ace') {
+				animate(
+					function(t) {
+						return (--t)*t*t+1;
+					},
+					function(progress) {
+						if(directionY == 'down') {
+							self.scrollTop = startScrollTop + Math.round(progress * momentam);
+						}
+						else {
+							self.scrollTop = startScrollTop - Math.round(progress * momentam);
+						}
+						if(self.scrollTop >= scrollHeight) self.scrollTop = scrollHeight;
+
+						var bartop = Math.round(barScrollHeight * self.scrollTop / scrollHeight) + padding;
+
+						// set scroll bar top
+						barY.style.top = bartop + 'px';
+						if(progress >= 1) {
+							clearTimeout(timerX);
+							timer = setTimeout(stop, 100);
+						}
+					},
+					400
+				);
+			}
+			else {
+				clearTimeout(timerX);
+				timerX = setTimeout(stopX, 500);
+			}
+
+			movingX = true;
+		}
+
+		function onWheelY(event) {
 			if(bframe.stopWheelEvent) {
 				var obj = bframe.getEventSrcElement(event);
 				if(!bframe.isChild(bframe.activeWheelElement, obj)) return;
@@ -352,32 +556,37 @@
 			var absDeltaY = Math.abs(event.deltaY);
 			if(!lowestDeltaY || absDeltaY < lowestDeltaY) lowestDeltaY = absDeltaY;
 			var fn = event.deltaY > 0 ? 'floor' : 'ceil';
-			var direction = event.deltaY > 0 ? 'down' : 'up';
+			var directionY = event.deltaY > 0 ? 'down' : event.deltaY == 0 ? '' : 'up';
+
 			if(lowestDeltaY !== 0) deltaY = Math[fn](event.deltaY / lowestDeltaY);
 
-			speed = deltaY * wheel_ratio;
-			self.scrollTop += speed;
+			speedY = deltaY * wheel_ratio;
+			self.scrollTop += speedY;
 
 			// set padding (for bounce scroll)
 			if(bouncescroll) {
 				if(self.scrollTop === 0) {
-					self.style.paddingTop = parseInt(paddingTop) + Math.round(speed * -1 / 2) + 'px';
+					self.style.paddingTop = paddingTop + Math.round(speedY * -1 / 2) + 'px';
 				}
 				if(self.scrollTop >= scrollHeight) {
-					self.style.paddingBottom = parseInt(paddingBottom) + Math.floor(speed * 1 / 2) + 'px';
-					self.scrollTop = scrollHeight + speed;
+					self.style.paddingBottom = paddingBottom + Math.floor(speedY * 1 / 2) + 'px';
+					self.scrollTop = scrollHeight + speedY;
 				}
-				if(moving && direction == 'down') {
-					self.style.paddingTop = '0';
+				if(movingY && directionY == 'down') {
+					self.style.paddingTop = paddingTop;
 				}
-				if(moving && direction == 'up') {
-					self.style.paddingBottom = '0';
+				if(movingY && directionY == 'up') {
+					self.style.paddingBottom = paddingBottom;
 				}
 			}
-			if(!moving && direction == 'up' && self.scrollTop === 0) {
+
+			if(!movingY && directionY == '') {
 				return;
 			}
-			if(!moving && direction == 'down' && self.scrollTop >= scrollHeight) {
+			if(!movingY && directionY == 'up' && self.scrollTop === 0) {
+				return;
+			}
+			if(!movingY && directionY == 'down' && self.scrollTop >= scrollHeight) {
 				return;
 			}
 
@@ -387,20 +596,20 @@
 			// set scroll bar top
 			var bartop = Math.round(barScrollHeight * self.scrollTop / scrollHeight) + padding;
 
-			bar.style.top = bartop + 'px';
-			bar.style.transition = '';
-			bar.style.opacity = '0.6';
+			barY.style.top = bartop + 'px';
+			barY.style.transition = '';
+			barY.style.opacity = '0.6';
 
 			// set scroll bar height (for bounce scroll)
 			if(bouncescroll) {
 				if(self.scrollTop === 0) {
-					bar.style.height = barHeight - Math.floor(speed * -1 / 10) - padding*2 + 'px';
+					barY.style.height = barHeight - Math.floor(speedY * -1 / 10) - padding*2 + 'px';
 				}
 				else if(bartop + barHeight >= self.clientHeight) {
-					bar.style.height = self.clientHeight - bartop - padding + 'px';
+					barY.style.height = self.clientHeight - bartop - padding + 'px';
 				}
 				else {
-					bar.style.height = barHeight - padding*2 + 'px';
+					barY.style.height = barHeight - padding*2 + 'px';
 				}
 			}
 
@@ -412,7 +621,7 @@
 						return (--t)*t*t+1;
 					},
 					function(progress) {
-						if(direction == 'down') {
+						if(directionY == 'down') {
 							self.scrollTop = startScrollTop + Math.round(progress * momentam);
 						}
 						else {
@@ -423,33 +632,47 @@
 						var bartop = Math.round(barScrollHeight * self.scrollTop / scrollHeight) + padding;
 
 						// set scroll bar top
-						bar.style.top = bartop + 'px';
+						barY.style.top = bartop + 'px';
 						if(progress >= 1) {
-							clearTimeout(timer);
-							timer = setTimeout(stop, 100);
+							clearTimeout(timerY);
+							timerY = setTimeout(stop, 100);
 						}
 					},
 					400
 				);
 			}
 			else {
-				clearTimeout(timer);
-				timer = setTimeout(stop, 500);
+				clearTimeout(timerY);
+				timerY = setTimeout(stopY, 500);
 			}
 
-			moving = true;
+			movingY = true;
 		}
 
-		function stop() {
-			bar.style.transition = 'opacity 0.4s ease-out';
+		function stopX() {
+			barX.style.transition = 'opacity 0.4s ease-out';
 
-			if(self.clientHeight < self.scrollHeight && isMouseOver) {
-				bar.style.opacity = '0.2';
+			if(self.clientWidth < self.scrollWidth && isMouseOver) {
+				barX.style.opacity = '0.2';
 			}
 			else {
-				bar.style.opacity = '0';
+				barX.style.opacity = '0';
 			}
-			moving = false;
+
+			movingX = false;
+		}
+
+		function stopY() {
+			barY.style.transition = 'opacity 0.4s ease-out';
+
+			if(self.clientHeight < self.scrollHeight && isMouseOver) {
+				barY.style.opacity = '0.2';
+			}
+			else {
+				barY.style.opacity = '0';
+			}
+
+			movingY = false;
 		}
 
 		function animate(timing, callback, duration) {
@@ -474,79 +697,147 @@
 		function onMouseover(event) {
 			isMouseOver = true;
 
-			if(self.clientHeight >= self.scrollHeight) return;
+			if(self.clientHeight < self.scrollHeight) {
+				barY.style.transition = 'opacity 0.4s ease-out';
+				barY.style.opacity = '0.2';
+			}
 
-			bar.style.transition = 'opacity 0.4s ease-out';
-			bar.style.opacity = '0.2';
+			if(self.clientWidth < self.scrollWidth) {
+				barX.style.transition = 'opacity 0.4s ease-out';
+				barX.style.opacity = '0.2';
+			}
 		}
 
 		function onMouseout(event) {
 			isMouseOver = false;
 
-			if(dragging) return;
-			if(self.clientHeight >= self.scrollHeight) return;
+			if(!draggingY && self.clientHeight < self.scrollHeight) {
+				barY.style.transition = 'opacity 0.4s ease-out';
+				barY.style.opacity = '0';
+				barContainerY.style.transition = 'opacity 0.2s ease-out';
+				barContainerY.style.opacity = '0';
+			}
 
-			bar.style.transition = 'opacity 0.4s ease-out';
-			bar.style.opacity = '0';
-			barContainer.style.transition = 'opacity 0.2s ease-out';
-			barContainer.style.opacity = '0';
+			if(!draggingX && self.clientWidth < self.scrollWidth) {
+				barX.style.transition = 'opacity 0.4s ease-out';
+				barX.style.opacity = '0';
+				barContainerX.style.transition = 'opacity 0.2s ease-out';
+				barContainerX.style.opacity = '0';
+			}
 		}
 
-		function onContainerMouseover(event) {
-			isMouseOver = true;
+		function onContainerMouseoverX(event) {
+			onMouseover();
 
-			if(self.clientHeight >= self.scrollHeight) return;
+			if(self.clientWidth >= self.scrollWidth) return;
 
-			barContainer.style.transition = 'opacity 0.2s ease-out';
-			barContainer.style.opacity = '0.7';
-			bar.style.opacity = '0.6';
+			barContainerX.style.transition = 'opacity 0.2s ease-out';
+			barContainerX.style.opacity = '0.7';
+			barX.style.opacity = '0.6';
 
 			event.stopPropagation();
 		}
 
-		function onContainerMouseout(event) {
-			if(dragging) return;
+		function onContainerMouseoverY(event) {
+			onMouseover();
+
 			if(self.clientHeight >= self.scrollHeight) return;
 
-			barContainer.style.transition = 'opacity 0.2s ease-out';
-			barContainer.style.opacity = '0';
+			barContainerY.style.transition = 'opacity 0.2s ease-out';
+			barContainerY.style.opacity = '0.7';
+			barY.style.opacity = '0.6';
+
+			event.stopPropagation();
 		}
 
-		function onMouseDown(event) {
+		function onContainerMouseoutX(event) {
+			if(draggingX) return;
+			if(self.clientWidth >= self.scrollWidth) return;
+
+			barContainerX.style.transition = 'opacity 0.2s ease-out';
+			barContainerX.style.opacity = '0';
+		}
+
+		function onContainerMouseoutY(event) {
+			if(draggingY) return;
 			if(self.clientHeight >= self.scrollHeight) return;
 
+			barContainerY.style.transition = 'opacity 0.2s ease-out';
+			barContainerY.style.opacity = '0';
+		}
+
+		function onMouseDownX(event) {
+			if(self.clientWidth >= self.scrollWidth) return;
+
 			draggStartMousePosition = bframe.getMousePosition(event);
-			draggStartScrollTop = self.scrollTop;
-			dragging = true;
+			draggStartScrollLeft = self.scrollLeft;
+			draggingX = true;
 
 			event.preventDefault();
 		}
 
-		function onMouseMove(event) {
-			if(!dragging) return;
+		function onMouseDownY(event) {
+			if(self.clientHeight >= self.scrollHeight) return;
+
+			draggStartMousePosition = bframe.getMousePosition(event);
+			draggStartScrollTop = self.scrollTop;
+			draggingY = true;
+
+			event.preventDefault();
+		}
+
+		function onMouseMoveX(event) {
+			if(!draggingX) return;
+			if(self.clientWidth >= self.scrollWidth) return;
+
+			mpos = bframe.getMousePosition(event);
+			self.scrollLeft = draggStartScrollLeft + (mpos.x - draggStartMousePosition.x) * Math.round(scrollWidth / barScrollWidth);
+			var barleft = Math.round(barScrollWidth * self.scrollLeft / scrollWidth) + padding;
+
+			barX.style.left = barleft + 'px';
+			barX.style.opacity = '0.6';
+		}
+
+		function onMouseMoveY(event) {
+			if(!draggingY) return;
 			if(self.clientHeight >= self.scrollHeight) return;
 
 			mpos = bframe.getMousePosition(event);
 			self.scrollTop = draggStartScrollTop + (mpos.y - draggStartMousePosition.y) * Math.round(scrollHeight / barScrollHeight);
 			var bartop = Math.round(barScrollHeight * self.scrollTop / scrollHeight) + padding;
 
-			bar.style.top = bartop + 'px';
-			bar.style.opacity = '0.6';
+			barY.style.top = bartop + 'px';
+			barY.style.opacity = '0.6';
 		}
 
-		function onMouseUp(event) {
-			if(!dragging) return;
-			if(self.clientHeight >= self.scrollHeight) return;
+		function onMouseUpX(event) {
+			if(!draggingX) return;
+			if(self.clientWidth >= self.scrollWidth) return;
 
-			dragging = false;
+			draggingX = false;
 
 			if(isMouseOver) {
-				bar.style.opacity = '0.2';
+				barX.style.opacity = '0.2';
 			}
 			else {
-				bar.style.opacity = '0';
+				barX.style.opacity = '0';
 			}
-			barContainer.style.opacity = '0';
+			barContainerX.style.opacity = '0';
+		}
+
+		function onMouseUpY(event) {
+			if(!draggingY) return;
+			if(self.clientHeight >= self.scrollHeight) return;
+
+			draggingY = false;
+
+			if(isMouseOver) {
+				barY.style.opacity = '0.2';
+			}
+			else {
+				barY.style.opacity = '0';
+			}
+			barContainerY.style.opacity = '0';
 		}
 
 		function rgba(color) {
