@@ -174,12 +174,12 @@
 		wrapper.appendChild(barX);
 
 		bframe.addEventListener(barY, 'mousedown' , onMouseDownY);
-		bframe.addEventListener(window, 'mousemove' , onMouseMoveY);
-		bframe.addEventListener(window, 'mouseup' , onMouseUpY);
+		bframe.addEventListenerAllFrames(top, 'mousemove' , onMouseMoveY);
+		bframe.addEventListenerAllFrames(top, 'mouseup' , onMouseUpY);
 
 		bframe.addEventListener(barX, 'mousedown' , onMouseDownX);
-		bframe.addEventListener(window, 'mousemove' , onMouseMoveX);
-		bframe.addEventListener(window, 'mouseup' , onMouseUpX);
+		bframe.addEventListenerAllFrames(top, 'mousemove' , onMouseMoveX);
+		bframe.addEventListenerAllFrames(top, 'mouseup', onMouseUpX);
 
 		if(self == document.body) {
 			bframe.addEventListener(window, 'wheel', onWheelX);
@@ -447,6 +447,9 @@
 
 			if(self.clientWidth >= self.scrollWidth) return;
 
+			// scroll vertical and horizontal are alternate
+			if(Math.abs(event.deltaX) < Math.abs(event.deltaY)) return;
+
 			// Look for lowest delta to normalize the delta values
 			var deltaX = event.deltaX;
 			var absDeltaX = Math.abs(event.deltaX);
@@ -491,7 +494,6 @@
 
 			// set scroll bar left
 			var barleft = Math.round(barScrollWidth * self.scrollLeft / scrollWidth) + padding;
-console.log('barleft', barleft, self.scrollLeft);
 			barX.style.left = barleft + 'px';
 			barX.style.transition = '';
 			barX.style.opacity = '0.6';
@@ -550,6 +552,9 @@ console.log('barleft', barleft, self.scrollLeft);
 			}
 
 			if(self.clientHeight >= self.scrollHeight) return;
+
+			// scroll vertical and horizontal are alternate
+			if(Math.abs(event.deltaY) < Math.abs(event.deltaX)) return;
 
 			// Look for lowest delta to normalize the delta values
 			var deltaY = event.deltaY;
