@@ -182,12 +182,10 @@
 		bframe.addEventListenerAllFrames(top, 'mouseup', onMouseUpX);
 
 		if(self == document.body) {
-			bframe.addEventListener(window, 'wheel', onWheelX);
-			bframe.addEventListener(window, 'wheel', onWheelY);
+			bframe.addEventListener(window, 'wheel', onWheel);
 		}
 		else {
-			bframe.addEventListener(self, 'wheel', onWheelX);
-			bframe.addEventListener(self, 'wheel', onWheelY);
+			bframe.addEventListener(self, 'wheel', onWheel);
 		}
 
 		bframe.addEventListener(self, 'mouseover', onMouseover);
@@ -438,6 +436,11 @@
 					onWheel(event);
 				}
 			}
+		}
+
+		function onWheel(event) {
+			onWheelX(event);
+			onWheelY(event);
 		}
 
 		function onWheelX(event) {
