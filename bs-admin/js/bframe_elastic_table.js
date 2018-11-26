@@ -79,6 +79,7 @@
 			if(start_width < maxWidth) {
 				th.style.width = maxWidth + padding + 'px';
 				table.style.width = start_table_width + maxWidth - start_width + padding + 'px';
+				bframe.fireEvent(window, 'resize');
 			}
 		}
 
