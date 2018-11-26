@@ -414,7 +414,8 @@
 		}
 
 		function onFrameWheel(event) {
-			onWheel(event);
+			onWheelX(event);
+			onWheelY(event);
 		}
 
 		function _onFrameWheel(event) {
