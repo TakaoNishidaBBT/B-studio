@@ -18,6 +18,12 @@
 	$ses = new B_Session;
 	$ses->start('nocache', 'bs-install', SESSION_DIR);
 
+	if(!$_SESSION['install_index_status']) {
+		$path = '.';
+		header("Location:$path");
+		exit;
+	}
+
 	// Config
 	require_once('../bs-admin/config/config.php');
 
@@ -44,6 +50,7 @@
 			$status = contents_install($error_message);
 		}
 		if($status) {
+			$_SESSION['install_complete'] = true;
 			$path = 'complete.php';
 			header("Location:$path");
 			exit;

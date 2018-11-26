@@ -43,6 +43,7 @@
 		$_SESSION['install_confirm'] = true;
 
 		if(confirm($db_install_form, $admin_basic_auth_form, $admin_user_form, $root_htaccess, $perm_message, $error_message)) {
+			$_SESSION['install_index_status'] = true;
 			$db_install_form->getValue($_SESSION['param']);
 			$admin_basic_auth_form->getValue($_SESSION['param']);
 			$admin_user_form->getValue($_SESSION['param']);
@@ -59,6 +60,8 @@
 		setHtaccess($root_htaccess);
 		confirmPermission($perm_message);
 	}
+
+	$_SESSION['install_index_status'] = false;
 
 	// Set value to language selectbox
 	if(function_exists('mb_internal_encoding')) {

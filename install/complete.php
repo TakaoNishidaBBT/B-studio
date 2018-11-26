@@ -9,17 +9,20 @@
 	ini_set('display_errors','Off');
 	set_error_handler('exception_error_handler');
 
-	// CHARSET
-	define('B_CHARSET', 'UTF-8');
-	mb_internal_encoding(B_CHARSET);
+	// Global function
+	require_once('../bs-admin/global/b_global_function.php');
 
 	// Start session
-	require_once('../bs-admin/class/B_Session.php');
-	$info = pathinfo($_SERVER['SCRIPT_NAME']);
-	define('SESSION_DIR', $info['dirname']);
+	define('SESSION_DIR', dirname($_SERVER['SCRIPT_NAME']));
 
 	$ses = new B_Session;
 	$ses->start('nocache', 'bs-install', SESSION_DIR);
+
+	if(!$_SESSION['install_complete']) {
+		$path = '.';
+		header("Location:$path");
+		exit;
+	}
 
 	// Send HTTP header
 	header('Cache-Control: no-cache, must-revalidate'); 
