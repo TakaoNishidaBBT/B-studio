@@ -191,7 +191,7 @@
 		bframe.addEventListener(self, 'mouseover', onMouseover);
 		bframe.addEventListener(self, 'mouseout', onMouseout);
 		bframe.addEventListener(self, 'resize', onResize);
-//		bframe.addEventListener(self, 'scroll', onScroll);
+		bframe.addEventListener(self, 'scroll', onScroll);
 
 		bframe.addEventListener(barY, 'mouseover', onContainerMouseoverY);
 		bframe.addEventListener(barContainerY, 'mouseover', onContainerMouseoverY);
@@ -379,6 +379,24 @@
 		}
 
 		function onScroll(event) {
+			onScrollX(event);
+			onScrollY(event);
+		}
+
+		function onScrollX(event) {
+			if(self.clientWidth >= self.scrollWidth) return;
+
+			// set scroll bar top
+			var barleft = Math.round(barScrollWidth * self.scrollLeft / scrollWidth) + padding;
+			barX.style.left = barLeft + 'px';
+			barX.style.transition = '';
+			barX.style.opacity = '0.6';
+
+			clearTimeout(timerX);
+			timerX = setTimeout(stopX, 500);
+		}
+
+		function onScrollY(event) {
 			if(self.clientHeight >= self.scrollHeight) return;
 
 			// set scroll bar top
@@ -387,8 +405,8 @@
 			barY.style.transition = '';
 			barY.style.opacity = '0.6';
 
-			clearTimeout(timer);
-			timer = setTimeout(stop, 500);
+			clearTimeout(timerY);
+			timerY = setTimeout(stopY, 500);
 		}
 
 		function onChildNodesWheel(event) {
@@ -535,7 +553,7 @@
 						barY.style.top = bartop + 'px';
 						if(progress >= 1) {
 							clearTimeout(timerX);
-							timer = setTimeout(stop, 100);
+							timerX = setTimeout(stopX, 100);
 						}
 					},
 					400
@@ -644,7 +662,7 @@
 						barY.style.top = bartop + 'px';
 						if(progress >= 1) {
 							clearTimeout(timerY);
-							timerY = setTimeout(stop, 100);
+							timerY = setTimeout(stopY, 100);
 						}
 					},
 					400
