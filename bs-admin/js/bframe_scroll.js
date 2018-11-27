@@ -153,8 +153,8 @@
 			wrapper.style.left = style.left;
 		}
 		else {
-			wrapper.style.top = self.offsetTop + 'px';
-			wrapper.style.left = self.offsetLeft + 'px';
+			wrapper.style.top = self.offsetTop + parseInt(parentStyle.paddingTop) + 'px';
+			wrapper.style.left = self.offsetLeft + parseInt(parentStyle.paddingLeft) + 'px';
 		}
 		wrapper.style.width = self.clientWidth + 'px';
 		wrapper.style.height = self.clientHeight + 'px';
