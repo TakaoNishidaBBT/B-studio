@@ -11,9 +11,10 @@ table.context_menu {
 	border: 1px solid #f8f8f8;
 }
 table.context_menu td {
+	box-sizing: border-box;
 	padding: 2px 6px;
 	line-height: 22px;
-	height: 26px;
+	height: 30px;
 	border-top: 1px solid #fff;
 	border-bottom: 1px solid #fff;
 	font-weight: normal;
