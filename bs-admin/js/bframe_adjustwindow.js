@@ -86,6 +86,7 @@
 
 		function adjustParent() {
 			var p, h;
+
 			if(self.parentNode.tagName.toLowerCase() == 'form') {
 				p = self.parentNode.parentNode;
 			}
@@ -104,7 +105,18 @@
 			var style = window.getComputedStyle(self);
 			var margin_top = parseInt(style.marginTop);	
 			var margin_bottom = parseInt(style.marginBottom);
-			var height = h - margin - margin_top - margin_bottom;
+			var padding_top = parseInt(style.paddingTop);	
+			var padding_bottom = parseInt(style.paddingBottom);
+			var border_top = parseInt(style.borderTopWidth);	
+			var border_bottom = parseInt(style.borderBottomWidth);
+
+			if(style.boxSizing == 'border-box') {
+				var height = h - margin - margin_top - margin_bottom;
+			}
+			else {
+				var height = h - margin - margin_top - margin_bottom - padding_top - padding_bottom - border_top - border_bottom;
+			}
+
 			if(style.transform) {
 				var transform = style.transform.replace('matrix', '').replace('(', '').replace(')', '').split(',');
 				var scaleY = transform[3];
