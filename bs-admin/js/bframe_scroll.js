@@ -47,6 +47,7 @@
 		var draggStartMousePosition;
 		var draggStartScrollTop;
 		var isMouseOver;
+		var scrollTarget;
 
 		var bouncescroll;
 
@@ -208,6 +209,10 @@
 			bframe.addEventListener(self.parentNode, 'mouseout', onMouseout);
 		}
 
+		bframe.addEventListener(self, 'click', onClick);
+		bframe.addEventListenerAllFrames(top, 'mousedown', onMousedown);
+		bframe.addEventListenerAllFrames(top, 'keydown', onKeydown);
+
 		var bartop = self.scrollTop + Math.round(barScrollHeight * self.scrollTop / scrollHeight) + padding;
 		barY.style.top = bartop + 'px';
 
@@ -226,6 +231,140 @@
 		}
 
 		onResize();
+
+		function onClick(event) {
+			scrollTarget = true;
+			event.stopPropagation();
+		}
+
+		function onMousedown(event) {
+			scrollTarget = false;
+		}
+
+		function onKeydown(event) {
+			if(!scrollTarget) return;
+
+			var keycode;
+			var directionX;
+			var directionY;
+			var speedX = 14;
+			var speedY = 14;
+
+			if(window.event) {
+				keycode = window.event.keyCode;
+			}
+			else {
+				keycode = event.keyCode;
+			}
+
+			switch(keycode) {
+			case 37:	// left
+				directionX = 'left';
+				self.scrollLeft -= speedX;
+				break;
+
+			case 38:	// up
+				directionY = 'up';
+				self.scrollTop -= speedY;
+				break;
+
+			case 39:	// right
+				directionX = 'right';
+				self.scrollLeft += speedX;
+				break;
+
+			case 40:	// down
+				directionY = 'down';
+				self.scrollTop += speedY;
+
+				break;
+
+			default:
+				return;
+			}
+
+			// set scroll bar left
+			var barleft = Math.round(barScrollWidth * self.scrollLeft / scrollWidth) + padding;
+
+			// set scroll bar top
+			var bartop = Math.round(barScrollHeight * self.scrollTop / scrollHeight) + padding;
+
+			if(directionY) {
+				startScrollTop = self.scrollTop;
+
+				if(os != 'mac' && mode != 'ace') {
+					animate(
+						function(t) {
+							return (--t)*t*t+1;
+						},
+						function(progress) {
+							if(directionY == 'down') {
+								self.scrollTop = startScrollTop + Math.round(progress * momentam);
+							}
+							else {
+								self.scrollTop = startScrollTop - Math.round(progress * momentam);
+							}
+							if(self.scrollTop >= scrollHeight) self.scrollTop = scrollHeight;
+
+							var bartop = Math.round(barScrollHeight * self.scrollTop / scrollHeight) + padding;
+
+							// set scroll bar top
+							barY.style.top = bartop + 'px';
+							if(progress >= 1) {
+								clearTimeout(timerY);
+								timerY = setTimeout(stopY, 100);
+							}
+						},
+						400
+					);
+				}
+				else {
+					clearTimeout(timerY);
+					timerY = setTimeout(stopY, 500);
+				}
+
+				movingY = true;
+			}
+
+			if(directionX) {
+				startScrollLeft = self.scrollLeft;
+
+				if(os != 'mac' && mode != 'ace') {
+					animate(
+						function(t) {
+							return (--t)*t*t+1;
+						},
+						function(progress) {
+							if(directionX == 'right') {
+								self.scrollLeft = startScrollLeft + Math.round(progress * momentam);
+							}
+							else {
+								self.scrollLeft = startScrollLeft - Math.round(progress * momentam);
+							}
+							if(self.scrollLeft >= scrollWidth) self.scrollLeft = scrollWidth;
+
+							var barleft = Math.round(barScrollWidth * self.scrollLeft / scrollWidth) + padding;
+
+							// set scroll bar left
+							barX.style.left = barleft + 'px';
+							if(progress >= 1) {
+								clearTimeout(timerX);
+								timerX = setTimeout(stopX, 100);
+							}
+						},
+						400
+					);
+				}
+				else {
+					clearTimeout(timerX);
+					timerX = setTimeout(stopX, 500);
+				}
+
+				movingX = true;
+			}
+
+			event.preventDefault();
+		}
 
 		function onResize() {
 			var currentScrollTop = self.scrollTop;
@@ -388,7 +527,7 @@
 
 			// set scroll bar top
 			var barleft = Math.round(barScrollWidth * self.scrollLeft / scrollWidth) + padding;
-			barX.style.left = barLeft + 'px';
+			barX.style.left = barleft + 'px';
 			barX.style.transition = '';
 			barX.style.opacity = '0.6';
 
@@ -539,18 +678,18 @@
 						return (--t)*t*t+1;
 					},
 					function(progress) {
-						if(directionY == 'down') {
-							self.scrollTop = startScrollTop + Math.round(progress * momentam);
+						if(directionX == 'right') {
+							self.scrollLeft = startScrollLeft + Math.round(progress * momentam);
 						}
 						else {
-							self.scrollTop = startScrollTop - Math.round(progress * momentam);
+							self.scrollLeft = startScrollLeft - Math.round(progress * momentam);
 						}
-						if(self.scrollTop >= scrollHeight) self.scrollTop = scrollHeight;
+						if(self.scrollLeft >= scrollWidth) self.scrollLeft = scrollWidth;
 
-						var bartop = Math.round(barScrollHeight * self.scrollTop / scrollHeight) + padding;
+						var barleft = Math.round(barScrollWidth * self.scrollLeft / scrollWidth) + padding;
 
-						// set scroll bar top
-						barY.style.top = bartop + 'px';
+						// set scroll bar left
+						barX.style.left = barleft + 'px';
 						if(progress >= 1) {
 							clearTimeout(timerX);
 							timerX = setTimeout(stopX, 100);
