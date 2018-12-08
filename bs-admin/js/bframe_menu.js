@@ -80,8 +80,6 @@
 
 		var mark_span;
 
-		var own_event;
-
 		this.hidePullDownMenu = hidePullDownMenu;
 		this.reload = init;
 		bframe.addEventListener(target, 'mousedown', showContextMenu);
@@ -172,15 +170,12 @@
 				context_menu.show();
 				bframe.addEventListener(document, 'mousewheel', bframe.cancelEvent);
 			}
-			own_event = true;
 			return false;
 		}
 
 		function hidePullDownMenu(event) {
-			if(own_event) {
-				own_event = false;
-				return;
-			}
+			if(bframe.getEventSrcElement(event) == target) return;
+
 			if(document.detachEvent) {
 				document.detachEvent('onmousewheel', bframe.cancelEvent);
 			}
