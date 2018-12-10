@@ -886,8 +886,18 @@
 		}
 
 		function onClick(event) {
+			var obj = bframe.getEventSrcElement(event);
+			if(obj != self && isScrollable(obj)) return;
+
 			scrollTarget = true;
 			event.stopPropagation();
+		}
+
+		function isScrollable(obj) {
+			if(obj == self) return false;
+			if(obj.clientHeight < obj.scrollHeight || obj.clientWidth < obj.scrollWidth) return true;
+
+			return isScrollable(obj.parentNode);
 		}
 
 		function onMousedown(event) {
@@ -895,7 +905,7 @@
 		}
 
 		function onKeydown(event) {
-			if(!scrollTarget) return;
+			if(!scrollTarget ||	self.tagName.toLowerCase() == 'textarea') return;
 
 			var keycode;
 			var directionX;
@@ -945,36 +955,30 @@
 			if(directionY) {
 				startScrollTop = self.scrollTop;
 
-				if(os != 'mac' && mode != 'ace') {
-					animate(
-						function(t) {
-							return (--t)*t*t+1;
-						},
-						function(progress) {
-							if(directionY == 'down') {
-								self.scrollTop = startScrollTop + Math.round(progress * momentam);
-							}
-							else {
-								self.scrollTop = startScrollTop - Math.round(progress * momentam);
-							}
-							if(self.scrollTop >= scrollHeight) self.scrollTop = scrollHeight;
+				animate(
+					function(t) {
+						return (--t)*t*t+1;
+					},
+					function(progress) {
+						if(directionY == 'down') {
+							self.scrollTop = startScrollTop + Math.round(progress * momentam);
+						}
+						else {
+							self.scrollTop = startScrollTop - Math.round(progress * momentam);
+						}
+						if(self.scrollTop >= scrollHeight) self.scrollTop = scrollHeight;
 
-							var bartop = Math.round(barScrollHeight * self.scrollTop / scrollHeight) + padding;
+						var bartop = Math.round(barScrollHeight * self.scrollTop / scrollHeight) + padding;
 
-							// set scroll bar top
-							barY.style.top = bartop + 'px';
-							if(progress >= 1) {
-								clearTimeout(timerY);
-								timerY = setTimeout(stopY, 100);
-							}
-						},
-						400
-					);
-				}
-				else {
-					clearTimeout(timerY);
-					timerY = setTimeout(stopY, 500);
-				}
+						// set scroll bar top
+						barY.style.top = bartop + 'px';
+						if(progress >= 1) {
+							clearTimeout(timerY);
+							timerY = setTimeout(stopY, 100);
+						}
+					},
+					400
+				);
 
 				movingY = true;
 			}
@@ -982,36 +986,30 @@
 			if(directionX) {
 				startScrollLeft = self.scrollLeft;
 
-				if(os != 'mac' && mode != 'ace') {
-					animate(
-						function(t) {
-							return (--t)*t*t+1;
-						},
-						function(progress) {
-							if(directionX == 'right') {
-								self.scrollLeft = startScrollLeft + Math.round(progress * momentam);
-							}
-							else {
-								self.scrollLeft = startScrollLeft - Math.round(progress * momentam);
-							}
-							if(self.scrollLeft >= scrollWidth) self.scrollLeft = scrollWidth;
+				animate(
+					function(t) {
+						return (--t)*t*t+1;
+					},
+					function(progress) {
+						if(directionX == 'right') {
+							self.scrollLeft = startScrollLeft + Math.round(progress * momentam);
+						}
+						else {
+							self.scrollLeft = startScrollLeft - Math.round(progress * momentam);
+						}
+						if(self.scrollLeft >= scrollWidth) self.scrollLeft = scrollWidth;
 
-							var barleft = Math.round(barScrollWidth * self.scrollLeft / scrollWidth) + padding;
+						var barleft = Math.round(barScrollWidth * self.scrollLeft / scrollWidth) + padding;
 
-							// set scroll bar left
-							barX.style.left = barleft + 'px';
-							if(progress >= 1) {
-								clearTimeout(timerX);
-								timerX = setTimeout(stopX, 100);
-							}
-						},
-						400
-					);
-				}
-				else {
-					clearTimeout(timerX);
-					timerX = setTimeout(stopX, 500);
-				}
+						// set scroll bar left
+						barX.style.left = barleft + 'px';
+						if(progress >= 1) {
+							clearTimeout(timerX);
+							timerX = setTimeout(stopX, 100);
+						}
+					},
+					400
+				);
 
 				movingX = true;
 			}
