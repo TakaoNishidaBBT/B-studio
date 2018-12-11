@@ -901,8 +901,9 @@
 		}
 
 		function isScrollable(obj) {
-			if(obj == self) return false;
+			if(obj == self || obj == document.body) return false;
 			if(obj.clientHeight < obj.scrollHeight || obj.clientWidth < obj.scrollWidth) return true;
+			if(obj.tagName.toLowerCase() == 'select' && obj.length > 1) return true;
 
 			return isScrollable(obj.parentNode);
 		}
@@ -912,7 +913,9 @@
 		}
 
 		function onKeydown(event) {
-			if(!scrollTarget ||	self.tagName.toLowerCase() == 'textarea') return;
+			if(document.activeElement != self) {
+				if(!scrollTarget ||	self.tagName.toLowerCase() == 'textarea' || isScrollable(document.activeElement)) return;
+			}
 
 			var keycode;
 			var directionX;
