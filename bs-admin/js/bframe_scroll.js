@@ -64,16 +64,28 @@
 			bouncescroll = true;
 		}
 
-		if(self == document.body) { // for body
+		if(target == document.body) { // for body
+			var bodyStyle = bframe.getStyle(document.body);
+
 			var body = document.createElement('div');
 			while(self.firstChild) {
 				body.appendChild(self.firstChild);
 			}
 			self.appendChild(body);
 			self = body;
+
 			self.style.width = '100%';
 			self.style.height = '100%';
+
+			self.style.padding = bodyStyle.padding;
+			self.style.paddingTop = bodyStyle.paddingTop;
+			self.style.paddingRight = bodyStyle.paddingRight;
+			self.style.paddingBottom = bodyStyle.paddingBottom;
+			self.style.paddingLeft = bodyStyle.paddingLeft;
+
+			document.body.style.padding = '0';
 			document.body.style.overflow = 'hidden';
+
 			bframe.adjustwindow(self);
 		}
 
@@ -195,12 +207,7 @@
 		bframe.addEventListenerAllFrames(top, 'mousemove' , onMouseMoveX);
 		bframe.addEventListenerAllFrames(top, 'mouseup', onMouseUpX);
 
-		if(self == document.body) {
-			bframe.addEventListener(window, 'wheel', onWheel);
-		}
-		else {
-			bframe.addEventListener(self, 'wheel', onWheel);
-		}
+		bframe.addEventListener(self, 'wheel', onWheel);
 
 		bframe.addEventListener(self, 'mouseover', onMouseover);
 		bframe.addEventListener(self, 'mouseout', onMouseout);
