@@ -174,7 +174,7 @@
 		}
 
 		function hidePullDownMenu(event) {
-			if(bframe.getEventSrcElement(event) == target) return;
+			if(event && bframe.getEventSrcElement(event) == target) return;
 
 			if(document.detachEvent) {
 				document.detachEvent('onmousewheel', bframe.cancelEvent);
