@@ -913,8 +913,9 @@
 		}
 
 		function onKeydown(event) {
+			if(self.tagName.toLowerCase() == 'textarea') return;
 			if(document.activeElement != self) {
-				if(!scrollTarget ||	self.tagName.toLowerCase() == 'textarea' || isScrollable(document.activeElement)) return;
+				if(!scrollTarget ||	isScrollable(document.activeElement)) return;
 			}
 
 			var keycode;
