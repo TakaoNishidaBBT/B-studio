@@ -548,6 +548,7 @@
 				else {
 					if($async) $sync = '&';
 					$cmdline = "$cmd > /dev/null $sync";
+					putenv('PATH=' . getenv('PATH'));
 					exec("$cmdline");
 				}
 			}
