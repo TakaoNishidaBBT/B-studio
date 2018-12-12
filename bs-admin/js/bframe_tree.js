@@ -2772,6 +2772,7 @@
 					extract_mode = 'confirm';
 					if(event.type == 'drop') {
 						var files = event.dataTransfer.files;
+						var items = event.dataTransfer.items;
 					}
 					else {
 						var files = event.target.files;
@@ -2792,7 +2793,7 @@
 						files[i].id = i;
 						var progress = new fileProgress(files[i], tree_id, pane_id, disp_type);
 
-						if(!files[i].type && files[i].size % 4096 == 0) {
+						if(items && items[i].webkitGetAsEntry().isDirectory) {
 							progress.setError();
 							progress.setStatus(property.upload.error_message);
 						}
