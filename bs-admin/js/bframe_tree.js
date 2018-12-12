@@ -2811,8 +2811,13 @@
 				bframe.fireEvent(window, 'resize');
 			}
 
-			function confirm(index) {
-				var info = upload_queue[index];
+			function confirm(i) {
+				var info;
+
+				for(index=i; index < upload_queue.length; index++) {
+					if(info = upload_queue[index]) break;
+				}
+
 				if(!info) {
 					overlay.style.width = 0;
 					overlay.style.height = 0;
