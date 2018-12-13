@@ -11,7 +11,7 @@
 	// -------------------------------------------------------------------------
 	class B_Session {
 		function start($limiter, $name, $path, $secure=false) {
-			if(preg_match('/localhost/', B_HTTP_HOST)) $secure=false;
+			if(preg_match('/localhost/', $_SERVER['SERVER_NAME'])) $secure=false;
 
 			session_cache_limiter($limiter);
 			session_name($name);

@@ -144,7 +144,7 @@
 						$this->progress = 0;
 
 						// register extract files
-						$node->walk($this, register_archive);
+						$node->walk($this, 'register_archive');
 						$response['status'] = 'extracting';
 						$response['progress'] = 100;
 						$this->sendChunk(',' . json_encode($response));
