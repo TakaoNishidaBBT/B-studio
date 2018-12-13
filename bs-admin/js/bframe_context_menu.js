@@ -697,8 +697,13 @@
 			this.func = function(e) {
 				if(disabled == 'disabled') return;
 
+				menu.hide();
+				setTimeout(exec, 1);
+			}
+			return false;
+
+			function exec() {
 				if(confirm_message) {
-					menu.hide();
 					if(tmp_confirm_message) {
 						if(!confirm(tmp_confirm_message)) {
 							return;
@@ -722,7 +727,6 @@
 					callback_func();
 				}
 			}
-			return false;
 		}
 	}
 
