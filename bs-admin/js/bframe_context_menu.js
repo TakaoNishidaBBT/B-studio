@@ -698,7 +698,7 @@
 				if(disabled == 'disabled') return;
 
 				menu.hide();
-				setTimeout(exec, 1);
+				setTimeout(exec, 10);
 			}
 			return false;
 
