@@ -904,6 +904,8 @@
 			if(obj == self || obj == document.body) return false;
 			if(obj.clientHeight < obj.scrollHeight || obj.clientWidth < obj.scrollWidth) return true;
 			if(obj.tagName.toLowerCase() == 'select' && obj.length > 1) return true;
+			if(obj.tagName.toLowerCase() == 'a' && obj.classList.contains('selectbox')) return true;
+			if(obj.tagName.toLowerCase() == 'input') return true;
 
 			return isScrollable(obj.parentNode);
 		}
