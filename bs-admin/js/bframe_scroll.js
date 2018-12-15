@@ -260,6 +260,15 @@
 		this.position = position;
 
 		function onResize() {
+			if(self.clientHeight >= self.scrollHeight && self.clientWidth >= self.scrollWidth) {
+				wrapper.style.display = 'none';
+				return;
+			}
+			else {
+				wrapper.style.display = 'block';
+			}
+
+
 			var currentScrollTop = self.scrollTop;
 			var currentScrollLeft = self.scrollLeft;
 
