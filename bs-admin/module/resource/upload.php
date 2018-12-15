@@ -259,7 +259,10 @@
 
 		function checkZipFile($zip_file) {
 			$zip = new ZipArchive();
-			$zip->open($zip_file);
+			if($zip->open($zip_file, ZipArchive::CHECKCONS) !== true) {
+				throw new Exception(__('Faild tp open zip file.'));
+			}
+
 			for($i=0; $i < $zip->numFiles; $i++) {
 				$stat = $zip->statIndex($i);
 				$file_name = mb_convert_encoding($stat['name'], 'UTF-8', B_MB_DETECT_ORDER);
