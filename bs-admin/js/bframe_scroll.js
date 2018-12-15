@@ -42,6 +42,7 @@
 		var lowestDeltaX, lowestDeltaY;
 		var startScrollLeft, startScrollTop;
 		var os = bframe.getOS();
+		var parentStyle;
 
 		var draggingX, draggingY;
 		var draggStartMousePosition;
@@ -161,7 +162,7 @@
 		barX.style.pointerEvents = 'auto';
 
 		// set parent positio to relative
-		var parentStyle = bframe.getStyle(self.parentNode);
+		parentStyle = bframe.getStyle(self.parentNode);
 		if(parentStyle.position.toLowerCase() == 'static') {
 			self.parentNode.style.position = 'relative';
 		}
@@ -172,16 +173,8 @@
 		wrapper.className = 'wrapper';
 		wrapper.style.position = 'absolute';
 
-		if(style.position.toLowerCase() == 'absolute' || style.position.toLowerCase() == 'fixed') {
-			wrapper.style.top = style.top;
-			wrapper.style.right = style.right;
-			wrapper.style.bottom = style.bottom;
-			wrapper.style.left = style.left;
-		}
-		else {
-			wrapper.style.top = self.offsetTop + parseInt(parentStyle.paddingTop) + 'px';
-			wrapper.style.left = self.offsetLeft + parseInt(parentStyle.paddingLeft) + 'px';
-		}
+		position();
+
 		wrapper.style.width = self.clientWidth + 'px';
 		wrapper.style.height = self.clientHeight + 'px';
 		wrapper.style.backgroundColor = 'transparent';
@@ -251,6 +244,20 @@
 		}
 
 		onResize();
+
+		function position() {
+			if(style.position.toLowerCase() == 'absolute' || style.position.toLowerCase() == 'fixed') {
+				wrapper.style.top = style.top;
+				wrapper.style.right = style.right;
+				wrapper.style.bottom = style.bottom;
+				wrapper.style.left = style.left;
+			}
+			else {
+				wrapper.style.top = self.offsetTop + parseInt(parentStyle.paddingTop) + 'px';
+				wrapper.style.left = self.offsetLeft + parseInt(parentStyle.paddingLeft) + 'px';
+			}
+		}
+		this.position = position;
 
 		function onResize() {
 			var currentScrollTop = self.scrollTop;

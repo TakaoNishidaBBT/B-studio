@@ -159,6 +159,8 @@
 			this.position = function(position) {
 				element.style.top = position.top + 'px';
 				element.style.left = position.left + 'px';
+
+				if(scroll) scroll.position();
 			}
 
 			if(bframe.scroll) {
