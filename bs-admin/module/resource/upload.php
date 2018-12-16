@@ -175,7 +175,7 @@
 						$this->except = array_flip(array('__MACOSX', '._' . $file['file_name']));
 
 						// Count extract files
-						$this->extracted_files = $node->nodeCount($this->except);
+						$this->extracted_files = $node->nodeCount(false, $this->except);
 
 						$this->registerd_files = 0;
 
