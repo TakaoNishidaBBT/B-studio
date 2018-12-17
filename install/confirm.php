@@ -95,8 +95,11 @@
 			file_put_contents('../.htaccess', $obj->value);
 
 			// Set up bs-admin htaccess basic authentication
+			$current_dir = dirname(str_replace('\\' , '/', __DIR__));
+			if(substr($current_dir, -1) != '/') $current_dir.= '/';
+
 			$contents = file_get_contents('./config/_admin_htaccess.txt');
-			$contents = str_replace('%AUTH_USER_FILE%', B_CURRENT_DIR . 'bs-admin/.htpassword', $contents);
+			$contents = str_replace('%AUTH_USER_FILE%', $current_dir . 'bs-admin/.htpassword', $contents);
 			file_put_contents('../bs-admin/.htaccess', $contents);
 			file_put_contents('../bs-admin-files/.htaccess', $contents);
 
