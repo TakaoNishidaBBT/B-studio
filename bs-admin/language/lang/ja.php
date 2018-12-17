@@ -172,7 +172,7 @@
 		'%FILE_NAME% already exists.<br />Are you sure you want to overwrite?'
 										=> '%FILE_NAME%は既に存在します。<br />上書きしてもよろしいですか？',
 		'Failed to create directory'	=> 'ディレクトリの作成に失敗しました',
-		'Faild tp open zip file.'		=> 'zip1ファイルのオープンに失敗しました',
+		'Faild tp open zip file.'		=> 'zipファイルのオープンに失敗しました',
 		'Multi-byte characters cannot be used in file names. Please check contents of the zip file.'
 										=> '日本語ファイル名は使用できません。（zipファイル中）',
 		'The uploaded file exceeds the upload_max_filesize directive in php.ini.'
