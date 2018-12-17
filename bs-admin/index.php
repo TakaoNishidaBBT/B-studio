@@ -22,12 +22,13 @@
 
 	// Set directory information
 	$current_dir = dirname(str_replace('\\' , '/', __DIR__));
+	if(substr($current_dir, -1) != '/') $current_dir.= '/';
+
 	$doc_root = str_replace('\\' , '/', realpath($_SERVER['DOCUMENT_ROOT']));
-	if(substr($doc_root, -1) != '/') {
-		$doc_root.= '/';
-	}
+	if(substr($doc_root, -1) != '/') $doc_root.= '/';
+
 	$current_path = str_replace(strtolower($doc_root), '', strtolower($current_dir));
-	$current = basename($current_dir);
+	if(substr($current_path, 1) != '/') $current_path = '/' . $current_path;
 
 	if(empty($_SERVER['HTTPS']) === true || $_SERVER['HTTPS'] !== 'on') {
 		$session_secure = false;
@@ -38,6 +39,6 @@
 
 	// Start admin session
 	$ses = new B_Session;
-	$ses->start('nocache', $current . '-admin-session', '/' . $current_path . '/', $session_secure);
+	$ses->start('nocache', $current . '-admin-session', $current_path, $session_secure);
 
 	require_once('./controller/controller.php');
