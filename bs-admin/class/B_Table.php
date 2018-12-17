@@ -53,7 +53,7 @@
 		}
 
 		function isColumnExist($column) {
-			array_key_exists($colmun, $this->config);
+			return array_key_exists($column, $this->config);
 		}
 
 		function getSelectSql() {
