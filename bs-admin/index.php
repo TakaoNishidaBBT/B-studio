@@ -29,6 +29,7 @@
 
 	$current_path = str_replace(strtolower($doc_root), '', strtolower($current_dir));
 	if(substr($current_path, 1) != '/') $current_path = '/' . $current_path;
+	$current = str_replace('.', '-', basename($current_dir));
 
 	if(empty($_SERVER['HTTPS']) === true || $_SERVER['HTTPS'] !== 'on') {
 		$session_secure = false;

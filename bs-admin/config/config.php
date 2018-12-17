@@ -46,7 +46,7 @@
 	define('B_ADMIN_DIR', B_DOC_ROOT . B_ADMIN_ROOT);
 
 	// Admin Session Name
-	define('B_ADMIN_SESSION_NAME', B_SITE_NAME . '-admin-session');
+	define('B_ADMIN_SESSION_NAME', str_replace('.', '-', B_SITE_NAME . '-admin-session'));
 
 	// URL of Top Page
 	define('B_SITE_ROOT', 'http://' . B_HTTP_HOST . B_CURRENT_ROOT);
