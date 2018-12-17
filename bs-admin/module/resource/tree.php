@@ -382,7 +382,7 @@
 								, null);
 
 				$this->total_truncate_nodes = $node->nodeCount();
-				if($this->total_truncate_nodes >= 500) {
+				if($this->total_truncate_nodes >= 10) {
 					// send progress
 					header('Content-Type: application/octet-stream');
 					header('Transfer-encoding: chunked');
@@ -403,22 +403,45 @@
 				$ret = $node->delete(array('obj' => $this, 'method' => 'truncate_callback'));
 				if($ret) {
 					if($this->show_progress) {
-						usleep(500000);
+						sleep(1);
 
+						// delete useless files
 						$response['status'] = 'message';
 						$response['message'] = 'Clean up Files';
 						$this->sendChunk(',' . json_encode($response));
 
-						// delete useless files
+						$response['status'] = 'progress';
+						$response['progress'] = 0;
+						$this->sendChunk(',' . json_encode($response));
+
 						$this->truncateFiles();
+						usleep(500000);
+
+						$response['status'] = 'progress';
+						$response['progress'] = 100;
+						$this->sendChunk(',' . json_encode($response));
 						sleep(1);
 
 						$response['status'] = 'message';
 						$response['message'] = 'Clean up DB';
 						$this->sendChunk(',' . json_encode($response));
 
+						$response['status'] = 'progress';
+						$response['progress'] = 0;
+						$this->sendChunk(',' . json_encode($response));
+
 						// clean up DB
 						$ret = $this->cleanUpDB();
+						usleep(500000);
+
+						$response['status'] = 'progress';
+						$response['progress'] = 100;
+						$this->sendChunk(',' . json_encode($response));
+						sleep(1);
+
+						$response['status'] = 'complete';
+						$response['message'] = 'Complete!';
+						$this->sendChunk(',' . json_encode($response));
 						sleep(1);
 					}
 					else {

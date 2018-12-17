@@ -216,6 +216,7 @@
 				}
 
 				if(!pane) return;
+				if(file_upload.isUploading()) return;
 				var node_count = selected_node.length();
 				if(!node_count) return;
 				var node = current_node.object();
@@ -2700,6 +2701,7 @@
 			var module;
 			var page;
 			var overlay;
+			var uploading;
 
 			var visibility = true;
 
@@ -2751,6 +2753,10 @@
 				visibility = false;
 			}
 			this.hide = hide;
+
+			function isUploading() {
+				return uploading;
+			}
 
 			function dragover(event) {
 				event.preventDefault();
@@ -2805,6 +2811,7 @@
 
 					overlay.style.width = wsize.width + 'px';
 					overlay.style.height = wsize.height + 'px';
+					uploading = true;
 
 					confirm(0);
 				}
@@ -2822,6 +2829,7 @@
 				if(!info) {
 					overlay.style.width = 0;
 					overlay.style.height = 0;
+					uploading = false;
 
 					bframe.fireEvent(window, 'resize');
 
@@ -3004,6 +3012,7 @@
 				}
 				overlay.style.width = 0;
 				overlay.style.height = 0;
+				uploading = false;
 			}
 
 			function cancelUpload() {
