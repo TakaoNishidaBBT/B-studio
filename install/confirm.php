@@ -9,6 +9,10 @@
 	ini_set('display_errors', 'On');
 	set_error_handler('exception_error_handler');
 
+	// Charset
+	define('B_CHARSET', 'UTF-8');
+	mb_internal_encoding(B_CHARSET);
+
 	// Global function
 	require_once('../bs-admin/global/b_global_function.php');
 
@@ -23,9 +27,6 @@
 		header("Location:$path");
 		exit;
 	}
-
-	// Config
-	require_once('../bs-admin/config/config.php');
 
 	// Form config
 	require_once('config/_form_config.php');
