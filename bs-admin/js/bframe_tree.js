@@ -2757,6 +2757,7 @@
 			function isUploading() {
 				return uploading;
 			}
+			this.isUploading = isUploading;
 
 			function dragover(event) {
 				event.preventDefault();
