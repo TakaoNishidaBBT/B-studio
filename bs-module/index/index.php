@@ -665,7 +665,11 @@
 	}
 
 	function notfound() {
-		$_REQUEST['url'] = '404.html';
+		redirectTo('404.html');
+	}
+
+	function redirectTo($url) {
+		$_REQUEST['url'] = $url;
 		unset($_POST['method']);
 		chdir(B_DOC_ROOT . B_CURRENT_ROOT);
 		require('./bs-controller/controller.php');
