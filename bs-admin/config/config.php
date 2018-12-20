@@ -22,9 +22,8 @@
 
 	//Document Root Directory
 	$doc_root = str_replace('\\' , '/', realpath($_SERVER['DOCUMENT_ROOT']));
-	if(substr($doc_root, -1) == '/') {
-		$doc_root = substr($doc_root, 0, -1);
-	}
+	if(substr($doc_root, -1) == '/') $doc_root = substr($doc_root, 0, -1);
+
 	define('B_DOC_ROOT', $doc_root);
 
 	$admin_dir = dirname(str_replace('\\' , '/', __DIR__));

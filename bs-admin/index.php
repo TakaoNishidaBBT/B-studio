@@ -21,25 +21,19 @@
 	define('DISPATCH_URL', 'index.php?terminal_id=' . TERMINAL_ID);
 
 	// Set directory information
-	$current_dir = dirname(str_replace('\\' , '/', __DIR__));
-	if(substr($current_dir, -1) != '/') $current_dir.= '/';
-
 	$doc_root = str_replace('\\' , '/', realpath($_SERVER['DOCUMENT_ROOT']));
 	if(substr($doc_root, -1) != '/') $doc_root.= '/';
 
+	$current_dir = dirname(str_replace('\\' , '/', __DIR__));
+	if(substr($current_dir, -1) != '/') $current_dir.= '/';
+
 	$current_path = str_replace(strtolower($doc_root), '', strtolower($current_dir));
 	if(substr($current_path, 1) != '/') $current_path = '/' . $current_path;
-	$current = str_replace('.', '-', basename($current_dir));
 
-	if(empty($_SERVER['HTTPS']) === true || $_SERVER['HTTPS'] !== 'on') {
-		$session_secure = false;
-	}
-	else {
-		$session_secure = true;
-	}
+	$current = str_replace('.', '-', basename($current_dir));
 
 	// Start admin session
 	$ses = new B_Session;
-	$ses->start('nocache', $current . '-admin-session', $current_path, $session_secure);
+	$ses->start('nocache', $current . '-admin-session', $current_path);
 
 	require_once('./controller/controller.php');

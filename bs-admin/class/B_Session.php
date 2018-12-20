@@ -10,8 +10,8 @@
 	// 
 	// -------------------------------------------------------------------------
 	class B_Session {
-		function start($limiter, $name, $path, $secure=false) {
-			if(preg_match('/localhost/', $_SERVER['SERVER_NAME'])) $secure=false;
+		function start($limiter, $name, $path, $secure=true) {
+			if(empty($_SERVER['HTTPS']) === true || $_SERVER['HTTPS'] !== 'on') $secure = false;
 
 			session_cache_limiter($limiter);
 			session_name($name);
