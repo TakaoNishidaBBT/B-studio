@@ -56,6 +56,9 @@
 			CKEDITOR.config.coreStyles_bold = {element: 'span', attributes: {'style': 'font-weight:bold' }};
 			CKEDITOR.config.coreStyles_italic = {element: 'span', attributes: {'style': 'font-style:italic' }};
 
+			// automatic color
+			CKEDITOR.config.colorButton_enableAutomatic = false;
+
 			// for HTML5 tags(cancel Automatic ACF Mode)
 			CKEDITOR.config.allowedContent = true;
 

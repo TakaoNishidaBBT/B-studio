@@ -93,6 +93,9 @@
 			CKEDITOR.config.autoGrow_onStartup = true;
 			CKEDITOR.config.autoGrow_minHeight = 360;
 
+			// automatic color
+			CKEDITOR.config.colorButton_enableAutomatic = false;
+
 			// for HTML5 tags(cancel Automatic ACF Mode)
 			CKEDITOR.config.allowedContent = true;
 
