@@ -8,7 +8,6 @@
 	require_once('./bs-admin/config/config.php');
 	require_once('./bs-admin/module/common/B_AdminModule.php');
 	require_once('./bs-module/common/B_CommonModule.php');
-	require_once('./bs-admin/language/language.php');
 
 	$url = pathinfo($_REQUEST['url']);
 
