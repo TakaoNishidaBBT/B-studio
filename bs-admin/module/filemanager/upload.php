@@ -263,17 +263,19 @@
 			// except file or folder (stop walking)
 			if(array_key_exists($node->file_name, $this->except)) return false;
 
+			if($node->level == 1) {
+				$this->registered_archive_node[] = $node->path;
+			}
+
 			$dest = B_Util::getPath(B_UPLOAD_DIR, B_Util::getPath($this->path, $node->path));
 			if(is_dir($node->fullpath)) {
  				if(!file_exists($dest)) {
 					mkdir($dest);
 				}
+				return true;
 			}
 			else {
 				copy($node->fullpath, B_Util::getPath(B_UPLOAD_DIR, B_Util::getPath($this->path, $node->path)));
-			}
-			if($node->level == 1) {
-				$this->registered_archive_node[] = $node->path;
 			}
 
 			$this->registerd_files++;

@@ -297,7 +297,7 @@
 				break;
 
 			default:
-				return;
+				return true;
 			}
 
 			// get image size
