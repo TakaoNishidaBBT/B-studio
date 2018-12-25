@@ -136,7 +136,7 @@
 						$node = new B_FileNode(B_RESOURCE_EXTRACT_DIR, '/', null, null, 'all');
 
 						// except file or folder
-						$this->except = array_flip(array('__MACOSX', '._' . $file['file_name']));
+						$this->except = array_flip(array('__MACOSX', '.DS_Store', '._' . $file['file_name']));
 
 						// Count extract files
 						$this->extracted_files = $node->nodeCount(true, $this->except);

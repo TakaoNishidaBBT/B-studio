@@ -161,6 +161,8 @@
 			drag_overlay.style.display = 'none';
 
 			resize_status = false;
+
+			bframe.fireEvent(window, 'resize');
 		}
 
 		function _adjustWindow() {
