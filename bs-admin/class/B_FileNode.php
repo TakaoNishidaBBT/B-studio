@@ -552,9 +552,8 @@
 				$info = B_Util::pathinfo($thumbnail_file_path);
 				chmod($thumbnail_file_path, 0777);
 				$data[$this->thumbnail_image_path] = $info['basename'];
-
-				return true;
 			}
+			return true;
 		}
 
 		function getThumbnailImgPath($path) {
