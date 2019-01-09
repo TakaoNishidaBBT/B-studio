@@ -18,7 +18,7 @@
 	$ses = new B_Session;
 	$ses->start('nocache', 'bs-install', SESSION_DIR);
 
-	if(!$_SESSION['install_complete']) {
+	if(!$_SESSION['install_complete'] && !$_SESSION['replace_complete']) {
 		$path = '.';
 		header("Location:$path");
 		exit;

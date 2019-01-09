@@ -10,11 +10,28 @@
 	ini_set('display_errors', 'On');
 	set_error_handler('exception_error_handler');
 
+	// Global Function
+	require_once('../bs-admin/global/b_global_function.php');
+
+	// Start Session
+	define('SESSION_DIR', dirname($_SERVER['SCRIPT_NAME']));
+
+	$ses = new B_Session;
+	$ses->start('nocache', 'bs-install', SESSION_DIR);
+
+	// Set $_SESSION['language']
+	define('LANG', 'en');
+	if(!$_SESSION['language']) $_SESSION['language'] = LANG;
+
+	if($_POST['action'] == 'select-language' && function_exists('mb_internal_encoding')) {
+		$_SESSION['language'] = $_POST['language'];
+	}
+
 	require_once('../bs-admin/config/config.php');
-	require_once('../bs-admin/language/language.php');
 
 	if($_POST['action'] == 'replace') {
 		replace_view($error_message);
+		$_SESSION['replace_complete'] = true;
 		$path = 'complete.php';
 		header("Location:$path");
 		exit;

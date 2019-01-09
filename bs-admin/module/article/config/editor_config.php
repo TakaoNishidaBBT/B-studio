@@ -33,7 +33,7 @@ $editor_config = array(
 		'start_html'	=> '<table class="editor"><tbody>',
 		'end_html'		=> '</tbody></table>',
 
-		// Title
+		// Headline
 		array(
 			'error_group'	=> true,
 			'start_html'	=> '<tr>',
@@ -46,14 +46,14 @@ $editor_config = array(
 					'start_html'	=> '<div id="title-container">',
 					'end_html'		=> '</div>',
 					array(
-						'name'			=> 'title',
+						'name'			=> 'headline',
 						'class'			=> 'B_TextArea',
-						'attr'			=> 'class="textarea title ime_on bframe_textarea" maxlength="300" placeholder="' . __('Title') . '"',
+						'attr'			=> 'class="textarea title ime_on bframe_textarea" maxlength="300" placeholder="' . __('Headline') . '"',
 						'validate'		=>
 						array(
 							array(
 								'type' 			=> 'required',
-								'error_message'	=> __('Please enter title'),
+								'error_message'	=> __('Please enter headline'),
 							),
 						),
 					),

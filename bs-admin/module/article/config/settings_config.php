@@ -365,7 +365,7 @@ $settings_config = array(
 		),
 	),
 
-	// keywords
+	// Title
 	array(
 		'error_group'	=> true,
 		array(
@@ -374,14 +374,14 @@ $settings_config = array(
 			array(
 				'start_html'	=> '<span class="title">',
 				'end_html'		=> '</span>',
-				'value'			=> 'Keywords',
+				'value'			=> 'Title',
 			),
 		),
 		array(
 			'start_html'	=> '<dd>',
 			'end_html'		=> '</dd>',
 			array(
-				'name'			=> 'keywords',
+				'name'			=> 'title',
 				'class'			=> 'B_TextArea',
 				'attr'			=> 'class="textarea ime_on bframe_textarea" maxlength="100"',
 			),
