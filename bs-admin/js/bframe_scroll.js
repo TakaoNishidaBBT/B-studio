@@ -931,7 +931,7 @@
 		}
 
 		function onKeydown(event) {
-			if(self.tagName.toLowerCase() == 'textarea') return;
+			if(self.tagName.toLowerCase() == 'textarea' || bframe.getEventSrcElement(event).tagName.toLowerCase() == 'textarea') return;
 			if(document.activeElement != self) {
 				if(!scrollTarget ||	isScrollable(document.activeElement)) return;
 			}
