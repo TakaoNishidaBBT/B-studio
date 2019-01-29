@@ -30,7 +30,7 @@
 	$admin = basename($admin_dir);
 	$current_dir = dirname($admin_dir);
 	$current_path = str_replace(strtolower(B_DOC_ROOT), '', strtolower($current_dir));
-	$site_name = basename($current_path);
+	$site_name = str_replace('.', '-', basename($current_dir));
 
 	// Site Name
 	define('B_SITE_NAME', $site_name);
