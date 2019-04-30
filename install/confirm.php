@@ -28,9 +28,6 @@
 		exit;
 	}
 
-	// Config
-	require_once('../bs-admin/config/config.php');
-
 	// Form config
 	require_once('config/_form_config.php');
 
