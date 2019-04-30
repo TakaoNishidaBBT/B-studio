@@ -93,6 +93,15 @@
 			// Set time limit to 3 minutes
 			set_time_limit(180);
 
+			//Document Root Directory
+			$doc_root = str_replace('\\' , '/', realpath($_SERVER['DOCUMENT_ROOT']));
+			if(substr($doc_root, -1) == '/') $doc_root = substr($doc_root, 0, -1);
+
+			$admin_dir = dirname(str_replace('\\' , '/', __DIR__));
+			$admin = basename($admin_dir);
+			$current_dir = dirname($admin_dir);
+			$current_path = str_replace(strtolower($doc_root), '', strtolower($current_dir));
+
 			// Set up htaccess
 			$obj = $root_htaccess->getElementByName('htaccess');
 			file_put_contents('../.htaccess', $obj->value);
@@ -103,7 +112,7 @@
 
 			$contents = file_get_contents('./config/_admin_htaccess.txt');
 			$contents = str_replace('%REWRITE_BASE%', B_CURRENT_ROOT, $contents);
-			$contents = str_replace('%AUTH_USER_FILE%', $current_dir . 'bs-admin/.htpassword', $contents);
+			$contents = str_replace('%AUTH_USER_FILE%', $current_path . 'bs-admin/.htpassword', $contents);
 			file_put_contents('../bs-admin/.htaccess', $contents);
 			file_put_contents('../bs-admin/admin-files/.htaccess', $contents);
 
