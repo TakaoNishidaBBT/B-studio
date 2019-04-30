@@ -131,10 +131,10 @@
 		$status &= checkWritePermission(B_CURRENT_DIR . 'bs-admin/download', $message);
 		$status &= checkWritePermission(B_CURRENT_DIR . 'bs-admin/log', $message);
 		$status &= checkWritePermission(B_CURRENT_DIR . 'bs-admin/user/users.php', $message);
-		$status &= checkWritePermission(B_CURRENT_DIR . 'bs-admin-files', $message);
-		$status &= checkWritePermission(B_CURRENT_DIR . 'bs-admin-files/.htaccess', $message);
-		$status &= checkWritePermission(B_CURRENT_DIR . 'bs-admin-files/files', $message);
-		$status &= checkWritePermission(B_CURRENT_DIR . 'bs-admin-files/thumbs', $message);
+		$status &= checkWritePermission(B_CURRENT_DIR . 'bs-admin/admin-files', $message);
+		$status &= checkWritePermission(B_CURRENT_DIR . 'bs-admin/admin-files/.htaccess', $message);
+		$status &= checkWritePermission(B_CURRENT_DIR . 'bs-admin/admin-files/files', $message);
+		$status &= checkWritePermission(B_CURRENT_DIR . 'bs-admin/admin-files/thumbs', $message);
 		$status &= checkWritePermission(B_CURRENT_DIR . 'files', $message);
 		$status &= checkExecutePermission(FFMPEG, $message);
 		return $status;
