@@ -1,0 +1,18 @@
+RewriteEngine on
+RewriteBase /bstudio/bs-admin/
+
+#RewriteCond %{HTTPS} off
+#RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [R,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
+
+AuthType Basic
+AuthName "Limited Room"
+AuthUserFile /Users/takao/www/bstudio/bs-admin/.htpassword
+AuthGroupFile /dev/null
+require valid-user
+
+php_value upload_max_filesize 200M
+php_value post_max_size 201M

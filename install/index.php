@@ -126,7 +126,6 @@
 		$status &= checkWritePermission(B_CURRENT_DIR . 'bs-admin/.htpassword', $message);
 		$status &= checkWritePermission(B_CURRENT_DIR . 'bs-admin/archive', $message);
 		$status &= checkWritePermission(B_CURRENT_DIR . 'bs-admin/cache', $message);
-		$status &= checkWritePermission(B_CURRENT_DIR . 'bs-admin/config/core_config.php', $message);
 		$status &= checkWritePermission(B_CURRENT_DIR . 'bs-admin/config/lang_config.php', $message);
 		$status &= checkWritePermission(B_CURRENT_DIR . 'bs-admin/db/db_connect.php', $message);
 		$status &= checkWritePermission(B_CURRENT_DIR . 'bs-admin/download', $message);
