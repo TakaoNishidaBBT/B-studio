@@ -252,11 +252,11 @@
 			$this->html_header->appendProperty('script', '<script src="js/bframe_shortcut.js"></script>');
 			$this->html_header->appendProperty('script', '<script src="js/bframe_emulator.js"></script>');
 			$this->html_header->appendProperty('script', '<script src="js/ace/ace.js"></script>');
+			$this->html_header->appendProperty('script', '<script src="js/ace/ext-language_tools.js"></script>');
 			$this->html_header->appendProperty('script', '<script src="js/ace/ext-split.js"></script>');
-			$this->html_header->appendProperty('script', '<script src="js/ace/ext-searchbox.js"></script>');
 			$this->html_header->appendProperty('script', '<script src="js/ace/theme-twilight.js"></script>');
-			$this->html_header->appendProperty('script', '<script src="js/ace/mode-html.js"></script>');
 			$this->html_header->appendProperty('script', '<script src="js/ace/mode-css.js"></script>');
+			$this->html_header->appendProperty('script', '<script src="js/ace/mode-html.js"></script>');
 			$this->html_header->appendProperty('script', '<script src="js/ace/mode-php.js"></script>');
 
 			// Show HTML header

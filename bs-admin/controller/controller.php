@@ -5,7 +5,6 @@
  *
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
-	require_once('./config/config.php');
 	require_once('./module/common/B_AdminModule.php');
 
 	$controller = new B_Controller;

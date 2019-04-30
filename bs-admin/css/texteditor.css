@@ -1,38 +1,47 @@
 @charset "UTF-8";
 
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+	body {
+	    font-weight: 600;
+	}
+}
+body {
+	-webkit-font-smoothing: subpixel-antialiased;
+}
 div.container {
 	margin: 0;
 	overflow: auto;
 	width: 100%;
 }
-ul.control {
+div.control {
+	display: flex;
+	justify-content: space-between;
+	background-color: #3a3a3a;
+}
+div.control ul {
+	display: flex;
 	margin: 0;
 	padding: 0 0 2px 0;
 	height: 30px;
-	background-color: #3a3a3a;
 	text-decoration: none;
 	-moz-user-select: none;
 	-khtml-user-select: none;
 	-webkit-user-select: none;
 }
-ul.control li {
-	float: left;
+div.control ul li {
 	width: 38px;
 	padding: 0;
 	border-right: 1px solid #555;
 	border-top: 1px solid #444;
 	list-style-type: none;
 }
-ul.control li:hover {
-	float: left;
-	width: 38px;
+div.control ul li:hover {
 	border-top: 1px solid #666;
 	border-right: 1px solid #333;
 	border-bottom: 1px solid #555;
 	background-color: #555;
-	list-style-type: none;
 }
-ul.control li a {
+div.control ul li a {
 	display: block;
 	text-align: center;
 	padding: 8px 0;
@@ -40,9 +49,19 @@ ul.control li a {
 	color: #fff;
 	cursor: pointer;
 }
-ul.control li img {
+div.control ul li img {
 	vertical-align: middle;
 }
+div.control .message-field {
+	font-weight: 400;
+	color: #ccc;
+	padding-top: 9px;
+	text-shadow: -1px -1px #333;
+}
+div.control ul li.refresh a {
+	padding-top: 5px;
+}
+
 div.line_number {
 	float: left;
 	background-color: #000;

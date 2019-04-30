@@ -1,5 +1,5 @@
-define('ace/snippets/sh', ['require', 'exports', 'module' ], function(require, exports, module) {
-
+define("ace/snippets/sh",["require","exports","module"], function(require, exports, module) {
+"use strict";
 
 exports.snippetText = "# Shebang. Executing bash via /usr/bin/env makes scripts more portable.\n\
 snippet #!\n\
@@ -62,7 +62,7 @@ snippet getopt\n\
 	  -h|help       Display this message\n\
 	  -v|version    Display script version\n\
 \n\
-			EOT\n\
+	EOT\n\
 	}    # ----------  end of function usage  ----------\n\
 \n\
 	#-----------------------------------------------------------------------\n\
@@ -87,4 +87,11 @@ snippet getopt\n\
 ";
 exports.scope = "sh";
 
-});
+});                (function() {
+                    window.require(["ace/snippets/sh"], function(m) {
+                        if (typeof module == "object" && typeof exports == "object" && module) {
+                            module.exports = m;
+                        }
+                    });
+                })();
+            

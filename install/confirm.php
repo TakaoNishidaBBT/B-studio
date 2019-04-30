@@ -28,6 +28,9 @@
 		exit;
 	}
 
+	// Config
+	require_once('../bs-admin/config/config.php');
+
 	// Form config
 	require_once('config/_form_config.php');
 
@@ -99,9 +102,10 @@
 			if(substr($current_dir, -1) != '/') $current_dir.= '/';
 
 			$contents = file_get_contents('./config/_admin_htaccess.txt');
+			$contents = str_replace('%REWRITE_BASE%', B_CURRENT_ROOT, $contents);
 			$contents = str_replace('%AUTH_USER_FILE%', $current_dir . 'bs-admin/.htpassword', $contents);
 			file_put_contents('../bs-admin/.htaccess', $contents);
-			file_put_contents('../bs-admin-files/.htaccess', $contents);
+			file_put_contents('../bs-admin/admin-files/.htaccess', $contents);
 
 			// Set up bs-admin password
 			$password = $param['basic_auth_id'] . ':' . htpasswd($param['basic_auth_pwd']);

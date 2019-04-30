@@ -83,10 +83,10 @@
 	define('B_DOWNLOAD_DIR', B_ADMIN_DIR . 'download/');
 
 	// User File Directory for Resource
-	define('B_ADMIN_FILES', 'bs-admin-files/');
-	define('B_ADMIN_FILES_DIR', B_DOC_ROOT . B_CURRENT_ROOT . B_ADMIN_FILES);
+	define('B_ADMIN_FILES', 'admin-files/');
+	define('B_ADMIN_FILES_DIR', B_ADMIN_DIR . B_ADMIN_FILES);
 	define('B_RESOURCE_DIR', B_ADMIN_FILES_DIR . 'files/');
-	define('B_RESOURCE_URL', B_CURRENT_ROOT . B_ADMIN_FILES . 'files/');
+	define('B_RESOURCE_URL', B_CURRENT_ROOT . B_ADMIN . B_ADMIN_FILES . 'files/');
 	define('B_RESOURCE_WORK_DIR', B_ADMIN_FILES_DIR);
 	define('B_RESOURCE_EXTRACT_DIR', B_ADMIN_FILES_DIR . 'extract/');
 
@@ -112,19 +112,20 @@
 	define('B_FILE_INFO_W', B_CACHE_DIR . 'file_info_w.txt');
 	define('B_FILE_INFO_SEMAPHORE_C', B_CACHE_DIR . 'file_info_semaphore_c.txt');
 	define('B_FILE_INFO_SEMAPHORE_W', B_CACHE_DIR . 'file_info_semaphore_w.txt');
-	define('B_FILE_INFO_THUMB', B_CACHE_DIR . 'file_info_thumb.txt');
-	define('B_FILE_INFO_THUMB_SEMAPHORE', B_CACHE_DIR . 'file_info_thumb_semaphore.txt');
 	define('B_LIMIT_FILE_INFO', B_CACHE_DIR . 'limit_info_c.txt');
 
 	// ffmpeg
 	if(substr(PHP_OS, 0, 3) === 'WIN') {
 		define('FFMPEG', B_ADMIN_DIR . 'class/ffmpeg/ffmpeg_for_windows.exe');
+		define('B_SYSTEM_FILENAME_ENCODE', 'sjis-win');
 	}
 	else if(substr(PHP_OS, 0, 5) === 'Linux') {
 		define('FFMPEG', B_ADMIN_DIR . 'class/ffmpeg/ffmpeg_for_linux');
+		define('B_SYSTEM_FILENAME_ENCODE', 'utf8');
 	}
 	else {
 		define('FFMPEG', B_ADMIN_DIR . 'class/ffmpeg/ffmpeg_for_mac');
+		define('B_SYSTEM_FILENAME_ENCODE', 'utf8');
 	}
 
 	// Table

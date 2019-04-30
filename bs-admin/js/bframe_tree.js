@@ -45,6 +45,7 @@
 		var eventPlace;
 		var new_node;
 
+		var tab_control;
 		var drag_control;
 		var file_upload;
 
@@ -99,6 +100,7 @@
 				getPane();
 
 				if(property.editable == 'true' || property.sort == 'manual') {
+					setTabControl();
 					setDragControl();
 					setFileUpload();
 					setContextMenu();
@@ -110,6 +112,12 @@
 					target.onclick = resetCurrentObject;
 				}
 				getNodeList('');
+			}
+		}
+
+		function setTabControl() {
+			if(property.editor_mode == 'true') {
+				tab_control = new tabControl();
 			}
 		}
 
@@ -472,6 +480,7 @@
 				context_menu.enableElement('deleteNode');
 				context_menu.enableElement('editName');
 				context_menu.enableElement('createNode');
+				context_menu.enableElement('upload');
 				context_menu.enableElement('download');
 				context_menu.enableElement('open_property');
 
@@ -489,11 +498,14 @@
 				context_menu.disableElement('pasteAriasNode');
 			}
 			var node = selected_node.object();
-
 			if(node.node_class == 'leaf') {
 				context_menu.disableElement('pasteNode');
 				context_menu.disableElement('pasteAriasNode');
 				context_menu.disableElement('createNode');
+				context_menu.disableElement('upload');
+			}
+			if(node != current_node.object()) {
+				context_menu.disableElement('upload');
 			}
 
 			var node_name = selected_node.name();
@@ -789,6 +801,7 @@
 				}
 
 				scrollToLatest();
+				if(property.editor_mode == 'true') tab_control.open();
 
 				bframe.fireEvent(window, 'resize');
 			}
@@ -805,7 +818,7 @@
 
 			if(node_info.children) {
 				for(var i=0; i < node_info.children.length; i++) {
-					if(pane && node_info.children[i].node_type == 'file') {
+					if(pane && property.editor_mode != 'true' && node_info.children[i].node_type == 'file') {
 						continue;
 					}
 					_showNode(ul, node_info.children[i], trash);
@@ -1528,10 +1541,10 @@
 					rel.location.href = property.relation.selectNode.url+'&node_id='+encodeURIComponent(node_id.substr(1))+'&path='+path.value+'&in_trash='+in_trash;
 				}
 			}
-
 			if(pane || !property.relation) {
 				selected_node.set(node_id);
 				selected_node.setColor('selected');
+				current_node.setColor('current');
 			}
 
 			if(property.onclick) {
@@ -1671,7 +1684,7 @@
 			current_node.setColor('current');
 		}
 
-		function selectResource(node_id) {
+		function selectResource(node_id, mode='temporry') {
 			var node = current_node.object();
 			if(bframe.searchParentById(node, 'ttrash')) return;
 
@@ -1696,7 +1709,7 @@
 							}
 							switch(func) {
 							case 'openEditor':
-								openEditor(node_id);
+								openEditor(node_id, mode);
 								break;
 
 							case 'openPreview':
@@ -1739,6 +1752,12 @@
 
 			var editor = window.open(url+param, node_id, settings);
 			editor.focus();
+		}
+
+		function openEditorResponse() {
+			if(httpObj.readyState == 4 && httpObj.status == 200 && response_wait) {
+				response_wait = false;
+			}
 		}
 
 		function openPreview() {
@@ -1785,6 +1804,11 @@
 			}
 			return text;
 		}
+
+		function upload() {
+			file_upload.selectFiles();
+		}
+		this.upload = upload;
 
 		function download() {
 			var  param='';
@@ -1858,6 +1882,14 @@
 
 		this.reload = function() {
 			return reloadTree();
+		}
+
+		this.setEditFlag = function() {
+			tab_control.setEditFlag();
+		}
+
+		this.resetEditFlag = function() {
+			tab_control.resetEditFlag();
 		}
 
 		// -------------------------------------------------------------------------
@@ -2131,6 +2163,665 @@
 
 			this.nodes = function() {
 				return current_node;
+			}
+		}
+
+		// -------------------------------------------------------------------------
+		// class tabControl
+		// -------------------------------------------------------------------------
+		function tabControl() {
+			var self = this;
+			var control = document.getElementById(property.relation.tab_control.id);
+			var folder = bframe.searchNodeByTagName(control, 'li');
+			var editor_container = document.getElementById(property.relation.editor_container.id);
+			var folder_container = document.getElementById(property.relation.folder_container.id);
+			var tabs = [];
+			var zIndex = 1;
+			var current_index=0;
+			var visible_index=0;
+			var scroll_left = document.getElementById(property.relation.tab_scroll.left);
+			var scroll_right = document.getElementById(property.relation.tab_scroll.right);
+			var scrolling;
+			var scroll_out;
+			var momentam = 100;
+			var drag_start;
+			var drag_overlay = document.createElement('div');
+			var drag_target;
+			var drag_element;
+			var drag_clone;
+			var start_position;
+			var drag_start_scrollLeft;
+			var last_position;
+
+			this.open = function(node_id='', mode) {
+				if(node_id) {
+					// change node_id to inside tree
+					node_id = 't'+node_id.substr(1);
+				}
+
+				var obj = exists(node_id);
+				if(obj) {
+					var exist = true;
+				}
+				else {
+					var clone = folder.cloneNode(true);
+					var obj = new tab(clone, self);
+
+					tabs.splice(current_index, 0, {'node_id' : node_id, 'obj' : obj});
+					openEditor(node_id);
+					obj.add(node_id, mode);
+				}
+
+				closeAll(obj, exist);
+				obj.show(mode);
+				select(node_id);
+				if(!node_id) { // folder
+					var file_name = document.getElementById('nm' + current_node.id()).value;
+					obj.setFilename(file_name);
+				}
+
+				setOrder();
+				scrollTo(obj);
+				current_index = getVisibleIndex() + 1;
+			}
+
+			function exists(node_id) {
+				for(var i=0; i < tabs.length; i++) {
+					if(tabs[i].node_id == node_id) return tabs[i].obj;
+				}
+			}
+
+			function getVisibleIndex() {
+				for(var i=0; i < tabs.length; i++) {
+					if(tabs[i].obj.isVisible()) return i;
+				}
+			}
+
+			function openEditor(node_id) {
+				var iframe = document.createElement('iframe');
+				var src = 'index.php?module='+property.editor.module+
+							'&page='+property.editor.file+
+							'&method='+property.editor.method+
+							'&terminal_id='+terminal_id+
+							'&node_id='+encodeURIComponent(node_id.substr(1));
+
+				iframe.id = 'ed' + node_id;
+				iframe.src = src;
+				iframe.opener = window;
+				iframe.setAttribute('data-param', 'margin:99');
+				iframe.classList.add('bframe_adjustparent');
+				editor_container.appendChild(iframe);
+
+				var ap = new bframe.adjustwindow(iframe);
+				return iframe.id;
+			}
+
+			function closeAll(except, exist) {
+				var remove_index;
+				for(var i=0; i < tabs.length; i++) {
+					if(tabs[i].obj.isVisible()) tabs[i].obj.hide();
+					if(tabs[i].obj.openMode() == 'temporary' && tabs[i].obj != except && !exist) {
+						remove_index = i;
+					}
+				}
+				if(remove_index) {
+					tabs[remove_index].obj.remove();
+					tabs.splice(remove_index, 1);
+				}
+			}
+
+			this.close = function(event) {
+				var evtSrc = bframe.getEventSrcElement(event);
+
+				for(var i=0; i < tabs.length; i++) {
+					if(tabs[i].obj.isChild(evtSrc)) {
+						closeTab(i);
+						break;
+					}
+				}
+				bframe.stopPropagation(event);
+			}
+
+			function closeTab(i) {
+				if(i == 0) return;
+				if(tabs[i].obj.getEditFlag() && !confirm(property.relation.editor_confirm.message)) return;
+				if(tabs[i].obj.isVisible())	visible = true;
+
+				var element = tabs[i].obj.element();
+				var clone = tabs[i].obj.clone();
+
+				clone.className = element.className;
+				clone.style.position = 'absolute';
+				clone.style.left = element.offsetLeft + 'px';
+				clone.style.top = element.offsetTop + 'px';
+				clone.style.marginLeft = 0;
+
+				control.appendChild(clone);
+				tabs[i].obj.inVisible();
+
+				if(tabs[i].obj.isVisible()) {
+					tabs[i-1].obj.show();
+					scrollTo(tabs[i-1].obj);
+					select(tabs[i-1].node_id);
+					current_index = i;
+				}
+
+				animate(
+					function(t) {
+						return (--t)*t*t+1;
+					},
+					function(progress) {
+						clone.style.top = Math.round(progress * clone.offsetHeight) + 'px';
+					},
+					200,
+					function () {
+						let start_width = element.offsetWidth + 50;
+						element.style.width = start_width + 'px';
+						element.style.minWidth = 0;
+
+						element.style.marginLeft = '-60px';
+						control.removeChild(clone);
+
+						animate(
+							function(t) {
+								return (--t)*t*t+1;
+							},
+							function(progress) {
+								element.style.width = Math.round((1 - progress) * start_width) + 'px';
+							},
+							400,
+							function () {
+								tabs[i].obj.remove();
+								tabs.splice(i, 1);
+							}
+						);
+					}
+				);
+			}
+
+			this.click = function(event) {
+				var evtSrc = bframe.getEventSrcElement(event);
+				controlTab(evtSrc);
+				bframe.stopPropagation(event);
+
+				return false;
+			}
+
+			function controlTab(evtSrc) {
+				for(var i=0; i < tabs.length; i++) {
+					if(tabs[i].obj.isChild(evtSrc)) {
+						tabs[i].obj.show();
+						select(tabs[i].node_id);
+						scrollTo(tabs[i].obj);
+						current_index = i+1;
+					}
+					else {
+						if(tabs[i].obj.isVisible()) {
+							tabs[i].obj.hide();
+						}
+					}
+				}
+			}
+
+			function setOrder() {
+				for(var i=0; i < tabs.length; i++) {
+					tabs[i].obj.setOrder(i);
+				}
+			}
+
+			function scrollTo(obj) {
+				var viewport = bframe.getElementPosition(control);
+				let startScrollLeft = control.scrollLeft;
+				let position = bframe.getElementPosition(obj.element());
+
+				position.right = position.left + position.width;
+				viewport.right = viewport.left + viewport.width;
+
+				if(viewport.left <= position.left && position.right <= viewport.right) return;
+
+				animate(
+					function(t) {
+						return (--t)*t*t+1;
+					},
+					function(progress) {
+						if((position.right) > viewport.right) {
+							control.scrollLeft = startScrollLeft + Math.round(progress * (position.right - viewport.right));
+						}
+						if(position.left < viewport.left) {
+							control.scrollLeft = startScrollLeft - Math.round(progress * (viewport.left - position.left));
+						}
+					},
+					400
+				);
+			}
+
+			function scrollLeftStart(event) {
+				scrolling = true;
+				scroll('left');
+			}
+			function scrollLeftStop(event) {
+				scrolling = false;
+				inertia('left');
+			}
+			function scrollRightStart(event) {
+				scrolling = true;
+				scroll('right');
+			}
+			function scrollRightStop(event) {
+				scrolling = false;
+				inertia('right');
+			}
+
+			function scroll(direction) {
+				let startScrollLeft = control.scrollLeft;
+				let start = performance.now();
+				if(drag_start) var startStyleLeft = parseInt(drag_clone.style.left);
+
+				requestAnimationFrame(function animate(time) {
+					let timeFraction = time - start;
+
+					if(direction == 'right') {
+						control.scrollLeft = startScrollLeft + Math.round(timeFraction * momentam / 200);
+					}
+					else {
+						control.scrollLeft = startScrollLeft - Math.round(timeFraction * momentam / 200);
+					}
+					if(scrolling) {
+						requestAnimationFrame(animate);
+					}
+				});
+			}
+
+			function inertia(direction) {
+				let startScrollLeft = control.scrollLeft;
+
+				animate(
+					function(t) {
+						return (--t)*t*t+1;
+					},
+					function(progress) {
+						if(direction == 'right') {
+							control.scrollLeft = startScrollLeft + Math.round(progress * momentam);
+						}
+						else {
+							control.scrollLeft = startScrollLeft - Math.round(progress * momentam);
+						}
+					},
+					400
+				);
+			}
+
+			function animate(timing, callback, duration, endCallBack=null) {
+				let start = performance.now();
+
+				requestAnimationFrame(function animate(time) {
+					// timeFraction goes from 0 to 1
+					let timeFraction = (time - start) / duration;
+					if(timeFraction > 1) timeFraction = 1;
+
+					// calculate the current animation state
+					let progress = timing(timeFraction);
+
+					callback(progress); // callback function
+
+					if(timeFraction < 1) {
+						requestAnimationFrame(animate);
+					}
+					else if(endCallBack) {
+						endCallBack();
+					}
+				});
+			}
+
+			function getEventTab(event) {
+				var evtSrc = bframe.getEventSrcElement(event);
+
+				for(var i=0; i < tabs.length; i++) {
+					if(tabs[i].obj.isChild(evtSrc)) return tabs[i].obj;
+				}
+			}
+
+			this.setEditFlag = function() {
+				for(var i=0; i < tabs.length; i++) {
+					if(tabs[i].obj.isVisible()) tabs[i].obj.setEditFlag();
+				}
+			}
+
+			this.resetEditFlag = function() {
+				for(var i=0; i < tabs.length; i++) {
+					if(tabs[i].obj.isVisible()) tabs[i].obj.resetEditFlag();
+				}
+			}
+
+			this.onMouseDown = function(event) {
+				drag_target = getEventTab(event);
+				drag_element = drag_target.element();
+				if(drag_element == folder) return;
+
+				drag_start = true;
+				drag_start_scrollLeft = control.scrollLeft;
+				last_position = '';
+				drag_overlay.style.display = 'block';
+				drag_overlay.style.zIndex = '1000';
+				control.style.zIndex = '1001';
+
+				var mouse_position = bframe.getMousePosition(event);
+
+				var position = bframe.getElementPosition(drag_element);
+				drag_clone = drag_target.clone();
+
+				drag_clone.className = 'clone selected';
+				drag_clone.style.position = 'absolute';
+				drag_clone.style.zIndex = '9999';
+				drag_clone.style.left = drag_element.offsetLeft + 'px';
+				drag_clone.style.top = drag_element.offsetTop + 'px';
+				drag_clone.style.marginLeft = 0;
+
+				control.appendChild(drag_clone);
+
+				start_position = mouse_position.x - drag_element.offsetLeft;
+				drag_target.inVisible();
+			}
+
+			function onMouseMove(event) {
+				var left;
+				var left_org;
+				var viewport = bframe.getElementPosition(control);
+
+				if(!drag_start) return;
+
+				current_position = bframe.getMousePosition(event);
+				if(!last_position) last_position = current_position;
+
+				left = left_org = current_position.x - start_position + control.scrollLeft - drag_start_scrollLeft;
+				if(left < folder.offsetWidth - 10) left = folder.offsetWidth - 10;
+				if(control.scrollWidth - drag_clone.offsetWidth < left) left = control.scrollWidth - drag_clone.offsetWidth;
+
+				// already scrolling
+				if(scroll_out && left < control.scrollLeft) return;
+				if(scroll_out && left > control.scrollLeft + control.offsetWidth - drag_clone.offsetWidth) return;
+
+				drag_clone.style.left = left + 'px';
+				deltaX = current_position.x - last_position.x > 0 ? 'right' : current_position.x - last_position.x < 0 ? 'left' : '';
+
+				if(deltaX == 'right') {
+					var next = getNextObject(drag_element);
+					if(next) var next_element = next.element();
+
+					if(next_element && next_element.offsetLeft + next_element.offsetWidth * 2 / 3 < left + drag_element.offsetWidth) {
+						swap(drag_element, 'right');
+					}
+					if(viewport.width + control.scrollLeft < left + drag_element.offsetWidth) {
+						if(!scroll_out)	{
+							scroll_out = true;
+							dragScroll('right');
+						}
+					}
+					else {
+						scroll_out = false;
+					}
+				}
+				if(deltaX == 'left') {
+					var prev = getPrevObject(drag_element);
+					if(prev) var prev_element = prev.element();
+					if(prev_element && left < prev_element.offsetLeft + prev_element.offsetWidth / 3) {
+						swap(drag_element, 'left');
+					}
+					if(left_org < control.scrollLeft) {
+						if(!scroll_out)	{
+							scroll_out = true;
+							dragScroll('left');
+						}
+					}
+					else {
+						scroll_out = false;
+					}
+				}
+
+				last_position = current_position;
+			}
+
+			function dragScroll(direction) {
+				let startScrollLeft = control.scrollLeft;
+				let start = performance.now();
+				if(drag_start) var startStyleLeft = parseInt(drag_clone.style.left);
+
+				requestAnimationFrame(function animate(time) {
+					if(!scroll_out) return;
+
+					let timeFraction = time - start;
+					let left;
+
+					if(direction == 'right') {
+						control.scrollLeft = startScrollLeft + Math.round(timeFraction * momentam / 200);
+						left = control.scrollLeft + control.offsetWidth - drag_clone.offsetWidth;
+						drag_clone.style.left = left + 'px';
+
+						var next = getNextObject(drag_element);
+						if(next) var next_element = next.element();
+						if(next_element && next_element.offsetLeft + next_element.offsetWidth * 2 / 3 < left + drag_element.offsetWidth) {
+							swap(drag_element, 'right');
+						}
+					}
+					else {
+						left = startScrollLeft - Math.round(timeFraction * momentam / 200);
+						control.scrollLeft = left;
+
+						if(left < folder.offsetWidth - 10) left = folder.offsetWidth - 10;
+						drag_clone.style.left = left + 'px';
+
+						var prev = getPrevObject(drag_element);
+						if(prev) var prev_element = prev.element();
+						if(prev_element && left < prev_element.offsetLeft + prev_element.offsetWidth / 3) {
+							swap(drag_element, 'left');
+						}
+					}
+					if((direction == 'right' && left + drag_clone.offsetWidth < control.scrollWidth) ||
+					 (direction == 'left' && control.scrollLeft > 0)) {
+						requestAnimationFrame(animate);
+					}
+				});
+			}
+
+			function onMouseUp(event) {
+				if(!drag_start) return;
+
+				drag_overlay.style.display = 'none';
+				control.removeChild(drag_clone);
+				drag_target.visible();
+				scrollTo(drag_target);
+
+				scroll_out = false;
+				drag_start = false;
+			}
+
+			function getIndex(element) {
+				for(var i=0; i < tabs.length; i++) {
+					if(tabs[i].obj.element() == element) {
+						return i;
+					}
+				}
+			}
+
+			function getPrevObject(element) {
+				var index = getIndex(element);
+				if(index != 1 && tabs[index-1]) return tabs[index-1].obj;
+			}
+
+			function getNextObject(element) {
+				var index = getIndex(element);
+				if(tabs[index+1]) return tabs[index+1].obj;
+			}
+
+			function swap(element, direction) {
+				var index = getIndex(element);
+				if(direction == 'right' && index + 1 == tabs.length) return;
+				if(direction == 'left' && index == 1) return;
+				if(direction == 'left') index--;
+
+				tabs.splice(index, 2, tabs[index+1], tabs[index]);
+				setOrder();
+			}
+
+			this.isFolderOpen = function() {
+				return getVisibleIndex() == 0;
+			}
+
+			// set drag overlay
+			drag_overlay.style.position = 'absolute'; 
+			drag_overlay.style.top = '0'; 
+			drag_overlay.style.right = '0'; 
+			drag_overlay.style.bottom = '0'; 
+			drag_overlay.style.left = '0'; 
+			drag_overlay.style.backgroundColor = '#f00'; 
+			drag_overlay.style.opacity = '0'; 
+			drag_overlay.style.display = 'none';
+
+			document.body.appendChild(drag_overlay);
+
+			// set folder tab
+			var folder_tab = new tab(folder, self);
+			tabs[current_index++] = {'node_id' : '', 'obj' : folder_tab};
+
+			// set scroll event handler
+			scroll_left.addEventListener('mousedown', scrollLeftStart);
+			scroll_left.addEventListener('mouseup', scrollLeftStop);
+			scroll_right.addEventListener('mousedown', scrollRightStart);
+			scroll_right.addEventListener('mouseup', scrollRightStop);
+
+			// set drag event handler
+			drag_overlay.addEventListener('mousemove', onMouseMove);
+			document.body.addEventListener('mousemove', onMouseMove);
+			document.body.addEventListener('mouseup', onMouseUp);
+			bframe.addEventListenerAllFrames(top, 'mousemove', onMouseMove);
+			bframe.addEventListenerAllFrames(top, 'mouseup', onMouseUp);
+
+			// -------------------------------------------------------------------------
+			// class tab
+			// -------------------------------------------------------------------------
+			function tab(li, tc) {
+				var editor;
+				var a = bframe.searchNodeByTagName(li, 'a');
+				var close_button = bframe.searchNodeByClassName(li, 'close-button');
+				var fname = bframe.searchNodeByClassName(li, 'file_name');
+				var visible=true;
+				var open_mode;
+				var z = zIndex++;
+				var edit_flag;
+
+				li.style.zIndex = z;
+
+				// set event handler
+				li.addEventListener('mousedown', tc.click);
+				li.addEventListener('click', tc.click);
+				li.addEventListener('mousedown', tc.onMouseDown);
+				close_button.addEventListener('mousedown', nop);
+				close_button.addEventListener('click', tc.close);
+
+				this.add = function(node_id, mode) {
+					editor = document.getElementById('ed' + node_id);
+					var file_name = document.getElementById('nm' + node_id).value;
+					fname.innerHTML = file_name;
+					fname.classList.add(mode);
+
+					control.appendChild(li);
+					open_mode = mode;
+				}
+
+				this.remove = function() {
+					control.removeChild(li);
+					editor_container.removeChild(editor);
+				}
+
+				this.isChild = function(obj) {
+					return bframe.isChild(li, obj);
+				}
+
+				this.show = function(mode) {
+					li.classList.add('selected');					
+					a.classList.add('selected');
+					visible = true;
+					li.style.zIndex = '9999';
+					if(mode && mode == 'permanent') {
+						fname.classList.remove('temporary');
+						fname.classList.add(mode);
+						open_mode = mode;
+					}
+
+					if(editor) {
+						editor.style.display = 'block';
+					}
+					else {
+						folder_container.style.display = 'block';
+					}
+				}
+
+				this.hide = function() {
+					li.classList.remove('selected');					
+					a.classList.remove('selected');					
+					visible = false;
+					li.style.zIndex = z;
+
+					if(editor) {
+						editor.style.display = 'none';
+					}
+					else {
+						folder_container.style.display = 'none';
+					}
+				}
+
+				this.inVisible = function() {
+					li.style.visibility = 'hidden';
+				}
+
+				this.visible = function() {
+					li.style.visibility = 'visible';
+				}
+
+				this.isVisible = function() {
+					return visible;
+				}
+
+				this.openMode = function() {
+					return open_mode;
+				}
+
+				this.element = function() {
+					return li;
+				}
+
+				this.setFilename = function(file_name) {
+					fname.innerHTML = file_name;
+				}
+
+				this.setOrder = function(number) {
+					li.style.order = number;
+				}
+
+				this.setEditFlag = function() {
+					edit_flag = true;
+					open_mode = 'permanent';
+					fname.classList.remove('temporary');
+					fname.classList.add('permanent');
+					close_button.innerHTML = '●';
+				}
+
+				this.resetEditFlag = function() {
+					close_button.innerHTML = '×';
+					edit_flag = false;
+				}
+
+				this.getEditFlag = function() {
+					return edit_flag;
+				}
+
+				this.clone = function() {
+					return li.cloneNode(true);
+				}
+
+				function nop(event) {
+					bframe.stopPropagation(event);
+				}
 			}
 		}
 
@@ -2522,7 +3213,9 @@
 				clone_node.style.left = 0;
 				clearBorder();
 
-				if(!drag_status) return;
+				if(!drag_status) {
+					setTimeout(this.dragStop, 100);
+				}
 
 				drag_status = false;
 				button_status = false;
@@ -2762,13 +3455,21 @@
 			function dragover(event) {
 				event.preventDefault();
 			}
-
+/*
 			function selectFiles(event) {
 				if(upload_queue[index]) return false;
 
 				bframe.fireEvent(upload_file, 'click');
 				bframe.stopPropagation(event);
 			}
+*/
+			function selectFiles() {
+				if(upload_queue[index]) return false;
+
+				bframe.fireEvent(upload_file, 'click');
+//				bframe.stopPropagation(event);
+			}
+			this.selectFiles = selectFiles;
 
 			function uploadFiles(event) {
 				if(visibility) {
@@ -2853,6 +3554,7 @@
 				form_data.append('method', 'confirm');
 				form_data.append('mode', mode);
 				form_data.append('session', module);
+				form_data.append('node_id', current_node.id().substr(1));
 				form_data.append('extract_mode', extract_mode);
 				form_data.append('filename', upload_queue[index].file['name']);
 				form_data.append('filesize', upload_queue[index].file['size']);
@@ -2923,8 +3625,8 @@
 				form_data.append('page', page);
 				form_data.append('method', 'upload');
 				form_data.append('mode', 'register');
-
 				form_data.append('extract_mode', extract_mode);
+				form_data.append('node_id', current_node.id().substr(1));
 				form_data.append('Filedata', upload_queue[index].file);
 				form_data.append('last_file', index + 1 == upload_queue.length ? true : false);
 				httpObj.open('POST','index.php');
@@ -3534,7 +4236,7 @@
 			if(place == 'tree') {
 				a.onclick = selectNode;
 				a.ondblclick = selectResourceNode;
-				if((pane && config.folder_count > 0 ) || (!pane && config.node_count > 0)) {
+				if((pane && config.folder_count > 0 ) || (config.node_count > 0)) {
 					if(config.children) {
 						control.src = property.icon.minus.src;
 					}
@@ -4025,7 +4727,6 @@
 			}
 			// right button
 			if(e.button == 2) return;
-
 			var node = getEventNode(event);
 			var node_type = document.getElementById('nt' + node.id);
 
@@ -4042,9 +4743,14 @@
 			else if(node != current_node.object() || node != selected_node.object()) {
 				select(node.id);
 			}
-
 			bframe.stopPropagation(event);
-			if(node.id == current_node.id()) return;
+
+			if(node.id == current_node.id() && tab_control.isFolderOpen()) return;
+
+			if(node_type.value == 'file' && property.editor_mode == 'true') {
+//				selectResource(node.id, 'temporary');
+				selectResource(node.id, 'permanent');
+			}
 
 			if(node_type.value != 'folder' && node.id.substr(1) != 'root' && node.id.substr(1) != 'trash') {
 				return;
@@ -4070,7 +4776,7 @@
 			if(e.button == 2) return;
 
 			var node = getEventNode(event);
-			selectResource(node.id);
+			selectResource(node.id, 'permanent');
 		}
 
 		function onNodeMouseDown(event) {

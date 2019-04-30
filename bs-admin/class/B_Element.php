@@ -2249,7 +2249,7 @@
 	class B_Image extends B_Element {
 		function getElementsHtml($mode=null) {
 			if($this->path) {
-				$src = B_Util::getPath($this->path, $this->value);
+				$src = __getPath($this->path, $this->value);
 			}
 			else {
 				$src = $this->value;

@@ -1,5 +1,5 @@
-define('ace/snippets/tcl', ['require', 'exports', 'module' ], function(require, exports, module) {
-
+define("ace/snippets/tcl",["require","exports","module"], function(require, exports, module) {
+"use strict";
 
 exports.snippetText = "# #!/usr/bin/env tclsh\n\
 snippet #!\n\
@@ -96,4 +96,11 @@ snippet nsc\n\
 ";
 exports.scope = "tcl";
 
-});
+});                (function() {
+                    window.require(["ace/snippets/tcl"], function(m) {
+                        if (typeof module == "object" && typeof exports == "object" && module) {
+                            module.exports = m;
+                        }
+                    });
+                })();
+            

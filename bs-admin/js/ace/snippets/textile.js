@@ -1,5 +1,5 @@
-define('ace/snippets/textile', ['require', 'exports', 'module' ], function(require, exports, module) {
-
+define("ace/snippets/textile",["require","exports","module"], function(require, exports, module) {
+"use strict";
 
 exports.snippetText = "# Jekyll post header\n\
 snippet header\n\
@@ -34,4 +34,11 @@ snippet fn\n\
 ";
 exports.scope = "textile";
 
-});
+});                (function() {
+                    window.require(["ace/snippets/textile"], function(m) {
+                        if (typeof module == "object" && typeof exports == "object" && module) {
+                            module.exports = m;
+                        }
+                    });
+                })();
+            

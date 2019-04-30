@@ -36,4 +36,62 @@
 	$ses = new B_Session;
 	$ses->start('nocache', $current . '-admin-session', $current_path);
 
+	require_once('./config/config.php');
+
+	// To Get Real URL (remove current root and parameter)
+	$url = $_SERVER['REQUEST_URI'];
+	$url = preg_replace('"^' . B_CURRENT_ROOT . '"', '', $url);
+	$url = preg_replace('/\?.*/', '', $url);
+	$url = urldecode($url);
+	$_REQUEST['url'] = $url;
+
+	$file = B_Util::pathinfo($_REQUEST['url']);
+
+	// Check Logedin
+	$auth = new B_AdminAuth;
+	$login = $auth->getUserInfo($user_id, $user_name, $user_auth, $language);
+	if($login && $_REQUEST['url']) {
+		if($file['dirname'] && $file['basename']) {
+			$dir_array = explode('/', $file['dirname']);
+			array_shift($dir_array);
+			$file['dirname'] = implode('/', $dir_array);
+			if($file['dirname']) {
+				$url = __getPath($file['dirname'], $file['basename']);
+			}
+			else {
+				$url = $file['basename'];
+			}
+
+			$thumbnail = B_UPLOAD_THUMBDIR . str_replace('/', '-', $url);
+			if(file_exists($thumbnail)) {
+				switch($file['extension']) {
+				case 'avi':
+				case 'flv':
+				case 'mov':
+				case 'mp4':
+				case 'mpg':
+				case 'mpeg':
+				case 'wmv':
+					header('Content-Type: image/jpg');
+					break;
+				default:
+					header('Content-Type: image/' . strtolower($file['extension']));
+					break;
+				}
+				readfile($thumbnail);
+				exit;
+			}
+		}
+	}
+
+	switch(strtolower($file['extension'])) {
+	case 'swf':
+	case 'jpg':
+	case 'jpeg':
+	case 'gif':
+	case 'png':
+		header('HTTP/1.1 404 Not Found');
+		exit;
+	}
+
 	require_once('./controller/controller.php');

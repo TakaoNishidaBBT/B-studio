@@ -37,10 +37,10 @@
 			if($value) {
 				$info = pathinfo($key);
 				if(substr($info['basename'], 0, 1) == '.') continue;
-				$zip->addFile($value, B_ADMIN_FILES . $key);
+				$zip->addFile($value, $key);
 			}
 			else {
-				$zip->addEmptyDir(B_ADMIN_FILES . $key);
+				$zip->addEmptyDir($key);
 			}
 		}
 	}
@@ -52,10 +52,10 @@
 			if($value) {
 				$info = pathinfo($key);
 				if(substr($info['basename'], 0, 1) == '.') continue;
-				$zip->addFile($value, B_UPLOAD_FILES . $key);
+				$zip->addFile($value, $key);
 			}
 			else {
-				$zip->addEmptyDir(B_UPLOAD_FILES . $key);
+				$zip->addEmptyDir($key);
 			}
 		}
 	}

@@ -233,16 +233,18 @@
 
 			$this->html_header->appendProperty('css', '<link rel="stylesheet" href="css/template_form.css">');
 			$this->html_header->appendProperty('css', '<link rel="stylesheet" href="css/texteditor.css">');
+
 			$this->html_header->appendProperty('script', '<script src="js/bframe_tab.js"></script>');
 			$this->html_header->appendProperty('script', '<script src="js/bframe_preview.js"></script>');
 			$this->html_header->appendProperty('script', '<script src="js/bframe_edit_check.js"></script>');
 			$this->html_header->appendProperty('script', '<script src="js/bframe_texteditor.js"></script>');
 			$this->html_header->appendProperty('script', '<script src="js/bframe_shortcut.js"></script>');
 			$this->html_header->appendProperty('script', '<script src="js/ace/ace.js"></script>');
+			$this->html_header->appendProperty('script', '<script src="js/ace/ext-language_tools.js"></script>');
 			$this->html_header->appendProperty('script', '<script src="js/ace/ext-split.js"></script>');
 			$this->html_header->appendProperty('script', '<script src="js/ace/theme-twilight.js"></script>');
-			$this->html_header->appendProperty('script', '<script src="js/ace/mode-html.js"></script>');
 			$this->html_header->appendProperty('script', '<script src="js/ace/mode-css.js"></script>');
+			$this->html_header->appendProperty('script', '<script src="js/ace/mode-html.js"></script>');
 			$this->html_header->appendProperty('script', '<script src="js/ace/mode-php.js"></script>');
 
 			// Show HTML header

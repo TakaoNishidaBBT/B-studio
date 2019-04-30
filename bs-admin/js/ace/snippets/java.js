@@ -1,5 +1,5 @@
-define('ace/snippets/java', ['require', 'exports', 'module' ], function(require, exports, module) {
-
+define("ace/snippets/java",["require","exports","module"], function(require, exports, module) {
+"use strict";
 
 exports.snippetText = "## Access Modifiers\n\
 snippet po\n\
@@ -244,4 +244,11 @@ snippet unless\n\
 ";
 exports.scope = "java";
 
-});
+});                (function() {
+                    window.require(["ace/snippets/java"], function(m) {
+                        if (typeof module == "object" && typeof exports == "object" && module) {
+                            module.exports = m;
+                        }
+                    });
+                })();
+            

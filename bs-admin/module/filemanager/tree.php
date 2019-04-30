@@ -218,9 +218,6 @@
 				else if(!$this->message) {
 					$this->message = $this->getErrorMessage($dest->getErrorNo());
 				}
-				if($move_status) {
-					$this->refreshThumbnailCache($root);
-				}
 				break;
 			}
 
@@ -275,7 +272,7 @@
 						$ret = $node->remove();
 						if($ret) {
 							$this->status = true;
-							if($node->isMyChild(B_Util::getPath($this->dir, $this->session['current_node']))) {
+							if($node->isMyChild(__getPath($this->dir, $this->session['current_node']))) {
 								$this->session['current_node'] = $node->parentPath();
 							}
 						}
@@ -285,10 +282,6 @@
 							break;
 						}
 					}
-				}
-				if($this->status) {
-					$root = new B_FileNode($this->dir, 'root', null, null, 'all');
-					$this->refreshThumbnailCache($root);
 				}
 			}
 
@@ -300,9 +293,9 @@
 			if($this->request['node_id'] && $this->request['node_id'] != 'null') {
 				$file_info = pathinfo($this->request['node_id']);
 				$node_name = trim($this->request['node_name']);
-				$new_node_id = B_Util::getPath($file_info['dirname'], $node_name);
-				$source = B_Util::getPath($this->dir , $this->request['node_id']);
-				$dest = B_Util::getPath($this->dir , $new_node_id);
+				$new_node_id = __getPath($file_info['dirname'], $node_name);
+				$source = __getPath($this->dir , $this->request['node_id']);
+				$dest = __getPath($this->dir , $new_node_id);
 
 				if($this->checkFileName($source, $dest, $node_name, $file_info)) {
 					$root = new B_FileNode($this->dir, 'root', null, null, 'all');
@@ -314,9 +307,7 @@
 						if($this->session['current_node'] == $this->request['node_id']) {
 							$this->session['current_node'] = $new_node_id;
 						}
-						$this->session['open_nodes'][$this->request['node_id']] = false;
-						$this->session['open_nodes'][$new_node_id] = true;
-						$this->refreshThumbnailCache($root);
+						$this->replaceOpenNodes($this->request['node_id'], $new_node_id);
 					}
 					else {
 						$this->message = __('The name could not be changed');
@@ -325,6 +316,16 @@
 			}
 			$this->response($this->session['current_node'], 'select');
 			exit;
+		}
+
+		function replaceOpenNodes($before, $after) {
+			foreach($this->session['open_nodes'] as $key => $value) {
+				if(strstr($key, $before)) {
+					$key = $after . substr($key, strlen($before));
+				}
+				$open_nodes[$key] = true;
+			}
+			$this->session['open_nodes'] = $open_nodes;
 		}
 
 		function checkFileName($source, $dest, $file_name, $file_info) {
@@ -336,7 +337,7 @@
 				$this->message = __('Multi-byte characters cannot be used');
 				return false;
 			}
-			if(!file_exists(B_Util::getPath($this->dir, $file_info['path']))) {
+			if(!file_exists(__getPath($this->dir, $file_info['path']))) {
 				$this->message = __('Another user has updated this record');
 				return false;
 			}
@@ -354,27 +355,6 @@
 				return false;
 			}
 			return true;
-		}
-
-		function refreshThumbnailCache($root, $progress=false) {
-			if(file_exists(B_FILE_INFO_THUMB_SEMAPHORE)) return;
-
-			$max = $root->getMaxThumbnailNo();
-			$root->createthumbnail($data, $max, $callback);
-			$fp = fopen(B_FILE_INFO_THUMB, 'w+');
-			fwrite($fp, serialize($data));
-			fclose($fp);
-		}
-
-		function createThumbnail_callback() {
-			$this->create_nodes++;
-			$response['status'] = 'progress';
-			$response['progress'] = round($this->create_nodes / $this->total_nodes * 100);
-			if($this->progress != $response['progress']) {
-				$this->sendChunk(',' . json_encode($response));
-				$this->progress = $response['progress'];
-			}
-
 		}
 
 		function download() {
@@ -552,7 +532,7 @@
 		function preview() {
 			if($this->request['node_id'] && $this->request['node_id'] != 'null') {
 				// Redircet to top page
-				$path = B_Util::getPath(B_UPLOAD_URL, $this->request['node_id']);
+				$path = __getPath(B_UPLOAD_URL, $this->request['node_id']);
 				header("Location:$path");
 			}
 
@@ -560,12 +540,6 @@
 		}
 
 		function response($node_id, $category) {
-			// If thumb-nail cache file not exists
-			if(!file_exists(B_FILE_INFO_THUMB)) {
-				if($this->createThumbnailCacheFile()) {
-					exit;
-				}
-			}
 			$response['status'] = $this->status;
 			if($this->message) {
 				$response['message'] = $this->message;
@@ -598,8 +572,56 @@
 				$response['sort_order'] = $this->session['sort_order'];
 			}
 
+			// create thmubnail if necessary
+			if($this->total_files = $current_node->missing_thumbnails()) {
+				if($this->total_files < 50) {
+					$current_node->createthumbnail();
+				}
+				else {
+					$this->createthumbnail($current_node);
+					$this->sendChunk(',' . json_encode($response));
+					$this->sendChunk();		// terminate
+					exit;
+				}
+			}
+
 			header('Content-Type: application/x-javascript charset=utf-8');
 			echo json_encode($response);
+		}
+
+		function createThumbnail($current_node) {
+			// Set time limit to 3 minutes
+			set_time_limit(180);
+
+			// send progress
+			header('Content-Type: application/octet-stream');
+			header('Transfer-encoding: chunked');
+			flush();
+			ob_flush();
+
+			// Send start message
+			$response['status'] = 'show';
+			$response['progress'] = 0;
+			$response['message'] = 'Creating Thumbnail files';
+			$this->sendChunk(json_encode($response));
+
+			$this->createTumbnail_files = 0;
+			$this->progress = 0;
+			$current_node->createthumbnail($this->except, array('obj' => $this, 'method' => 'createThumbnail_callback'));
+
+			sleep(1);
+		}
+
+		function createThumbnail_callback($node) {
+			if($node->node_type == 'folder') return true;
+
+			$this->createTumbnail_files++;
+			$response['status'] = 'progress';
+			$response['progress'] = round($this->createTumbnail_files / $this->total_files * 100);
+			if($this->progress != $response['progress']) {
+				$this->sendChunk(',' . json_encode($response));
+				$this->progress = $response['progress'];
+			}
 		}
 
 		function getErrorMessage($error) {

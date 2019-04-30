@@ -1,5 +1,5 @@
-define('ace/snippets/haml', ['require', 'exports', 'module' ], function(require, exports, module) {
-
+define("ace/snippets/haml",["require","exports","module"], function(require, exports, module) {
+"use strict";
 
 exports.snippetText = "snippet t\n\
 	%table\n\
@@ -24,4 +24,11 @@ snippet =rpc\n\
 ";
 exports.scope = "haml";
 
-});
+});                (function() {
+                    window.require(["ace/snippets/haml"], function(m) {
+                        if (typeof module == "object" && typeof exports == "object" && module) {
+                            module.exports = m;
+                        }
+                    });
+                })();
+            

@@ -1,17 +1,8 @@
-define('ace/snippets/php', ['require', 'exports', 'module' ], function(require, exports, module) {
+define("ace/snippets/php",["require","exports","module"], function(require, exports, module) {
+"use strict";
 
-
-exports.snippetText = "snippet <?\n\
-	<?php\n\
-\n\
-	${1}\n\
-snippet ec\n\
+exports.snippetText = "snippet ec\n\
 	echo ${1};\n\
-snippet <?e\n\
-	<?php echo ${1} ?>\n\
-# this one is for php5.4\n\
-snippet <?=\n\
-	<?=${1}?>\n\
 snippet ns\n\
 	namespace ${1:Foo\\Bar\\Baz};\n\
 	${2}\n\
@@ -19,12 +10,12 @@ snippet use\n\
 	use ${1:Foo\\Bar\\Baz};\n\
 	${2}\n\
 snippet c\n\
-	${1:abstract }class ${2:`Filename()`}\n\
+	${1:abstract }class ${2:$FILENAME}\n\
 	{\n\
 		${3}\n\
 	}\n\
 snippet i\n\
-	interface ${1:`Filename()`}\n\
+	interface ${1:$FILENAME}\n\
 	{\n\
 		${2}\n\
 	}\n\
@@ -42,13 +33,13 @@ snippet m\n\
 		${7}\n\
 	}\n\
 # setter method\n\
-snippet sm \n\
+snippet sm\n\
 	/**\n\
 	 * Sets the value of ${1:foo}\n\
 	 *\n\
 	 * @param ${2:$1} $$1 ${3:description}\n\
 	 *\n\
-	 * @return ${4:`Filename()`}\n\
+	 * @return ${4:$FILENAME}\n\
 	 */\n\
 	${5:public} function set${6:$2}(${7:$2 }$$1)\n\
 	{\n\
@@ -95,7 +86,7 @@ snippet S\n\
 	$_SERVER['${1:variable}']${2}\n\
 snippet SS\n\
 	$_SESSION['${1:variable}']${2}\n\
-	\n\
+\n\
 # the following are old ones\n\
 snippet inc\n\
 	include '${1:file}';${2}\n\
@@ -196,7 +187,7 @@ snippet doc_h\n\
 	 * @copyright ${4:$2}, `strftime('%d %B, %Y')`\n\
 	 * @package ${5:default}\n\
 	 */\n\
-	\n\
+\n\
 # Interface\n\
 snippet interface\n\
 	/**\n\
@@ -205,7 +196,7 @@ snippet interface\n\
 	 * @package ${3:default}\n\
 	 * @author ${4:`g:snips_author`}\n\
 	 */\n\
-	interface ${1:`Filename()`}\n\
+	interface ${1:$FILENAME}\n\
 	{\n\
 		${5}\n\
 	}\n\
@@ -214,7 +205,7 @@ snippet class\n\
 	/**\n\
 	 * ${1}\n\
 	 */\n\
-	class ${2:`Filename()`}\n\
+	class ${2:$FILENAME}\n\
 	{\n\
 		${3}\n\
 		/**\n\
@@ -244,23 +235,12 @@ snippet if\n\
 	if (${1:/* condition */}) {\n\
 		${2:// code...}\n\
 	}\n\
-snippet ifil\n\
-	<?php if (${1:/* condition */}): ?>\n\
-		${2:<!-- code... -->}\n\
-	<?php endif; ?>\n\
 snippet ife\n\
 	if (${1:/* condition */}) {\n\
 		${2:// code...}\n\
 	} else {\n\
 		${3:// code...}\n\
 	}\n\
-	${4}\n\
-snippet ifeil\n\
-	<?php if (${1:/* condition */}): ?>\n\
-		${2:<!-- html... -->}\n\
-	<?php else: ?>\n\
-		${3:<!-- html... -->}\n\
-	<?php endif; ?>\n\
 	${4}\n\
 snippet else\n\
 	else {\n\
@@ -292,18 +272,10 @@ snippet foreach\n\
 	foreach ($${1:variable} as $${2:value}) {\n\
 		${3:// code...}\n\
 	}\n\
-snippet foreachil\n\
-	<?php foreach ($${1:variable} as $${2:value}): ?>\n\
-		${3:<!-- html... -->}\n\
-	<?php endforeach; ?>\n\
 snippet foreachk\n\
 	foreach ($${1:variable} as $${2:key} => $${3:value}) {\n\
 		${4:// code...}\n\
 	}\n\
-snippet foreachkil\n\
-	<?php foreach ($${1:variable} as $${2:key} => $${3:value}): ?>\n\
-		${4:<!-- html... -->}\n\
-	<?php endforeach; ?>\n\
 # $... = array (...)\n\
 snippet array\n\
 	$${1:arrayName} = array('${2}' => ${3});${4}\n\
@@ -328,8 +300,8 @@ snippet vd\n\
 snippet vdd\n\
 	var_dump(${1}); die(${2:});\n\
 snippet http_redirect\n\
-	header (\"HTTP/1.1 301 Moved Permanently\"); \n\
-	header (\"Location: \".URL); \n\
+	header (\"HTTP/1.1 301 Moved Permanently\");\n\
+	header (\"Location: \".URL);\n\
 	exit();\n\
 # Getters & Setters\n\
 snippet gs\n\
@@ -348,7 +320,7 @@ snippet gs\n\
 	 *\n\
 	 * @param $2 $$1 ${5:description}\n\
 	 *\n\
-	 * @return ${6:`Filename()`}\n\
+	 * @return ${6:$FILENAME}\n\
 	 */\n\
 	public function set$3(${7:$2 }$$1)\n\
 	{\n\
@@ -359,7 +331,7 @@ snippet gs\n\
 snippet ags\n\
 	/**\n\
 	 * ${1:description}\n\
-	 * \n\
+	 *\n\
 	 * @${7}\n\
 	 */\n\
 	${2:protected} $${3:foo};\n\
@@ -378,7 +350,48 @@ snippet rett\n\
 	return true;\n\
 snippet retf\n\
 	return false;\n\
+scope html\n\
+snippet <?\n\
+	<?php\n\
+\n\
+	${1}\n\
+snippet <?e\n\
+	<?php echo ${1} ?>\n\
+# this one is for php5.4\n\
+snippet <?=\n\
+	<?=${1}?>\n\
+snippet ifil\n\
+	<?php if (${1:/* condition */}): ?>\n\
+		${2:<!-- code... -->}\n\
+	<?php endif; ?>\n\
+snippet ifeil\n\
+	<?php if (${1:/* condition */}): ?>\n\
+		${2:<!-- html... -->}\n\
+	<?php else: ?>\n\
+		${3:<!-- html... -->}\n\
+	<?php endif; ?>\n\
+	${4}\n\
+snippet foreachil\n\
+	<?php foreach ($${1:variable} as $${2:value}): ?>\n\
+		${3:<!-- html... -->}\n\
+	<?php endforeach; ?>\n\
+snippet foreachkil\n\
+	<?php foreach ($${1:variable} as $${2:key} => $${3:value}): ?>\n\
+		${4:<!-- html... -->}\n\
+	<?php endforeach; ?>\n\
+scope html-tag\n\
+snippet ifil\\n\\\n\
+	<?php if (${1:true}): ?>${2:code}<?php endif; ?>\n\
+snippet ifeil\\n\\\n\
+	<?php if (${1:true}): ?>${2:code}<?php else: ?>${3:code}<?php endif; ?>${4}\n\
 ";
 exports.scope = "php";
 
-});
+});                (function() {
+                    window.require(["ace/snippets/php"], function(m) {
+                        if (typeof module == "object" && typeof exports == "object" && module) {
+                            module.exports = m;
+                        }
+                    });
+                })();
+            

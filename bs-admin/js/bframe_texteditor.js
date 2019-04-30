@@ -6,11 +6,11 @@
 */
 	bframe.addEventListener(window, 'load' , bframeTextEditorInit);
 
-	function bframeTextEditorInit(){
+	function bframeTextEditorInit() {
 		var objects = document.querySelectorAll('textarea.bframe_texteditor');
 
 		for(var i=0; i < objects.length; i++) {
-			var s = new bframe.texteditor(objects[i]);
+			bframe_texteditor = new bframe.texteditor(objects[i]);
 		}
 	}
 
@@ -26,13 +26,15 @@
 		var widget;
 		var ace_editor, theme, Split, split, UndoManager;
 		var edit_flag = false;
-		var command = {
+		var undo_depth = 0;
+		var message_field;
+		var save_command = {
 			name: 'save',
 			bindKey: {
 				mac: 'Command-S',
 				win: 'Ctrl-S'
 			},
-			exec: function(){
+			exec: function() {
 				save()
 			}
 		}
@@ -49,28 +51,53 @@
 		init();
 
 		function createControl() {
+			var control, control1, control2, li;
 			// control
-			control = document.createElement('ul');
+			control = document.createElement('div');
 			control.className = 'control';
 			parent.appendChild(control);
 
-			li = createControlButton('images/editor/undo.png', 'undo (ctrl-z)', undo);
-			control.appendChild(li);
-			li = createControlButton('images/editor/redo.png', 'redo (ctrl-y)', redo);
-			control.appendChild(li);
+			control1 = document.createElement('ul');
+			control1.className = 'left-side-control';
+			control.appendChild(control1);
+
+			if(bframe.getOS() == 'windows') {
+				li = createControlButton('images/editor/undo.png', 'undo (ctrl-z)', undo);
+				control1.appendChild(li);
+				li = createControlButton('images/editor/redo.png', 'redo (ctrl-y)', redo);
+				control1.appendChild(li);
+			}
+			else {
+				li = createControlButton('images/editor/undo.png', 'undo (command-z)', undo);
+				control1.appendChild(li);
+				li = createControlButton('images/editor/redo.png', 'redo (command-y)', redo);
+				control1.appendChild(li);
+			}
 			li = createControlButton('images/editor/splith.png', 'split horizontal', splith);
-			control.appendChild(li);
+			control1.appendChild(li);
 			li = createControlButton('images/editor/splitv.png', 'split vertical', splitv);
-			control.appendChild(li);
+			control1.appendChild(li);
 			li = createControlButton('images/editor/indent_guide.png', 'show indent guide', indentGuide);
-			control.appendChild(li);
+			control1.appendChild(li);
 			li = createControlButton('images/editor/invisible_object.png', 'show invisibles', invisible);
-			control.appendChild(li);
+			control1.appendChild(li);
+			if(bframe.getOS() == 'windows') {
+				li = createControlButton('images/editor/goto.png', 'go to line (ctrl-l)', goto);
+				control1.appendChild(li);
+			}
+			else {
+				li = createControlButton('images/editor/goto.png', 'go to line', goto);
+				control1.appendChild(li);
+			}
 			widget = bframe.searchNodeByClassName(parent, 'open_widgetmanager');
 			if(widget) {
 				li = createControlButton('images/editor/gear.png', 'widgets', openWidget);
-				control.appendChild(li);
+				control1.appendChild(li);
 			}
+
+			message_field = document.createElement('div'); 
+			message_field.className = 'message-field'; 
+			control.appendChild(message_field);
 		}
 
 		function createControlButton(icon_img, title, func) {
@@ -80,7 +107,7 @@
 			var a = document.createElement('a');
 			a.title = title;
 			if(func) {
-				bframe.addEventListener(a, 'mousedown',func);
+				bframe.addEventListener(a, 'mousedown', func);
 			}
 			li.appendChild(a);
 			img = document.createElement('img');
@@ -139,8 +166,15 @@
 			ace_editor.getSession().setUseSoftTabs(false);
 			ace_editor.getSession().on('change', setEditFlag);
 
+			var completion = require('ace/ext/language_tools');
+			ace_editor.setOptions({
+				enableBasicAutocompletion: true,
+				enableLiveAutocompletion: true,
+				enableSnippets: true,
+			});
+
 			ace_editor.setScrollSpeed(2);
-			ace_editor.commands.addCommand(command);
+			ace_editor.commands.addCommand(save_command);
 
 			target.style.display = 'none';
 
@@ -205,7 +239,8 @@
 				newEditor.renderer.setShowPrintMargin(ace_editor.renderer.getShowPrintMargin());
 				newEditor.renderer.setShowInvisibles(ace_editor.renderer.getShowInvisibles());
 				newEditor.setDisplayIndentGuides(ace_editor.getDisplayIndentGuides());
-				newEditor.commands.addCommand(command);
+				newEditor.commands.addCommand(save_command);
+				newEditor.focus();
 			}
 			else{
 				split.setSplits(1);
@@ -226,10 +261,12 @@
 				newEditor.renderer.setShowPrintMargin(ace_editor.renderer.getShowPrintMargin());
 				newEditor.renderer.setShowInvisibles(ace_editor.renderer.getShowInvisibles());
 				newEditor.setDisplayIndentGuides(ace_editor.getDisplayIndentGuides());
-				newEditor.commands.addCommand(command);
+				newEditor.commands.addCommand(save_command);
+				newEditor.focus();
 			}
 			else {
 				split.setSplits(1);
+				ace_editor.focus();
 			}
 		}
 
@@ -263,17 +300,33 @@
 			}
 		}
 
+		function goto(event) {
+			line = parseInt(prompt("Enter line number:"), 10);
+			if(!isNaN(line)) {
+				var cEditor = split.getCurrentEditor();
+				cEditor.gotoLine(line);
+				cEditor.focus();
+			}
+		}
+
 		function onFocus() {
 			split.resize();
 			split.focus();
 		}
 
 		function updateEditor() {
+			var session = ace_editor.getSession();
+			var cursor = session.selection.getCursor();
+			var top = session.getScrollTop();
+
 			ace_editor.selectAll();
 			var range = ace_editor.getSelectionRange();
 			ace_editor.clearSelection();
 			ace_editor.getSession().replace(range, target.value);
-			ace_editor.renderer.alignCursor(0);
+
+			// keep scroll top and cursor position 
+			ace_editor.moveCursorToPosition(cursor);
+			session.setScrollTop(top);
 		}
 
 		function updateTarget() {
@@ -281,13 +334,19 @@
 		}
 
 		function editCheckCallback() {
-			if(ace_editor.getSession().getUndoManager().hasUndo() && edit_flag) {
+			if(ace_editor.getSession().getUndoManager().undoDepth() != undo_depth) {
 				bframe.editCheck_handler.setEditFlag();
 			}
 		}
 
 		function setEditFlag() {
-			edit_flag = true;
+			setTimeout(_setEditFlag, 10);
+		}
+
+		function _setEditFlag() {
+			if(ace_editor.getSession().getUndoManager().undoDepth() != undo_depth) {
+				edit_flag = true;
+			}
 		}
 
 		function resetDirtyCallback() {
@@ -296,5 +355,6 @@
 
 		function save() {
 			bframe.fireEvent(register_button, 'click');
+			undo_depth = ace_editor.getSession().getUndoManager().undoDepth();
 		}
 	}

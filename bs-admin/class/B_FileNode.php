@@ -10,36 +10,33 @@
 	// 
 	// -------------------------------------------------------------------------
 	class B_FileNode {
-		function __construct($dir, $path, $open_nodes=null, $parent=null, $expand_level=0, $level=0, $thumb_info=null) {
+		function __construct($dir, $path, $open_nodes=null, $parent=null, $expand_level=0, $level=0) {
 			if(!$path) return;
 
 			$this->dir = $dir;
 			$this->path = $path == 'root' ? '' : $path;
 			$this->node_id = $path == '/' ? 'root' : $path;
 
-			$this->fullpath = B_Util::getPath($dir, $this->path);
-			$i = strrpos($this->fullpath, '/');
-			if($i) {
-				$this->file_name = substr($this->fullpath, $i+1);
-			}
+			$this->fullpath = __getPath($dir, $this->path);
+			$this->file_name = basename($this->fullpath);
 
-			$this->parent = $parent;
+			if($parent) {
+				$this->parent = $parent;
+			}
+			else if(!$this->isRoot()) {
+				$dir = dirname($this->path) == '.' ? '' : dirname($this->path);
+				$this->parent = new B_FileNode($this->dir, str_replace('\\', '/', $dir), null, null);
+				$this->parent->addNodes($this);
+			}
 			$this->level = $level;
 			$this->node_count = 0;
-
-			if(!$thumb_info	&& file_exists(B_FILE_INFO_THUMB)) {
-				$serializedString = file_get_contents(B_FILE_INFO_THUMB);
-			    $thumb_info = unserialize($serializedString);
-			}
-			$this->thumb_info = $thumb_info;
-			$this->thumbnail_image_path = $this->getThumbnailImgPath($this->path);
-			$this->thumb = $this->thumb_info[$this->thumbnail_image_path];
 
 			if(!file_exists($this->fullpath)) return;
 
 			$this->update_datetime_u = filemtime($this->fullpath);
 			$this->update_datetime_t = date('Y/m/d H:i', filemtime($this->fullpath));
 			if(!is_dir($this->fullpath)) {
+				$this->file_info = pathinfo($this->fullpath);
 				$this->file_size = filesize($this->fullpath);
 				$this->node_type = 'file';
 				$this->node_class = 'leaf';
@@ -47,11 +44,14 @@
 				if(is_array($image_size)) {
 					$this->image_size = $image_size[0] * $image_size[1];
 					$this->human_image_size = $image_size[0] . 'x' . $image_size[1];
+
+					// thumbnail_image_path
+					$this->thumbnail_image_path = $this->getThumbnailImgPath($this->path);
+					$this->thumb = B_UPLOAD_THUMBDIR . str_replace('/', '-', $this->thumbnail_image_path);
 				}
 
 				return;
 			}
-
 			if($this->node_id == 'root') {
 				$this->node_type = 'root';
 			}
@@ -61,17 +61,17 @@
 			$this->node_class = 'folder';
 
 			$handle = opendir($this->fullpath);
-
 			while(false !== ($file_name = readdir($handle))) {
 				if($file_name == '.' || $file_name == '..') continue;
 
 				$this->node_count++;
 
-				if(is_dir(B_Util::getPath($this->fullpath, $file_name))) {
+				if(is_dir(__getPath($this->fullpath, $file_name))) {
 					$this->folder_count++;
 				}
+
 				if((is_array($open_nodes) && $open_nodes[$this->node_id]) || ($expand_level === 'all' || $level < $expand_level)) {
-					$object = new B_FileNode($this->dir, B_Util::getPath($this->path, $file_name), $open_nodes, $this, $expand_level, $level+1, $thumb_info);
+					$object = new B_FileNode($this->dir, __getPath($this->path, $file_name), $open_nodes, $this, $expand_level, $level+1);
 					$this->addNodes($object);
 				}
 			}
@@ -80,6 +80,14 @@
 			if(is_array($this->node)) usort($this->node, array($this, '_sort_name_callback'));
 
 			closedir($handle);
+		}
+
+		function isRoot() {
+			$dir = $this->dir;
+			$fullpath = $this->fullpath;
+			if(substr($dir, -1) != '/') $dir.= '/';
+			if(substr($fullpath, -1) != '/') $fullpath.= '/';
+			return $fullpath == $dir;
 		}
 
 		function addNodes(&$object) {
@@ -180,11 +188,11 @@
 		}
 
 		function _getNodeList($node_id, $category, $path, $disp_seq) {
-			$list['node_id'] = $this->node_id;
+			$list['node_id'] = mb_convert_encoding($this->node_id, 'utf8', B_SYSTEM_FILENAME_ENCODE);
 			$list['node_type'] = $this->node_type;
 			$list['node_class'] = $this->node_class;
-			$list['node_name'] = $this->file_name;
-			$list['thumbnail_image_path'] = $this->thumbnail_image_path;
+			$list['node_name'] = mb_convert_encoding($this->file_name, 'utf8', B_SYSTEM_FILENAME_ENCODE);
+			$list['thumbnail_image_path'] = mb_convert_encoding($this->thumbnail_image_path, 'utf8', B_SYSTEM_FILENAME_ENCODE);
 			$list['node_count'] = $this->node_count;
 			$list['folder_count'] = $this->folder_count;
 			$list['create_datetime_u'] = $this->update_datetime_u;
@@ -202,40 +210,59 @@
 			if($this->node_id == $node_id) {
 				$list[$category] = true;
 			}
-			$list['path'] = $this->path;
+			$list['path'] = mb_convert_encoding($this->path, 'utf8', B_SYSTEM_FILENAME_ENCODE);
 			$list['disp_seq'] = $disp_seq;
 			$list['order'] = $this->order;
 			return $list;
 		}
 
 		function rename($old_name, $new_name) {
-			if($this->node_id === $old_name) {
-				$ret = rename(B_Util::getPath($this->dir, $old_name), B_Util::getPath($this->dir , $new_name));
-				if(!$ret) return false;
+			$thumb = $this->thumb;
 
-				$this->node_id = $new_name;
-				$this->path = $new_name;
-				$this->thumbnail_image_path = $this->getThumbnailImgPath($this->path);
-			}
-			else {
-				$this->path = B_Util::getPath($this->parent->path, $this->file_name);
-				$this->node_id = B_Util::getPath($this->parent->path, $this->file_name);
-				$this->thumbnail_image_path = $this->getThumbnailImgPath($this->path);
-			}
+			try {
+				if($this->node_id === $old_name) {
+					$ret = rename(__getPath($this->dir, $old_name), __getPath($this->dir, $new_name));
+					if(!$ret) throw new Exception();
 
-			$this->fullpath = B_Util::getPath($this->dir, $this->path);
+					$this->node_id = $new_name;
+					$this->path = $new_name;
+					$this->thumbnail_image_path = $this->getThumbnailImgPath($this->path);
+					$this->thumb = B_UPLOAD_THUMBDIR . str_replace('/', '-', $this->thumbnail_image_path);
+					if(file_exists($thumb)) {
+						$ret = rename($thumb, $this->thumb);
+						if(!$ret) return false;
+					}
+				}
+				else {
+					$this->path = __getPath($this->parent->path, $this->file_name);
+					$this->node_id = __getPath($this->parent->path, $this->file_name);
+					$this->thumbnail_image_path = $this->getThumbnailImgPath($this->path);
+					$this->thumb = B_UPLOAD_THUMBDIR . str_replace('/', '-', $this->thumbnail_image_path);
+					if(file_exists($thumb)) {
+						$ret = rename($thumb, $this->thumb);
+						if(!$ret) throw new Exception();
+					}
+				}
 
-			if(is_array($this->node)) {
-				foreach(array_keys($this->node) as $key) {
-					$ret = $this->node[$key]->rename($old_name, $new_name);
-					if(!$ret) return false;
+				$this->fullpath = __getPath($this->dir, $this->path);
+
+				if(is_array($this->node)) {
+					foreach(array_keys($this->node) as $key) {
+						$this->node[$key]->rename($old_name, $new_name);
+					}
 				}
 			}
+			catch(Exception $e) {
+				$error = error_get_last();
+				$this->message = $error['message'];
+				return false;
+			}
+
 			return true;
 		}
 
-		function copy($dest, &$new_node_name, &$data, &$index, $recursive=false, $callback=null) {
-			$destination = B_Util::getPath($this->dir, $dest);
+		function copy($dest, &$new_node_name, $recursive=false, $callback=null) {
+			$destination = __getPath($this->dir, $dest);
 			if($this->isMyChild($destination)) {
 				$this->error_no = 1;
 				return false;
@@ -243,8 +270,8 @@
 			if(file_exists($this->fullpath)) {
 				if(is_dir($this->fullpath)) {
 					$new_node_name = $this->getNewNodeName($destination, $this->file_name, 'copy');
-					$dest = B_Util::getPath($dest, $new_node_name);
-					$destination = B_Util::getPath($this->dir, $dest);
+					$dest = __getPath($dest, $new_node_name);
+					$destination = __getPath($this->dir, $dest);
 					if(!file_exists($destination)) {
 						mkdir($destination);
 						chmod($destination, 0777);
@@ -252,21 +279,17 @@
 				}
 				else {
 					$new_node_name = $this->getNewNodeName($destination, $this->file_name, 'copy');
-					$dest = B_Util::getPath($dest, $new_node_name);
-					$destination = B_Util::getPath($this->dir, $dest);
+					$dest = __getPath($dest, $new_node_name);
+					$destination = __getPath($this->dir, $dest);
 					copy($this->fullpath, $destination);
 					chmod($destination, 0777);
 
 					// copy thumbnail
-					if($this->thumb && file_exists(B_UPLOAD_THUMBDIR . $this->thumb)) {
-						$file_info = pathinfo($this->path);
-						$index++;
-						$thumbnail_file_path = B_UPLOAD_THUMBDIR . str_pad($index, 10, '0', STR_PAD_LEFT) . '.' . $file_info['extension'];
-						copy(B_UPLOAD_THUMBDIR . $this->thumb, $thumbnail_file_path);
-						chmod($thumbnail_file_path, 0777);
-						$thumbnail_image_path = $this->getThumbnailImgPath($dest);
-						$info = B_Util::pathinfo($thumbnail_file_path);
-						$data[$thumbnail_image_path] = $info['basename'];
+					if($this->thumb && file_exists($this->thumb)) {
+						$dest_thumb = $this->getThumbnailImgPath($dest);
+						$destination_thmbnail = B_UPLOAD_THUMBDIR . str_replace('/', '-', $dest_thumb);
+						copy($this->thumb, $destination_thmbnail);
+						chmod($destination_thmbnail, 0777);
 					}
 				}
 				if($callback) {
@@ -275,40 +298,36 @@
 			}
 			if($recursive && is_array($this->node)) {
 				foreach(array_keys($this->node) as $key) {
-					$this->node[$key]->_copy($dest, $data, $index, $recursive, $callback);
+					$this->node[$key]->_copy($dest, $recursive, $callback);
 				}
 			}
 
 			return true;
 		}
 
-		function _copy($dest, &$data, &$index, $recursive=false, $callback=null) {
-			$destination = B_Util::getPath($this->dir, $dest);
+		function _copy($dest, $recursive=false, $callback=null) {
+			$destination = __getPath($this->dir, $dest);
 			if(file_exists($this->fullpath)) {
 				if(is_dir($this->fullpath)) {
-					$dest = B_Util::getPath($dest, $this->file_name);
-					$destination = B_Util::getPath($this->dir, $dest);
+					$dest = __getPath($dest, $this->file_name);
+					$destination = __getPath($this->dir, $dest);
 					if(!file_exists($destination)) {
 						mkdir($destination);
 						chmod($destination, 0777);
 					}
 				}
 				else {
-					$dest = B_Util::getPath($dest, $this->file_name);
-					$destination = B_Util::getPath($this->dir, $dest);
+					$dest = __getPath($dest, $this->file_name);
+					$destination = __getPath($this->dir, $dest);
 					copy($this->fullpath, $destination);
 					chmod($destination, 0777);
 
 					// copy thumbnail
-					if($this->thumb && file_exists(B_UPLOAD_THUMBDIR . $this->thumb)) {
-						$file_info = pathinfo($this->path);
-						$index++;
-						$thumbnail_file_path = B_UPLOAD_THUMBDIR . str_pad($index, 10, '0', STR_PAD_LEFT) . '.' . $file_info['extension'];
-						copy(B_UPLOAD_THUMBDIR . $this->thumb, $thumbnail_file_path);
-						chmod($thumbnail_file_path, 0777);
-						$thumbnail_image_path = $this->getThumbnailImgPath($dest);
-						$info = B_Util::pathinfo($thumbnail_file_path);
-						$data[$thumbnail_image_path] = $info['basename'];
+					if($this->thumb && file_exists($this->thumb)) {
+						$dest_thumb = $this->getThumbnailImgPath($dest);
+						$destination_thmbnail = B_UPLOAD_THUMBDIR . str_replace('/', '-', $dest_thumb);
+						copy($this->thumb, $destination_thmbnail);
+						chmod($destination_thmbnail, 0777);
 					}
 				}
 				if($callback) {
@@ -317,7 +336,7 @@
 			}
 			if($recursive && is_array($this->node)) {
 				foreach(array_keys($this->node) as $key) {
-					$this->node[$key]->_copy($dest, $data, $index, $recursive, $callback);
+					$this->node[$key]->_copy($dest, $recursive, $callback);
 				}
 			}
 
@@ -327,14 +346,14 @@
 		function fileCopy($destination, $recursive=false, $callback=null) {
 			if(file_exists($this->fullpath)) {
 				if(is_dir($this->fullpath)) {
-					$destination = B_Util::getPath($destination, $this->file_name);
+					$destination = __getPath($destination, $this->file_name);
 					if(!file_exists($destination)) {
 						mkdir($destination);
 						chmod($destination, 0777);
 					}
 				}
 				else {
-					$destination = B_Util::getPath($destination, $this->file_name);
+					$destination = __getPath($destination, $this->file_name);
 					copy($this->fullpath, $destination);
 					chmod($destination, 0777);
 				}
@@ -359,11 +378,10 @@
 			try {
 				if(file_exists($this->fullpath)) {
 					if(is_dir($this->fullpath)) {
-						$info = pathinfo($source->fullpath);
 						$source->parent->removeNodes($source);
 						$this->addNodes($source);
 						$source->parent = $this;
-						$this->rename($source->node_id, B_Util::getPath($this->path, $source->file_name));
+						$source->rename($source->node_id, __getPath($this->path, $source->file_name));
 						return true;
 					}
 				}
@@ -380,13 +398,13 @@
 				}
 			}
 			if(is_dir($this->fullpath)) {
-				usleep(1000);
+				usleep(2000);
 				rmdir($this->fullpath);
 			}
 			else if(file_exists($this->fullpath)) {
 				unlink($this->fullpath);
-				if($this->dir == B_UPLOAD_DIR && file_exists(B_UPLOAD_THUMBDIR . $this->thumb) && !is_dir(B_UPLOAD_THUMBDIR . $this->thumb)) {
-					unlink(B_UPLOAD_THUMBDIR . $this->thumb);
+				if(file_exists($this->thumb) && !is_dir($this->thumb)) {
+					unlink($this->thumb);
 				}
 			}
 
@@ -407,14 +425,14 @@
 				return false;
 			}
 
-			for($i=2, $folder = $node_name; file_exists(B_Util::getPath($this->fullpath, $folder)); $folder = $node_name . $extend) {
+			for($i=2, $folder = $node_name; file_exists(__getPath($this->fullpath, $folder)); $folder = $node_name . $extend) {
 				$extend = '(' . $i++ . ')';
 			}
-			$folder_name = B_Util::getPath($this->fullpath, $folder);
+			$folder_name = __getPath($this->fullpath, $folder);
 			$ret = mkdir($folder_name);
 			chmod($folder_name, 0777);
 
-			$new_node_id = B_Util::getPath($this->path, $folder);
+			$new_node_id = __getPath($this->path, $folder);
 
 			return $ret;
 		}
@@ -424,12 +442,12 @@
 				return false;
 			}
 			$new_node_name = $this->getNewNodeName($this->fullpath, $node_name, 'insert');
-			$file_name = B_Util::getPath($this->fullpath, $new_node_name);
+			$file_name = __getPath($this->fullpath, $new_node_name);
 			$fp = fopen($file_name, 'w');
 			fclose($fp);
 			chmod($file_name, 0666);
 
-			$new_node_id = B_Util::getPath($this->path, $new_node_name);
+			$new_node_id = __getPath($this->path, $new_node_name);
 
 			return true;
 		}
@@ -439,10 +457,10 @@
 
 			for($i=2, $node_name = $info['filename'];; $node_name = $prefix . $info['filename'] . $extend) {
 				if($info['extension']) {
-					if(!file_exists(B_Util::getPath($dir, $node_name) . '.' . $info['extension'])) break;
+					if(!file_exists(__getPath($dir, $node_name) . '.' . $info['extension'])) break;
 				}
 				else {
-					if(!file_exists(B_Util::getPath($dir, $node_name))) break;
+					if(!file_exists(__getPath($dir, $node_name))) break;
 				}
 				switch($mode) {
 				case 'insert':
@@ -495,77 +513,78 @@
 		}
 
 		function parentPath() {
-			if($this->parent) return $this->parent;
+			if($this->parent) return $this->parent->path;
 			$parent_path = dirname($this->path);
 			if($parent_path == '\\') $parent_path = 'root';
 
 			return $parent_path;
 		}
 
-		function getMaxThumbnailNo() {
-			if($handle = opendir(B_UPLOAD_THUMBDIR)) {
-				while(false !== ($file_name = readdir($handle))){
-					if($file_name == '.' || $file_name == '..') continue;
-					$number = substr($file_name, 0, 10);
-					if(!is_numeric($number)) continue;
-					if(!$max || intval($max) < intval($number)) {
-						$max = $number;
+		function missing_thumbnails() {
+			$count=0;
+			if(is_array($this->node)) {
+				foreach(array_keys($this->node) as $key) {
+					if($this->node[$key]->thumbnail_image_path && $this->node[$key]->file_info[extension] != 'svg') {
+						$thumbnail_file_path = B_UPLOAD_THUMBDIR . str_replace('/', '-', $this->node[$key]->thumbnail_image_path);
+						if(!file_exists($thumbnail_file_path)) {
+							$count++;
+						}
 					}
 				}
-				closedir($handle);
-
-				return $max;
 			}
+			return $count;
 		}
 
-		function createthumbnail(&$data, &$index=0, $except_array=null, $callback=null) {
+		function createthumbnail($except_array=null, $callback=null) {
 			if($this->file_name && is_array($except_array) && array_key_exists($this->file_name, $except_array)) return;
 
 			if(is_array($this->node)) {
 				foreach(array_keys($this->node) as $key) {
-					$this->node[$key]->createthumbnail($data, $index, $except_array, $callback);
+					$this->node[$key]->createthumbnail($except_array, $callback);
 				}
 			}
-			else if($this->node_type != 'folder' && $this->node_type != 'root') {
-				$ret = $this->_createthumbnail($data, $index);
-			}
-			if($ret && $callback) {
-				$this->callBack($callback);
+			if($this->node_type != 'root') {
+				if($this->_createthumbnail()) {
+					if($callback) $this->callBack($callback);
+				}
 			}
 		}
 
-		function _createthumbnail(&$data, &$index) {
+		function _createthumbnail() {
 			if($this->node_type == 'folder') return true;
 			if(!file_exists($this->fullpath)) return;
+			if($this->thumb && file_exists($this->thumb)) return;
 
-			if($this->thumb && file_exists(B_UPLOAD_THUMBDIR . $this->thumb)) {
-				$data[$this->thumbnail_image_path] = $this->thumb;
-				return;
-			}
-
-			$file_info = pathinfo($this->path);
-			$index++;
-			$thumbnail_file_path = B_UPLOAD_THUMBDIR . str_pad($index, 10, '0', STR_PAD_LEFT) . '.' . $file_info['extension'];
+			$thumbnail_file_path = B_UPLOAD_THUMBDIR . str_replace('/', '-', $this->thumbnail_image_path);
 
 			// create thumbnail
 			if(B_Util::createthumbnail($this->fullpath, $thumbnail_file_path, B_THUMB_MAX_SIZE)) {
 				$info = B_Util::pathinfo($thumbnail_file_path);
 				chmod($thumbnail_file_path, 0777);
-				$data[$this->thumbnail_image_path] = $info['basename'];
+				return true;
 			}
-			return true;
 		}
 
 		function getThumbnailImgPath($path) {
+			if(substr($path, 0, 1) == '/') $path = substr($path, 1);
+
 			$file_info = pathinfo($path);
-			if(strtolower($file_info['extension']) != 'svg') {
-				$thumb_prefix = B_THUMB_PREFIX;
-			}
-			if($file_info['dirname'] != '.' && $file_info['dirname'] != '\\') {
-				return B_Util::getPath(B_Util::getPath(B_UPLOAD_URL, $file_info['dirname']), $thumb_prefix . $file_info['basename']);
+			if(strtolower($file_info['extension']) == 'svg') {
+				if($file_info['dirname'] != '.' && $file_info['dirname'] != '\\') {
+					return __getPath(B_FILE_ROOT_URL, $file_info['dirname'], $thumb_prefix . $file_info['basename']);
+				}
+				else {
+					return __getPath(B_FILE_ROOT_URL, $thumb_prefix . $file_info['basename']);
+				}
 			}
 			else {
-				return B_Util::getPath(B_UPLOAD_URL, $thumb_prefix . $file_info['basename']);
+				$thumb_prefix = B_THUMB_PREFIX;
+				if($file_info['dirname'] != '.' && $file_info['dirname'] != '\\') {
+					return __getPath($file_info['dirname'], $thumb_prefix . $file_info['basename']);
+				}
+				else {
+					return $thumb_prefix . $file_info['basename'];
+				}
 			}
 		}
 
@@ -645,5 +664,9 @@
 
 		function getErrorNo() {
 			return $this->error_no;
+		}
+
+		function getMessage() {
+			return $this->message;
 		}
 	}

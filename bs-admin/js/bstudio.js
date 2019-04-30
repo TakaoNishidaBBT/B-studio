@@ -53,7 +53,7 @@
 			file_path_array[file_path_array.length-1] = 'thumb_' + file_path_array[file_path_array.length-1];
 			var thumb = file_path_array.join('/');
 			if(dir.substr(-1) == '/' && thumb.substr(0, 1) == '/') thumb = thumb.substr(1);
-			img.src = dir + thumb;
+			img.src = thumb;
 			target.appendChild(img);
 		}
 	}

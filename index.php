@@ -12,7 +12,7 @@
 
 	$file = B_Util::pathinfo($_REQUEST['url']);
 
-	// To get real url
+	// To get real url (remove current root and parameter)
 	$url = $_SERVER['REQUEST_URI'];
 	$url = preg_replace('"^' . B_CURRENT_ROOT . '"', '', $url);
 	$url = preg_replace('/\?.*/', '', $url);

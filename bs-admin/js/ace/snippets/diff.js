@@ -1,5 +1,5 @@
-define('ace/snippets/diff', ['require', 'exports', 'module' ], function(require, exports, module) {
-
+define("ace/snippets/diff",["require","exports","module"], function(require, exports, module) {
+"use strict";
 
 exports.snippetText = "# DEP-3 (http://dep.debian.net/deps/dep3/) style patch header\n\
 snippet header DEP-3 style header\n\
@@ -15,4 +15,11 @@ snippet header DEP-3 style header\n\
 ";
 exports.scope = "diff";
 
-});
+});                (function() {
+                    window.require(["ace/snippets/diff"], function(m) {
+                        if (typeof module == "object" && typeof exports == "object" && module) {
+                            module.exports = m;
+                        }
+                    });
+                })();
+            

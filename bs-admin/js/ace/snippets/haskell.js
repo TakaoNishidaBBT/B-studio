@@ -1,5 +1,5 @@
-define('ace/snippets/haskell', ['require', 'exports', 'module' ], function(require, exports, module) {
-
+define("ace/snippets/haskell",["require","exports","module"], function(require, exports, module) {
+"use strict";
 
 exports.snippetText = "snippet lang\n\
 	{-# LANGUAGE ${1:OverloadedStrings} #-}\n\
@@ -86,4 +86,11 @@ snippet where\n\
 ";
 exports.scope = "haskell";
 
-});
+});                (function() {
+                    window.require(["ace/snippets/haskell"], function(m) {
+                        if (typeof module == "object" && typeof exports == "object" && module) {
+                            module.exports = m;
+                        }
+                    });
+                })();
+            

@@ -1,5 +1,5 @@
-define('ace/snippets/clojure', ['require', 'exports', 'module' ], function(require, exports, module) {
-
+define("ace/snippets/clojure",["require","exports","module"], function(require, exports, module) {
+"use strict";
 
 exports.snippetText = "snippet comm\n\
 	(comment\n\
@@ -94,4 +94,11 @@ snippet when-let\n\
 ";
 exports.scope = "clojure";
 
-});
+});                (function() {
+                    window.require(["ace/snippets/clojure"], function(m) {
+                        if (typeof module == "object" && typeof exports == "object" && module) {
+                            module.exports = m;
+                        }
+                    });
+                })();
+            

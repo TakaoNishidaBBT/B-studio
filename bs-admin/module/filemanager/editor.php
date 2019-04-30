@@ -17,7 +17,7 @@
 
 		function open() {
 			if($this->request['node_id']) {
-				$file_path = B_Util::getPath(B_UPLOAD_DIR , $this->request['node_id']);
+				$file_path = __getPath(B_UPLOAD_DIR , $this->request['node_id']);
 				$info = pathinfo($file_path);
 				$update_datetime = filemtime($file_path);
 				$obj = $this->editor->getElementByName('contents');
@@ -57,7 +57,7 @@
 				if($obj) $obj->value = $update_datetime;
 
 				$obj = $this->tab_control->getElementByName('text_editor_index');
-				if($obj) $obj->value = B_Util::getPath(B_SITE_BASE . B_UPLOAD_FILES, $this->request['node_id']);
+				if($obj) $obj->value = __getPath(B_SITE_BASE . B_UPLOAD_FILES, $this->request['node_id']);
 
 				$this->setTitle($info['basename']);
 			}
@@ -108,14 +108,16 @@
 			$this->html_header->appendProperty('css', '<link rel="stylesheet" href="css/editor.css">');
 			$this->html_header->appendProperty('css', '<link rel="stylesheet" href="css/texteditor.css">');
 			$this->html_header->appendProperty('css', '<link rel="stylesheet" href="css/selectbox.css">');
+
 			$this->html_header->appendProperty('script', '<script src="js/bframe_edit_check.js"></script>');
-			$this->html_header->appendProperty('script', '<script src="js/bframe_texteditor.js"></script>');
 			$this->html_header->appendProperty('script', '<script src="js/bframe_selectbox.js"></script>');
+			$this->html_header->appendProperty('script', '<script src="js/bframe_texteditor.js"></script>');
 			$this->html_header->appendProperty('script', '<script src="js/ace/ace.js"></script>');
+			$this->html_header->appendProperty('script', '<script src="js/ace/ext-language_tools.js"></script>');
 			$this->html_header->appendProperty('script', '<script src="js/ace/ext-split.js"></script>');
 			$this->html_header->appendProperty('script', '<script src="js/ace/theme-twilight.js"></script>');
-			$this->html_header->appendProperty('script', '<script src="js/ace/mode-html.js"></script>');
 			$this->html_header->appendProperty('script', '<script src="js/ace/mode-css.js"></script>');
+			$this->html_header->appendProperty('script', '<script src="js/ace/mode-html.js"></script>');
 			$this->html_header->appendProperty('script', '<script src="js/ace/mode-php.js"></script>');
 
 			// Show HTML header

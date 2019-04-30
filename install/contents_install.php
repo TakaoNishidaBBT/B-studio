@@ -58,9 +58,9 @@
 		}
 
 		function copy() {
-			// b-admin-files/files
-			$node = new B_FileNode(B_RESOURCE_EXTRACT_DIR, 'bs-admin-files', null, null, 'all');
-			$node->fileCopy(B_DOC_ROOT . B_CURRENT_ROOT, true);
+			// bs-admin-files/files
+			$node = new B_FileNode(B_RESOURCE_EXTRACT_DIR, 'admin-files', null, null, 'all');
+			$node->fileCopy(B_DOC_ROOT . B_CURRENT_ROOT . 'bs-admin', true);
 
 			// files
 			$node = new B_FileNode(B_RESOURCE_EXTRACT_DIR, 'files', null, null, 'all');

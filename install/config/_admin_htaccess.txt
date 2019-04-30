@@ -1,7 +1,12 @@
-RewriteEngine off
+RewriteEngine on
+RewriteBase %REWRITE_BASE%bs-admin/
 
 #RewriteCond %{HTTPS} off
 #RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [R,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
 
 AuthType Basic
 AuthName "Limited Room"

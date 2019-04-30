@@ -14,6 +14,23 @@
 		return $pwd;
 	}
 
+	function __getPath() {
+		$path = str_replace('\\', '/', func_get_arg(0));
+		for($i=1; $i<func_num_args(); $i++) {
+			if(!$file_name = func_get_arg($i)) continue;
+			if(substr($path, -1) == '/') {
+				$path = substr($path, 0, -1);
+			}
+			if(substr($file_name, 0, 1) == '/') {
+				$file_name = substr($file_name, 1);
+			}
+			if($path) $path.= '/';
+
+			$path.= $file_name;
+		}
+		return $path;
+	}
+
 	function __($text) {
 		if($_SESSION['language'] == 'en') return $text;
 

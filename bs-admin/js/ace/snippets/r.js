@@ -1,5 +1,5 @@
-define('ace/snippets/r', ['require', 'exports', 'module' ], function(require, exports, module) {
-
+define("ace/snippets/r",["require","exports","module"], function(require, exports, module) {
+"use strict";
 
 exports.snippetText = "snippet #!\n\
 	#!/usr/bin/env Rscript\n\
@@ -50,7 +50,7 @@ snippet apply\n\
 snippet lapply\n\
 	lapply(${1:list}, ${2:function})\n\
 snippet sapply\n\
-	lapply(${1:list}, ${2:function})\n\
+	sapply(${1:list}, ${2:function})\n\
 snippet vapply\n\
 	vapply(${1:list}, ${2:function}, ${3:type})\n\
 snippet mapply\n\
@@ -125,4 +125,11 @@ snippet kvt \n\
 ";
 exports.scope = "r";
 
-});
+});                (function() {
+                    window.require(["ace/snippets/r"], function(m) {
+                        if (typeof module == "object" && typeof exports == "object" && module) {
+                            module.exports = m;
+                        }
+                    });
+                })();
+            
