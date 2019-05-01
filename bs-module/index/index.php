@@ -537,6 +537,12 @@
 		}
 
 		function widget($node_id, $args) {
+			if($this->widget_cache[$node_id]) {
+				// retrun result from buffer cache
+				echo $this->widget_cache[$node_id];
+				return;
+			}
+
 			$node_id = $this->db->real_escape_string($node_id);
 
 			$sql = "select a.node_id
@@ -559,7 +565,24 @@
 					'<link rel="stylesheet" href="W' . $__row['contents_id'] . '.css">');
 			}
 
+			// Get buffer
+			$contents_before = ob_get_clean();
+
+			// Start buffering
+			ob_start();
+
 			widgetExec($this->view_mode, './view/view_widget.php', $__row, $this->url, $this->breadcrumbs);
+
+			// Get buffer
+			$contents_widget = ob_get_clean();
+
+			// save result on buffer cache
+			$this->widget_cache[$node_id] = $contents_widget;
+
+			// Start buffering again
+			ob_start();
+			echo $contents_before;
+			echo $contents_widget;
 		}
 
 		function view() {
