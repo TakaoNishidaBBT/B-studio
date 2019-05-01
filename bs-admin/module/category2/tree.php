@@ -169,12 +169,12 @@
 									, $this->version['revision_id']
 									, $this->request['delete_node_id'][0]
 									, null
-									, 0
+									, 'all'
 									, null);
 
 				// start transaction
 				$this->db->begin();
-				$ret = $node->delete();
+				$ret = $node->physicalDelete();
 				if($ret) {
 					$this->db->commit();
 					$this->status = true;
