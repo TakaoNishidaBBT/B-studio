@@ -571,10 +571,10 @@
 			$file_info = pathinfo($path);
 			if(strtolower($file_info['extension']) == 'svg') {
 				if($file_info['dirname'] != '.' && $file_info['dirname'] != '\\') {
-					return __getPath(B_FILE_ROOT_URL, $file_info['dirname'], $thumb_prefix . $file_info['basename']);
+					return __getPath(B_UPLOAD_URL, $file_info['dirname'], $thumb_prefix . $file_info['basename']);
 				}
 				else {
-					return __getPath(B_FILE_ROOT_URL, $thumb_prefix . $file_info['basename']);
+					return __getPath(B_UPLOAD_URL, $thumb_prefix . $file_info['basename']);
 				}
 			}
 			else {
