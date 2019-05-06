@@ -312,7 +312,6 @@
 			$this->sendHttpHeader();
 
 			$this->html_header->appendProperty('css', '<link rel="stylesheet" href="css/article.css">');
-			$this->html_header->appendProperty('css', '<link rel="stylesheet" href="css/calendar.css">');
 			$this->html_header->appendProperty('script', '<script src="js/bframe_tab.js"></script>');
 			$this->html_header->appendProperty('script', '<script src="js/bframe_edit_check.js"></script>');
 			$this->html_header->appendProperty('script', '<script src="js/ckeditor/ckeditor.js"></script>');

@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="css/context_menu.css">
 <link rel="stylesheet" href="css/modal_window.css">
 <link rel="stylesheet" href="css/progress_bar.css">
+<link rel="stylesheet" href="css/calendar.css">
 <script src="js/bframe.js"></script>
 <script src="js/bframe_ajax.js"></script>
 <script src="js/bframe_message.js"></script>

@@ -73,8 +73,7 @@
 		var mode = '';
 
 		var date_input;
-
-		bframe.addEventListenerAllFrames(top, 'click', hide);
+		var overlay;
 
 		init();
 
@@ -94,10 +93,32 @@
 
 				date_input = document.getElementById(property.target);
 
-				popup = new bframe.calendarPopup(100, property.drop_shadow, property.transparent);
+				popup = new bframe.calendarPopup(100001, property.drop_shadow, property.transparent);
+
+				createOverlay();
 
 				response_wait = false;
 			}
+		}
+
+		function createOverlay() {
+			overlay = top.document.getElementById('bframe_calendar_overlay');
+			if(!overlay) {
+				overlay = document.createElement('div');
+				overlay.id = 'bframe_calendar_overlay';
+				overlay.style.position = 'absolute';
+				overlay.style.top = 0;
+				overlay.style.left = 0;
+				overlay.style.right = 0;
+				overlay.style.bottom = 0;
+				overlay.style.backgroundColor = '#000';
+				overlay.style.opacity = '0.3';
+				overlay.style.zIndex = 100000;
+				overlay.style.display = 'none';
+
+				top.document.body.appendChild(overlay);
+			}
+			bframe.addEventListener(overlay, 'click', hide);
 		}
 
 		function getTargetId() {
@@ -107,6 +128,7 @@
 
 		function hide() {
 			popup.hidePopUp();
+			overlay.style.display = 'none';
 		}
 		this.hide = hide;
 
@@ -141,8 +163,10 @@
 			bframe.fireEvent(document, 'click');
 
 			target = document.getElementById(target.id);
+			var offset = bframe.getFrameOffset(window, '');
 			position = bframe.getElementPosition(target);
-			position.left += position.width;
+			position.left += (offset.left + position.width);
+			position.top += offset.top;
 			if(property.offsetLeft) {
 				position.left += parseInt(property.offsetLeft);
 			}
@@ -193,6 +217,8 @@
 
 				calendar_container.closeAll();
 				popup.showPopUp();
+
+				overlay.style.display = 'block';
 
 				response_wait = false;
 			}
@@ -254,7 +280,7 @@
 		if(!zindex) {
 			zindex = 1;
 		}
-		var popup = new bframe.popup(window, zindex, drop_shadow, transparent);
+		var popup = new bframe.popup(top, zindex, drop_shadow, transparent);
 
 		this.setPopUpPosition = function(position) {
 			popup.position(position);
