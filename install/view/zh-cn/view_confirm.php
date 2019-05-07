@@ -55,9 +55,9 @@
 			<legend>安装时生成文本</legend>
 			<ul>
 				<li>安装路径/.htaccess</li>
-				<li>安装路径/bs-admin/user/users.php</li>
-				<li>安装路径/bs-admin/config/core_config.php</li>
+				<li>安装路径/bs-admin/.htaccess</li>
 				<li>安装路径/bs-admin/db/db_connect.php</li>
+				<li>安装路径/bs-admin/user/users.php</li>
 			</ul>
 			<p><span class="caution">※</span>如果文本已存在，新生成的文本将覆盖原文本。</p>
 		</fieldset>

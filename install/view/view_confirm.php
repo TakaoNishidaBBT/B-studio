@@ -55,9 +55,9 @@
 			<legend>The following files will be created after install.</legend>
 			<ul>
 				<li>(install-directory)/.htaccess</li>
-				<li>(install-directory)/bs-admin/user/users.php</li>
-				<li>(install-directory)/bs-admin/config/core_config.php</li>
+				<li>(install-directory)/bs-admin/.htaccess</li>
 				<li>(install-directory)/bs-admin/db/db_connect.php</li>
+				<li>(install-directory)/bs-admin/user/users.php</li>
 			</ul>
 			<p><span class="caution">※</span>The files will be overwriten when files are already exist.</p>
 		</fieldset>

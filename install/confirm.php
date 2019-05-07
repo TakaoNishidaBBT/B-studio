@@ -99,7 +99,6 @@
 			if(substr($current_dir, -1) == '/') $current_dir = substr($current_dir, 0, -1);
 
 			$current = str_replace($doc_root, '', $current_dir);
-			if(!$current) $current = '/';
 
 			// Set up htaccess
 			$obj = $root_htaccess->getElementByName('htaccess');

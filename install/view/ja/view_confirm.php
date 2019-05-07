@@ -55,9 +55,9 @@
 			<legend>インストールによって作成されるファイル</legend>
 			<ul>
 				<li>インストールディレクトリ/.htaccess</li>
-				<li>インストールディレクトリ/bs-admin/user/users.php</li>
-				<li>インストールディレクトリ/bs-admin/config/core_config.php</li>
+				<li>インストールディレクトリ/bs-admin/.htaccess</li>
 				<li>インストールディレクトリ/bs-admin/db/db_connect.php</li>
+				<li>インストールディレクトリ/bs-admin/user/users.php</li>
 			</ul>
 			<p><span class="caution">※</span>ファイルが存在する場合は上書きされます。</p>
 		</fieldset>

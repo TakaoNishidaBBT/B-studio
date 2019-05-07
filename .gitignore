@@ -8,9 +8,9 @@
 /bs-admin/user
 
 # git update-index --skip-worktree .htaccess
-# git update-index --skip-worktree bs-admin-files/.htaccess
-# git update-index --skip-worktree bs-admin-files/files/.gitkeep
-# git update-index --skip-worktree bs-admin-files/thumbs/.gitkeep
+# git update-index --skip-worktree bs-admin/admin-files/.htaccess
+# git update-index --skip-worktree bs-admin/admin-files/files/.gitkeep
+# git update-index --skip-worktree bs-admin/admin-files/thumbs/.gitkeep
 # git update-index --skip-worktree bs-admin/.htaccess
 # git update-index --skip-worktree bs-admin/.htpassword
 # git update-index --skip-worktree bs-admin/config/lang_config.php

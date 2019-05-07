@@ -553,13 +553,13 @@
 		function _createthumbnail() {
 			if($this->node_type == 'folder') return true;
 			if(!file_exists($this->fullpath)) return;
+			if(!$this->thumbnail_image_path) return;
 			if($this->thumb && file_exists($this->thumb)) return;
 
 			$thumbnail_file_path = B_UPLOAD_THUMBDIR . str_replace('/', '-', $this->thumbnail_image_path);
 
 			// create thumbnail
 			if(B_Util::createthumbnail($this->fullpath, $thumbnail_file_path, B_THUMB_MAX_SIZE)) {
-				$info = B_Util::pathinfo($thumbnail_file_path);
 				chmod($thumbnail_file_path, 0777);
 				return true;
 			}
