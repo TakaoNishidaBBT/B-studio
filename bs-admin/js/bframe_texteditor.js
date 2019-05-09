@@ -334,7 +334,7 @@
 		}
 
 		function editCheckCallback() {
-			if(ace_editor.getSession().getUndoManager().undoDepth() != undo_depth) {
+			if(edit_flag && bframe.editCheck_handler) {
 				bframe.editCheck_handler.setEditFlag();
 			}
 		}
