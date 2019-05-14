@@ -39,10 +39,7 @@
 				edit_flag=true;
 			}
 
-			// call back
-			editCheckExecuteCallBack();
-
-			if(edit_flag == true) {
+			if(edit_flag == true || editCheckExecuteCallBack()) {
 				bframe.fireEvent(document, 'mouseup');
 				return true;
 			}
@@ -91,10 +88,13 @@
 		}
 
 		function editCheckExecuteCallBack() {
+			var ret;
+
 			for(var i=0; i<cb.length; i++) {
 				func = cb[i];
-				func();
+				ret |= func();
 			}
+			return ret;
 		}
 
 		this.executeCallBack = editCheckExecuteCallBack;

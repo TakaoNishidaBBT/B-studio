@@ -334,9 +334,7 @@
 		}
 
 		function editCheckCallback() {
-			if(edit_flag && bframe.editCheck_handler) {
-				bframe.editCheck_handler.setEditFlag();
-			}
+			return edit_flag;
 		}
 
 		function setEditFlag() {
@@ -346,6 +344,9 @@
 		function _setEditFlag() {
 			if(ace_editor.getSession().getUndoManager().undoDepth() != undo_depth) {
 				edit_flag = true;
+			}
+			else {
+				edit_flag = false;
 			}
 		}
 
