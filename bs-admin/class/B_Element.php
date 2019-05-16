@@ -1959,6 +1959,8 @@
 		}
 
 		function setValue($value) {
+			if(!$value) return;
+
 			if(isset($this->elements)) {
 				foreach($this->elements as $element) {
 					$element->setValue($value);
