@@ -4745,7 +4745,7 @@
 			}
 			bframe.stopPropagation(event);
 
-			if(node.id == current_node.id() && tab_control.isFolderOpen()) return;
+			if(node.id == current_node.id() && tab_control && tab_control.isFolderOpen()) return;
 
 			if(node_type.value == 'file' && property.editor_mode == 'true') {
 //				selectResource(node.id, 'temporary');
