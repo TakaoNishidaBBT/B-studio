@@ -9,11 +9,11 @@
 		function __construct() {
 			parent::__construct(__FILE__);
 
-			// ヘッダー 作成
+			// Create list header
 			require_once('./config/list_header_config.php');
 			$this->header = new B_Element($header_config, $this->user_auth);
 
-			// DataGrid 作成,
+			// Create DataGrid
 			require_once('./config/list_config.php');
 			$this->dg = new B_DataGrid($this->db, $list_config);
 		}
