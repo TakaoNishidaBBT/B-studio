@@ -50,7 +50,7 @@ div.control ul li a {
 	cursor: pointer;
 }
 div.control ul li img {
-	vertical-align: middle;
+	vertical-align: top;
 }
 div.control .message-field {
 	font-weight: 400;
