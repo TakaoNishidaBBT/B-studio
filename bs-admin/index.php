@@ -43,14 +43,13 @@
 	$url = preg_replace('"^' . B_CURRENT_ROOT . '"', '', $url);
 	$url = preg_replace('/\?.*/', '', $url);
 	$url = urldecode($url);
-	$_REQUEST['url'] = $url;
 
-	$file = B_Util::pathinfo($_REQUEST['url']);
+	$file = B_Util::pathinfo($url);
 
 	// Check Logedin
 	$auth = new B_AdminAuth;
 	$login = $auth->getUserInfo($user_id, $user_name, $user_auth, $language);
-	if($login && $_REQUEST['url']) {
+	if($login && $url) {
 		if($file['dirname'] && $file['basename']) {
 			$dir_array = explode('/', $file['dirname']);
 			array_shift($dir_array);
