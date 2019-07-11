@@ -8,9 +8,10 @@
 	class index extends B_CommonModule {
 		function __construct() {
 			parent::__construct(__FILE__);
-			global $admin_mode;
+			global $admin_mode, $internal_redirect;
 
 			$this->admin_mode = $admin_mode;
+			$this->internal_redirect = $internal_redirect;
 
 			if($this->admin_mode) {
 				$this->node_view = B_WORKING_CONTENTS_NODE_VIEW;
@@ -156,7 +157,7 @@
 				$sql = str_replace('%NODE_NAME%', "and node_name in ('index.html', 'index.php') ", $sql);
 			}
 
-			if($this->admin_mode) {
+			if($this->admin_mode || $this->internal_redirect) {
 				$sql = str_replace('%NODE_STATUS%', "", $sql);
 			}
 			else {
@@ -692,6 +693,10 @@
 	}
 
 	function redirectTo($url) {
+		global $internal_redirect;
+
+		$internal_redirect = true;
+
 		$_REQUEST['url'] = $url;
 		unset($_POST['method']);
 		chdir(B_DOC_ROOT . B_CURRENT_ROOT);
