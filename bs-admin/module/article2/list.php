@@ -154,7 +154,7 @@
 		function setSqlWhere() {
 			if($this->keyword) {
 				$keyword = $this->db->real_escape_string_for_like($this->keyword);
-				$sql_where.= " and (article_id like '%KEYWORD%' or category like '%KEYWORD%' or permalink like '%KEYWORD%' or article_date_t like '%KEYWORD%' or title like '%KEYWORD%' or url like '%KEYWORD%' or keywords like '%KEYWORD%' or description like '%KEYWORD%' or content1 like '%KEYWORD%' or content2 like '%KEYWORD%' or content3 like '%KEYWORD%' or content4 like '%KEYWORD%') ";
+				$sql_where.= " and (article_id like '%KEYWORD%' or category like '%KEYWORD%' or permalink like '%KEYWORD%' or article_date_t like '%KEYWORD%' or title like '%KEYWORD%' or url like '%KEYWORD%' or description like '%KEYWORD%' or headline like '%KEYWORD%' or content1 like '%KEYWORD%' or content2 like '%KEYWORD%' or content3 like '%KEYWORD%' or content4 like '%KEYWORD%') ";
 				$sql_where = str_replace('%KEYWORD%', "%" . $this->db->real_escape_string_for_like($this->keyword) . "%", $sql_where);
 
 				$select_message.= __('Keyword: ') . ' <em>' . htmlspecialchars($this->keyword, ENT_QUOTES) . '</em>　';
