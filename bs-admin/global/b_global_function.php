@@ -15,11 +15,11 @@
 	}
 
 	function __getPath() {
-		for($i=0; $i<func_num_args(); $i++) {
-			$file_name = str_replace('\\', '/', func_get_arg($i));
+		$path = str_replace('\\', '/', func_get_arg(0));
+		if($path == '.') $path = '';
 
-			if(!$file_name || $file_name == '.') continue;
-
+		for($i=1; $i<func_num_args(); $i++) {
+			if(!$file_name = func_get_arg($i)) continue;
 			if(substr($path, -1) == '/') {
 				$path = substr($path, 0, -1);
 			}
