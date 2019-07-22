@@ -57,7 +57,8 @@
 		}
 
 		function setRowPerPage($cnt) {
-			$this->pager['row_per_page'] = $cnt;
+			$this->pager['row_per_page'] = $this->db->real_escape_string($cnt);
+			if(!is_numeric($this->pager['row_per_page'])) $this->pager['row_per_page'] = 20;
 		}
 
 		function sqlReplace($search, $replace) {
@@ -66,7 +67,8 @@
 		}
 
 		function setPage($page_no) {
-			$this->page_no = $page_no;
+			$this->page_no = $this->db->real_escape_string($page_no);
+			if(!is_numeric($this->page_no)) $this->page_no = 1;
 		}
 
 		function bind($data=null) {

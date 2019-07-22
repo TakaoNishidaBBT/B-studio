@@ -184,6 +184,7 @@
 					if($status) {
 						chmod($path, 0777);
 						$node = new B_FileNode($this->dir, __getPath($this->request['node_id'], $file['basename']), null, null, 1);
+						$node->removethumbnail();
 						$node->createthumbnail();
 						$response['node_info'][] = $node->getNodeList('', '', $this->request['node_id']);
 					}
