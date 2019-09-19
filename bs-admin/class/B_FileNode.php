@@ -524,7 +524,7 @@
 			$count=0;
 			if(is_array($this->node)) {
 				foreach(array_keys($this->node) as $key) {
-					if($this->node[$key]->thumbnail_image_path && $this->node[$key]->file_info[extension] != 'svg') {
+					if($this->node[$key]->thumbnail_image_path && $this->node[$key]->file_info['extension'] != 'svg') {
 						$thumbnail_file_path = B_UPLOAD_THUMBDIR . str_replace('/', '-', $this->node[$key]->thumbnail_image_path);
 						if(!file_exists($thumbnail_file_path)) {
 							$count++;

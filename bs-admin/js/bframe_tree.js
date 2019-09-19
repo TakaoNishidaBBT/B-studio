@@ -4236,7 +4236,7 @@
 			if(place == 'tree') {
 				a.onclick = selectNode;
 				a.ondblclick = selectResourceNode;
-				if((pane && config.folder_count > 0 ) || (config.node_count > 0)) {
+				if((pane && config.folder_count > 0 ) || (!pane && config.node_count > 0)) {
 					if(config.children) {
 						control.src = property.icon.minus.src;
 					}
