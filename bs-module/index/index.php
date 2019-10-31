@@ -12,6 +12,7 @@
 
 			$this->admin_mode = $admin_mode;
 			$this->internal_redirect = $internal_redirect;
+			$this->templates = array();
 
 			if($this->admin_mode) {
 				$this->node_view = B_WORKING_CONTENTS_NODE_VIEW;

@@ -59,28 +59,27 @@
 		define('B_SITE_BASE', B_SITE_ROOT_SSL);
 	}
 
-	// Log Files
+	// DataBase Connect File
+	define('B_DB_CONNECT_INFO', B_ADMIN_DIR . 'db/db_connect.php');
+	require_once(B_DB_CONNECT_INFO);
+
 	// DB Archive Log File
 	define('B_ARCHIVE_LOG_FILE', B_ADMIN_DIR . 'archive/archive.log');
 
 	// Access Log File
 	define('B_ACCESS_LOG_FILE', B_ADMIN_DIR . 'log/access.log');
 
-	// Mail Log File
-	define('B_MAIL_LOG_FILE', B_ADMIN_DIR . 'log/mail.log');
-
 	// Log File
 	define('B_LOG_FILE', B_ADMIN_DIR . 'log/log.txt');
 
-	// Language Files Directory
-	define('B_LNGUAGE_DIR', B_ADMIN_DIR . 'language/');
-
-	// DataBase Connect File
-	define('B_DB_CONNECT_INFO', B_ADMIN_DIR . 'db/db_connect.php');
-	require_once(B_DB_CONNECT_INFO);
+	// Mail Log File
+	define('B_MAIL_LOG_FILE', B_ADMIN_DIR . 'log/mail.log');
 
 	// Download Directory
 	define('B_DOWNLOAD_DIR', B_ADMIN_DIR . 'download/');
+
+	// Language Files Directory
+	define('B_LNGUAGE_DIR', B_ADMIN_DIR . 'language/');
 
 	// User File Directory for Resource
 	define('B_ADMIN_FILES', 'admin-files/');
@@ -93,8 +92,8 @@
 	// User File Directory for Article
 	define('B_UPLOAD_FILES', 'files/');
 	define('B_UPLOAD_DIR', B_DOC_ROOT . B_CURRENT_ROOT . B_UPLOAD_FILES);
-	define('B_UPLOAD_THUMBDIR', B_ADMIN_FILES_DIR . 'thumbs/');
 	define('B_UPLOAD_URL', B_CURRENT_ROOT . B_UPLOAD_FILES);
+	define('B_UPLOAD_THUMBDIR', B_ADMIN_FILES_DIR . 'thumbs/');
 
 	// Dump File
 	define('B_DUMP_FILE', 'dump/');
