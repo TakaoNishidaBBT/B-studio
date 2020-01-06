@@ -39,9 +39,6 @@
 				if(file_exists(B_FILE_INFO_C)) {
 					unlink(B_FILE_INFO_C);
 				}
-				if(file_exists(B_FILE_INFO_THUMB)) {
-					unlink(B_FILE_INFO_THUMB);
-				}
 			}
 			catch (Exception $e) {
 				$this->error_message = '<p class="error-message">' . $e->getMessage() . '</p>';

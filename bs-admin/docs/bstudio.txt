@@ -377,6 +377,30 @@ background-color: #141414;\
 //			if ( newHeight != currentHeight && lastHeight != newHeight ) {
 			if ( newHeight != currentHeight ) {
 
+5. plugins colorbutton
+
+242行目
+テキストカラーを「自動」にすると、style="color:null"となる。
+style="color:initial"に修正
+
+			if ( config.colorButton_enableAutomatic !== false ) {
+				// Render the "Automatic" button.
+				output.push( '<a class="cke_colorauto" _cke_focus=1 hidefocus=true' +
+					' title="', lang.auto, '"' +
+// fixed by T.Nishida 2019/12/12
+//					' onclick="CKEDITOR.tools.callFunction(', clickFn, ',null,\'', type, '\');return false;"' +
+					' onclick="CKEDITOR.tools.callFunction(', clickFn, ',\'initial\',\'', type, '\');return false;"' +
+					' href="javascript:void(\'', lang.auto, '\')"' +
+					' role="option" aria-posinset="1" aria-setsize="', total, '">' +
+						'<table role="presentation" cellspacing=0 cellpadding=0 width="100%">' +
+							'<tr>' +
+								'<td colspan="' + colorsPerRow + '" align="center"><span class="cke_colorbox" id="', colorBoxId, '"></span>', lang.auto, '</td>' +
+							'</tr>' +
+						'</table>' +
+					'</a>' );
+			}
+
+
 
 ■CKEditorのビルド
 	1.ソースをダウンロードし、その配下にdevディレクトリを作成
