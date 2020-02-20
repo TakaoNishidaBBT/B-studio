@@ -26,29 +26,29 @@ $settings_config = array(
 		),
 	),
 
-	// permalink
+	// Slug
 	array(
-		'name'			=> 'permalink_row',
+		'name'			=> 'slug_row',
 		'filter'		=> '!insert',
 		array(
-			'start_html'	=> '<dt class="publication">',
+			'start_html'	=> '<dt class="slug">',
 			'end_html'		=> '</dt>',
 			array(
 				'start_html'	=> '<span class="title">',
 				'end_html'		=> '</span>',
-				'value'			=> __('Permalink'),
+				'value'			=> __('Slug'),
 			),
 			array(
-				'name'			=> 'permalink',
+				'name'			=> 'slug',
 				'class'			=> 'B_InputText',
-				'attr'			=> 'class="textbox permalink ime_off"',
+				'attr'			=> 'class="textbox slug ime_off"',
 				'validate'		=>
 				array(
 					array(
 						'type' 			=> 'callback',
 						'obj'			=> $this,
 						'method'		=> '_validate_callback',
-						'error_message'	=> __('This permalink is already in use'),
+						'error_message'	=> __('This Slug is already in use'),
 					),
 				),
 			),
@@ -68,62 +68,66 @@ $settings_config = array(
 			'start_html'	=> '<dt class="publication">',
 			'end_html'		=> '</dt>',
 			array(
-				'start_html'	=> '<span class="title">',
-				'end_html'		=> '</span>',
-				'value'			=> __('Publication date'),
-			),
-			array(
-				'name'			=> 'article_date_t',
-				'class'			=> 'B_InputText',
-				'attr'			=> 'class="textbox date ime_off" readonly="readonly"',
-				'validate'		=>
+				'start_html'	=> '<div class="flex-row">',
+				'end_html'		=> '</div>',
 				array(
-					array(
-						'type' 			=> 'required',
-						'error_message'	=> __('Please enter publication date'),
-					),
+					'start_html'	=> '<span class="title">',
+					'end_html'		=> '</span>',
+					'value'			=> __('Publication date'),
 				),
-			),
-			array(
-				'filter'		=> 'update/insert/default',
-				'id'			=> 'schedule_calendar1',
-				'class'			=> 'B_Link',
-				'attr'			=> 'class="bframe_calendar settings-button" title="' . __('Calendar') . '" onclick="bstudio.activateCalendar(\'schedule_calendar1\'); return false;" ',
-				'script'		=>
 				array(
-					'bframe_calendar'	=>
+					'name'			=> 'article_date_t',
+					'class'			=> 'B_InputText',
+					'attr'			=> 'class="textbox date ime_off" readonly="readonly"',
+					'validate'		=>
 					array(
-						'width'			=> '200',
-						'height'		=> '230',
-						'offsetLeft'	=> '4',
-						'drop_shadow'	=> 'true',
-						'target'		=> 'article_date_t',
-						'ajax'			=>
 						array(
-							'module'		=> 'calendar',
-							'file'			=> 'ajax',
-							'method'		=> 'getCalendar',
+							'type' 			=> 'required',
+							'error_message'	=> __('Please enter publication date'),
 						),
 					),
 				),
-				'element'	=>
 				array(
-					'value'		=> '<img alt="Calendar" src="images/common/calendar_white.png" />',
+					'filter'		=> 'update/insert/default',
+					'id'			=> 'schedule_calendar1',
+					'class'			=> 'B_Link',
+					'attr'			=> 'class="bframe_calendar settings-button" title="' . __('Calendar') . '" onclick="bstudio.activateCalendar(\'schedule_calendar1\'); return false;" ',
+					'script'		=>
+					array(
+						'bframe_calendar'	=>
+						array(
+							'width'			=> '200',
+							'height'		=> '230',
+							'offsetLeft'	=> '4',
+							'drop_shadow'	=> 'true',
+							'target'		=> 'article_date_t',
+							'ajax'			=>
+							array(
+								'module'		=> 'calendar',
+								'file'			=> 'ajax',
+								'method'		=> 'getCalendar',
+							),
+						),
+					),
+					'element'	=>
+					array(
+						'value'		=> '<img alt="Calendar" src="images/common/calendar_white.png" />',
+					),
 				),
-			),
-			array(
-				'filter'			=> 'update/insert/default',
-				'class'				=> 'B_Link',
-				'link'				=> '#',
-				'attr'				=> 'title="' . __('Clear') . '" class="clear-button" onclick="bstudio.clearText(\'article_date_t\'); return false;"',
-				'specialchars'		=> 'none',
-				'value'				=> '<img alt="Clear" src="images/common/clear_white.png" />',
-			),
-			array(
-				'name'				=> 'error_message',
-				'class'				=> 'B_ErrMsg',
-				'start_html'		=> '<p class="error-message">',
-				'end_html'			=> '</p>',
+				array(
+					'filter'			=> 'update/insert/default',
+					'class'				=> 'B_Link',
+					'link'				=> '#',
+					'attr'				=> 'title="' . __('Clear') . '" class="clear-button" onclick="bstudio.clearText(\'article_date_t\'); return false;"',
+					'specialchars'		=> 'none',
+					'value'				=> '<img alt="Clear" src="images/common/clear_white.png" />',
+				),
+				array(
+					'name'				=> 'error_message',
+					'class'				=> 'B_ErrMsg',
+					'start_html'		=> '<p class="error-message">',
+					'end_html'			=> '</p>',
+				),
 			),
 		),
 	),
@@ -172,37 +176,104 @@ $settings_config = array(
 			'start_html'	=> '<dd>',
 			'end_html'		=> '</dd>',
 			array(
-				'name'			=> 'category',
-				'class'			=> 'B_InputText',
-				'attr'			=> 'class="textbox category" readonly="readonly"',
-			),
-			array(
-				'class'			=> 'B_Hidden',
-				'name'			=> 'category_id',
-			),
-			array(
-				'filter'		=> 'update/insert/default',
-				'name'			=> 'open_category',
-				'class'			=> 'B_Link',
-				'link'			=> 'index.php',
-				'attr'			=> 'title="' . __('Category') . '" class="settings-button" onclick="top.bframe.modalWindow.activate(this, window, \'category_id\'); return false;" data-param="width:350,height:400"',
-				'fixedparam'	=>
+				'start_html'	=> '<div class="flex-row">',
+				'end_html'		=> '</div>',
 				array(
-					'terminal_id'	=> TERMINAL_ID,
-					'module'		=> 'category', 
-					'page'			=> 'tree',
+					'name'			=> 'category',
+					'class'			=> 'B_InputText',
+					'attr'			=> 'class="textbox category" readonly="readonly"',
 				),
 				array(
-					'value'			=> '<img alt="Category" src="images/common/gear_white.png" />',
+					'class'			=> 'B_Hidden',
+					'name'			=> 'category_id',
+				),
+				array(
+					'filter'		=> 'update/insert/default',
+					'name'			=> 'open_category',
+					'class'			=> 'B_Link',
+					'link'			=> 'index.php',
+					'attr'			=> 'title="' . __('Category') . '" class="settings-button" onclick="top.bframe.modalWindow.activate(this, window, \'category_id\'); return false;" data-param="width:350,height:400"',
+					'fixedparam'	=>
+					array(
+						'terminal_id'	=> TERMINAL_ID,
+						'module'		=> 'category', 
+						'page'			=> 'tree',
+					),
+					array(
+						'value'			=> '<img alt="Category" src="images/common/gear_white.png" />',
+					),
+				),
+				array(
+					'filter'		=> 'update/insert/default',
+					'class'			=> 'B_Link',
+					'link'			=> '#',
+					'attr'			=> 'title="' . __('Clear') . '" class="clear-button" onclick="bstudio.clearText(\'category_id\', \'category\'); return false;"',
+					'specialchars'	=> 'none',
+					'value'			=> '<img alt="Clear" src="images/common/clear_white.png" />',
 				),
 			),
+		),
+	),
+
+	// Tags
+	array(
+		'error_group'	=> true,
+		array(
+			'start_html'	=> '<dt>',
+			'end_html'		=> '</dt>',
 			array(
-				'filter'		=> 'update/insert/default',
-				'class'			=> 'B_Link',
-				'link'			=> '#',
-				'attr'			=> 'title="' . __('Clear') . '" class="clear-button" onclick="bstudio.clearText(\'category_id\', \'category\'); return false;"',
-				'specialchars'	=> 'none',
-				'value'			=> '<img alt="Clear" src="images/common/clear_white.png" />',
+				'start_html'	=> '<span class="title">',
+				'end_html'		=> '</span>',
+				'value'			=> __('Tags'),
+			),
+		),
+		array(
+			'start_html'	=> '<dd>',
+			'end_html'		=> '</dd>',
+			array(
+				'start_html'	=> '<div class="flex-row">',
+				'end_html'		=> '</div>',
+				array(
+					'start_html'	=> '<div class="tag-container">',
+					'end_html'		=> '</div>',
+					array(
+						'name'			=> 'tag_list',
+						'start_html'	=> '<div id="tag_list" class="tag-list">',
+						'end_html'		=> '</div>',
+					),
+					array(
+						'name'			=> 'tags',
+						'class'			=> 'B_Hidden',
+					),
+					array(
+						'class'			=> 'B_Hidden',
+						'name'			=> 'tag_id',
+					),
+					array(
+						'filter'		=> 'update/insert/default',
+						'name'			=> 'open_tags',
+						'class'			=> 'B_Link',
+						'link'			=> 'index.php',
+						'attr'			=> 'title="' . __('Tags') . '" class="settings-button" onclick="top.bframe.modalWindow.activate(this, window, \'tag_id\'); return false;" data-param="width:350,height:400"',
+						'fixedparam'	=>
+						array(
+							'terminal_id'	=> TERMINAL_ID,
+							'module'		=> 'tag',
+							'page'			=> 'tree',
+						),
+						array(
+							'value'			=> '<img alt="Tags" src="images/common/gear_white.png" />',
+						),
+					),
+					array(
+						'filter'		=> 'update/insert/default',
+						'class'			=> 'B_Link',
+						'link'			=> '#',
+						'attr'			=> 'title="' . __('Clear') . '" class="clear-button" onclick="bstudio.clearTag(); return false;"',
+						'specialchars'	=> 'none',
+						'value'			=> '<img alt="Clear" src="images/common/clear_white.png" />',
+					),
+				),
 			),
 		),
 	),
@@ -223,52 +294,44 @@ $settings_config = array(
 			'start_html'	=> '<dd>',
 			'end_html'		=> '</dd>',
 			array(
-				'start_html'	=> '<table class="img-item">',
-				'end_html'		=> '</table>',
+				'start_html'	=> '<div class="flex-row">',
+				'end_html'		=> '</div>',
 				array(
-					'start_html'	=> '<tr>',
-					'end_html'		=> '</tr>',
+					'name'			=> 'title_img',
+					'start_html'	=> '<div id="title_img">',
+					'end_html'		=> '</div>',
+				),
+				array(
+					'filter'		=> 'update/insert/default',
 					array(
-						'name'			=> 'title_img',
-						'start_html'	=> '<td id="title_img">',
-						'end_html'		=> '</td>',
+						'name'			=> 'open_filelist',
+						'class'			=> 'B_Link',
+						'link'			=> 'index.php',
+						'attr'			=> 'title="' . __('Image selection') . '" class="settings-button" onclick="bstudio.activateModalWindow(this, 1100, 500); return false;"',
+						'fixedparam'	=>
+						array(
+							'terminal_id'	=> TERMINAL_ID,
+							'module'		=> 'filemanager',
+							'page'			=> 'popup',
+							'method'		=> 'open',
+							'target'		=> 'title_img',
+							'target_id'		=> 'title_img_file',
+						),
+						'specialchars'	=> 'none',
+						'value'			=> '<img alt="Select image" src="images/common/gear_white.png" />',
 					),
 					array(
 						'filter'		=> 'update/insert/default',
-						'start_html'	=> '<td class="buttons">',
-						'end_html'		=> '</td>',
-						array(
-							'name'			=> 'open_filelist',
-							'class'			=> 'B_Link',
-							'link'			=> 'index.php',
-							'attr'			=> 'title="' . __('Image selection') . '" class="settings-button" onclick="bstudio.activateModalWindow(this, 1100, 500); return false;"',
-							'fixedparam'	=>
-							array(
-								'terminal_id'	=> TERMINAL_ID,
-								'module'		=> 'filemanager',
-								'page'			=> 'popup',
-								'method'		=> 'open',
-								'target'		=> 'title_img',
-								'target_id'		=> 'title_img_file',
-							),
-							'specialchars'	=> 'none',
-							'value'			=> '<img alt="Select image" src="images/common/gear_white.png" />',
-						),
-						array(
-							'filter'		=> 'update/insert/default',
-							'class'			=> 'B_Link',
-							'link'			=> '#',
-							'attr'			=> 'title="' . __('Clear') . '" class="clear-button" onclick="bstudio.clearIMG(\'title_img\', \'title_img_file\'); return false;"',
-							'specialchars'	=> 'none',
-							'value'			=> '<img alt="Clear" src="images/common/clear_white.png" />',
-						),
+						'class'			=> 'B_Link',
+						'link'			=> '#',
+						'attr'			=> 'title="' . __('Clear') . '" class="clear-button" onclick="bstudio.clearIMG(\'title_img\', \'title_img_file\'); return false;"',
+						'specialchars'	=> 'none',
+						'value'			=> '<img alt="Clear" src="images/common/clear_white.png" />',
 					),
-					array(
-						'name'			=> 'title_img_file',
-						'class'			=> 'B_Hidden',
-						'start_html'	=> '<td>',
-						'end_html'		=> '</td>',
-					),
+				),
+				array(
+					'name'			=> 'title_img_file',
+					'class'			=> 'B_Hidden',
 				),
 			),
 		),
@@ -365,7 +428,7 @@ $settings_config = array(
 		),
 	),
 
-	// Title
+	// Hash Tag
 	array(
 		'error_group'	=> true,
 		array(
@@ -374,14 +437,14 @@ $settings_config = array(
 			array(
 				'start_html'	=> '<span class="title">',
 				'end_html'		=> '</span>',
-				'value'			=> 'Title',
+				'value'			=> __('Hash Tag'),
 			),
 		),
 		array(
 			'start_html'	=> '<dd>',
 			'end_html'		=> '</dd>',
 			array(
-				'name'			=> 'title',
+				'name'			=> 'hash_tag',
 				'class'			=> 'B_TextArea',
 				'attr'			=> 'class="textarea ime_on bframe_textarea" maxlength="100"',
 			),

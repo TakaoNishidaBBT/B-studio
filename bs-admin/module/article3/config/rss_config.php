@@ -11,7 +11,7 @@ array(
 						xml:lang="ja">',
 	'end_html'		=> '</rdf:RDF>',
 
-	'select_sql'	=> "select * from " . BC_DB_PREFIX . "v_article3 where publication = '1' ",
+	'select_sql'	=> "select * from " . BC_DB_PREFIX . "v_article2 where publication = '1' ",
 
 	'header'	=>
 	array(
@@ -116,7 +116,7 @@ array(
 	'start_html'	=> '<rdf:Seq>',
 	'end_html'		=> '</rdf:Seq>',
 
-	'select_sql'	=> "select * from " . BC_DB_PREFIX . "v_article3 where publication = '1' ",
+	'select_sql'	=> "select * from " . BC_DB_PREFIX . "v_article2 where publication = '1' ",
 	'row'		=>
 	array(
 		array(

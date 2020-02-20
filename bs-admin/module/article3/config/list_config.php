@@ -9,7 +9,17 @@ $list_config = array(
 	'start_html'	=> '<table class="list bframe_elastic">',
 	'end_html'		=> '</table>',
 
-	'select_sql'	=> "select * from " . B_DB_PREFIX . "v_admin_article3 where 1=1 ",
+	'select_sql'	=> "select b.total_cnt, c.access_cnt, a.* from " . B_DB_PREFIX . "v_admin_article3 a
+						left join (
+							select article_id, count(*) total_cnt from " . B_DB_PREFIX . "access_log3
+							group by article_id) b
+						on a.article_id = b.article_id
+						left join (
+							select article_id, count(*) access_cnt from " . B_DB_PREFIX . "access_log3
+							where (create_datetime + 3600 * 24 * 30) >= unix_timestamp(now())
+							group by article_id) c
+						on a.article_id = c.article_id
+						where 1 ",
 
 	'empty_message'	=> '<span class="bold">　' . __('No record found') . '</span>',
 
@@ -57,17 +67,17 @@ $list_config = array(
 			'param'				=> '&amp;module=' . $this->module . '&amp;page=list&amp;method=sort&amp;sort_key=article_date',
 		),
 		array(
-			'name'				=> 'permalink',
+			'name'				=> 'slug',
 			'class'				=> 'B_Link',
 			'start_html'		=> '<th class="sortable" style="width:100px">',
 			'start_html_asc'	=> '<th class="sortable asc" style="width:100px">',
 			'start_html_desc'	=> '<th class="sortable desc" style="width:100px">',
 			'end_html'			=> '</th>',
-			'value'				=> __('Permalink'),
+			'value'				=> __('Slug'),
 			'link'				=> DISPATCH_URL,
 			'cond_html'			=> 'class="current-key"',
-			'sort_key'			=> 'permalink',
-			'param'				=> '&amp;module=' . $this->module . '&amp;page=list&amp;method=sort&amp;sort_key=permalink',
+			'sort_key'			=> 'slug',
+			'param'				=> '&amp;module=' . $this->module . '&amp;page=list&amp;method=sort&amp;sort_key=slug',
 		),
 		array(
 			'name'				=> 'category',
@@ -83,17 +93,58 @@ $list_config = array(
 			'param'				=> '&amp;module=' . $this->module . '&amp;page=list&amp;method=sort&amp;sort_key=category',
 		),
 		array(
+			'name'				=> 'tags',
+			'class'				=> 'B_Link',
+			'start_html'		=> '<th class="sortable" style="width:300px">',
+			'start_html_asc'	=> '<th class="sortable asc" style="width:300px">',
+			'start_html_desc'	=> '<th class="sortable desc" style="width:300px">',
+			'end_html'			=> '</th>',
+			'value'				=> __('Tags'),
+			'link'				=> DISPATCH_URL,
+			'cond_html'			=> 'class="current-key"',
+			'sort_key'			=> 'tags',
+			'param'				=> '&amp;module=' . $this->module . '&amp;page=list&amp;method=sort&amp;sort_key=tags',
+		),
+		array(
 			'name'				=> 'headline',
 			'class'				=> 'B_Link',
-			'start_html'		=> '<th class="sortable" style="width:260px">',
-			'start_html_asc'	=> '<th class="sortable asc" style="width:260px">',
-			'start_html_desc'	=> '<th class="sortable desc" style="width:260px">',
+			'start_html'		=> '<th class="sortable" style="width:400px">',
+			'start_html_asc'	=> '<th class="sortable asc" style="width:400px">',
+			'start_html_desc'	=> '<th class="sortable desc" style="width:400px">',
 			'end_html'			=> '</th>',
-			'value'				=> __('Headline'),
+			'value'				=> __('Title'),
 			'link'				=> DISPATCH_URL,
 			'cond_html'			=> 'class="current-key"',
 			'sort_key'			=> 'headline',
 			'param'				=> '&amp;module=' . $this->module . '&amp;page=list&amp;method=sort&amp;sort_key=headline',
+		),
+		array(
+			'name'				=> 'total_cnt',
+			'class'				=> 'B_Link',
+			'start_html'		=> '<th class="sortable" style="width:80px">',
+			'start_html_asc'	=> '<th class="sortable asc" style="width:80px">',
+			'start_html_desc'	=> '<th class="sortable desc" style="width:80px">',
+			'end_html'			=> '</th>',
+			'value'				=> __('Page View(Total)'),
+			'link'				=> DISPATCH_URL,
+			'cond_html'			=> 'class="current-key"',
+			'title'				=> __('Page View(Total)'),
+			'sort_key'			=> 'total_cnt',
+			'param'				=> '&amp;module=' . $this->module . '&amp;page=list&amp;method=sort&amp;sort_key=total_cnt',
+		),
+		array(
+			'name'				=> 'access_cnt',
+			'class'				=> 'B_Link',
+			'start_html'		=> '<th class="sortable" style="width:80px">',
+			'start_html_asc'	=> '<th class="sortable asc" style="width:80px">',
+			'start_html_desc'	=> '<th class="sortable desc" style="width:80px">',
+			'end_html'			=> '</th>',
+			'value'				=> __('Page View(Last 30 days)'),
+			'link'				=> DISPATCH_URL,
+			'cond_html'			=> 'class="current-key"',
+			'value'				=> __('Page View(Last 30 days)'),
+			'sort_key'			=> 'access_cnt',
+			'param'				=> '&amp;module=' . $this->module . '&amp;page=list&amp;method=sort&amp;sort_key=access_cnt',
 		),
 		array(
 			'name'				=> 'publication',
@@ -139,7 +190,7 @@ $list_config = array(
 			'end_html'		=> '</td>',
 		),
 		array(
-			'name'			=> 'permalink',
+			'name'			=> 'slug',
 			'start_html'	=> '<td class="left">',
 			'end_html'		=> '</td>',
 		),
@@ -149,12 +200,25 @@ $list_config = array(
 			'end_html'		=> '</td>',
 		),
 		array(
+			'name'			=> 'tags',
+			'start_html'	=> '<td class="left tags">',
+			'end_html'		=> '</td>',
+		),
+		array(
 			'name'			=> 'headline',
 			'start_html'	=> '<td class="left">',
 			'end_html'		=> '</td>',
-			'shorten_text'	=> '100',
-			'trimmarker'	=> '…',
 			'strip_tags'	=> true,
+		),
+		array(
+			'name'			=> 'total_cnt',
+			'start_html'	=> '<td class="right">',
+			'end_html'		=> '</td>',
+		),
+		array(
+			'name'			=> 'access_cnt',
+			'start_html'	=> '<td class="right">',
+			'end_html'		=> '</td>',
 		),
 		array(
 			'name'			=> 'publication',

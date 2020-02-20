@@ -141,6 +141,9 @@
 	define('B_CATEGORY_TABLE', 'category');
 	define('B_CATEGORY2_TABLE', 'category2');
 	define('B_CATEGORY3_TABLE', 'category3');
+	define('B_TAG_TABLE', 'tag');
+	define('B_TAG2_TABLE', 'tag2');
+	define('B_TAG3_TABLE', 'tag3');
 	define('B_VERSION_TABLE', 'version');
 
 	// View
@@ -171,6 +174,11 @@
 	define('B_CATEGORY_VIEW', 'v_category');
 	define('B_CATEGORY2_VIEW', 'v_category2');
 	define('B_CATEGORY3_VIEW', 'v_category3');
+
+	define('B_TAG_VIEW', 'v_tag');
+	define('B_TAG1_VIEW', 'v_tag1');
+	define('B_TAG2_VIEW', 'v_tag2');
+	define('B_TAG3_VIEW', 'v_tag3');
 
 	// View for Compare
 	define('B_COMPARE_CONTENTS_NODE_VIEW', 'v_compare_contents_node');

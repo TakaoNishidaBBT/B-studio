@@ -17,6 +17,9 @@
 			require_once('./config/list_config.php');
 			$this->dg = new B_DataGrid($this->db, $list_config);
 
+			// Set Call Back
+			$this->dg->setCallBack($this, '_list_callback');
+
 			// Category list
 			$this->category_list = $this->getCategoryList();
 			$obj = $this->header->getElementByName('category');
@@ -88,8 +91,8 @@
 					$this->session['order'] = ' asc';
 				}
 			}
-			$this->setProperty();
 
+			$this->setProperty();
 			$this->setHeader();
 			$this->setSqlWhere();
 			$this->setData();
@@ -134,6 +137,19 @@
 			$obj->attr.= ' data-default="' . $this->default_row_per_page . '"';
 		}
 
+		function _list_callback($array) {
+			$row = $array['row'];
+
+			$obj = $row->getElementByName('tags');
+			if($obj->value) {
+				$values = explode(',', $obj->value);
+				foreach($values as $value) {
+					$html.= '<span class="tag"><span class="inner">' . $value . '</span></span>'; 
+				}
+				$obj->value = $html;
+			}
+		}
+
 		function setData() {
 			$this->dg->setSqlWhere($this->sql_where);
 
@@ -154,7 +170,7 @@
 		function setSqlWhere() {
 			if($this->keyword) {
 				$keyword = $this->db->real_escape_string_for_like($this->keyword);
-				$sql_where.= " and (article_id like '%KEYWORD%' or category like '%KEYWORD%' or permalink like '%KEYWORD%' or article_date_t like '%KEYWORD%' or title like '%KEYWORD%' or url like '%KEYWORD%' or description like '%KEYWORD%' or headline like '%KEYWORD%' or content1 like '%KEYWORD%' or content2 like '%KEYWORD%' or content3 like '%KEYWORD%' or content4 like '%KEYWORD%') ";
+				$sql_where.= " and (a.article_id like '%KEYWORD%' or category like '%KEYWORD%' or tags like '%KEYWORD%' or slug like '%KEYWORD%' or article_date_t like '%KEYWORD%' or title like '%KEYWORD%' or url like '%KEYWORD%' or description like '%KEYWORD%' or headline like '%KEYWORD%' or content1 like '%KEYWORD%' or content2 like '%KEYWORD%' or content3 like '%KEYWORD%' or content4 like '%KEYWORD%') ";
 				$sql_where = str_replace('%KEYWORD%', "%" . $this->db->real_escape_string_for_like($this->keyword) . "%", $sql_where);
 
 				$select_message.= __('Keyword: ') . ' <em>' . htmlspecialchars($this->keyword, ENT_QUOTES) . '</em>　';

@@ -9,6 +9,8 @@
 		// To protect php tag
 		$__innerHTML = str_replace('<?', '<!-----?', $__innerHTML);
 		$__innerHTML = str_replace('?>', '?----->', $__innerHTML);
+		$__innerHTML = str_replace('<script', '<!-- script', $__innerHTML);
+		$__innerHTML = str_replace('</script>', '</script -->', $__innerHTML);
 		echo $__innerHTML;
 	}
 	if($__end_html) {

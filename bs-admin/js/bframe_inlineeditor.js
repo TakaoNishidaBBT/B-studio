@@ -70,10 +70,6 @@
 			CKEDITOR.config.shiftEnterMode = 1;
 			CKEDITOR.config.templates_replaceContent = false;
 
-			// protect source
-			CKEDITOR.config.protectedSource.push(/<\?[\s\S]*?\?>/g);
-			CKEDITOR.config.protectedSource.push(/<body[\s\S]*?>/g);
-
 			// filebrowser
 			if(filebrowser) {
 				CKEDITOR.config.filebrowserBrowseUrl = filebrowser;
@@ -218,6 +214,7 @@
 		function onblurEditor() {
 			if(editor.checkDirty()) {
 				var data = editor.getData();
+
 				// for IE
 				data = data.replace(/{C}<!-----\?/g, '<?');
 
@@ -228,6 +225,9 @@
 				// protected source
 				data = data.replace(/<!-----\?/g, '<?');
 				data = data.replace(/\?----->/g, '?>');
+				data = data.replace(/<!-- script/g, '<script');
+				data = data.replace(/<\/script -->/g, '</script>');
+
 				parent.bstudio.updateHtml(data);
 				editor.resetDirty();
 			}

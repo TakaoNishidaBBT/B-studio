@@ -1,0 +1,152 @@
+@charset "UTF-8";
+
+html, body {
+	background-color: #fff;
+}
+
+/* bframe_tree */
+div#tree_container {
+	margin: 0;
+}
+div#select_category_container {
+	margin: 0;
+}
+div.select_category {
+	border: 1px solid #ccc;
+}
+div#tree_container_header {
+	height: 18px;
+	background-color: #444444;
+}
+div#tree_box {
+	border-top: 1px solid #ddd;
+	border-left: 1px solid #ddd;
+	overflow: auto;
+}
+div#select_category_container div#tree_box {
+	border: 1px solid #ddd;
+}
+div.bframe_tree {
+	cursor:default;
+	padding: 8px 0;
+	background-color: #fff;
+	overflow: auto;
+}
+div.bframe_tree ul {
+	margin: 0 0 0 20px;
+	padding: 0;
+	white-space: nowrap;
+}
+div.bframe_tree ul.root {
+	margin: 0;
+	padding: 0;
+}
+div.bframe_tree li.tree-list {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+div.bframe_tree li.tree-list div.tree {
+	margin: 0;
+	padding-top: 2px;
+	height: 20px;
+	border-top: 1px solid #fff;
+}
+div.bframe_tree li.tree-list div.selected {
+	border-top: 1px dotted #f00;
+}
+div.bframe_tree li.tree-list img {
+	vertical-align: -30%;
+	margin-right: 2px;
+}
+div.bframe_tree li.tree-list span.node-name {
+	padding: 2px 5px;
+	font-size: 12px;
+}
+div.bframe_tree li.tree-list span.node-name input {
+	margin: 0;
+	padding: 1px 0;
+}
+div.bframe_tree a:link {
+	text-decoration: none;
+}
+div.bframe_tree a:visited {
+	color: #000;
+	text-decoration: none;
+}
+div.bframe_tree a:active {
+	color: #000;
+	text-decoration: none;
+}
+div.bframe_tree a:hover {
+	color: #000;
+	text-decoration: none;
+}
+span.current {
+	background-color: #22a8f6 !important;
+	color: #fff !important;
+}
+span.selected {
+	background-color: #ece9d8 !important;
+	color: #333 !important;
+}
+div.control {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	height: 30px;
+}
+div.control div.guidance {
+	width: 220px;
+}
+div.control span.caution {
+	color: #f00;
+	padding: 0 2px;
+}
+div.control ul {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+	padding-top: 4px;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+.register-button {
+	padding: 3px 20px;
+	min-width: 80px;
+	background-color: #444;
+	color: #fff;
+	cursor: pointer;
+	border: 2px solid #444;
+	border-radius: 12px;
+}
+.cancel-button {
+	padding: 3px 20px;
+	min-width: 80px;
+	background-color: #fff;
+	color: #000;
+	cursor: pointer;
+	border: 2px solid #444;
+	border-radius: 12px;
+	margin-right: 14px;
+}
+.register-button:hover {
+	background-color: #ccc;
+}
+.register-button:hover {
+	background-color: #000;
+}
+.cancel-button:hover {
+	opacity: 0.6;
+}
+.cancel-button {
+	margin-right: 10px;
+}
+.guidance {
+	display: flex;
+}
+.guidance .message {
+	width: 140px;
+}

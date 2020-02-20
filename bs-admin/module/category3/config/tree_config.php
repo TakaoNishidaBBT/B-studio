@@ -41,7 +41,7 @@ $tree_config = array(
 				'open_property'	=>
 				array(
 					'url'		=> DISPATCH_URL . '&module=' . $this->module . '&page=property&method=select',
-					'params'	=> 'width:360,height:330',
+					'params'	=> 'width:360,height:380',
 					'title'		=> __('Properties'),
 					'func'		=> 'reloadTree',
 				),

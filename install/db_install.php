@@ -54,6 +54,9 @@
 			$this->createTable('category');
 			$this->createTable('category2');
 			$this->createTable('category3');
+			$this->createTable('tag');
+			$this->createTable('tag2');
+			$this->createTable('tag3');
 			$this->createTable('user');
 		}
 
@@ -92,6 +95,12 @@
 			$this->createView('cre_v_category.sql');
 			$this->createView('cre_v_category2.sql');
 			$this->createView('cre_v_category3.sql');
+			$this->createView('cre_v_tag.sql');
+			$this->createView('cre_v_tag2.sql');
+			$this->createView('cre_v_tag3.sql');
+			$this->createView('cre_v_article_tag.sql');
+			$this->createView('cre_v_article_tag2.sql');
+			$this->createView('cre_v_article_tag3.sql');
 			$this->createView('cre_v_article.sql');
 			$this->createView('cre_v_article2.sql');
 			$this->createView('cre_v_article3.sql');

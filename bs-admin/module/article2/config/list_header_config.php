@@ -89,7 +89,7 @@ $list_header_config = array(
 					'start_html'	=> '<li class="insert">',
 					'end_html'		=> '</li>',
 					'name'			=> 'insert',
-					'attr'	=> 'class="insert-button" onclick="bframe.submit(\'header_form\', \'' . $this->module . '\', \'form\', \'select\', \'insert\')"',
+					'attr'			=> 'class="insert-button" onclick="bframe.submit(\'header_form\', \'' . $this->module . '\', \'form\', \'select\', \'insert\')"',
 					'value'			=> __('New '),
 				),
 				array(

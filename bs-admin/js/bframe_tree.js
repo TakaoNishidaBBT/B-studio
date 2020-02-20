@@ -762,7 +762,7 @@
 				selected_node.setColor('selected');
 				current_node.reload();
 				current_node.setColor('current');
-
+console.log('current_node', current_node);
 				// set cut status
 				if(paste_mode) {
 					if(clipboard.target) {
@@ -2109,14 +2109,16 @@
 			}
 
 			this.setColor = function(mode) {
+console.log('setColor', current_node);
 				if(!current_node[0]) return;
 
 				for(var i=0; i < current_node.length; i++) {
 					if(current_edit_node.id == current_node[i].id) continue;
+console.log('current_node[i].id', current_node[i].id);
 					var node = self.object(i);
+console.log('node', node);
 					if(node) {
 						var span = bframe.searchNodeByName(node, 'node_span');
-
 						switch(mode) {
 						case 'selected':
 							span.className = 'node-name selected';
@@ -2127,6 +2129,7 @@
 							break;
 						}
 					}
+console.log('span', span);
 				}
 			}
 
@@ -2142,7 +2145,9 @@
 
 			this.object = function(i) {
 				var index = i ? i : 0;
+console.log('object index', index);
 				if(current_node[index]) {
+console.log('current_node[index].id', current_node[index].id);
 					obj = document.getElementById(current_node[index].id);
 					if(obj) return obj;
 					if(current_node[index].id.substr(0, 1) == 't') {

@@ -16,11 +16,11 @@
 		bframe.calendarContainer.activate(target_id);
 	}
 
-	bstudio.activateModalWindow = function(a, w, h, func) {
+	bstudio.activateModalWindow = function(a, w, h, func, param) {
 		var p = 'width:' + w + ',height:' + h;
 		a.setAttribute('data-param', p);
 
-		top.bframe.modalWindow.activate(a, window);
+		top.bframe.modalWindow.activate(a, window, param);
 		if(func) top.bframe.modalWindow.registerCallBackFunction(func);
 	}
 
@@ -98,6 +98,70 @@
 		if(node_id == 'root') return;
 		bstudio.insertValue(window.frameElement.opener, 'category_id', node_id, 'category', node_value);
 		window.frameElement.deactivate();
+	}
+
+	bstudio.setTags = function(separater1, target_id, separater2, hidden_target_id) {
+		var tag, tags;
+		var nodes = bframe_tree.getCurrentNodes();
+
+		for(var i=0, tags='', tag_id=''; i<nodes.length; i++) {
+			if(tags) tags += separater1;
+			tags += nodes[i].path;
+			if(tag_id) tag_id += separater2;
+			tag_id += nodes[i].id.substr(1);
+		}
+
+		bstudio.insertTag(window.frameElement.opener, 'tags', tags, 'tag_id', tag_id);
+		window.frameElement.deactivate();
+	}
+
+	bstudio.insertTag = function(opener, target_id, target_value, hidden_target_id, hidden_target_value) {
+		opener.bstudio._insertTag(target_id, target_value, hidden_target_id, hidden_target_value);
+	}
+
+	bstudio._insertTag = function(target_id, target_value, hidden_target_id, hidden_target_value) {
+		var target = document.getElementById(target_id);
+		if(!target) {
+			return;
+		}
+		target.value = target_value;
+
+		var hidden_target = document.getElementById(hidden_target_id);
+		if(!hidden_target) {
+			return;
+		}
+		hidden_target.value = hidden_target_value;
+
+		var html='';
+
+		if(target_value) {
+			var tags = target_value.split(',');
+			for(let i=0; i<tags.length; i++) {
+				html+= '<span>' + tags[i] + '</span>';
+			}
+		}
+
+		var tag_list = document.getElementById('tag_list');
+		tag_list.innerHTML = html;
+
+		if(bframe.fireEvent) bframe.fireEvent(target, 'change');
+
+		return false;
+	}
+
+	bstudio.clearTag = function() {
+		var tag_list = document.getElementById('tag_list');
+		if(tag_list && tag_list.innerHTML) {
+			tag_list.innerHTML = '';
+		}
+		var tags = document.getElementById('tags');
+		if(tags && tags.value) {
+			tags.value = '';
+		}
+		var tag_id = document.getElementById('tag_id');
+		if(tag_id && tag_id.value) {
+			tag_id.value = '';
+		}
 	}
 
 	bstudio.insertValue = function(opener, target_id, target_value, hidden_target_id, hidden_target_value) {

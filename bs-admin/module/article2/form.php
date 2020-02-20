@@ -49,16 +49,19 @@
 					$this->copy_control = new B_Element($this->copy_control_config);
 				}
 
-				$sql = "select * from " . B_DB_PREFIX . "article2 where article_id = '$article_id'";
+				$sql = "select * from " . B_DB_PREFIX . "v_admin_article2 where article_id = '$article_id'";
 
 				$rs=$this->db->query($sql);
 				$row=$this->db->fetch_assoc($rs);
 				if(!$row) $row['article_id'] = '0000000000';
 
+				// set Category
 				$this->category = $this->getCategory();
 				$row['category'] = $this->getCategoryName($this->category, $row['category_id']);
+
 				$this->editor->setValue($row);
 				$this->settings->setValue($row);
+				$this->setTagName();
 				$this->setThumnail($row['title_img_file']);
 				$this->setDetailStatus();
 
@@ -77,7 +80,10 @@
 				$this->category = $this->getCategory();
 				$row['category'] = $this->getCategoryName($this->category, $row['category_id']);
 
-				$row['permalink'] = '';
+				$this->tag = $this->getTag();
+				$row['tag'] = $this->getTagName($this->tag, $row['tags']);
+
+				$row['slug'] = '';
 				$this->editor->setValue($row);
 				$this->settings->setValue($row);
 				$this->setThumnail($row['title_img_file']);
@@ -102,8 +108,30 @@
 			}
 		}
 
+		function setTagName() {
+			$tags = $this->settings->getElementByName('tags');
+			if(!trim($tags->value)) return;
+			
+			$tag = explode(',', $tags->value);
+			for($i=0; $i < count($tag); $i++) {
+				$html.= '<span>' . $tag[$i] . '</span>';
+			}
+			$tag_list = $this->settings->getElementByName('tag_list');
+			$tag_list->value = $html;
+		}
+
 		function getCategory() {
 			$sql = "select * from " . B_DB_PREFIX . "v_category2 where parent_node = 'root' order by disp_seq";
+			$rs = $this->db->query($sql);
+			while($row = $this->db->fetch_assoc($rs)) {
+				$name = $row['node_name'];
+				$data[$row['node_id']] = $name;
+			}
+			return $data;
+		}
+
+		function getTag() {
+			$sql = "select * from " . B_DB_PREFIX . "v_tag where parent_node = 'root' order by disp_seq";
 			$rs = $this->db->query($sql);
 			while($row = $this->db->fetch_assoc($rs)) {
 				$name = $row['node_name'];
@@ -117,22 +145,22 @@
 			if(!$article_id) return true;
 
 			$obj = $param['obj'];
-			$permalink = $org = $obj->value;
+			$slug = $org = $obj->value;
 
 			$suffix = 2;
-			while($this->checkPermalink($article_id, $permalink)) {
-				$permalink = $org . '-' . $suffix++;
+			while($this->checkSlug($article_id, $slug)) {
+				$slug = $org . '-' . $suffix++;
 			}
-			$obj->value = $permalink;
+			$obj->value = $slug;
 
 			return true;
 		}
 
-		function checkPermalink($article_id, $permalink) {
+		function checkSlug($article_id, $slug) {
 			$article_id = $this->db->real_escape_string($article_id);
-			$permalink = $this->db->real_escape_string($permalink);
+			$slug = $this->db->real_escape_string($slug);
 
-			$sql = "select count(*) cnt from " . B_DB_PREFIX . "article2 where permalink = binary '$permalink' and article_id <> '$article_id'";
+			$sql = "select count(*) cnt from " . B_DB_PREFIX . "article2 where slug = binary '$slug' and article_id <> '$article_id'";
 			$rs = $this->db->query($sql);
 			$row = $this->db->fetch_assoc($rs);
 
@@ -208,6 +236,7 @@
 			$this->setThumnail($this->request['title_img_file']);
 			$this->setDetailStatus();
 			$this->settings->setFilterValue($this->session['mode']);
+			$this->setTagName();
 
 			$title = $this->editor->getElementById('title-container');
 			$response['innerHTML'] = array(
@@ -243,7 +272,7 @@
 				$ret = $this->main_table->selectInsert($param);
 				if($ret) {
 					$param['article_id'] = $this->main_table->selectMaxValue('article_id');
-					$param['permalink'] = $param['article_id'];
+					$param['slug'] = $param['article_id'];
 					$ret = $this->main_table->update($param);
 
 					$this->settings->setValue($param);
@@ -257,7 +286,10 @@
 				}
 				$ret = $this->main_table->upsert($param);
 			}
-
+			if($ret) {
+				$this->deleteTag($param['article_id']);
+				$this->insertTag($param['article_id'], $param['tag_id']);
+			}
 			if($ret) {
 				$this->db->commit();
 			}
@@ -265,6 +297,31 @@
 				$this->db->rollback();
 			}
 			return $ret;
+		}
+
+		function deleteTag($article_id) {
+			$sql = "delete from " . B_DB_PREFIX . "article_tag2 where article_id='$article_id'";
+			return $this->db->query($sql);
+		}
+
+		function insertTag($article_id, $tag_id) {
+			if(!$tag_id) return;
+
+			$table_article_tag = new B_Table($this->db, 'article_tag2');
+
+			$tag = array_unique(explode(',', $tag_id));
+
+			foreach($tag as $value) {
+				$param['article_id'] = $article_id;
+				$param['tag_id'] = $value;
+				$param['del_flag'] = '0';
+				$param['create_user'] = $this->user_id;
+				$param['create_datetime'] = time();
+				$param['update_user'] = $this->user_id;
+				$param['update_datetime'] = time();
+
+				$table_article_tag->insert($param);
+			}
 		}
 
 		function delete() {

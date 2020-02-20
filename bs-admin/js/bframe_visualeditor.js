@@ -76,7 +76,7 @@
 			,['JustifyLeft','JustifyCenter','JustifyRight']
 			,['Link','Unlink','Anchor']
 			,['Image','Table']
-			,'/'
+//			,'/'
 			,['Styles','Format','FontSize']
 			,['TextColor','BGColor']
 			,['ShowBlocks']
@@ -115,6 +115,8 @@
 
 			// protect php
 			CKEDITOR.config.protectedSource.push(/<\?[\s\S]*?\?>/g);
+			CKEDITOR.config.protectedSource.push(/<script[\s\S]*?<\/script>/gi);
+			CKEDITOR.config.protectedSource.push(/<noscript[\s\S]*?<\/noscript>/gi);
 
 			// disable resize editor
 			CKEDITOR.config.resize_enabled = false;

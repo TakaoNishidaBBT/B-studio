@@ -56,6 +56,28 @@ $config_form_config = array(
 				'start_html'	=> '<table class="form file-title" border="0" cellspacing="0" cellpadding="0"><tbody>',
 				'end_html'		=> '</tbody></table>',
 
+				// Slug
+				array(
+					'start_html'	=> '<tr>',
+					'end_html'		=> '</tr>',
+					array(
+						'start_html'	=> '<th>',
+						'end_html'		=> '</th>',
+						array(
+							'value'		=> __('Slug'),
+						),
+					),
+					array(
+						'start_html'	=> '<td>',
+						'end_html'		=> '</td>',
+						array(
+							'name'			=> 'slug',
+							'class'			=> 'B_InputText',
+							'attr'			=> 'class="category ime-off"',
+						),
+					),
+				),
+
 				// Text color
 				array(
 					'start_html'	=> '<tr>',

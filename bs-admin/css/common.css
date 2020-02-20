@@ -516,12 +516,15 @@ table.list th {
 }
 table.list th.sortable {
 	background: url(../images/common/sort.png) no-repeat right 2px center #3c3c3c;
+	padding-right: 10px;
 }
 table.list th.sortable.asc {
 	background: url(../images/common/sort_asc_b.png) no-repeat right 2px center #3c3c3c;
+	padding-right: 10px;
 }
 table.list th.sortable.desc {
 	background: url(../images/common/sort_desc_b.png) no-repeat right 2px center #3c3c3c;
+	padding-right: 10px;
 }
 table.list th:first-child {
 	border-left: 1px solid #4e4e4e;

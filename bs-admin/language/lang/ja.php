@@ -225,9 +225,12 @@
 		'This is an error in your entry'=> '入力内容に誤りがあります。',
 		'This permalink is already in use'
 										=> 'そのパーマリンクは既に使用されています',
+		'Tags'							=> 'タグ',
+		'Hash Tag'						=> 'ハッシュタグ',
 
 		// Category
 		'Double-click to set'			=> 'カテゴリ名をダブルクリックすると設定されます',
+		'Directory'						=> 'ディレクトリ',
 		'Text color'					=> '文字色',
 		'Backgroud color'				=> '背景色',
 		'Icon'							=> 'アイコン',

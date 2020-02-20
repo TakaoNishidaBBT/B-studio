@@ -58,7 +58,7 @@
 
 		function setRowPerPage($cnt) {
 			$this->pager['row_per_page'] = $this->db->real_escape_string($cnt);
-			if(!is_numeric($this->pager['row_per_page'])) $this->pager['row_per_page'] = 20;
+			if(!is_numeric($this->pager['row_per_page']) && strtolower($this->pager['row_per_page']) != 'all') $this->pager['row_per_page'] = 20;
 		}
 
 		function sqlReplace($search, $replace) {

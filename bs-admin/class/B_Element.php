@@ -1935,7 +1935,7 @@
 					$this->setParamProperty($key2, $value2);
 				}
 			}
-			$this->element_start_html =	'<a href="' . $this->link . $this->permalink . $this->param . '"';
+			$this->element_start_html =	'<a href="' . $this->link . $this->slug . $this->param . '"';
 			if($this->id) {
 				$this->element_start_html.= ' id="' . $this->_gethtmlid() . '"';
 			}
@@ -1981,9 +1981,9 @@
 				return;
 			}
 
-			if(is_array($this->config_org['permalink'])) {
-				foreach($this->config_org['permalink'] as $value2) {
-					$this->setPermalink($value[$value2]);
+			if(is_array($this->config_org['slug'])) {
+				foreach($this->config_org['slug'] as $value2) {
+					$this->setSlug($value[$value2]);
 				}
 			}
 			if(is_array($this->config_org['param'])) {
@@ -2055,8 +2055,8 @@
 			$param.= "'" . $value . "'";
 		}
 
-		function setPermalink($value) {
-			$this->permalink = '/' . $value;
+		function setSlug($value) {
+			$this->slug = '/' . $value;
 		}
 	}
 

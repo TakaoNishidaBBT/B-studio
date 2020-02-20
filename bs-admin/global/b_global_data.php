@@ -328,7 +328,8 @@
 			'external_link'				=> array('char', 		'1', 	'', 	''),
 			'external_window'			=> array('char', 		'1', 	'', 	''),
 			'url'						=> array('text', 		'', 	'', 	''),
-			'permalink'					=> array('text', 		'', 	'', 	''),
+			'slug'						=> array('text', 		'', 	'', 	''),
+			'hash_tag'					=> array('text', 		'', 	'', 	''),
 			'content1'					=> array('mediumtext', 	'', 	'', 	''),
 			'content2'					=> array('mediumtext', 	'', 	'', 	''),
 			'content3'					=> array('mediumtext', 	'', 	'', 	''),
@@ -353,9 +354,41 @@
 			'node_class'				=> array('char', 		'10', 	'', 	''),
 			'node_name'					=> array('text', 		'', 	'', 	''),
 			'disp_seq'					=> array('text', 		'', 	'', 	''),
+			'slug'						=> array('text', 		'', 	'', 	''),
 			'color'						=> array('text', 		'', 	'', 	''),
 			'background_color'			=> array('text', 		'', 	'', 	''),
 			'icon_file'					=> array('text', 		'', 	'', 	''),
+			'del_flag'					=> array('char', 		'1', 	'', 	''),
+			'create_user'				=> array('text', 		'', 	'',		''),
+			'create_datetime'			=> array('text', 		'', 	'',		''),
+			'update_user'				=> array('text', 		'', 	'',		''),
+			'update_datetime'			=> array('text', 		'', 	'',		''),
+		);
+
+	${$g_data_set}['table']['tag'] =
+		array(							// Data Types			Length	PK		Auto-Increment
+			'node_id'					=> array('char', 		'10', 	'1', 	'1'),
+			'parent_node'				=> array('char', 		'10', 	'', 	''),
+			'path'						=> array('text', 		'', 	'', 	''),
+			'node_type'					=> array('char', 		'10', 	'', 	''),
+			'node_class'				=> array('char', 		'10', 	'', 	''),
+			'node_name'					=> array('text', 		'', 	'', 	''),
+			'disp_seq'					=> array('text', 		'', 	'', 	''),
+			'slug'						=> array('text', 		'', 	'', 	''),
+			'color'						=> array('text', 		'', 	'', 	''),
+			'background_color'			=> array('text', 		'', 	'', 	''),
+			'icon_file'					=> array('text', 		'', 	'', 	''),
+			'del_flag'					=> array('char', 		'1', 	'', 	''),
+			'create_user'				=> array('text', 		'', 	'',		''),
+			'create_datetime'			=> array('text', 		'', 	'',		''),
+			'update_user'				=> array('text', 		'', 	'',		''),
+			'update_datetime'			=> array('text', 		'', 	'',		''),
+		);
+
+	${$g_data_set}['table']['article_tag'] =
+		array(							// Data Types			Length	PK		Auto-Increment
+			'article_id'				=> array('char', 		'10', 	'1', 	''),
+			'tag_id'					=> array('char', 		'10', 	'2', 	''),
 			'del_flag'					=> array('char', 		'1', 	'', 	''),
 			'create_user'				=> array('text', 		'', 	'',		''),
 			'create_datetime'			=> array('text', 		'', 	'',		''),
@@ -378,7 +411,8 @@
 			'external_link'				=> array('char', 		'1', 	'', 	''),
 			'external_window'			=> array('char', 		'1', 	'', 	''),
 			'url'						=> array('text', 		'', 	'', 	''),
-			'permalink'					=> array('text', 		'', 	'', 	''),
+			'slug'						=> array('text', 		'', 	'', 	''),
+			'hash_tag'					=> array('text', 		'', 	'', 	''),
 			'content1'					=> array('mediumtext', 	'', 	'', 	''),
 			'content2'					=> array('mediumtext', 	'', 	'', 	''),
 			'content3'					=> array('mediumtext', 	'', 	'', 	''),
@@ -403,9 +437,41 @@
 			'node_class'				=> array('char', 		'10', 	'', 	''),
 			'node_name'					=> array('text', 		'', 	'', 	''),
 			'disp_seq'					=> array('text', 		'', 	'', 	''),
+			'slug'						=> array('text', 		'', 	'', 	''),
 			'color'						=> array('text', 		'', 	'', 	''),
 			'background_color'			=> array('text', 		'', 	'', 	''),
 			'icon_file'					=> array('text', 		'', 	'', 	''),
+			'del_flag'					=> array('char', 		'1', 	'', 	''),
+			'create_user'				=> array('text', 		'', 	'',		''),
+			'create_datetime'			=> array('text', 		'', 	'',		''),
+			'update_user'				=> array('text', 		'', 	'',		''),
+			'update_datetime'			=> array('text', 		'', 	'',		''),
+		);
+
+	${$g_data_set}['table']['tag2'] =
+		array(							// Data Types			Length	PK		Auto-Increment
+			'node_id'					=> array('char', 		'10', 	'1', 	'1'),
+			'parent_node'				=> array('char', 		'10', 	'', 	''),
+			'path'						=> array('text', 		'', 	'', 	''),
+			'node_type'					=> array('char', 		'10', 	'', 	''),
+			'node_class'				=> array('char', 		'10', 	'', 	''),
+			'node_name'					=> array('text', 		'', 	'', 	''),
+			'disp_seq'					=> array('text', 		'', 	'', 	''),
+			'slug'						=> array('text', 		'', 	'', 	''),
+			'color'						=> array('text', 		'', 	'', 	''),
+			'background_color'			=> array('text', 		'', 	'', 	''),
+			'icon_file'					=> array('text', 		'', 	'', 	''),
+			'del_flag'					=> array('char', 		'1', 	'', 	''),
+			'create_user'				=> array('text', 		'', 	'',		''),
+			'create_datetime'			=> array('text', 		'', 	'',		''),
+			'update_user'				=> array('text', 		'', 	'',		''),
+			'update_datetime'			=> array('text', 		'', 	'',		''),
+		);
+
+	${$g_data_set}['table']['article_tag2'] =
+		array(							// Data Types			Length	PK		Auto-Increment
+			'article_id'				=> array('char', 		'10', 	'1', 	''),
+			'tag_id'					=> array('char', 		'10', 	'2', 	''),
 			'del_flag'					=> array('char', 		'1', 	'', 	''),
 			'create_user'				=> array('text', 		'', 	'',		''),
 			'create_datetime'			=> array('text', 		'', 	'',		''),
@@ -428,7 +494,8 @@
 			'external_link'				=> array('char', 		'1', 	'', 	''),
 			'external_window'			=> array('char', 		'1', 	'', 	''),
 			'url'						=> array('text', 		'', 	'', 	''),
-			'permalink'					=> array('text', 		'', 	'', 	''),
+			'slug'						=> array('text', 		'', 	'', 	''),
+			'hash_tag'					=> array('text', 		'', 	'', 	''),
 			'content1'					=> array('mediumtext', 	'', 	'', 	''),
 			'content2'					=> array('mediumtext', 	'', 	'', 	''),
 			'content3'					=> array('mediumtext', 	'', 	'', 	''),
@@ -453,9 +520,41 @@
 			'node_class'				=> array('char', 		'10', 	'', 	''),
 			'node_name'					=> array('text', 		'', 	'', 	''),
 			'disp_seq'					=> array('text', 		'', 	'', 	''),
+			'slug'						=> array('text', 		'', 	'', 	''),
 			'color'						=> array('text', 		'', 	'', 	''),
 			'background_color'			=> array('text', 		'', 	'', 	''),
 			'icon_file'					=> array('text', 		'', 	'', 	''),
+			'del_flag'					=> array('char', 		'1', 	'', 	''),
+			'create_user'				=> array('text', 		'', 	'',		''),
+			'create_datetime'			=> array('text', 		'', 	'',		''),
+			'update_user'				=> array('text', 		'', 	'',		''),
+			'update_datetime'			=> array('text', 		'', 	'',		''),
+		);
+
+	${$g_data_set}['table']['tag3'] =
+		array(							// Data Types			Length	PK		Auto-Increment
+			'node_id'					=> array('char', 		'10', 	'1', 	'1'),
+			'parent_node'				=> array('char', 		'10', 	'', 	''),
+			'path'						=> array('text', 		'', 	'', 	''),
+			'node_type'					=> array('char', 		'10', 	'', 	''),
+			'node_class'				=> array('char', 		'10', 	'', 	''),
+			'node_name'					=> array('text', 		'', 	'', 	''),
+			'disp_seq'					=> array('text', 		'', 	'', 	''),
+			'slug'						=> array('text', 		'', 	'', 	''),
+			'color'						=> array('text', 		'', 	'', 	''),
+			'background_color'			=> array('text', 		'', 	'', 	''),
+			'icon_file'					=> array('text', 		'', 	'', 	''),
+			'del_flag'					=> array('char', 		'1', 	'', 	''),
+			'create_user'				=> array('text', 		'', 	'',		''),
+			'create_datetime'			=> array('text', 		'', 	'',		''),
+			'update_user'				=> array('text', 		'', 	'',		''),
+			'update_datetime'			=> array('text', 		'', 	'',		''),
+		);
+
+	${$g_data_set}['table']['article_tag3'] =
+		array(							// Data Types			Length	PK		Auto-Increment
+			'article_id'				=> array('char', 		'10', 	'1', 	''),
+			'tag_id'					=> array('char', 		'10', 	'2', 	''),
 			'del_flag'					=> array('char', 		'1', 	'', 	''),
 			'create_user'				=> array('text', 		'', 	'',		''),
 			'create_datetime'			=> array('text', 		'', 	'',		''),
@@ -543,4 +642,25 @@
 			'reserve1'					=> array('text', 		'', 	'', 	''),
 			'reserve2'					=> array('text', 		'', 	'', 	''),
 			'reserve3'					=> array('text', 		'', 	'', 	''),
+		);
+
+	${$g_data_set}['table']['access_log'] =
+		array(							// Data Types			Length	PK		Auto-Increment
+			'article_id'				=> array('char', 		'10', 	'', 	''),
+			'referer_url'				=> array('text', 		'', 	'', 	''),
+			'create_datetime'			=> array('char', 		'10', 	'', 	''),
+		);
+
+	${$g_data_set}['table']['access_log2'] =
+		array(							// Data Types			Length	PK		Auto-Increment
+			'article_id'				=> array('char', 		'10', 	'', 	''),
+			'referer_url'				=> array('text', 		'', 	'', 	''),
+			'create_datetime'			=> array('char', 		'10', 	'', 	''),
+		);
+
+	${$g_data_set}['table']['access_log3'] =
+		array(							// Data Types			Length	PK		Auto-Increment
+			'article_id'				=> array('char', 		'10', 	'', 	''),
+			'referer_url'				=> array('text', 		'', 	'', 	''),
+			'create_datetime'			=> array('char', 		'10', 	'', 	''),
 		);
