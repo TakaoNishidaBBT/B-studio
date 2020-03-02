@@ -10,7 +10,7 @@
 
 	<p class="error"><?php echo $this->error_message; ?></p>
 	<fieldset>
-		<legend>Error Message</legend>
+		<legend>エラーメッセージ</legend>
 		<?php echo $this->db_error_message; ?>
 	</fieldset>
 

@@ -122,12 +122,12 @@ $settings_config = array(
 					'specialchars'		=> 'none',
 					'value'				=> '<img alt="Clear" src="images/common/clear_white.png" />',
 				),
-				array(
-					'name'				=> 'error_message',
-					'class'				=> 'B_ErrMsg',
-					'start_html'		=> '<p class="error-message">',
-					'end_html'			=> '</p>',
-				),
+			),
+			array(
+				'name'				=> 'error_message',
+				'class'				=> 'B_ErrMsg',
+				'start_html'		=> '<p class="error-message">',
+				'end_html'			=> '</p>',
 			),
 		),
 	),

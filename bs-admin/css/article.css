@@ -404,8 +404,8 @@ dl.settings input.radio:not(:first-child) {
 	margin-left: 10px;
 }
 dl.settings input.checkbox {
-	margin-right: 8px;
-	vertical-align: -2px;
+	margin-right: 6px;
+	vertical-align: 0px;
 }
 .wrap {
 	padding: 20px;
