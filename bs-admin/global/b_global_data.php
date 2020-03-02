@@ -647,6 +647,8 @@
 	${$g_data_set}['table']['access_log'] =
 		array(							// Data Types			Length	PK		Auto-Increment
 			'article_id'				=> array('char', 		'10', 	'', 	''),
+			'ip'						=> array('text', 		'',  	'', 	''),
+			'ua'						=> array('text', 		'',  	'', 	''),
 			'referer_url'				=> array('text', 		'', 	'', 	''),
 			'create_datetime'			=> array('char', 		'10', 	'', 	''),
 		);
@@ -654,6 +656,8 @@
 	${$g_data_set}['table']['access_log2'] =
 		array(							// Data Types			Length	PK		Auto-Increment
 			'article_id'				=> array('char', 		'10', 	'', 	''),
+			'ip'						=> array('text', 		'',  	'', 	''),
+			'ua'						=> array('text', 		'',  	'', 	''),
 			'referer_url'				=> array('text', 		'', 	'', 	''),
 			'create_datetime'			=> array('char', 		'10', 	'', 	''),
 		);
@@ -661,6 +665,8 @@
 	${$g_data_set}['table']['access_log3'] =
 		array(							// Data Types			Length	PK		Auto-Increment
 			'article_id'				=> array('char', 		'10', 	'', 	''),
+			'ip'						=> array('text', 		'',  	'', 	''),
+			'ua'						=> array('text', 		'',  	'', 	''),
 			'referer_url'				=> array('text', 		'', 	'', 	''),
 			'create_datetime'			=> array('char', 		'10', 	'', 	''),
 		);

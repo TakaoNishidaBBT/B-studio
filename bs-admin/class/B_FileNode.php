@@ -44,11 +44,11 @@
 				if(is_array($image_size)) {
 					$this->image_size = $image_size[0] * $image_size[1];
 					$this->human_image_size = $image_size[0] . 'x' . $image_size[1];
-
-					// thumbnail_image_path
-					$this->thumbnail_image_path = $this->getThumbnailImgPath($this->path);
-					$this->thumb = B_UPLOAD_THUMBDIR . str_replace('/', '-', $this->thumbnail_image_path);
 				}
+
+				// thumbnail_image_path
+				$this->thumbnail_image_path = $this->getThumbnailImgPath($this->path);
+				$this->thumb = B_UPLOAD_THUMBDIR . str_replace('/', '-', $this->thumbnail_image_path);
 
 				return;
 			}
@@ -575,21 +575,39 @@
 			if(substr($path, 0, 1) == '/') $path = substr($path, 1);
 
 			$file_info = pathinfo($path);
-			if(strtolower($file_info['extension']) == 'svg') {
+			switch(strtolower($file_info['extension'])) {
+			case 'svg':
 				if($file_info['dirname'] != '.' && $file_info['dirname'] != '\\') {
 					return __getPath(B_UPLOAD_URL, $file_info['dirname'], $thumb_prefix . $file_info['basename']);
 				}
 				else {
 					return __getPath(B_UPLOAD_URL, $thumb_prefix . $file_info['basename']);
 				}
-			}
-			else {
+				break;
+
+			case 'avi':
+			case 'flv':
+			case 'mov':
+			case 'mp4':
+			case 'mpg':
+			case 'mpeg':
+			case 'wmv':
+				$thumb_prefix = B_THUMB_PREFIX;
+				if($file_info['dirname'] != '.' && $file_info['dirname'] != '\\') {
+					return __getPath($file_info['dirname'], $thumb_prefix, $file_info['filename'], '.jpg');
+				}
+				else {
+					return __getPath($thumb_prefix, $file_info['filename'], '.jpg');
+				}
+				break;
+
+			default:
 				$thumb_prefix = B_THUMB_PREFIX;
 				if($file_info['dirname'] != '.' && $file_info['dirname'] != '\\') {
 					return __getPath($file_info['dirname'], $thumb_prefix . $file_info['basename']);
 				}
 				else {
-					return $thumb_prefix . $file_info['basename'];
+					return __getPath($thumb_prefix, $file_info['basename']);
 				}
 			}
 		}
