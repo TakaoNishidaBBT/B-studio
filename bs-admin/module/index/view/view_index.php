@@ -6,6 +6,7 @@
 <meta name="source_module" content="index">
 <meta name="source_page" content="index">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<base href="<?php echo B_ADMIN_SITE_BASE ?>">
 <link rel="stylesheet" href="css/common.css">
 <link rel="stylesheet" href="css/menu.css">
 <link rel="stylesheet" href="css/context_menu.css">

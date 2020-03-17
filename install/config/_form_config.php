@@ -24,7 +24,7 @@ $select_language_config = array(
 		'data_set'		=> $language,
 		'local'			=> true,
 		'value'			=> 'en',
-		'attr'	=> 'class="bframe_selectbox white" onchange=submit()',
+		'attr'			=> 'class="bframe_selectbox white" onchange=submit()',
 	),
 );
 
@@ -49,11 +49,11 @@ $db_install_form_config = array(
 				'start_html'	=> '<td>',
 				'end_html'		=> '</td>',
 				array(
-					'name'					=> 'db_srv',
-					'class'					=> 'B_InputText',
+					'name'			=> 'db_srv',
+					'class'			=> 'B_InputText',
 					'attr'			=> 'class="textbox ime-off" size="40" maxlength="100" ',
-					'status'				=> true,
-					'validate'				=>
+					'status'		=> true,
+					'validate'		=>
 					array(
 						array(
 							'type' 			=> 'required',
@@ -66,10 +66,10 @@ $db_install_form_config = array(
 					),
 				),
 				array(
-					'name'					=> 'error_message',
-					'class'					=> 'B_ErrMsg',
-					'start_html'			=> '<span class="error-message">',
-					'end_html'				=> '</span>',
+					'name'			=> 'error_message',
+					'class'			=> 'B_ErrMsg',
+					'start_html'	=> '<span class="error-message">',
+					'end_html'		=> '</span>',
 				),
 			),
 		),
@@ -89,11 +89,11 @@ $db_install_form_config = array(
 				'start_html'	=> '<td>',
 				'end_html'		=> '</td>',
 				array(
-					'name'					=> 'db_usr',
-					'class'					=> 'B_InputText',
+					'name'			=> 'db_usr',
+					'class'			=> 'B_InputText',
 					'attr'			=> 'class="textbox ime-off" size="40" maxlength="100" ',
-					'status'				=> true,
-					'validate'				=>
+					'status'		=> true,
+					'validate'		=>
 					array(
 						array(
 							'type' 			=> 'required',
@@ -106,10 +106,10 @@ $db_install_form_config = array(
 					),
 				),
 				array(
-					'name'					=> 'error_message',
-					'class'					=> 'B_ErrMsg',
-					'start_html'			=> '<span class="error-message">',
-					'end_html'				=> '</span>',
+					'name'			=> 'error_message',
+					'class'			=> 'B_ErrMsg',
+					'start_html'	=> '<span class="error-message">',
+					'end_html'		=> '</span>',
 				),
 			),
 		),
@@ -129,11 +129,11 @@ $db_install_form_config = array(
 				'start_html'	=> '<td>',
 				'end_html'		=> '</td>',
 				array(
-					'name'					=> 'db_pwd',
-					'class'					=> 'B_InputText',
+					'name'			=> 'db_pwd',
+					'class'			=> 'B_InputText',
 					'attr'			=> 'class="textbox ime-off" size="40" maxlength="100" ',
-					'status'				=> true,
-					'validate'				=>
+					'status'		=> true,
+					'validate'		=>
 					array(
 						array(
 							'type' 			=> 'required',
@@ -146,10 +146,10 @@ $db_install_form_config = array(
 					),
 				),
 				array(
-					'name'					=> 'error_message',
-					'class'					=> 'B_ErrMsg',
-					'start_html'			=> '<span class="error-message">',
-					'end_html'				=> '</span>',
+					'name'			=> 'error_message',
+					'class'			=> 'B_ErrMsg',
+					'start_html'	=> '<span class="error-message">',
+					'end_html'		=> '</span>',
 				),
 			),
 		),
@@ -169,11 +169,11 @@ $db_install_form_config = array(
 				'start_html'	=> '<td>',
 				'end_html'		=> '</td>',
 				array(
-					'name'					=> 'db_nme',
-					'class'					=> 'B_InputText',
+					'name'			=> 'db_nme',
+					'class'			=> 'B_InputText',
 					'attr'			=> 'class="textbox ime-off" size="40" maxlength="100" ',
-					'status'				=> true,
-					'validate'				=>
+					'status'		=> true,
+					'validate'		=>
 					array(
 						array(
 							'type' 			=> 'required',
@@ -186,10 +186,10 @@ $db_install_form_config = array(
 					),
 				),
 				array(
-					'name'					=> 'error_message',
-					'class'					=> 'B_ErrMsg',
-					'start_html'			=> '<span class="error-message">',
-					'end_html'				=> '</span>',
+					'name'			=> 'error_message',
+					'class'			=> 'B_ErrMsg',
+					'start_html'	=> '<span class="error-message">',
+					'end_html'		=> '</span>',
 				),
 			),
 		),
@@ -209,11 +209,11 @@ $db_install_form_config = array(
 				'start_html'	=> '<td>',
 				'end_html'		=> '</td>',
 				array(
-					'name'					=> 'db_prefix',
-					'class'					=> 'B_InputText',
+					'name'			=> 'db_prefix',
+					'class'			=> 'B_InputText',
 					'attr'			=> 'class="textbox prefix ime-off" maxlength="100" ',
-					'value'					=> 'bs_',
-					'validate'				=>
+					'value'			=> 'bs_',
+					'validate'		=>
 					array(
 						array(
 							'type' 			=> 'required',
@@ -222,16 +222,16 @@ $db_install_form_config = array(
 					),
 				),
 				array(
-					'start_html'			=> '<span class="notice">',
-					'end_html'				=> '</span>',
-					'class'					=> 'B_Guidance',
-					'value'					=> __('Usually changing this field is unnecessary. Please change This field when installing B-studio multiple times in one schema.'),
+					'start_html'	=> '<span class="notice">',
+					'end_html'		=> '</span>',
+					'class'			=> 'B_Guidance',
+					'value'			=> __('Usually changing this field is unnecessary. Please change This field when installing B-studio multiple times in one schema.'),
 				),
 				array(
-					'name'					=> 'error_message',
-					'class'					=> 'B_ErrMsg',
-					'start_html'			=> '<p class="error-message">',
-					'end_html'				=> '</p>',
+					'name'			=> 'error_message',
+					'class'			=> 'B_ErrMsg',
+					'start_html'	=> '<p class="error-message">',
+					'end_html'		=> '</p>',
 				),
 			),
 		),
@@ -258,10 +258,10 @@ $admin_basic_auth_config = array(
 				'start_html'	=> '<td>',
 				'end_html'		=> '</td>',
 				array(
-					'name'					=> 'basic_auth_id',
-					'class'					=> 'B_InputText',
+					'name'			=> 'basic_auth_id',
+					'class'			=> 'B_InputText',
 					'attr'			=> 'class="textbox ime-off" size="40" maxlength="100" ',
-					'validate'				=>
+					'validate'		=>
 					array(
 						array(
 							'type' 			=> 'required',
@@ -275,10 +275,10 @@ $admin_basic_auth_config = array(
 					),
 				),
 				array(
-					'name'					=> 'error_message',
-					'class'					=> 'B_ErrMsg',
-					'start_html'			=> '<span class="error-message">',
-					'end_html'				=> '</span>',
+					'name'			=> 'error_message',
+					'class'			=> 'B_ErrMsg',
+					'start_html'	=> '<span class="error-message">',
+					'end_html'		=> '</span>',
 				),
 			),
 		),
@@ -298,11 +298,11 @@ $admin_basic_auth_config = array(
 				'start_html'	=> '<td>',
 				'end_html'		=> '</td>',
 				array(
-					'name'					=> 'basic_auth_pwd',
-					'class'					=> 'B_Password',
-					'attr'			=> 'class="textbox ime-off" size="40" maxlength="100" ',
-					'confirm_message'		=> __('(Set password)'),
-					'validate'				=>
+					'name'				=> 'basic_auth_pwd',
+					'class'				=> 'B_Password',
+					'attr'				=> 'class="textbox ime-off" size="40" maxlength="100" ',
+					'confirm_message'	=> __('(Set password)'),
+					'validate'			=>
 					array(
 						array(
 							'type' 			=> 'required',
@@ -316,10 +316,10 @@ $admin_basic_auth_config = array(
 					),
 				),
 				array(
-					'name'					=> 'error_message',
-					'class'					=> 'B_ErrMsg',
-					'start_html'			=> '<span class="error-message">',
-					'end_html'				=> '</span>',
+					'name'			=> 'error_message',
+					'class'			=> 'B_ErrMsg',
+					'start_html'	=> '<span class="error-message">',
+					'end_html'		=> '</span>',
 				),
 			),
 		),
@@ -340,10 +340,10 @@ $admin_basic_auth_config = array(
 				'start_html'	=> '<td>',
 				'end_html'		=> '</td>',
 				array(
-					'name'					=> 'basic_auth_pwd2',
-					'class'					=> 'B_Password',
+					'name'			=> 'basic_auth_pwd2',
+					'class'			=> 'B_Password',
 					'attr'			=> 'class="textbox ime-off" size="40" maxlength="100" ',
-					'validate'				=>
+					'validate'		=>
 					array(
 						array(
 							'type' 			=> 'required',
@@ -357,10 +357,10 @@ $admin_basic_auth_config = array(
 					),
 				),
 				array(
-					'name'					=> 'error_message',
-					'class'					=> 'B_ErrMsg',
-					'start_html'			=> '<span class="error-message">',
-					'end_html'				=> '</span>',
+					'name'			=> 'error_message',
+					'class'			=> 'B_ErrMsg',
+					'start_html'	=> '<span class="error-message">',
+					'end_html'		=> '</span>',
 				),
 			),
 		),
@@ -388,10 +388,10 @@ $admin_user_form_config = array(
 				'start_html'	=> '<td>',
 				'end_html'		=> '</td>',
 				array(
-					'name'					=> 'admin_user_name',
-					'class'					=> 'B_InputText',
+					'name'			=> 'admin_user_name',
+					'class'			=> 'B_InputText',
 					'attr'			=> 'class="textbox" size="40" maxlength="100" ',
-					'validate'				=>
+					'validate'		=>
 					array(
 						array(
 							'type' 			=> 'required',
@@ -400,10 +400,10 @@ $admin_user_form_config = array(
 					),
 				),
 				array(
-					'name'					=> 'error_message',
-					'class'					=> 'B_ErrMsg',
-					'start_html'			=> '<span class="error-message">',
-					'end_html'				=> '</span>',
+					'name'			=> 'error_message',
+					'class'			=> 'B_ErrMsg',
+					'start_html'	=> '<span class="error-message">',
+					'end_html'		=> '</span>',
 				),
 			),
 		),
@@ -423,10 +423,10 @@ $admin_user_form_config = array(
 				'start_html'	=> '<td>',
 				'end_html'		=> '</td>',
 				array(
-					'name'					=> 'admin_user_id',
-					'class'					=> 'B_InputText',
+					'name'			=> 'admin_user_id',
+					'class'			=> 'B_InputText',
 					'attr'			=> 'class="textbox ime-off" size="40" maxlength="100" ',
-					'validate'				=>
+					'validate'		=>
 					array(
 						array(
 							'type' 			=> 'required',
@@ -440,10 +440,10 @@ $admin_user_form_config = array(
 					),
 				),
 				array(
-					'name'					=> 'error_message',
-					'class'					=> 'B_ErrMsg',
-					'start_html'			=> '<span class="error-message">',
-					'end_html'				=> '</span>',
+					'name'			=> 'error_message',
+					'class'			=> 'B_ErrMsg',
+					'start_html'	=> '<span class="error-message">',
+					'end_html'		=> '</span>',
 				),
 			),
 		),
@@ -463,11 +463,11 @@ $admin_user_form_config = array(
 				'start_html'	=> '<td>',
 				'end_html'		=> '</td>',
 				array(
-					'name'					=> 'admin_user_pwd',
-					'class'					=> 'B_Password',
-					'attr'			=> 'class="textbox ime-off" size="40" maxlength="100" ',
-					'confirm_message'		=> __('(Set password)'),
-					'validate'				=>
+					'name'				=> 'admin_user_pwd',
+					'class'				=> 'B_Password',
+					'attr'				=> 'class="textbox ime-off" size="40" maxlength="100" ',
+					'confirm_message'	=> __('(Set password)'),
+					'validate'			=>
 					array(
 						array(
 							'type' 			=> 'required',
@@ -481,10 +481,10 @@ $admin_user_form_config = array(
 					),
 				),
 				array(
-					'name'					=> 'error_message',
-					'class'					=> 'B_ErrMsg',
-					'start_html'			=> '<span class="error-message">',
-					'end_html'				=> '</span>',
+					'name'			=> 'error_message',
+					'class'			=> 'B_ErrMsg',
+					'start_html'	=> '<span class="error-message">',
+					'end_html'		=> '</span>',
 				),
 			),
 		),
@@ -505,10 +505,10 @@ $admin_user_form_config = array(
 				'start_html'	=> '<td>',
 				'end_html'		=> '</td>',
 				array(
-					'name'					=> 'admin_user_pwd2',
-					'class'					=> 'B_Password',
+					'name'			=> 'admin_user_pwd2',
+					'class'			=> 'B_Password',
 					'attr'			=> 'class="textbox ime-off" size="40" maxlength="100" ',
-					'validate'				=>
+					'validate'		=>
 					array(
 						array(
 							'type' 			=> 'required',
@@ -522,10 +522,10 @@ $admin_user_form_config = array(
 					),
 				),
 				array(
-					'name'					=> 'error_message',
-					'class'					=> 'B_ErrMsg',
-					'start_html'			=> '<span class="error-message">',
-					'end_html'				=> '</span>',
+					'name'			=> 'error_message',
+					'class'			=> 'B_ErrMsg',
+					'start_html'	=> '<span class="error-message">',
+					'end_html'		=> '</span>',
 				),
 			),
 		),
@@ -534,8 +534,8 @@ $admin_user_form_config = array(
 
 $root_htaccess_config = array(
 	array(
-		'name'			=> 'htaccess',
-		'class'			=> 'B_TextArea',
+		'name'	=> 'htaccess',
+		'class'	=> 'B_TextArea',
 		'attr'	=> 'class="htaccess"',
 	),
 );

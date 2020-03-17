@@ -59,6 +59,9 @@
 		define('B_SITE_BASE', B_SITE_ROOT_SSL);
 	}
 
+	// Admin Site Base Directory (for Base Tag)
+	define('B_ADMIN_SITE_BASE', B_SITE_BASE . B_ADMIN);
+
 	// DataBase Connect File
 	define('B_DB_CONNECT_INFO', B_ADMIN_DIR . 'db/db_connect.php');
 	require_once(B_DB_CONNECT_INFO);

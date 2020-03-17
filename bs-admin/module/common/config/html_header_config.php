@@ -13,6 +13,10 @@ $html_header_config = array(
 		'<meta charset="UTF-8">',
 		'<meta http-equiv="X-UA-Compatible" content="IE=edge">',
 	),
+	'base'		=>
+	array(
+		'<base href="' . B_ADMIN_SITE_BASE . '">',
+	),
 	'script'	=> 
 	array(
 		'<script src="js/bstudio.js"></script>',
