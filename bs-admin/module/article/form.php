@@ -223,7 +223,7 @@
 					}
 				}
 				else {
-					$this->message = __('This is an error in your entry');
+					$this->message = __('There is an error in your entry');
 					$this->status = false;
 				}
 			}

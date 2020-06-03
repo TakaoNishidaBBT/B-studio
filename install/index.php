@@ -226,7 +226,7 @@
 		}
 		else {
 			// Confirm message
-			$error_message = __('This is an error in your entry<br />Please check any error message and re-enter the necessary information');
+			$error_message = __('There is an error in your entry<br />Please check any error message and re-enter the necessary information');
 		}
 
 		return $status;

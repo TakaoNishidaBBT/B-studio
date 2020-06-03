@@ -222,7 +222,7 @@
 		'Properties'					=> 'プロパティー',
 		'newCategory'					=> '新しいカテゴリ',
 		'newFolder'						=> '新しいフォルダ',
-		'This is an error in your entry'=> '入力内容に誤りがあります。',
+		'There is an error in your entry'=> '入力内容に誤りがあります。',
 		'This permalink is already in use'
 										=> 'そのパーマリンクは既に使用されています',
 		'Tags'							=> 'タグ',
@@ -442,7 +442,7 @@
 		'Able to connect to DB but failed to select schema.'
 										=> 'DBへ接続はできましたがスキーマの選択に失敗しました。',
 		'Failed to connect to DB.'		=> 'DBへの接続に失敗しました。',
-		'This is an error in your entry<br />Please check any error message and re-enter the necessary information'
+		'There is an error in your entry<br />Please check any error message and re-enter the necessary information'
 										=> '入力内容に誤りがあります。<br />各欄のエラーメッセージをご覧の上、入力し直してください。',
 
 		'Failed to create table.'		=> 'テーブルの作成に失敗しました。',

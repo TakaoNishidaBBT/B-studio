@@ -2,6 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8">
+<meta name="robots" content="noindex">
 <meta name="terminal_id" content="<?php echo TERMINAL_ID ?>">
 <meta name="source_module" content="index">
 <meta name="source_page" content="index">

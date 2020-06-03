@@ -2,6 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8">
+<meta name="robots" content="noindex">
 <link rel="stylesheet" href="css/common.css">
 <link rel="stylesheet" href="css/login.css">
 <title><?php echo $this->title ?></title></head>
