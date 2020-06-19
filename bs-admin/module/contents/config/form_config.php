@@ -31,7 +31,7 @@ $form_config = array(
 				'fixedparam'	=>
 				array(
 					'terminal_id'	=> TERMINAL_ID,
-					'module'		=> 'widget', 
+					'module'		=> 'widget',
 					'page'			=> 'select_tree',
 					'target_id'		=> 'html1',
 				),

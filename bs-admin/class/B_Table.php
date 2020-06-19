@@ -64,8 +64,8 @@
 			$status = false;
 
 			foreach($this->config as $key => $value) {
-				if($value[2] && isset($param[$key]) && $param[$key] != '') { // primary key
-					if(!isset($param[$key]) || $param[$key] == '') {
+				if($value[2]) { // primary key
+					if(!isset($param[$key]) || !$param[$key] || $param[$key] === '') {
 						return false;
 					}
 					switch($value[0]) {	// type
