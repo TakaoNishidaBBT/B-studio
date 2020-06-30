@@ -1055,6 +1055,9 @@
 	// -------------------------------------------------------------------------
 	class B_Text extends B_Element {
 		function getElementsHtml($mode=null) {
+			if($this->strip_tags) {
+				$this->value = strip_tags($this->value);
+			}
 			if($this->shorten_text) {
 				$this->value = $this->shortenText($this->value, $this->shorten_text);
 			}
