@@ -40,15 +40,28 @@
 				$this->file_size = filesize($this->fullpath);
 				$this->node_type = 'file';
 				$this->node_class = 'leaf';
-				$image_size = B_Util::getimagesize($this->fullpath);
+
+				switch(strtolower($this->file_info['extension'])) {
+				case 'jpeg':
+				case 'jpg':
+				case 'gif':
+				case 'png':
+				case 'svg':
+					$image_size = B_Util::getimagesize($this->fullpath);
+					break;
+
+				default:
+					return;
+				}
+
 				if(is_array($image_size)) {
 					$this->image_size = $image_size[0] * $image_size[1];
 					$this->human_image_size = $image_size[0] . 'x' . $image_size[1];
-				}
 
-				// thumbnail_image_path
-				$this->thumbnail_image_path = $this->getThumbnailImgPath($this->path);
-				$this->thumb = B_UPLOAD_THUMBDIR . str_replace('/', '-', $this->thumbnail_image_path);
+					// thumbnail_image_path
+					$this->thumbnail_image_path = $this->getThumbnailImgPath($this->path);
+					$this->thumb = B_UPLOAD_THUMBDIR . str_replace('/', '-', $this->thumbnail_image_path);
+				}
 
 				return;
 			}
