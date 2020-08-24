@@ -624,7 +624,7 @@
 				if(!$ret = $this->callBack($callback)) return $ret;
 			}
 
-			if(count($this->node)) {
+			if(is_array($this->node) && count($this->node)) {
 				foreach(array_keys($this->node) as $key) {
 					$ret = $this->node[$key]->physicalDelete($callback);
 					if(!$ret) return $ret;

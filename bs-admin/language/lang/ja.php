@@ -236,6 +236,10 @@
 		'Icon'							=> 'アイコン',
 		'Image selection'				=> '画像選択',
 
+		// Tag
+		'Cannot use ,(Comma) for Tag Name'
+										=> 'タグに（,）カンマは使えません',
+
 		// Calendar
 		'Calendar'						=> 'カレンダー',
 		'%MONTH% %YEAR%'				=> '%YEAR%年 %MONTH%',

@@ -247,7 +247,7 @@
 					}
 				}
 				else {
-					$this->path = __getPath($this->parent->path, $this->file_name);
+					if($this->parent->path) $this->path = __getPath($this->parent->path, $this->file_name);
 					$this->node_id = __getPath($this->parent->path, $this->file_name);
 					$this->thumbnail_image_path = $this->getThumbnailImgPath($this->path);
 					$this->thumb = B_UPLOAD_THUMBDIR . str_replace('/', '-', $this->thumbnail_image_path);

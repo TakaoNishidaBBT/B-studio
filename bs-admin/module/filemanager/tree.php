@@ -282,7 +282,13 @@
 			if($this->request['node_id'] && $this->request['node_id'] != 'null') {
 				$file_info = pathinfo($this->request['node_id']);
 				$node_name = trim($this->request['node_name']);
-				$new_node_id = __getPath($file_info['dirname'], $node_name);
+				if($file_info['dirname'] == '.') {
+					$new_node_id = $node_name;
+				}
+				else {
+					$new_node_id = __getPath($file_info['dirname'], $node_name);
+				}
+
 				$source = __getPath($this->dir , $this->request['node_id']);
 				$dest = __getPath($this->dir , $new_node_id);
 
