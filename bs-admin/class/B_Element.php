@@ -1446,9 +1446,15 @@
 		function getElementsHtml($mode=null) {
 			if(isset($this->data_set_value)) {
 				if(is_array($this->value)) {
-					foreach($this->value as $value) {
+					foreach($this->value as $this->value2) {
 						if($html) $html.= "&nbsp;";
-						$html.= $this->data_set_value[$value];
+						array_walk_recursive($this->data_set_value, function($value, $key) {
+							if($key == $this->value2) {
+								$this->html = $value;
+							}
+						});
+						$html.= $this->html;
+
 						if($this->special_text) {
 							foreach($this->elements as $obj) {
 								if($obj->index == $value) {
@@ -1460,7 +1466,12 @@
 					}
 				}
 				else {
-					$html = $this->data_set_value[$this->value];
+					array_walk_recursive($this->data_set_value, function($value, $key) {
+						if($key == $this->value) {
+							$this->html = $value;
+						}
+					});
+					$html = $this->html;
 					if($this->special_text) {
 						foreach($this->elements as $obj) {
 							if($obj->index == $this->value) {
