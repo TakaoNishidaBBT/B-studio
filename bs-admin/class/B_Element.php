@@ -1391,15 +1391,32 @@
 
 				if(isset($this->data_set_value) && is_array($this->data_set_value)) {
 					foreach($this->data_set_value as $key => $value) {
-						$html.=
-							'  <option value="' .
-							$key . '" ';
-						if(isset($this->value)) {
-							if($key == $this->value) {
-								$html.= 'selected="selected"';
+						if(is_array($value)) {
+							$html.= '  <optgroup label="' . $key . '">';
+							foreach($value as $key2 => $value2) {
+								$html.=
+									'  <option value="' .
+									$key . '" ';
+								if(isset($this->value)) {
+									if($key2 == $this->value) {
+										$html.= 'selected="selected"';
+									}
+								}
+								$html.= '>' . $value2 . '</option>' ."\n";
 							}
+							$html.= '  </optgroup>';
 						}
-						$html.= '>' . $value . '</option>' ."\n";
+						else {
+							$html.=
+								'  <option value="' .
+								$key . '" ';
+							if(isset($this->value)) {
+								if($key == $this->value) {
+									$html.= 'selected="selected"';
+								}
+							}
+							$html.= '>' . $value . '</option>' ."\n";
+						}
 					}
 				}
 				$html.= '</select>' . "\n";
