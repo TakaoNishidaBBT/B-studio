@@ -1395,8 +1395,7 @@
 							$html.= '  <optgroup label="' . $key . '">';
 							foreach($value as $key2 => $value2) {
 								$html.=
-									'  <option value="' .
-									$key . '" ';
+									'  <option value="' . $key2 . '" ';
 								if(isset($this->value)) {
 									if($key2 == $this->value) {
 										$html.= 'selected="selected"';
