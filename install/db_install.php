@@ -98,6 +98,9 @@
 			$this->createView('cre_v_tag.sql');
 			$this->createView('cre_v_tag2.sql');
 			$this->createView('cre_v_tag3.sql');
+			$this->createView('cre_v_tag_article.sql');
+			$this->createView('cre_v_tag_article2.sql');
+			$this->createView('cre_v_tag_article3.sql');
 			$this->createView('cre_v_article_tag.sql');
 			$this->createView('cre_v_article_tag2.sql');
 			$this->createView('cre_v_article_tag3.sql');

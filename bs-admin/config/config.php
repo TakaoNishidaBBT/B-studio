@@ -179,9 +179,11 @@
 	define('B_CATEGORY3_VIEW', 'v_category3');
 
 	define('B_TAG_VIEW', 'v_tag');
-	define('B_TAG1_VIEW', 'v_tag1');
 	define('B_TAG2_VIEW', 'v_tag2');
 	define('B_TAG3_VIEW', 'v_tag3');
+	define('B_TAG_ARTICLE_VIEW', 'v_tag_article');
+	define('B_TAG_ARTICLE2_VIEW', 'v_tag_article2');
+	define('B_TAG_ARTICLE3_VIEW', 'v_tag_article3');
 
 	// View for Compare
 	define('B_COMPARE_CONTENTS_NODE_VIEW', 'v_compare_contents_node');
