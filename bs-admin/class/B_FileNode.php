@@ -48,19 +48,28 @@
 				case 'png':
 				case 'svg':
 					$image_size = B_Util::getimagesize($this->fullpath);
-					break;
-
-				default:
-					return;
-				}
-
-				if(is_array($image_size)) {
 					$this->image_size = $image_size[0] * $image_size[1];
 					$this->human_image_size = $image_size[0] . 'x' . $image_size[1];
 
 					// thumbnail_image_path
 					$this->thumbnail_image_path = $this->getThumbnailImgPath($this->path);
 					$this->thumb = B_UPLOAD_THUMBDIR . str_replace('/', '-', $this->thumbnail_image_path);
+					break;
+
+				case 'avi':
+				case 'flv':
+				case 'mov':
+				case 'mp4':
+				case 'mpg':
+				case 'mpeg':
+				case 'wmv':
+					// thumbnail_image_path
+					$this->thumbnail_image_path = $this->getThumbnailImgPath($this->path);
+					$this->thumb = B_UPLOAD_THUMBDIR . str_replace('/', '-', $this->thumbnail_image_path);
+					break;
+
+				default:
+					return;
 				}
 
 				return;
