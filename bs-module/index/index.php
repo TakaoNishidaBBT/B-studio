@@ -387,12 +387,6 @@
 				$this->html_header->appendProperty('css', '<style>' . $this->contents['css'] . '</style>');
 			}
 
-			$serializedString = file_get_contents(B_FILE_INFO_W);
-			$info = unserialize($serializedString);
-			if($info[B_CONTENTS_INLINE_TEMPLATES]) {
-				$this->html_header->appendMeta('visual_editor_templates', B_CONTENTS_INLINE_TEMPLATES);
-			}
-
 			$this->html_header->appendProperty('script', '<script src="' . B_ADMIN_ROOT . 'js/bframe.js"></script>');
 			$this->html_header->appendProperty('script', '<script src="' . B_ADMIN_ROOT . 'js/ckeditor/ckeditor.js"></script>');
 			$this->html_header->appendProperty('script', '<script src="' . B_ADMIN_ROOT . 'js/bframe_inlineeditor.js"></script>');

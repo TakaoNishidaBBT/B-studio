@@ -11,9 +11,6 @@ div#tree_container {
 div#select_category_container {
 	margin: 0;
 }
-div.select_category {
-	border: 1px solid #ccc;
-}
 div#tree_container_header {
 	height: 18px;
 	background-color: #444444;

@@ -763,15 +763,16 @@
 				current_node.reload();
 				current_node.setColor('current');
 
-				// set cut status
-				if(paste_mode) {
-					if(clipboard.target) {
+				// paste mode cut
+				if(clipboard.mode == 'cut') {
+					// clear clipboard
+					if(paste_mode && clipboard.target) {
 						delete clipboard.target;
+						paste_mode = false;
 					}
-					paste_mode = false;
-				}
-				else if(clipboard.mode == 'cut') {
-					setCutStatus();
+					else {
+						setCutStatus();
+					}
 				}
 
 				// hide upload button in trash

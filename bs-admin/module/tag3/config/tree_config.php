@@ -7,7 +7,7 @@
 */
 $tree_config = array(
 	'id'			=> 'tree',
-	'start_html'	=> '<div id="tree" class="bframe_tree bframe_adjustparent select_tag bframe_scroll" data-param="margin:6" unselectable="on">',
+	'start_html'	=> '<div id="tree" class="bframe_tree select_tag" unselectable="on">',
 	'end_html'		=> '</div>',
 	'script'		=>
 	array(

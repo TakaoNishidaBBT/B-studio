@@ -239,6 +239,8 @@
 		// Tag
 		'Cannot use ,(Comma) for Tag Name'
 										=> 'タグに（,）カンマは使えません',
+		'To select multiple items, use Ctrl-click'
+										=> '複数タグ　Ctrl + Click',
 
 		// Calendar
 		'Calendar'						=> 'カレンダー',
