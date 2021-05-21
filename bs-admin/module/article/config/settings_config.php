@@ -704,7 +704,7 @@ $result_config = array(
 		'value'			=> __('Title: '),
 	),
 	array(
-		'name'			=> 'title',
+		'name'			=> 'headline',
 		'class'			=> 'B_Text',
 		'start_html'	=> '<span class="bold">',
 		'end_html'		=> '</span>',

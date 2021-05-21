@@ -281,9 +281,6 @@
 			else {
 				$param['update_user'] = $this->user_id;
 				$param['update_datetime'] = time();
-				if($param['article_id'] == '0000000000') {
-					$param['del_flag'] = '1';
-				}
 				$ret = $this->main_table->upsert($param);
 			}
 			if($ret) {

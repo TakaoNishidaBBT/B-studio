@@ -19,7 +19,7 @@ $list_config = array(
 							where (create_datetime + 3600 * 24 * 30) >= unix_timestamp(now())
 							group by article_id) c
 						on a.article_id = c.article_id
-						where 1 ",
+						where a.article_id != '0000000000' ",
 
 	'empty_message'	=> '<span class="bold">　' . __('No record found') . '</span>',
 
