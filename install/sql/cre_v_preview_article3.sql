@@ -17,3 +17,4 @@ on a.category_id = b.node_id
 left join %DB_PREFIX%v_article_tag3 c
 on a.article_id = c.article_id
 where a.del_flag='0' and publication in ('1', '2')
+and a.article_id != '0000000000'
