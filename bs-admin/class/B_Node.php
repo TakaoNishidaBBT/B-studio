@@ -466,7 +466,7 @@
 			$node_id = $this->tbl_node->selectMaxValue('node_id');
 			$new_node_id[] = $node_id;
 
-			if(count($this->node)) {
+			if(is_array($this->node)) {
 				foreach(array_keys($this->node) as $key) {
 					$ret = $this->node[$key]->copy($node_id, $user_id, $new_node_id, $callback);
 					if(!$ret) return $ret;
@@ -543,8 +543,10 @@
 			// update path of related records
 			$this->updatePath($destination_node_id, $destination_node);
 
-			for($i=0; $i < count($this->node); $i++) {
-				$this->node[$i]->_updateDispSeq($user_id, str_pad($i+1, 4, '0', STR_PAD_LEFT));
+			if(is_array($this->node)) {
+				for($i=0; $i < count($this->node); $i++) {
+					$this->node[$i]->_updateDispSeq($user_id, str_pad($i+1, 4, '0', STR_PAD_LEFT));
+				}
 			}
 
 			return true;
@@ -597,7 +599,7 @@
 		function delete($callback=null) {
 			if(!$this->node_id) return;
 
-			if(count($this->node)) {
+			if(is_array($this->node)) {
 				foreach(array_keys($this->node) as $key) {
 					$ret = $this->node[$key]->delete($callback);
 					if(!$ret) return $ret;

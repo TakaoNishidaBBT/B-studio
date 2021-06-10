@@ -228,9 +228,11 @@
 			// Get templates array
 			$this->getTemplates($this->contents['template_id']);
 
-			for($i=0; $i < count($this->templates); $i++) {
-				$this->start_html.= $this->templates[$i]['start_html'];
-				$this->end_html = $this->templates[$i]['end_html'] . $this->end_html;
+			if(is_array($this->templates)) {
+				for($i=0; $i < count($this->templates); $i++) {
+					$this->start_html.= $this->templates[$i]['start_html'];
+					$this->end_html = $this->templates[$i]['end_html'] . $this->end_html;
+				}
 			}
 			return $this->start_html . $this->innerHTML . $this->end_html;
 		}
@@ -269,17 +271,21 @@
 		}
 
 		function setTemplateCssLink() {
-			for($i=0; $i < count($this->templates); $i++) {
-				if($this->templates[$i]['css']) {
-					$this->html_header->appendProperty('css',
-						'<link rel="stylesheet" href="T' . $this->templates[$i]['contents_id'] . '.css">');
+			if(is_array($this->templates)) {
+				for($i=0; $i < count($this->templates); $i++) {
+					if($this->templates[$i]['css']) {
+						$this->html_header->appendProperty('css',
+							'<link rel="stylesheet" href="T' . $this->templates[$i]['contents_id'] . '.css">');
+					}
 				}
 			}
 		}
 
 		function setTemplateExternalCss() {
-			for($i=0; $i < count($this->templates); $i++) {
-				$this->setCss($this->templates[$i]['external_css']);
+			if(is_array($this->templates)) {
+				for($i=0; $i < count($this->templates); $i++) {
+					$this->setCss($this->templates[$i]['external_css']);
+				}
 			}
 		}
 
@@ -289,8 +295,10 @@
 		}
 
 		function setTemplateExternalScript() {
-			for($i=0; $i < count($this->templates); $i++) {
-				$this->setScript($this->templates[$i]['external_js']);
+			if(is_array($this->templates)) {
+				for($i=0; $i < count($this->templates); $i++) {
+					$this->setScript($this->templates[$i]['external_js']);
+				}
 			}
 		}
 
@@ -300,8 +308,10 @@
 		}
 
 		function setTemplateHeaderElement() {
-			for($i=0; $i < count($this->templates); $i++) {
-				$this->setHeaderElement($this->templates[$i]['header_element']);
+			if(is_array($this->templates)) {
+				for($i=0; $i < count($this->templates); $i++) {
+					$this->setHeaderElement($this->templates[$i]['header_element']);
+				}
 			}
 		}
 
@@ -369,9 +379,11 @@
 
 			$this->getTemplates($this->contents['template_id']);
 
-			for($i=0; $i < count($this->templates); $i++) {
-				$this->start_html.= $this->templates[$i]['start_html'];
-				$this->end_html = $this->templates[$i]['end_html'] . $this->end_html;
+			if(is_array($this->templates)) {
+				for($i=0; $i < count($this->templates); $i++) {
+					$this->start_html.= $this->templates[$i]['start_html'];
+					$this->end_html = $this->templates[$i]['end_html'] . $this->end_html;
+				}
 			}
 			$inline_param = 'filebrowser:bs-admin/index.php?terminal_id=' . $this->post['terminal_id'] . '&amp;module=resource&amp;page=popup';
 			$inline_param.= ',language:' . $admin_language;
@@ -419,9 +431,11 @@
 
 			$this->getTemplates($this->contents['template_id']);
 
-			for($i=0; $i < count($this->templates); $i++) {
-				$this->start_html.= $this->templates[$i]['start_html'];
-				$this->end_html = $this->templates[$i]['end_html'] . $this->end_html;
+			if(is_array($this->templates)) {
+				for($i=0; $i < count($this->templates); $i++) {
+					$this->start_html.= $this->templates[$i]['start_html'];
+					$this->end_html = $this->templates[$i]['end_html'] . $this->end_html;
+				}
 			}
 
 			$this->innerHTML = $this->contents['html1'];
