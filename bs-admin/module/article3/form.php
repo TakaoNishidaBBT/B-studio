@@ -72,7 +72,7 @@
 
 		function copy() {
 			if($this->post['source_id'] && is_numeric($this->post['source_id'])) {
-				$sql = "select * from " . B_DB_PREFIX . "article3 where article_id = %id%";
+				$sql = "select * from " . B_DB_PREFIX . "v_admin_article3 where article_id = %id%";
 				$sql = str_replace('%id%', $this->post['source_id'] , $sql);
 				$rs = $this->db->query($sql);
 				$row = $this->db->fetch_assoc($rs);
@@ -80,12 +80,10 @@
 				$this->category = $this->getCategory();
 				$row['category'] = $this->getCategoryName($this->category, $row['category_id']);
 
-				$this->tag = $this->getTag();
-				$row['tag'] = $this->getTagName($this->tag, $row['tags']);
-
 				$row['slug'] = '';
 				$this->editor->setValue($row);
 				$this->settings->setValue($row);
+				$this->setTagName();
 				$this->setThumnail($row['title_img_file']);
 				$this->setDetailStatus();
 			}
