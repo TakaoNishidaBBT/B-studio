@@ -5,6 +5,10 @@
  *
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
+
+
+
+
 	error_reporting(E_ALL & ~E_NOTICE & ~E_STRICT);
 
 	require_once('bs-admin/global/b_global_function.php');
