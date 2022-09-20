@@ -32,6 +32,9 @@
 	}
 
 	bstudio._insertIMG = function(dir, file_path, img_size, img_obj_id, hidden_obj_id, w, h) {
+		if(file_path.substr(0, 1) == '/') {
+			file_path = file_path.substr(1);
+		}
 		var hidden_target = document.getElementById(hidden_obj_id);
 		if(hidden_target) {
 			// set hidden target value (real value)

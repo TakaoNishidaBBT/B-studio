@@ -540,7 +540,7 @@
 				$response['message'] = $this->message;
 			}
 
-			$root_node = new B_FileNode($this->dir, '/', $this->session['open_nodes'], null, 1);
+			$root_node = new B_FileNode($this->dir, 'root', $this->session['open_nodes'], null, 1);
 			$current_node = $root_node->getNodeById($this->session['current_node']);
 			if(!$current_node) {
 				$current_node = $root_node;

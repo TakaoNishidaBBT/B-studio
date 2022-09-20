@@ -10,28 +10,13 @@
 	function __getRandomText($length) {
 		$base = 'abcdefghijkmnprstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ2345678';
 		for($i=0; $i<$length; $i++) {
-			$pwd.= $base{mt_rand(0, strlen($base)-1)};
+			$pwd.= $base[mt_rand(0, strlen($base)-1)];
 		}
 		return $pwd;
 	}
 
 	function __getPath() {
-		$path = str_replace('\\', '/', func_get_arg(0));
-		if($path == '.') $path = '';
-
-		for($i=1; $i<func_num_args(); $i++) {
-			if(!$file_name = func_get_arg($i)) continue;
-			if(substr($path, -1) == '/') {
-				$path = substr($path, 0, -1);
-			}
-			if(substr($file_name, 0, 1) == '/') {
-				$file_name = substr($file_name, 1);
-			}
-			if($path) $path.= '/';
-
-			$path.= $file_name;
-		}
-		return $path;
+		return preg_replace('/(?<!:)\/+/', '/', implode('/', array_filter(array_map('trim', func_get_args()), 'strlen')));
 	}
 
 	function __($text) {
