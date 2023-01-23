@@ -67,8 +67,8 @@
 		}
 
 		function setPage($page_no) {
-			$this->page_no = $this->db->real_escape_string($page_no);
-			if(!is_numeric($this->page_no)) $this->page_no = 1;
+			$this->page_no = (int)$this->db->real_escape_string($page_no);
+			if(!is_numeric($this->page_no) || $this->page_no <= 0) $this->page_no = 1;
 		}
 
 		function bind($data=null) {
