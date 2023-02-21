@@ -58,7 +58,7 @@
 				// set Category
 				$this->category = $this->getCategory();
 				$row['category'] = $this->getCategoryName($this->category, $row['category_id']);
-$this->log->write('$row', $row);
+
 				$this->editor->setValue($row);
 				$this->settings->setValue($row);
 				$this->setTagName();
