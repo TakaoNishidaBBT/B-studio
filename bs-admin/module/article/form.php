@@ -58,7 +58,7 @@
 				// set Category
 				$this->category = $this->getCategory();
 				$row['category'] = $this->getCategoryName($this->category, $row['category_id']);
-
+$this->log->write('$row', $row);
 				$this->editor->setValue($row);
 				$this->settings->setValue($row);
 				$this->setTagName();
@@ -119,7 +119,7 @@
 		}
 
 		function getCategory() {
-			$sql = "select * from " . B_DB_PREFIX . "v_category where parent_node = 'root' order by disp_seq";
+			$sql = "select * from " . B_DB_PREFIX . "v_category order by disp_seq";
 			$rs = $this->db->query($sql);
 			while($row = $this->db->fetch_assoc($rs)) {
 				$name = $row['node_name'];
