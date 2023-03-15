@@ -344,6 +344,8 @@
 								bframe.editCheck_handler.registerResetCallBackFunction(resetDirtyCallback);
 							}
 
+							ev.editor.dataProcessor.writer.selfClosingEnd = '>';
+
 							bframe.fireEvent(window, 'resize');
 							onScroll();
 						},
