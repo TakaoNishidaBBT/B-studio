@@ -21,7 +21,7 @@
 	</form>
 
 	<?php
-		if($error_message) {
+		if(isset($error_message)) {
 			echo '<p class="error-message-top">' . $error_message . '</p>';
 		}
 	?>
