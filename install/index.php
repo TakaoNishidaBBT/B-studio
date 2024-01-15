@@ -39,7 +39,7 @@
 	$admin_user_form = new B_Element($admin_user_form_config);
 	$root_htaccess = new B_Element($root_htaccess_config);
 
-	if($_POST['action'] == 'confirm') {
+	if(isset($_POST['action']) && $_POST['action'] == 'confirm') {
 		$_SESSION['install_confirm'] = true;
 
 		if(confirm($db_install_form, $admin_basic_auth_form, $admin_user_form, $root_htaccess, $perm_message, $error_message)) {
@@ -53,7 +53,7 @@
 			exit;
 		}
 	}
-	else if($_SESSION['install_confirm']) {
+	else if(isset($_SESSION['install_confirm'])) {
 		back($db_install_form, $admin_basic_auth_form, $admin_user_form, $root_htaccess, $perm_message);
 	}
 	else {
