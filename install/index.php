@@ -118,7 +118,7 @@
 		// Set up htaccess
 		$contents = file_get_contents('./config/_htaccess.txt');
 		$contents = str_replace('%REWRITE_BASE%', B_CURRENT_ROOT, $contents);
-		$param['htaccess'].= $contents;
+		$param['htaccess'] = $contents;
 		$root_htaccess->setValue($param);
 	}
 
