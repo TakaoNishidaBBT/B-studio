@@ -24,7 +24,7 @@
 
 		global $texts;
 
-		return $texts[$text] ? $texts[$text] : $text;
+		return isset($texts[$text]) ? $texts[$text] : $text;
 	}
 
 	// class auto loader
