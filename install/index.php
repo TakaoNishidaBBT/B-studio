@@ -20,7 +20,7 @@
 
 	// Set $_SESSION['language']
 	define('LANG', 'en');
-	if(!$_SESSION['language']) $_SESSION['language'] = LANG;
+	if(!isset($_SESSION['language'])) $_SESSION['language'] = LANG;
 
 	if($_POST['action'] == 'select-language' && function_exists('mb_internal_encoding')) {
 		$_SESSION['language'] = $_POST['language'];
