@@ -12,6 +12,7 @@
 	class B_Element {
 		public $mb_no_trim;
 		public $no_trim;
+		public $convert;
 
 		function __construct($config, $user_auth=NULL, $config_filter=NULL, &$parent=NULL, $level=0) {
 			if(!is_array($config)) {
