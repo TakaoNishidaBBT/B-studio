@@ -9,10 +9,89 @@
 	// class B_Element
 	// 
 	// -------------------------------------------------------------------------
-	class B_Element {
+	class B_Element extends stdClass {
+		public $config;
+		public $config_org;
+		public $parent;
+		public $validation;
+		public $level;
+		public $start_html;
+		public $start_html_asc;
+		public $start_html_desc;
+		public $start_html_alt;
+		public $start_html_a;
+		public $start_html_b;
+		public $start_html_d;
+		public $start_html_f;
+		public $start_html_s;
+		public $start_html_1;
+		public $start_html_open;
+		public $invalid_start_html;
+		public $config_start_html;
+		public $end_html;
+		public $config_end_html;
+		public $mode;
+		public $name;
+		public $name_prefix;
+		public $attr;
+		public $value;
+		public $elements;
+		public $class;
+		public $auth_filter;
+		public $config_filter;
+		public $filter;
+		public $data_set;
+		public $data_set_value;
+		public $local;
+		public $filter_value = array();
+		public $start_html_invalid;
+		public $link;
+		public $format;
+		public $empty;
+		public $cond_html;
+		public $sort_key;
+		public $param;
+		public $title;
+		public $strip_tags;
+		public $id;
+		public $script;
+		public $target;
+		public $specialchars;
+		public $validate;
+		public $alt;
+		public $item;
+		public $container;
+		public $label;
+		public $error_group;
+		public $confirm_mode;
+		public $checked;
 		public $mb_no_trim;
-		public $no_trim;
+		public $index;
+		public $name_index;
+		public $special_text;
+		public $sequence;
+		public $value_index;
+		public $fixed;
+		public $disabled;
+		public $shorten_text;
+		public $no_linefeed;
+		public $convert_text;
+		public $status;
+		public $type;
 		public $convert;
+		public $confirm_start_html;
+		public $confirm_end_html;
+		public $confirm_data_set;
+		public $display;
+		public $tag;
+		public $row_span;
+		public $col_span;
+		public $confirm_message;
+		public $data_name;
+		public $value_exist;
+		public $shortenText;
+		public $attr_disabled;
+		public $session_enquete;
 
 		function __construct($config, $user_auth=NULL, $config_filter=NULL, &$parent=NULL, $level=0) {
 			if(!is_array($config)) {
@@ -45,12 +124,17 @@
 					switch($key) {
 						case 'validate':
 						case 'convert_text':
-						case 'script':
+//						case 'script':
 						case 'row':
 						case 'data_set':
 						case 'item':
 						case 'special_text':
+						case 'strip_tags':
 							$this->$key = $value;
+							break;
+
+						case 'script':
+							$this->$key = $this->array_filter_recursive($value, $user_auth, $config_filter);
 							break;
 					}
 
@@ -64,11 +148,39 @@
 			if(isset($this->data_set)) $this->data_set_value = $this->getDataSetValue($this->data_set);
 		}
 
+		function array_filter_recursive($value, $user_auth, $config_filter) {
+			$numeric_key = true;
+			$result = array();
+
+			if(is_array($value)) {
+				if((isset($value['auth_filter']) && !$this->checkFilter($value['auth_filter'], $user_auth)) ||
+					(isset($value['config_filter']) && !$this->checkFilter($value['config_filter'], $config_filter))) {
+					return $result;
+				}
+				foreach($value as $key => $value2) {
+					if(!is_numeric($key)) $numeric_key = false;
+
+					if($array = $this->array_filter_recursive($value2, $user_auth, $config_filter)) {
+						$result[$key] = $array;
+					}
+				}
+				if($numeric_key) {
+					$result = array_values($result);
+				}
+			}
+			else {
+				$result = $value;
+			}
+			return $result;
+		}
+
 		function addElement($element) {
 			$this->elements[] = &$element;
 		}
 
 		function checkFilter($filter, $value) {
+			$mode = '';
+
 			if(!isset($filter)) return true;
 
 			if(substr($filter, 0, 1) == '!') {
@@ -123,6 +235,8 @@
 		}
 
 		function getDataSetValue($data_set) {
+			$data_set_value = array();
+
 			global $g_data_set, ${$g_data_set};
 
 			if($data_set) {
@@ -142,14 +256,14 @@
 					}
 				}
 				else {
-					$data_set_value = ${$g_data_set}[$data_set];
+					if(isset(${$g_data_set}[$data_set])) $data_set_value = ${$g_data_set}[$data_set];
 				}
 				return $data_set_value;
 			}
 		}
 
 		function getElementById($id) {
-			if($id == $this->id) {
+			if(isset($this->id) && $this->id == $id) {
 				return $this;
 			}
 			if(isset($this->elements)) {
@@ -164,7 +278,7 @@
 		}
 
 		function getElementByName($name) {
-			if($name == $this->name) {
+			if(isset($this->name) && $this->name == $name) {
 				return $this;
 			}
 			if(isset($this->elements)) {
@@ -189,14 +303,14 @@
 					}
 				}
 			}
-			if($name == $this->name) {
+			if(isset($this->name) && $this->name == $name) {
 				$target[] = $this;
 			}
 			return $target;
 		}
 
 		function getElementByFieldName($field_name, $name) {
-			if($name == $this->$field_name) {
+			if(isset($this->$field_name) && $this->$field_name == $name) {
 				return $this;
 			}
 			if(isset($this->elements)) {
@@ -251,24 +365,7 @@
 			}
 			$this->_setValue($value);
 		}
-/*
-		function _setValue($value) {
-			if(substr($this->name, strlen($this->name)-2, 2) == '[]') {
-				$name = $this->name_prefix . substr($this->name, 0, strlen($this->name)-2);
-			}
-			else {
-				$name = $this->name_prefix . $this->name;
-			}
 
-			if(isset($value[$name])) {
-				$this->value = $this->_prepareInput($value[$name]);
-			}
-
-			if($this->number_format) {
-				$this->value = str_replace(',', '', $this->value);
-			}
-		}
-*/
 		function _setValue($value) {
 			$name_prefix = '';
 			$name = '';
@@ -320,7 +417,7 @@
 		}
 
 		function _getValue(&$param) {
-			if(!$this->class || !$this->name) return;
+			if(!isset($this->class) || !isset($this->name)) return;
 
 			if(substr($this->name, strlen($this->name)-2, 2) == '[]') {
 				$name = substr($this->name, 0, strlen($this->name)-2);
@@ -328,12 +425,11 @@
 			else {
 				$name = $this->name;
 			}
-
 			$param[$name] = $this->value;
 		}
 
 		function getHtml($mode=NULL) {
-			if(!$this->checkFilter($this->filter, $this->filter_value)) {
+			if(isset($this->filter) && !$this->checkFilter($this->filter, $this->filter_value)) {
 				return;
 			}
 
@@ -341,7 +437,7 @@
 				return;
 			}
 
-			if($mode == 'confirm' && $this->confirm_mode == 'none') {
+			if($mode == 'confirm' && isset($this->confirm_mode) && $this->confirm_mode == 'none') {
 				return;
 			}
 
@@ -349,7 +445,7 @@
 			$inner_html = $this->getInnerHTML($mode);
 			$end_html = $this->getEndHtml($mode);
 
-			if($this->empty == 'no-display' && !$inner_html) {
+			if(isset($this->empty) && $this->empty == 'no-display' && !$inner_html) {
 				return;
 			}
 			$html = $start_html . $inner_html . $end_html;
@@ -366,12 +462,12 @@
 			if($mode == 'confirm' && isset($this->confirm_start_html)) {
 				return $this->confirm_start_html;
 			}
-			return $this->start_html;
+			return isset($this->start_html) ? $this->start_html : '';
 		}
 
 		function getValidationStatus() {
-			for($obj=$this->parent ; $obj->parent ; $obj=$obj->parent) {
-				if($obj->error_group) {
+			for($obj = isset($this->parent) ? $this->parent : ''; isset($obj->parent); $obj = $obj->parent) {
+				if(isset($obj->error_group)) {
 					return $obj->validation;
 				}
 			}
@@ -379,12 +475,15 @@
 		}
 
 		function getEndHtml($mode=null) {
+			$html = '';
+
 			if($mode == 'confirm' && isset($this->confirm_end_html)) {
 				$html = $this->confirm_end_html;
 			}
-			else {
+			else if(isset($this->end_html)) {
 				$html = $this->end_html;
 			}
+
 			return $html;
 		}
 
@@ -400,19 +499,24 @@
 		}
 
 		function getElementsHtml($mode=null) {
-			$value = $this->value;
+			$value = isset($this->value) ? $this->value : '';
 
-			if($this->strip_tags) {
-				$value = strip_tags($value);
+			if(isset($this->strip_tags)) {
+				if(is_array($this->strip_tags)) {
+					$value = strip_tags($value, implode($this->strip_tags));
+				}
+				else {
+					$value = strip_tags($value);
+				}
 			}
 
-			if($this->number_format && is_numeric($value)) {
+			if(isset($this->number_format) && is_numeric($value)) {
 				if($value || !$this->zero_suppress) {
 					$value = number_format(str_replace(',', '', $value));
 				}
 			}
 
-			if($this->shorten_text) {
+			if(isset($this->shorten_text)) {
 				$value = $this->shortenText($value, $this->shorten_text);
 			}
 
@@ -425,6 +529,8 @@
 		}
 
 		function getHiddenHtml() {
+			$html = '';
+
 			if(!$this->checkFilter($this->filter, $this->filter_value)) {
 				return;
 			}
@@ -447,12 +553,15 @@
 		}
 
 		function _gethtmlid() {
-			$id = strlen($this->id) ? $this->id : $this->name;
-			return $this->name_prefix . $id;
+			$name = isset($this->name) ? $this->name : '';  
+			$name_prefix = isset($this->name_prefix) ? $this->name_prefix : '';  
+			$id = isset($this->id) ? $this->id : $name;
+
+			return $name_prefix . $id;
 		}
 
 		function _prepareInput($input) {
-		    if(is_array($input)) {
+			if(is_array($input)) {
 				foreach($input as $key => $value) {
 					if(is_array($value)) {
 						$output[$key] = $this->_prepareInput($value);
@@ -466,15 +575,15 @@
 			else {
 				$output = $this->sanitize($input);
 			}
-		    return $output;
+			return $output;
 		}
 
 		function sanitize($value) {
 			// trim
-			if($this->mb_no_trim) {
+			if(isset($this->mb_no_trim) && $this->mb_no_trim) {
 				$value = trim($value);
 			}
-			else if(!$this->no_trim) {
+			else if(!isset($this->no_trim)) {
 				$value = $this->mb_trim($value);
 			}
 
@@ -482,13 +591,13 @@
 			if(function_exists('mb_convert_kana')) $value = mb_convert_kana($value, 'KV');
 
 			// convert
-			if($this->convert) {
+			if(isset($this->convert)) {
 				if(function_exists('mb_convert_kana')) $value = mb_convert_kana($value, $this->convert);
 			}
-			if($this->convert_text) {
+			if(isset($this->convert_text)) {
 				$value = $this->convert_text($value, $this->convert_text);
 			}
-			if($this->convert_dateformat && $value) {
+			if(isset($this->convert_dateformat) && $value) {
 				$value = $this->convert_dateformat($value, $this->convert_dateformat);
 			}
 
@@ -568,7 +677,7 @@
 		}
 
 		function validate() {
-			if($this->validate == 'none') return true;
+			if(isset($this->validate) && $this->validate == 'none') return true;
 
 			if(isset($this->elements)) {
 				foreach($this->elements as $element) {
@@ -588,35 +697,37 @@
 				case 'status':
 					if(!$this->status) {
 						$err_obj = $this->searchElementByName('error_message');
-						if($err_obj) $err_obj->value = $config['error_message'];
+						if($err_obj && !$err_obj->value) $err_obj->value = $config['error_message'];
 						return false;
 					}
 					break;
 
 				case 'callback':
-					$param = $config['param'];
-					$param['obj'] = $this;
-					$param['value'] = $this->value;
-					$obj = $config['obj'];
-					$method = $config['method'];
-					if(method_exists($obj, $method)) {
-						if(!$obj->$method($param)) {
-							$err_obj = $this->searchElementByName('error_message');
-							if($err_obj) {
-								if($config['error_message']) {
-									$err_obj->value = $config['error_message'];
+					if(isset($config['param'])) {
+						$param = $config['param'];
+						$param['obj'] = $this;
+						$param['value'] = $this->value;
+						$obj = $config['obj'];
+						$method = $config['method'];
+						if(method_exists($obj, $method)) {
+							if(!$obj->$method($param)) {
+								$err_obj = $this->searchElementByName('error_message');
+								if($err_obj) {
+									if($config['error_message']) {
+										$err_obj->value = $config['error_message'];
+									}
+									if($param['error_message']) {
+										$err_obj->value = $param['error_message'];
+									}
 								}
-								if($param['error_message']) {
-									$err_obj->value = $param['error_message'];
-								}
+								return false;
 							}
-							return false;
 						}
 					}
 					break;
 
 				case 'required':
-					if($config['option'] == 'numeric') {
+					if(isset($config['option']) && $config['option'] == 'numeric') {
 						if(!(int)$this->value) {
 							$err_obj = $this->searchElementByName('error_message');
 							if($err_obj) $err_obj->value = $config['error_message'];
@@ -707,7 +818,7 @@
 
 				case 'length':
 					$len = mb_strlen($this->value);
-					if($len < $config['min'] || $len > $config['max']) {
+					if((isset($config['min']) && $len < $config['min']) || (isset($config['max']) && $len > $config['max'])) {
 						$err_obj = $this->searchElementByName('error_message');
 						if($err_obj) $err_obj->value = $config['error_message'];
 						return false;
@@ -716,7 +827,7 @@
 
 				case 'pattern':
 					if(isset($this->value) && $this->value != '') {
-						if($config['delimiter']) {
+						if(isset($config['delimiter'])) {
 							$value_list = explode($config['delimiter'], $this->value);
 						}
 						else {
@@ -734,7 +845,7 @@
 
 				case 'denaial_pattern':
 					if(isset($this->value)) {
-						if($config['delimiter']) {
+						if(isset($config['delimiter'])) {
 							$value_list = explode($config['delimiter'], $this->value);
 						}
 						else {
@@ -753,7 +864,7 @@
 				case 'emailMX':
 					if(isset($this->value) && $this->value != '') { // not required
 						if(substr(PHP_OS, 0, 3) === 'WIN') break;
-						if($config['delimiter']) {
+						if(isset($config['delimiter'])) {
 							$value_list = explode($config['delimiter'], $this->value);
 						}
 						else {
@@ -1090,19 +1201,22 @@
 			if($this->shorten_text) {
 				$this->value = $this->shortenText($this->value, $this->shorten_text);
 			}
-			$html = htmlspecialchars($this->value, ENT_QUOTES, B_CHARSET);
+			$html = isset($this->value) ? htmlspecialchars($this->value, ENT_QUOTES, B_CHARSET) : '';
+
 			return $html;
 		}
 
 		function _getHiddenHtml() {
 			if(!isset($this->name)) return;
 
+			$value = isset($this->value) ? htmlspecialchars($this->value, ENT_QUOTES, B_CHARSET) : '';
+
 			return	'<input type="hidden" ' .
 					'name="' . $this->name . '" ' .
 					'id="' . $this->_gethtmlid() . '" ' .
-					'value="' . htmlspecialchars($this->value, ENT_QUOTES, B_CHARSET) . '" ' .
+					'value="' . $value . '" ' .
 					$this->attr .
-					' />' . "\n";
+					' >' . "\n";
 		}
 	}
 
@@ -1116,13 +1230,17 @@
 				return '<pre>' . htmlspecialchars($this->value, ENT_QUOTES, B_CHARSET) . '</pre>';
 			}
 			else {
+				$name = isset($this->name) ? $this->name : '';
+				$name_prefix = isset($this->name_prefix) ? $this->name_prefix : '';
+				$value = isset($this->value) ? $this->value : '';
+				$html = isset($this->html) ? $this->html : '';
+
 				return 
 					'<textarea ' .
 					$this->attr . ' ' .
 					'id="' . $this->_gethtmlid() . '" ' .
-					'name="' . $this->name_prefix . $this->name . '" ' .
-					$this->html .'>' . "\n" .
-					htmlspecialchars($this->value, ENT_QUOTES, B_CHARSET) .
+					'name="' . $name_prefix . $name . '" ' . $html .'>' . "\n" .
+					htmlspecialchars($value, ENT_QUOTES, B_CHARSET) .
 					'</textarea>' . "\n";
 			}
 		}
@@ -1141,7 +1259,7 @@
 				$value = htmlspecialchars($this->value, ENT_QUOTES, B_CHARSET);
 			}
 
-			return str_replace("\n", '<br />', $value);
+			return str_replace("\n", '<br>', $value);
 		}
 
 		function _getHiddenHtml() {
@@ -1159,7 +1277,7 @@
 					'id="' . $this->_gethtmlid() . '" ' .
 					'value="' . $value . '" ' .
 					$this->attr .
-					' />' . "\n";
+					' >' . "\n";
 		}
 	}
 
@@ -1184,32 +1302,37 @@
 			if($mode == 'confirm') {
 				return htmlspecialchars($this->value, ENT_QUOTES, B_CHARSET);
 			}
-			if($this->label) {
+			if(isset($this->label)) {
 				$html = '<label>' . $this->label . '</label>';
 			}
 			$disabled = '';
-			if($this->disabled && $this->disabled == 'disabled') {
+			if(isset($this->disabled) && $this->disabled == 'disabled') {
 				$disabled = ' disabled="disabled" ';
 			}
 
-			$value = htmlspecialchars($this->value, ENT_QUOTES, B_CHARSET);
-			if($this->zero_suppress && is_numeric($this->value) && $this->value == 0) {
+			$value = '';
+			if(isset($this->value)) $value = htmlspecialchars($this->value, ENT_QUOTES, B_CHARSET);
+			if(isset($this->zero_suppress) && is_numeric($this->value) && $this->value == 0) {
 				$value = '';
 			}
-			if($this->type) {
+			if(isset($this->type)) {
 				$type = $this->type;
 			}
 			else {
 				$type = 'text';
 			}
-			$html.= 
+
+			$name = isset($this->name) ? $this->name : '';
+			$name_prefix = isset($this->name_prefix) ? $this->name_prefix : '';
+
+			$html = 
 				'<input ' .
 				$this->attr . $disabled . ' ' .
 				'type="' . $type . '" ' .
-				'name="' . $this->name_prefix . $this->name . '" ' .
+				'name="' . $name_prefix . $name . '" ' .
 				'id="' . $this->_gethtmlid() . '" ' .
 				'value="' . $value . '"' .
-				' />';
+				' >';
 			return $html;
 		}
 	}
@@ -1240,7 +1363,7 @@
 				'name="' . $this->name_prefix . $this->name . '" ' .
 				'id="' . $this->_gethtmlid() . '" ' .
 				'value="' . $value . '"' .
-				' />';
+				' >';
 
 			return $html;
 		}
@@ -1264,7 +1387,7 @@
 				'data-value="' . $this->value . '" ' .
 				$confirm . ' ' .
 				$this->attr . ' ' .
-				' />';
+				' >';
 
 			return $html;
 		}
@@ -1276,11 +1399,13 @@
 	// -------------------------------------------------------------------------
 	class B_Button extends B_Element {
 		function getElementsHtml($mode=null) {
+			$disabled = '';
+
 			if($mode == 'confirm') {
 				return;
 			}
 
-			if($this->disabled == 'disabled') {
+			if(isset($this->disabled) && $this->disabled == 'disabled') {
 				$disabled = ' disabled="disabled" ';
 			}
 			return 
@@ -1291,7 +1416,7 @@
 				'value="' . $this->value . '" ' .
 				$this->attr .
 				$disabled .
-				' />';
+				' >';
 		}
 	}
 
@@ -1310,14 +1435,18 @@
 				}
 			}
 
+			$name = isset($this->name) ? $this->name : '';
+			$name_prefix = isset($this->name_prefix) ? $this->name_prefix : '';
+			$value = isset($this->value) ? $this->value : '';
+
 			$html = 
 				'<input ' .
 				$this->attr . ' ' .
 				'type="password" ' .
-				'name="' . $this->name_prefix . $this->name . '" ' .
+				'name="' . $name_prefix . $name . '" ' .
 				'id="' . $this->_gethtmlid() . '" ' .
-				'value="' . $this->value . '" ' .
-				' />' . "\n";
+				'value="' . $value . '" ' .
+				' >' . "\n";
 
 			return $html;
 		}
@@ -1336,7 +1465,7 @@
 				'name="' . $this->name_prefix . $this->name . '" ' .
 				'id="' . $this->_gethtmlid() . '" ' .
 				'value="' . $this->value . '" ' .
-				' />' . "\n";
+				' >' . "\n";
 		}
 	}
 
@@ -1353,7 +1482,7 @@
 				'name="' . $this->name_prefix . $this->name . '" ' .
 				'id="' . $this->_gethtmlid() . '" ' .
 				'value="' . $this->value . '" ' .
-				' />' . "\n";
+				' >' . "\n";
 		}
 	}
 
@@ -1365,29 +1494,35 @@
 		function getElementsHtml($mode=null) {
 			if(is_array($this->value)) {
 				foreach($this->value as $value2) {
+					$value = $value2 ? htmlspecialchars($value2, ENT_QUOTES, B_CHARSET) : '';
+
 					$html.=
 							'<input ' .
 							'type="hidden" ' .
 							'name="' . $this->name_prefix . $this->name . '[]" ' .
 							'id="' . $this->_gethtmlid() . '[]" ' .
-							'value="' . htmlspecialchars($value2, ENT_QUOTES, B_CHARSET) . '" ' .
+							'value="' . $value . '" ' .
 							$this->attr .
-							' />' . "\n";
+							' >' . "\n";
 				}
 			}
 			else {
+				$value = $this->value ? htmlspecialchars($this->value, ENT_QUOTES, B_CHARSET) : '';
+
+				$id = $this->_gethtmlid();
 				$name = $this->name;
 				if($this->mode == 'array') {
 					$name.='[]';
+					$id.= '[' . $value . ']';
 				}
 				$html =
 					'<input ' .
 					'type="hidden" ' .
 					'name="' . $this->name_prefix . $name . '" ' .
-					'id="' . $this->_gethtmlid() . '" ' .
-					'value="' . htmlspecialchars($this->value, ENT_QUOTES, B_CHARSET) . '" ' .
+					'id="' . $id . '" ' .
+					'value="' . $value . '" ' .
 					$this->attr .
-					' />' . "\n";
+					' >' . "\n";
 			}
 
 			return $html;
@@ -1420,42 +1555,18 @@
 
 				if(isset($this->data_set_value) && is_array($this->data_set_value)) {
 					foreach($this->data_set_value as $key => $value) {
-						if(is_array($value)) {
-							$html.= '  <optgroup label="' . $key . '">';
-							foreach($value as $key2 => $value2) {
-								$html.=
-									'  <option value="' . $key2 . '" ';
-								if(isset($this->value)) {
-									if($key2 == $this->value) {
-										$html.= 'selected="selected"';
-									}
-								}
-								$html.= '>' . $value2 . '</option>' ."\n";
+						$html.=
+							'  <option value="' .
+							$key . '" ';
+						if(isset($this->value)) {
+							if($key == $this->value) {
+								$html.= 'selected="selected"';
 							}
-							$html.= '  </optgroup>';
 						}
-						else {
-							$html.=
-								'  <option value="' .
-								$key . '" ';
-							if(isset($this->value)) {
-								if($key == $this->value) {
-									$html.= 'selected="selected"';
-								}
-							}
-							$html.= '>' . $value . '</option>' ."\n";
-						}
+						$html.= '>' . $value . '</option>' ."\n";
 					}
 				}
 				$html.= '</select>' . "\n";
-
-				if($this->special_text) {
-					foreach($this->elements as $obj) {
-						if($obj->index == $key) {
-							$html.= $obj->getElementsHtmlSpecial();
-						}
-					}
-				}
 			}
 
 			return $html;
@@ -1474,43 +1585,63 @@
 		function getElementsHtml($mode=null) {
 			if(isset($this->data_set_value)) {
 				if(is_array($this->value)) {
-					foreach($this->value as $this->value2) {
+					foreach($this->value as $value) {
 						if($html) $html.= "&nbsp;";
-						array_walk_recursive($this->data_set_value, function($value, $key) {
-							if($key == $this->value2) {
-								$this->html = $value;
-							}
-						});
-						$html.= $this->html;
-
-						if($this->special_text) {
-							foreach($this->elements as $obj) {
-								if($obj->index == $value) {
-									if($html) $html.= "&nbsp;";
-									$html.= $obj->label . $obj->getConfirmHtmlSpecial();
-								}
-							}
-						}
+						$html.= $this->data_set_value[$value];
 					}
 				}
 				else {
-					array_walk_recursive($this->data_set_value, function($value, $key) {
-						if($key == $this->value) {
-							$this->html = $value;
-						}
-					});
-					$html = $this->html;
-					if($this->special_text) {
-						foreach($this->elements as $obj) {
-							if($obj->index == $this->value) {
-								$html.= $obj->label . $obj->getConfirmHtmlSpecial();
-							}
-						}
-					}
+					$html = isset($this->data_set_value[$this->value]) ? $this->data_set_value[$this->value] : '';
 				}
 			}
 			else {
 				$html = $this->value;
+			}
+
+			return $html;
+		}
+
+		function _getHiddenHtml() {
+			if(!isset($this->name)) return;
+
+			$value = isset($this->value) ? htmlspecialchars($this->value, ENT_QUOTES, B_CHARSET) : '';
+
+			return	'<input type="hidden" ' .
+					'name="' . $this->name_prefix . $this->name . '" ' .
+					'id="' . $this->_gethtmlid() . '" ' .
+					'value="' . $value . '" ' .
+					$this->attr .
+					' >' . "\n";
+		}
+	}
+
+	// -------------------------------------------------------------------------
+	// class B_PluralSelectedText
+	// 
+	// -------------------------------------------------------------------------
+	class B_PluralSelectedText extends B_Element {
+		function getElementsHtml($mode=null) {
+			if(isset($this->data_set_value)) {
+				$a = explode('/', $this->value);
+				foreach($this->data_set_value as $key => $value) {
+					unset($item);
+					if(substr($key2, 0, 2) == 'LF') continue;
+					foreach($a as $v) {
+						if($key == $v) {
+							if($this->item) {
+								$item = new B_Element($this->item);
+								$item->value = $this->data_set_value[$key];
+								$html.= $item->getHtml();
+
+							}
+							else {
+								$html.= '<span>' . $this->data_set_value[$key] . '</span>';
+							}
+
+							break;
+						}
+					}
+				}
 			}
 
 			return $html;
@@ -1524,7 +1655,7 @@
 					'id="' . $this->_gethtmlid() . '" ' .
 					'value="' . htmlspecialchars($this->value, ENT_QUOTES, B_CHARSET) . '" ' .
 					$this->attr .
-					' />' . "\n";
+					' >' . "\n";
 		}
 	}
 
@@ -1533,8 +1664,9 @@
 	// 
 	// -------------------------------------------------------------------------
 	class B_SpecialInput extends B_Element {
-
 		function getElementsHtml($mode=null) {
+			$html = '';
+
 			if($mode == 'confirm') {
 				if($this->value && $this->parent->checked) {
 					$html = $this->label . htmlspecialchars($this->value, ENT_QUOTES, B_CHARSET);
@@ -1542,13 +1674,14 @@
 			}
 			else {
 				$id = $this->_gethtmlid();
+				$value = isset($this->value) ? htmlspecialchars($this->value, ENT_QUOTES, B_CHARSET) : '';
 				$html.= 
 					'<input ' .	$this->attr . ' ' .
 					'type="text" ' .
 					'name="' . $this->name_prefix . $this->name . '" ' .
 					'id="' . $id . '" ' .
-					'value="' . htmlspecialchars($this->value, ENT_QUOTES, B_CHARSET) . '" ' .
-					' />' . "\n";
+					'value="' . $value . '" ' .
+					' >' . "\n";
 				if($this->label) {
 					$html = '<label for="' . $id . '">' . $this->label . '</label>'. $html;
 				}
@@ -1583,6 +1716,10 @@
 				return $this->value;
 			}
 		}
+
+		function _getValue(&$param) {
+			return;
+		}
 	}
 
 	// -------------------------------------------------------------------------
@@ -1602,7 +1739,7 @@
 					unset($config);
 					if(substr($key, 0, 2) == 'LF') {
 						$config['confirm_mode'] = 'none';
-						$config['value'] = '<br />' . "\n";
+						$config['value'] = '<br class="br-pc" >' . "\n";
 						$class = 'B_Element';
 					}
 					else {
@@ -1611,7 +1748,13 @@
 						$config['name'] = $this->name;
 						$config['id'] = $this->name . '_' . $key;
 						$config['value'] = $key;
-						$config['label'] = htmlspecialchars($label, ENT_QUOTES, B_CHARSET);
+						$config['container'] = true;
+						if(isset($config['specialchars']) && $config['specialchars'] == 'none') {
+							$config['label'] = $label;
+						}
+						else {
+							$config['label'] = htmlspecialchars($label, ENT_QUOTES, B_CHARSET);
+						}
 						$class = 'B_Checkbox';
 					}
 
@@ -1620,7 +1763,7 @@
 					$this->addElement($item);
 
 					// special text
-					if($this->special_text && is_array($this->special_text)) {
+					if(isset($this->special_text) && is_array($this->special_text)) {
 						foreach($this->special_text as $value) {
 							if($value['index'] == $key) {
 								$special_input = new B_SpecialInput($value);
@@ -1699,6 +1842,8 @@
 		}
 
 		function getElementsHtml($mode=null) {
+			$html = '';
+
 			if($mode == 'confirm') {
 				if($this->checked) {
 					$html = $this->label;
@@ -1707,21 +1852,22 @@
 			else {
 				$name = $this->name_prefix . $this->name . $this->name_index;
 				$id = $this->_gethtmlid();
-				if(!$this->fixed && $this->value) {
+				if(!isset($this->fixed) && isset($this->value)) {
 					$name.= '[' . $this->value . ']';
+					if(!isset($this->container)) $id.= '[' . $this->value . ']';
 				}
 
 				$html.= '<input type="checkbox" name="' . $name . '" id="' . $id . '" value="' . $this->value . '"';
 				$html.= ' ' . $this->attr;
 
 				if($this->disabled) {
-					$html.= ' disabled="disabled"';
+					$html.= ' disabled="true"';
 				}
 				if($this->checked) {
 					$html.= ' checked="checked"';
 				}
-				$html.= ' />';
-				if(isset($this->label)) {
+				$html.= ' >';
+				if($this->label) {
 					$html.= '<label for="' . $id . '">' . $this->label . '</label>';
 				}
 			}
@@ -1799,7 +1945,7 @@
 					unset($config);
 					if(substr($key, 0, 2) == 'LF') {
 						$config['confirm_mode'] = 'none';
-						$config['value'] = '<br />' . "\n";
+						$config['value'] = '<br class="br-pc" >' . "\n";
 						$class = 'B_Element';
 					}
 					else {
@@ -1809,7 +1955,7 @@
 						$config['id'] = $this->name . '_' . $key;
 						$config['value'] = $key;
 						$config['label'] = htmlspecialchars($label, ENT_QUOTES, B_CHARSET);
-						if($this->index) {
+						if(isset($this->index)) {
 							$config['index'] = $this->index;
 						}
 						$class = 'B_Radio';
@@ -1825,7 +1971,7 @@
 					$this->addElement($item);
 
 					// special text
-					if($this->special_text && is_array($this->special_text)) {
+					if(isset($this->special_text) && is_array($this->special_text)) {
 						foreach($this->special_text as $value) {
 							if($value['index'] == $key) {
 								$special_input = new B_SpecialInput($value);
@@ -1865,7 +2011,7 @@
 		function getStartHtml($mode=null) {
 			if($mode == 'confirm') {
 				if($this->checked) {
-					return $this->confirm_start_html ? $this->confirm_start_html : $this->start_html;
+					return isset($this->confirm_start_html) ? $this->confirm_start_html : $this->start_html;
 				}
 			}
 			else {
@@ -1875,8 +2021,8 @@
 
 		function getEndHtml($mode=null) {
 			if($mode == 'confirm') {
-				if($this->checked) {
-					return $this->confirm_end_html ? $this->confirm_end_html : $this->end_html;
+				if(isset($this->checked)) {
+					return isset($this->confirm_end_html) ? $this->confirm_end_html : $this->end_html;
 				}
 			}
 			else {
@@ -1885,6 +2031,8 @@
 		}
 
 		function getElementsHtml($mode=null) {
+			$html = '';
+
 			if($mode == 'confirm') {
 				if($this->checked) {
 					$html = $this->label;
@@ -1907,8 +2055,8 @@
 				if($this->checked) {
 					$html.= ' checked="checked"';
 				}
-				$html.= ' />';
-				if(isset($this->label)) {
+				$html.= ' >';
+				if($this->label) {
 					$html.= '<label for="' . $id . '">' . $this->label . '</label>';
 				}
 			}
@@ -1966,8 +2114,13 @@
 	// 
 	// -------------------------------------------------------------------------
 	class B_Label extends B_Element {
-		function getElementsHtml($mode=null) {
-			return '<label for="' . $this->parent->_getHtmlid() . '">' . $this->value . '</label>';
+		function getStartHtml($mode=null) {
+			if($this->attr) $this->attr = ' ' . $this->attr;
+			return '<label for="' . $this->parent->_getHtmlid() . '"' . $this->attr . ' >';
+		}
+
+		function getEndHtml($mode=null) {
+			return '</label>';
 		}
 	}
 
@@ -1976,12 +2129,20 @@
 	// 
 	// -------------------------------------------------------------------------
 	class B_Link extends B_Element {
+		public $permalink;
+		public $element_start_html;
+		public $element_end_html;
+		public $event;
+		public $value_exist;
+		public $param_exist;
+
 		function getElementsHtml($mode=null) {
 			if($this->specialchars == 'none') {
 				return $this->value;
 			}
 			else {
-				return htmlspecialchars($this->value, ENT_QUOTES, B_CHARSET);
+				$value = $this->value ? htmlspecialchars($this->value, ENT_QUOTES, B_CHARSET) : '';
+				return $value;
 			}
 		}
 
@@ -1989,12 +2150,12 @@
 			if($this->link && $this->link == 'none') {
 				return $this->start_html;
 			}
-			if(!$this->param && $this->config_org['fixedparam']) {
+			if(!$this->param && isset($this->config_org['fixedparam'])) {
 				foreach($this->config_org['fixedparam'] as $key2 => $value2) {
 					$this->setParamProperty($key2, $value2);
 				}
 			}
-			$this->element_start_html =	'<a href="' . $this->link . $this->slug . $this->param . '"';
+			$this->element_start_html =	'<a href="' . $this->link . $this->permalink . $this->param . '"';
 			if($this->id) {
 				$this->element_start_html.= ' id="' . $this->_gethtmlid() . '"';
 			}
@@ -2040,32 +2201,32 @@
 				return;
 			}
 
-			if(is_array($this->config_org['slug'])) {
-				foreach($this->config_org['slug'] as $value2) {
-					$this->setSlug($value[$value2]);
+			if(isset($this->config_org['permalink']) && is_array($this->config_org['permalink'])) {
+				foreach($this->config_org['permalink'] as $value2) {
+					$this->setPermalink($value[$value2]);
 				}
 			}
-			if(is_array($this->config_org['param'])) {
+			if(isset($this->config_org['param']) && is_array($this->config_org['param'])) {
 				foreach($this->config_org['param'] as $key2 => $value2) {
 					$this->setParamProperty($key2, $value[$value2]);
 				}
 			}
-			if(is_array($this->config_org['data_param'])) {
+			if(isset($this->config_org['data_param']) && is_array($this->config_org['data_param'])) {
 				foreach($this->config_org['data_param'] as $key2 => $value2) {
 					$this->setParamProperty($key2, $value[$value2]);
 				}
 			}
-			if(is_array($this->config_org['fixedparam'])) {
+			if(isset($this->config_org['fixedparam']) && is_array($this->config_org['fixedparam'])) {
 				foreach($this->config_org['fixedparam'] as $key2 => $value2) {
 					$this->setParamProperty($key2, $value2);
 				}
 			}
 
-			if($this->config_org['anchor']) {
+			if(isset($this->config_org['anchor'])) {
 				$this->param = '#' . $value[$this->config_org['anchor']];
 			}
 
-			if($this->config_org['event']) {
+			if(isset($this->config_org['event'])) {
 				foreach($this->config_org['event'] as $key2 => $value2) {
 					$html = ' ' . $key2 . '="return ' . $value2['function'] . '(';
 					$param = '';
@@ -2114,8 +2275,8 @@
 			$param.= "'" . $value . "'";
 		}
 
-		function setSlug($value) {
-			$this->slug = '/' . $value;
+		function setPermalink($value) {
+			$this->permalink = '/' . $value;
 		}
 	}
 
@@ -2173,7 +2334,7 @@
 					'id="' . $this->_gethtmlid() . '" ' .
 					'value="' . htmlspecialchars($this->value, ENT_QUOTES, B_CHARSET) . '" ' .
 					$this->attr .
-					' />' . "\n";
+					' >' . "\n";
 		}
 	}
 
@@ -2192,6 +2353,9 @@
 	// 
 	// -------------------------------------------------------------------------
 	class B_Cell extends B_Element {
+		public $rowspan;
+		public $colspan;
+
 		function setValue($value) {
 			if(isset($this->elements)) {
 				foreach($this->elements as $element) {
@@ -2199,10 +2363,12 @@
 				}
 			}
 			// set col_span
-			if($this->config_org['col_span'] && $value[$this->config_org['col_span']] > 1) {
+			if(isset($this->config_org['col_span']) && isset($value[$this->config_org['col_span']]) &&
+				$value[$this->config_org['col_span']] > 1) {
 				$this->colspan = ' colspan="' . $value[$this->config_org['col_span']] . '"';
 			}
-			if($this->config_org['row_span'] && $value[$this->config_org['row_span']] > 1) {
+			if(isset($this->config_org['row_span']) && isset($value[$this->config_org['row_span']]) &&
+				$value[$this->config_org['row_span']] > 1) {
 				$this->rowspan = ' rowspan="' . $value[$this->config_org['row_span']] . '"';
 			}
 
@@ -2255,6 +2421,10 @@
 		}
 
 		function getStartHtml($mode=null) {
+			$attr = '';
+			$name = '';
+			$id = '';
+
 			if($this->attr) {
 				$attr = ' ' . $this->attr;
 			}
@@ -2287,11 +2457,7 @@
 				$id = ' id="' . $this->_gethtmlid() . '"';
 			}
 
-			return
-				'<iframe' . $id . $name .
-				' src="' . $this->src . '"' .
-				$this->attr .
-				'>';
+			return '<iframe' . $id . $name . ' src="' . $this->src . '" ' .	$this->attr . '>';
 		}
 
 		function getEndHtml($mode=null) {
@@ -2308,8 +2474,10 @@
 	// 
 	// -------------------------------------------------------------------------
 	class B_Image extends B_Element {
+		public $oath;
+
 		function getElementsHtml($mode=null) {
-			if($this->path) {
+			if(isset($this->path)) {
 				$src = __getPath($this->path, $this->value);
 			}
 			else {
@@ -2321,6 +2489,6 @@
 				'src="' . $src . '" ' .
 				'alt="' . $this->alt . '" ' .
 				$this->attr .
-				' />' . "\n";
+				' >' . "\n";
 		}
 	}
