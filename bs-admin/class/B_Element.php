@@ -23,7 +23,8 @@
 
 			foreach($config as $key => $value) {
 				if(is_array($value)) {
-					if(!$this->checkFilter($value['auth_filter'], $user_auth) || !$this->checkFilter($value['config_filter'], $config_filter)) {
+					if((isset($value['auth_filter']) && !$this->checkFilter($value['auth_filter'], $user_auth)) ||
+					   (isset($value['config_filter']) && !$this->checkFilter($value['config_filter'], $config_filter))) { 
 						continue;
 					}
 					if(is_numeric($key) || $key == 'element') {
