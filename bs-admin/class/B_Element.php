@@ -247,7 +247,7 @@
 			}
 			$this->_setValue($value);
 		}
-
+/*
 		function _setValue($value) {
 			if(substr($this->name, strlen($this->name)-2, 2) == '[]') {
 				$name = $this->name_prefix . substr($this->name, 0, strlen($this->name)-2);
@@ -261,6 +261,30 @@
 			}
 
 			if($this->number_format) {
+				$this->value = str_replace(',', '', $this->value);
+			}
+		}
+*/
+		function _setValue($value) {
+			$name_prefix = '';
+			$name = '';
+
+			if(isset($this->name_prefix)) $name_prefix = $this->name_prefix;
+
+			if(isset($this->name)) {
+				if(substr($this->name, strlen($this->name)-2, 2) == '[]') {
+					$name = $name_prefix . substr($this->name, 0, strlen($this->name)-2);
+				}
+				else {
+					$name = $name_prefix . $this->name;
+				}
+			}
+
+			if(isset($value[$name])) {
+				$this->value = $this->_prepareInput($value[$name]);
+			}
+
+			if(isset($this->number_format)) {
 				$this->value = str_replace(',', '', $this->value);
 			}
 		}
