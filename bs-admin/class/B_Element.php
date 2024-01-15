@@ -57,7 +57,7 @@
 					$this->config_org[$key] = $value;
 				}
 			}
-			$this->data_set_value = $this->getDataSetValue($this->data_set);
+			if(isset($this->data_set)) $this->data_set_value = $this->getDataSetValue($this->data_set);
 		}
 
 		function addElement($element) {
