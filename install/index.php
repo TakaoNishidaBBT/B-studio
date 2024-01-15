@@ -235,10 +235,12 @@
 	}
 
 	function back($db_install_form, $admin_basic_auth_form, $admin_user_form, $root_htaccess, &$perm_message) {
-		$db_install_form->setValue($_SESSION['param']);
-		$admin_basic_auth_form->setValue($_SESSION['param']);
-		$admin_user_form->setValue($_SESSION['param']);
-		$root_htaccess->setValue($_SESSION['param']);
+		$param = isset($_SESSION['param']) ? $_SESSION['param'] : '';
+
+		$db_install_form->setValue($param);
+		$admin_basic_auth_form->setValue($param);
+		$admin_user_form->setValue($param);
+		$root_htaccess->setValue($param);
 		confirmPermission($perm_message);
 	}
 
