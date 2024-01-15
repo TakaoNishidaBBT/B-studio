@@ -28,7 +28,7 @@
 						continue;
 					}
 					if(is_numeric($key) || $key == 'element') {
-						$class = $value['class'] ? $value['class'] : 'B_Element';
+						$class = isset($value['class']) ? $value['class'] : 'B_Element';
 						if(class_exists($class)) {
 							$element = new $class($value, $user_auth, $config_filter, $this, $level+1);
 						}
