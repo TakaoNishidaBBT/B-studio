@@ -29,7 +29,6 @@
 	// Config
 	require_once('../bs-admin/config/config.php');
 
-echo 'session lang:' . $_SESSION['language'] . ' post lang:' . $_POST['language'];
 	// Confirm timezone
 	date('Ymd');
 
