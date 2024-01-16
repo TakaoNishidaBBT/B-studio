@@ -20,8 +20,6 @@
 	}
 
 	function __($text) {
-echo '__';
-echo $text . ' ' . $_SESSION['language'];
 		if(isset($_SESSION['language']) && $_SESSION['language'] == 'en') return $text;
 
 		global $texts;
