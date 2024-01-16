@@ -9,6 +9,8 @@
 	ini_set('display_errors', 'On');
 	set_error_handler('exception_error_handler');
 
+	if(!isset($_SESSION['language'])) $_SESSION['language'] = LANG;
+
 	// Global Function
 	require_once('../bs-admin/global/b_global_function.php');
 
@@ -23,7 +25,6 @@
 
 	// Set $_SESSION['language']
 //	define('LANG', 'en');
-	if(!isset($_SESSION['language'])) $_SESSION['language'] = LANG;
 
 	if(isset($_POST['action']) && $_POST['action'] == 'select-language' && function_exists('mb_internal_encoding')) {
 		$_SESSION['language'] = $_POST['language'];
