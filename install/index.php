@@ -18,16 +18,17 @@
 	$ses = new B_Session;
 	$ses->start('nocache', 'bs-install', SESSION_DIR);
 
-	// Config
-	require_once('../bs-admin/config/config.php');
-
 	// Set $_SESSION['language']
-//	define('LANG', 'en');
-//	if(!isset($_SESSION['language'])) $_SESSION['language'] = LANG;
+	define('LANG', 'en');
+	if(!isset($_SESSION['language'])) $_SESSION['language'] = LANG;
 
 	if(isset($_POST['action']) && $_POST['action'] == 'select-language' && function_exists('mb_internal_encoding')) {
 		$_SESSION['language'] = $_POST['language'];
 	}
+
+	// Config
+	require_once('../bs-admin/config/config.php');
+
 echo 'session lang:' . $_SESSION['language'] . ' posr lang:' . $_POST['language'];
 	// Confirm timezone
 	date('Ymd');
