@@ -25,13 +25,13 @@
 //	define('LANG', 'en');
 	if(!isset($_SESSION['language'])) $_SESSION['language'] = LANG;
 
+echo 'language:' . $_SESSION['language'];
 	if(isset($_POST['action']) && $_POST['action'] == 'select-language' && function_exists('mb_internal_encoding')) {
 		$_SESSION['language'] = $_POST['language'];
 	}
 
 	// Confirm timezone
 	date('Ymd');
-echo 'language:' . $_SESSION['language'];
 	require_once('config/_form_config.php');
 	$select_language = new B_Element($select_language_config);
 	$db_install_form = new B_Element($db_install_form_config);
