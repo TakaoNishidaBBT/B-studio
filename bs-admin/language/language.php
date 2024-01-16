@@ -6,7 +6,7 @@
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
 	$lang = LANG;
-	if($_SESSION['language']) {
+	if(isset($_SESSION['language'])) {
 		$lang = $_SESSION['language'];
 	}
 
