@@ -10,6 +10,7 @@ echo '(language.php) $lang:' . $lang;
 	if(isset($_SESSION['language'])) {
 		$lang = $_SESSION['language'];
 	}
+echo '(language.php) $lang2:' . $lang;
 
 	mb_language('uni');
 
