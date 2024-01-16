@@ -20,7 +20,7 @@
 	}
 
 	function __($text) {
-		if($_SESSION['language'] == 'en') return $text;
+		if(isset($_SESSION['language']) && $_SESSION['language'] == 'en') return $text;
 
 		global $texts;
 
