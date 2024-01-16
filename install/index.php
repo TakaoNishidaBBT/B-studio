@@ -26,12 +26,13 @@
 		$_SESSION['language'] = $_POST['language'];
 	}
 
+echo 'session lang:' . $_SESSION['language'] . ' post lang:' . $_POST['language'];
 	// Config
 	require_once('../bs-admin/config/config.php');
 
-echo 'session lang:' . $_SESSION['language'] . ' posr lang:' . $_POST['language'];
 	// Confirm timezone
 	date('Ymd');
+
 	require_once('config/_form_config.php');
 	$select_language = new B_Element($select_language_config);
 	$db_install_form = new B_Element($db_install_form_config);
