@@ -31,7 +31,7 @@
 
 	// Confirm timezone
 	date('Ymd');
-
+echo 'language:' . $_SESSION['language'];
 	require_once('config/_form_config.php');
 	$select_language = new B_Element($select_language_config);
 	$db_install_form = new B_Element($db_install_form_config);
