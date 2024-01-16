@@ -23,13 +23,12 @@
 
 	// Set $_SESSION['language']
 //	define('LANG', 'en');
-	if(!isset($_SESSION['language'])) $_SESSION['language'] = LANG;
+//	if(!isset($_SESSION['language'])) $_SESSION['language'] = LANG;
 
-echo 'language:' . $_SESSION['language'];
 	if(isset($_POST['action']) && $_POST['action'] == 'select-language' && function_exists('mb_internal_encoding')) {
 		$_SESSION['language'] = $_POST['language'];
 	}
-
+echo 'lang:' . $_SESSION['language']
 	// Confirm timezone
 	date('Ymd');
 	require_once('config/_form_config.php');
