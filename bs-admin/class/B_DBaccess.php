@@ -359,6 +359,7 @@
 		}
 
 		function import($dump_file) {
+echo 'DBAccess import start $dump_file:' . $dump_file;
 			try {
 				if(!file_exists($dump_file)) return false;
 				if(!$this->is_connect) return false;
