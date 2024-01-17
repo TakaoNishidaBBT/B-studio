@@ -363,6 +363,7 @@ echo 'DBAccess import start $dump_file:' . $dump_file;
 			try {
 				if(!file_exists($dump_file)) return false;
 				if(!$this->is_connect) return false;
+echo 'DBAccess import start 2';
 
 				$this->begin();
 
@@ -377,6 +378,7 @@ echo 'DBAccess import start $dump_file:' . $dump_file;
 					$sql.= str_replace('%PREFIX%', B_DB_PREFIX, $line);
 
 					if(substr(trim($line), -1, 1) == ';') {
+echo 'SQL:' . $sql;
 						$this->query($sql);
 						$sql = '';
 					}
