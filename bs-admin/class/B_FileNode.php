@@ -10,6 +10,35 @@
 	// 
 	// -------------------------------------------------------------------------
 	class B_FileNode {
+		public $dir;
+		public $path;
+		public $node_id;
+		public $fullpath;
+		public $file_name;
+		public $parent;
+		public $level;
+		public $node_count;
+		public $update_datetime_u;
+		public $update_datetime_t;
+		public $file_info;
+		public $file_size;
+		public $node_type;
+		public $node_class;
+		public $image_size;
+		public $human_image_size;
+		public $thumbnail_image_path;
+		public $thumb;
+		public $node;
+		public $id;
+		public $start_html;
+		public $end_html;
+		public $script;
+		public $sort_key;
+		public $sort_order;
+		public $folder_count;
+		public $order;
+		public $total_files;
+
 		function __construct($dir, $path, $open_nodes=null, $parent=null, $expand_level=0, $level=0) {
 			if(!$path) return;
 
