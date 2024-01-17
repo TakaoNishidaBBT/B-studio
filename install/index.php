@@ -32,7 +32,7 @@
 	// Confirm timezone
 	date('Ymd');
 
-	if(!class_exists('ZipArchive')) {
+	if(class_exists('ZipArchive')) {
 		echo 'class ZipArchive not exists';
 	}
 
