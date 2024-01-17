@@ -56,7 +56,7 @@
 			$this->file_path = $file_path;
 			$this->module = $this->getModuleName();
 			$this->page = $this->getPageName();
-			if(defined('TERMINAL_ID') && is_array($_SESSION[TERMINAL_ID])) {
+			if(defined('TERMINAL_ID') && isset($_SESSION[TERMINAL_ID]) && is_array($_SESSION[TERMINAL_ID])) {
 				$this->session = &$_SESSION[TERMINAL_ID][$this->module];
 				$this->global_session = &$_SESSION[TERMINAL_ID];
 			}

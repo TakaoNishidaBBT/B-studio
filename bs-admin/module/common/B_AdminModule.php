@@ -6,6 +6,49 @@
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
 	class B_AdminModule extends B_Module {
+		public $auth;
+		public $user_id;
+		public $user_name;
+		public $user_auth;
+		public $language;
+		public $exhibitor;
+		public $node_id;
+		public $site_settings;
+		public $lang;
+		public $site_settings_table;
+		public $html_mail_header;
+		public $list_header_config;
+		public $list_config;
+		public $entry_status_info_config;
+		public $entry_form_config;
+		public $enquete_config;
+		public $preview_config;
+		public $chat_list_config;
+		public $booth_chat_list_config;
+		public $session_list_config;
+		public $session_text_list_config;
+		public $session_text_list_config2;
+		public $session_text_list_config_ex;
+		public $session_text_list_config2_ex;
+		public $top_page_table;
+		public $top_page_contents;
+		public $global_navi;
+		public $event_type;
+		public $ses_exhibition;
+		public $pager_config;
+		public $bframe_message_config;
+		public $default_row_per_page;
+		public $sql_where;
+		public $select_message;
+		public $site_title;
+		public $title;
+		public $agent;
+		public $bframe_message;
+		public $view_file;
+		public $session_list;
+		public $event_hybrid_online;
+		public $session_data_list;
+
 		function __construct($file_path) {
 			parent::__construct($file_path);
 
