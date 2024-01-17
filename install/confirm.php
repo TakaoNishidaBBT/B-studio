@@ -185,7 +185,7 @@
 			$text.= substr($bin, 0, min(16, $i));
 		}
 		for($i=$len; $i>0; $i>>=1) {
-			$text.= ($i & 1) ? chr(0) : $plainpasswd{0};
+			$text.= ($i & 1) ? chr(0) : $plainpasswd[0];
 		}
 
 		$bin = pack('H32', md5($text));
