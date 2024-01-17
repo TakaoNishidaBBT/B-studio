@@ -145,6 +145,7 @@
 	}
 
 	function db_install(&$error_message) {
+echo 'db_install start';
 		if(file_exists('./default/bstudio.zip')) {
 			return true;
 		}
@@ -160,12 +161,16 @@
 	}
 
 	function contents_install(&$error_message) {
+echo 'contents_install start';
 		if(!file_exists('./default/bstudio.zip')) {
 			return true;
 		}
 
+echo 'contents_install start2';
+
 		require_once('contents_install.php');
 		$contents_install = new contents_install();
+echo 'contents_install start';
 		$status = $contents_install->install();
 		if(!$status) {
 			$error_message = $contents_install->getErrorMessage();

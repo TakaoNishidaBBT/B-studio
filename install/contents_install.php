@@ -15,6 +15,7 @@
 				return true;
 			}
 			try {
+echo 'contents_install install';
 				$this->zip = new ZipArchive();
 				$this->zip->open('./default/bstudio.zip', ZipArchive::CREATE);
 				$this->zip->extractTo(B_RESOURCE_EXTRACT_DIR);
@@ -55,6 +56,7 @@
 		}
 
 		function copy() {
+echo 'copy start';
 			// bs-admin-files/files
 			$node = new B_FileNode(B_RESOURCE_EXTRACT_DIR, 'admin-files', null, null, 'all');
 			$node->fileCopy(B_DOC_ROOT . B_CURRENT_ROOT . 'bs-admin', true);
