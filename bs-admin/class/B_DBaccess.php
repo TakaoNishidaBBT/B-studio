@@ -370,11 +370,10 @@
 				$lines = file($dump_file);
 				foreach($lines as $line) {
 					// skip comment
-					if(substr($line, 0, 2) == '--' || $line == '' || trim($line) == '') {
+					if(substr($line, 0, 2) == '--' || $line == '') {
 						continue;
 					}
 					$sql.= str_replace('%PREFIX%', B_DB_PREFIX, $line);
-echo 'SQL:' . $sql;
 
 					if(substr(trim($line), -1, 1) == ';') {
 						$this->query($sql);
@@ -384,7 +383,6 @@ echo 'SQL:' . $sql;
 			}
 
 			catch(Exception $e) {
-echo 'exeption!';
 				$this->rollback();
 				return false;
 			}
