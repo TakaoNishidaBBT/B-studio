@@ -377,9 +377,9 @@ echo 'line:' . $line;
 					}
 
 					$sql.= str_replace('%PREFIX%', B_DB_PREFIX, $line);
+echo 'SQL:' . $sql;
 
 					if(substr(trim($line), -1, 1) == ';') {
-echo 'SQL:' . $sql;
 						$this->query($sql);
 						$sql = '';
 					}
