@@ -15,7 +15,6 @@
 				return true;
 			}
 			try {
-echo 'contents_install install';
 				$this->zip = new ZipArchive();
 				$this->zip->open('./default/bstudio.zip', ZipArchive::CREATE);
 				$this->zip->extractTo(B_RESOURCE_EXTRACT_DIR);
@@ -27,12 +26,11 @@ echo 'contents_install install';
 				$this->remove(B_UPLOAD_DIR);
 
 				$this->copy();
-echo 'copy end';
 				$this->import();
 
 				// remove extract files
-//				$node = new B_FileNode(B_RESOURCE_EXTRACT_DIR, '/', null, null, 'all');
-//				$node->remove();
+				$node = new B_FileNode(B_RESOURCE_EXTRACT_DIR, '/', null, null, 'all');
+				$node->remove();
 
 				// remove cache files
 				if(file_exists(B_FILE_INFO_W)) {
@@ -57,7 +55,6 @@ echo 'copy end';
 		}
 
 		function copy() {
-echo 'copy start';
 			// bs-admin-files/files
 			$node = new B_FileNode(B_RESOURCE_EXTRACT_DIR, 'admin-files', null, null, 'all');
 			$node->fileCopy(B_DOC_ROOT . B_CURRENT_ROOT . 'bs-admin', true);
@@ -68,7 +65,6 @@ echo 'copy start';
 		}
 
 		function import() {
-echo 'import start';
 			if($handle = opendir(B_RESOURCE_EXTRACT_DIR . 'dump')) {
 				while(false !== ($file_name = readdir($handle))){
 					if($file_name == '.' || $file_name == '..') continue;
