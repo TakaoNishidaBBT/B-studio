@@ -9,7 +9,7 @@
 	define('B_SYSTEM_NAME', 'B-studio');
 
 	// Charset
-	define('B_CHARSET', 'UTF-8');
+	if(!defined('B_CHARSET')) define('B_CHARSET', 'UTF-8');
 
 	// Charset for Header
 	define('B_CHARSET_HEADER', 'UTF-8');
