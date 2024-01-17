@@ -44,18 +44,19 @@
 	if(isset($_POST['action']) && $_POST['action'] == 'install') {
 		$status = install($db_install_form, $admin_basic_auth_form, $admin_user_form, $root_htaccess, $error_message);
 		if($status) {
+echo 'install end';
 			require_once('../bs-admin/config/config.php');
 			$status = db_install($error_message);
 		}
 		if($status) {
 			$status = contents_install($error_message);
 		}
-		if($status) {
-			$_SESSION['install_complete'] = true;
-			$path = 'complete.php';
-			header("Location:$path");
-			exit;
-		}
+		// if($status) {
+		// 	$_SESSION['install_complete'] = true;
+		// 	$path = 'complete.php';
+		// 	header("Location:$path");
+		// 	exit;
+		// }
 	}
 
 	// Send HTTP header
