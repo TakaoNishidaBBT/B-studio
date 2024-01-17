@@ -368,8 +368,8 @@ echo 'DBAccess import start 2';
 				$this->begin();
 
 				$lines = file($dump_file);
-
 				foreach($lines as $line) {
+echo 'line:' . $line;
 					// skip comment
 					if(substr($line, 0, 2) == '--' || $line == '') {
 						continue;
