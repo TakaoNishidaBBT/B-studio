@@ -387,6 +387,7 @@ echo 'SQL:' . $sql;
 			}
 
 			catch(Exception $e) {
+echo 'exeption!';
 				$this->rollback();
 				return false;
 			}
