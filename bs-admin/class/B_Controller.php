@@ -10,6 +10,8 @@
 	// 
 	// -------------------------------------------------------------------------
 	class B_Controller {
+		private $log;
+
 		function __construct() {
 			$this->log = new B_Log(B_ACCESS_LOG_FILE);
 			$this->log->write('----- start -----' . "\n", '$_REQUEST:', $_REQUEST);

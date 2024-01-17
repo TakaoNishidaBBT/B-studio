@@ -10,7 +10,10 @@
 	// 
 	// -------------------------------------------------------------------------
 	class B_Log {
-		function __construct($file_name, $option=null) {
+		private $file_name;
+		private $fp;
+
+			function __construct($file_name, $option=null) {
 			if($option == 'one-file') {
 				$path = substr($file_name, 0, strrpos($file_name, '/')+1);
 				$file = substr($file_name, strrpos($file_name, '/')+1, strlen($file_name));
@@ -27,6 +30,8 @@
 		}
 
 		function write() {
+			$message = '';
+
 			if($this->fp) {
 				for($i=0; $i<func_num_args(); $i++) {
 					$param = func_get_arg($i);
@@ -44,6 +49,8 @@
 		}
 
 		function shortenText($param) {
+			$param2 = array();
+
 			if(is_array($param)) {
 				foreach($param as $key => $value) {
 					$param2[$key] = $this->shortenText($value);
