@@ -10,6 +10,17 @@
 	// 
 	// -------------------------------------------------------------------------
 	class B_DBaccess {
+		public $log;
+		public $log_switch;
+		public $db_server;
+		public $db_user;
+		public $db_password;
+		public $db_name;
+		public $charset;
+		public $db;
+		public $is_connect;
+		public $errno;
+
 		function __construct($log) {
 			$this->log = $log;
 			$this->log_switch = false;
@@ -158,6 +169,10 @@
 			try {
 				if(!$this->is_connect) return false;
 
+				ini_set('memory_limit', '256M');
+
+				$fp = fopen($file_name, 'w+');
+
 				$this->begin();
 
 				$rs = $this->query("select version()");
@@ -220,6 +235,8 @@
 					$result.= "\n);\n\n";
 				}
 
+				fwrite($fp, $result);
+
 				// tables
 				if($tables) {
 					$tables = is_array($tables) ? $tables : explode(',', $tables);
@@ -237,6 +254,8 @@
 				}
 
 				foreach($tables as $table) {
+					$result = "";
+
 					$table_with_prefix = $table;
 					if($install == 'install') {
 						$table_with_prefix = preg_replace('/^' . B_DB_PREFIX . '/', '%PREFIX%', $table);
@@ -297,10 +316,14 @@
 						$result.= $fields . ";\n";
 					}
 					$result.= "/*!40000 ALTER TABLE `$table_with_prefix` ENABLE KEYS */;\n\n\n";
+
+					fwrite($fp, $result);
 				}
 
 				// views
 				foreach($views as $view) {
+					$result = "";
+
 					$view_with_prefix = $view;
 					if($install == 'install') {
 						$view_with_prefix = preg_replace('/^' . B_DB_PREFIX . '/', '%PREFIX%', $view);
@@ -321,11 +344,9 @@
 					}
 
 					$result.= $string . ";\n\n";
-				}
 
-				$fp = fopen($file_name, 'w+');
-				fwrite($fp, $result);
-				fclose($fp);
+					fwrite($fp, $result);
+				}
 
 				$this->rollback();
 			}
