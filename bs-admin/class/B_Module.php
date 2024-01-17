@@ -10,6 +10,38 @@
 	// 
 	// -------------------------------------------------------------------------
 	class B_Module {
+		public $archive;
+		public $log;
+		public $db;
+		public $util;
+		public $file_path;
+		public $module;
+		public $page;
+		public $session;
+		public $global_session;
+		public $request;
+		public $post;
+		public $html_header;
+		public $charset;
+		public $view;
+		public $entry_if;
+		public $name;
+		public $corp;
+		public $email;
+		public $entry_status;
+		public $entry_status_online;
+		public $entry_media;
+		public $page_no;
+		public $row_per_page;
+		public $sort_key;
+		public $order;
+		public $mode;
+		public $entry_id;
+		public $judge_status;
+		public $s_session;
+		public $contents_id;
+		public $scale;
+
 		function __construct($file_path) {
 			$this->archive = new B_Log(B_ARCHIVE_LOG_FILE);
 			$this->log = new B_Log(B_LOG_FILE);

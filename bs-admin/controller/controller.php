@@ -9,6 +9,7 @@
 
 	$controller = new B_Controller;
 	$auth = new B_AdminAuth;
+	$method = '';
 
 	try {
 		if(!isset($_REQUEST['terminal_id']) || !$auth->checkUserAuth()) {
