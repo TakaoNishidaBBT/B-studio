@@ -179,6 +179,7 @@
 		$len = strlen($plainpasswd);
 		$text = $plainpasswd . '$apr1$' . $salt;
 		$bin = pack('H32', md5($plainpasswd . $salt . $plainpasswd));
+		$tmp = '';
 
 		for($i=$len; $i>0; $i-=16) {
 			$text.= substr($bin, 0, min(16, $i));
