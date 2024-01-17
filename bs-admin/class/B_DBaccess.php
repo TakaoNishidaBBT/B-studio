@@ -359,6 +359,8 @@
 		}
 
 		function import($dump_file) {
+			$sql ='';
+
 			try {
 				if(!file_exists($dump_file)) return false;
 				if(!$this->is_connect) return false;
