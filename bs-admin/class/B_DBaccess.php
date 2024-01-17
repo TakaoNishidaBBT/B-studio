@@ -372,10 +372,9 @@ echo 'count($lines):' . count($lines);
 				foreach($lines as $line) {
 echo 'line:' . $line;
 					// skip comment
-					if(substr($line, 0, 2) == '--' || $line == '' || is_null($line)) {
+					if(substr($line, 0, 2) == '--' || $line == '' || !isset($line)) {
 						continue;
 					}
-echo 'hex2bin' . hex2bin($line);
 echo 'line2' . $line;
 					$sql.= str_replace('%PREFIX%', B_DB_PREFIX, $line);
 echo 'SQL:' . $sql;
