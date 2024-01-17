@@ -368,7 +368,7 @@ echo 'DBAccess import start 2';
 				$this->begin();
 
 				$lines = file($dump_file);
-echo '$lines:' . $lines;
+echo 'count($lines):' . count($lines);
 				foreach($lines as $line) {
 echo 'line:' . $line;
 					// skip comment
