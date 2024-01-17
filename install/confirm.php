@@ -41,7 +41,7 @@
 	$admin_user_form->setValue($_SESSION['param']);
 	$root_htaccess->setValue($_SESSION['param']);
 
-	if($_POST['action'] == 'install') {
+	if(isset($_POST['action']) && $_POST['action'] == 'install') {
 		$status = install($db_install_form, $admin_basic_auth_form, $admin_user_form, $root_htaccess, $error_message);
 		if($status) {
 			require_once('../bs-admin/config/config.php');
