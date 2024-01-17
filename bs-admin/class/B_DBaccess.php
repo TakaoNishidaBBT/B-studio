@@ -372,7 +372,7 @@ echo 'count($lines):' . count($lines);
 				foreach($lines as $line) {
 echo 'line:' . $line;
 					// skip comment
-					if(substr($line, 0, 2) == '--' || $line == '' || empty($line)) {
+					if(substr($line, 0, 2) == '--' || $line == '' || is_null($line)) {
 						continue;
 					}
 echo 'line2' . $line;
