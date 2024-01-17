@@ -27,6 +27,7 @@ echo 'contents_install install';
 				$this->remove(B_UPLOAD_DIR);
 
 				$this->copy();
+echo 'copy end';
 				$this->import();
 
 				// remove extract files
@@ -67,6 +68,7 @@ echo 'copy start';
 		}
 
 		function import() {
+echo 'import start';
 			if($handle = opendir(B_RESOURCE_EXTRACT_DIR . 'dump')) {
 				while(false !== ($file_name = readdir($handle))){
 					if($file_name == '.' || $file_name == '..') continue;
