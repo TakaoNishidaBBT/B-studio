@@ -5,5 +5,6 @@
  *
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
+
 	// Language
 	if(!defined('LANG')) define('LANG', 'ja');
