@@ -375,7 +375,7 @@ echo 'line:' . $line;
 					if(substr($line, 0, 2) == '--' || $line == '') {
 						continue;
 					}
-
+echo 'line2' . $line;
 					$sql.= str_replace('%PREFIX%', B_DB_PREFIX, $line);
 echo 'SQL:' . $sql;
 
