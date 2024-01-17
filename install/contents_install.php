@@ -31,8 +31,8 @@ echo 'copy end';
 				$this->import();
 
 				// remove extract files
-				$node = new B_FileNode(B_RESOURCE_EXTRACT_DIR, '/', null, null, 'all');
-				$node->remove();
+//				$node = new B_FileNode(B_RESOURCE_EXTRACT_DIR, '/', null, null, 'all');
+//				$node->remove();
 
 				// remove cache files
 				if(file_exists(B_FILE_INFO_W)) {
