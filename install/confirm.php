@@ -31,6 +31,8 @@
 	// Form config
 	require_once('config/_form_config.php');
 
+	public $error_message;
+
 	$db_install_form = new B_Element($db_install_form_config);
 	$admin_basic_auth_form = new B_Element($admin_basic_auth_config);
 	$admin_user_form = new B_Element($admin_user_form_config);
