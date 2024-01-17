@@ -11,7 +11,7 @@
 
 		<h1>Install B-studio</h1>
 
-		<?php if($error_message) { ?>
+		<?php if(isset($error_message)) { ?>
 			<div class="error">
 				<fieldset>
 					<legend>Error</legend>
