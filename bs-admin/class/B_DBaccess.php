@@ -359,23 +359,18 @@
 		}
 
 		function import($dump_file) {
-echo 'DBAccess import start $dump_file:' . $dump_file;
 			try {
 				if(!file_exists($dump_file)) return false;
 				if(!$this->is_connect) return false;
-echo 'DBAccess import start 2';
 
 				$this->begin();
 
 				$lines = file($dump_file);
-echo 'count($lines):' . count($lines);
 				foreach($lines as $line) {
-echo 'line:' . $line;
 					// skip comment
 					if(substr($line, 0, 2) == '--' || $line == '' || trim($line) == '') {
 						continue;
 					}
-echo 'line2' . $line;
 					$sql.= str_replace('%PREFIX%', B_DB_PREFIX, $line);
 echo 'SQL:' . $sql;
 
