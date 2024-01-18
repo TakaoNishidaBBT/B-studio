@@ -18,6 +18,7 @@
 	$path = $dir . '/bs-module/' . $module;
 	$file_name = $path . '/' . $page;
 	$file_name = str_replace(':', '', $file_name);
+	$method = '';
 
 	if(file_exists($file_name)) {
 		// setup module
