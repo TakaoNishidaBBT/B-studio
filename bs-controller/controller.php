@@ -30,6 +30,7 @@
 		$path = './bs-module/index';
 		$page = 'index.php';
 		$class = 'index';
+		$method = '';
 	}
 
 	$controller = new B_Controller;
