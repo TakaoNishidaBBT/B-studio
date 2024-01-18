@@ -20,6 +20,11 @@
 		public $contents_node;
 		public $path;
 		public $url;
+		public $breadcrumbs;
+		public $start_html;
+		public $end_html;
+		public $innerHTML;
+		public $view_file;
 
 		function __construct() {
 			parent::__construct(__FILE__);
@@ -37,11 +42,11 @@
 				$this->widget_node_view = B_WORKING_WIDGET_NODE_VIEW;
 				$this->widget_view = B_WORKING_WIDGET_VIEW;
 
-				if($this->post['method'] == 'preview' || $this->post['method'] == 'template_preview' || $this->post['method'] == 'widget_preview') {
+				if(isset($this->post['method']) && ($this->post['method'] == 'preview' || $this->post['method'] == 'template_preview' || $this->post['method'] == 'widget_preview')) {
 					$this->view_mode = 'preview';
 					return;
 				}
-				if($this->post['method'] == 'inline') {
+				if(isset($this->post['method']) && $this->post['method'] == 'inline') {
 					$this->view_mode = 'inline';
 					return;
 				}
@@ -434,6 +439,8 @@
 		}
 
 		function preview() {
+			$level = 0;
+
 			if(!$this->admin_mode) return;
 
 			$this->contents = $this->post;
