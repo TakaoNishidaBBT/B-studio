@@ -314,7 +314,8 @@
 			}
 
 			$file_info = pathinfo($file_name);
-			switch($file_info['extension']) {
+			$extension = isset($file_info['extension']) && $file_info['extension'] ? $file_info['extension'] : '';
+			switch($extension) {
 			case 'css':
 			case 'swf':
 			case 'jpg':
