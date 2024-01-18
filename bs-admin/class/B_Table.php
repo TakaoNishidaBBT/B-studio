@@ -27,7 +27,7 @@
 			}
 
 			$this->table = $table_name;
-			$this->config = ${$g_data_set}['table'][$this->table];
+			$this->config = isset(${$g_data_set}['table'][$this->table]) ? ${$g_data_set}['table'][$this->table] : '';
 		}
 
 		function select() {

@@ -8,6 +8,7 @@
 	class contents_tree extends B_AdminModule {
 		public $tree_config;
 		public $tree;
+		public $message;
 
 		function __construct() {
 			parent::__construct(__FILE__);
@@ -50,11 +51,11 @@
 		}
 
 		function getNodeList() {
-			if($this->request['node_id']) {
+			if(isset($this->request['node_id']) && $this->request['node_id']) {
 				$this->session['current_node'] = $this->request['node_id'];
 				$this->session['open_nodes'][$this->request['node_id']] = true;
 			}
-			if(!$this->session['current_node']) {
+			if(!isset($this->session['current_node']) || !$this->session['current_node']) {
 				$this->session['current_node'] = 'root';
 			}
 			$this->response($this->session['current_node'], 'select');
