@@ -42,7 +42,7 @@
 		function unserializeSession($data) {
 			$vars=preg_split('/([a-zA-Z0-9_]+)\|/', $data, -1, PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE);
 
-			for($i=0; $vars[$i]; $i++) {
+			for($i=0; isset($vars[$i]); $i++) {
 				$result[$vars[$i++]]=unserialize($vars[$i]);
 			}
 			return $result;
