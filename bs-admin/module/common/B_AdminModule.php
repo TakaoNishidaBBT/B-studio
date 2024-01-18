@@ -50,6 +50,7 @@
 		public $session_list;
 		public $event_hybrid_online;
 		public $session_data_list;
+		public $status;
 
 		function __construct($file_path) {
 			parent::__construct($file_path);

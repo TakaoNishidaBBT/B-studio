@@ -9,7 +9,12 @@
 	// class B_Table
 	// 
 	// -------------------------------------------------------------------------
-	class B_Table {
+	class B_Table extends stdClass {
+		public $db;
+		public $prefix;
+		public $table;
+		public $config;
+
 		function __construct(&$db, $table_name, $prefix='') {
 			global $g_data_set, ${$g_data_set};
 

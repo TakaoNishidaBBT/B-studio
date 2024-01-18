@@ -6,6 +6,9 @@
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
 	class contents_tree extends B_AdminModule {
+		public $tree_config;
+		public $tree;
+
 		function __construct() {
 			parent::__construct(__FILE__);
 
