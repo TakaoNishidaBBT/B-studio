@@ -6,6 +6,11 @@
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
 	class resource_tree extends B_AdminModule {
+		public $target;
+		public $target_id;
+		public $tree_config;
+		public $tree;
+
 		function __construct() {
 			parent::__construct(__FILE__);
 
