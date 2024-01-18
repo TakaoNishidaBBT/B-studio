@@ -13,7 +13,50 @@
 	// 		   : 2	node count is not much
 	// 		   : 3	node was updated by another user
 	// -------------------------------------------------------------------------
-	class B_Node {
+	class B_Node extends stdClass {
+		public $db;
+		public $table;
+		public $view;
+		public $version;
+		public $revision;
+		public $node_id;
+		public $status;
+		public $error_no;
+		public $sort_mode;
+		public $level;
+		public $node_count;
+		public $tbl_node;
+		public $view_node;
+		public $id;
+		public $start_html;
+		public $end_html;
+		public $script;
+		public $node_type;
+		public $parent;
+		public $node_class;
+		public $property;
+		public $node_name;
+		public $folder_count;
+		public $create_datetime;
+		public $update_datetime;
+		public $file_size;
+		public $image_size;
+		public $node_status;
+		public $disp_seq;
+		public $node;
+		public $parent_node;
+		public $path;
+		public $contents_id;
+		public $del_flag;
+		public $create_user;
+		public $update_user;
+		public $sort_key;
+		public $slug;
+		public $color;
+		public $background_color;
+		public $icon_file;
+		public $new_contents_id;
+
 		function __construct($db, $table, $view, $version, $revision, $node_id, $parent, $expand_level, $open_nodes, $node_count=false, $sort_mode='manual', $level=0, $row=null) {
 			$this->db = $db;
 			$this->table = $table;

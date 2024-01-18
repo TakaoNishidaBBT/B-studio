@@ -9,7 +9,7 @@
 	// class B_HtmlHeader
 	// 
 	// -------------------------------------------------------------------------
-	class B_HtmlHeader {
+	class B_HtmlHeader extends stdClass {
 		public $doc_type;
 		public $html;
 		public $meta;
