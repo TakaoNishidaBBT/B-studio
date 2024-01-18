@@ -6,6 +6,9 @@
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
 	class resource_editor extends B_AdminModule {
+		public $editor;
+		public $tab_control;
+
 		function __construct() {
 			parent::__construct(__FILE__);
 
@@ -74,6 +77,8 @@
 		}
 
 		function getFilePath($node_id) {
+			$path = '';
+
 			$sql_org = "select node_name, parent_node from %VIEW% where node_id='%NODE_ID%'";
 			$sql_org = str_replace('%VIEW%', B_DB_PREFIX . B_WORKING_RESOURCE_NODE_VIEW, $sql_org);
 
