@@ -55,16 +55,14 @@
 			$this->auth_filter = $auth_filter;
 			$this->config_filter = $config_filter;
 			$this->row_instance = new B_Element($this->config['row'], $this->auth_filter, $this->config_filter);
-			$this->select_sql = $config['select_sql'];
-			$this->count_sql = $config['count_sql'];
-			$this->empty_message = $config['empty_message'];
-			$this->pager = $config['pager'];
-			$this->id = $config['id'];
-			$this->name = $config['name'];
-			$this->script = $config['script'];
-			if($config['param']) {
-				$this->param = $config['param'];
-			}
+			if(isset($config['select_sql'])) $this->select_sql = $config['select_sql'];
+			if(isset($config['count_sql'])) $this->count_sql = $config['count_sql'];
+			if(isset($config['empty_message'])) $this->empty_message = $config['empty_message'];
+			if(isset($config['pager'])) $this->pager = $config['pager'];
+			if(isset($config['id'])) $this->id = $config['id'];
+			if(isset($config['name'])) $this->name = $config['name'];
+			if(isset($config['script'])) $this->script = $config['script'];
+			if(isset($config['param']))	$this->param = $config['param'];
 		}
 
 		function setSqlGroupBy($sql_string) {
