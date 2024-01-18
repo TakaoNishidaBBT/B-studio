@@ -360,7 +360,7 @@
 				$html.= $pager_html;
 			}
 
-			$html.= $this->config['start_html'] . "\n";
+			$html.= (isset($this->config['start_html']) ? $this->config['start_html'] : '') . "\n";
 
 			// get caption html
 			if($this->caption) {
@@ -375,10 +375,10 @@
 			// get row html
 			$html.= $this->getRowHtml($mode);
 
-			$html.= $this->config['end_html'];
+			$html.= isset($this->config['end_html']) ? $this->config['end_html'] : '';
 
 			//pager bottom
-			if($this->pager && $this->pager['location']['bottom'] == 'true') {
+			if($this->pager && isset($this->pager['location']['bottom']) && $this->pager['location']['bottom'] == 'true') {
 				if(!$pager_html) $pager_html = $this->showPager();
 				$html.= $pager_html;
 			}
