@@ -33,4 +33,4 @@
 	}
 
 	$controller = new B_Controller;
-	$controller->dispatch($path, $page, $class, $method=null);
+	$controller->dispatch($path, $page, $class, $method);
