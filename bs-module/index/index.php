@@ -244,8 +244,6 @@
 			else {
 				$this->breadcrumbs[$level]['url'] = $this->breadcrumbs[$level-1]['url'] . $node['node_name'] . $url_suffix;
 			}
-			$this->log->write('$this->breadcrumbs:');
-			$this->log->write($this->breadcrumbs);
 		}
 
 		function createHTML() {
