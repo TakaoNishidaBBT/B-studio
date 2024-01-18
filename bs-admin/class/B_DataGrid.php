@@ -355,7 +355,7 @@
 			}
 
 			//pager top
-			if($this->pager && $this->pager['location']['top'] == 'true') {
+			if($this->pager && isset($this->pager['location']['top']) && $this->pager['location']['top'] == 'true') {
 				$pager_html = $this->showPager();
 				$html.= $pager_html;
 			}
@@ -413,6 +413,8 @@
 		}
 
 		function getRowHtml($mode) {
+			$html = '';
+
 			if(!is_array($this->row)) {
 				return;
 			}
