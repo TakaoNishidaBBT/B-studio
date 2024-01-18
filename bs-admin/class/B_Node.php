@@ -718,7 +718,7 @@
 		}
 
 		function getNewNodeName($parent_node, $default_name, $mode) {
-			$pewfix = '';
+			$prefix = '';
 
 			$parent_node = $this->db->real_escape_string($parent_node);
 			$sql = "select node_name from %VIEW% where parent_node='$parent_node' order by node_name";
