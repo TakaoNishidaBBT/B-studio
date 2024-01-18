@@ -392,8 +392,6 @@
 		}
 
 		function inline() {
-			$level = 0;
-
 			global $admin_language;
 			if(!$this->admin_mode) return;
 
@@ -401,7 +399,7 @@
 
 			$this->getContentsNodeForPreview($this->contents['node_id']);
 
-			for($i=count($this->contents_node), $level=0; $i >= 0; $i--, $level++) {
+			for($i=count($this->contents_node) - 1, $level=0; $i >= 0; $i--, $level++) {
 				$this->createBreadCrumbs($this->contents_node[$i], $level);
 			}
 
