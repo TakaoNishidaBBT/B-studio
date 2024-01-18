@@ -688,10 +688,12 @@
 		}
 
 		function insert($node_type, $node_class, $user_id, &$new_node_id, &$new_node_name) {
+$log = new B_Log(B_LOG_FILE);
 			if(!$this->node_id) return;
 
 			$default_node_name = $this->script['bframe_tree']['icon'];
 			$new_node_name = $this->getNewNodeName($this->node_id, $default_node_name[$node_type]['new'], 'insert');
+$log->write('$new_node_name', $new_node_name);
 			$param['parent_node'] = $this->node_id;
 			if($this->node_id == 'root') {
 				$param['path'] = '/';
