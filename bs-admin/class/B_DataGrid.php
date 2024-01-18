@@ -10,6 +10,41 @@
 	// 
 	// -------------------------------------------------------------------------
 	class B_DataGrid {
+		public $db;
+		public $page_no;
+		public $callback_index;
+		public $csv_callback_index;
+		public $excel_callback_index;
+		public $config;
+		public $auth_filter;
+		public $config_filter;
+		public $row_instance;
+		public $select_sql;
+		public $count_sql;
+		public $empty_message;
+		public $pager;
+		public $id;
+		public $name;
+		public $script;
+		public $param;
+		public $sql_group_by;
+		public $sql_order_by;
+		public $sort_key;
+		public $sort_order;
+		public $sql_where;
+		public $sql_limit;
+		public $row;
+		public $bind_data;
+		public $caption;
+		public $header;
+		public $thead;
+		public $tbody;
+		public $record_cnt;
+		public $callback;
+		public $filter_value;
+		public $csv_config;
+		public $csv_callback;
+
 		function __construct($db, $config, $auth_filter=null, $config_filter=null) {
 			$this->db = $db;
 			$this->page_no = 1;
