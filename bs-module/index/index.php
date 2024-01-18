@@ -392,6 +392,8 @@
 		}
 
 		function inline() {
+			$level = 0;
+
 			global $admin_language;
 			if(!$this->admin_mode) return;
 
