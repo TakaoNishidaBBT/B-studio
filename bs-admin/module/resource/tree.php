@@ -924,7 +924,7 @@
 									, 'trash'
 									, null
 									, 0
-									, $this->session['open_nodes']
+									, $open_nodes
 									, false
 									, 'auto');
 
