@@ -10,6 +10,7 @@
 		public $target_id;
 		public $tree_config;
 		public $tree;
+		public $message;
 
 		function __construct() {
 			parent::__construct(__FILE__);
@@ -28,10 +29,10 @@
 
 			$this->tree->setConfig($this->tree_config);
 
-			if($this->request['node_id']) {
+			if(isset($this->request['node_id'])) {
 				$this->openCurrentNode($this->request['node_id']);
 			}
-			if($this->request['mode'] == 'open') {
+			if(isset($this->request['mode']) && $this->request['mode'] == 'open') {
 				$this->openCurrentNode($this->session['current_node']);
 			}
 
@@ -54,19 +55,19 @@
 		}
 
 		function getNodeList() {
-			if($this->request['sort_key']) {
+			if(isset($this->request['sort_key'])) {
 				if($this->request['node_id'] == $this->session['current_node'] && $this->session['sort_key'] == $this->request['sort_key']) {
 					$this->session['sort_order'] = $this->session['sort_order'] == 'asc' ? 'desc' : 'asc';
 				}
 				$this->session['sort_key'] = $this->request['sort_key'];
 			}
-			if($this->request['node_id'] && $this->request['mode'] != 'open') {
+			if(isset($this->request['node_id']) && $this->request['mode'] != 'open') {
 				$this->session['current_node'] = $this->request['node_id'];
 			}
-			if($this->request['node_id']) {
+			if(isset($this->request['node_id'])) {
 				$this->session['open_nodes'][$this->request['node_id']] = true;
 			}
-			if(!$this->session['current_node']) {
+			if(!isset($this->session['current_node'])) {
 				$this->session['current_node'] = 'root';
 			}
 			if(isset($this->request['display_mode'])) {
@@ -893,6 +894,7 @@
 				$response['message'] = $this->message;
 			}
 
+			$open_nodes = isset($this->session['open_nodes']) ? $this->session['open_nodes'] : '';
 			$root_node = new B_Node($this->db
 									, B_RESOURCE_NODE_TABLE
 									, B_WORKING_RESOURCE_NODE_VIEW
@@ -901,7 +903,7 @@
 									, 'root'
 									, null
 									, 1
-									, $this->session['open_nodes']
+									, $open_nodes
 									, false
 									, 'auto');
 
@@ -937,7 +939,7 @@
 			$list[] = $trash_node->getNodeList('', '', B_RESOURCE_DIR);
 
 			$response['current_node'] = $this->session['current_node'];
-			if($this->selected_node) {
+			if(isset($this->selected_node)) {
 				$response['selected_node'] = $this->selected_node;
 			}
 
