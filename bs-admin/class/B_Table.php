@@ -188,7 +188,7 @@
 
 			try {
 				foreach($this->config as $key => $config) {
-					if(isset($v)) $v.= ',';
+					if($v) $v.= ',';
 					$v.= $this->setInsertValues($key, $config, $param);
 				}
 				$sql = "insert into $this->prefix$this->table select $v from $this->prefix$this->table $sql_where";
