@@ -10,6 +10,7 @@
 		public $settings_form;
 		public $tab_control;
 		public $contents_table;
+		public $node_info;
 
 		function __construct() {
 			parent::__construct(__FILE__);
