@@ -10,6 +10,18 @@
 	// 
 	// -------------------------------------------------------------------------
 	class B_HtmlHeader {
+		public $doc_type;
+		public $html;
+		public $meta;
+		public $script;
+		public $css;
+		public $title;
+		public $current;
+		public $charset;
+		public $viewport;
+		public $misc;
+		public $base;
+
 		function __construct($config) {
 			if(!is_array($config)) {
 				$this->error('CONFIG ERROR');
