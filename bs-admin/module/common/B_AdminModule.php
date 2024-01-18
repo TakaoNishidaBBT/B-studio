@@ -6,6 +6,8 @@
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
 	class B_AdminModule extends B_Module {
+		public $version;
+		public $version_info;
 		public $auth;
 		public $user_id;
 		public $user_name;

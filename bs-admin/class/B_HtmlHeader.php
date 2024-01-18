@@ -87,6 +87,8 @@
 		}
 
 		function _outValue($param) {
+			$html = '';
+
 			if(!$param) return;
 
 			if(is_array($param)) {
