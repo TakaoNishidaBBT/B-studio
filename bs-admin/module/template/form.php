@@ -6,6 +6,11 @@
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
 	class template_form extends B_AdminModule {
+		public $form;
+		public $tab_control;
+		public $contents_table;
+		public $node_info;
+
 		function __construct() {
 			parent::__construct(__FILE__);
 
