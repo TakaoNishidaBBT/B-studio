@@ -110,22 +110,22 @@
 			$this->bind_data = array();
 
 			// create caption objects
-			if($this->config['caption']) {
+			if(isset($this->config['caption'])) {
 				$this->caption = new B_Element($this->config['caption'], $this->auth_filter, $this->config_filter);
 			}
 
 			// create thead objects
-			if($this->config['thead']) {
+			if(isset($this->config['thead'])) {
 				$this->thead = new B_Element($this->config['thead'], $this->auth_filter, $this->config_filter);
 			}
 
 			// create header objects
-			if($this->config['header']) {
+			if(isset($this->config['header'])) {
 				$this->header = new B_Element($this->config['header'], $this->auth_filter, $this->config_filter);
 			}
 
 			// create tbody objects
-			if($this->config['tbody']) {
+			if(isset($this->config['tbody'])) {
 				$this->tbody = new B_Element($this->config['tbody'], $this->auth_filter, $this->config_filter);
 			}
 
@@ -316,6 +316,9 @@
 		}
 
 		function getHtml($mode=NULL) {
+			$html = '';
+			$pager_html ='';
+
 			if($this->record_cnt == 0 || count($this->row) == 0 || !is_array($this->row)) {
 				return $this->empty_message;
 			}
@@ -323,9 +326,9 @@
 			// tr call back
 			for($i=0; $i < $this->callback_index; $i++) {
 				for($j=0; $j < count($this->row); $j++) {
-					$param = array('row' => &$this->row[$j], 'cnt' => $j);
+					$param = array('row' => &$this->row[$j], 'cnt' => $j, 'data' => $this->bind_data[$j]);
 
-					if($this->callback[$i]['param']) {
+					if(isset($this->callback[$i]['param'])) {
 						if(is_array($this->callback[$i]['param'])) {
 							foreach($this->callback[$i]['param'] as $key => $value) {
 								$param[$key] = $value;
