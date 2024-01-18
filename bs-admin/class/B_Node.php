@@ -383,6 +383,8 @@
 		}
 
 		function getParentPath() {
+			$path = '';
+
 			$sql_org = "select * from %VIEW% where node_id = '%parent_node%'";
 			$sql_org = str_replace('%VIEW%', B_DB_PREFIX . $this->view, $sql_org);
 
