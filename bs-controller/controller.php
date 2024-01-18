@@ -12,8 +12,8 @@
 	$url = pathinfo($_REQUEST['url']);
 
 	// dispatch rule
-	$dir = $url['dirname'] ? $url['dirname'] : '.';
-	$module = $url['filename'] ? $url['filename'] : 'index';
+	$dir = isset($url['dirname']) ? $url['dirname'] : '.';
+	$module = isset($url['filename']) ? $url['filename'] : 'index';
 	$page = $module . '.php';
 	$path = $dir . '/bs-module/' . $module;
 	$file_name = $path . '/' . $page;
@@ -30,8 +30,7 @@
 		$path = './bs-module/index';
 		$page = 'index.php';
 		$class = 'index';
-		$method = '';
 	}
 
 	$controller = new B_Controller;
-	$controller->dispatch($path, $page, $class, $method);
+	$controller->dispatch($path, $page, $class, $method=null);
