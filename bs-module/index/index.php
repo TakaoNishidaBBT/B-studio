@@ -237,13 +237,14 @@
 			$row = $this->db->fetch_assoc($rs);
 
 			$this->breadcrumbs[$level]['value'] = $row['breadcrumbs'];
-
+/*
 			if($level == 0) {
 				$this->breadcrumbs[$level]['url'] = B_CURRENT_ROOT;
 			}
 			else {
 				$this->breadcrumbs[$level]['url'] = $this->breadcrumbs[$level-1]['url'] . $node['node_name'] . $url_suffix;
 			}
+*/
 		}
 
 		function createHTML() {
