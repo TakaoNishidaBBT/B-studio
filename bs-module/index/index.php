@@ -527,6 +527,9 @@
 		}
 
 		function template_preview() {
+			$start_html = '';
+			$end_html = '';
+
 			if(!$this->admin_mode) return;
 
 			$this->contents = $this->post;
