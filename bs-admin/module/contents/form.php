@@ -57,7 +57,9 @@
 		}
 
 		function _select($node_info) {
-			if($node_info['contents_id']) {
+			$row = '';
+
+			if(isset($node_info['contents_id'])) {
 				$sql = "select a.*
 							  ,b.node_name template
 						from   %CONTENTS_VIEW% a
@@ -74,8 +76,8 @@
 				$row=$this->db->fetch_assoc($rs);
 			}
 
-			$row['htmlv'] = $row['html1'];
-			$row['node_id'] = $node_info['node_id'];
+			$row['htmlv'] = isset($row['html1']) ? $row['html1'] : '';
+			$row['node_id'] = isset($node_info['node_id']) ? $node_info['node_id'] : '';
 			$this->form->setValue($row);
 		}
 

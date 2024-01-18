@@ -184,6 +184,8 @@
 		}
 
 		function selectInsert($param, $sql_where='') {
+			$v = '';
+
 			try {
 				foreach($this->config as $key => $config) {
 					if(isset($v)) $v.= ',';
@@ -246,7 +248,7 @@
 
 		function setInsertValues($key, $config, $param) {
 			if($config[3] && (!isset($param[$key]) || $param[$key] == '')) { // auto increment
-				$start_value = ($config[4]) ? $config[4] : 0;
+				$start_value = isset($config[4]) ? $config[4] : 0;
 				switch($config[0]) { // data type
 				case 'char':
 				case 'text':

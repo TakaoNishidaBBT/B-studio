@@ -735,7 +735,7 @@
 			}
 
 			for($i=2, $node_name = $info['filename'] ;; $node_name = $prefix . $info['filename'] . $extend) {
-				if($info['extension']) {
+				if(isset($info['extension'])) {
 					for($j=0; $j<$cnt && $row[$j]['node_name'] != $node_name . '.' . $info['extension']; $j++);
 				}
 				else {
@@ -764,7 +764,7 @@
 					break;
 				}
 			}
-			if($info['extension']) {
+			if(isset($info['extension']) && $info['extension']) {
 				return $node_name . '.' . $info['extension'];
 			}
 			else {
