@@ -104,6 +104,8 @@
 		}
 
 		function update($param) {
+			$v = '';
+
 			try {
 				if(!is_array($param)) return false;
 				foreach($param as $key => $value) {

@@ -11,6 +11,7 @@
 		public $tab_control;
 		public $contents_table;
 		public $node_info;
+		public $time;
 
 		function __construct() {
 			parent::__construct(__FILE__);
