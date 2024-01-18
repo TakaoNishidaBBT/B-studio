@@ -200,6 +200,10 @@
 		define('B_TITLE_PREFIX', __('(Test)'));
 		define('B_ARCHIVE_LOG_MODE', 'DEBUG');
 	}
+	else if(preg_match('/www.event-site4.info/', B_HTTP_HOST)) {
+		define('B_TITLE_PREFIX', __('(Test)'));
+		define('B_ARCHIVE_LOG_MODE', 'DEBUG');
+	}
 	else {
 		define('B_TITLE_PREFIX', '');
 		define('B_ARCHIVE_LOG_MODE', '');
