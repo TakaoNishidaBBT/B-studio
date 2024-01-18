@@ -25,6 +25,9 @@
 		public $end_html;
 		public $innerHTML;
 		public $view_file;
+		public $widget_cache;
+		public $file_name;
+		public $file_extension;
 
 		function __construct() {
 			parent::__construct(__FILE__);
@@ -569,7 +572,7 @@
 		}
 
 		function widget($node_id, $args) {
-			if($this->widget_cache[$node_id]) {
+			if(isset($this->widget_cache[$node_id]) && $this->widget_cache[$node_id]) {
 				// retrun result from buffer cache
 				echo $this->widget_cache[$node_id];
 				return;
