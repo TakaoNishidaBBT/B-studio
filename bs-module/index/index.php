@@ -452,7 +452,8 @@
 			$this->getContentsNodeForPreview($this->contents['node_id']);
 
 			for($i=count($this->contents_node), $level=0; $i >= 0; $i--, $level++) {
-				$this->createBreadCrumbs($this->contents_node[$i], $level);
+				$contents_node = isset($this->contents_node[$i]) ? $this->contents_node[$i] : '';
+				$this->createBreadCrumbs($contents_node, $level);
 			}
 
 			$this->getTemplates($this->contents['template_id']);
