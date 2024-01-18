@@ -92,12 +92,12 @@
 				$this->parent = $parent;
 			}
 			else {
-				$this->parent = $row['parent_node'];
+				$this->parent = isset($row['parent_node']) ? $row['parent_node'] : '';
 			}
 
 			if($this->node_class == 'leaf') return;
 
-			if((is_array($open_nodes) && $open_nodes[$node_id]) || ($expand_level === 'all' || $level < $expand_level)) {
+			if((is_array($open_nodes) && isset($open_nodes[$node_id])) || ($expand_level === 'all' || $level < $expand_level)) {
 				$rs = $this->selectChild($node_id);
 				while($row = $this->db->fetch_assoc($rs)) {
 					$this->node_count++;
