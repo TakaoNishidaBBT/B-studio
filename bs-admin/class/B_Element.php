@@ -2203,17 +2203,20 @@
 
 			if(isset($this->config_org['permalink']) && is_array($this->config_org['permalink'])) {
 				foreach($this->config_org['permalink'] as $value2) {
-					$this->setPermalink($value[$value2]);
+					$param = isset($value[$value2]) ? $value[$value2] : '';
+					$this->setPermalink($param);
 				}
 			}
 			if(isset($this->config_org['param']) && is_array($this->config_org['param'])) {
 				foreach($this->config_org['param'] as $key2 => $value2) {
-					$this->setParamProperty($key2, $value[$value2]);
+					$param = isset($value[$value2]) ? $value[$value2] : '';
+					$this->setParamProperty($key2, $param);
 				}
 			}
 			if(isset($this->config_org['data_param']) && is_array($this->config_org['data_param'])) {
 				foreach($this->config_org['data_param'] as $key2 => $value2) {
-					$this->setParamProperty($key2, $value[$value2]);
+					$param = isset($value[$value2]) ? $value[$value2] : '';
+					$this->setParamProperty($key2, $param);
 				}
 			}
 			if(isset($this->config_org['fixedparam']) && is_array($this->config_org['fixedparam'])) {
