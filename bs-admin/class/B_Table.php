@@ -112,7 +112,7 @@
 					if(!isset($this->config[$key])) continue;
 					if($this->config[$key][2]) continue; // pk
 
-					if(isset($v)) $v.= ',';
+					if($v) $v.= ',';
 					$v.= $this->setUpdateVlues($key, $value);
 				}
 
