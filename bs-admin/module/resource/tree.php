@@ -61,7 +61,7 @@
 				}
 				$this->session['sort_key'] = $this->request['sort_key'];
 			}
-			if(isset($this->request['node_id']) && $this->request['mode'] != 'open') {
+			if(isset($this->request['node_id']) && isset($this->request['mode']) && $this->request['mode'] != 'open') {
 				$this->session['current_node'] = $this->request['node_id'];
 			}
 			if(isset($this->request['node_id'])) {
