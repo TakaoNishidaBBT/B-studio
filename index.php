@@ -10,7 +10,8 @@
 	require_once('bs-admin/global/b_global_function.php');
 	require_once('bs-admin/config/config.php');
 
-	$file = B_Util::pathinfo($_REQUEST['url']);
+	$url = isset($_REQUEST['url']) ? $_REQUEST['url'] : '';
+	$file = B_Util::pathinfo($url);
 
 	// To get real url (remove current root and parameter)
 	$url = $_SERVER['REQUEST_URI'];

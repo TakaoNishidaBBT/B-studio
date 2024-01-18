@@ -6,6 +6,21 @@
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
 	class index extends B_CommonModule {
+		public $admin_mode;
+		public $internal_redirect;
+		public $templates;
+		public $node_view;
+		public $contents_view;
+		public $template_node_view;
+		public $template_view;
+		public $widget_node_view;
+		public $widget_view;
+		public $view_mode;
+		public $contents;
+		public $contents_node;
+		public $path;
+		public $url;
+
 		function __construct() {
 			parent::__construct(__FILE__);
 			global $admin_mode, $internal_redirect;

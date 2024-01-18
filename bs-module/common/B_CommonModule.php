@@ -6,6 +6,8 @@
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
 	class B_CommonModule extends B_Module {
+		public $html_header_config;
+		
 		function __construct($file_path) {
 			parent::__construct($file_path);
 

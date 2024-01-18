@@ -9,7 +9,7 @@
 	// class B_Session
 	// 
 	// -------------------------------------------------------------------------
-	class B_Session {
+	class B_Session extends stdClass {
 		function start($limiter, $name, $path, $secure=true) {
 			if(empty($_SERVER['HTTPS']) === true || $_SERVER['HTTPS'] !== 'on') $secure = false;
 

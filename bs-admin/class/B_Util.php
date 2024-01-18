@@ -9,7 +9,7 @@
 	// class B_Util
 	// 
 	// -------------------------------------------------------------------------
-	class B_Util {
+	class B_Util extends stdClass {
 		public static function removeComma($value) {
 			return str_replace(',', '', $value);
 		}
@@ -99,7 +99,7 @@
 			$info['filename'] = '';
 			$info['extension'] = '';
 
-			$i = strrpos($path, '/');
+			if(isset($path)) $i = strrpos($path, '/');
 			if($i !== false ){
 				if($i) $info['dirname'] = substr($path, 0, $i);
 				else $info['dirname'] = substr($path, 0, $i+1);
@@ -109,7 +109,7 @@
 				$info['basename'] = $path;
 			}
 
-			$i = strrpos($info['basename'], '.');
+			if(isset($info['basename'])) $i = strrpos($info['basename'], '.');
 			if($i === false) {
 				$info['filename'] = $info['basename'];
 			}
