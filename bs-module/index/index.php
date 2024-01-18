@@ -200,6 +200,8 @@
 		}
 
 		function createBreadCrumbs($node, $level) {
+			$url_suffix = '';
+
 			if(is_array($node) && ($node['node_name'] == 'index.html' || $node['node_name'] == 'index.htm')) {
 				return;
 			}
