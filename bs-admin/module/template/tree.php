@@ -196,7 +196,7 @@
 				$this->db->begin();
 				$ret = $node->delete();
 				if($ret) {
-					$ret = $this->cleanUpDB();
+//					$ret = $this->cleanUpDB();
 				}
 				if($ret) {
 					$this->db->commit();
