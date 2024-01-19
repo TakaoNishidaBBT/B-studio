@@ -244,7 +244,7 @@
 						select id from (
 							select concat(version_id, revision_id, node_id) id
 								   ,del_flag
-							from " . B_DB_PREFIX . B_TEMPLATE_NODE_TABLE . "
+							from " . B_DB_PREFIX . B_TEMPLATE_NODE_TABLE . " a
 							,(
 								select node_id
 								from  " . B_DB_PREFIX . B_TEMPLATE_NODE_TABLE . "
