@@ -36,7 +36,7 @@
 			if($this->request['node_id']) {
 				$this->node_info = $this->getNodeInfo($this->request['node_id']);
 
-				if($this->node_info['node_type'] != 'template') {
+				if(isset($this->node_info['node_type']) && $this->node_info['node_type'] != 'template') {
 					$this->setView('view_folder');
 					return;
 				}
