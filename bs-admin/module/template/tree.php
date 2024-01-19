@@ -218,7 +218,7 @@
 					where concat(version_id, revision_id, contents_id) in
 					(
 						select id from (
-							select concat(version_id, revision_id, contents_id) id
+							select concat(a.version_id, a.revision_id, a.contents_id) id
 								   ,del_flag
 								   ,contents_id
 							from " . B_DB_PREFIX . B_TEMPLATE_NODE_TABLE . " a
@@ -242,7 +242,7 @@
 					where concat(version_id, revision_id, node_id) in
 					(
 						select id from (
-							select concat(version_id, revision_id, node_id) id
+							select concat(a.version_id, a.revision_id, a.node_id) id
 								   ,del_flag
 							from " . B_DB_PREFIX . B_TEMPLATE_NODE_TABLE . " a
 							,(
