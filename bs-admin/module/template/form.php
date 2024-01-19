@@ -38,7 +38,7 @@
 		function select() {
 			if($this->request['node_id']) {
 				$this->node_info = $this->getNodeInfo($this->request['node_id']);
-
+$this->log->write('$this->node_info', $this->node_info);
 				if(isset($this->node_info['node_type']) && $this->node_info['node_type'] != 'template') {
 					$this->setView('view_folder');
 					return;
