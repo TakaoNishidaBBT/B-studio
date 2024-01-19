@@ -557,7 +557,8 @@
 
 			// get destination node record
 			$destination_node = $this->selectNode($destination_node_id);
-
+$log = new B_Log(B_LOG_FILE);
+$log->write('$destination_node', $destination_node);
 			switch($destination_node_id) {
 			case 'root':
 				$param['path'] = '/';
