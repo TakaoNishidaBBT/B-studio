@@ -8,6 +8,7 @@
 	class template_tree extends B_AdminModule {
 		public $tree_config;
 		public $tree;
+		public $message;
 
 		function __construct() {
 			parent::__construct(__FILE__);
