@@ -10,6 +10,9 @@
 		public $tab_control;
 		public $contents_table;
 		public $node_info;
+		public $time;
+		public $node;
+		public $message;
 
 		function __construct() {
 			parent::__construct(__FILE__);
