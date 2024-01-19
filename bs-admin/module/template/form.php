@@ -53,7 +53,7 @@
 		}
 
 		function _select($node_info) {
-			if(isset($node_info['contents_id'] && $node_info['contents_id']) {
+			if(isset($node_info['contents_id'] && $node_info['contents_id'])) {
 				$sql = "select * from %VIEW% where contents_id='%CONTENTS_ID%'";
 				$sql = str_replace('%VIEW%', B_DB_PREFIX . B_WORKING_TEMPLATE_VIEW, $sql);
 				$sql = str_replace('%CONTENTS_ID%', $node_info['contents_id'], $sql);
