@@ -221,9 +221,15 @@
 							select concat(version_id, revision_id, contents_id) id
 								   ,del_flag
 								   ,contents_id
-							from " . B_DB_PREFIX . B_TEMPLATE_NODE_TABLE . "
-							 group by node_id
-							 having count(*) = 1
+							from (
+								select node_id
+
+								from " . B_DB_PREFIX . B_TEMPLATE_NODE_TABLE . "
+								 group by node_id
+								 having count(*) = 1
+							) a 
+                            ,bs_template_node b
+                            where a.node_id = b.node_id
 						) as tmp
 						where del_flag = '1'
 						and contents_id <> ''
@@ -238,9 +244,16 @@
 						select id from (
 							select concat(version_id, revision_id, node_id) id
 								   ,del_flag
-							from " . B_DB_PREFIX . B_TEMPLATE_NODE_TABLE . "
-							 group by node_id
-							 having count(*) = 1
+							from (
+								select node_id
+
+								from " . B_DB_PREFIX . B_TEMPLATE_NODE_TABLE . "
+								 group by node_id
+								 having count(*) = 1
+							) a 
+                            ,bs_template_node b
+                            where a.node_id = b.node_id
+
 						) as tmp
 						where del_flag = '1'
 					)";
