@@ -1055,6 +1055,8 @@
 
 		function getRoots($node_id) {
 			$row = $this->selectNode($node_id);
+$log = new B_Log(B_LOG_FILE);
+$log->write('$row', $row);
 			$roots = explode('/', $row['path']);
 			return $roots;
 		}
