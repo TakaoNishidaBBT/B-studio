@@ -553,10 +553,6 @@
 				return false;
 			}
 
-			if($call_back) {
-				if(!$ret = $this->callBack($call_back)) return $ret;
-			}
-
 			$this->cloneNode($this->node_id);
 
 			// get destination node record
