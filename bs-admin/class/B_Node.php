@@ -574,7 +574,9 @@
 
 			$param['parent_node'] = $destination_node_id;
 			$param['node_id'] = $this->node_id;
-			if(!$disp_seq) $this->disp_seq = $this->getMaxDispSeq($destination_node_id, $destination_node['disp_seq']);
+			if(!$disp_seq) {
+				$this->disp_seq = $this->getMaxDispSeq($destination_node_id, $destination_node['disp_seq']);
+			}
 			$param['disp_seq'] = $this->disp_seq;
 			$param['update_user'] = $user_id;
 			$param['update_datetime'] = time();
