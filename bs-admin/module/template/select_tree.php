@@ -6,6 +6,9 @@
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
 	class template_select_tree extends B_AdminModule {
+		public $tree_config;
+		public $tree;
+
 		function __construct() {
 			parent::__construct(__FILE__);
 
@@ -64,9 +67,10 @@
 		}
 
 		function getNodeList() {
+			$node_id = isset($this->request['node_id']) ? $this->request['node_id'] : '';
 			$response['status'] = true;
 			$response['current_node'] = $this->session['current_node'];
-			$this->session['open_nodes'][$this->request['node_id']] = true;
+			$this->session['open_nodes'][$node_id] = true;
 
 			$root_node = new B_Node($this->db
 									, B_TEMPLATE_NODE_TABLE
@@ -79,7 +83,7 @@
 									, $this->session['open_nodes']
 									, true);
 
-			$list[] = $root_node->getNodeList($this->request['node_id'], 'select');
+			$list[] = $root_node->getNodeList($node_id, 'select');
 
 			if($list) {
 				$response['node_info'] = $list;
