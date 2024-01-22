@@ -87,12 +87,13 @@ $this->log->write('$this->post', $this->post);
 		}
 
 		function getHtml() {
+$this->log->write('getHtml');
 			$this->url = preg_replace('?/{2,}?', '/', $this->request['url']);	// Remove slashes in succession
 			$this->url = preg_replace('?^/?', '', $this->url);					// Remove first slash
 
 			$url_array = explode('/', $this->url);
 			$this->contents_node = $this->getContentsNode($url_array);
-
+$this->log->write('$this->contents_node', $this->contents_node);
 			if(!$this->contents_node) {
 				unset($this->breadcrumbs);		// Unset bread crumbs
 				$url_array = explode('/', '404.html');
