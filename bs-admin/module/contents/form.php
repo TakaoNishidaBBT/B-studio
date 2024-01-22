@@ -59,7 +59,7 @@
 		function _select($node_info) {
 			$row = '';
 
-			if(isset($node_info['contents_id'])) {
+			if(isset($node_info['contents_id']) && $node_info['contents_id']) {
 				$sql = "select a.*
 							  ,b.node_name template
 						from   %CONTENTS_VIEW% a
