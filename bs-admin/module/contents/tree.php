@@ -386,11 +386,11 @@
 								, null
 								, 0
 								, null);
-
+$this->log->write('$node->node_type', $node->node_type);
 				if($node->node_type != 'page') exit;
 
 				$path = $node->getPath();
-
+$this->log->write('$path', $path);
 				// Redirect to index
 				$path = B_SITE_BASE . $path;
 				header("Location:$path");
