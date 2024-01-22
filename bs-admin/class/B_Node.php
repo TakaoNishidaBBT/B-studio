@@ -690,8 +690,9 @@
 		function insert($node_type, $node_class, $user_id, &$new_node_id, &$new_node_name) {
 			if(!$this->node_id) return;
 
-			$default_node_name = $this->script['bframe_tree']['icon'];
-			$new_node_name = $this->getNewNodeName($this->node_id, $default_node_name[$node_type]['new'], 'insert');
+			$default_node_name = isset($this->script['bframe_tree']['icon']) ? $this->script['bframe_tree']['icon'] : '';
+			$new = isset($default_node_name[$node_type]['new']) ? $default_node_name[$node_type]['new'] : '';
+			$new_node_name = $this->getNewNodeName($this->node_id, $new, 'insert');
 			$param['parent_node'] = $this->node_id;
 			if($this->node_id == 'root') {
 				$param['path'] = '/';
@@ -728,7 +729,7 @@
 
 			for($cnt=0; $row[$cnt] = $this->db->fetch_assoc($rs); $cnt++);
 
-			if(strlen($default_name) == mb_strlen($default_name)) {
+			if(default_name && strlen($default_name) == mb_strlen($default_name)) {
 				$info = pathinfo($default_name);
 			}
 			else {
@@ -1076,7 +1077,7 @@
 			$roots[] = $node_id;
 			foreach($roots as $node_id) {
 				$row = $this->selectNode($node_id);
-				if($row['node_status']) return $row['node_status'];
+				if(isset($row['node_status']) && $row['node_status']) return $row['node_status'];
 			}
 		}
 
