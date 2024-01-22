@@ -10,7 +10,8 @@
 		public $config_form;
 		public $tab_control;
 		public $contents_node_table;
-		
+		public $message;
+
 		function __construct() {
 			parent::__construct(__FILE__);
 
@@ -48,6 +49,8 @@
 		}
 
 		function register() {
+			$contents_id = '';
+
 			try {
 				$this->form->setValue($this->post);
 
