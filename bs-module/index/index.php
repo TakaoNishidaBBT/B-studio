@@ -21,6 +21,7 @@
 		public $path;
 		public $url;
 		public $breadcrumbs = array();
+		public $html;
 		public $start_html;
 		public $end_html;
 		public $innerHTML;
@@ -110,22 +111,25 @@ $this->log->write('$this->contents_node', $this->contents_node);
 				$this->setTemplateExternalScript();
 				$this->setTemplateHeaderElement();
 				$this->setTemplateCssLink();
-				$this->setCss($this->contents['external_css']);
-				$this->setScript($this->contents['external_js']);
+				$external_css = isset($this->contents['external_css']) ? $this->contents['external_css'] : '';
+				$this->setCss($external_css);
+				$external_js = isset($this->contents['external_js']) ? $this->contents['external_js'] : '';
+				$this->setScript($external_js);
+				$header_element = isset($this->contents['header_element']) ? $this->contents['header_element'] : '';
 				$this->setHeaderElement($this->contents['header_element']);
 
-				if($this->contents['css']) {
+				if(isset($this->contents['css']) && $this->contents['css']) {
 					$this->html_header->appendProperty('css',
 						'<link rel="stylesheet" href="C' . $this->contents_node['contents_id'] . '.css">');
 				}
 
 				$this->setTitle(htmlspecialchars($this->contents['title'], ENT_QUOTES, B_CHARSET));
 
-				if($this->contents['keywords']) {
+				if(isset($this->contents['keywords']) && $this->contents['keywords']) {
 					$this->html_header->appendMeta('keywords', $this->contents['keywords']);
 				}
 
-				if($this->contents['description']) {
+				if(isset($this->contents['description']) && $this->contents['description']) {
 					$this->html_header->appendMeta('description', $this->contents['description']);
 				}
 
