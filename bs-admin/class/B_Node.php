@@ -491,6 +491,8 @@
 				$param['path'] = $destination_node['path'] . $destination_node['node_id'] . '/';
 			}
 
+			$disp_seq = isset($destination_node['disp_seq']) ? $destination_node['disp_seq'] : '';
+
 			$param['node_id'] = '';
 			$param['parent_node'] = $destination_node_id;
 			$param['disp_seq'] = $this->getMaxDispSeq($destination_node_id, $destination_node['disp_seq']);
@@ -717,6 +719,7 @@
 
 		function getNewNodeName($parent_node, $default_name, $mode) {
 			$prefix = '';
+			$extend = '';
 
 			$parent_node = $this->db->real_escape_string($parent_node);
 			$sql = "select node_name from %VIEW% where parent_node='$parent_node' order by node_name";
