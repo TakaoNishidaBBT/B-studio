@@ -729,7 +729,7 @@
 
 			for($cnt=0; $row[$cnt] = $this->db->fetch_assoc($rs); $cnt++);
 
-			if(default_name && strlen($default_name) == mb_strlen($default_name)) {
+			if($default_name && strlen($default_name) == mb_strlen($default_name)) {
 				$info = pathinfo($default_name);
 			}
 			else {
