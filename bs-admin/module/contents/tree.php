@@ -393,6 +393,7 @@ $this->log->write('$node->node_type', $node->node_type);
 $this->log->write('$path', $path);
 				// Redirect to index
 				$path = B_SITE_BASE . $path;
+$this->log->write('$path2', $path);
 				header("Location:$path");
 			}
 
