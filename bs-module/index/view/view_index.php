@@ -4,9 +4,9 @@
 			eval('?>' . $__templates[$__i]['php']);
 		}
 	}
-	if($__contents['php']) {
+	if(isset($__contents['php']) && $__contents['php']) {
 		eval('?>' . $__contents['php']);
 	}
-	if($__start_html || $__innerHTML || $__end_html) {
+	if(isset($__start_html) || isset($__innerHTML) || isset($__end_html)) {
 		eval('?>' . $__start_html . $__innerHTML . $__end_html);
 	}
