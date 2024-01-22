@@ -46,7 +46,6 @@
 				$this->template_view = B_WORKING_TEMPLATE_VIEW;
 				$this->widget_node_view = B_WORKING_WIDGET_NODE_VIEW;
 				$this->widget_view = B_WORKING_WIDGET_VIEW;
-$this->log->write('$this->post', $this->post);
 				if(isset($this->post['method']) && ($this->post['method'] == 'preview' || $this->post['method'] == 'template_preview' || $this->post['method'] == 'widget_preview')) {
 					$this->view_mode = 'preview';
 					return;
@@ -88,13 +87,11 @@ $this->log->write('$this->post', $this->post);
 		}
 
 		function getHtml() {
-$this->log->write('getHtml');
 			$this->url = preg_replace('?/{2,}?', '/', $this->request['url']);	// Remove slashes in succession
 			$this->url = preg_replace('?^/?', '', $this->url);					// Remove first slash
 
 			$url_array = explode('/', $this->url);
 			$this->contents_node = $this->getContentsNode($url_array);
-$this->log->write('$this->contents_node', $this->contents_node);
 			if(!$this->contents_node) {
 				unset($this->breadcrumbs);		// Unset bread crumbs
 				$url_array = explode('/', '404.html');
