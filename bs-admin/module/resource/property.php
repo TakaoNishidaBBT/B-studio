@@ -6,10 +6,10 @@
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
 	class resource_property extends B_AdminModule {
-		public form;
-		public config_form;
-		public tab_control;
-		public service_node_table;
+		public $form;
+		public $config_form;
+		public $tab_control;
+		public $service_node_table;
 		public $message;
 
 		function __construct() {
