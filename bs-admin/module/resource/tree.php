@@ -33,11 +33,12 @@
 				$this->openCurrentNode($this->request['node_id']);
 			}
 			if(isset($this->request['mode']) && $this->request['mode'] == 'open') {
-				$this->openCurrentNode($this->session['current_node']);
+				$current_node = $this->session['current_node'] ? $this->session['current_node'] : '';
+				$this->openCurrentNode($current_node);
 			}
 
-			if(!$this->session['sort_order']) $this->session['sort_order'] = 'asc';
-			if(!$this->session['sort_key']) $this->session['sort_key'] = 'node_name';
+			if(!isset($this->session['sort_order']) || !$this->session['sort_order']) $this->session['sort_order'] = 'asc';
+			if(!isset($this->session['sort_key']) || !$this->session['sort_key']) $this->session['sort_key'] = 'node_name';
 
 			$this->status = true;
 		}
