@@ -93,6 +93,8 @@
 		}
 
 		function pasteNode() {
+			$response = array();
+
 			if($this->request['source_node_id'] && $this->request['source_node_id'] != 'null') {
 				if($this->request['destination_node_id'] != 'trash' && $this->tree->checkDuplicateById($this->request['destination_node_id'], $this->request['source_node_id'])) {
 
@@ -229,7 +231,9 @@
 				$this->sendChunk();	// terminate
 			}
 
-			if(!$response) $this->response($this->request['node_id'], 'select');
+			if(!$response) {
+				$node_id = isset($this->request['node_id']) ? $this->request['node_id'] : '';
+				$this->response($node_id, 'select');
 			exit;
 		}
 
