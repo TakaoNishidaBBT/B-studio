@@ -118,6 +118,7 @@
 		function upload() {
 			$status = true;
 			$response = array();
+			$message = '';
 
 			try {
 				$node = new B_Node($this->db
