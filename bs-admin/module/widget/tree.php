@@ -216,12 +216,18 @@
 					where concat(version_id, revision_id, contents_id) in
 					(
 						select id from (
-							select concat(version_id, revision_id, contents_id) id
+							select concat(a.version_id, a.revision_id, a.contents_id) id
 								   ,del_flag
 								   ,contents_id
-							from " . B_DB_PREFIX . B_WIDGET_NODE_TABLE . "
-							 group by node_id
-							 having count(*) = 1
+							from " . B_DB_PREFIX . B_WIDGET_NODE_TABLE . " a
+							,(
+								select node_id
+								from  " . B_DB_PREFIX . B_WIDGET_NODE_TABLE . "
+								group by node_id
+								having count(*) = 1
+							) b
+							where
+							a.node_id = b.node_id
 						) as tmp
 						where del_flag = '1'
 						and contents_id <> ''
@@ -234,11 +240,17 @@
 					where concat(version_id, revision_id, node_id) in
 					(
 						select id from (
-							select concat(version_id, revision_id, node_id) id
+							select concat(a.version_id, a.revision_id, a.node_id) id
 								   ,del_flag
-							from " . B_DB_PREFIX . B_WIDGET_NODE_TABLE . "
-							 group by node_id
-							 having count(*) = 1
+							from " . B_DB_PREFIX . B_WIDGET_NODE_TABLE . " a
+							,(
+								select node_id
+								from  " . B_DB_PREFIX . B_WIDGET_NODE_TABLE . "
+								group by node_id
+								having count(*) = 1
+							) b
+							where
+							a.node_id = b.node_id
 						) as tmp
 						where del_flag = '1'
 					)";
