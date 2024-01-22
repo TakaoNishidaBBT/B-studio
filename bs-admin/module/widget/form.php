@@ -12,6 +12,7 @@
 		public $node_info;
 		public $time;
 		public $message;
+		public $node;
 
 		function __construct() {
 			parent::__construct(__FILE__);
