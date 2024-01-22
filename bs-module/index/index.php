@@ -116,14 +116,15 @@ $this->log->write('$this->contents_node', $this->contents_node);
 				$external_js = isset($this->contents['external_js']) ? $this->contents['external_js'] : '';
 				$this->setScript($external_js);
 				$header_element = isset($this->contents['header_element']) ? $this->contents['header_element'] : '';
-				$this->setHeaderElement($this->contents['header_element']);
+				$this->setHeaderElement($header_element);
 
 				if(isset($this->contents['css']) && $this->contents['css']) {
 					$this->html_header->appendProperty('css',
 						'<link rel="stylesheet" href="C' . $this->contents_node['contents_id'] . '.css">');
 				}
 
-				$this->setTitle(htmlspecialchars($this->contents['title'], ENT_QUOTES, B_CHARSET));
+				$title = isset($this->contents['title']) ? $this->contents['title'] : '';
+				$this->setTitle(htmlspecialchars($title, ENT_QUOTES, B_CHARSET));
 
 				if(isset($this->contents['keywords']) && $this->contents['keywords']) {
 					$this->html_header->appendMeta('keywords', $this->contents['keywords']);
