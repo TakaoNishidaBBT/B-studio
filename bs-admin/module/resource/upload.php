@@ -6,6 +6,10 @@
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
 	class resource_upload extends B_AdminModule {
+		public $dir;
+		public $current_folder;
+		public $resource_node_table;
+
 		function __construct() {
 			parent::__construct(__FILE__);
 
@@ -15,6 +19,8 @@
 
 		function confirm() {
 			$status = true;
+			$response_mode = '';
+			$message = '';
 
 			try {
 				if(!$this->current_folder) {
