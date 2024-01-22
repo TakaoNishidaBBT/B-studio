@@ -350,7 +350,8 @@
 					}
 				}
 			}
-			$this->response($this->request['node_id'], 'select');
+			$node_id = isset($this->request['node_id']) ? $this->request['node_id'] : '';
+			$this->response($node_id, 'select');
 			exit;
 		}
 
