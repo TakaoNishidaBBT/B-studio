@@ -37,7 +37,7 @@
 				$this->openCurrentNode($this->request['node_id']);
 			}
 			if(isset($this->request['mode']) && $this->request['mode'] == 'open') {
-				$current_node = $this->session['current_node'] ? $this->session['current_node'] : '';
+				$current_node = isset($this->session['current_node']) ? $this->session['current_node'] : '';
 				$this->openCurrentNode($current_node);
 			}
 

@@ -6,6 +6,12 @@
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
 	class resource_property extends B_AdminModule {
+		public form;
+		public config_form;
+		public tab_control;
+		public service_node_table;
+		public $message;
+
 		function __construct() {
 			parent::__construct(__FILE__);
 
@@ -43,6 +49,8 @@
 		}
 
 		function register() {
+			$contents_id = '';
+
 			try {
 				$this->form->setValue($this->post);
 
