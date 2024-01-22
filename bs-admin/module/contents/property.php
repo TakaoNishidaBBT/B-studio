@@ -6,6 +6,11 @@
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
 	class contents_property extends B_AdminModule {
+		public $form;
+		public $config_form;
+		public $tab_control;
+		public $contents_node_table;
+		
 		function __construct() {
 			parent::__construct(__FILE__);
 
