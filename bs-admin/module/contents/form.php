@@ -57,7 +57,7 @@
 		}
 
 		function _select($node_info) {
-			$row = '';
+			$row = array();
 
 			if(isset($node_info['contents_id']) && $node_info['contents_id']) {
 				$sql = "select a.*
