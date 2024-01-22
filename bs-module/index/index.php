@@ -45,7 +45,7 @@
 				$this->template_view = B_WORKING_TEMPLATE_VIEW;
 				$this->widget_node_view = B_WORKING_WIDGET_NODE_VIEW;
 				$this->widget_view = B_WORKING_WIDGET_VIEW;
-
+$this->log->write('$this->post', $this->post);
 				if(isset($this->post['method']) && ($this->post['method'] == 'preview' || $this->post['method'] == 'template_preview' || $this->post['method'] == 'widget_preview')) {
 					$this->view_mode = 'preview';
 					return;
