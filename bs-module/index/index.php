@@ -247,10 +247,12 @@
 		function createHTML() {
 			// Get contents from DB
 			$this->contents = $this->getContents($this->contents_node['contents_id'], $this->contents_view);
-			$this->innerHTML = $this->contents['html1'];
+			$this->innerHTML = isset($this->contents['html1']) ? $this->contents['html1'] : '';
 
 			// Get templates array
-			$this->getTemplates($this->contents['template_id']);
+			if(isset($this->contents['template_id']) && $this->contents['template_id']) {
+				$this->getTemplates($this->contents['template_id']);
+			}
 
 			if(is_array($this->templates)) {
 				for($i=0; $i < count($this->templates); $i++) {
@@ -258,6 +260,7 @@
 					$this->end_html = $this->templates[$i]['end_html'] . $this->end_html;
 				}
 			}
+
 			return $this->start_html . $this->innerHTML . $this->end_html;
 		}
 
