@@ -47,7 +47,7 @@
 			$sql_org = "select parent_node from %VIEW% where node_id='%NODE_ID%'";
 			$sql_org = str_replace('%VIEW%', B_DB_PREFIX . B_WORKING_RESOURCE_NODE_VIEW, $sql_org);
 
-			for($id = $node_id; $id && $id != 'root'; $id = $row['parent_node']) {
+			for($id = $node_id; $id && $id != 'root'; $id = isset($row['parent_node']) ? $row['parent_node'] : '') {
 				$this->session['open_nodes'][$id] = true;
 				$sql = str_replace('%NODE_ID%', $id, $sql_org);
 				$rs = $this->db->query($sql);
