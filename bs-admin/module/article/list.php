@@ -6,6 +6,10 @@
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
 	class article_list extends B_AdminModule {
+		public $header;
+		public $dg;
+		public $category_list;
+
 		function __construct() {
 			parent::__construct(__FILE__);
 
