@@ -11,6 +11,10 @@
 		public $tree_config;
 		public $tree;
 		public $message;
+		public $total_truncate_nodes;
+		public $truncate_nodes;
+		public $show_progress;
+		public $truncate_files;
 
 		function __construct() {
 			parent::__construct(__FILE__);

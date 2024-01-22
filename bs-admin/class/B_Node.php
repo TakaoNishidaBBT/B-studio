@@ -963,6 +963,8 @@
 		}
 
 		function nodeCount() {
+			$count = 0;
+
 			if(is_array($this->node)) {
 				foreach(array_keys($this->node) as $key) {
 					$count+= $this->node[$key]->nodeCount();
