@@ -19,6 +19,8 @@
 		}
 
 		function open() {
+			$encoding = '';
+
 			if($this->request['node_id']) {
 				$id = $this->db->real_escape_string($this->request['node_id']);
 				$sql = "select * from %VIEW% where node_id='%NODE_ID%'";
