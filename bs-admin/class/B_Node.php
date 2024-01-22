@@ -495,7 +495,7 @@
 
 			$param['node_id'] = '';
 			$param['parent_node'] = $destination_node_id;
-			$param['disp_seq'] = $this->getMaxDispSeq($destination_node_id, $destination_node['disp_seq']);
+			$param['disp_seq'] = $this->getMaxDispSeq($destination_node_id, $disp_seq);
 			$param['node_type'] = $this->node_type;
 			$param['node_class'] = $this->node_class;
 			$param['node_name'] = $copy_node_name;
