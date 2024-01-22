@@ -699,7 +699,7 @@
 		}
 
 		function download() {
-			if($this->request['mode'] == 'download') {
+			if(isset($this->request['mode']) && $this->request['mode'] == 'download') {
 				$this->downloadFile($this->request['file_name'], $this->request['file_path'], $this->request['remove']);
 			}
 			else {
