@@ -502,6 +502,8 @@
 		}
 
 		function truncateFiles() {
+			$truncate_files = 0;
+
 			$sql = "select contents_id, count(*) cnt, max(del_flag) del_flag, max(node_name) node_name
 					from " . B_DB_PREFIX . B_RESOURCE_NODE_TABLE . "
 					where node_type = 'file'
