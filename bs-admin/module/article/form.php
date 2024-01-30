@@ -6,6 +6,18 @@
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
 	class article_form extends B_AdminModule {
+		public $settings;
+		public $tab_control;
+		public $editor;
+		public $result;
+		public $result_control;
+		public $main_table;
+		public $copy_control_config;
+		public $input_control_config;
+		public $confirm_control_config;
+		public $delete_control_config;
+		public $control;
+		
 		function __construct() {
 			parent::__construct(__FILE__);
 
