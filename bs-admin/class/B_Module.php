@@ -9,7 +9,7 @@
 	// class B_Module
 	// 
 	// -------------------------------------------------------------------------
-	class B_Module {
+	class B_Module extends stdClass {
 		public $archive;
 		public $log;
 		public $db;
@@ -78,7 +78,9 @@
 		}
 
 		function getModuleName() {
-			return basename(dirname($this->file_path));
+			$mypath = str_replace("\\", "/", $this->file_path);
+			$module = substr($mypath, strrpos($mypath, 'module/') + strlen('module/'));
+			return dirname($module);
 		}
 
 		function getPageName() {
