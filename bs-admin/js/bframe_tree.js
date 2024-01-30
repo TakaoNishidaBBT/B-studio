@@ -589,12 +589,14 @@
 				param+= '&mode='+mode;
 			}
 			if(bframe.progressBar) {
+console.log('bframe.progressBar', bframe.progressBar);
 				httpObj = createXMLHttpRequest(showProgress);
 				var params = {
 					'id': 				property.progress_id, 
 					'icon': 			property.progress_icon,
 					'complete_icon': 	property.complete_icon,
 				}
+console.log('params', params);
 				progress = new bframe.progressBar(params);
 			}
 			else {
