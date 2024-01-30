@@ -18,6 +18,10 @@
 		public $data;
 		public $start_day_of_the_week;
 		public $holiday;
+		public $year;
+		public $month;
+		public $day;
+		public $callback_param;
 
 		function __construct($db, $config) {
 			$this->db = $db;
