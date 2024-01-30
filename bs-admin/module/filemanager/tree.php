@@ -31,8 +31,8 @@
 			}
 
 			$this->status = true;
-			if(!$this->session['sort_order']) $this->session['sort_order'] = 'asc';
-			if(!$this->session['sort_key']) $this->session['sort_key'] = 'file_name';
+			if(!isset($this->session['sort_order']) || !$this->session['sort_order']) $this->session['sort_order'] = 'asc';
+			if(!isset($this->session['sort_key']) || !$this->session['sort_key']) $this->session['sort_key'] = 'file_name';
 		}
 
 		function openCurrentNode($node_id) {
