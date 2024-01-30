@@ -6,9 +6,9 @@
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
 	class category_tree extends B_AdminModule {
-		publc $tree_config;
-		publc $tree;
-		publc $message;
+		public $tree_config;
+		public $tree;
+		public $message;
 
 		function __construct() {
 			parent::__construct(__FILE__);
