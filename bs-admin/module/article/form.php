@@ -128,7 +128,8 @@
 			$html = '';
 
 			$tags = $this->settings->getElementByName('tags');
-			if(!trim($tags->value)) return;
+			$tags_value = isset($tags->value) ? $tags->value : '';
+			if(!trim($tags_value)) return;
 			
 			$tag = explode(',', $tags->value);
 			for($i=0; $i < count($tag); $i++) {
