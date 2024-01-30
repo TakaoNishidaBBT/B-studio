@@ -401,6 +401,8 @@ $this->log->write('$path2', $path);
 		}
 
 		function response($node_id, $category) {
+			$open_nodes = isset($this->session['open_nodes']) ? $this->session['open_nodes'] : '';
+
 			$response['status'] = $this->status;
 			if($this->message) {
 				$response['message'] = $this->message;
@@ -414,7 +416,7 @@ $this->log->write('$path2', $path);
 									, 'root'
 									, null
 									, 1
-									, $this->session['open_nodes']
+									, $open_nodes
 									, true);
 
 			$list[] = $root_node->getNodeList($node_id, $category);
@@ -427,7 +429,7 @@ $this->log->write('$path2', $path);
 									, 'trash'
 									, null
 									, 0
-									, $this->session['open_nodes']
+									, $open_nodes
 									, true);
 
 			$list[] = $trash_node->getNodeList('', '');

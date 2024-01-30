@@ -6,6 +6,9 @@
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
 	class index_index extends B_AdminModule {
+		public $menu;
+		public $initial_page;
+
 		function __construct() {
 			parent::__construct(__FILE__);
 
@@ -65,7 +68,7 @@
 		function login() {
 			$_SESSION['language'] = LANG;
 
-			if($_POST['login']) {
+			if(isset($_POST['login']) && $_POST['login']) {
 				// Check login
 				$auth = new B_AdminAuth;
 				$ret = $auth->login($this->db, $_POST['user_id'], $_POST['password']);

@@ -9,6 +9,7 @@
 		public $header;
 		public $dg;
 		public $category_list;
+		public $select_message;
 
 		function __construct() {
 			parent::__construct(__FILE__);
@@ -143,6 +144,7 @@
 
 		function _list_callback($array) {
 			$row = $array['row'];
+			$html = '';
 
 			$obj = $row->getElementByName('tags');
 			if($obj->value) {
@@ -172,6 +174,9 @@
 		}
 
 		function setSqlWhere() {
+			$select_message = '';
+			$sql_where = '';
+
 			if($this->keyword) {
 				$keyword = $this->db->real_escape_string_for_like($this->keyword);
 				$sql_where.= " and (a.article_id like '%KEYWORD%' or category like '%KEYWORD%' or tags like '%KEYWORD%' or slug like '%KEYWORD%' or article_date_t like '%KEYWORD%' or title like '%KEYWORD%' or url like '%KEYWORD%' or description like '%KEYWORD%' or headline like '%KEYWORD%' or content1 like '%KEYWORD%' or content2 like '%KEYWORD%' or content3 like '%KEYWORD%' or content4 like '%KEYWORD%') ";
@@ -191,7 +196,7 @@
 				$select_message.= __('Category: ') . '<em>' . htmlspecialchars(str_replace('&emsp;', '', $this->category_list[$this->category]), ENT_QUOTES, B_CHARSET) . '</em>&nbsp;&nbsp;';
 			}
 
-			if($select_message) {
+			if(isset($select_message) && $select_message) {
 				$select_message = '<p class="condition"><span class="bold">' . __('Search conditions') . '&nbsp;</span>' . $select_message . '</p>';
 			}
 
