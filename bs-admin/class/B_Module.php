@@ -43,6 +43,8 @@
 		public $scale;
 		public $keyword;
 		public $category;
+		public $target;
+		public $target_id;
 
 		function __construct($file_path) {
 			$this->archive = new B_Log(B_ARCHIVE_LOG_FILE);
