@@ -125,7 +125,7 @@
 		}
 
 		function real_escape_string($string) {
-			return $this->db->escape_string($string);
+			return isset($string) ? $this->db->real_escape_string($string) : '';
 		}
 
 		function real_escape_string_for_like($string) {

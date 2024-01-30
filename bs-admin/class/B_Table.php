@@ -169,6 +169,8 @@
 		}
 
 		function insert($param) {
+			$v = '';
+
 			try {
 				foreach($this->config as $key => $config) {
 					if(isset($v)) $v.= ",";

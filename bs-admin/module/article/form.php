@@ -20,6 +20,7 @@
 		public $copy_control;
 		public $action_message;
 		public $display_mode;
+		public $message;
 
 		function __construct() {
 			parent::__construct(__FILE__);
@@ -218,7 +219,7 @@
 				$this->editor->setValue($this->request);
 				$this->settings->setValue($this->request);
 
-				if($this->post['external_link'] && !$this->post['url']) {
+				if(isset($this->post['external_link']) && $this->post['external_link'] && !$this->post['url']) {
 					$obj = $this->settings->getElementByName('url');
 					$obj->status = false;
 				}
