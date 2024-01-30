@@ -78,7 +78,7 @@ $tree_config = array(
 				array(
 					'id'		=> 'display_detail',
 				),
-				'default'		=> $this->session['display_mode'],
+				'default'		=> isset($this->session['display_mode']) ? $this->session['display_mode'] : '',
 			),
 			'detail'	=>
 			array(
@@ -109,7 +109,7 @@ $tree_config = array(
 						'sort_key'		=> 'image_size',
 					),
 				),
-				'sort_key'	=> $this->session['sort_key'],
+				'sort_key'	=> isset($this->session['sort_key']) ? $this->session['sort_key'] : '',
 			),
 			'icon'		=>
 			array(

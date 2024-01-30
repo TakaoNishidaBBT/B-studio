@@ -25,7 +25,7 @@
 			$this->tree = new B_FileNode($this->dir, '');
 			$this->tree->setConfig($tree_config);
 
-			if(is_array($_FILES['upload'])) {
+			if(isset($_FILES['upload']) && is_array($_FILES['upload'])) {
 				$response['CKEditorFuncNum'] = $this->request['CKEditorFuncNum'];
 				$response['url'] = '';
 				$response['message'] = __('Please use server browser');
