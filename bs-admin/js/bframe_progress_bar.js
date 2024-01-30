@@ -35,14 +35,14 @@
 		box.appendChild(title);
 
 		progress_icon.className = 'progress-icon';
-		progress_icon.src = params.icon;
 		title.appendChild(progress_icon);
+		progress_icon.src = params.icon;
 
 		if(params.complete_icon) {
 			complete_icon.className = 'complete-icon';
-			complete_icon.src = params.complete_icon;
 			complete_icon.style.display = 'none';
 			title.appendChild(complete_icon);
+			complete_icon.src = params.complete_icon;
 		}
 
 		message.className = 'progress-message';
