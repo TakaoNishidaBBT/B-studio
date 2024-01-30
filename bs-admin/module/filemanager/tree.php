@@ -6,6 +6,10 @@
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
 	class filemanager_tree extends B_AdminModule {
+		public $dir;
+		public $tree_config;
+		public $tree;
+
 		function __construct() {
 			parent::__construct(__FILE__);
 
@@ -17,10 +21,10 @@
 
 			$this->tree->setConfig($this->tree_config);
 
-			if($this->request['node_id']) {
+			if(isset($this->request['node_id']) && $this->request['node_id']) {
 				$this->openCurrentNode($this->request['node_id']);
 			}
-			if($this->request['mode'] == 'open') {
+			if(isset($this->request['mode']) && $this->request['mode'] == 'open') {
 				$this->openCurrentNode($this->session['current_node']);
 			}
 
@@ -42,26 +46,27 @@
 		function getNodeList() {
 			$this->session['selected_node'] = '';
 
-			if($this->request['sort_key']) {
+			if(isset($this->request['sort_key']) && $this->request['sort_key']) {
 				if($this->request['node_id'] == $this->session['current_node'] && $this->session['sort_key'] == $this->request['sort_key']) {
 					$this->session['sort_order'] = $this->session['sort_order'] == 'asc' ? 'desc' : 'asc';
 				}
 				
 				$this->session['sort_key'] = $this->request['sort_key'];
 			}
-			if($this->request['node_id'] && $this->request['mode'] != 'open') {
+			if(isset($this->request['node_id']) && $this->request['node_id'] && ((isset($this->request['mode']) && $this->request['mode'] != 'open') || !isset($this->request['mode']))) {
 				$this->session['current_node'] = $this->request['node_id'];
 			}
-			if($this->request['node_id']) {
+			if(isset($this->request['node_id']) && $this->request['node_id']) {
 				$this->session['open_nodes'][$this->request['node_id']] = true;
 			}
-			if(!$this->session['current_node']) {
+			if(isset($this->session['current_node']) && !$this->session['current_node']) {
 				$this->session['current_node'] = 'root';
 			}
 			if(isset($this->request['display_mode'])) {
 				$this->session['display_mode'] = $this->request['display_mode'];
 			}
-			$this->response($this->session['current_node'], 'select');
+			$current_node = isset($this->session['current_node']) ? $this->session['current_node'] : '';
+			$this->response($current_node, 'select');
 
 			exit;
 		}
