@@ -8,6 +8,7 @@
 	class tag_tree extends B_AdminModule {
 		public $tree_config;
 		public $tree;
+		public $message;
 
 		function __construct() {
 			$selected_nodes = '';
