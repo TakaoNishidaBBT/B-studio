@@ -10,7 +10,7 @@
 	require_once('global/b_global_function.php');
 
 	// Set TERMINAL_ID
-	if($_REQUEST['terminal_id']) {
+	if(isset($_REQUEST['terminal_id']) && $_REQUEST['terminal_id']) {
 		define('TERMINAL_ID', $_REQUEST['terminal_id']);
 	}
 	else {

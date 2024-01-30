@@ -8,6 +8,8 @@
 	// global function
 
 	function __getRandomText($length) {
+		$pwd = '';
+
 		$base = 'abcdefghijkmnprstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ2345678';
 		for($i=0; $i<$length; $i++) {
 			$pwd.= $base[mt_rand(0, strlen($base)-1)];
