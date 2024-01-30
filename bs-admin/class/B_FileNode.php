@@ -285,7 +285,7 @@
 					$this->path = $new_name;
 					$this->thumbnail_image_path = $this->getThumbnailImgPath($this->path);
 					$this->thumb = B_UPLOAD_THUMBDIR . str_replace('/', '-', $this->thumbnail_image_path);
-					if(file_exists($thumb)) {
+					if($thumb && file_exists($thumb)) {
 						$ret = rename($thumb, $this->thumb);
 						if(!$ret) return false;
 					}
