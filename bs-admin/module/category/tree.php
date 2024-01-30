@@ -6,6 +6,10 @@
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
 	class category_tree extends B_AdminModule {
+		publc $tree_config;
+		publc $tree;
+		publc $message;
+
 		function __construct() {
 			parent::__construct(__FILE__);
 
@@ -65,8 +69,10 @@
 		}
 
 		function getNodeList() {
-			$this->session['open_nodes'][$this->request['node_id']] = true;
-			$this->response($this->request['node_id'], 'select');
+			$node_id = isset($this->request['node_id']) ? $this->request['node_id'] : '';
+
+			$this->session['open_nodes'][$node_id] = true;
+			$this->response($node_id, 'select');
 			exit;
 
 		}
