@@ -588,6 +588,7 @@
 			if(mode) {
 				param+= '&mode='+mode;
 			}
+/*
 			if(bframe.progressBar) {
 				httpObj = createXMLHttpRequest(showProgress);
 				var params = {
@@ -600,7 +601,7 @@
 			else {
 				httpObj = createXMLHttpRequest(showNode);
 			}
-
+*/
 			eventHandler(httpObj, property.module, property.file, property.method.getNodeList, 'POST', param);
 			target.style.cursor = 'wait';
 			if(pane) pane.style.cursor = 'wait';
