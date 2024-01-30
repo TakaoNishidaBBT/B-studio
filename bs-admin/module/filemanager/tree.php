@@ -36,6 +36,8 @@
 		}
 
 		function openCurrentNode($node_id) {
+			$path = '';
+
 			$dir = explode('/', $node_id);
 
 			for($i=0; $i<count($dir); $i++) {

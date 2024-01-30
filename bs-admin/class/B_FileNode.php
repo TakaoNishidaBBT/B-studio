@@ -121,7 +121,7 @@
 					$this->folder_count++;
 				}
 
-				if((is_array($open_nodes) && $open_nodes[$this->node_id]) || ($expand_level === 'all' || $level < $expand_level)) {
+				if((is_array($open_nodes) && isset($open_nodes[$this->node_id]) && $open_nodes[$this->node_id]) || ($expand_level === 'all' || $level < $expand_level)) {
 					$object = new B_FileNode($this->dir, __getPath($this->path, $file_name), $open_nodes, $this, $expand_level, $level+1);
 					$this->addNodes($object);
 				}
