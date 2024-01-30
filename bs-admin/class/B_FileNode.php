@@ -244,8 +244,12 @@
 			$list['node_id'] = mb_convert_encoding($this->node_id, 'utf8', B_SYSTEM_FILENAME_ENCODE);
 			$list['node_type'] = $this->node_type;
 			$list['node_class'] = $this->node_class;
-			$list['node_name'] = mb_convert_encoding($this->file_name, 'utf8', B_SYSTEM_FILENAME_ENCODE);
-			$list['thumbnail_image_path'] = mb_convert_encoding($this->thumbnail_image_path, 'utf8', B_SYSTEM_FILENAME_ENCODE);
+			if(isset($this->thumbnail_image_path) && $this->thumbnail_image_path) {
+				$list['node_name'] = mb_convert_encoding($this->file_name, 'utf8', B_SYSTEM_FILENAME_ENCODE);
+			}
+			if(isset($this->thumbnail_image_path) && $this->thumbnail_image_path) {
+				$list['thumbnail_image_path'] = mb_convert_encoding($this->thumbnail_image_path, 'utf8', B_SYSTEM_FILENAME_ENCODE);
+			}
 			$list['node_count'] = $this->node_count;
 			$list['folder_count'] = $this->folder_count;
 			$list['create_datetime_u'] = $this->update_datetime_u;
