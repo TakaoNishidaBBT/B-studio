@@ -6,7 +6,12 @@
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
 	class tag_tree extends B_AdminModule {
+		public $tree_config;
+		public $tree;
+
 		function __construct() {
+			$selected_nodes = '';
+
 			parent::__construct(__FILE__);
 
 			if(array_key_exists('tag_id', $this->request)) {
@@ -71,8 +76,10 @@
 		}
 
 		function getNodeList() {
-			$this->session['open_nodes'][$this->request['node_id']] = true;
-			$this->response($this->request['node_id'], 'select');
+			$node_id = isset($this->request['node_id']) ? $this->request['node_id'] : '';
+
+			$this->session['open_nodes'][$node_id] = true;
+			$this->response($node_id, 'select');
 			exit;
 
 		}
