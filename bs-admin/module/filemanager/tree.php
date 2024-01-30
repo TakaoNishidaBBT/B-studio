@@ -48,6 +48,7 @@
 		}
 
 		function getNodeList() {
+$this->log->write('getNodeList');
 			$this->session['selected_node'] = '';
 
 			if(isset($this->request['sort_key']) && $this->request['sort_key']) {
@@ -57,19 +58,25 @@
 				
 				$this->session['sort_key'] = $this->request['sort_key'];
 			}
+$this->log->write('getNodeList1');
 			if(isset($this->request['node_id']) && $this->request['node_id'] && ((isset($this->request['mode']) && $this->request['mode'] != 'open') || !isset($this->request['mode']))) {
 				$this->session['current_node'] = $this->request['node_id'];
 			}
+$this->log->write('getNodeList2');
 			if(isset($this->request['node_id']) && $this->request['node_id']) {
 				$this->session['open_nodes'][$this->request['node_id']] = true;
 			}
+$this->log->write('getNodeList3');
 			if(isset($this->session['current_node']) && !$this->session['current_node']) {
 				$this->session['current_node'] = 'root';
 			}
+$this->log->write('getNodeList4');
 			if(isset($this->request['display_mode'])) {
 				$this->session['display_mode'] = $this->request['display_mode'];
 			}
+$this->log->write('getNodeList5');
 			$current_node = isset($this->session['current_node']) ? $this->session['current_node'] : '';
+$this->log->write('getNodeList6');
 			$this->response($current_node, 'select');
 
 			exit;
