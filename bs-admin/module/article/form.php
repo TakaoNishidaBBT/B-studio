@@ -17,7 +17,10 @@
 		public $confirm_control_config;
 		public $delete_control_config;
 		public $control;
-		
+		public $copy_control;
+		public $action_message;
+		public $display_mode;
+
 		function __construct() {
 			parent::__construct(__FILE__);
 
@@ -105,6 +108,8 @@
 		}
 
 		function getCategoryName($category, $category_id) {
+			$name = '';
+
 			$id_array = explode(',', $category_id);
 			if(is_array($id_array)) {
 				foreach($id_array as $id) {
@@ -119,6 +124,8 @@
 		}
 
 		function setTagName() {
+			$html = '';
+
 			$tags = $this->settings->getElementByName('tags');
 			if(!trim($tags->value)) return;
 			
