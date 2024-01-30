@@ -6,6 +6,11 @@
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
 	class calendar_ajax extends B_Module {
+		public $cal;
+		public $year;
+		public $month;
+		public $day;
+
 		function __construct() {
 			parent::__construct(__FILE__);
 

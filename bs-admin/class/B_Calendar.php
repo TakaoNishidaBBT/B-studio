@@ -10,6 +10,15 @@
 	// 
 	// -------------------------------------------------------------------------
 	class B_Calendar {
+		public $db;
+		public $config;
+		public $months;
+		public $cal;
+		public $caption;
+		public $data;
+		public $start_day_of_the_week;
+		public $holiday;
+
 		function __construct($db, $config) {
 			$this->db = $db;
 			$this->config = $config;
