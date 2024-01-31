@@ -462,7 +462,7 @@
 			}
 			else if(file_exists($this->fullpath)) {
 				unlink($this->fullpath);
-				if(file_exists($this->thumb) && !is_dir($this->thumb)) {
+				if($this->thumb && file_exists($this->thumb) && !is_dir($this->thumb)) {
 					unlink($this->thumb);
 				}
 			}
