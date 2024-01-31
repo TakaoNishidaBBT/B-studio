@@ -49,6 +49,8 @@
 		}
 
 		function shortenText($param) {
+			if(!$param) return;
+
 			$param2 = array();
 
 			if(is_array($param)) {
