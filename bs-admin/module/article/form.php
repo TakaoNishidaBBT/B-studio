@@ -57,7 +57,7 @@
 
 			default:
 				$this->control = new B_Element($this->input_control_config);
-				if($this->request['article_id']) {
+				if(isset($this->request['article_id']) && $this->request['article_id']) {
 					$article_id = $this->db->real_escape_string($this->request['article_id']);
 				}
 				else {
@@ -73,7 +73,8 @@
 
 				// set Category
 				$this->category = $this->getCategory();
-				$row['category'] = $this->getCategoryName($this->category, $row['category_id']);
+				$category_id = isset($row['category_id']) ? $row['category_id'] : '';
+				$row['category'] = $this->getCategoryName($this->category, $category_id);
 
 				$this->editor->setValue($row);
 				$this->settings->setValue($row);
@@ -110,6 +111,8 @@
 
 		function getCategoryName($category, $category_id) {
 			$name = '';
+
+			if(!$category_id) return;
 
 			$id_array = explode(',', $category_id);
 			if(is_array($id_array)) {
