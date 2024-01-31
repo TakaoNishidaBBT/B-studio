@@ -291,7 +291,7 @@
 					}
 				}
 				else {
-					if($this->parent->path) $this->path = __getPath($this->parent->path, $this->file_name);
+					if(isset($this->parent->path) && $this->parent->path) $this->path = __getPath($this->parent->path, $this->file_name);
 					$this->node_id = __getPath($this->parent->path, $this->file_name);
 					$this->thumbnail_image_path = $this->getThumbnailImgPath($this->path);
 					$this->thumb = B_UPLOAD_THUMBDIR . str_replace('/', '-', $this->thumbnail_image_path);
@@ -632,10 +632,12 @@
 			if(substr($path, 0, 1) == '/') $path = substr($path, 1);
 
 			$file_info = pathinfo($path);
+			$dirname = isset($file_info['dirname']) ? $file_info['dirname'] : '';
+
 			switch(strtolower($file_info['extension'])) {
 			case 'svg':
-				if($file_info['dirname'] != '.' && $file_info['dirname'] != '\\') {
-					return __getPath(B_UPLOAD_URL, $file_info['dirname'], $file_info['basename']);
+				if($dirname != '.' && $dirname != '\\') {
+					return __getPath(B_UPLOAD_URL, $dirname, $file_info['basename']);
 				}
 				else {
 					return __getPath(B_UPLOAD_URL, $file_info['basename']);
@@ -650,8 +652,8 @@
 			case 'mpeg':
 			case 'wmv':
 				$thumb_prefix = B_THUMB_PREFIX;
-				if($file_info['dirname'] != '.' && $file_info['dirname'] != '\\') {
-					return __getPath($file_info['dirname'], $thumb_prefix, $file_info['filename'], '.jpg');
+				if($dirname != '.' && $dirname != '\\') {
+					return __getPath($dirname, $thumb_prefix, $file_info['filename'], '.jpg');
 				}
 				else {
 					return __getPath($thumb_prefix, $file_info['filename'], '.jpg');
@@ -660,8 +662,8 @@
 
 			default:
 				$thumb_prefix = B_THUMB_PREFIX;
-				if($file_info['dirname'] != '.' && $file_info['dirname'] != '\\') {
-					return __getPath($file_info['dirname'], $thumb_prefix . $file_info['basename']);
+				if($dirname != '.' && $dirname != '\\') {
+					return __getPath($dirname, $thumb_prefix . $file_info['basename']);
 				}
 				else {
 					return __getPath($thumb_prefix, $file_info['basename']);

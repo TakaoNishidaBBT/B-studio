@@ -343,7 +343,7 @@
 				$this->message = __('Multi-byte characters cannot be used');
 				return false;
 			}
-			if(!file_exists(__getPath($this->dir, $file_info['path']))) {
+			if(isset($file_info['path']) && !file_exists(__getPath($this->dir, $file_info['path']))) {
 				$this->message = __('Another user has updated this record');
 				return false;
 			}
