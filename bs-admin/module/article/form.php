@@ -217,11 +217,9 @@
 		}
 
 		function register() {
-			$article_id = '';
-
 			try {
 				$ret = true;
-				$article_id = $this->request['article_id'];
+				$article_id = isset($this->request['article_id']) ? $this->request['article_id'] : '';
 
 				$this->editor->setValue($this->request);
 				$this->settings->setValue($this->request);
