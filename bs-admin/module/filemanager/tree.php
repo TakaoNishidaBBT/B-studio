@@ -597,6 +597,7 @@
 			}
 
 			header('Content-Type: application/x-javascript charset=utf-8');
+$this->log->write('$response', $response);
 			echo json_encode($response);
 		}
 
