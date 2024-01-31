@@ -11,6 +11,7 @@
 		public $tree;
 		public $message;
 		public $total_files;
+		public $show_progress;
 
 		function __construct() {
 			parent::__construct(__FILE__);
@@ -144,6 +145,8 @@
 				$this->session['selected_node'] = array();
 
 				foreach($source_node as $source) {
+					$callback = array();
+
 					if($dest->node_type == 'folder' || $dest->node_type == 'root') {
 						if($this->show_progress) $callback = array('obj' => $this, 'method' => '_copy_callback');
 						$ret = $source->copy($dest->path, $new_node_name, true, $callback);

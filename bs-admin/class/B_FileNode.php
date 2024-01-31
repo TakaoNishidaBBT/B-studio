@@ -512,10 +512,12 @@
 		}
 
 		function getNewNodeName($dir, $default_name, $mode) {
+			$prefix = '';
+
 			$info = pathinfo($default_name);
 
 			for($i=2, $node_name = $info['filename'];; $node_name = $prefix . $info['filename'] . $extend) {
-				if($info['extension']) {
+				if(isset($info['extension']) && $info['extension']) {
 					if(!file_exists(__getPath($dir, $node_name) . '.' . $info['extension'])) break;
 				}
 				else {
@@ -710,6 +712,8 @@
 		}
 
 		function nodeCount($file_only=false, $except_array=null) {
+			$count = 0;
+
 			if($this->file_name && is_array($except_array) && array_key_exists($this->file_name, $except_array)) return;
 
 			if(is_array($this->node)) {
