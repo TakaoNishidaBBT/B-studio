@@ -633,14 +633,17 @@
 
 			$file_info = pathinfo($path);
 			$dirname = isset($file_info['dirname']) ? $file_info['dirname'] : '';
+			$extension = isset($file_info['extension']) ? $file_info['extension'] : '';
+			$basename = isset($file_info['basename']) ? $file_info['basename'] : '';
+			$filename = isset($file_info['filename']) ? $file_info['filename'] : '';
 
-			switch(strtolower($file_info['extension'])) {
+			switch(strtolower($extension)) {
 			case 'svg':
 				if($dirname != '.' && $dirname != '\\') {
-					return __getPath(B_UPLOAD_URL, $dirname, $file_info['basename']);
+					return __getPath(B_UPLOAD_URL, $dirname, $basename);
 				}
 				else {
-					return __getPath(B_UPLOAD_URL, $file_info['basename']);
+					return __getPath(B_UPLOAD_URL, $basename);
 				}
 				break;
 
@@ -653,20 +656,20 @@
 			case 'wmv':
 				$thumb_prefix = B_THUMB_PREFIX;
 				if($dirname != '.' && $dirname != '\\') {
-					return __getPath($dirname, $thumb_prefix, $file_info['filename'], '.jpg');
+					return __getPath($dirname, $thumb_prefix, $filename, '.jpg');
 				}
 				else {
-					return __getPath($thumb_prefix, $file_info['filename'], '.jpg');
+					return __getPath($thumb_prefix, $filename, '.jpg');
 				}
 				break;
 
 			default:
 				$thumb_prefix = B_THUMB_PREFIX;
 				if($dirname != '.' && $dirname != '\\') {
-					return __getPath($dirname, $thumb_prefix . $file_info['basename']);
+					return __getPath($dirname, $thumb_prefix . $basename);
 				}
 				else {
-					return __getPath($thumb_prefix, $file_info['basename']);
+					return __getPath($thumb_prefix, $basename);
 				}
 			}
 		}
