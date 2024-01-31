@@ -9,7 +9,7 @@
 		function __construct() {
 			parent::__construct(__FILE__);
 
-			if($this->request['session']) {
+			if(isset($this->request['session']) && $this->request['session']) {
 				$this->session['relation'] = $this->request['session'];
 			}
 
@@ -20,6 +20,8 @@
 		}
 
 		function confirm() {
+			$response_mode = '';
+			$message = '';
 			$status = true;
 
 			try {
@@ -91,6 +93,7 @@
 
 		function upload() {
 			$status = true;
+			$message = '';
 
 			try {
 				// Get file info
