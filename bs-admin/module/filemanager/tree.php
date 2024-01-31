@@ -308,7 +308,7 @@
 					$ret = $root->rename($this->request['node_id'], $new_node_id);
 					if($ret) {
 						$this->status = true;
-						$this->session['selected_node'] = '';
+						$this->session['selected_node'] = array();
 						$this->session['selected_node'][0] = $new_node_id;
 						if($this->session['current_node'] == $this->request['node_id']) {
 							$this->session['current_node'] = $new_node_id;
