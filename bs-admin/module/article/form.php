@@ -79,7 +79,8 @@
 				$this->editor->setValue($row);
 				$this->settings->setValue($row);
 				$this->setTagName();
-				$this->setThumnail($row['title_img_file']);
+				$title_img_file = isset($row['title_img_file']) ? $row['title_img_file'] : '';
+				$this->setThumnail($title_img_file);
 				$this->setDetailStatus();
 
 				break;
