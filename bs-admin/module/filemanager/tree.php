@@ -87,7 +87,7 @@
 		}
 
 		function pasteNode() {
-			$response = arrray();
+			$response = array();
 
 			$root = new B_FileNode($this->dir, 'root', null, null, 'all');
 			$dest = $root->getNodeById($this->request['destination_node_id']);
