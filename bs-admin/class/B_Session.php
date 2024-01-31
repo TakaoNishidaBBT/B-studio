@@ -29,7 +29,10 @@
 		}
 
 		function read($session_name) {
-			$session_id = htmlspecialchars($_COOKIE[$session_name], ENT_QUOTES, B_CHARSET);
+			$session_array = array();
+
+			$cookie_session_name = isset($_COOKIE[$session_name]) ? $_COOKIE[$session_name] : '';
+			$session_id = htmlspecialchars($cookie_session_name, ENT_QUOTES, B_CHARSET);
 			$session_file = session_save_path() . '/sess_' . $session_id;
 
 			if(is_file($session_file)) {

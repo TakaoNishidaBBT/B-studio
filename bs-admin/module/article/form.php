@@ -217,6 +217,8 @@
 		}
 
 		function register() {
+			$article_id = '';
+
 			try {
 				$ret = true;
 				$article_id = $this->request['article_id'];

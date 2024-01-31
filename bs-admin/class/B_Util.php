@@ -250,6 +250,9 @@
 		}
 
 		public static function createthumbnail($src, &$dest, $max_size) {
+			$exif = array();
+			$rotate = '';
+
 			ini_set('memory_limit', '256M');
 
 			$file_info = B_Util::pathinfo($src);
