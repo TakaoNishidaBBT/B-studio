@@ -21,7 +21,7 @@
 		$args = array();
 
 		$func_array = func_get_args();
-		for($i=0; $i < strlen($func_array); $i++) {
+		for($i=0; $i < count($func_array); $i++) {
 			if($func_array[$i]) $args[] = $func_array[$i];
 		}
 		return preg_replace('/(?<!:)\/+/', '/', implode('/', array_filter($args, 'strlen')));
