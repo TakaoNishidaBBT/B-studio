@@ -513,6 +513,7 @@
 
 		function getNewNodeName($dir, $default_name, $mode) {
 			$prefix = '';
+			$extend = '';
 
 			$info = pathinfo($default_name);
 
@@ -542,7 +543,7 @@
 					break;
 				}
 			}
-			if($info['extension']) {
+			if(isset($info['extension']) && $info['extension']) {
 				return $node_name . '.' . $info['extension'];
 			}
 			else {
