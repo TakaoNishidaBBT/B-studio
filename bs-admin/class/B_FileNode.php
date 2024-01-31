@@ -274,7 +274,7 @@
 		}
 
 		function rename($old_name, $new_name) {
-			$thumb = $this->thumb;
+			$thumb = isset($this->thumb) ? $this->thumb : '';
 
 			try {
 				if($this->node_id === $old_name) {
