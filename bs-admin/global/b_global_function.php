@@ -18,7 +18,8 @@
 	}
 
 	function __getPath() {
-		return preg_replace('/(?<!:)\/+/', '/', implode('/', array_filter(array_map('trim', func_get_args()), 'strlen')));
+		$args = isset(func_get_args()) ? func_get_args() : '';
+		return preg_replace('/(?<!:)\/+/', '/', implode('/', array_filter(array_map('trim', $args), 'strlen')));
 	}
 
 	function __($text) {
