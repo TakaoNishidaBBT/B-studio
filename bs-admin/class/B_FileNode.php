@@ -244,7 +244,7 @@
 			$list['node_id'] = mb_convert_encoding($this->node_id, 'utf8', B_SYSTEM_FILENAME_ENCODE);
 			$list['node_type'] = $this->node_type;
 			$list['node_class'] = $this->node_class;
-			if(isset($this->thumbnail_image_path) && $this->thumbnail_image_path) {
+			if(isset($this->node_name) && $this->thumbnail_image_path) {
 				$list['node_name'] = mb_convert_encoding($this->file_name, 'utf8', B_SYSTEM_FILENAME_ENCODE);
 			}
 			if(isset($this->thumbnail_image_path) && $this->thumbnail_image_path) {
