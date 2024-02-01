@@ -35,13 +35,11 @@
 	// Start admin session
 	$ses = new B_Session;
 	$ses->start('nocache', $current . '-admin-session', $current_path);
-$log = new B_Log(B_LOG_FILE);
-if(defined('LANG')) {
-	$log->write('index defined LANG', LANG);
-}
-	require_once('./config/config.php');
 
+	require_once('./config/config.php');
+$log = new B_Log(B_LOG_FILE);
 $log->write('index LANG', LANG);
+
 	// To Get Real URL (remove current root and parameter)
 	$url = $_SERVER['REQUEST_URI'];
 	$url = preg_replace('"^' . B_CURRENT_ROOT . '"', '', $url);
