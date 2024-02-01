@@ -1543,7 +1543,6 @@
 	// -------------------------------------------------------------------------
 	class B_SelectBox extends B_SelectedText {
 		function getElementsHtml($mode=null) {
-$log = new B_Log(B_LOG_FILE);
 			if($mode == 'confirm') {
 				$html = parent::getElementsHtml($mode);
 			}
@@ -1560,7 +1559,6 @@ $log = new B_Log(B_LOG_FILE);
 							'  <option value="' .
 							$key . '" ';
 						if(isset($this->value)) {
-$log->write('$this->value', $this->value);
 							if($key == $this->value) {
 								$html.= 'selected="selected"';
 							}
