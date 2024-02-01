@@ -6,9 +6,11 @@
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
 	class filemanager_popup extends B_AdminModule {
-		public $bframe_message;
 		public $dir;
+		public $target;
+		public $target_id;
 		public $tree;
+		public $bframe_message;
 
 		function __construct() {
 			parent::__construct(__FILE__);
