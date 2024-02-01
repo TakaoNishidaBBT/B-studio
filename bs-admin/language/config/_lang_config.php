@@ -10,4 +10,5 @@
 		$log = new B_Log(B_LOG_FILE);
 		$log->write('LANG is not defined');
 		define('LANG', '%LANGUAGE%');
+		$log->write('LANG is defined', LANG);
 	}

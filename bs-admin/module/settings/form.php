@@ -81,6 +81,7 @@
 			$contents = file_get_contents(B_LNGUAGE_DIR . 'config/_lang_config.php');
 			$contents = str_replace('%LANGUAGE%',  $param['language'], $contents);
 			file_put_contents(B_DOC_ROOT . B_ADMIN_ROOT . 'config/lang_config.php', $contents);
+			flush();
 
 			if($ret) {
 				$this->db->commit();
