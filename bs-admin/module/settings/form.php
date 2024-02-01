@@ -82,7 +82,7 @@
 			$contents = str_replace('%LANGUAGE%',  $param['language'], $contents);
 			file_put_contents(B_DOC_ROOT . B_ADMIN_ROOT . 'config/lang_config.php', $contents);
 			flush();
-			sleep(1);
+			usleep(100000);
 $this->log->write('settings flushed');
 $this->log->write('settings LANG', LANG);
 			if($ret) {
