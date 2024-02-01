@@ -76,7 +76,7 @@
 			else {
 				$ret = $this->main_table->insert($param);
 			}
-
+$this->log->write('param', $param);
 			// Set up lang_config
 			$contents = file_get_contents(B_LNGUAGE_DIR . 'config/_lang_config.php');
 			$contents = str_replace('%LANGUAGE%',  $param['language'], $contents);
