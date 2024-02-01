@@ -6,6 +6,10 @@
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
 	class settings_form extends B_AdminModule {
+		public $action_message;
+		public $error_message;
+		public $display_mode;
+
 		function __construct() {
 			parent::__construct(__FILE__);
 
