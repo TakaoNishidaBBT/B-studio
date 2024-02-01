@@ -82,7 +82,8 @@
 			$contents = str_replace('%LANGUAGE%',  $param['language'], $contents);
 			file_put_contents(B_DOC_ROOT . B_ADMIN_ROOT . 'config/lang_config.php', $contents);
 			flush();
-
+$this->log->write('settings flushed');
+$this->log->write('settings LANG', LANG);
 			if($ret) {
 				$this->db->commit();
 				$param['action_message'] = '<p><strong>' . __('Basic settings: Saved') . '</strong></p>';
