@@ -37,7 +37,8 @@
 	$ses->start('nocache', $current . '-admin-session', $current_path);
 
 	require_once('./config/config.php');
-
+$log = new B_Log(B_LOG_FILE);
+$log->write('index LANG', LANG);
 	// To Get Real URL (remove current root and parameter)
 	$url = $_SERVER['REQUEST_URI'];
 	$url = preg_replace('"^' . B_CURRENT_ROOT . '"', '', $url);
