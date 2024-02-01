@@ -6,4 +6,5 @@
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
 	// Language
+	uopz_undefine('LANG');
 	if(!defined('LANG')) define('LANG', 'ja');
