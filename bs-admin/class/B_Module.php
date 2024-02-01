@@ -116,8 +116,7 @@
 		}
 
 		function _setRequest($property) {
-			$property = isset($this->request[$property]) ? $this->request[$property] : '';
-			$this->session[$property] = $property;
+			$this->session[$property] = isset($this->request[$property]) ? $this->request[$property] : '';
 		}
 
 		function _setProperty($property, $default) {
