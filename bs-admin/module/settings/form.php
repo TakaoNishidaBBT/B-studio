@@ -80,11 +80,14 @@
 			// Set up lang_config
 			$contents = file_get_contents(B_LNGUAGE_DIR . 'config/_lang_config.php');
 			$contents = str_replace('%LANGUAGE%',  $param['language'], $contents);
-			file_put_contents(B_DOC_ROOT . B_ADMIN_ROOT . 'config/lang_config.php', $contents);
-			flush();
-			usleep(200000);
-$this->log->write('settings flushed');
-$this->log->write('settings LANG', LANG);
+
+//			file_put_contents(B_DOC_ROOT . B_ADMIN_ROOT . 'config/lang_config.php', $contents);
+			$fp = fopen(B_DOC_ROOT . B_ADMIN_ROOT . 'config/lang_config.php', 'r+');
+			rewind($fp);
+			ftruncate($fp, 0);
+			fputs($fp, $contents);
+			fclose($fp);
+
 			if($ret) {
 				$this->db->commit();
 				$param['action_message'] = '<p><strong>' . __('Basic settings: Saved') . '</strong></p>';
