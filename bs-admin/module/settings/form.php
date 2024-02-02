@@ -38,7 +38,7 @@
 
 		function select() {
 			$this->session = array();
-$this->log->write('LANG', LANG);
+
 			$this->control = new B_Element($this->input_control_config);
 			$param['id'] = '00001';
 			$row = $this->main_table->selectByPk($param);
