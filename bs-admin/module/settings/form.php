@@ -82,7 +82,7 @@ $this->log->write('LANG', LANG);
 			$contents = str_replace('%LANGUAGE%',  $param['language'], $contents);
 			file_put_contents(B_DOC_ROOT . B_ADMIN_ROOT . 'config/lang_config.php', $contents);
 
-			sleep(1);
+			sleep(2);
 
 			if($ret) {
 				$this->db->commit();
