@@ -6,6 +6,9 @@
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
 	class version_list extends B_AdminModule {
+		public $select_message;
+		pblic $error_message;
+
 		function __construct() {
 			parent::__construct(__FILE__);
 
@@ -113,6 +116,9 @@
 		}
 
 		function setSqlWhere() {
+			$select_message = '';
+			$sql_where = '';
+
 			if($this->keyword) {
 				$sql_where.= " and (version_id like '%KEYWORD%' or publication_datetime_t like '%KEYWORD%' or version like '%KEYWORD%' or notes like '%KEYWORD%') ";
 				$sql_where = str_replace("%KEYWORD%", "%" . $this->db->real_escape_string_for_like($this->keyword) . "%", $sql_where);
