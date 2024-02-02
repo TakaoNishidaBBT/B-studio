@@ -15,6 +15,8 @@
 
 			require_once('./config/form_config.php');
 $this->log->write('settings_form now:', microtime());
+$this->log->write('LANGUAGE_TIME:', LANGUAGE_TIME);
+
 			$this->form = new B_Element($form_config);
 
 			$this->main_table = new B_Table($this->db, 'settings');
