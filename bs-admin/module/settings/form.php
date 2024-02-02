@@ -12,7 +12,7 @@
 
 		function __construct() {
 			parent::__construct(__FILE__);
-
+$this->log->write('settings_form LANG', LANG);
 			require_once('./config/form_config.php');
 			$this->form = new B_Element($form_config);
 
