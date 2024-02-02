@@ -12,7 +12,7 @@
 
 		function __construct() {
 			parent::__construct(__FILE__);
-$this->log->write('settings_form LANG', LANG);
+
 			require_once('./config/form_config.php');
 			$this->form = new B_Element($form_config);
 
@@ -78,23 +78,9 @@ $this->log->write('settings_form LANG', LANG);
 			}
 
 			// Set up lang_config
-//			$contents = file_get_contents(B_LNGUAGE_DIR . 'config/_lang_config.php');
-//			$contents = str_replace('%LANGUAGE%',  $param['language'], $contents);
-
-//			file_put_contents(B_DOC_ROOT . B_ADMIN_ROOT . 'config/lang_config.php', $contents);
-			$fp = fopen(B_DOC_ROOT . B_ADMIN_ROOT . 'config/lang_config.php', 'w+');
-			rewind($fp);
-//			ftruncate($fp, 0);
 			$contents = file_get_contents(B_LNGUAGE_DIR . 'config/_lang_config.php');
 			$contents = str_replace('%LANGUAGE%',  $param['language'], $contents);
-			fputs($fp, $contents);
-			fclose($fp);
-
-			$fp = fopen(B_DOC_ROOT . B_ADMIN_ROOT . 'config/lang_config.php', 'r');
-			$read_contents = fread($fp, 10000);
-			fclose($fp);
-
-$this->log->write('close', $read_contents);
+			file_put_contents(B_DOC_ROOT . B_ADMIN_ROOT . 'config/lang_config.php', $contents);
 
 			if($ret) {
 				$this->db->commit();
