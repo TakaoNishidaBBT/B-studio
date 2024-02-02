@@ -84,8 +84,8 @@
 
 			$fp = fopen(B_DOC_ROOT . B_ADMIN_ROOT . 'config/lang_config.php', 'w');
 			fwrite($fp, $contents);
-			fclose($fp);
 			fflush($fp);
+			fclose($fp);
 
 			if($ret) {
 				$this->db->commit();
