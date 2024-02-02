@@ -14,6 +14,7 @@
 			parent::__construct(__FILE__);
 
 			require_once('./config/form_config.php');
+$this->log->write('settings_form now:', microtime());
 			$this->form = new B_Element($form_config);
 
 			$this->main_table = new B_Table($this->db, 'settings');
@@ -80,8 +81,8 @@
 			// Set up lang_config
 			$contents = file_get_contents(B_LNGUAGE_DIR . 'config/_lang_config.php');
 			$contents = str_replace('%LANGUAGE%',  $param['language'], $contents);
+			$contents = str_replace('%LANGUAGE_TIME%', microtime(),  $contents);
 			file_put_contents(B_DOC_ROOT . B_ADMIN_ROOT . 'config/lang_config.php', $contents);
-			clearstatcache(false, B_DOC_ROOT . B_ADMIN_ROOT . 'config/lang_config.php');
 
 			if($ret) {
 				$this->db->commit();
