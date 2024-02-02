@@ -7,7 +7,7 @@
 */
 	class version_list extends B_AdminModule {
 		public $select_message;
-		pblic $error_message;
+		public $error_message;
 
 		function __construct() {
 			parent::__construct(__FILE__);
