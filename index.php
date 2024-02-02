@@ -9,8 +9,7 @@
 
 	require_once('bs-admin/global/b_global_function.php');
 	require_once('bs-admin/config/config.php');
-$log = new B_Log(B_LOG_FILE);
-$log->write('This is top index');
+
 	$url = isset($_REQUEST['url']) ? $_REQUEST['url'] : '';
 	$file = B_Util::pathinfo($url);
 
