@@ -6,4 +6,8 @@
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
 	// Language
-	if(!defined('LANG')) define('LANG', 'ja');
+	if(!defined('LANG')) {
+		$log = new B_Log(B_LOG_FILE);
+		define('LANG', '%LANGUAGE%');
+		$log->write('lang_config LANG', LANG);
+	}
