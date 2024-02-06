@@ -164,7 +164,7 @@
 				$this->db->rollback();
 				$param['action_message'] = __('was faild to register.');
 			}
-			$param['title'] = $this->session['post']['title'];
+			$param['title'] = isset($this->session['post']['title']) ? $this->session['post']['title'] : '';
 			$this->result->setValue($param);
 
 			$this->setView('result_view');
