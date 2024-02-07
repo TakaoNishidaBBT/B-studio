@@ -9,7 +9,7 @@
 	// class B_AdminAuth
 	// 
 	// -------------------------------------------------------------------------
-	class B_AdminAuth {
+	class B_AdminAuth extends stdClass {
 		function login($db, $user_id, $pwd) {
 			global $g_auth_users;
 			foreach($g_auth_users as $value) {

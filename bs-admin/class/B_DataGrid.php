@@ -9,7 +9,7 @@
 	// class B_DataGrid
 	// 
 	// -------------------------------------------------------------------------
-	class B_DataGrid {
+	class B_DataGrid extends stdClass {
 		public $db;
 		public $page_no;
 		public $callback_index;

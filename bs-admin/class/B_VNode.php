@@ -8,7 +8,9 @@
 	// -------------------------------------------------------------------------
 	// class B_VNode
 	// -------------------------------------------------------------------------
-	class B_VNode {
+	class B_VNode extends stdClass {
+			public $db;
+
 		function __construct($db, $view, $version, $revision, $node_id, $parent, $expand_level, $open_nodes, $node_count=false, $level=0, $row=null) {
 			$this->db = $db;
 			$this->view = $view;

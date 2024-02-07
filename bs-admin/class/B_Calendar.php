@@ -9,7 +9,7 @@
 	// class B_Calendar
 	// 
 	// -------------------------------------------------------------------------
-	class B_Calendar {
+	class B_Calendar extends stdClass {
 		public $db;
 		public $config;
 		public $months;

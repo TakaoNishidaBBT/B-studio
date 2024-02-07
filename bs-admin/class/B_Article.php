@@ -9,7 +9,7 @@
 	// class B_Article
 	// 
 	// -------------------------------------------------------------------------
-	class B_Article {
+	class B_Article extends stdClass {
 		function __construct($db, $view) {
 			$this->db = $db;
 			$this->view = $view;

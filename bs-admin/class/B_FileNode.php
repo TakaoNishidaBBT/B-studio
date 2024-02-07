@@ -9,7 +9,7 @@
 	// class B_FileNode
 	// 
 	// -------------------------------------------------------------------------
-	class B_FileNode {
+	class B_FileNode extends stdClass {
 		public $dir;
 		public $path;
 		public $node_id;

@@ -6,6 +6,9 @@
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
 	class contents_compare_tree extends B_AdminModule {
+		public $version_left;
+		public $version_right;
+
 		function __construct() {
 			parent::__construct(__FILE__);
 

@@ -9,7 +9,7 @@
 	// class B_Log
 	// 
 	// -------------------------------------------------------------------------
-	class B_Log {
+	class B_Log extends stdClass {
 		private $file_name;
 		private $fp;
 

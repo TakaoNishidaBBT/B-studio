@@ -9,7 +9,7 @@
 	// class B_Controller
 	// 
 	// -------------------------------------------------------------------------
-	class B_Controller {
+	class B_Controller extends stdClass {
 		private $log;
 
 		function __construct() {

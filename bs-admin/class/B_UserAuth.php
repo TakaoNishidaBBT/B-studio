@@ -9,7 +9,7 @@
 	// class B_UserAuth
 	// 
 	// -------------------------------------------------------------------------
-	class B_UserAuth {
+	class B_UserAuth extends stdClass {
 		function getUserInfo(&$user_id, &$user_name) {
 			if(!$_SESSION['user_id'] || !$_SESSION['user_name']) {
 				return false;

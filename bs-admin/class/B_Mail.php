@@ -9,7 +9,7 @@
 	// class B_Mail
 	// 
 	// -------------------------------------------------------------------------
-	class B_Mail {
+	class B_Mail extends stdClass {
 		function __construct($config) {
 			$this->config = $config;
 			$this->elements = $config;
