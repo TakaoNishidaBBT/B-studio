@@ -9,7 +9,7 @@
 	// class B_Element
 	// 
 	// -------------------------------------------------------------------------
-	class B_Element {
+	class B_Element extends stdClass {
 		public $mb_no_trim;
 		public $no_trim;
 		public $convert;

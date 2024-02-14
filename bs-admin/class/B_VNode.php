@@ -153,6 +153,8 @@
 		}
 
 		function getHtml() {
+			$html = '';
+
 			if(isset($this->start_html)) {
 				$html.= $this->start_html;
 			}
