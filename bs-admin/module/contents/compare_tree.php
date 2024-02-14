@@ -73,7 +73,7 @@
 			if(isset($this->request['path']) && $this->request['path']) {
 				$this->session['open_nodes_path'][$this->request['path']] = true;
 			}
-			if(!$this->session['current_node']) {
+			if(!isset($this->session['current_node'])) {
 				$this->session['current_node'] = 'root';
 			}
 			if(!isset($this->session['open_nodes'])) {
