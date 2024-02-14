@@ -186,10 +186,12 @@
 					for($i=0; $i<($cnt/4%8); $i++) {
 						$dots.= '.';
 					}
-					$response['status'] = 'message';
-					$response['message'] = "Creating archive file {$dots}";
+					if($dots.) {
+						$response['status'] = 'message';
+						$response['message'] = "Creating archive file {$dots}";
 
-					$this->sendChunk(',' . json_encode($response));
+						$this->sendChunk(',' . json_encode($response));
+					}
 				}
 
 				usleep(40000);
