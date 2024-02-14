@@ -186,7 +186,7 @@
 					for($i=0; $i<($cnt/4%8); $i++) {
 						$dots.= '.';
 					}
-					if($dots.) {
+					if($dots) {
 						$response['status'] = 'message';
 						$response['message'] = "Creating archive file {$dots}";
 
