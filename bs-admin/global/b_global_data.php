@@ -98,6 +98,11 @@
 			'3'		=> __('Another user has updated this record'),
 		);
 
+	${$g_data_set}['mail_type_settings_default'] =
+		array(
+			'' => __('-- mail_type --'),
+		);
+
 	${$g_data_set}['mail_type_settings'] =
 		array(
 			'contact_reply'		=> __('Contact Auto Reply'),
