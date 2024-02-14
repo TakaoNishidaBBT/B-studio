@@ -150,7 +150,8 @@
 			$this->compare($left, $right);
 			$root_node->compare($this->version_right['version_id'], $left, $right);
 
-			$list[] = $root_node->getNodeList($this->session['open_nodes'], $this->session['open_nodes_path'], $node_id, $category);
+			$open_node_path = isset($this->session['open_nodes_path']) ? $this->session['open_nodes_path'] : '';
+			$list[] = $root_node->getNodeList($this->session['open_nodes'], $open_nodes_path, $node_id, $category);
 
 			$this->db->commit();
 
