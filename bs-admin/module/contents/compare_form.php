@@ -83,6 +83,8 @@
 		}
 
 		function getPath($version_id, $row) {
+			$path = '';
+
 			if($row['parent_node'] && $row['parent_node'] != 'root') {
 				$sql = "select *
 						from " . B_DB_PREFIX . "contents_node a
@@ -195,7 +197,7 @@
 				$param['css_left'] = $row['css'];
 				$param['php_left'] = $row['php'];
 				$param['title_left'] = $row['title'];
-				$param['bread_crumb_name_left'] = $row['bread_crumb_name'];
+				$param['bread_crumb_name_left'] = isset($row['bread_crumb_name']) ? $row['bread_crumb_name'] : '';
 				$param['keywords_left'] = $row['keywords'];
 				$param['description_left'] = $row['description'];
 				$param['external_css_left'] = $row['external_css'];
@@ -248,8 +250,8 @@
 				$param['css_right'] = $row['css'];
 				$param['php_right'] = $row['php'];
 				$param['title_right'] = $row['title'];
-				$param['bread_crumb_name_right'] = $row['bread_crumb_name'];
-				$param['template_name_right'] = $row['template_name'];
+				$param['bread_crumb_name_right'] = isset($row['bread_crumb_name']) ? $row['bread_crumb_name'] : '';
+				$param['template_name_right'] = isset($row['template_name']) ? $row['template_name'] : '';
 				$param['keywords_right'] = $row['keywords'];
 				$param['description_right'] = $row['description'];
 				$param['external_css_right'] = $row['external_css'];
