@@ -131,11 +131,11 @@
 		function setSqlWhere() {
 			$select_message = '';
 			$sql_where = '';
-
+			
 			if($this->keyword) {
 				$sql_where.= " and (mail_id like '%KEYWORD%' or mail_title like '%KEYWORD%' or subject like '%KEYWORD%' or from_name like '%KEYWORD%' or from_addr like '%KEYWORD%'
 								 or to_addr like '%KEYWORD%' or bcc like '%KEYWORD%' or body like '%KEYWORD%' or html like '%KEYWORD%') ";
-				 = str_replace("%KEYWORD%", "%" . $this->db->real_escape_string_for_like($this->keyword) . "%", $sql_where);
+				$sql_where = str_replace("%KEYWORD%", "%" . $this->db->real_escape_string_for_like($this->keyword) . "%", $sql_where);
 
 				$select_message.= __('Keyword: ') . ' <em>' . htmlspecialchars($this->keyword, ENT_QUOTES) . '</em>　';
 			}
