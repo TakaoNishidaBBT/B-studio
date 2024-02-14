@@ -129,6 +129,9 @@
 				$version = $this->version_right;
 			}
 
+			$version_id = isset($version['version_id']) ? $version['version_id'] : '';
+			$revision_id = isset($version['revision_id']) ? $version['revision_id'] : '';
+
 			// start tramsaction
 			$this->db->begin();
 			$sql = "update " . B_DB_PREFIX . "compare_version set compare_version_id='" . $version['version_id'] . "'";
@@ -136,8 +139,8 @@
 
 			$root_node = new B_VNode($this->db
 									, B_COMPARE_CONTENTS_NODE_VIEW
-									, $version['version_id']
-									, $version['revision_id']
+									, $version_id
+									, $revision_id
 									, 'root'
 									, null
 									, 'all'
