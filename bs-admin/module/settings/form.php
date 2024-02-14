@@ -114,6 +114,8 @@
 		}
 
 		function createArchive() {
+			$dots = '';
+
 			if(!class_exists('ZipArchive')) exit;
 
 			$file_name = 'bstudio_' . date('YmdHis') . '.zip';

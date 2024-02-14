@@ -730,6 +730,8 @@
 		}
 
 		function filesize() {
+			$size = 0;
+
 			if($this->file_size) $size = $this->file_size;
 
 			if(is_array($this->node)) {
