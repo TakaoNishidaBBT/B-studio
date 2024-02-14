@@ -294,21 +294,23 @@
 							$field_value = '';
 							$i=0;
 							foreach($row as $key => $value) {
-								$value = addslashes($value);
-								$value = preg_replace("/\r\n/",'\r\n', $value);
-								$value = preg_replace("/\n/",'\n', $value);
+								if($value) {
+									$value = addslashes($value);
+									$value = preg_replace("/\r\n/",'\r\n', $value);
+									$value = preg_replace("/\n/",'\n', $value);
 
-								if($field_value) $field_value.= ',';
-								if(is_null($row[$key])) {
-									$field_value.= 'NULL';
+									if($field_value) $field_value.= ',';
+									if(is_null($row[$key])) {
+										$field_value.= 'NULL';
+									}
+									else if(strtolower($field[$i]->type) == 'int') {
+										$field_value.= $value;
+									}
+									else {
+										$field_value.= "'" . $value . "'";
+									}
+									$i++;
 								}
-								else if(strtolower($field[$i]->type) == 'int') {
-									$field_value.= $value;
-								}
-								else {
-									$field_value.= "'" . $value . "'";
-								}
-								$i++;
 							}
 							if($fields) $fields.= ",\n";
 							$fields.= " ($field_value)";
