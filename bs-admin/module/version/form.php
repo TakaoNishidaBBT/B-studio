@@ -8,6 +8,7 @@
 	class version_form extends B_AdminModule {
 		public $action_message;
 		public $display_mode;
+		public $delete_resource_files;
 
 		function __construct() {
 			parent::__construct(__FILE__);
