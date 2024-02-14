@@ -246,7 +246,12 @@
 			$list['node_id'] = $this->node_id;
 			$list['node_type'] = $this->node_type;
 			$list['node_class'] = $this->node_class;
-			$list['node_name'] = mb_convert_encoding($this->node_name, 'UTF-8', B_MB_DETECT_ORDER);
+			if(isset($this->node_name)) {
+				$list['node_name'] = mb_convert_encoding($this->node_name, 'UTF-8', B_MB_DETECT_ORDER);
+			}
+			else {
+				$list['node_name'] = '';
+			}
 			$list['contents_id'] = $this->contents_id;
 			$list['node_diff_status'] = $this->node_diff_status;
 			$list['node_count'] = $this->node_count;
