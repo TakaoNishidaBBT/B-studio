@@ -235,6 +235,8 @@
 		}
 
 		function getDataSetValue($data_set) {
+$log = new B_Log(B_LOG_FILE);
+$log->write('$data_set', $data_set);
 			$data_set_value = array();
 
 			global $g_data_set, ${$g_data_set};
@@ -247,6 +249,7 @@
 					else {
 						foreach($data_set as $value) {
 							if(is_array($data_set_value)) {
+$log->write('$value', $value);
 								$data_set_value = $data_set_value + ${$g_data_set}[$value];
 							}
 							else {
