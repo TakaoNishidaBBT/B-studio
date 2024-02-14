@@ -21,6 +21,7 @@
 			public $create_datetime;
 			public $image_size;
 			public $file_size;
+			public $update_datetime;
 
 		function __construct($db, $view, $version, $revision, $node_id, $parent, $expand_level, $open_nodes, $node_count=false, $level=0, $row=null) {
 			$this->db = $db;
@@ -193,7 +194,7 @@
 
 		function setNodeStatus($version_right, $left, $right) {
 			if($this->version == $version_right) {
-				if(!$right[$this->node_id]) return false;
+				if(!isset($right[$this->node_id])) return false;
 				if($this->node_name != $left[$this->node_id]['node_name']) {
 					$this->node_diff_status = 'diff';
 					return true;
