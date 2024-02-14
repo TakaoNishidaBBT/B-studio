@@ -14,10 +14,15 @@
 
 			$this->version_left = $this->global_session['version_left'];
 			$this->version_right = $this->global_session['version_right'];
+			$version_left_v = isset($this->version_left['version_id']) ? $this->version_left['version_id'] : '';
+			$version_left_r = isset($this->version_left['revision_id']) ? $this->version_left['revision_id'] : '';
+			$version_right_v = isset($this->version_right['version_id']) ? $this->version_right['version_id'] : '';
+			$version_right_r = isset($this->version_right['revision_id']) ? $this->version_right['revision_id'] : '';
+
 			$this->tree_left = new B_VNode($this->db
 											, B_COMPARE_CONTENTS_NODE_VIEW
-											, $this->version_left['version_id']
-											, $this->version_left['revision_id']
+											, $version_left_v
+											, $version_left_r
 											, null
 											, null
 											, 0
@@ -25,8 +30,8 @@
 
 			$this->tree_right = new B_VNode($this->db
 											, B_COMPARE_CONTENTS_NODE_VIEW
-											, $this->version_right['version_id']
-											, $this->version_right['revision_id']
+											, $version_right_v
+											, $version_right_r
 											, null
 											, null
 											, 0
@@ -60,11 +65,11 @@
 		}
 
 		function getNodeList() {
-			if($this->request['node_id']) {
+			if(isset($this->request['node_id']) && $this->request['node_id']) {
 				$this->session['current_node'] = $this->request['node_id'];
 				$this->session['open_nodes'][$this->request['node_id']] = true;
 			}
-			if($this->request['path']) {
+			if(isset($this->request['path']) && $this->request['path']) {
 				$this->session['open_nodes_path'][$this->request['path']] = true;
 			}
 			if(!$this->session['current_node']) {
