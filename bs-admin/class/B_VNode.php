@@ -12,7 +12,13 @@
 			public $db;
 			public $node;
 			public $node_class;
+			public $node_name;
+			public $contents_id;
 			public $folder_count;
+			public $node_diff_status;
+			public $open_nodes_path;
+			public $node_count;
+			public $create_datetime;
 
 		function __construct($db, $view, $version, $revision, $node_id, $parent, $expand_level, $open_nodes, $node_count=false, $level=0, $row=null) {
 			$this->db = $db;
