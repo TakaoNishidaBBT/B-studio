@@ -41,7 +41,7 @@ $settings_config = array(
 				'filter'			=> 'insert',
 				'name'				=> 'mail_type',
 				'class'				=> 'B_SelectBox',
-				'data_set'			=> array('mail_type_settings_default', 'mail_type_settings'),
+				'data_set'			=> 'mail_type_settings',
 				'confirm_data_set'	=> 'mail_type_settings',
 				'attr'				=> 'class="bframe_selectbox"',
 				'validate'			=>
