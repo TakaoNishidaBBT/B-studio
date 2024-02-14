@@ -8,6 +8,7 @@
 	class contents_compare_tree extends B_AdminModule {
 		public $version_left;
 		public $version_right;
+		public $message;
 
 		function __construct() {
 			parent::__construct(__FILE__);
@@ -115,6 +116,8 @@
 		}
 
 		function response($node_id, $category, $target_id) {
+			$version = array();
+
 			$response['status'] = $this->status;
 			if($this->message) {
 				$response['message'] = $this->message;
