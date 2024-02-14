@@ -10,6 +10,7 @@
 	// -------------------------------------------------------------------------
 	class B_VNode extends stdClass {
 			public $db;
+			public $node;
 			public $node_class;
 			public $folder_count;
 
@@ -44,12 +45,12 @@
 				$this->parent = $parent;
 			}
 			else {
-				$this->parent = $row['parent_node'];
+				$this->parent = isset($row['parent_node']) ? $row['parent_node'] : '';
 			}
 
 			if($this->node_class == 'leaf') return;
 
-			if((is_array($open_nodes) && $open_nodes[$node_id]) || ($expand_level === 'all' || $level < $expand_level)) {
+			if((is_array($open_nodes) && isset($open_nodes[$node_id])) || ($expand_level === 'all' || $level < $expand_level)) {
 				$rs = $this->selectChild($node_id);
 				while($row = $this->db->fetch_assoc($rs)) {
 					$this->node_count++;
@@ -199,7 +200,7 @@
 				}
 			}
 			else {
-				if(!$left[$this->node_id]) return false;
+				if(!isset($left[$this->node_id])) return false;
 				if($this->node_name != $right[$this->node_id]['node_name']) {
 					$this->node_diff_status = 'diff';
 					return true;
