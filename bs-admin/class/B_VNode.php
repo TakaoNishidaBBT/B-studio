@@ -19,6 +19,8 @@
 			public $open_nodes_path;
 			public $node_count;
 			public $create_datetime;
+			public $image_size;
+			public $file_size;
 
 		function __construct($db, $view, $version, $revision, $node_id, $parent, $expand_level, $open_nodes, $node_count=false, $level=0, $row=null) {
 			$this->db = $db;
@@ -270,7 +272,7 @@
 			}
 			$list['path'] = $path . $list['node_name'];
 
-			if($open_nodes[$this->node_id] || $open_nodes_path[$path]) {
+			if(isset($open_nodes[$this->node_id]) || isset($open_nodes_path[$path])) {
 				$list['opened'] = true;
 			}
 			return $list;
