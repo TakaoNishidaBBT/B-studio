@@ -75,6 +75,8 @@
 		}
 
 		function _callback($key, $row) {
+			$mail_type = '';
+
 			if(!$key) return true;
 
 			foreach($row as $value) {
