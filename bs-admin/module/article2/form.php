@@ -5,7 +5,7 @@
  *
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
-	class article2_form extends B_AdminModule  {
+	class article2_form extends B_AdminModule {
 		public $settings;
 		public $tab_control;
 		public $editor;

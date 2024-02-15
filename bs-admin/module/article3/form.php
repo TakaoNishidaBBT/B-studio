@@ -57,7 +57,7 @@
 
 			default:
 				$this->control = new B_Element($this->input_control_config);
-				if($this->request['article_id']) {
+				if(isset($this->request['article_id']) && $this->request['article_id']) {
 					$article_id = $this->db->real_escape_string($this->request['article_id']);
 				}
 				else {
@@ -73,12 +73,14 @@
 
 				// set Category
 				$this->category = $this->getCategory();
-				$row['category'] = $this->getCategoryName($this->category, $row['category_id']);
+				$category_id = isset($row['category_id']) ? $row['category_id'] : '';
+				$row['category'] = $this->getCategoryName($this->category, $category_id);
 
 				$this->editor->setValue($row);
 				$this->settings->setValue($row);
 				$this->setTagName();
-				$this->setThumnail($row['title_img_file']);
+				$title_img_file = isset($row['title_img_file']) ? $row['title_img_file'] : '';
+				$this->setThumnail($title_img_file);
 				$this->setDetailStatus();
 
 				break;
@@ -111,6 +113,8 @@
 		function getCategoryName($category, $category_id) {
 			$name = '';
 
+			if(!$category_id) return;
+
 			$id_array = explode(',', $category_id);
 			if(is_array($id_array)) {
 				foreach($id_array as $id) {
@@ -128,7 +132,8 @@
 			$html = '';
 
 			$tags = $this->settings->getElementByName('tags');
-			if(!trim($tags->value)) return;
+			$tags_value = isset($tags->value) ? $tags->value : '';
+			if(!trim($tags_value)) return;
 			
 			$tag = explode(',', $tags->value);
 			for($i=0; $i < count($tag); $i++) {
@@ -139,6 +144,8 @@
 		}
 
 		function getCategory() {
+			$data = array();
+
 			$sql = "select * from " . B_DB_PREFIX . "v_category3 order by disp_seq";
 			$rs = $this->db->query($sql);
 			while($row = $this->db->fetch_assoc($rs)) {
@@ -214,7 +221,7 @@
 		function register() {
 			try {
 				$ret = true;
-				$article_id = $this->request['article_id'];
+				$article_id = isset($this->request['article_id']) ? $this->request['article_id'] : '';
 
 				$this->editor->setValue($this->request);
 				$this->settings->setValue($this->request);
