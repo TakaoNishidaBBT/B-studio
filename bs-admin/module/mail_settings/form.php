@@ -8,7 +8,8 @@
 	class mail_settings_form extends B_AdminModule {
 		public $action_message;
 		public $display_mode;
-		
+		public $copy_control;
+
 		function __construct() {
 			parent::__construct(__FILE__);
 
