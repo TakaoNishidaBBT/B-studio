@@ -118,12 +118,12 @@
 
 		function register() {
 			try {
-				$mail_id = $this->request['mail_id'];
+				$mail_id = isset($this->request['mail_id']) ? $this->request['mail_id'] : '';
 
 				$this->editor->setValue($this->request);
 				$this->settings->setValue($this->request);
 
-				if($this->post['external_link'] && !$this->post['url']) {
+				if(isset($this->post['external_link']) && !$this->post['url']) {
 					$obj = $this->settings->getElementByName('url');
 					$obj->status = false;
 				}
