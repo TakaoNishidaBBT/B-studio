@@ -6,6 +6,9 @@
  * Licensed under the GPL, LGPL and MPL Open Source licenses.
 */
 	class mail_settings_form extends B_AdminModule {
+		public $action_message;
+		public $display_mode;
+		
 		function __construct() {
 			parent::__construct(__FILE__);
 
@@ -43,7 +46,7 @@
 
 			default:
 				$this->control = new B_Element($this->input_control_config);
-				if($this->request['mail_id']) {
+				if(isset($this->request['mail_id'])) {
 					$row = $this->main_table->selectByPk($this->request);
 					$this->editor->setValue($row);
 					$this->settings->setValue($row);
@@ -74,7 +77,8 @@
 			if(!$key) return true;
 
 			foreach($row as $value) {
-				if($key == $value['mail_type']) {
+				$mail_value = isset($value['mail_type']) ? $value['mail_type'] : '';
+				if($key == $mail_type) {
 					return false;
 				}
 			}
