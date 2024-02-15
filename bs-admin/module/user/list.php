@@ -124,6 +124,9 @@
 		}
 
 		function setSqlWhere() {
+			$select_message = '';
+			$sql_where = '';
+
 			if($this->keyword) {
 				$sql_where.= " and (user_id like '%KEYWORD%' or user_name like '%KEYWORD%' or notes like '%KEYWORD%') ";
 				$sql_where = str_replace("%KEYWORD%", "%" . $this->db->real_escape_string_for_like($this->keyword) . "%", $sql_where);
