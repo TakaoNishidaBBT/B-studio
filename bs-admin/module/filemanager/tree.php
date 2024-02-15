@@ -28,7 +28,8 @@
 				$this->openCurrentNode($this->request['node_id']);
 			}
 			if(isset($this->request['mode']) && $this->request['mode'] == 'open') {
-				$this->openCurrentNode($this->session['current_node']);
+				$current_node = isset($this->session['current_node']) ? $this->session['current_node'] : '';
+				$this->openCurrentNode($current_node);
 			}
 
 			$this->status = true;
@@ -39,12 +40,14 @@
 		function openCurrentNode($node_id) {
 			$path = '';
 
-			$dir = explode('/', $node_id);
+			if($node_id) {
+				$dir = explode('/', $node_id);
 
-			for($i=0; $i<count($dir); $i++) {
-				if(!$dir[$i]) continue;
-				$path.= '/' . $dir[$i];
-				$this->session['open_nodes'][$path] = true;
+				for($i=0; $i<count($dir); $i++) {
+					if(!$dir[$i]) continue;
+					$path.= '/' . $dir[$i];
+					$this->session['open_nodes'][$path] = true;
+				}
 			}
 		}
 
