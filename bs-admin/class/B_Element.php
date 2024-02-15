@@ -2160,7 +2160,9 @@
 					$this->setParamProperty($key2, $value2);
 				}
 			}
-			$this->element_start_html =	'<a href="' . $this->link . $this->slug . $this->param . '"';
+			$slug = isset($this->slug) ? $this->slug : '';
+			$param = isset($this->param) ? $this->param : '';
+			$this->element_start_html =	'<a href="' . $this->link . $slug . $param . '"';
 			if($this->id) {
 				$this->element_start_html.= ' id="' . $this->_gethtmlid() . '"';
 			}
