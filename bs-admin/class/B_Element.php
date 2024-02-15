@@ -2136,8 +2136,12 @@
 		public $value_exist;
 		public $param_exist;
 		public $slug;
+		public $param;
+		public $value;
 
 		function getElementsHtml($mode=null) {
+			$value = '';
+
 			if($this->specialchars == 'none') {
 				return $this->value;
 			}
