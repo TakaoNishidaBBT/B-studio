@@ -30,6 +30,7 @@
 		public $file_name;
 		public $file_extension;
 		public $http_status;
+		public $keywords;
 
 		function __construct() {
 			parent::__construct(__FILE__);
