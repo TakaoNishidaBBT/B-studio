@@ -2135,6 +2135,7 @@
 		public $event;
 		public $value_exist;
 		public $param_exist;
+		public $slug;
 
 		function getElementsHtml($mode=null) {
 			if($this->specialchars == 'none') {
