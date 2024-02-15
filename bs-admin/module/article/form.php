@@ -144,6 +144,8 @@
 		}
 
 		function getCategory() {
+			$data = array();
+
 			$sql = "select * from " . B_DB_PREFIX . "v_category order by disp_seq";
 			$rs = $this->db->query($sql);
 			while($row = $this->db->fetch_assoc($rs)) {
