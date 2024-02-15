@@ -92,6 +92,7 @@
 		public $shortenText;
 		public $attr_disabled;
 		public $session_enquete;
+		public $slug;
 
 		function __construct($config, $user_auth=NULL, $config_filter=NULL, &$parent=NULL, $level=0) {
 			if(!is_array($config)) {
@@ -2135,7 +2136,6 @@
 		public $event;
 		public $value_exist;
 		public $param_exist;
-		public $slug;
 		public $param;
 		public $value;
 
@@ -2155,7 +2155,7 @@
 			if($this->link && $this->link == 'none') {
 				return $this->start_html;
 			}
-			if(!$this->param && isset($this->config_org['fixedparam'])) {
+			if(!isset($this->param) && isset($this->config_org['fixedparam'])) {
 				foreach($this->config_org['fixedparam'] as $key2 => $value2) {
 					$this->setParamProperty($key2, $value2);
 				}
