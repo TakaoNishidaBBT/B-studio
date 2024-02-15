@@ -2205,6 +2205,7 @@ $log->write('$this->config_org', $this->config_org);
 			if(isset($this->config_org['slug']) && is_array($this->config_org['slug'])) {
 				foreach($this->config_org['slug'] as $value2) {
 					$param = isset($value[$value2]) ? $value[$value2] : '';
+$log->write('$param', $param);
 					$this->setPermalink($param);
 				}
 			}
