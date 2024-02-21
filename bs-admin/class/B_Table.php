@@ -249,6 +249,8 @@
 		}
 
 		function setInsertValues($key, $config, $param) {
+			$v = '';
+
 			if($config[3] && (!isset($param[$key]) || $param[$key] == '')) { // auto increment
 				$start_value = isset($config[4]) ? $config[4] : 0;
 				switch($config[0]) { // data type
@@ -272,7 +274,7 @@
 				if(isset($param[$key])) {
 					if(is_array($param[$key])) {
 						foreach($param[$key] as $value) {
-							if(isset($v)) {
+							if(isset($v), && $v) {
 								$v.= '/' . $value;
 							}
 							else {

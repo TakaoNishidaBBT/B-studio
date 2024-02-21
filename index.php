@@ -24,7 +24,8 @@
 	$ses = new B_Session;
 	$session = $ses->read(B_ADMIN_SESSION_NAME);
 
-	if($session['terminal_id'] && $session['user_id']) {
+	if(isset($session['terminal_id']) && $session['terminal_id'] &&
+		isset($session['user_id']) && $session['user_id']) {
 		$admin_mode = true;
 		$admin_language = $session['language'];
 		$version = 'w';
