@@ -274,7 +274,7 @@
 				if(isset($param[$key])) {
 					if(is_array($param[$key])) {
 						foreach($param[$key] as $value) {
-							if(isset($v), && $v) {
+							if(isset($v) && $v) {
 								$v.= '/' . $value;
 							}
 							else {
